@@ -182,8 +182,11 @@ CREATE TABLE `users` (
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO users VALUES("2","Darius","ddddd","+37061214448","test@gmail.com","$argon2i$v=19$m=65536,t=4,p=1$MGRmSFR4c0RPMmUvaGdKMg$Pf8H8eqOlanOnqZv2wM/hDFqJIAiddCfFZMvMmKHpLU","admin");
-INSERT INTO users VALUES("4","Petras2","Petraitis","37061366848","test2@gmail.com","$argon2i$v=19$m=65536,t=4,p=1$endPWlNsNDY1R2FFQ09meA$qoMAOJPjxm2XESQ3b4JYs9ZO5I0eB729ebHwTnLB12Q","user");
-INSERT INTO users VALUES("9","Vladas","Girinis","+3705555557848","test3@gmail.com","$argon2i$v=19$m=131072,t=4,p=2$MTFPa0QwQkNlYnk5T253NA$a1OJXgqleVfIoAFcI8fVlqGzUOctY3DI7wcOaEVWCPI","moderator");
-INSERT INTO users VALUES("10","Darius4","44444","+3706121484","test4@gmail.com","$argon2i$v=19$m=131072,t=4,p=2$WXE1VDRpWC50cWY3cUNlaw$5HbcS6+i44OIw7r0H9RIG0nLxt5KUojv7hLZU0foBZ8","user");
-INSERT INTO users VALUES("11","Dariusxz","zxdc","+3706121zxc4848","test5@gmail.com","$argon2i$v=19$m=131072,t=4,p=2$bE5OZjdCN1MyQWxveG5waQ$hsEm0sa4d626N9admI9eTx3m1DbcNF5Npgl6M7sPnPo","user");
+INSERT INTO users VALUES("2","Darius","ddddd","+37061287842","test@gmail.com","$argon2i$v=19$m=65536,t=4,p=1$MGRmSFR4c0RPMmUvaGdKMg$Pf8H8eqOlanOnqZv2wM/hDFqJIAiddCfFZMvMmKHpLU","admin");
+INSERT INTO users VALUES("4","Petras2","Petraitis","+37061366841","test2@gmail.com","$argon2i$v=19$m=65536,t=4,p=1$endPWlNsNDY1R2FFQ09meA$qoMAOJPjxm2XESQ3b4JYs9ZO5I0eB729ebHwTnLB12Q","user");
+INSERT INTO users VALUES("9","Vladas","Girinis","+37055557847","test3@gmail.com","$argon2i$v=19$m=131072,t=4,p=2$MTFPa0QwQkNlYnk5T253NA$a1OJXgqleVfIoAFcI8fVlqGzUOctY3DI7wcOaEVWCPI","moderator");
+INSERT INTO users VALUES("10","Darius4","44444","+3706124184","test4@gmail.com","$argon2i$v=19$m=131072,t=4,p=2$WXE1VDRpWC50cWY3cUNlaw$5HbcS6+i44OIw7r0H9RIG0nLxt5KUojv7hLZU0foBZ8","user");
+INSERT INTO users VALUES("11","Dariusxz","zxdc","+37061217444","test5@gmail.com","$argon2i$v=19$m=131072,t=4,p=2$bE5OZjdCN1MyQWxveG5waQ$hsEm0sa4d626N9admI9eTx3m1DbcNF5Npgl6M7sPnPo","user");
+
+
+
