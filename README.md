@@ -45,7 +45,30 @@ Atsižvelgiant į šiuos elementus ir funkcijas, svetainė yrap patogus ir funkc
   <p>Projektas dar tęsiamas, numatoma pridėti daugiau funkcionalumų</p>
   
   /////// En /////////////////
-  
+  <p><b>This website admin control panel contains several features and tools:</b>
+<ul><li>
+<li>Dashboard (information summary)</li>
+<li>Users</li>
+<li>Categories</li>
+<li>Posts</li>
+<li>Menu (menu)</li>
+<li>Block</li>
+<li>Contact Form</li>
+<li>Files</li>
+<li>Language</li>
+<li>Settings</li>
+</ul>
+The site uses Bootstrap 5.2.3, FontAwesome 6.1.0 and jQuery 3.6.0 libraries for styling and functionality. There's also a custom Roboto font and custom CSS styles that include a bit of a neon effect.<br>
+   <b>The website structure consists of the following elements:</b>
+Fixed top navigation bar with logo, page front link and login/logout buttons.
+Sidebar with a list of administrator functions and tools.
+Main content containing several blocks with statistics for different functions (eg number of categories, users, posts).
+<br><b>The site also contains JavaScript code that includes the following functions:</b>
+Loading the page without reloading when clicking on links with the "data-page" attribute.
+Automatically close notifications (alerts) after 3 seconds.
+Toggle function to expand or collapse the side navigation bar.
+Considering these elements and functions, the website is a convenient and functional admin control panel.
+</p>
   <ul>
 <li>Content Security Policy (CSP): There is a CSP header at the beginning of the code that restricts the use of external resources. CSP helps protect against some injection attacks such as Cross-Site Scripting (XSS).</li>
 
