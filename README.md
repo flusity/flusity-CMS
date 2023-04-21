@@ -17,12 +17,12 @@ PHP CMS project, Log In, Sign Up, admin, moderator, user roles, add/edit/delete 
 <li>Language (kalba)</li>
 <li>Settings (nustatymai)</li>
 </ul>
-Svetainė naudoja Bootstrap 5.2.3, FontAwesome 6.1.0 ir jQuery 3.6.0 bibliotekas stiliui ir funkcionalumui užtikrinti. Taip pat yra pritaikytas šriftas "Roboto" ir individualizuoti CSS stiliai, kurie apima šiek tiek neoninio efekto.
+Svetainė naudoja Bootstrap 5.2.3, FontAwesome 6.1.0 ir jQuery 3.6.0 bibliotekas stiliui ir funkcionalumui užtikrinti. Taip pat yra pritaikytas šriftas "Roboto" ir individualizuoti CSS stiliai, kurie apima šiek tiek neoninio efekto.<br>
   <b>Svetainės struktūra susideda iš šių elementų:</b>
 Fiksuota viršutinė navigacijos juosta su logotipu, puslapio priekio nuoroda ir prisijungimo/atsijungimo mygtukais.
 Šoninė navigacijos juosta (sidebar) su administratoriaus funkcijų ir įrankių sąrašu.
 Pagrindinis turinys, kuriame yra keli blokai su skirtingų funkcijų statistika (pvz., kategorijų, vartotojų, pranešimų skaičius).
-Svetainė taip pat turi JavaScript kodą, kuris apima šias funkcijas:
+<br><b>Svetainė taip pat turi JavaScript kodą, kuris apima šias funkcijas:</b>
 Puslapio įkėlimas be perkrovimo, kai paspaudžiamos nuorodos su "data-page" atributu.
 Automatiškai uždaryti pranešimus (alerts) po 3 sekundžių.
 Toggle funkcija šoninės navigacijos juostai išplėsti ar suskleisti.
