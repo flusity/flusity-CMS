@@ -18,6 +18,19 @@ INSERT INTO categories VALUES("92","fff","2023-04-19 22:49:36","2023-04-19 22:49
 
 
 
+DROP TABLE IF EXISTS contact_form_settings;
+
+CREATE TABLE `contact_form_settings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `setting_key` varchar(255) NOT NULL,
+  `setting_value` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+INSERT INTO contact_form_settings VALUES("1","ssssdfff","dddddddd");
+
+
+
 DROP TABLE IF EXISTS custom_blocks;
 
 CREATE TABLE `custom_blocks` (
@@ -114,7 +127,7 @@ CREATE TABLE `settings` (
   `footer_text` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-INSERT INTO settings VALUES("JD website","This is my website description","JD website Footer");
+INSERT INTO settings VALUES("JD website","JD website description","JD website Footer");
 
 
 
@@ -169,13 +182,11 @@ CREATE TABLE `users` (
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO users VALUES("2","Darius","ddddd","+37061214448","jakaitisdarius@gmail.com","$argon2i$v=19$m=65536,t=4,p=1$MGRmSFR4c0RPMmUvaGdKMg$Pf8H8eqOlanOnqZv2wM/hDFqJIAiddCfFZMvMmKHpLU","admin");
-INSERT INTO users VALUES("4","Petras2","Petraitis","37061366848","jakayyyyttttttt@gmail.com","$argon2i$v=19$m=65536,t=4,p=1$endPWlNsNDY1R2FFQ09meA$qoMAOJPjxm2XESQ3b4JYs9ZO5I0eB729ebHwTnLB12Q","user");
-INSERT INTO users VALUES("9","Vladas","Girinis","+3705555557848","vladijanashs@gmail.com","$argon2i$v=19$m=131072,t=4,p=2$MTFPa0QwQkNlYnk5T253NA$a1OJXgqleVfIoAFcI8fVlqGzUOctY3DI7wcOaEVWCPI","moderator");
-INSERT INTO users VALUES("10","Darius4","44444","+3706121484","j4rius@gmail.com","$argon2i$v=19$m=131072,t=4,p=2$WXE1VDRpWC50cWY3cUNlaw$5HbcS6+i44OIw7r0H9RIG0nLxt5KUojv7hLZU0foBZ8","user");
-INSERT INTO users VALUES("11","Dariusxz","zxdc","+3706121zxc4848","xzcrius@gmail.com","$argon2i$v=19$m=131072,t=4,p=2$bE5OZjdCN1MyQWxveG5waQ$hsEm0sa4d626N9admI9eTx3m1DbcNF5Npgl6M7sPnPo","user");
-INSERT INTO users VALUES("12","Dariusdfa","Jakfd","+370677748","jaas@gmail.com","$argon2i$v=19$m=131072,t=4,p=2$ZVQ2R3ZWUUFLUlVCbnRNNw$G4smz8L7TVjIdO59UK5zcYJ21V9NltyQ2pNLnjTbKZ4","user");
-INSERT INTO users VALUES("13","Dariusddd","ddd","612148418","jakaisrius@gmail.com","$argon2i$v=19$m=131072,t=4,p=2$MTRXOEo3aGptUTQxOEdTMw$2TIhjyHLE2wejcx47nFa4rQ8kvdkR8YPjV+IWLPVsLE","user");
+INSERT INTO users VALUES("2","Darius","ddddd","+3706128848","test@gmail.com","$argon2i$v=19$m=65536,t=4,p=1$MGRmSFR4c0RPMmUvaGdKMg$Pf8H8eqOlanOnqZv2wM/hDFqJIAiddCfFZMvMmKHpLU","admin");
+INSERT INTO users VALUES("4","Petras2","Petraitis","+37061366848","test2@gmail.com","$argon2i$v=19$m=65536,t=4,p=1$endPWlNsNDY1R2FFQ09meA$qoMAOJPjxm2XESQ3b4JYs9ZO5I0eB729ebHwTnLB12Q","user");
+INSERT INTO users VALUES("9","Vladas","Girinis","+37055557848","test3@gmail.com","$argon2i$v=19$m=131072,t=4,p=2$MTFPa0QwQkNlYnk5T253NA$a1OJXgqleVfIoAFcI8fVlqGzUOctY3DI7wcOaEVWCPI","moderator");
+INSERT INTO users VALUES("10","Darius4","44444","+3706124184","test4@gmail.com","$argon2i$v=19$m=131072,t=4,p=2$WXE1VDRpWC50cWY3cUNlaw$5HbcS6+i44OIw7r0H9RIG0nLxt5KUojv7hLZU0foBZ8","user");
+INSERT INTO users VALUES("11","Dariusxz","zxdc","+370612174848","test5@gmail.com","$argon2i$v=19$m=131072,t=4,p=2$bE5OZjdCN1MyQWxveG5waQ$hsEm0sa4d626N9admI9eTx3m1DbcNF5Npgl6M7sPnPo","user");
 
 
 
