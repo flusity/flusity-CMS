@@ -2,8 +2,8 @@
 
 $config = [
     'db_host' => 'localhost',
-    'db_name' => 'blomb',
+    'db_name' => 'your_database',
     'db_user' => 'root',
-    'db_password' => 'Slimas1'
+    'db_password' => 'database_password'
 ];
 $language_code = 'lt'; 
