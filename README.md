@@ -5,18 +5,18 @@ PHP CMS project, Log In, Sign Up, admin, moderator, user roles, add/edit/delete 
 ![banner](http://manowebas.lt/wp-content/themes/manowebas/assets/img/logo.png)
 
 <p><b>Šiame svetainės administratoriaus valdymo skydelyje yra keliatą funkcijų ir įrankių:</b>
-
-•	Dashboard (informacijos suvestinė)
-•	Users (vartotojai)
-•	Categories (kategorijos)
-•	Posts (pranešimai)
-•	Menu (meniu)
-•	Block (blokai)
-•	Contact Form (kontaktų forma)
-•	Files (failai)
-•	Language (kalba)
-•	Settings (nustatymai)
-
+<ul>
+<li>Dashboard (informacijos suvestinė)</li>
+<li>Users (vartotojai)</li>
+<li>Categories (kategorijos)</li>
+<li>Posts (pranešimai)</li>
+<li>Menu (meniu)</li>
+<li>Block (blokai)</li>
+<li>Contact Form (kontaktų forma)</li>
+<li>Files (failai)</li>
+<li>Language (kalba)</li>
+<li>Settings (nustatymai)</li>
+</ul>
 Svetainė naudoja Bootstrap 5.2.3, FontAwesome 6.1.0 ir jQuery 3.6.0 bibliotekas stiliui ir funkcionalumui užtikrinti. Taip pat yra pritaikytas šriftas "Roboto" ir individualizuoti CSS stiliai, kurie apima šiek tiek neoninio efekto.
   <b>Svetainės struktūra susideda iš šių elementų:</b>
 Fiksuota viršutinė navigacijos juosta su logotipu, puslapio priekio nuoroda ir prisijungimo/atsijungimo mygtukais.
