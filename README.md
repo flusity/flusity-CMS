@@ -3,6 +3,31 @@
 PHP CMS project, Log In, Sign Up, admin, moderator, user roles, add/edit/delete post, categories, language, files, menu, custom block, backup.sql, update website settings.
 
 ![banner](http://manowebas.lt/wp-content/themes/manowebas/assets/img/logo.png)
+
+<p><b>Šiame svetainės administratoriaus valdymo skydelyje yra keliatą funkcijų ir įrankių:</b>
+
+•	Dashboard (informacijos suvestinė)
+•	Users (vartotojai)
+•	Categories (kategorijos)
+•	Posts (pranešimai)
+•	Menu (meniu)
+•	Block (blokai)
+•	Contact Form (kontaktų forma)
+•	Files (failai)
+•	Language (kalba)
+•	Settings (nustatymai)
+
+Svetainė naudoja Bootstrap 5.2.3, FontAwesome 6.1.0 ir jQuery 3.6.0 bibliotekas stiliui ir funkcionalumui užtikrinti. Taip pat yra pritaikytas šriftas "Roboto" ir individualizuoti CSS stiliai, kurie apima šiek tiek neoninio efekto.
+  <b>Svetainės struktūra susideda iš šių elementų:</b>
+Fiksuota viršutinė navigacijos juosta su logotipu, puslapio priekio nuoroda ir prisijungimo/atsijungimo mygtukais.
+Šoninė navigacijos juosta (sidebar) su administratoriaus funkcijų ir įrankių sąrašu.
+Pagrindinis turinys, kuriame yra keli blokai su skirtingų funkcijų statistika (pvz., kategorijų, vartotojų, pranešimų skaičius).
+Svetainė taip pat turi JavaScript kodą, kuris apima šias funkcijas:
+Puslapio įkėlimas be perkrovimo, kai paspaudžiamos nuorodos su "data-page" atributu.
+Automatiškai uždaryti pranešimus (alerts) po 3 sekundžių.
+Toggle funkcija šoninės navigacijos juostai išplėsti ar suskleisti.
+Atsižvelgiant į šiuos elementus ir funkcijas, svetainė yrap patogus ir funkcionalus administratoriaus valdymo skydelis.
+</p>
 <b>Šiame projekte pritaikytos apsaugos yra šios:</b>
 <ul>
 <li>Content Security Policy (CSP): Kodo pradžioje yra CSP antraštė, kuri apriboja išorinių išteklių naudojimą. CSP padeda apsaugoti nuo kai kurių įterpimo atakų, tokių kaip Cross-Site Scripting (XSS).</li>
