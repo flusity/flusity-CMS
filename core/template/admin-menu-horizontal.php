@@ -7,7 +7,9 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav ml-5 mt-2">
             <li class="nav-item active">
-                <a class="nav-link" href="../../?page">Puslapio priekis</a>
+              <?php $settings = getSettings($db); // Funkcija, kuri gauna nustatymus iš duomenų bazės
+                ?>
+                <a class="nav-link" href="<?php echo $settings['pretty_url'] == 1 ? "/" : "../../?page"; ?>">Puslapio priekis</a>
             </li>
             <?php if (isset($_SESSION['user_id'])): 
                 $isAdmin = checkUserRole($user_id, 'admin', $db);
