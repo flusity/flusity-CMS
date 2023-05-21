@@ -21,7 +21,7 @@ $current_page_url = getCurrentPageUrl($db);
 
 foreach ($menuItems as $item):
     $active = $current_page_url === $item['page_url'] ? 'active' : '';
-    $generatedUrl = generateMenuUrl($item['page_url']);
+    $generatedUrl = generateMenuUrl($db, $item['page_url']);
 ?>
     <li class="nav-item">
         <a class="nav-link <?php echo $active; ?>" href="<?php echo $generatedUrl; ?>"><?php echo htmlspecialchars($item['name']); ?></a>
