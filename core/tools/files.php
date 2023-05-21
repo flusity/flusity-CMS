@@ -56,7 +56,8 @@ $db = getDBConnection($config);
            echo "<h3>Failų sąrašas</h3>";
            
            
-           echo '<div class="row row-cols-1 row-cols-md-3 g-4">';
+          // Sutvarkome failų sąrašo eilutės div'ą, kad pridėtume tarpą tarp paveikslėlių
+echo '<div class="row row-cols-1 row-cols-md-3 g-4">';
 
 foreach ($files as $file) {
     $url = $file['url'];
@@ -69,30 +70,32 @@ foreach ($files as $file) {
 
     $shortName = (strlen($shortName) > 10) ? substr($shortName, 0, 7) . '...' : $shortName;
 
-    echo '<div class="col" style="width: 80px;">';
-    echo '<div class="card h-100" style="width: 80px;">';
-
+    // Pridedame 7px tarpą ir keičiame paveikslėlio dydį į 150x150
+    echo '<div class="col" style="margin: 7px; width: 150px; position: relative;">';
+    echo '<div class="card h-100" style="padding: 3px; width: 160px;">'; // pridėtas 'padding: 3px;'
+    
     if ($is_image) {
-        
-        echo '<img src="' . $url . '" class="card-img-top" alt="' . htmlspecialchars($shortName) . '" style="width: 80px; height: 80px; object-fit: cover;" title="' . htmlspecialchars($shortName) . '">';
+        echo '<img src="' . $url . '" class="card-img-top" alt="' . htmlspecialchars($shortName) . '" style="width: 100%; height: 144px; object-fit: cover; border-radius: .25rem;" title="' . htmlspecialchars($shortName) . '">'; // pridėtas 'border-radius: .25rem;'
+
+        echo '<div class="card-body p-0" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); color: white; border-radius: .25rem;">'; // pridėtas 'border-radius: .25rem;'
+        echo '<p class="card-text m-0" style="position: absolute; bottom: 0; width: 100%; text-align: center;">';
+       echo '<a href="' . $url . '" target="_blank" title="Peržiūrėti" style="color: white;"><i class="fas fa-eye"></i></a> ';
+        echo '<a href="#" onclick="copyToClipboard(\'' . $url . '\')" title="Kopijuoti nuorodą" style="color: white;"><i class="fas fa-copy"></i></a> ';
+        echo '<a href="file_delete.php?id=' . urlencode($file['id']) . '" title="Trinti" style="color: white;"><i class="fas fa-trash"></i></a>';
+        echo '</p>';
+        echo '</div>';
     } else {
         echo '<div class="card-header">' . htmlspecialchars($file['name']) . '</div>';
     }
-
-    echo '<div class="card-body p-0" style="display: none;">';
-    echo '<p class="card-text m-0">';
-    echo '<a href="' . $url . '" target="_blank" title="Peržiūrėti"><i class="fas fa-eye"></i></a> ';
-    echo '<a href="#" onclick="copyToClipboard(\'' . $url . '\')" title="Kopijuoti nuorodą"><i class="fas fa-copy"></i></a> ';
-    echo '<a href="file_delete.php?id=' . urlencode($file['id']) . '" title="Trinti"><i class="fas fa-trash"></i></a>';
-    echo '</p>';
-    echo '</div>';
-
+    
     echo '<div class="card-footer p-0 text-center" style="font-size: 10px;">';
     echo '<p class="m-0">' . htmlspecialchars($shortName) . '</p>';
     echo '</div>';
-
+    
     echo '</div>';
     echo '</div>';
+    
+    
 }
 
 echo '</div>';
