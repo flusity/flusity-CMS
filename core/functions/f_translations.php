@@ -10,6 +10,12 @@ function getTranslations($db, $language_code) {
 }
 function t($key) {
     global $translations;
+    global $settings; // pridėkite šią eilutę, kad galėtumėte pasiekti nustatymus
+
+    // jeigu nustatyta kalba yra "en", grąžinkite raktą be vertimo
+    if ($settings['language'] === 'en') {
+        return $key;
+    }
 
     if (isset($translations[$key])) {
         return $translations[$key];
@@ -17,6 +23,7 @@ function t($key) {
 
     return $key; // Grąžinkite raktą, jei vertimas nerastas
 }
+
 function getTranslationsWords($db, $limit = 15, $offset = 0) {
     $stmt = $db->prepare("SELECT * FROM `translations` ORDER BY id DESC LIMIT :limit OFFSET :offset");
     $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);

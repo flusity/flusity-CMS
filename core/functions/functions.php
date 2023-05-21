@@ -1,7 +1,6 @@
 <?php
 
 
-
 function getFullUrl($relativePath) {
     $base_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'];
     return $base_url . $relativePath;
@@ -42,22 +41,38 @@ function getDBConnection($config) {
 
     
     function getCurrentPageUrl($db) {
+        // Gaukite nustatymus iš duomenų bazės
+        $stmt = $db->prepare("SELECT * FROM settings");
+        $stmt->execute();
+        $settings = $stmt->fetch(PDO::FETCH_ASSOC);
+    
         $current_url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         $menus = getMenus($db);
     
         // Nustato numatytąjį URL pavadinimą
         $default_url_name = 'index';
-    
-        foreach ($menus as $menu) {
-            $menu_url = "http://" . $_SERVER['HTTP_HOST'] . '/?page=' . $menu['page_url'];
-            if ($current_url == $menu_url) {
-                return $menu['page_url'];
+        
+        // Jei pretty_url nustatymas yra 1, tikrina "gražų" URL
+        if($settings['pretty_url'] == 1){
+            foreach ($menus as $menu) {
+                $menu_url = "http://" . $_SERVER['HTTP_HOST'] . '/' . $menu['page_url'];
+                if ($current_url == $menu_url) {
+                    return $menu['page_url'];
+                }
+            }
+        } else{
+            foreach ($menus as $menu) {
+                $menu_url = "http://" . $_SERVER['HTTP_HOST'] . '/?page=' . $menu['page_url'];
+                if ($current_url == $menu_url) {
+                    return $menu['page_url'];
+                }
             }
         }
     
         // Jei nerandamas joks kitas URL pavadinimas, grąžina numatytąjį
         return $default_url_name;
     }
+    
     
     
     function getTemplates($dir) {
@@ -77,13 +92,17 @@ function getDBConnection($config) {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     
-    function updateSettings($db, $site_title, $meta_description, $footer_text) {
-        $stmt = $db->prepare("UPDATE settings SET site_title = :site_title, meta_description = :meta_description, footer_text = :footer_text");
+    function updateSettings($db, $site_title, $meta_description, $footer_text, $pretty_url, $language) {
+        $stmt = $db->prepare("UPDATE settings SET site_title = :site_title, meta_description = :meta_description, footer_text = :footer_text, pretty_url = :pretty_url, language = :language");
         $stmt->bindParam(':site_title', $site_title, PDO::PARAM_STR);
         $stmt->bindParam(':meta_description', $meta_description, PDO::PARAM_STR);
         $stmt->bindParam(':footer_text', $footer_text, PDO::PARAM_STR);
+        $stmt->bindParam(':pretty_url', $pretty_url, PDO::PARAM_INT);
+        $stmt->bindParam(':language', $language, PDO::PARAM_STR);
         return $stmt->execute();
     }
+    
+    
     function createBackupFilename($db) {
     $names = [
         ['Jonas', 'Darius', 'Petras', 'Antanas', 'Juozas', 'Mantas'],
