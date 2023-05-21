@@ -1,9 +1,9 @@
 <?php session_start();
-<!--
+/*
  @MiniFrame css karkasas Lic GNU
  Author Darius Jakaitis, author web site http://www.manowebas.lt
  fix-content
--->
+*/
 require_once 'security/config.php';
 require_once 'core/functions/functions.php';
 require_once 'get_customblock.php';
