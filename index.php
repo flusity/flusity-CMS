@@ -7,6 +7,11 @@
 require_once 'security/config.php';
 require_once 'core/functions/functions.php';
 require_once 'get_customblock.php';
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 secureSession();
 $db = getDBConnection($config);
 
