@@ -17,8 +17,8 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
         <?php
           $users = getAllUsers($db);
           ?>
-<div class="col-md-10 content-up">
-<div class="col-sm-9">
+    <div class="col-md-10 content-up">
+    <div class="col-sm-9">
         <?php  if (isset($_SESSION['success_message'])) {
                 echo "<div class='alert alert-success alert-dismissible fade show slow-fade'>
                         " . htmlspecialchars($_SESSION['success_message']) . "
@@ -35,20 +35,20 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
                 unset($_SESSION['error_message']);
             } ?>
     </div>
-    <h1>Vartotojai</h1>
+    <h1><?php echo t("User's");?></h1>
       <!-- Išveda Vartotojo redagavimo langą -->
       <div id="get-user-edit"></div>
       
     <table class="table">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Username</th>
-                <th>Surname</th>
-                <th>Phone</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Actions</th>
+                <th><?php echo t("ID");?></th>
+                <th><?php echo t("Username");?></th>
+                <th><?php echo t("Surname");?></th>
+                <th><?php echo t("Phone");?></th>
+                <th><?php echo t("Email");?></th>
+                <th><?php echo t("Role");?></th>
+                <th><?php echo t("Actions");?></th>
             </tr>
         </thead>
         <tbody>
@@ -61,11 +61,11 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
                     <td><?php echo htmlspecialchars($user['email']); ?></td>
                     <td><?php echo htmlspecialchars($user['role']); ?></td>
                     <td>
-                        <button type="button" class="btn btn-sm btn-primary" onclick="loadUserEditForm(<?php echo $user['id']; ?>)" title="Edit">
-                            <i class="fas fa-edit"></i>
+                       <button type="button" class="btn btn-sm btn-primary" onclick="loadUserEditForm(<?php echo $user['id']; ?>)" title="<?php echo t('Edit'); ?>">
+                        <i class="fas fa-edit"></i>
                         </button>
                        
-                        <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteUserModal" data-user-id="<?php echo $user['id']; ?>" title="Delete">
+                        <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteUserModal" data-user-id="<?php echo $user['id']; ?>" title="<?php echo t('Delete'); ?>">
                             <i class="fas fa-trash-alt"></i>
                         </button>
                       
@@ -78,27 +78,57 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
     </div>
 </div>
 
-<!-- Modal -->
 <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="confirmDeleteModalLabel">Patvirtinkite šalinimą</h5>
+        <h5 class="modal-title" id="confirmDeleteModalLabel"><?php echo t('Confirm the removal'); ?></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        Ar tikrai norite ištrinti šį Vartotoją?
+      <?php echo t('Are you sure you want to delete this User?'); ?>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Atšaukti</button>
-        <button type="button" class="btn btn-danger  delete-user-btn" id="confirm-delete-btn">Ištrinti</button>
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?php echo t("Cancel");?></button>
+        <button type="button" class="btn btn-danger  delete-user-btn" id="confirm-delete-btn"><?php echo t("Remove");?></button>
       </div>
     </div>
   </div>
 </div>
+
+<script src="js/admin-user-edit.js"></script>
 <script>
 
-</script>
-<script src="js/admin-user-edit.js"></script>
 
+// Paspaudus ištrynimo mygtuką, atidaro patvirtinimo modalą
+$('button[data-bs-target="#deleteUserModal"]').on('click', function () {
+      const userId = $(this).data('user-id');
+      $('#confirmDeleteModal').data('user-id', userId);
+      $('#confirmDeleteModal').modal('show');
+    });
+  
+    // Paspaudus patvirtinimo mygtuką, ištrina kategoriją
+    $('#confirm-delete-btn').on('click', function () {
+      const userId = $('#confirmDeleteModal').data('user-id');
+      
+      // Siunčia POST užklausą į delete_user.php failą
+      $.ajax({
+        type: 'POST',
+        url: 'delete_user.php',
+        data: {
+          action: 'delete_user',
+          user_id: userId
+        },
+        success: function(response) {
+          $('#confirmDeleteModal').modal('hide');
+          window.location.href = 'users.php';
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+         
+          console.error(textStatus, errorThrown);
+        }
+      });
+    });
+
+</script>
 <?php require_once ROOT_PATH . 'core/template/admin-footer.php';?>

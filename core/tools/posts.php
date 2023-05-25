@@ -17,18 +17,14 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
             <?php require_once ROOT_PATH . 'core/tools/sidebar.php';?>
         </div>
         <?php   $i = 1;
-                $limit = 5; // Kiek įrašų rodyti per puslapį
+                $limit = 10;
                 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
                 $start = ($page - 1) * $limit;
 
                 $posts = getAllPostsPagination($db, $start, $limit);
                 $total_posts = countAllPosts($db);
                 $total_pages = ceil($total_posts / $limit);
-
-
-
-
-          //$posts = getAllPosts($db);
+                $allPost = getAllPosts($db);
           ?>
         <div class="col-md-10 content-up">
             <div class="col-sm-9">
@@ -50,7 +46,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
                 }
                 ?>
             </div>
-            <h2>Posts on pages</h2>
+            <h2><?php echo t("Posts on pages");?></h2>
             <button type="button" class="btn btn-sm btn-primary" onclick="loadPostForm('create')" title="Add">
 
               <i class="fas fa-pencil"></i>
@@ -61,24 +57,23 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
             <table class="table">
                 <thead>
                     <tr>
-                        <th style="width: 3%;">Nr.</th>
-                        <th style="width: 17%;">Title</th>
-                        <th style="width: 40%;">Content</th>
-                        <th style="width: 13%;">Public</th>
-                        <th style="width: 12%;">Author</th>
-                        <th style="width: 15%;">Actions</th>
+                        <th style="width: 3%;"><?php echo t("No.");?></th>
+                        <th style="width: 17%;"><?php echo t("Title");?></th>
+                        <th style="width: 40%;"><?php echo t("Content");?></th>
+                        <th style="width: 13%;"><?php echo t("Public");?></th>
+                        <th style="width: 12%;"><?php echo t("Author");?></th>
+                        <th style="width: 15%;"><?php echo t("Actions");?></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($posts as $post) { ?>
+                    <?php foreach ($allPost as $post) { ?>
                         <tr>
-                            <!-- <td><?php //echo htmlspecialchars($post['id']); ?></td> -->
                             <td><?php echo $i++; ?></td>
                             <td><?php echo htmlspecialchars($post['title']); ?></td>
                             <td>
                             <?php
                                 $content = htmlspecialchars($post['content']);
-                                $max_length = 100; // Nustatykite norimą maksimalų simbolių kiekį
+                                $max_length = 100; 
                                 if (strlen($content) > $max_length) {
                                     echo substr($content, 0, $max_length) . '...';
                                 } else {
@@ -90,11 +85,11 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
                             <td><?php echo htmlspecialchars($user_name); ?></td>
                             <td>
                                 
-                                <button type="button" class="btn btn-sm btn-primary" onclick="loadPostEditForm(<?php echo $post['id']; ?>)" title="Edit">
+                                <button type="button" class="btn btn-sm btn-primary" onclick="loadPostEditForm(<?php echo $post['id']; ?>)" title="<?php echo t("Edit");?>">
                                     <i class="fas fa-edit"></i>
                                 </button>
 
-                                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deletePostModal" data-post-id="<?php echo $post['id']; ?>" title="Delete">
+                                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deletePostModal" data-post-id="<?php echo $post['id']; ?>" title="<?php echo t("Delete");?>">
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
                             </td>
@@ -123,15 +118,15 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="confirmDeleteModalLabel">Patvirtinkite šalinimą</h5>
+        <h5 class="modal-title" id="confirmDeleteModalLabel"><?php echo t("Confirm deletion");?></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        Ar tikrai norite ištrinti šį įrašą?
+      <?php echo t("Are you sure you want to delete this post?");?> 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Atšaukti</button>
-        <button type="button" class="btn btn-danger delete-post-btn" id="confirm-delete-btn">Ištrinti</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?php echo t("Cancel");?></button>
+        <button type="button" class="btn btn-danger delete-post-btn" id="confirm-delete-btn"><?php echo t("Delete");?></button>
       </div>
     </div>
   </div>
@@ -140,6 +135,32 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
   function loadPostEditForm(postId) {
     loadPostForm('edit', postId);
   }
+  
+  $('button[data-bs-target="#deletePostModal"]').on('click', function () {
+    const postId = $(this).data('post-id');
+    $('#confirmDeleteModal').data('post-id', postId);
+    $('#confirmDeleteModal').modal('show');
+  });
+  
+  $('#confirm-delete-btn').on('click', function () {
+    const postId = $('#confirmDeleteModal').data('post-id');
+    $.ajax({
+      type: 'POST',
+      url: 'delete_post.php',
+      data: {
+        action: 'delete_post',
+        post_id: postId
+      },
+      success: function(response) {
+        $('#confirmDeleteModal').modal('hide');
+        window.location.href = 'posts.php';
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.error(textStatus, errorThrown);
+      }
+    });
+  });
+  
 </script>
 
 <script src="js/admin-post-edit.js"></script>

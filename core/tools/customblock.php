@@ -18,7 +18,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
         </div>
         <?php
         $categories = getAllCategories($db);
-        $menus = getMenus($db);
+        $menus = getMenuItems($db);
 
           $customblocks = getAllCustomBlocks($db);
           ?>
@@ -42,8 +42,8 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
                 }
                 ?>
             </div>
-            <h2>Custom Blocks</h2>
-            <button type="button" class="btn btn-sm btn-primary" onclick="loadCustomBlockForm('create')" title="Add">
+            <h2><?php echo t("Custom Blocks");?></h2>
+            <button type="button" class="btn btn-sm btn-primary" onclick="loadCustomBlockForm('create')" title="<?php echo t("Add");?>">
 
               <i class="fas fa-plus"></i>
             </button>
@@ -53,12 +53,12 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
             <table class="table">
     <thead>
         <tr>
-            <th style="width: 3%;">ID</th>
-            <th style="width: 17%;">Name</th>
-            <th style="width: 40%;">HTML Code</th>
-            <th style="width: 13%;">Menu Place</th>
-            <th style="width: 12%;">Category</th>
-            <th style="width: 15%;">Actions</th>
+            <th style="width: 3%;"><?php echo t("ID");?></th>
+            <th style="width: 17%;"><?php echo t("Name");?></th>
+            <th style="width: 40%;"><?php echo t("HTML Code");?></th>
+            <th style="width: 13%;"><?php echo t("Menu Place");?></th>
+            <th style="width: 12%;"><?php echo t("Category");?></th>
+            <th style="width: 15%;"><?php echo t("Actions");?></th>
         </tr>
     </thead>
     <tbody>
@@ -80,11 +80,11 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
                 <td><?= htmlspecialchars(findNameById($customBlock['menu_id'], $menus)); ?></td>
                 <td><?= htmlspecialchars(findNameById($customBlock['category_id'], $categories)); ?></td>
                 <td>
-                    <button type="button" class="btn btn-sm btn-primary" onclick="loadCustomBlockEditForm(<?= $customBlock['id']; ?>)" title="Edit">
+                    <button type="button" class="btn btn-sm btn-primary" onclick="loadCustomBlockEditForm(<?= $customBlock['id']; ?>)" title="<?php echo t("Edit");?>">
                         <i class="fas fa-edit"></i>
                     </button>
                 
-                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteCustomblockModal" data-custom-block-id="<?php echo $customBlock['id']; ?>" title="Delete">
+                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteCustomblockModal" data-custom-block-id="<?php echo $customBlock['id']; ?>" title="<?php echo t("Delete");?>">
 
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
@@ -104,15 +104,15 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="confirmDeleteModalLabel">Patvirtinkite šalinimą</h5>
+        <h5 class="modal-title" id="confirmDeleteModalLabel"><?php echo t("Confirm deletion");?></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        Ar tikrai norite ištrinti šį bloką?
+      <?php echo t("Are you sure you want to delete this block?");?> 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Atšaukti</button>
-        <button type="button" class="btn btn-danger  delete-customblock-btn" id="confirm-delete-btn">Ištrinti</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?php echo t("Cancel");?></button>
+        <button type="button" class="btn btn-danger  delete-customblock-btn" id="confirm-delete-btn"><?php echo t("Delete");?></button>
       </div>
     </div>
   </div>

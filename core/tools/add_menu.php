@@ -6,6 +6,13 @@ define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../') . '/');
 
 require_once ROOT_PATH . 'security/config.php';
 require_once ROOT_PATH . 'core/functions/functions.php';
+// Duomenų gavimas iš duomenų bazės
+$db = getDBConnection($config);
+
+// Gaunamas kalbos nustatymas iš duomenų bazės  
+$language_code = getLanguageSetting($db);
+$translations = getTranslations($db, $language_code);
+
 secureSession();
 // Duomenų gavimas iš duomenų bazės
 $db = getDBConnection($config);
@@ -19,9 +26,9 @@ if (defined('IS_ADMIN') && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST
 
     $response = array();
     if ($result) {
-        $_SESSION['success_message'] = 'Menu punktas sėkmingai pridėtas.';
+        $_SESSION['success_message'] = t('Menu item successfully added.');
     } else {
-        $_SESSION['error_message'] = 'Klaida pridedant menu punktą. Bandykite dar kartą.';
+        $_SESSION['error_message'] = t('Error adding menu item. Try again.');
     }
     echo json_encode($response);
     exit;

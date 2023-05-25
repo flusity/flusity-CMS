@@ -9,6 +9,8 @@ require_once ROOT_PATH . 'core/functions/functions.php';
 secureSession();
 // Duomenų gavimas iš duomenų bazės
 $db = getDBConnection($config);
+$language_code = getLanguageSetting($db);
+$translations = getTranslations($db, $language_code);
 
 if (defined('IS_ADMIN') && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'update_category' && isset($_POST['category_id']) && isset($_POST['category_name'])) {
     $categoryId = $_POST['category_id'];
@@ -17,9 +19,9 @@ if (defined('IS_ADMIN') && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST
 
     $response = array();
     if ($result) {
-        $_SESSION['success_message'] = 'Kategorija sėkmingai atnaujinta.';
+        $_SESSION['success_message'] = t('Category successfully updated.');
     } else {
-        $_SESSION['error_message'] = 'Klaida atnaujinant kategoriją. Bandykite dar kartą.';
+        $_SESSION['error_message'] = t('Error updating category. Try again.');
     }
     echo json_encode($response);
     exit;

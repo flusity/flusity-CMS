@@ -27,10 +27,10 @@ $target_file = $target_dir . basename($new_filename);
 if (move_uploaded_file($uploaded_file["tmp_name"], $target_file)) {//
     $file_url = $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['HTTP_HOST'] . "/uploads/" . $new_filename;
     
-    $_SESSION['success_message'] = "Failas " . basename($uploaded_file["name"]) . " sėkmingai įkeltas.";
+    $_SESSION['success_message'] = "File" ." ". basename($uploaded_file["name"]) . " " .t("sėkmingai įkeltas.");
     saveFileToDatabase($db, $new_filename, $file_url);
 } else {
-    $_SESSION['error_message'] = "Klaida įkeliant failą.";
+    $_SESSION['error_message'] = t("Error loading file.");
 }
 
 header("Location: files.php");

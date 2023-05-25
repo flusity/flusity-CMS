@@ -7,8 +7,10 @@ define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../') . '/');
 require_once ROOT_PATH . 'security/config.php';
 require_once ROOT_PATH . 'core/functions/functions.php';
 secureSession();
-// Duomenų gavimas iš duomenų bazės
+
 $db = getDBConnection($config);
+$language_code = getLanguageSetting($db);
+$translations = getTranslations($db, $language_code);
 
 $result = ['success' => false];
 
@@ -20,15 +22,15 @@ if (isset($_POST['post_title'], $_POST['post_content'], $_POST['post_menu'], $_P
     $status = $_POST['post_status'];
     $tags = $_POST['post_tags'];
     $role = $_POST['role'];
-    $author = $_SESSION['user_id']; // Čia priskirkite autoriaus ID iš sesijos
+    $author = $_SESSION['user_id']; 
 
     $insert = createPost($db, $title, $content, $menuId, $status, $author, $tags, $role);
 
     if ($insert) {
-        $_SESSION['success_message'] = 'Įrašas sėkmingai pridėtas.';
+        $_SESSION['success_message'] = t('Record successfully added.');
         $result['success'] = true;
     } else {
-        $_SESSION['error_message'] = 'Klaida atnaujinant Įrašą. Bandykite dar kartą.';
+        $_SESSION['error_message'] = t('Error adding Record. Try again.');
     }
 }
 

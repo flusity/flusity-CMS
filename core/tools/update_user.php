@@ -6,9 +6,14 @@ define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../') . '/');
 
 require_once ROOT_PATH . 'security/config.php';
 require_once ROOT_PATH . 'core/functions/functions.php';
+
 secureSession();
 // Duomenų gavimas iš duomenų bazės
 $db = getDBConnection($config);
+
+// Gaunamas kalbos nustatymas iš duomenų bazės  
+$language_code = getLanguageSetting($db);
+$translations = getTranslations($db, $language_code);
 
 
 $result = ['success' => false];
@@ -21,13 +26,22 @@ if (isset($_POST['user_id'], $_POST['user_username'], $_POST['user_surname'], $_
     $email = $_POST['user_email'];
     $role = $_POST['user_role'];
 
-    $updated = updateUser($db, $userId, $username, $surname, $phone, $email, $role);
+    $password = isset($_POST['user_password']) ? $_POST['user_password'] : null;
+    $confirm_password = isset($_POST['user_confirm_password']) ? $_POST['user_confirm_password'] : null;
 
+    if (($password || $confirm_password) && $password !== $confirm_password) {
+        $_SESSION['error_message'] = t('The passwords do not match. Try again.');
+        echo json_encode($result);
+        exit;
+    }
+
+    $updated = updateUser($db, $userId, $username, $surname, $phone, $email, $role, $password);
+   
     if ($updated) {
-        $_SESSION['success_message'] = 'Vartotojas sėkmingai atnaujintas.';
+        $_SESSION['success_message'] = t('User successfully updated.');
         $result['success'] = true;
     } else {
-        $_SESSION['error_message'] = 'Klaida atnaujinant vartotoją. Bandykite dar kartą.';
+        $_SESSION['error_message'] = t('Error updating user. Try again.');
     }
 }
 

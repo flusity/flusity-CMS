@@ -8,7 +8,8 @@ require_once ROOT_PATH . 'security/config.php';
 require_once ROOT_PATH . 'core/functions/functions.php';
 
 $db = getDBConnection($config);
-
+$language_code = getLanguageSetting($db);
+$translations = getTranslations($db, $language_code);
 
 if (isset($_GET['file'])) {
     $backupDir = realpath(dirname(__FILE__) . '/backups/') . '/';
@@ -17,17 +18,17 @@ if (isset($_GET['file'])) {
 
     if (file_exists($filePath)) {
         if (unlink($filePath)) {
-            $_SESSION['success_message'] = "Atsarginė kopija sėkmingai ištrinta!";
+            $_SESSION['success_message'] = t("Backup deleted successfully!");
         } else {
-            $_SESSION['error_message'] = "Nepavyko ištrinti atsarginės kopijos.";
+            $_SESSION['error_message'] = t("Failed to delete backup.");
         }
         header("Location: settings.php");
         exit;
     } else {
         http_response_code(404);
-        echo "Failas nerastas.";
+        echo t("File not found.");
     }
 } else {
     http_response_code(400);
-    echo "Klaida: Prašome nurodyti failo pavadinimą.";
+    echo t("Error: Please specify a file name.");
 }

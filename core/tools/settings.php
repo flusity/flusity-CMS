@@ -3,9 +3,11 @@ define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../') . '/');
 
 
 require_once ROOT_PATH . 'core/template/header-admin.php';
-
+$db = getDBConnection($config);
 $languages = getAllLanguages($db);
 $settings = getSettings($db);
+$language_code = getLanguageSetting($db);
+$translations = getTranslations($db, $language_code);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
    
@@ -13,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $meta_description = $_POST['meta_description'];
     $footer_text = $_POST['footer_text'];
     $pretty_url = $_POST['pretty_url'];
-    $language = $_POST['language']; // Čia pridėta naują 'language' formos laukelio vertę
+    $language = $_POST['language']; 
     updateSettings($db, $site_title, $meta_description, $footer_text, $pretty_url, $language);
   
     $_SESSION['success_message'] =  t("Settings successfully updated!");
@@ -93,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </select>
 </div>
 
-  <button type="submit" class="btn btn-primary"><?php echo t("Update settings");?></button>
+  <button type="submit" class="btn btn-primary"><?php echo t("Update Settings");?></button>
 </form>
 </div>
   <div class="col-sm-4 mt-5">
@@ -108,17 +110,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $backupDirectory = ROOT_PATH . 'core/tools/backups/';
         $backupFiles = getBackupFilesList($backupDirectory);
 
-        echo "<h3>Atsarginių kopijų sąrašas</h3>";
+        echo "<h3>".t('List of backups')."</h3>";
 
         if (count($backupFiles) > 0) {
             echo '<ul>';
             foreach ($backupFiles as $file) {
-                echo "<li><a href='download_backup.php?file=" . urlencode($file) . "'>" . htmlspecialchars($file) . "</a> <a href='delete_backup.php?file=" . urlencode($file) . "' onclick=\"return confirm('Ar tikrai norite ištrinti šį failą?')\">[Ištrinti]</a></li>";
+                echo "<li><a href='download_backup.php?file=" . urlencode($file) . "'>" . htmlspecialchars($file) . "</a> <a href='delete_backup.php?file=" . urlencode($file) . "' onclick=\"return confirm('Are you sure you want to delete this file?')\">[Ištrinti]</a></li>";
 
             }
             echo '</ul>';
         } else {
-            echo '<p>Nėra atsarginių kopijų.</p>';
+            echo '<p>'. t("No backups").'</p>';
         }
    ?>
 </div>

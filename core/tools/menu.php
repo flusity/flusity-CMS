@@ -2,6 +2,11 @@
 define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../') . '/');
 
 require_once ROOT_PATH . 'core/template/header-admin.php';
+
+$db = getDBConnection($config);
+// Gaunamas kalbos nustatymas iš duomenų bazės  
+$language_code = getLanguageSetting($db);
+$translations = getTranslations($db, $language_code);
 ?>
 <div class="container-fluid">
     <div class="row">
@@ -40,7 +45,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
                 ?>
             </div>
 
-            <h2>Page Menu</h2>
+            <h2><?php echo t("Page Menu");?></h2>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addMenuModal" data-mode="add">
             <i class="fas fa-plus"></i>
             </button>
@@ -48,12 +53,12 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
             <table class="table">
                 <thead>
                     <tr>
-                        <th style="width: 3%;">ID</th>
-                        <th style="width: 17%;">Name</th>
-                        <th style="width: 30%;">Page URL</th>
-                        <th style="width: 22%;">Template</th>
-                        <th style="width: 13%;">Position</th>
-                        <th style="width: 15%;">Actions</th>
+                        <th style="width: 3%;"><?php echo t("ID");?></th>
+                        <th style="width: 17%;"><?php echo t("Name");?></th>
+                        <th style="width: 30%;"><?php echo t("Page URL");?></th>
+                        <th style="width: 22%;"><?php echo t("Template");?></th>
+                        <th style="width: 13%;"><?php echo t("Position");?></th>
+                        <th style="width: 15%;"><?php echo t("Actions");?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -67,11 +72,11 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
                             <td><?php echo htmlspecialchars($menu['position']); ?></td>
                             <td>
 
-                                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addMenuModal" data-menu-id="<?php echo $menu['id']; ?>" data-mode="update" title="Edit">
+                                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addMenuModal" data-menu-id="<?php echo $menu['id']; ?>" data-mode="update" title="<?php echo t("Edit");?>">
                                     <i class="fas fa-edit"></i>
                                 </button>
 
-                                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteMenuModal" data-menu-id="<?php echo $menu['id']; ?>" title="Delete">
+                                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteMenuModal" data-menu-id="<?php echo $menu['id']; ?>" title="<?php echo t("Delete");?>">
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
 
@@ -92,28 +97,26 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
 <div class="modal-dialog">
   <div class="modal-content">
     <div class="modal-header">
-      <h5 class="modal-title" id="addMenuModalLabel">Add Menu</h5>
+      <h5 class="modal-title" id="addMenuModalLabel"><?php echo t('Add Menu');?></h5>
       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="modal-body">
       <form id="add-menu-form">
         <div class="form-group">
-          <label for="menu_name">Menu Name</label>
+          <label for="menu_name"><?php echo t("Menu Name");?></label>
           <input type="text" class="form-control" id="menu_name" name="menu_name" required>
         </div>
         <div class="form-group">
-          <label for="page_url">Page URL</label>
+          <label for="page_url"><?php echo t("Page URL");?></label>
           <input type="text" class="form-control" id="page_url" name="page_url">
         </div>
         <div class="form-group">
-          <label for="position">Position</label>
+          <label for="position"><?php echo t("Position");?></label>
           <input type="number" class="form-control" id="position" name="position" required>
         </div>
         <div class="form-group">
-          <label for="template">Template</label>
-
-          <!-- <input type="text" class="form-control" id="template" name="template" required> -->
-         <?php $templates = getTemplates("../../template/"); // Čia įrašykite katalogo kelią su šablonais
+          <label for="template"><?php echo t("Template");?></label>
+         <?php $templates = getTemplates("../../template/"); 
          ?>
 
           <select class="form-control" id="template" name="template">
@@ -126,7 +129,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
         
         
         </div>
-        <button type="submit" class="btn btn-primary mt-3" id="submit-button">Add Menu</button>
+        <button type="submit" class="btn btn-primary mt-3" id="submit-button"><?php echo t("Add Menu");?></button>
       </form>
     </div>
   </div>
@@ -137,15 +140,15 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
 <div class="modal-dialog">
   <div class="modal-content">
     <div class="modal-header">
-      <h5 class="modal-title" id="confirmDeleteModalLabel">Patvirtinkite šalinimą</h5>
+      <h5 class="modal-title" id="confirmDeleteModalLabel"><?php echo t("Confirm deletion");?></h5>
       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="modal-body">
-      Ar tikrai norite ištrinti šį menu?
+    <?php echo t("Are you sure you want to delete this menu?");?>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Atšaukti</button>
-      <button type="button" class="btn btn-danger  delete-menu-btn" id="confirm-delete-btn">Ištrinti</button>
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?php echo t("Cancel");?></button>
+      <button type="button" class="btn btn-danger  delete-menu-btn" id="confirm-delete-btn"><?php echo t("Delete");?></button>
     </div>
   </div>
 </div>

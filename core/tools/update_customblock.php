@@ -9,6 +9,8 @@ require_once ROOT_PATH . 'core/functions/functions.php';
 secureSession();
 // Duomenų gavimas iš duomenų bazės
 $db = getDBConnection($config);
+$language_code = getLanguageSetting($db);
+$translations = getTranslations($db, $language_code);
 
 $result = ['success' => false];
 
@@ -22,10 +24,10 @@ if (isset($_POST['customblock_id'], $_POST['customblock_name'], $_POST['custombl
     $update = updateCustomBlock($db, $customBlockId, $name, $menuId, $categoryId, $htmlCode);
 
     if ($update) {
-        $_SESSION['success_message'] = 'Blokas sėkmingai atnaujintas.';
+        $_SESSION['success_message'] = t('The Block has been updated successfully.');
         $result['success'] = true;
     } else {
-        $_SESSION['error_message'] = 'Klaida atnaujinant bloką. Bandykite dar kartą.';
+        $_SESSION['error_message'] = t('Error update the Block. Try again.');
     }
 }
 

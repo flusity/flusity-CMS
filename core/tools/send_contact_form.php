@@ -26,11 +26,9 @@ try {
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port       = 587;
 
-    //Recipients
     $mail->setFrom('your-email@example.com', 'Mailer');
     $mail->addAddress('recipient@example.com', 'Recipient Name');
 
-    //Content
     $mail->isHTML(true);
     $mail->Subject = 'Here is the subject';
     $mail->Body    = 'This is the HTML message body <b>in bold!</b>';

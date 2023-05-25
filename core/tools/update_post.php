@@ -9,6 +9,8 @@ require_once ROOT_PATH . 'core/functions/functions.php';
 secureSession();
 // Duomenų gavimas iš duomenų bazės
 $db = getDBConnection($config);
+$language_code = getLanguageSetting($db);
+$translations = getTranslations($db, $language_code);
 
 $result = ['success' => false];
 
@@ -24,10 +26,10 @@ if (isset($_POST['post_id'], $_POST['post_title'], $_POST['post_content'], $_POS
     $update = updatePost($db, $postId, $title, $content, $menuId, $status, $tags, $role);
 
     if ($update) {
-        $_SESSION['success_message'] = 'Puslapis sėkmingai atnaujintas.';
+        $_SESSION['success_message'] = t('The record has been updated successfully.');
         $result['success'] = true;
     } else {
-        $_SESSION['error_message'] = 'Klaida atnaujinant puslapį. Bandykite dar kartą.';
+        $_SESSION['error_message'] = t("Error updating post. Try again.");
     }
 }
 

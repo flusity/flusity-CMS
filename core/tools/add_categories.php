@@ -8,6 +8,8 @@ require_once ROOT_PATH . 'core/functions/functions.php';
 secureSession();
 // Duomenų gavimas iš duomenų bazės
 $db = getDBConnection($config);
+$language_code = getLanguageSetting($db);
+$translations = getTranslations($db, $language_code);
 
 if (defined('IS_ADMIN') && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'add_category' && isset($_POST['category_name'])) {
     $categoryName = $_POST['category_name'];
@@ -15,9 +17,9 @@ if (defined('IS_ADMIN') && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST
 
     $response = array();
     if ($result) {
-        $_SESSION['success_message'] = 'Kategorija sėkmingai pridėta.';
+        $_SESSION['success_message'] = t('Category successfully added.');
     } else {
-        $_SESSION['error_message'] = 'Klaida pridedant kategoriją. Bandykite dar kartą.';
+        $_SESSION['error_message'] = t('Error adding category. Try again.');
     }
     echo json_encode($response);
     exit;

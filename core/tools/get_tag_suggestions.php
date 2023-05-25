@@ -1,7 +1,4 @@
-<?php ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
+<?php
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -12,25 +9,25 @@ define('IS_ADMIN', true);
 require_once $_SERVER['DOCUMENT_ROOT'] . '/security/config.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/core/functions/functions.php';
 
-secureSession();
-$db = getDBConnection($config);
 
+secureSession();
 $input = isset($_POST['input']) ? trim($_POST['input']) : '';
 
+$db = getDBConnection($config);
 $tags = getTagSuggestionsFromDatabase($db, $input);
 
-// Siunčia žymių pasiūlymus JSON formatu
+file_put_contents('debug.txt', json_encode($tags));
+// Siunčiamas žymių pasiūlymus JSON formatu
 
-header('Content-Type: application/json');
+header('Content-Type: text/html');
 
 echo json_encode($tags);
 
 function getTagSuggestionsFromDatabase($db, $input) {
-
-    $query = "SELECT DISTINCT `tags` FROM `posts` WHERE `tags` LIKE ? LIMIT 10";
+    $query = "SELECT DISTINCT `tags` FROM `posts` WHERE `tags` LIKE :input LIMIT 10";
     $stmt = $db->prepare($query);
-    $search_term = "%" . $input . "%";
-    $stmt->bind_param("s", $search_term);
+    $search_term = '%' . $input . '%';
+    $stmt->bindValue(':input', $search_term, PDO::PARAM_STR);
     $stmt->execute();
     $result = $stmt->get_result();
     $tags = [];

@@ -59,7 +59,7 @@ $contactFormSettings = getContactFormSettings($db);
                     
                     </div>
                 <?php endforeach; ?>
-                <button type="submit" class="btn btn-primary mt-3"><?php echo t("Save contact settings"); ?></button>
+                <button type="submit" class="btn btn-primary mt-3"><?php echo t("Save settings"); ?></button>
             </form>
 
 

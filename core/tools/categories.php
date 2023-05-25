@@ -1,6 +1,10 @@
 <?php define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../') . '/');
 
-require_once ROOT_PATH . 'core/template/header-admin.php';?>
+require_once ROOT_PATH . 'core/template/header-admin.php';
+// Gaunamas kalbos nustatymas iš duomenų bazės  
+$language_code = getLanguageSetting($db);
+$translations = getTranslations($db, $language_code);
+?>
 <div class="container-fluid ">
     <div class="row">
         <div class="col-sm-12">
@@ -18,7 +22,6 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
 ?>
 
 <div class="col-md-10 content-up">
-    
     <div class="col-sm-9">
         <?php  if (isset($_SESSION['success_message'])) {
                 echo "<div class='alert alert-success alert-dismissible fade show slow-fade'>
@@ -37,53 +40,48 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
             } ?>
     </div>
 
-    <h1>Kategorijos</h1>
+    <h1><?php echo t("Categories");?></h1>
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCategoryModal" data-mode="add">
-       Add Category
+    <?php echo t("Add Category");?>
      </button>
-    
-    
-<table class="table">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
- 
-        <?php foreach ($categories as $category) { ?>
-            <tr>   
-                <td><?php echo htmlspecialchars($category['id']); ?></td>
-                <td><?php echo htmlspecialchars($category['name']); ?></td>
-                <td>  
-                
-                        
-                        <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addCategoryModal" data-category-id="<?php echo $category['id']; ?>" data-mode="update" title="Edit">
-                        <i class="fas fa-edit"></i>
-                        </button>
-                       
-                        <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteCategoryModal" data-category-id="<?php echo $category['id']; ?>" title="Delete">
-                            <i class="fas fa-trash-alt"></i>
-                        </button>
-
-                    
-
-                </td>
-            </tr>
-        <?php } ?>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th><?php echo t("ID");?></th>
+                    <th><?php echo t("Name");?></th>
+                    <th><?php echo t("Actions");?></th>
+                </tr>
+            </thead>
+            <tbody>
         
-    </tbody>
-</table>
+                <?php foreach ($categories as $category) { ?>
+                    <tr>   
+                        <td><?php echo htmlspecialchars($category['id']); ?></td>
+                        <td><?php echo htmlspecialchars($category['name']); ?></td>
+                        <td>  
+                        
+                                
+                                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addCategoryModal" data-category-id="<?php echo $category['id']; ?>" data-mode="update" title="<?php echo t("Edit");?>">
+                                <i class="fas fa-edit"></i>
+                                </button>
+                              
+                                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteCategoryModal" data-category-id="<?php echo $category['id']; ?>" title="<?php echo t("Delete");?>">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
 
+                            
+
+                        </td>
+                    </tr>
+                <?php } ?>
+                
+            </tbody>
+        </table>
 </div>
-            </div>
-            
-            </div>
-
         </div>
-    </div>
+      </div>
+     </div>
+  </div>
 </div>
 
 <!-- Modal -->
@@ -91,37 +89,35 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addCategoryModalLabel">Add Category</h5>
+        <h5 class="modal-title" id="addCategoryModalLabel"><?php echo t("Add Category");?></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form id="add-category-form">
           <div class="form-group">
-            <label for="category_name">Category Name</label>
+            <label for="category_name"><?php echo t("Category Name");?></label>
             <input type="text" class="form-control" id="category_name" name="category_name" required>
           </div>
-          <button type="submit" class="btn btn-primary" id="submit-button">Add Category</button>
+          <button type="submit" class="btn btn-primary" id="submit-button"><?php echo t("Add Category");?></button>
         </form>
       </div>
     </div>
   </div>
 </div>
-
-
 <!-- Modal -->
 <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="confirmDeleteModalLabel">Patvirtinkite šalinimą</h5>
+        <h5 class="modal-title" id="confirmDeleteModalLabel"><?php echo t("Confirm deletion");?></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        Ar tikrai norite ištrinti šią kategoriją?
+      <?php echo t("Are you sure you want to delete this category?");?>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Atšaukti</button>
-        <button type="button" class="btn btn-danger  delete-category-btn" id="confirm-delete-btn">Ištrinti</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?php echo t("Cancel");?></button>
+        <button type="button" class="btn btn-danger  delete-category-btn" id="confirm-delete-btn"><?php echo t("Delete");?></button>
       </div>
     </div>
   </div>
@@ -197,10 +193,6 @@ $('#addCategoryModal').on('show.bs.modal', function (event) {
   }
 });
 
-
-
-
-
 $(document).ready(function () {
   // Paspaudus ištrynimo mygtuką, atidaro patvirtinimo modalą
   $('button[data-bs-target="#deleteCategoryModal"]').on('click', function () {
@@ -227,14 +219,11 @@ $(document).ready(function () {
         window.location.href = 'categories.php';
       },
       error: function(jqXHR, textStatus, errorThrown) {
-        // Rodo klaidos pranešimą
         console.error(textStatus, errorThrown);
       }
     });
   });
 });
-
-
 
 </script>
 <?php require_once ROOT_PATH . 'core/template/admin-footer.php';?>
