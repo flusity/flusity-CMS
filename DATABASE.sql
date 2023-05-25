@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 25, 2023 at 09:45 PM
+-- Generation Time: May 25, 2023 at 10:08 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -361,7 +361,15 @@ INSERT INTO `translations` (`id`, `language_code`, `translation_key`, `translati
 (164, 'lt', 'uploaded successfully.', 'sėkmingai įkeltas.'),
 (165, 'lt', 'Error loading file.', 'Klaida įkeliant failą.'),
 (166, 'lt', 'Are you sure you want to delete this User?', 'Ar tikrai norite ištrinti šį naudotoją?'),
-(167, 'lt', 'Confirm the removal', 'Patvirtinkite pašalinimą');
+(167, 'lt', 'Confirm the removal', 'Patvirtinkite pašalinimą'),
+(168, 'lt', 'Invalid username or password.', 'Neteisingas vartotojo vardas arba slaptažodis.'),
+(169, 'lt', 'Login system', 'Prisijungimo sistema'),
+(170, 'lt', 'The content management system is intended for personal websites', 'Turinio valdymo sistema skirta asmeninėms svetainėms'),
+(171, 'lt', 'Login', 'Prisijungti'),
+(172, 'lt', 'Home page', 'Pagrindinis puslapis'),
+(173, 'lt', 'Connect to page', 'Prisijungimas'),
+(174, 'lt', 'User Name', 'Vartotojo Vardas'),
+(175, 'lt', 'Back to', 'Grįžti į');
 
 -- --------------------------------------------------------
 
@@ -490,7 +498,7 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT for table `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=168;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=176;
 
 --
 -- AUTO_INCREMENT for table `users`
