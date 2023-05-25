@@ -1,6 +1,6 @@
 $(document).ready(function() {
 $('#add-menu-form').on('submit', function (e) {
-    //sconsole.log("Form submitted"); // Pridėkite šią eilutę
+    //sconsole.log("Form submitted"); 
   e.preventDefault();
 
   const menuName = $('#menu_name').val();
@@ -24,7 +24,6 @@ $('#add-menu-form').on('submit', function (e) {
     return;
   }
 
-  // menu data is validation
   const menuData = {
   action: action,
   menu_id: menuId,
@@ -42,10 +41,8 @@ $('#add-menu-form').on('submit', function (e) {
     data: menuData,
     success: function (response) {
       console.log(response);
-
       // Uždaro modal
       $('#addMenuModal').modal('hide');
-
       // Išvalo input laukus
       $('#menu_name').val('');
       $('#page_url').val('');
@@ -61,9 +58,9 @@ $('#add-menu-form').on('submit', function (e) {
 
 
 $('#addMenuModal').on('show.bs.modal', function (event) {
-  const button = $(event.relatedTarget); // Button that triggered the modal
-  const mode = button.data('mode'); // Extract mode from data-* attributes
-  const menuId = button.data('menu-id'); // Extract menu ID from data-* attributes
+  const button = $(event.relatedTarget); 
+  const mode = button.data('mode'); 
+  const menuId = button.data('menu-id'); 
 
   const modal = $(this);
   modal.data('mode', mode);
@@ -95,17 +92,14 @@ $('#addMenuModal').on('show.bs.modal', function (event) {
 });
 
 $(document).ready(function () {
-// When the delete button is clicked, open the confirmation modal
 $('button[data-bs-target="#deleteMenuModal"]').on('click', function () {
 const menuId = $(this).data('menu-id');
 $('#confirmDeleteModal').data('menu-id', menuId);
 $('#confirmDeleteModal').modal('show');
 });
 
-// When the confirmation button is clicked, delete the menu
 $('#confirm-delete-btn').on('click', function () {
 const menuId = $('#confirmDeleteModal').data('menu-id');
-// Send a POST request to delete_menu.php
 $.ajax({
   type: 'POST',
   url: 'delete_menu.php',
@@ -114,12 +108,10 @@ $.ajax({
     menu_item_id: menuId
   },
   success: function(response) {
-    // Close the modal and reload the menu.php page
     $('#confirmDeleteModal').modal('hide');
     window.location.href = 'menu.php';
   },
   error: function(jqXHR, textStatus, errorThrown) {
-    // Show an error message
     console.error(textStatus, errorThrown);
   }
 });

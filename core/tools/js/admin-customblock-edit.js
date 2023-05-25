@@ -29,12 +29,12 @@ function initializeCustomBlockForm(mode) {
                 if (data.success) {
                     window.location.href = 'customblock.php';
                 } else {
-                    alert(mode === 'edit' ? 'Klaida atnaujinant customblock.1' : 'Klaida pridedant customblock.1');
+                    alert(mode === 'edit' ? 'Klaida atnaujinant customblock' : 'Klaida pridedant customblock');
                 }
             })
             .catch(error => {
                 console.error('Klaida:', error);
-                alert(mode === 'edit' ? 'Klaida atnaujinant customblock.2' : 'Klaida pridedant customblock.2');
+                alert(mode === 'edit' ? 'Klaida atnaujinant customblock2' : 'Klaida pridedant customblock2');
             });
         });
     }
@@ -47,9 +47,6 @@ function initializeCustomBlockForm(mode) {
     }
 }
 
-// Add additional event handlers and AJAX calls for customblock-specific actions.
-
-  
 
   
   

@@ -1,5 +1,4 @@
 
-
 function loadPostForm(mode, postId = null) {
   const url = mode === 'edit' ? 'get_post.php?post_id=' + postId : 'get_post.php';
   fetch(url)
@@ -15,7 +14,7 @@ function loadPostForm(mode, postId = null) {
 
 function initializePostForm(mode) {
   const postForm = document.querySelector('#post-form');
-  initializeTagSuggestions(); // Įdėkite šią eilutę čia
+  initializeTagSuggestions();
 
   if (postForm) {
     postForm.addEventListener('submit', function (event) {
@@ -33,12 +32,12 @@ function initializePostForm(mode) {
           if (data.success) {
             window.location.href = 'posts.php';
           } else {
-            alert(mode === 'edit' ? 'Klaida atnaujinant įrašą.' : 'Klaida pridedant įrašą.');
+            alert(mode === 'edit' ? 'Error updating record.' : 'Error adding record.');
           }
         })
         .catch(error => {
           console.error('Klaida:', error);
-          alert(mode === 'edit' ? 'Klaida atnaujinant įrašą.' : 'Klaida pridedant įrašą.');
+          alert(mode === 'edit' ? 'Error updating record.' : 'Error adding record.');
         });
     });
   }
@@ -59,7 +58,7 @@ function initializePostForm(mode) {
       fetch('get_tag_suggestions.php', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+          'Content-Type': 'text/html'
         },
         body: 'input=' + encodeURIComponent(inputValue)
       })
@@ -68,7 +67,7 @@ function initializePostForm(mode) {
           // Rodo žymių pasiūlymus tagSuggestions elemente
           let suggestionsHtml = '';
           for (const tag of data.tags) {
-            suggestionsHtml += `<span class="badge badge-secondary">${tag}</span> `;
+            suggestionsHtml += `${tag}`;
           }
           tagSuggestions.innerHTML = suggestionsHtml;
         })
@@ -87,35 +86,4 @@ function initializePostForm(mode) {
     }
 }
 
-  
-  // Paspaudus ištrynimo mygtuką, atidaro patvirtinimo modalą
-  $('button[data-bs-target="#deletePostModal"]').on('click', function () {
-    const postId = $(this).data('post-id');
-    $('#confirmDeleteModal').data('post-id', postId);
-    $('#confirmDeleteModal').modal('show');
-  });
-  
-  // Paspaudus patvirtinimo mygtuką, ištrina puslapį
-  $('#confirm-delete-btn').on('click', function () {
-    const postId = $('#confirmDeleteModal').data('post-id');
-  
-    // Siunčia POST užklausą į delete_post.php failą
-    $.ajax({
-      type: 'POST',
-      url: 'delete_post.php',
-      data: {
-        action: 'delete_post',
-        post_id: postId
-      },
-      success: function(response) {
-        // Uždaro modalą ir peradresuoja į posts.php puslapį
-        $('#confirmDeleteModal').modal('hide');
-        window.location.href = 'posts.php';
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-        // Rodo klaidos pranešimą
-        console.error(textStatus, errorThrown);
-      }
-    });
-  });
   
