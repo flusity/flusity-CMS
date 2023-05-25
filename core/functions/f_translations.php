@@ -1,6 +1,4 @@
 <?php
-
-
 function getTranslations($db, $language_code) {
     $query = $db->prepare("SELECT translation_key, translation_value FROM translations WHERE language_code = :language_code");
     $query->execute(['language_code' => $language_code]);
@@ -10,10 +8,10 @@ function getTranslations($db, $language_code) {
 }
 function t($key) {
     global $translations;
-    global $settings; // pridėkite šią eilutę, kad galėtumėte pasiekti nustatymus
+    global $settings;
 
-    // jeigu nustatyta kalba yra "en", grąžinkite raktą be vertimo
-    if ($settings['language'] === 'en') {
+    // patikrinti, ar 'language' yra nustatyta $settings masyve
+    if (isset($settings['language']) && $settings['language'] === 'en') {
         return $key;
     }
 
@@ -21,16 +19,24 @@ function t($key) {
         return $translations[$key];
     }
 
-    return $key; // Grąžinkite raktą, jei vertimas nerastas
+    return $key;
 }
 
-function getTranslationsWords($db, $limit = 15, $offset = 0) {
-    $stmt = $db->prepare("SELECT * FROM `translations` ORDER BY id DESC LIMIT :limit OFFSET :offset");
-    $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
-    $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+
+function getTranslationsWords($db, $limit = 15, $offset = 0, $search_term = '') {
+    if ($search_term === '') {
+        $stmt = $db->prepare("SELECT * FROM `translations` ORDER BY id DESC LIMIT :limit OFFSET :offset");
+    } else {
+        $stmt = $db->prepare("SELECT * FROM `translations` WHERE translation_key LIKE :search_term OR translation_value LIKE :search_term ORDER BY id DESC LIMIT :limit OFFSET :offset");
+        $stmt->bindValue(':search_term', '%' . $search_term . '%', PDO::PARAM_STR);
+    }
+
+    $stmt->bindValue(':limit', (int) $limit, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', (int) $offset, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
 
 function addTranslation($db, $language_code, $translation_key, $translation_value) {
 $stmt = $db->prepare("INSERT INTO `translations` (language_code, translation_key, translation_value) VALUES (:language_code, :translation_key, :translation_value)");
@@ -72,5 +78,9 @@ function updateTranslation($db, $id, $language_code, $translation_key, $translat
     $stmt->bindParam(':translation_value', $translation_value, PDO::PARAM_STR);
     $stmt->execute();
 }
-
-
+function getLanguageSetting($db) {
+    $stmt = $db->prepare("SELECT `language` FROM `settings`");
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return isset($result['language']) ? $result['language'] : 'en';
+}

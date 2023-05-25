@@ -101,19 +101,36 @@ function getUserNameById($db, $user_id) {
     $stmt->execute();
     return $stmt->fetchAll();
 }
-  
-function updateUser($db, $id, $username, $surname, $phone, $email, $role) {
-    $stmt = $db->prepare("UPDATE users SET username = :username, surname = :surname, phone = :phone, email = :email, role = :role WHERE id = :id");
-    
+function updateUser($db, $id, $username, $surname, $phone, $email, $role, $password = null) {
+    $sql = "UPDATE users SET username = :username, surname = :surname, phone = :phone, email = :email, role = :role";
+
+    // Jei yra slaptažodis, pridėkite jį į SQL užklausą
+    if ($password !== null) {
+        $sql .= ", password = :password";
+    }
+
+    $sql .= " WHERE id = :id";
+
+    $stmt = $db->prepare($sql);
+
     $stmt->bindParam(':username', $username, PDO::PARAM_STR);
     $stmt->bindParam(':surname', $surname, PDO::PARAM_STR);
     $stmt->bindParam(':phone', $phone, PDO::PARAM_STR);
     $stmt->bindParam(':email', $email, PDO::PARAM_STR);
     $stmt->bindParam(':role', $role, PDO::PARAM_STR);
+
+    // Jei yra slaptažodis, pridėkite jį į parametrus
+    if ($password !== null) {
+        // Užšifruokite slaptažodį prieš jį išsaugodami
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        $stmt->bindParam(':password', $hashed_password, PDO::PARAM_STR);
+    }
+
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 
     return $stmt->execute();
 }
+
 
 function getUserById($db, $id) {
     $stmt = $db->prepare("SELECT * FROM users WHERE id = :id");

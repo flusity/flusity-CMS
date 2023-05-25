@@ -11,12 +11,6 @@ function getMenuItems($db) {
     $stmt->execute();
     return $stmt->fetchAll();
 }
-function getMenus($db) {
-    $stmt = $db->prepare('SELECT * FROM menu ORDER BY position');
-    $stmt->execute();
-    return $stmt->fetchAll();
-}
-
 function createMenuItem($db, $name, $page_url, $position, $template) {
     $stmt = $db->prepare('INSERT INTO menu (name, page_url, position, template) VALUES (:name, :page_url, :position, :template)');
     $stmt->bindParam(':name', $name, PDO::PARAM_STR);

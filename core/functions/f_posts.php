@@ -1,7 +1,5 @@
 <?php
 
-// Puslapių naujienos
-
 function getPostsNews($db, $limit, $offset, $menuUrl) {
     if ($menuUrl != '') {
         $stmt = $db->prepare('SELECT posts.* FROM posts JOIN menu ON posts.menu_id = menu.id WHERE menu.page_url = :menu_url LIMIT :limit OFFSET :offset');
@@ -64,18 +62,6 @@ function updatePost($db, $postId, $title, $content, $menu_id, $status, $tags, $r
     $stmt->bindParam(':post_id', $postId, PDO::PARAM_INT);
     return $stmt->execute();
 }
-
-// function updatePost($db, $postId, $title, $content, $menu_id, $status, $tags, $role) {
-//     $stmt = $db->prepare('UPDATE posts SET title = :title, content = :content, menu_id = :menu_id, status = :status, tags = :tags, role = :role, updated_at = CURRENT_TIMESTAMP WHERE id = :post_id');
-//     $stmt->bindParam(':role', $role, PDO::PARAM_STR);
-//     $stmt->bindParam(':title', $title, PDO::PARAM_STR);
-//     $stmt->bindParam(':content', $content, PDO::PARAM_STR);
-//     $stmt->bindParam(':menu_id', $menu_id, PDO::PARAM_INT);
-//     $stmt->bindParam(':status', $status, PDO::PARAM_STR);
-//     $stmt->bindParam(':tags', $tags, PDO::PARAM_STR);
-//     $stmt->bindParam(':post_id', $postId, PDO::PARAM_INT);
-//     return $stmt->execute();
-// }
 
 
 function getPostById($db, $postId) {

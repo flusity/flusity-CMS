@@ -47,7 +47,7 @@ function getDBConnection($config) {
         $settings = $stmt->fetch(PDO::FETCH_ASSOC);
     
         $current_url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-        $menus = getMenus($db);
+        $menus = getMenuItems($db);
     
         // Nustato numatytąjį URL pavadinimą
         $default_url_name = 'index';
@@ -190,7 +190,8 @@ function createDatabaseBackup($db, $backupFilename) {
         $setting = $stmt->fetch(PDO::FETCH_ASSOC);
         return $setting['setting_value'];
     }
-
+  
+    
     require_once 'f_users.php';
     require_once 'f_posts.php';
     require_once 'f_menu.php';
