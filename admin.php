@@ -16,7 +16,7 @@
         <div class="col-md-10 content main-content-with-sidebar" id="content">
 
             <div class="row mt-3 mb-5">
-        <h2>Administration tools</h2>
+        <h2><?php echo t("Administration tools");?></h2>
         <?php 
 
         
@@ -45,7 +45,7 @@
         <?php $categories = getCategories($db);
         $total_categories = count($categories);
         ?>
-        <h4>Categories</h4>
+        <h4><?php echo t("Categories");?></h4>
         <p><?php echo $total_categories; ?></p>
       </div>
     </div>
@@ -54,7 +54,7 @@
         <?php $allUsers = getAllUsers($db);
             $totalUsers = count($allUsers);
             ?>
-      <h4>User's</h4>
+      <h4><?php echo t("User's");?></h4>
         <p><?php echo $totalUsers; ?></p>
       </div>
     </div>
@@ -63,7 +63,7 @@
       <?php $allPosts = getAllPosts($db);
             $totalPosts = count($allPosts);
             ?>
-      <h4>Post's</h4>
+      <h4><?php echo t("Post's");?></h4>
         <p><?php echo $totalPosts; ?></p>
       </div>
     </div>
@@ -72,7 +72,7 @@
       <?php $allMenu = getMenuItems($db);
             $totalMenu = count($allMenu);
             ?>
-      <h4>Menu items</h4>
+      <h4><?php echo t("Menu items");?></h4>
       <p><?php echo $totalMenu; ?></p>
       </div>
     </div>
@@ -81,7 +81,7 @@
       <?php $allBlock = getCustomBlocks($db);
             $totalBlock = count($allBlock);
             ?>
-      <h4>Block's</h4>
+      <h4><?php echo t("Block's");?></h4>
       <p><?php echo $totalBlock; ?></p>
       </div>
     </div>
@@ -90,7 +90,7 @@
         <?php
         $totalFiles = countFilesInDatabase($db);
         ?>
-        <h4>Files</h4>
+        <h4><?php echo t("Files");?></h4>
         <p><?php echo $totalFiles; ?></p>
     </div>
 </div>
