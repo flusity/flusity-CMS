@@ -93,7 +93,10 @@ if (isset($_GET['edit_id'])) {
                     <table class="table">
             <thead>
                 <tr>    
-                <input type="text" id="search_term" class="form-control" name="search_term" placeholder="<?php echo t("Search translations...");?>">
+                <div class="input-wrapper">
+                    <input type="text" id="search_term" class="form-control" name="search_term" placeholder="<?php echo t("Search translations...");?>">
+                    <span id="clear-search" class="clear-button">&times;</span>
+                </div>
                     <th style="width: 3%;"><?php echo t("No.");?></th>
                     <th style="width: 3%;"><?php echo t("Code");?></th>
                     <th style="width: 40%;"><?php echo t("Translation Key");?></th>
@@ -169,7 +172,25 @@ document.getElementById('language_code').addEventListener('change', function () 
             document.getElementById('new_language_code').classList.add('d-none');
         }
  });
+ document.querySelector('#search_term').addEventListener('input', function() {
+        // Show the clear button if the input field is not empty
+        if (this.value !== '') {
+            document.querySelector('#clear-search').style.display = 'block';
+        } else {
+            document.querySelector('#clear-search').style.display = 'none';
+        }
+    });
 
+    document.querySelector('#clear-search').addEventListener('click', function() {
+    // Clear the input field and hide the clear button
+    var searchInput = document.querySelector('#search_term');
+    searchInput.value = '';
+    this.style.display = 'none';
+
+    // Trigger the keyup event
+    var event = new Event('keyup');
+    searchInput.dispatchEvent(event);
+});
 </script>
 
 <?php require_once ROOT_PATH . 'core/template/admin-footer.php'; ?>
