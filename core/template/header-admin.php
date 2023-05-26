@@ -4,7 +4,6 @@ define('IS_ADMIN', true);
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/security/config.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/core/functions/functions.php';
-
 secureSession();
 // Duomenų gavimas iš duomenų bazės
 $db = getDBConnection($config);
@@ -12,7 +11,6 @@ if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
     $user_name = getUserNameById($db, $user_id);
     $translations = getTranslations($db, $language_code);
-
 } else {
     header("Location: 404.php");
     exit;
@@ -43,8 +41,7 @@ body {
   font-family: 'Roboto', sans-serif;
 
 }
-
-
+        
 .btn-primary {
   background-color: #27ae60;
   border-color: #27ae60;
@@ -85,8 +82,19 @@ body {
 .neon {
   animation: neon-glow 1s ease-in-out infinite alternate;
 }
+.input-wrapper {
+        position: relative;
+        display: inline-block;
+    }
 
+    .clear-button {
+        position: absolute;
+        right: 5px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        display: none;
+    }
     </style>
 </head>
-
 <body>
