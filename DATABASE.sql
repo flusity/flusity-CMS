@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 26, 2023 at 01:59 PM
+-- Generation Time: May 26, 2023 at 02:04 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -389,7 +389,8 @@ INSERT INTO `translations` (`id`, `language_code`, `translation_key`, `translati
 (191, 'lt', 'Post status', 'Įrašo būsena'),
 (192, 'lt', 'Update Post', 'Atnaujinti įrašą'),
 (193, 'lt', 'Add Post', 'Pridėti įrašą'),
-(194, 'lt', 'Back', 'Grįžti');
+(194, 'lt', 'Back', 'Grįžti'),
+(195, 'lt', 'Search translations...', 'Ieškoti vertimo...');
 
 -- --------------------------------------------------------
 
@@ -518,7 +519,7 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT for table `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=195;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=196;
 
 --
 -- AUTO_INCREMENT for table `users`
