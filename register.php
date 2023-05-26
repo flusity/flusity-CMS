@@ -4,6 +4,9 @@ require_once 'security/config.php';
 require_once 'core/functions/functions.php';
 secureSession();
 $db = getDBConnection($config);
+// Gaunamas kalbos nustatymas iš duomenų bazės  
+$language_code = getLanguageSetting($db);
+$translations = getTranslations($db, $language_code);
 
 if (isset($_SESSION['user_id'])) {
     header('Location: /');
@@ -101,3 +104,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 </div>
    <?php require_once 'core/template/admin-footer.php';?>
+
