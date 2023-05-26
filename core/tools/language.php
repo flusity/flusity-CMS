@@ -109,11 +109,10 @@ if (isset($_GET['edit_id'])) {
                     echo "<td>" . htmlspecialchars($translationWord['language_code']) . "</td>";
                     echo "<td>" . htmlspecialchars($translationWord['translation_key']) . "</td>";
                     echo "<td>" . htmlspecialchars($translationWord['translation_value']) . "</td>";
-                    echo "<td><a href='language.php?edit_id=" . htmlspecialchars($translationWord['id']) . "' class='btn btn-primary' title='Edit'><i class='fas fa-edit'></i></a> <a href='delete_translation.php?id=" . htmlspecialchars($translationWord['id']) . "' class='btn btn-danger' title='Delete'><i class='fas fa-trash'></i></a></td>";
+                    echo "<td><div class='btn-group'><a href='language.php?edit_id=" . htmlspecialchars($translationWord['id']) . "' class='btn btn-primary' title='Edit'><i class='fas fa-edit'></i></a> <a href='delete_translation.php?id=" . htmlspecialchars($translationWord['id']) . "' class='btn btn-danger' title='Delete'><i class='fas fa-trash'></i></a></div></td>";
                     echo "</tr>";
                 }
-            ?>
-
+                ?>
             </tbody>
         </table>
 
