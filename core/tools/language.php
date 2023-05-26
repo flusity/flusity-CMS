@@ -94,9 +94,10 @@ if (isset($_GET['edit_id'])) {
             <thead>
                 <tr>    
                 <div class="input-wrapper">
-                    <input type="text" id="search_term" class="form-control" name="search_term" placeholder="<?php echo t("Search translations...");?>">
+                     <input type="text" id="search_term" class="form-control search-input-long" name="search_term" placeholder="<?php echo t("Search translations...");?>">
                     <span id="clear-search" class="clear-button">&times;</span>
-                </div>
+                 </div>
+
                     <th style="width: 3%;"><?php echo t("No.");?></th>
                     <th style="width: 3%;"><?php echo t("Code");?></th>
                     <th style="width: 40%;"><?php echo t("Translation Key");?></th>
