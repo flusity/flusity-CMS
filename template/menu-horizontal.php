@@ -55,7 +55,7 @@
     <a class="nav-link" href="login.php"><?php echo t("Log In"); ?></a>
 </li>
 <li class="nav-item">
-    <p class="mt-2">or</p>
+    <p class="mt-2"><?php echo t("or"); ?></p>
 </li>
 <li class="nav-item">
     <a class="nav-link" href="register.php"><?php echo t("Sign up"); ?></a>
