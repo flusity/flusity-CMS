@@ -37,7 +37,7 @@
     $isUser = checkUserRole($user_id, 'user', $db);
 ?>
     <?php if ($isAdmin || $isModerator): ?>
-        <a class="nav-link" href="admin.php">Admin</a>
+        <a class="nav-link" href="admin.php"><?php echo t("Admin"); ?></a>
     <?php endif; ?>
         </li>
     </ul>
