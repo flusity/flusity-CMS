@@ -16,7 +16,7 @@
       
     <ul class="navbar-nav ml-5 mt-2">
     <?php
-$menuItems = getMenus($db);
+$menuItems = getMenuItems($db);
 $current_page_url = getCurrentPageUrl($db);
 
 foreach ($menuItems as $item):
