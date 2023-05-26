@@ -5,6 +5,11 @@
     // Duomenų gavimas iš duomenų bazės
         $db = getDBConnection($config);
        // $menuItems = getMenuItems($db);
+       
+// Gaunamas kalbos nustatymas iš duomenų bazės  
+$language_code = getLanguageSetting($db);
+$translations = getTranslations($db, $language_code);
+
         ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand ml-5" href="http://localhost/"><?php require_once 'assets/logo-50.php'?></a>
@@ -41,22 +46,22 @@ foreach ($menuItems as $item):
     <ul class="navbar-nav mt-2">
     <li class="nav-item">
         <?php if ($isUser): ?>
-            <p style=" margin: 10px 0px -3px 0px;">Sveiki, <?php echo htmlspecialchars($user_name); ?>!</p>
+            <p style=" margin: 10px 0px -3px 0px;"><?php echo t("Hello")." "; ?>, <?php echo htmlspecialchars($user_name); ?>!</p>
 </li>
 <?php endif; ?>
 <li class="nav-item">
-<a class="nav-link mt-1" href="logout.php">Atsijungti</a>
+<a class="nav-link mt-1" href="logout.php"><?php echo t("Sign out"); ?></a>
 </li>
 
 <?php else: ?>
     <li class="nav-item">
-    <a class="nav-link" href="login.php">Log In</a>
+    <a class="nav-link" href="login.php"><?php echo t("Log In"); ?></a>
 </li>
 <li class="nav-item">
     <p class="mt-2">or</p>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="register.php">Sign up</a>
+    <a class="nav-link" href="register.php"><?php echo t("Sign up"); ?></a>
 </li>
 <?php endif; ?>
 </ul>
