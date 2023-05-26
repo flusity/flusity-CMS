@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 26, 2023 at 09:48 AM
+-- Generation Time: May 26, 2023 at 01:59 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -173,7 +173,8 @@ INSERT INTO `posts` (`id`, `title`, `content`, `author_id`, `role`, `created_at`
 (11, 'sdsrrrrrr', 'fghghgfbfghb fg hh dh dh gfhgfhdfghgf fhj trtyėį  tėįrsh   jjgdjgj', 2, 'user', '0000-00-00 00:00:00', 'published', 1, '', '2023-04-19 16:17:29'),
 (28, 'sdfsdf', 'sdfsdf', 2, 'admin', '2023-04-19 18:18:44', 'published', 3, 'aaa', '2023-05-25 09:25:46'),
 (29, 'hh', 'hhhccccccc', 2, 'admin', '2023-04-19 20:56:21', 'draft', 6, 'hddzf', '2023-05-25 09:28:47'),
-(30, 'nnn', 'xcvx', 2, 'admin', '2023-04-19 21:11:47', 'draft', 3, 'nnnf', '2023-05-25 09:34:27');
+(30, 'nnneeeee', 'xcvxerter e er', 2, 'admin', '2023-04-19 21:11:47', 'draft', 3, 'nnnf', '2023-05-26 10:56:16'),
+(31, 'asda', 'adasdasdas', 2, 'admin', '2023-05-26 13:58:04', 'published', 1, 'nnnn', '2023-05-26 10:58:04');
 
 -- --------------------------------------------------------
 
@@ -384,7 +385,11 @@ INSERT INTO `translations` (`id`, `language_code`, `translation_key`, `translati
 (187, 'lt', 'Hello', 'Sveiki'),
 (188, 'lt', 'Front page', 'Puslapio priekis'),
 (189, 'lt', 'Log out', 'Atsijungti'),
-(190, 'lt', 'or', 'arba');
+(190, 'lt', 'or', 'arba'),
+(191, 'lt', 'Post status', 'Įrašo būsena'),
+(192, 'lt', 'Update Post', 'Atnaujinti įrašą'),
+(193, 'lt', 'Add Post', 'Pridėti įrašą'),
+(194, 'lt', 'Back', 'Grįžti');
 
 -- --------------------------------------------------------
 
@@ -507,13 +512,13 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=191;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=195;
 
 --
 -- AUTO_INCREMENT for table `users`
