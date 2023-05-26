@@ -81,8 +81,8 @@ if ($mode === 'create' || $post) {
             </select>
 
         </div>
-        <button type="submit" class="btn btn-primary"><?php echo $mode === 'edit' ? 'Update Post' : 'Add Post'; ?></button>
-        <button type="button" class="btn btn-secondary" id="cancel-post"><?php echo $mode === 'edit' ? 'Cancel' : 'Back'; ?></button>
+        <button type="submit" class="btn btn-primary"><?php echo $mode === 'edit' ? t('Update Post') : t('Add Post'); ?></button>
+        <button type="button" class="btn btn-secondary" id="cancel-post"><?php echo $mode === 'edit' ? t('Cancel') : t('Back'); ?></button>
      </form>
 
      </div>
