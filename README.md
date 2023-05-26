@@ -12,9 +12,9 @@ PHP CMS project, Log In, Sign Up, admin, moderator, user roles, add/edit/delete 
 <li>Posts (pranešimai)</li>
 <li>Menu (meniu)</li>
 <li>Block (blokai)</li>
-<li>Contact Form (kontaktų forma)</li>
+<li>Contact Form (kontaktų forma dar kūrimo būsenoje)</li>
 <li>Files (failai)</li>
-<li>Language (kalba)</li>
+<li>Language (kalba vertimas į lt)</li>
 <li>Settings (nustatymai)</li>
 </ul>
 Svetainė naudoja Bootstrap 5.2.3, FontAwesome 6.1.0 ir jQuery 3.6.0 bibliotekas stiliui ir funkcionalumui užtikrinti. Taip pat yra pritaikytas šriftas "Roboto" ir individualizuoti CSS stiliai, kurie apima šiek tiek neoninio efekto.<br>
@@ -55,7 +55,7 @@ Atsižvelgiant į šiuos elementus ir funkcijas, svetainė yrap patogus ir funkc
 <li>Block</li>
 <li>Contact Form</li>
 <li>Files</li>
-<li>Language</li>
+<li>Language (default en)</li>
 <li>Settings</li>
 </ul>
 The site uses Bootstrap 5.2.3, FontAwesome 6.1.0 and jQuery 3.6.0 libraries for styling and functionality. There's also a custom Roboto font and custom CSS styles that include a bit of a neon effect.<br>
