@@ -93,7 +93,7 @@ if (isset($_GET['edit_id'])) {
                     <table class="table">
             <thead>
                 <tr>    
-                <input type="text" id="search_term" name="search_term" placeholder="Search translations...">
+                <input type="text" id="search_term" class="form-control" name="search_term" placeholder="<?php echo t("Search translations...");?>">
                     <th style="width: 3%;"><?php echo t("No.");?></th>
                     <th style="width: 3%;"><?php echo t("Code");?></th>
                     <th style="width: 40%;"><?php echo t("Translation Key");?></th>
