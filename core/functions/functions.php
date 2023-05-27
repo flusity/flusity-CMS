@@ -104,9 +104,9 @@ function getDBConnection($config) {
     
     
     function createBackupFilename($db) {
-    $names = [
-        ['Jonas', 'Darius', 'Petras', 'Antanas', 'Juozas', 'Mantas'],
-        ['Baltrūnas', 'Jakaitis', 'Jankauskas', 'Kazlauskas', 'Mockus', 'Razma']
+     $names = [
+        ['Emily', 'Sophia', 'Amelia', 'Harper', 'Evelyn', 'Abigail', 'Ella', 'Ava', 'Sophie', 'Isabella'],
+        ['Smith', 'Johnson', 'Williams', 'Jones', 'Brown', 'Davis', 'Miller', 'Wilson', 'Moore', 'Taylor']
     ];
     $firstName = $names[0][array_rand($names[0])];
     $lastName = $names[1][array_rand($names[1])];
