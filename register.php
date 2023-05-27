@@ -1,18 +1,9 @@
 <?php header("Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self';");
-session_start();
-require_once 'security/config.php';
-require_once 'core/functions/functions.php';
-secureSession();
-$db = getDBConnection($config);
-// Gaunamas kalbos nustatymas iš duomenų bazės  
-$language_code = getLanguageSetting($db);
-$translations = getTranslations($db, $language_code);
-
+require_once 'template/header.php';
 if (isset($_SESSION['user_id'])) {
     header('Location: /');
     exit();
 }
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $csrf_token = validateInput($_POST['csrf_token']);
     if (!validateCSRFToken($csrf_token)) {
@@ -40,11 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $error_message = t("Passwords do not match. Try again.");
         }
     }
-}
-
-?>
-
-<?php require_once 'template/header.php';?>
+} ?>
 <div class="container-fluid ">
     <div class="row">
         <div class="col-sm-12">
@@ -104,4 +91,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 </div>
    <?php require_once 'core/template/admin-footer.php';?>
-

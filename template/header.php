@@ -1,6 +1,11 @@
-<?php define('ROOT_PATH', realpath(dirname(__FILE__)) . '../../');
+<?php 
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+  }
+define('ROOT_PATH', realpath(dirname(__FILE__)) . '../../');
 require_once ROOT_PATH . 'security/config.php';
 require_once ROOT_PATH . 'core/functions/functions.php';
+secureSession();
 $db = null;
 
 if (isset($config)) {

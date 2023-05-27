@@ -1,20 +1,11 @@
 <?php
-session_start();
-require_once 'security/config.php';
-require_once 'core/functions/functions.php';
-secureSession();
-// Duomenų gavimas iš duomenų bazės
-$db = getDBConnection($config);
-// Gaunamas kalbos nustatymas iš duomenų bazės  
-$language_code = getLanguageSetting($db);
-$translations = getTranslations($db, $language_code);
+ require_once 'template/header.php';
 if (isset($_SESSION['user_id'])) {
     header('Location: index.php');
     exit();
 }
 
 $csrf_token = generateCSRFToken();
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $csrf_token = $_POST['csrf_token'];
     if (!validateCSRFToken($csrf_token)) {
@@ -33,10 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $error_message = t('Invalid username or password.');
     }
-}
-?>
-
-<?php require_once 'template/header.php';?>
+} ?>
 <div class="container-fluid ">
     <div class="row">
         <div class="col-sm-12">
@@ -80,6 +68,4 @@ $csrf_token = generateCSRFToken();
 </div>
 </div>
 </div>
-
 <?php require_once 'template/footer.php';?>
-

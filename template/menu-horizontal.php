@@ -1,9 +1,4 @@
 <?php 
-    require_once 'security/config.php';
-    require_once 'core/functions/functions.php';
-    secureSession();
-    // Duomenų gavimas iš duomenų bazės
-    $db = getDBConnection($config);
     // Gaunamas kalbos nustatymas iš duomenų bazės  
     $language_code = getLanguageSetting($db);
     $translations = getTranslations($db, $language_code);

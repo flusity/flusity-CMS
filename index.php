@@ -1,4 +1,6 @@
-<?php session_start();
+<?php if (session_status() !== PHP_SESSION_ACTIVE) {
+  session_start();
+}
 /*
  @MiniFrame css karkasas Lic GNU
  Author Darius Jakaitis, author web site http://www.manowebas.lt
