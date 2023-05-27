@@ -47,8 +47,6 @@ function getUserNameById($db, $user_id) {
             // Sesija nebegalioja
             session_unset();
             session_destroy();
-            //session_start(); Pradedama nauja sesija po to, kai sena buvo sunaikinta
-             // Nukreipiame vartotoją į prisijungimo puslapį
         header("Location: ../../login.php");
         exit;
         }
