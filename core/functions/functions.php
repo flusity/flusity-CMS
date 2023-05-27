@@ -182,15 +182,6 @@ function createDatabaseBackup($db, $backupFilename) {
         $settings = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $settings;
     }
-
-    function getContactFormSetting($db, $key) {
-        $stmt = $db->prepare("SELECT `setting_value` FROM `contact_form_settings` WHERE `setting_key` = :key");
-        $stmt->bindParam(':key', $key);
-        $stmt->execute();
-        $setting = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $setting['setting_value'];
-    }
-  
     
     require_once 'f_users.php';
     require_once 'f_posts.php';

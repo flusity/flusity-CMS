@@ -21,13 +21,13 @@ function getUserNameById($db, $user_id) {
     }
     
     function secureSession() {
-        if (session_status() !== PHP_SESSION_ACTIVE) {
-            // Nustatomi saugųs sesijos parametrai
-            $session_name = 'secure_session';
-            $secure = true;
-            $httponly = true;
-            $inactive = 1800; // 30 minučių
+        // Nustatomi saugųs sesijos parametrai
+        $session_name = 'secure_session';
+        $secure = true;
+        $httponly = true;
+        $inactive = 900; // 15 minučių
     
+        if (session_status() === PHP_SESSION_NONE) {
             ini_set('session.use_only_cookies', 1);
             ini_set('session.cookie_httponly', 1);
             ini_set('session.cookie_secure', 1);
@@ -35,21 +35,28 @@ function getUserNameById($db, $user_id) {
             $cookieParams = session_get_cookie_params();
             session_set_cookie_params($cookieParams['lifetime'], $cookieParams['path'], $cookieParams['domain'], $secure, $httponly);
             session_name($session_name);
-            session_start();
-    
-            // Tikriname, ar buvo perduotas veiksmas, ir atnaujiname sesiją
-            if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > $inactive)) {
-                // Sesija nebegalioja
-                session_unset();
-                session_destroy();
-            } else {
-                // Atnaujiname sesijos laiką
-                $_SESSION['last_activity'] = time();
-            }
-    
-            
         }
+    
+        // Pradedama ar tęsiama sesija
+        if (session_status() !== PHP_SESSION_ACTIVE) {
+            session_start();
+        }
+    
+        // Tikriname, ar buvo perduotas veiksmas, ir atnaujiname sesiją
+        if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > $inactive)) {
+            // Sesija nebegalioja
+            session_unset();
+            session_destroy();
+            //session_start(); Pradedama nauja sesija po to, kai sena buvo sunaikinta
+             // Nukreipiame vartotoją į prisijungimo puslapį
+        header("Location: ../../login.php");
+        exit;
+        }
+    
+        // Atnaujiname sesijos laiką
+        $_SESSION['last_activity'] = time();
     }
+    
     
     function authenticateUser($username, $password) {
         global $config;

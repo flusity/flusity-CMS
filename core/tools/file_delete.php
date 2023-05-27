@@ -1,5 +1,7 @@
 <?php
-session_start();
+    if (session_status() !== PHP_SESSION_ACTIVE) {
+        session_start();
+      }
 
 define('IS_ADMIN', true);
 
@@ -23,20 +25,19 @@ if (!empty($_GET['id'])) {
 
         if (unlink($file_path)) {
             if (deleteFileFromDatabase($db, $file_id)) {
-                $_SESSION['success_message'] = t("File"). " " . $filename . " ". t("deleted successfully.");//Failas pav. sėkmingai ištrintas.
+                $_SESSION['success_message'] = t("File"). " " . $filename . " ". t("deleted successfully.");
                 } else {
-                    $_SESSION['error_message'] = t("Error deleting file from database.");//Klaida trinant failą iš duomenų bazės.
+                    $_SESSION['error_message'] = t("Error deleting file from database.");
                     }
                     } else {
-                        $_SESSION['error_message'] = t("Error deleting file from system.");//Klaida trinant failą iš sistemos.
+                        $_SESSION['error_message'] = t("Error deleting file from system.");
                     }
                     } else {
-                        $_SESSION['error_message'] = t("No such file found."); //Toks failas nerastas.
+                        $_SESSION['error_message'] = t("No such file found."); 
                     }
                     } else {
-                        $_SESSION['error_message'] = t("No file ID specified."); //Nenurodytas failo ID.
+                        $_SESSION['error_message'] = t("No file ID specified.");
                     }
                 
                 header("Location: files.php");
                 exit();
-?>

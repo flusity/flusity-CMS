@@ -1,5 +1,4 @@
 /*Admin-style*/
-
 a.navbar-brand.ml-5 {
     margin-left: 30px;
 }
@@ -30,20 +29,19 @@ button#toggleSidebarBtn {
 }
 .fixed-sidebar {
     position: fixed;
-    top: 23px; /* Change this value based on the height of your top menu */
+    top: 23px; 
     left: 0;
     z-index: 1020;
-    width: 250px; /* Change this value based on the width of your sidebar */
+    width: 250px; 
     height: 100%;
     overflow-y: auto;
-    
 }
 
 .main-content-with-sidebar {
-    padding-left: 250px; /* Change this value based on the width of your sidebar */
+    padding-left: 250px; 
 }
 .main-content-collapsed-sidebar {
-    padding-left: 100px; /* Change this value based on the width of your collapsed sidebar */
+    padding-left: 100px; 
 }
 
 .fixed-top-navbar {
@@ -55,7 +53,7 @@ button#toggleSidebarBtn {
 }
 
 .main-content {
-    padding-top: 70px; /* Change this value based on the height of your navbar */
+    padding-top: 70px;
 }
 .main-content-collapsed {
     padding-left: 0;
@@ -64,8 +62,6 @@ button#toggleSidebarBtn {
     margin-top:70px;
   }
   .card.left-nav-items.flex-shrink-0 {
-   
-   
     margin-top: 70px;
     border-top: none;
     border-left: none;
@@ -77,17 +73,16 @@ li.list-group-item {
     border-bottom: 0.025rem;
 }
 .card.left-nav-items.flex-shrink-0.admin-sidebar{
-   
-   box-shadow: none !important;
-    border-radius: none !important;
-    /* border-radius: var(--bs-card-border-radius); */
+  box-shadow: none !important;
+  border-radius: none !important;
 }
+
 li.list-group-item:hover{
    background-color: rgba(90, 108, 113, 0.09);
   
     border-radius: none !important;
-    /* border-radius: var(--bs-card-border-radius); */
 }
+
 button#toggleSidebarBtn {
     width: 38px;
     height: 38px;
@@ -97,6 +92,7 @@ button#toggleSidebarBtn {
     display: block;
     top: 26px;
 }
+
 #sidebar.sidebar-collapsed {
   max-width: 70px;
   overflow: hidden;
@@ -114,7 +110,6 @@ li.list-group-item {
 }
 #sidebar.sidebar-collapsed .list-group-item .nav-icon {
  display: inline-block;
-  /* float: right;*/
 }
 
 .sidebar-collapsed .nav-text {

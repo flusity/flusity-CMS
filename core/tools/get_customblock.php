@@ -1,14 +1,14 @@
 <?php
-session_start();
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+  }
 define('IS_ADMIN', true);
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/security/config.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/core/functions/functions.php';
 
 secureSession();
-// Duomenų gavimas iš duomenų bazės
 $db = getDBConnection($config);
-// Gaunamas kalbos nustatymas iš duomenų bazės  
 $language_code = getLanguageSetting($db);
 $translations = getTranslations($db, $language_code);
 
@@ -20,19 +20,12 @@ if (isset($_SESSION['user_id'])) {
     exit;
 }
 
-// Tikriname, ar vartotojas yra adminas ar moderatorius
 if (!checkUserRole($user_id, 'admin', $db) && !checkUserRole($user_id, 'moderator', $db)) {
     header("Location: 404.php");
     exit;
 }
-
-// Gaukite customblock ID iš užklausos
 $customBlockId = isset($_GET['customblock_id']) ? (int)$_GET['customblock_id'] : 0;
-
-// Nustatykite režimą (redagavimas arba kūrimas) pagal customblock ID
 $mode = $customBlockId > 0 ? 'edit' : 'create';
-
-// Gaukite customblock duomenis iš duomenų bazės, jei režimas yra "edit"
 $customBlock = $mode === 'edit' ? getCustomBlockById($db, $customBlockId) : null;
 
 $categories = getCategories($db);

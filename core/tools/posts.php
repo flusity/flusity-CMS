@@ -10,7 +10,6 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
         </div>
     </div>
 </div>
-
 <div class="container-fluid mt-4">
     <div class="row d-flex flex-nowrap">
         <div class="col-md-2 sidebar" id="sidebar">
@@ -48,12 +47,10 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
             </div>
             <h2><?php echo t("Posts on pages");?></h2>
             <button type="button" class="btn btn-sm btn-primary" onclick="loadPostForm('create')" title="Add">
-
               <i class="fas fa-pencil"></i>
             </button>
             <!-- Išveda Puslapio redagavimo langą -->
             <div id="get-post-edit"></div>
-
             <table class="table">
                 <thead>
                     <tr>
@@ -84,7 +81,6 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
                             <td><?php echo htmlspecialchars($post['status']); ?></td>
                             <td><?php echo htmlspecialchars($user_name); ?></td>
                             <td>
-                                
                                 <button type="button" class="btn btn-sm btn-primary" onclick="loadPostEditForm(<?php echo $post['id']; ?>)" title="<?php echo t("Edit");?>">
                                     <i class="fas fa-edit"></i>
                                 </button>
@@ -108,7 +104,6 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
         </ul>
     </nav>
 </div>
-
         </div>
     </div>
 </div>
@@ -160,9 +155,6 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
       }
     });
   });
-  
 </script>
-
 <script src="js/admin-post-edit.js"></script>
-
 <?php require_once ROOT_PATH . 'core/template/admin-footer.php';?>

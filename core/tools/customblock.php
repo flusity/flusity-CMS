@@ -1,6 +1,5 @@
 <?php
 define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../') . '/');
-
 require_once ROOT_PATH . 'core/template/header-admin.php';
 ?>
 <div class="container-fluid ">
@@ -10,17 +9,15 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
         </div>
     </div>
 </div>
-
 <div class="container-fluid mt-4">
     <div class="row d-flex flex-nowrap">
         <div class="col-md-2 sidebar" id="sidebar">
             <?php require_once ROOT_PATH . 'core/tools/sidebar.php';?>
         </div>
         <?php
-        $categories = getAllCategories($db);
-        $menus = getMenuItems($db);
-
-          $customblocks = getAllCustomBlocks($db);
+            $categories = getAllCategories($db);
+            $menus = getMenuItems($db);
+            $customblocks = getAllCustomBlocks($db);
           ?>
         <div class="col-md-10 content-up">
             <div class="col-sm-9">
@@ -51,49 +48,47 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
             <div id="get-customblock-edit"></div>
 
             <table class="table">
-    <thead>
-        <tr>
-            <th style="width: 3%;"><?php echo t("ID");?></th>
-            <th style="width: 17%;"><?php echo t("Name");?></th>
-            <th style="width: 40%;"><?php echo t("HTML Code");?></th>
-            <th style="width: 13%;"><?php echo t("Menu Place");?></th>
-            <th style="width: 12%;"><?php echo t("Category");?></th>
-            <th style="width: 15%;"><?php echo t("Actions");?></th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach ($customblocks as $customBlock): ?>
-            <tr>
-                <td><?= htmlspecialchars($customBlock['id']); ?></td>
-                <td><?= htmlspecialchars($customBlock['name']); ?></td>
-                <td>
-                  <?php
-                      $html_code = htmlspecialchars($customBlock['html_code']);
-                      $max_length = 100;
-                      if (strlen($html_code) > $max_length) {
-                          echo substr($html_code, 0, $max_length) . '...';
-                      } else {
-                          echo $html_code;
-                      }
-                  ?>
-                </td>
-                <td><?= htmlspecialchars(findNameById($customBlock['menu_id'], $menus)); ?></td>
-                <td><?= htmlspecialchars(findNameById($customBlock['category_id'], $categories)); ?></td>
-                <td>
-                    <button type="button" class="btn btn-sm btn-primary" onclick="loadCustomBlockEditForm(<?= $customBlock['id']; ?>)" title="<?php echo t("Edit");?>">
-                        <i class="fas fa-edit"></i>
-                    </button>
-                
-                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteCustomblockModal" data-custom-block-id="<?php echo $customBlock['id']; ?>" title="<?php echo t("Delete");?>">
-
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-    </tbody>
-</table>
-
+                <thead>
+                    <tr>
+                        <th style="width: 3%;"><?php echo t("ID");?></th>
+                        <th style="width: 17%;"><?php echo t("Name");?></th>
+                        <th style="width: 40%;"><?php echo t("HTML Code");?></th>
+                        <th style="width: 13%;"><?php echo t("Menu Place");?></th>
+                        <th style="width: 12%;"><?php echo t("Category");?></th>
+                        <th style="width: 15%;"><?php echo t("Actions");?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($customblocks as $customBlock): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($customBlock['id']); ?></td>
+                            <td><?= htmlspecialchars($customBlock['name']); ?></td>
+                            <td>
+                              <?php
+                                  $html_code = htmlspecialchars($customBlock['html_code']);
+                                  $max_length = 100;
+                                  if (strlen($html_code) > $max_length) {
+                                      echo substr($html_code, 0, $max_length) . '...';
+                                  } else {
+                                      echo $html_code;
+                                  }
+                              ?>
+                            </td>
+                            <td><?= htmlspecialchars(findNameById($customBlock['menu_id'], $menus)); ?></td>
+                            <td><?= htmlspecialchars(findNameById($customBlock['category_id'], $categories)); ?></td>
+                            <td>
+                            <button type="button" class="btn btn-sm btn-primary" onclick="loadCustomBlockEditForm(<?= $customBlock['id']; ?>)" title="<?php echo t("Edit");?>">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        
+                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteCustomblockModal" data-custom-block-id="<?php echo $customBlock['id']; ?>" title="<?php echo t("Delete");?>">
+                            <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+         </table>
         </div>
     </div>
 </div>
@@ -117,8 +112,6 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
     </div>
   </div>
 </div>
-
-
 <script>
 
   function loadCustomBlockEditForm(customBlockId) {
@@ -159,5 +152,4 @@ $(document).ready(function () {
   });
 </script>
 <script src="js/admin-customblock-edit.js"></script>
-
 <?php require_once ROOT_PATH . 'core/template/admin-footer.php';?>

@@ -1,4 +1,6 @@
-<?php session_start();
+<?php if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+  }
 define('IS_ADMIN', true);
 
 define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../') . '/');

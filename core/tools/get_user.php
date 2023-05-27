@@ -1,11 +1,13 @@
 <?php 
-session_start();
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+  }
 define('IS_ADMIN', true);
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/security/config.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/core/functions/functions.php';
-
 secureSession();
+
 $db = getDBConnection($config);
 
 $language_code = getLanguageSetting($db);
@@ -20,21 +22,16 @@ if (isset($_SESSION['user_id'])) {
     exit;
 }
 
-// Tikriname, ar vartotojas yra adminas ar moderatorius
 if (!checkUserRole($user_id, 'admin', $db) && !checkUserRole($user_id, 'moderator', $db)) {
     header("Location: 404.php");
     exit;
 }
 
-// Gaukite vartotojo ID iš užklausos
 $userId = isset($_GET['user_id']) ? (int)$_GET['user_id'] : 0;
 
-// Gaukite vartotojo duomenis iš duomenų bazės
 $user = getUserById($db, $userId);
 
-if ($user) {
-    // Sugeneruokite HTML formą su vartotojo duomenimis
-?>
+if ($user) { ?>
 <div id="edit-user-content">
     <form id="edit-user-form">
         <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">

@@ -8,7 +8,6 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
         </div>
     </div>
 </div>
-
 <div class="container-fluid mt-4">
     <div class="row d-flex flex-nowrap">
         <div class="col-md-2 sidebar" id="sidebar">
@@ -38,7 +37,6 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
     <h1><?php echo t("User's");?></h1>
       <!-- Išveda Vartotojo redagavimo langą -->
       <div id="get-user-edit"></div>
-      
     <table class="table">
         <thead>
             <tr>
@@ -75,9 +73,8 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
         </tbody>
     </table>
 </div>
-    </div>
 </div>
-
+</div>
 <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -99,19 +96,14 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
 <script src="js/admin-user-edit.js"></script>
 <script>
 
-
-// Paspaudus ištrynimo mygtuką, atidaro patvirtinimo modalą
 $('button[data-bs-target="#deleteUserModal"]').on('click', function () {
       const userId = $(this).data('user-id');
       $('#confirmDeleteModal').data('user-id', userId);
       $('#confirmDeleteModal').modal('show');
     });
   
-    // Paspaudus patvirtinimo mygtuką, ištrina kategoriją
     $('#confirm-delete-btn').on('click', function () {
       const userId = $('#confirmDeleteModal').data('user-id');
-      
-      // Siunčia POST užklausą į delete_user.php failą
       $.ajax({
         type: 'POST',
         url: 'delete_user.php',

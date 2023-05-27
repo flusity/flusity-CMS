@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+  }
 define('IS_ADMIN', true);
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/security/config.php';

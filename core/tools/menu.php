@@ -1,13 +1,6 @@
 <?php
 define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../') . '/');
-
-require_once ROOT_PATH . 'core/template/header-admin.php';
-
-$db = getDBConnection($config);
-// Gaunamas kalbos nustatymas iš duomenų bazės  
-$language_code = getLanguageSetting($db);
-$translations = getTranslations($db, $language_code);
-?>
+require_once ROOT_PATH . 'core/template/header-admin.php';?>
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-12">
@@ -15,16 +8,13 @@ $translations = getTranslations($db, $language_code);
         </div>
     </div>
 </div>
-
 <div class="container-fluid mt-4">
     <div class="row d-flex flex-nowrap">
         <div class="col-md-2 sidebar" id="sidebar">
             <?php require_once ROOT_PATH . 'core/tools/sidebar.php'; ?>
         </div>
         <?php $allMenu = getMenuItems($db); ?>
-
         <div class="col-md-10 content-up">
-
             <div class="col-sm-9">
                 <?php
                 if (isset($_SESSION['success_message'])) {
@@ -34,7 +24,6 @@ $translations = getTranslations($db, $language_code);
                     </div>";
                     unset($_SESSION['success_message']);
                 }
-
                 if (isset($_SESSION['error_message'])) {
                     echo "<div class='alert alert-danger alert-dismissible fade show slow-fade'>
                         " . htmlspecialchars($_SESSION['error_message']) . "
@@ -44,12 +33,10 @@ $translations = getTranslations($db, $language_code);
                 }
                 ?>
             </div>
-
             <h2><?php echo t("Page Menu");?></h2>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addMenuModal" data-mode="add">
             <i class="fas fa-plus"></i>
             </button>
-
             <table class="table">
                 <thead>
                     <tr>
@@ -62,7 +49,6 @@ $translations = getTranslations($db, $language_code);
                     </tr>
                 </thead>
                 <tbody>
-
                     <?php foreach ($allMenu as $menu) { ?>
                         <tr>
                             <td><?php echo htmlspecialchars($menu['id']); ?></td>
@@ -71,7 +57,6 @@ $translations = getTranslations($db, $language_code);
                             <td><?php echo htmlspecialchars($menu['template']); ?></td>
                             <td><?php echo htmlspecialchars($menu['position']); ?></td>
                             <td>
-
                                 <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addMenuModal" data-menu-id="<?php echo $menu['id']; ?>" data-mode="update" title="<?php echo t("Edit");?>">
                                     <i class="fas fa-edit"></i>
                                 </button>
@@ -79,21 +64,17 @@ $translations = getTranslations($db, $language_code);
                                 <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteMenuModal" data-menu-id="<?php echo $menu['id']; ?>" title="<?php echo t("Delete");?>">
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
-
                             </td>
                         </tr>
                     <?php } ?>
-
                 </tbody>
             </table>
-
         </div>
     </div>
 </div>
 
 <!-- Modal -->
 <div class="modal fade" id="addMenuModal" tabindex="-1" aria-labelledby="addMenuModalLabel" aria-hidden="true">
-
 <div class="modal-dialog">
   <div class="modal-content">
     <div class="modal-header">
@@ -118,16 +99,11 @@ $translations = getTranslations($db, $language_code);
           <label for="template"><?php echo t("Template");?></label>
          <?php $templates = getTemplates("../../template/"); 
          ?>
-
           <select class="form-control" id="template" name="template">
               <?php foreach ($templates as $template): ?>
-                  
                   <option value="<?php echo $template; ?>"><?php echo $template; ?></option>
               <?php endforeach; ?>
           </select>
-        
-        
-        
         </div>
         <button type="submit" class="btn btn-primary mt-3" id="submit-button"><?php echo t("Add Menu");?></button>
       </form>

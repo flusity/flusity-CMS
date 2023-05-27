@@ -1,7 +1,6 @@
 
 <?php
 define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../') . '/');
-
 require_once ROOT_PATH . 'core/template/header-admin.php';
 
 $limit = 15;
@@ -19,7 +18,6 @@ if (isset($_GET['edit_id'])) {
     $editTranslation = getTranslationById($db, $_GET['edit_id']);
 }
 ?>
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-12">
@@ -27,13 +25,11 @@ if (isset($_GET['edit_id'])) {
         </div>
     </div>
 </div>
-
 <div class="container-fluid mt-4">
     <div class="row d-flex flex-nowrap">
         <div class="col-md-2 sidebar" id="sidebar">
             <?php require_once ROOT_PATH . 'core/tools/sidebar.php'; ?>
         </div>
-
         <div class="col-md-10 content-up">
         <div class="col-sm-9">
                 <?php
@@ -54,9 +50,7 @@ if (isset($_GET['edit_id'])) {
                 }
                 ?>
             </div>
-
             <h2><?php echo t("Translation form");?></h2>
-          
             <div class="row">
             <div class="col-sm-3">
             <form method="post" action="<?php echo $editTranslation ? 'edit_translation.php' : 'add_translation.php'; ?>">
@@ -74,7 +68,6 @@ if (isset($_GET['edit_id'])) {
                     ?>
                 <option value="new"><?php echo t("Add new");?></option>
             </select>
-
             <input type="text" class="form-control mt-2 d-none" id="new_language_code" name="new_language_code" placeholder="<?php echo t('Enter new language code'); ?>">
             </div>
             <div class="form-group">
@@ -87,17 +80,15 @@ if (isset($_GET['edit_id'])) {
             </div>
             <button type="submit" class="btn btn-primary mt-3"><?php echo t("Add/Edit");?></button>
              </form>
-
         </div>
         <div class="col-sm-9">
-                    <table class="table">
+        <table class="table">
             <thead>
                 <tr>    
                 <div class="input-wrapper">
                      <input type="text" id="search_term" class="form-control search-input-long" name="search_term" placeholder="<?php echo t("Search translations...");?>">
                     <span id="clear-search" class="clear-button">&times;</span>
                  </div>
-
                     <th style="width: 3%;"><?php echo t("No.");?></th>
                     <th style="width: 3%;"><?php echo t("Code");?></th>
                     <th style="width: 40%;"><?php echo t("Translation Key");?></th>
@@ -119,7 +110,6 @@ if (isset($_GET['edit_id'])) {
                 ?>
             </tbody>
         </table>
-
         <nav aria-label="Page navigation">
             <ul class="pagination">
                 <li class="page-item <?php echo ($page <= 1) ? 'disabled' : ''; ?>">
@@ -127,9 +117,8 @@ if (isset($_GET['edit_id'])) {
                     <span aria-hidden="true">«</span>
                      </a>
                  </li>
-                
-        <?php  $num_pages_to_display = 5;
-                for ($i = max(1, $page - $num_pages_to_display); $i <= min($page + $num_pages_to_display, $total_pages); $i++): ?>
+          <?php  $num_pages_to_display = 5;
+                 for ($i = max(1, $page - $num_pages_to_display); $i <= min($page + $num_pages_to_display, $total_pages); $i++): ?>
                     <li class="page-item <?php echo ($i == $page) ? 'active' : ''; ?>">
                         <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
                     </li>
@@ -143,7 +132,7 @@ if (isset($_GET['edit_id'])) {
         </nav>
      </div>
     </div>
-    </div>
+ </div>
 </div>
 </div>
 <script>

@@ -1,23 +1,28 @@
 <?php
-session_start();
-define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../') . '/');
-
-require_once ROOT_PATH . 'core/template/header-admin.php';
-
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+  }
+  require_once $_SERVER['DOCUMENT_ROOT'] . '/security/config.php';
+  require_once $_SERVER['DOCUMENT_ROOT'] . '/core/functions/functions.php';
+  define('IS_ADMIN', true);
+    // Duomenų gavimas iš duomenų bazės
+    $db = getDBConnection($config);
+    $language_code = getLanguageSetting($db);
+    $translations = getTranslations($db, $language_code);
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php"); // Įsitikinkite, kad naudojate tinkamą kelį į prisijungimo puslapį
+    header("Location: login.php");
     exit();
 }
 
 if (isset($_POST['clear_cache'])) {
     if (function_exists('apcu_clear_cache')) {
         apcu_clear_cache();
-        $_SESSION['success_message'] = "Cache sėkmingai išvalytas!";
+        $_SESSION['success_message'] = t("Cache cleared successfully!");
     } else {
-        $_SESSION['error_message'] = "Nepavyko išvalyti cache, APCu nėra įdiegta!";
+        $_SESSION['error_message'] = t("Failed to clear cache, APCu is not installed!");
     }
-    header("Location: admin.php"); // Įsitikinkite, kad naudojate tinkamą kelį į admin puslapį
+    header("Location: ../../core/tools/settings.php"); 
     exit();
 }
 ?>

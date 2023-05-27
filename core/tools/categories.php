@@ -1,10 +1,7 @@
-<?php define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../') . '/');
+<?php 
+define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../') . '/');
 
-require_once ROOT_PATH . 'core/template/header-admin.php';
-// Gaunamas kalbos nustatymas iš duomenų bazės  
-$language_code = getLanguageSetting($db);
-$translations = getTranslations($db, $language_code);
-?>
+require_once ROOT_PATH . 'core/template/header-admin.php'; ?>
 <div class="container-fluid ">
     <div class="row">
         <div class="col-sm-12">
@@ -18,9 +15,7 @@ $translations = getTranslations($db, $language_code);
         <div class="col-md-2 sidebar" id="sidebar">
             <?php require_once ROOT_PATH . 'core/tools/sidebar.php';?>
         </div>
-<?php $categories = getAllCategories($db);
-?>
-
+<?php $categories = getAllCategories($db); ?>
 <div class="col-md-10 content-up">
     <div class="col-sm-9">
         <?php  if (isset($_SESSION['success_message'])) {
@@ -30,7 +25,6 @@ $translations = getTranslations($db, $language_code);
                     </div>";
                 unset($_SESSION['success_message']);
             }
-
             if (isset($_SESSION['error_message'])) {
                 echo "<div class='alert alert-danger alert-dismissible fade show slow-fade'>
                         " . htmlspecialchars($_SESSION['error_message']) . "
@@ -39,7 +33,6 @@ $translations = getTranslations($db, $language_code);
                 unset($_SESSION['error_message']);
             } ?>
     </div>
-
     <h1><?php echo t("Categories");?></h1>
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCategoryModal" data-mode="add">
     <?php echo t("Add Category");?>
@@ -53,28 +46,21 @@ $translations = getTranslations($db, $language_code);
                 </tr>
             </thead>
             <tbody>
-        
                 <?php foreach ($categories as $category) { ?>
                     <tr>   
                         <td><?php echo htmlspecialchars($category['id']); ?></td>
                         <td><?php echo htmlspecialchars($category['name']); ?></td>
                         <td>  
+                          <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addCategoryModal" data-category-id="<?php echo $category['id']; ?>" data-mode="update" title="<?php echo t("Edit");?>">
+                          <i class="fas fa-edit"></i>
+                          </button>
                         
-                                
-                                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addCategoryModal" data-category-id="<?php echo $category['id']; ?>" data-mode="update" title="<?php echo t("Edit");?>">
-                                <i class="fas fa-edit"></i>
-                                </button>
-                              
-                                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteCategoryModal" data-category-id="<?php echo $category['id']; ?>" title="<?php echo t("Delete");?>">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-
-                            
-
+                          <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteCategoryModal" data-category-id="<?php echo $category['id']; ?>" title="<?php echo t("Delete");?>">
+                              <i class="fas fa-trash-alt"></i>
+                          </button>
                         </td>
                     </tr>
                 <?php } ?>
-                
             </tbody>
         </table>
 </div>
@@ -83,7 +69,6 @@ $translations = getTranslations($db, $language_code);
      </div>
   </div>
 </div>
-
 <!-- Modal -->
 <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -122,8 +107,6 @@ $translations = getTranslations($db, $language_code);
     </div>
   </div>
 </div>
-
-
 <script>
 // Prideda kategoriją po paspaudimo
 $('#add-category-form').on('submit', function (e) {
@@ -171,11 +154,10 @@ $('#add-category-form').on('submit', function (e) {
   });
 });
 
-
 $('#addCategoryModal').on('show.bs.modal', function (event) {
-  const button = $(event.relatedTarget); // Button that triggered the modal
-  const mode = button.data('mode'); // Extract mode from data-* attributes
-  const categoryId = button.data('category-id'); // Extract category ID from data-* attributes
+  const button = $(event.relatedTarget); 
+  const mode = button.data('mode'); 
+  const categoryId = button.data('category-id'); 
 
   const modal = $(this);
   modal.data('mode', mode);
