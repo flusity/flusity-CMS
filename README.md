@@ -91,4 +91,5 @@ Autoriaus adresas http://www.manowebas.lt
 ![banner](http://manowebas.lt/wp-content/uploads/2023/05/administration.jpg)
 ![banner](http://manowebas.lt/wp-content/uploads/2023/05/registration.jpg)
 ![banner](http://manowebas.lt/wp-content/uploads/2023/05/login.jpg)
+![banner](http://manowebas.lt/wp-content/uploads/2023/05/fileup.jpg)
 
