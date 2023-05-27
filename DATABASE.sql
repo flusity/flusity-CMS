@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 26, 2023 at 02:04 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Generation Time: May 27, 2023 at 08:51 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,7 +32,7 @@ CREATE TABLE `categories` (
   `name` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `categories`
@@ -57,14 +57,14 @@ CREATE TABLE `contact_form_settings` (
   `id` int(11) NOT NULL,
   `setting_key` varchar(255) NOT NULL,
   `setting_value` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `contact_form_settings`
 --
 
 INSERT INTO `contact_form_settings` (`id`, `setting_key`, `setting_value`) VALUES
-(1, 'ssssdfff', 'dddddddd');
+(1, 'raktas_457', 'raktas_457');
 
 -- --------------------------------------------------------
 
@@ -78,7 +78,7 @@ CREATE TABLE `custom_blocks` (
   `menu_id` int(10) UNSIGNED DEFAULT NULL,
   `category_id` int(10) UNSIGNED DEFAULT NULL,
   `html_code` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `custom_blocks`
@@ -87,11 +87,12 @@ CREATE TABLE `custom_blocks` (
 INSERT INTO `custom_blocks` (`id`, `name`, `menu_id`, `category_id`, `html_code`) VALUES
 (2, 'bcvbcv', 3, 80, 'cxvv'),
 (3, 'ffff', 1, 79, 'ffbbbbsssss'),
-(7, 'fghgfh777', 6, 79, 'ghghfggh 777777'),
+(7, 'fghgfh777', 6, 79, 'ghghfggh 777777vvvvvvvv'),
 (8, 'fff', 6, 79, 'fghfh'),
 (9, 'ghgh', 1, 79, 'ghg'),
 (10, 'bbbb', 1, 85, 'ssddfsxxxx'),
-(11, 'dd', 12, 79, 'fdgdf');
+(11, 'dd', 12, 79, 'fdgdf'),
+(13, 'cvvvvvvv', 1, 79, 'xcccc');
 
 -- --------------------------------------------------------
 
@@ -104,7 +105,7 @@ CREATE TABLE `files` (
   `name` varchar(255) NOT NULL,
   `url` varchar(255) NOT NULL,
   `uploaded_at` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `files`
@@ -129,7 +130,7 @@ CREATE TABLE `menu` (
   `template` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `menu`
@@ -158,7 +159,7 @@ CREATE TABLE `posts` (
   `menu_id` int(11) DEFAULT NULL,
   `tags` text DEFAULT NULL,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `posts`
@@ -170,11 +171,11 @@ INSERT INTO `posts` (`id`, `title`, `content`, `author_id`, `role`, `created_at`
 (5, 'fthhj', 'gfhjgfhjfghjgfhj', 2, 'user', '0000-00-00 00:00:00', 'draft', 1, 'aaa', '2023-04-19 16:17:29'),
 (8, 'test www', 'dfgdfgfg dfgfg', 2, 'admin', '0000-00-00 00:00:00', 'draft', 3, 'wwwc', '2023-05-25 09:36:58'),
 (10, 'test www', 'tervvr re eshh          šįyįš yįęįšudhhdf  dfhfh fghd', 2, 'admin', '0000-00-00 00:00:00', 'published', 3, 'nnnu', '2023-05-25 09:48:58'),
-(11, 'sdsrrrrrr', 'fghghgfbfghb fg hh dh dh gfhgfhdfghgf fhj trtyėį  tėįrsh   jjgdjgj', 2, 'user', '0000-00-00 00:00:00', 'published', 1, '', '2023-04-19 16:17:29'),
+(11, 'sdsrrrrrr', 'fghghgfbfghb fg hh dh dh gfhgfhdfghgf fhj trtyėį  tėįrsh   jjgdjgj', 2, 'admin', '0000-00-00 00:00:00', 'published', 1, '', '2023-05-26 16:21:26'),
 (28, 'sdfsdf', 'sdfsdf', 2, 'admin', '2023-04-19 18:18:44', 'published', 3, 'aaa', '2023-05-25 09:25:46'),
-(29, 'hh', 'hhhccccccc', 2, 'admin', '2023-04-19 20:56:21', 'draft', 6, 'hddzf', '2023-05-25 09:28:47'),
+(29, 'hh', 'hhhccccccc', 2, 'admin', '2023-04-19 20:56:21', 'draft', 6, 'hddzf', '2023-05-26 16:21:11'),
 (30, 'nnneeeee', 'xcvxerter e er', 2, 'admin', '2023-04-19 21:11:47', 'draft', 3, 'nnnf', '2023-05-26 10:56:16'),
-(31, 'asda', 'adasdasdas', 2, 'admin', '2023-05-26 13:58:04', 'published', 1, 'nnnn', '2023-05-26 10:58:04');
+(31, 'asda', 'adasdasdas', 2, 'admin', '2023-05-26 13:58:04', 'published', 1, 'nnnn', '2023-05-26 16:18:54');
 
 -- --------------------------------------------------------
 
@@ -188,7 +189,7 @@ CREATE TABLE `settings` (
   `footer_text` text NOT NULL,
   `pretty_url` int(1) NOT NULL DEFAULT 0,
   `language` varchar(2) NOT NULL DEFAULT 'en'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `settings`
@@ -208,7 +209,7 @@ CREATE TABLE `translations` (
   `language_code` varchar(5) NOT NULL,
   `translation_key` varchar(255) NOT NULL,
   `translation_value` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `translations`
@@ -390,7 +391,15 @@ INSERT INTO `translations` (`id`, `language_code`, `translation_key`, `translati
 (192, 'lt', 'Update Post', 'Atnaujinti įrašą'),
 (193, 'lt', 'Add Post', 'Pridėti įrašą'),
 (194, 'lt', 'Back', 'Grįžti'),
-(195, 'lt', 'Search translations...', 'Ieškoti vertimo...');
+(195, 'lt', 'Search translations...', 'Ieškoti vertimo...'),
+(196, 'lt', 'Cache cleared successfully!', 'Talpykla sėkmingai išvalyta!'),
+(197, 'lt', 'Failed to clear cache, APCu is not installed!', 'Nepavyko išvalyti cache, APCu nėra įdiegta!'),
+(198, 'lt', 'Backup successfully created.', 'Atsarginė kopija sėkmingai sukurta.'),
+(199, 'lt', 'Failed to create a backup.', 'Nepavyko sukurti atsarginės kopijos.'),
+(200, 'lt', 'Website Name', 'Svetainės pavadinimas'),
+(201, 'lt', 'file uploaded successfully.', 'failas sėkmingai įkeltas.'),
+(202, 'lt', 'Error loading file.', 'Įkeliant failą įvyko klaida.'),
+(203, 'lt', 'Failed to clear cache, APCu is not installed!', 'Nepavyko išvalyti talpyklos, APCu neįdiegtas!');
 
 -- --------------------------------------------------------
 
@@ -406,16 +415,17 @@ CREATE TABLE `users` (
   `email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
   `role` enum('admin','moderator','user') NOT NULL DEFAULT 'user'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `surname`, `phone`, `email`, `password`, `role`) VALUES
-(2, 'Darius', 'dsssiixxxxc', '+37061287842', 'teggfffst@gmail.com', '$argon2i$v=19$m=65536,t=4,p=1$MGRmSFR4c0RPMmUvaGdKMg$Pf8H8eqOlanOnqZv2wM/hDFqJIAiddCfFZMvMmKHpLU', 'admin'),
-(4, 'Petras2', 'Petraitis', '+37061366841', 'test2@gmail.com', '$argon2i$v=19$m=65536,t=4,p=1$endPWlNsNDY1R2FFQ09meA$qoMAOJPjxm2XESQ3b4JYs9ZO5I0eB729ebHwTnLB12Q', 'user'),
-(9, 'Vladas', 'Girinis5', '+37055557847', 'test3@gmail.com', '$2y$10$.CW7FIIzJ9j2Posl5yggU.602/ZXNpJM/eOpj0G54zTcmtdJPW6WC', 'moderator');
+(2, 'Admin', 'dsssiixxxxc', '+37061287842', 'teggfffst@gmail.com', '$2y$10$zZw5CNmdMIf71X/bAYzqnerxoMMRWejxSIPYaPc9FX7lAXW2Ig5bG', 'admin'),
+(4, 'User', 'Petraitis', '+37061366841', 'test2@gmail.com', '$2y$10$45/c5/lTRkDWZWFl.XEy5e3I4jn8UrZwj6b.pjP5dzk5/nQNHw7My', 'user'),
+(9, 'Moderator', 'Girinis5', '+37055557847', 'test3@gmail.com', '$2y$10$4Fx3cVTfyyqvCcdiAJZUrebiuZs.cyEsIXvElv8uDi1oMXeCk/PNO', 'moderator'),
+(14, 'Darius', 'Petraitis22', '+370678654645', 'testusers@userv.com', '$2y$10$dguINhYIM9ZThoEUT6bGZONqbCxN6if4ZZHMoMnEr1PCnb1hS8ZKu', 'admin');
 
 --
 -- Indexes for dumped tables
@@ -483,7 +493,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
 --
 -- AUTO_INCREMENT for table `contact_form_settings`
@@ -495,19 +505,19 @@ ALTER TABLE `contact_form_settings`
 -- AUTO_INCREMENT for table `custom_blocks`
 --
 ALTER TABLE `custom_blocks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `files`
 --
 ALTER TABLE `files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `posts`
@@ -519,13 +529,13 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT for table `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=196;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=204;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables
