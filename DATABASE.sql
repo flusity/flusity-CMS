@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 27, 2023 at 08:51 AM
+-- Generation Time: May 28, 2023 at 10:24 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -39,13 +39,16 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(79, 'dd7777777', '2023-04-14 15:01:16', '2023-04-16 12:26:49'),
-(80, 'testuoju', '2023-04-14 15:12:13', '2023-04-14 15:12:13'),
-(83, 'fffffddd', '2023-04-14 15:20:38', '2023-04-14 15:29:15'),
-(85, 'dogas', '2023-04-14 15:33:23', '2023-04-14 16:04:56'),
-(86, 'kika', '2023-04-14 16:04:47', '2023-04-14 16:04:47'),
-(87, 'testuoju 55', '2023-04-15 08:09:50', '2023-04-15 08:09:50'),
-(92, 'fff', '2023-04-19 19:49:36', '2023-04-19 19:49:36');
+(79, 'head-box-one', '2023-04-14 15:01:16', '2023-05-28 08:27:20'),
+(80, 'news-right-5', '2023-04-14 15:12:13', '2023-05-28 08:21:48'),
+(83, 'home-right-5', '2023-04-14 15:20:38', '2023-05-28 08:15:56'),
+(85, 'doc-right-5', '2023-04-14 15:33:23', '2023-05-28 08:20:16'),
+(92, 'home-left-7', '2023-04-19 19:49:36', '2023-05-28 08:24:53'),
+(100, 'head-box-two', '2023-05-28 08:27:28', '2023-05-28 08:27:28'),
+(101, 'contact-right-5', '2023-05-28 08:28:19', '2023-05-28 08:28:19'),
+(102, 'contact-left-7', '2023-05-28 08:30:01', '2023-05-28 08:30:01'),
+(103, 'doc-left-7', '2023-05-28 08:30:21', '2023-05-28 08:30:21'),
+(104, 'home-col-down-12', '2023-05-28 12:26:33', '2023-05-28 12:26:33');
 
 -- --------------------------------------------------------
 
@@ -85,14 +88,13 @@ CREATE TABLE `custom_blocks` (
 --
 
 INSERT INTO `custom_blocks` (`id`, `name`, `menu_id`, `category_id`, `html_code`) VALUES
-(2, 'bcvbcv', 3, 80, 'cxvv'),
-(3, 'ffff', 1, 79, 'ffbbbbsssss'),
-(7, 'fghgfh777', 6, 79, 'ghghfggh 777777vvvvvvvv'),
-(8, 'fff', 6, 79, 'fghfh'),
-(9, 'ghgh', 1, 79, 'ghg'),
-(10, 'bbbb', 1, 85, 'ssddfsxxxx'),
-(11, 'dd', 12, 79, 'fdgdf'),
-(13, 'cvvvvvvv', 1, 79, 'xcccc');
+(2, 'News col 5', 3, 80, 'Testuoju News skyrių'),
+(7, 'Pridėtas Blokas col-sm-5', 6, 83, 'Testuoju bloko pridėjimą į col-sm-5 dalį'),
+(9, 'Testuoju dokumentus', 1, 85, 'Bandomas tekstas dokumentuose'),
+(11, 'Test Contact col 5', 12, 101, 'Test Contact block col-sm-5 '),
+(13, ' Box test', 6, 79, ' <h2 class=\"box__title\">Antraštė pirma</h2>\r\n<p class=\"box__text\">Trumpas tekstas box dalis pirmas</p>\r\n   <a href=\"#\" class=\"box__link\">Box Nuoroda 1</a>'),
+(14, 'Testuoju home-col-down-12', 6, 104, 'Pridedamas bandomasis turinys į home-col-down-12'),
+(15, 'Box test 2', 6, 100, ' <h2 class=\"box__title\">Antraštė angtra</h2>\r\n <p class=\"box__text\">Trumpas tekstas box dalis antras</p>\r\n <a href=\"#\" class=\"box__link\">Box Nuoroda 2</a>');
 
 -- --------------------------------------------------------
 
@@ -114,7 +116,9 @@ CREATE TABLE `files` (
 INSERT INTO `files` (`id`, `name`, `url`, `uploaded_at`) VALUES
 (19, 'logo_dbc3f8c0e5c17ee1.png', 'http://localhost/uploads/logo_dbc3f8c0e5c17ee1.png', '2023-04-21 13:12:25'),
 (20, 'bg23_a1506a0d8103819f.png', 'http://localhost/uploads/bg23_a1506a0d8103819f.png', '2023-04-21 20:15:43'),
-(22, 'pexels-paashuu-15526366_71c26724e8db22dc.jpg', 'http://localhost/uploads/pexels-paashuu-15526366_71c26724e8db22dc.jpg', '2023-05-25 21:51:55');
+(22, 'pexels-paashuu-15526366_71c26724e8db22dc.jpg', 'http://localhost/uploads/pexels-paashuu-15526366_71c26724e8db22dc.jpg', '2023-05-25 21:51:55'),
+(24, 'pexels-dominika-roseclay_2b7dd92bc8d188b4.jpg', 'http://localhost/uploads/pexels-dominika-roseclay_2b7dd92bc8d188b4.jpg', '2023-05-28 15:59:43'),
+(25, 'pexels-quang-nguyen_8ca6b53cdb562332.jpg', 'http://localhost/uploads/pexels-quang-nguyen_8ca6b53cdb562332.jpg', '2023-05-28 17:18:46');
 
 -- --------------------------------------------------------
 
@@ -196,7 +200,7 @@ CREATE TABLE `settings` (
 --
 
 INSERT INTO `settings` (`site_title`, `meta_description`, `footer_text`, `pretty_url`, `language`) VALUES
-('JD website', 'JD website description', 'JD website Footer', 1, 'lt');
+('JD website', 'JD website description', 'Copyright &copy; JD Theme 2023', 1, 'lt');
 
 -- --------------------------------------------------------
 
@@ -399,7 +403,18 @@ INSERT INTO `translations` (`id`, `language_code`, `translation_key`, `translati
 (200, 'lt', 'Website Name', 'Svetainės pavadinimas'),
 (201, 'lt', 'file uploaded successfully.', 'failas sėkmingai įkeltas.'),
 (202, 'lt', 'Error loading file.', 'Įkeliant failą įvyko klaida.'),
-(203, 'lt', 'Failed to clear cache, APCu is not installed!', 'Nepavyko išvalyti talpyklos, APCu neįdiegtas!');
+(203, 'lt', 'Failed to clear cache, APCu is not installed!', 'Nepavyko išvalyti talpyklos, APCu neįdiegtas!'),
+(204, 'lt', 'Create', 'Sukurti'),
+(205, 'lt', 'Category with this name already exists. Try a different name', 'Kategorija tokiu pavadinimu jau yra. Pabandykite kitą pavadinimą'),
+(206, 'lt', 'Error adding category. Try again.', 'Klaida pridedant kategoriją. Bandyk iš naujo.'),
+(207, 'lt', 'Category successfully added.', 'Kategorija sėkmingai pridėta.'),
+(208, 'lt', 'Category successfully updated.', 'Kategorija sėkmingai atnaujinta.'),
+(209, 'lt', 'Category with this name already exists. Try a different name.', 'Kategorija tokiu pavadinimu jau yra. Pabandykite kitą pavadinimą.'),
+(210, 'lt', 'Error updating category. Try again.', 'Klaida atnaujinant kategoriją. Bandyk iš naujo.'),
+(212, 'lt', 'Please fill in all fields.', 'Klaida: užpildykite visus laukus.'),
+(214, 'lt', 'Translation added successfully.', 'Vertimas sėkmingai pridėtas.'),
+(215, 'lt', 'Error: Translation word already exists.', 'Klaida: verčiamas žodis jau yra.'),
+(216, 'lt', 'Block', 'Blokai');
 
 -- --------------------------------------------------------
 
@@ -422,10 +437,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `surname`, `phone`, `email`, `password`, `role`) VALUES
-(2, 'Admin', 'dsssiixxxxc', '+37061287842', 'teggfffst@gmail.com', '$2y$10$zZw5CNmdMIf71X/bAYzqnerxoMMRWejxSIPYaPc9FX7lAXW2Ig5bG', 'admin'),
-(4, 'User', 'Petraitis', '+37061366841', 'test2@gmail.com', '$2y$10$45/c5/lTRkDWZWFl.XEy5e3I4jn8UrZwj6b.pjP5dzk5/nQNHw7My', 'user'),
-(9, 'Moderator', 'Girinis5', '+37055557847', 'test3@gmail.com', '$2y$10$4Fx3cVTfyyqvCcdiAJZUrebiuZs.cyEsIXvElv8uDi1oMXeCk/PNO', 'moderator'),
-(14, 'Darius', 'Petraitis22', '+370678654645', 'testusers@userv.com', '$2y$10$dguINhYIM9ZThoEUT6bGZONqbCxN6if4ZZHMoMnEr1PCnb1hS8ZKu', 'admin');
+(2, 'Admin', 'Administratorius', '+37061287842', 'admin@js.com', '$argon2i$v=19$m=131072,t=4,p=2$Lm1Iai9hN1JRNWRCQnlHVA$/oQb5+oaeSPlOqRxk5RJ/hqX3J6Kzwa8pLN8M6fBBak', 'admin'),
+(4, 'User', 'Petraitis', '+37061366841', 'test2@gmail.com', '$argon2i$v=19$m=131072,t=4,p=2$Sm9aWWFZcGFkWnJqTG5wbA$TYxEvzRh3tRU/CYXqQdSvHgAtjHZjgf/HqnpoCL77mY', 'user'),
+(9, 'Moderator', 'Girinis5', '+37055557847', 'test3@gmail.com', '$argon2i$v=19$m=131072,t=4,p=2$Q09rY1p5bExBcnouWnBjag$4lj8EPZIAjowxL2qEYOn9+F1f9dIzqFCign/nVFfcaI', 'moderator'),
+(14, 'Darius', 'Jakaitis', '+370678654645', 'testusers@userv.com', '$argon2i$v=19$m=131072,t=4,p=2$Y2dxZkR6TFdUY1pjSC5ZVQ$14ajUVQnKVzLxMlxwkcJApTGfVWDiOxa6xrkEcm/Xh0', 'admin');
 
 --
 -- Indexes for dumped tables
@@ -493,7 +508,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
 --
 -- AUTO_INCREMENT for table `contact_form_settings`
@@ -505,13 +520,13 @@ ALTER TABLE `contact_form_settings`
 -- AUTO_INCREMENT for table `custom_blocks`
 --
 ALTER TABLE `custom_blocks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `files`
 --
 ALTER TABLE `files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `menu`
@@ -529,13 +544,13 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT for table `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=204;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=217;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Constraints for dumped tables
