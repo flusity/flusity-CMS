@@ -21,29 +21,22 @@ $posts = getPostsNews($db, $limit, $offset, $menuUrl);
 $total_posts = countPosts($db);
 $total_urls = ceil($total_posts / $limit);
 ?>
-<?php require_once 'template/header.php';?>
-<div class="container-fluid ">
-    <div class="row">
-        <div class="col-sm-12">
-        <?php require_once 'template/menu-horizontal.php';?>
-        </div>
-    </div>
-</div>   
-    
-<div class="container">
+<header id="header" class="no-header">
+<?php require_once 'template/menu-horizontal.php';?>
+</header>
+<main class="main">
+ <div class="container spacer">
     <div class="row">
         <div class="col-sm-7">
-            Your other content col-sm
         </div>
         <div class="col-sm-5">
             <?php 
             $page_url = getCurrentPageUrl($db);
             if ($page_url) {
-                displayCustomBlockByCategory($db, $page_url, 'dd7777777');
+                displayCustomBlockByCategory($db, $page_url, 'news-right-5');
             } else {
-                print "---";
+                print "";
             }
-            
             ?>
         </div>
     </div>
@@ -57,6 +50,8 @@ $total_urls = ceil($total_posts / $limit);
         </div>
     </div>
 </div>
+</main>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-12 text-center"> 

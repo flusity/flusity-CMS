@@ -1,19 +1,19 @@
 
-<h2>Contact Us</h2>
+<h2><?php echo t("Contact Us"); ?></h2>
 <form id="contact-form" method="post">
     <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" required>
+        <label for="name"><?php echo t("Name"); ?></label>
+        <input type="text"  class="form-control" id="name" name="name" required>
     </div>
     <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
+        <label for="email"><?php echo t("Email"); ?></label>
+        <input type="email"  class="form-control" id="email" name="email" required>
     </div>
     <div class="form-group">
-        <label for="message">Message</label>
-        <textarea id="message" name="message" rows="4" required></textarea>
+        <label for="message"><?php echo t("Message"); ?></label>
+        <textarea  class="form-control" id="message" name="message" rows="4" required></textarea>
     </div>
-    <button type="submit">Send</button>
+    <button  class="w-100 btn btn-lg btn-primary mb-3" type="submit"><?php echo t("Send"); ?></button>
 </form>
 <div class="modal" tabindex="-1" id="responseModal">
   <div class="modal-dialog">
@@ -26,7 +26,7 @@
         <p id="responseMessage"></p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Uždaryti</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -47,16 +47,13 @@ $(document).ready(function() {
             dataType: "json",
             success: function(response) {
                 if (response.status === "success") {
-                    // Rodyti sėkmės pranešimą, pvz., naudodami modalą
                     alert(response.message);
                 } else {
-                    // Rodyti klaidos pranešimą, pvz., naudodami modalą
                     alert(response.message);
                 }
             },
             error: function() {
-                // Rodyti klaidos pranešimą, pvz., naudodami modalą
-                alert("Įvyko klaida, bandykite dar kartą");
+                alert("An error occurred, please try again");
             }
         });
     });

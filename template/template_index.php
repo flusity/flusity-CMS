@@ -1,47 +1,101 @@
+
+<header id="header" class="header">
+<?php require_once 'template/menu-horizontal.php';?>
+<div class="box-header">
+    <div class="header__content">
+        <h1 class="header__title"></h1>
+        <p class="header__text"></p>
+        <a href="#" class="header__link btn"></a>
+    </div>
+</div>
+<div class="container-fluid"> 
+    <div class="row"> 
+    <div class="boxes col-lg-4 col-md-12 col-sm-12 col-12"> 
+        <div class="box d-flex">
+           <div class="row">
+                <div class="col-10 ml-1">
+                <?php 
+                    $page_url = getCurrentPageUrl($db);
+                    if ($page_url) {
+                        displayCustomBlockByCategory($db, $page_url, 'head-box-one');
+                    } else {
+                        print "";
+                    }
+                    ?>
+                 
+                </div>
+            </div>
+        </div>
+        <div class="box d-flex">
+            <div class="row">
+                <div class="col-10 ml-1">
+                <?php 
+                    $page_url = getCurrentPageUrl($db);
+                    if ($page_url) {
+                        displayCustomBlockByCategory($db, $page_url, 'head-box-two');
+                    } else {
+                        print "";
+                    }
+                    ?>
+               </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</header>
+<main class="main">
 <div class="container">
     <div class="row">
         <div class="col-sm-7">
-            Your other content col-sm
+            <?php 
+            $page_url = getCurrentPageUrl($db);
+            if ($page_url) {
+                displayCustomBlockByCategory($db, $page_url, 'home-left-7');
+            } else {
+                print "";
+            }
+            ?>
         </div>
         <div class="col-sm-5">
             <?php 
             $page_url = getCurrentPageUrl($db);
             if ($page_url) {
-                displayCustomBlockByCategory($db, $page_url, 'dd7777777');
+                displayCustomBlockByCategory($db, $page_url, 'home-right-5');
             } else {
-                print "---";
+                print "";
             }
-            
             ?>
         </div>
     </div>
 </div>
 <div class="container">
-    <div class="row">
-        <div class="col-sm-12"> 
-
-            
-<?php foreach ($posts as $post): ?>
+     <div class="row">
+    <div class="col-sm-12">   
+      <?php foreach ($posts as $post): ?>
         <h2><?php echo htmlspecialchars($post['title']); ?></h2>
         <p><?php echo htmlspecialchars($post['content']); ?></p>
-    <?php endforeach; ?>
-
-    <div class="pagination">
+      <?php endforeach; ?>
+      <div class="pagination">
         <?php for ($i = 1; $i <= $total_urls; $i++): ?>
             <a href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
         <?php endfor; ?>
+     </div>
     </div>
-
-
-        </div>
-    </div>
+ </div>
 </div>
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-12 text-center"> 
-            <p>Your other content col-sm</p>
+        <?php 
+            $page_url = getCurrentPageUrl($db);
+            if ($page_url) {
+                displayCustomBlockByCategory($db, $page_url, 'home-col-down-12');
+            } else {
+                print "";
+            }
+            ?>
         </div>
     </div>
 </div>
-
-  
+        </main>

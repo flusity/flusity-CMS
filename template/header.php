@@ -22,14 +22,17 @@ $footer_text = isset($settings['footer_text']) ? $settings['footer_text'] : '';
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    
     <title><?php echo $site_title;?></title>
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' gap:; script-src 'self' data: https://ssl.gstatic.com 'unsafe-eval'; object-src *; img-src 'self' data:; media-src 'self' data:;  style-src 'self' data: 'unsafe-inline'; font-src 'self' data:; connect-src *">
-    <script src="assets/dist/js/jquery-3.6.0.min.js"></script>
-
     <link href="assets/bootstrap-5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="/assets/bootstrap-5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <link href="assets/main/style.css" rel="stylesheet">
-   
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet"> -->
+    <link href="assets/fonts/fonts-quicksand.css" rel="stylesheet">
+    <link href="assets/main/style.css" rel="stylesheet"> <!-- -->
+   <style>
+    .navbar-shrink {
+        height: 80px;
+        transition: height 0.5s ease;
+    }
+  </style>
 </head>
 <body>

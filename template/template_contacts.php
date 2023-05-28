@@ -21,36 +21,37 @@ $posts = getPostsNews($db, $limit, $offset, $menuUrl);
 $total_posts = countPosts($db);
 $total_urls = ceil($total_posts / $limit);
 ?>
-<?php require_once 'template/header.php';?>
-<div class="container-fluid ">
-    <div class="row">
-        <div class="col-sm-12">
-        <?php require_once 'template/menu-horizontal.php';?>
-        </div>
-    </div>
-</div>   
-    
-<div class="container">
+<header id="header" class="no-header">
+<?php require_once 'template/menu-horizontal.php';?>
+</header>
+<main class="main">
+ <div class="container spacer">
     <div class="row">
         <div class="col-sm-7">
-            Your other content col-sm
+            <?php 
+            $page_url = getCurrentPageUrl($db);
+            if ($page_url) {
+                displayCustomBlockByCategory($db, $page_url, 'contact-left-7');
+            } else {
+                print "";
+            }
+            ?>
         </div>
         <div class="col-sm-5">
             <?php 
             $page_url = getCurrentPageUrl($db);
             if ($page_url) {
-                displayCustomBlockByCategory($db, $page_url, 'dd7777777');
+                displayCustomBlockByCategory($db, $page_url, 'contact-right-5');
             } else {
-                print "---";
+                print "";
             }
-            
             ?>
         </div>
     </div>
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-sm-12"> 
+        <div class="col-sm-5"> 
         <?php
                 if (isset($_SESSION['success_message'])) {
                     echo "<div class='alert alert-success alert-dismissible fade show slow-fade'>
@@ -71,15 +72,32 @@ $total_urls = ceil($total_posts / $limit);
         <?php require_once 'contact_content.php';?>
 
         </div>
+        <div class="col-sm-7">
+        <?php 
+            $page_url = getCurrentPageUrl($db);
+            if ($page_url) {
+                displayCustomBlockByCategory($db, $page_url, 'contact-right-7');
+            } else {
+                print "";
+            }
+            ?>
+        </div>
     </div>
 </div>
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-12 text-center"> 
-            <p>Your other content col-sm</p>
+        <?php 
+            $page_url = getCurrentPageUrl($db);
+            if ($page_url) {
+                displayCustomBlockByCategory($db, $page_url, 'contact-fluid-12');
+            } else {
+                print "";
+            }
+            ?>
         </div>
     </div>
 </div>
-
+            </main>
 
     <?php require_once 'template/footer.php';?>
