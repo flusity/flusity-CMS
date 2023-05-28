@@ -39,11 +39,22 @@ function getTranslationsWords($db, $limit = 15, $offset = 0, $search_term = '') 
 
 
 function addTranslation($db, $language_code, $translation_key, $translation_value) {
-$stmt = $db->prepare("INSERT INTO `translations` (language_code, translation_key, translation_value) VALUES (:language_code, :translation_key, :translation_value)");
-$stmt->bindParam(':language_code', $language_code);
-$stmt->bindParam(':translation_key', $translation_key);
-$stmt->bindParam(':translation_value', $translation_value);
-return $stmt->execute();
+    // Patikrina, ar vertimas su tokiu raktu jau egzistuoja
+    $stmt = $db->prepare("SELECT * FROM `translations` WHERE `translation_key` = :translation_key");
+    $stmt->bindParam(':translation_key', $translation_key);
+    $stmt->execute();
+
+    if ($stmt->fetch(PDO::FETCH_ASSOC)) {
+        // Jei vertimas egzistuoja, grąžina klaidą
+        return 'Translation key already exists';
+    }
+
+    // Jei vertimas neegzistuoja, prideda jį
+    $stmt = $db->prepare("INSERT INTO `translations` (language_code, translation_key, translation_value) VALUES (:language_code, :translation_key, :translation_value)");
+    $stmt->bindParam(':language_code', $language_code);
+    $stmt->bindParam(':translation_key', $translation_key);
+    $stmt->bindParam(':translation_value', $translation_value);
+    return $stmt->execute();
 }
 
 function deleteTranslation($db, $id) {
@@ -69,15 +80,28 @@ function getTranslationById($db, $id) {
     $stmt->execute();
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
-
 function updateTranslation($db, $id, $language_code, $translation_key, $translation_value) {
+    // Pirmiausia patikrinkite, ar translation_key jau egzistuoja
+    $stmt = $db->prepare("SELECT * FROM `translations` WHERE `translation_key` = :translation_key AND `id` != :id");
+    $stmt->bindParam(':translation_key', $translation_key, PDO::PARAM_STR);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    $existingKey = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    if ($existingKey) {
+        return "duplicate_key";
+    }
+
     $stmt = $db->prepare("UPDATE `translations` SET `language_code` = :language_code, `translation_key` = :translation_key, `translation_value` = :translation_value WHERE `id` = :id");
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->bindParam(':language_code', $language_code, PDO::PARAM_STR);
     $stmt->bindParam(':translation_key', $translation_key, PDO::PARAM_STR);
     $stmt->bindParam(':translation_value', $translation_value, PDO::PARAM_STR);
     $stmt->execute();
+
+    return "";
 }
+
 function getLanguageSetting($db) {
     $stmt = $db->prepare("SELECT `language` FROM `settings`");
     $stmt->execute();

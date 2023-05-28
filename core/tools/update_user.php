@@ -16,7 +16,6 @@ $db = getDBConnection($config);
 $language_code = getLanguageSetting($db);
 $translations = getTranslations($db, $language_code);
 
-
 $result = ['success' => false];
 
 if (isset($_POST['user_id'], $_POST['user_username'], $_POST['user_surname'], $_POST['user_phone'], $_POST['user_email'], $_POST['user_role'])) {
@@ -26,6 +25,19 @@ if (isset($_POST['user_id'], $_POST['user_username'], $_POST['user_surname'], $_
     $phone = $_POST['user_phone'];
     $email = $_POST['user_email'];
     $role = $_POST['user_role'];
+
+    // Patikrinti ar username yra unikalus
+    $stmt = $db->prepare("SELECT COUNT(*) FROM users WHERE username = :username AND id != :id");
+    $stmt->bindParam(':username', $username);
+    $stmt->bindParam(':id', $userId);
+    $stmt->execute();
+    $usernameExists = $stmt->fetchColumn() > 0;
+
+    if ($usernameExists) {
+        $_SESSION['error_message'] = t('Username is already taken. Try a different one.');
+        echo json_encode($result);
+        exit;
+    }
 
     $password = isset($_POST['user_password']) ? $_POST['user_password'] : null;
     $confirm_password = isset($_POST['user_confirm_password']) ? $_POST['user_confirm_password'] : null;
@@ -37,7 +49,7 @@ if (isset($_POST['user_id'], $_POST['user_username'], $_POST['user_surname'], $_
     }
 
     $updated = updateUser($db, $userId, $username, $surname, $phone, $email, $role, $password);
-   
+
     if ($updated) {
         $_SESSION['success_message'] = t('User successfully updated.');
         $result['success'] = true;

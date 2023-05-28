@@ -50,7 +50,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
             <table class="table">
                 <thead>
                     <tr>
-                        <th style="width: 3%;"><?php echo t("ID");?></th>
+                        <th style="width: 3%;"><?php echo t("No.");?></th>
                         <th style="width: 17%;"><?php echo t("Name");?></th>
                         <th style="width: 40%;"><?php echo t("HTML Code");?></th>
                         <th style="width: 13%;"><?php echo t("Menu Place");?></th>
@@ -59,9 +59,11 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($customblocks as $customBlock): ?>
+                    <?php 
+                    $i=0;
+                    foreach ($customblocks as $customBlock): ?>
                         <tr>
-                            <td><?= htmlspecialchars($customBlock['id']); ?></td>
+                            <td><?= $i=$i+1; ?>.</td>
                             <td><?= htmlspecialchars($customBlock['name']); ?></td>
                             <td>
                               <?php

@@ -40,7 +40,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
     <table class="table">
         <thead>
             <tr>
-                <th><?php echo t("ID");?></th>
+                <th><?php echo t("No.");?></th>
                 <th><?php echo t("Username");?></th>
                 <th><?php echo t("Surname");?></th>
                 <th><?php echo t("Phone");?></th>
@@ -50,9 +50,11 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($users as $user) { ?>
+            <?php
+            $i=0;
+            foreach ($users as $user) { ?>
                 <tr>
-                    <td><?php echo htmlspecialchars($user['id']); ?></td>
+                    <td><?php $i=$i+1; echo $i; ?>.</td>
                     <td><?php echo htmlspecialchars($user['username']); ?></td>
                     <td><?php echo htmlspecialchars($user['surname']); ?></td>
                     <td><?php echo htmlspecialchars($user['phone']); ?></td>

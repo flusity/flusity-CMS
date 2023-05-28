@@ -26,8 +26,13 @@ if (isset($_POST['edit_id']) && isset($_POST['translation_key']) && isset($_POST
         $language_code = trim($_POST['new_language_code']);
     }
 
-    updateTranslation($db, $id, $language_code, $translation_key, $translation_value);
-    $_SESSION['success_message'] = t("Translation updated successfully.");
+    $updateResult = updateTranslation($db, $id, $language_code, $translation_key, $translation_value);
+
+    if ($updateResult === "duplicate_key") {
+        $_SESSION['error_message'] = t("Error: Translation word already exists.");
+    } else {
+        $_SESSION['success_message'] = t("Translation updated successfully.");
+    }
 } else {
     $_SESSION['error_message'] = t("Error: Please fill in all fields.");
 }

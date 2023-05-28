@@ -23,8 +23,12 @@ if (isset($_POST['translation_key']) && isset($_POST['translation_value']) && is
         $language_code = trim($_POST['new_language_code']);
     }
 
-    addTranslation($db, $language_code, $translation_key, $translation_value);
-    $_SESSION['success_message'] = t("Translation added successfully.");
+    $result = addTranslation($db, $language_code, $translation_key, $translation_value);
+    if ($result === 'Translation key already exists') {
+        $_SESSION['error_message'] = t("Error: Translation word already exists.");
+    } else {
+        $_SESSION['success_message'] = t("Translation added successfully.");
+    }
 } else {
     $_SESSION['error_message'] = t("Error: Please fill in all fields.");
 }

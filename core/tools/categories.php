@@ -40,15 +40,17 @@ require_once ROOT_PATH . 'core/template/header-admin.php'; ?>
         <table class="table">
             <thead>
                 <tr>
-                    <th><?php echo t("ID");?></th>
+                    <th><?php echo t("No.");?></th>
                     <th><?php echo t("Name");?></th>
                     <th><?php echo t("Actions");?></th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($categories as $category) { ?>
-                    <tr>   
-                        <td><?php echo htmlspecialchars($category['id']); ?></td>
+                <?php
+                $i=0;
+                 foreach ($categories as $category) { ?>
+                    <tr>  
+                        <td><?php $i++; echo htmlspecialchars($i); ?></td>
                         <td><?php echo htmlspecialchars($category['name']); ?></td>
                         <td>  
                           <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addCategoryModal" data-category-id="<?php echo $category['id']; ?>" data-mode="update" title="<?php echo t("Edit");?>">

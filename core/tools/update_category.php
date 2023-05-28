@@ -20,8 +20,10 @@ if (defined('IS_ADMIN') && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST
     $result = updateCategory($db, $categoryId, $categoryName);
 
     $response = array();
-    if ($result) {
+    if ($result === 'Category updated successfully') {
         $_SESSION['success_message'] = t('Category successfully updated.');
+    } elseif ($result === 'Category already exists') {
+        $_SESSION['error_message'] = t('Category with this name already exists. Try a different name.');
     } else {
         $_SESSION['error_message'] = t('Error updating category. Try again.');
     }
