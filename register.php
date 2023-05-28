@@ -1,5 +1,10 @@
 <?php header("Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self';");
 require_once 'template/header.php';
+$db = getDBConnection($config);
+   // Gaunamas kalbos nustatymas iš duomenų bazės  
+    $language_code = getLanguageSetting($db);
+    $translations = getTranslations($db, $language_code);
+ 
 if (isset($_SESSION['user_id'])) {
     header('Location: /');
     exit();
@@ -32,14 +37,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 } ?>
-<div class="container-fluid ">
-    <div class="row">
-        <div class="col-sm-12">
-        <?php require_once 'template/menu-horizontal.php';?>
-        </div>
-    </div>
-</div>
-<div class="container">
+<header id="header">
+<?php require_once 'template/menu-horizontal.php';?>
+</header>
+<section class="container spacer">
+    <main class="main my-4">
     <div class="row">
         <div class="col-sm-4">
         <h2><?php echo t("Registration system");?></h2>
@@ -85,9 +87,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
     <input type="hidden" name="csrf_token" value="<?php echo generateCSRFToken(); ?>">
     <br>
-    <button class="w-100 btn btn-lg btn-primary" type="submit"><?php echo t("Register");?></button>
+    <button class="w-100 btn btn-lg btn-primary mb-3" type="submit"><?php echo t("Register");?></button>
 </form>
+<p><?php echo t("Back to"); ?>&nbsp;<a href="/" class="btn-link"><?php echo strtolower(t("Home page")); ?></a>&nbsp;<?php echo t("or"); ?>&nbsp;
+&nbsp;<a href="login.php" class="btn-link"><?php echo strtolower(t("Log In")); ?></a>&nbsp;<p>
+
 </div>
 </div>
-</div>
-   <?php require_once 'core/template/admin-footer.php';?>
+</main>
+</section>
+<?php require_once 'template/footer.php';?>

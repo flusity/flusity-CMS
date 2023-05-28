@@ -14,9 +14,13 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+ 
 secureSession();
 $db = getDBConnection($config);
-
+   // Gaunamas kalbos nustatymas iš duomenų bazės  
+    $language_code = getLanguageSetting($db);
+    $translations = getTranslations($db, $language_code);
+ 
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
     $user_name = getUserNameById($db, $user_id);
@@ -37,15 +41,8 @@ $menu = getMenuByPageUrl($db, $current_page_url);
 $templateName = $menu['template'];
 $templatePath = __DIR__ . "/template/{$templateName}.php";
 
-
 require_once 'template/header.php'; ?>
-<div class="container-fluid ">
-    <div class="row">
-        <div class="col-sm-12">
-        <?php require_once 'template/menu-horizontal.php';?>
-        </div>
-    </div>
-</div>   
+
     
 <?php 
 if (file_exists($templatePath)) {
@@ -54,5 +51,4 @@ if (file_exists($templatePath)) {
     echo "Šablonas nerastas!";
 }
 ?>
-
 <?php require_once 'template/footer.php';?>
