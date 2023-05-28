@@ -54,11 +54,11 @@ if ($user) { ?>
         </div>
         <div class="form-group">
             <label for="user_password"><?php echo t("Password");?></label>
-            <input type="password" class="form-control" id="user_password" name="user_password" placeholder="<?php echo t("Enter new password"); ?>">
+            <input type="password" class="form-control" id="user_password" name="user_password" placeholder="<?php echo t("Enter new password"); ?>" required>
         </div>
         <div class="form-group">
             <label for="user_confirm_password"><?php echo t("Confirm Password");?></label>
-            <input type="password" class="form-control" id="user_confirm_password" name="user_confirm_password" placeholder="<?php echo t("Confirm new password"); ?>">
+            <input type="password" class="form-control" id="user_confirm_password" name="user_confirm_password" placeholder="<?php echo t("Confirm new password"); ?>" required>
         </div>
         <div class="form-group">
             <label for="user_role"><?php echo t("Role");?></label>
