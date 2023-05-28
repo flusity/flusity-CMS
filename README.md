@@ -93,6 +93,8 @@ Autoriaus adresas http://www.manowebas.lt
 ![banner](http://manowebas.lt/wp-content/uploads/2023/05/login.jpg)
 ![banner](http://manowebas.lt/wp-content/uploads/2023/05/fileup.jpg)
 ![banner](http://manowebas.lt/wp-content/uploads/2023/05/settings.jpg)
-<h3>New version theme</h3>
 ![banner](http://manowebas.lt/wp-content/uploads/2023/05/front-new-template.jpg)
+
+
+
 
