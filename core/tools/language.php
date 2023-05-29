@@ -68,7 +68,7 @@ if (isset($_GET['edit_id'])) {
                             echo "<option value='{$language['language_code']}' $selected>{$language['language_code']}</option>";
                         }
                     ?>
-                <option value="new"><?php echo t("Add new");?></option>
+                <option value="new"><?php echo t("Add new code");?></option>
             </select>
             <input type="text" class="form-control mt-2 d-none" id="new_language_code" name="new_language_code" placeholder="<?php echo t('Enter new language code'); ?>">
             </div>
