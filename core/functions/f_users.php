@@ -81,21 +81,32 @@ function getUserNameById($db, $user_id) {
     }
     
     
+    function registerUser($login_name, $username, $password, $surname, $phone, $email, $db) {
+        $banned_words = ['admin', 'admina', 'adminai', 'adminas', 'admin1', 'admin2', 'admin3', 'aadmin', 'adminn', 'admi', 'administrator', 'administratorius', 'root', 'master', 'superuser'];
     
-
-    function registerUser($username, $password, $surname, $phone, $email, $db) {
+        foreach($banned_words as $word) {
+            if (strpos(strtolower($login_name), $word) !== false || 
+                strpos(strtolower($username), $word) !== false || 
+                strpos(strtolower($email), $word) !== false) {
+                // The input contains a banned word
+                return false;
+            }
+        }
+    
         $hashed_password = password_hash($password, PASSWORD_ARGON2I, ['memory_cost' => 1<<17, 'time_cost' => 4, 'threads' => 2]);
     
-        $stmt = $db->prepare("SELECT COUNT(*) FROM users WHERE email = :email");
+        $stmt = $db->prepare("SELECT COUNT(*) FROM users WHERE email = :email OR login_name = :login_name");
         $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':login_name', $login_name);
         $stmt->execute();
-        $emailExists = $stmt->fetchColumn() > 0;
+        $exists = $stmt->fetchColumn() > 0;
     
-        if ($emailExists) {
+        if ($exists) {
             return false;
         }
     
-        $stmt = $db->prepare("INSERT INTO users (username, password, surname, phone, email) VALUES (:username, :password, :surname, :phone, :email)");
+        $stmt = $db->prepare("INSERT INTO users (login_name, username, password, surname, phone, email) VALUES (:login_name, :username, :password, :surname, :phone, :email)");
+        $stmt->bindParam(':login_name', $login_name);
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':password', $hashed_password);
         $stmt->bindParam(':surname', $surname);
@@ -104,6 +115,14 @@ function getUserNameById($db, $user_id) {
         return $stmt->execute();
     }
     
+    
+    function isLoginNameTaken($login_name, $db) {
+        $stmt = $db->prepare("SELECT COUNT(*) FROM users WHERE login_name = :login_name");
+        $stmt->bindParam(':login_name', $login_name, PDO::PARAM_STR);
+        $stmt->execute();
+        $count = $stmt->fetchColumn();
+        return $count > 0;
+    }
     function isUsernameTaken($username, $db) {
         $stmt = $db->prepare("SELECT COUNT(*) FROM users WHERE username = :username");
         $stmt->bindParam(':username', $username, PDO::PARAM_STR);
