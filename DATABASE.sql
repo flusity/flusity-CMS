@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 28, 2023 at 10:24 PM
+-- Generation Time: May 29, 2023 at 09:26 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -414,7 +414,12 @@ INSERT INTO `translations` (`id`, `language_code`, `translation_key`, `translati
 (212, 'lt', 'Please fill in all fields.', 'Klaida: užpildykite visus laukus.'),
 (214, 'lt', 'Translation added successfully.', 'Vertimas sėkmingai pridėtas.'),
 (215, 'lt', 'Error: Translation word already exists.', 'Klaida: verčiamas žodis jau yra.'),
-(216, 'lt', 'Block', 'Blokai');
+(216, 'lt', 'Block', 'Blokai'),
+(217, 'lt', 'Core Settings', 'Pagrindiniai nustatymai'),
+(218, 'lt', 'Lines per page:', 'Eilučių per puslapį:'),
+(219, 'lt', 'Add new code', 'Pridėti naują kodą'),
+(220, 'lt', 'That Name or Login Name is already taken. Choose another.', 'That Name or Login Name is already taken. Choose another.'),
+(221, 'lt', 'Invalid CSRF token. Try again.', 'Neteisingas CSRF žetonas. Bandykite dar kartą.');
 
 -- --------------------------------------------------------
 
@@ -424,6 +429,7 @@ INSERT INTO `translations` (`id`, `language_code`, `translation_key`, `translati
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
+  `login_name` varchar(50) NOT NULL,
   `username` varchar(50) NOT NULL,
   `surname` varchar(255) NOT NULL,
   `phone` varchar(20) NOT NULL,
@@ -436,11 +442,12 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `surname`, `phone`, `email`, `password`, `role`) VALUES
-(2, 'Admin', 'Administratorius', '+37061287842', 'admin@js.com', '$argon2i$v=19$m=131072,t=4,p=2$Lm1Iai9hN1JRNWRCQnlHVA$/oQb5+oaeSPlOqRxk5RJ/hqX3J6Kzwa8pLN8M6fBBak', 'admin'),
-(4, 'User', 'Petraitis', '+37061366841', 'test2@gmail.com', '$argon2i$v=19$m=131072,t=4,p=2$Sm9aWWFZcGFkWnJqTG5wbA$TYxEvzRh3tRU/CYXqQdSvHgAtjHZjgf/HqnpoCL77mY', 'user'),
-(9, 'Moderator', 'Girinis5', '+37055557847', 'test3@gmail.com', '$argon2i$v=19$m=131072,t=4,p=2$Q09rY1p5bExBcnouWnBjag$4lj8EPZIAjowxL2qEYOn9+F1f9dIzqFCign/nVFfcaI', 'moderator'),
-(14, 'Darius', 'Jakaitis', '+370678654645', 'testusers@userv.com', '$argon2i$v=19$m=131072,t=4,p=2$Y2dxZkR6TFdUY1pjSC5ZVQ$14ajUVQnKVzLxMlxwkcJApTGfVWDiOxa6xrkEcm/Xh0', 'admin');
+INSERT INTO `users` (`id`, `login_name`, `username`, `surname`, `phone`, `email`, `password`, `role`) VALUES
+(2, 'Admin7', 'Admin', 'Administratorius', '+37061287842', 'admin@js.com', '$argon2i$v=19$m=131072,t=4,p=2$VW5lSlRCcENXWTUuQmpqdA$N2fXosH8kiamXeZkmrXuykMuGbKjjuyBWb97M9eH1mM', 'admin'),
+(4, 'User11', 'User', 'Petraitis', '+37061366841', 'test2@gmail.com', '$argon2i$v=19$m=131072,t=4,p=2$Sm9aWWFZcGFkWnJqTG5wbA$TYxEvzRh3tRU/CYXqQdSvHgAtjHZjgf/HqnpoCL77mY', 'user'),
+(9, 'Moder4', 'Moderator', 'Girinis5', '+37055557847', 'test3@gmail.com', '$argon2i$v=19$m=131072,t=4,p=2$Q09rY1p5bExBcnouWnBjag$4lj8EPZIAjowxL2qEYOn9+F1f9dIzqFCign/nVFfcaI', 'moderator'),
+(14, 'Darkon', 'Darius', 'Jakaitis', '+370678654645', 'testusers@userv.com', '$argon2i$v=19$m=131072,t=4,p=2$Y2dxZkR6TFdUY1pjSC5ZVQ$14ajUVQnKVzLxMlxwkcJApTGfVWDiOxa6xrkEcm/Xh0', 'admin'),
+(16, 'TestuojuV', 'Sokis', 'Getraitis5', '370613664555', 'testre@js.com', '$argon2i$v=19$m=131072,t=4,p=2$Rzh5T1VKcVE0OFNmVE5YNQ$PldHCojGxdbFqCtK7U9YB7olOlYGHMhNhO5NlnUCs5Y', 'user');
 
 --
 -- Indexes for dumped tables
@@ -498,7 +505,8 @@ ALTER TABLE `translations`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`),
-  ADD UNIQUE KEY `email` (`email`);
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `login_name` (`login_name`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -544,13 +552,13 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT for table `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=217;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=222;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Constraints for dumped tables
