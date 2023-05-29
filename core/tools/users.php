@@ -41,9 +41,10 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
         <thead>
             <tr>
                 <th><?php echo t("No.");?></th>
-                <th><?php echo t("Username");?></th>
-                <th><?php echo t("Surname");?></th>
-                <th><?php echo t("Phone");?></th>
+                <th><?php echo t("Login Name");?></th>
+                <!-- <th><?php // echo t("Username");?></th>
+                <th><?php // echo t("Surname");?></th>
+                <th><?php // echo t("Phone");?></th> -->
                 <th><?php echo t("Email");?></th>
                 <th><?php echo t("Role");?></th>
                 <th><?php echo t("Actions");?></th>
@@ -55,9 +56,10 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
             foreach ($users as $user) { ?>
                 <tr>
                     <td><?php $i=$i+1; echo $i; ?>.</td>
-                    <td><?php echo htmlspecialchars($user['username']); ?></td>
-                    <td><?php echo htmlspecialchars($user['surname']); ?></td>
-                    <td><?php echo htmlspecialchars($user['phone']); ?></td>
+                    <td><?php echo htmlspecialchars($user['login_name']); ?></td>
+                    <!-- <td><?php // echo htmlspecialchars($user['username']); ?></td>
+                    <td><?php // echo htmlspecialchars($user['surname']); ?></td>
+                    <td><?php // echo htmlspecialchars($user['phone']); ?></td> -->
                     <td><?php echo htmlspecialchars($user['email']); ?></td>
                     <td><?php echo htmlspecialchars($user['role']); ?></td>
                     <td>
