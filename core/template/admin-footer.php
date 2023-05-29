@@ -52,6 +52,14 @@ $(document).ready(function() {
 
     $('#toggleSidebarBtn').on('click', toggleSidebar);
 });
+document.getElementById('settingsDropdown').addEventListener('click', function() {
+  var submenu = document.getElementById('settingsSubmenu');
+  if (submenu.style.display === "none") {
+    submenu.style.display = "block";
+  } else {
+    submenu.style.display = "none";
+  }
+});
 
 </script>
 </body>
