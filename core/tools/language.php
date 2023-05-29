@@ -85,7 +85,7 @@ if (isset($_GET['edit_id'])) {
              <div class="col-sm-12 d-flex mt-5">
              <form method="GET" id="rows-form">
                 <label for="rows"><?php echo t("Lines per page:");?></label>
-                <select name="rows" class="form-control" id="rows" onchange="document.getElementById('rows-form').submit()">
+                <select name="rows" class="form-select" id="rows" onchange="document.getElementById('rows-form').submit()">
                     <?php foreach($possible_rows as $rows): ?>
                         <option value="<?php echo $rows; ?>" <?php echo ($rows == $records_per_page ? 'selected' : ''); ?>>
                             <?php echo $rows; ?>
