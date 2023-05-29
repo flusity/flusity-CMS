@@ -39,9 +39,16 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
             <div class="col-sm-8">
 
                 <form action="upload.php" method="POST" enctype="multipart/form-data">
-                <?php echo t("Select a file:");?>
-                    <input type="file" name="uploaded_file">
-                    <button type="submit"><?php echo t("Upload file");?></button>
+                <div class="row justify-content-end">
+                <label for="formFile" class="form-label"><?php echo t("Select a file:");?></label>
+                <div class="col-auto">
+                    <input class="form-control" id="formFile" type="file" name="uploaded_file">
+                </div>
+                <div class="col-auto">
+                    <button class="btn btn-primary" type="submit"><?php echo t("Upload file");?></button>
+                </div>
+                </div>
+
                 </form>
                 <?php
            $files = getFilesListFromDatabase($db);
