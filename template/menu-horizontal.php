@@ -24,7 +24,7 @@
     $isUser = checkUserRole($user_id, 'user', $db);
    ?>
     <?php if ($isAdmin || $isModerator): ?>
-        <a class="nav-item" href="admin.php"><?php echo t("Admin"); ?></a>
+        <a class="nav-item" href="admin.php"><?php echo t("Dashboard"); ?></a>
     <?php endif; ?>
     <?php if ($isUser): ?>
      <p style=" margin: 10px 0px -3px 0px;"><?php echo t("Hello")." "; ?>, <?php echo htmlspecialchars($user_name); ?>!</p>
