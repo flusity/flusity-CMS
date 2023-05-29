@@ -36,6 +36,10 @@ if ($user) { ?>
     <form id="edit-user-form">
         <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">
 
+        <div class="form-group mb-3 mt-3">
+            <label for="login_name"><?php echo t("Login Name:");?></label>
+            &nbsp;<b><?php echo htmlspecialchars($user['login_name']); ?></b>
+        </div>
         <div class="form-group">
             <label for="user_username"><?php echo t("Username");?></label>
             <input type="text" class="form-control" id="user_username" name="user_username" value="<?php echo htmlspecialchars($user['username']); ?>" required>
