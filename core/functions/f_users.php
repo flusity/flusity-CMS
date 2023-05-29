@@ -63,13 +63,13 @@ function getUserNameById($db, $user_id) {
         $_SESSION['last_activity'] = time();
     }
     
-    function authenticateUser($usernameOrEmail, $password) {
+    function authenticateUser($login_nameOrEmail, $password) {
         global $config;
     
         $db = getDBConnection($config);
-        $stmt = $db->prepare('SELECT id, password, role FROM users WHERE username = :username OR email = :email');
-        $stmt->bindValue(':username', $usernameOrEmail, PDO::PARAM_STR);
-        $stmt->bindValue(':email', $usernameOrEmail, PDO::PARAM_STR);
+        $stmt = $db->prepare('SELECT id, password, role FROM users WHERE login_name = :login_name OR email = :email');
+        $stmt->bindValue(':login_name', $login_nameOrEmail, PDO::PARAM_STR);
+        $stmt->bindValue(':email', $login_nameOrEmail, PDO::PARAM_STR);
         $stmt->execute();
         $user = $stmt->fetch();
     
