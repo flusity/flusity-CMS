@@ -112,15 +112,22 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
         cardBody.style.display = 'none';
     }
 
-document.querySelectorAll('.card').forEach((card) => {
+    document.querySelectorAll('.card').forEach((card) => {
     card.addEventListener('mouseover', (event) => {
-        event.currentTarget.querySelector('.card-body').style.display = 'block';
+        let cardBody = event.currentTarget.querySelector('.card-body');
+        if (cardBody) {
+            cardBody.style.display = 'block';
+        }
     });
 
     card.addEventListener('mouseout', (event) => {
-        event.currentTarget.querySelector('.card-body').style.display = 'none';
+        let cardBody = event.currentTarget.querySelector('.card-body');
+        if (cardBody) {
+            cardBody.style.display = 'none';
+        }
     });
 });
+
 
 document.querySelectorAll('.card-body').forEach((cardBody) => {
     cardBody.addEventListener('mouseover', () => {
