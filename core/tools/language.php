@@ -3,20 +3,22 @@
 define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../') . '/');
 require_once ROOT_PATH . 'core/template/header-admin.php';
 
-$limit = 15;
+$possible_rows = [15, 35, 75, 150, 250, 350]; // galimos eilučių reikšmės
+$records_per_page = isset($_GET['rows']) ? intval($_GET['rows']) : 15; // pasirinktos eilutės
+
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-$offset = ($page - 1) * $limit;
+$offset = ($page - 1) * $records_per_page;
 $search_term = isset($_GET['search_term']) ? $_GET['search_term'] : '';
-$translationsWords = getTranslationsWords($db, $limit, $offset, $search_term);
+$translationsWords = getTranslationsWords($db, $records_per_page, $offset, $search_term);
 
 $total_records = countTranslations($db);
-$records_per_page = 15;
 $total_pages = ceil($total_records / $records_per_page);
 $i=1;
 $editTranslation = null;
 if (isset($_GET['edit_id'])) {
     $editTranslation = getTranslationById($db, $_GET['edit_id']);
 }
+
 ?>
 <div class="container-fluid">
     <div class="row">
@@ -80,7 +82,20 @@ if (isset($_GET['edit_id'])) {
             </div>
             <button type="submit" class="btn btn-primary mt-3"><?php echo t("Add/Edit");?></button>
              </form>
+             <div class="col-sm-12 d-flex mt-5">
+             <form method="GET" id="rows-form">
+                <label for="rows"><?php echo t("Lines per page:");?></label>
+                <select name="rows" class="form-control" id="rows" onchange="document.getElementById('rows-form').submit()">
+                    <?php foreach($possible_rows as $rows): ?>
+                        <option value="<?php echo $rows; ?>" <?php echo ($rows == $records_per_page ? 'selected' : ''); ?>>
+                            <?php echo $rows; ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </form>
         </div>
+        </div>
+        
         <div class="col-sm-9">
         <table class="table">
             <thead>
