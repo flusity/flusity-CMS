@@ -18,7 +18,7 @@
             ?>
         <?php if ($isAdmin || $isModerator): ?>
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo getFullUrl('/admin.php'); ?>"><?php echo t("Admin"); ?></a>
+                <a class="nav-link" href="<?php echo getFullUrl('/admin.php'); ?>"><?php echo t("Dashboard"); ?></a>
             </li>
         <?php endif; ?>
     </ul>
