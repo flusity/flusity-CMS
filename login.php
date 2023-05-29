@@ -16,17 +16,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die('Bad CSRF token.');
     }
 
-    $usernameOrEmail = validateInput($_POST['username']);
+    $login_nameOrEmail = validateInput($_POST['login_name']);
     $password = validateInput($_POST['password']);
 
-    if ($user = authenticateUser($usernameOrEmail, $password)) {
+    if ($user = authenticateUser($login_nameOrEmail, $password)) {
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['user_role'] = $user['role'];
         session_regenerate_id(true);
         header('Location: /');
         exit();
     } else {
-        $error_message = t('Invalid username/email or password.');
+        $error_message = t('Invalid Login Name/email or password.');
     }
 } ?>
 <header id="header">
@@ -51,8 +51,8 @@ $csrf_token = generateCSRFToken();
 ?>
 <form method="POST" action="">
 <div class="form-floating">
-    <input type="text" class="form-control" id="username" name="username" placeholder="<?php echo t("User Name or Email"); ?>" required>
-    <label for="username"><?php echo t("User Name or Email"); ?></label>
+    <input type="text" class="form-control" id="login_name" name="login_name" placeholder="<?php echo t("Login Name or Email"); ?>" required>
+    <label for="login_name"><?php echo t("Login Name or Email"); ?></label>
 </div>
     <br>
     <div class="form-floating">
