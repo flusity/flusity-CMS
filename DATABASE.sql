@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 29, 2023 at 09:46 PM
+-- Generation Time: May 29, 2023 at 09:50 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -405,7 +405,6 @@ INSERT INTO `translations` (`id`, `language_code`, `translation_key`, `translati
 (202, 'lt', 'Error loading file.', 'Įkeliant failą įvyko klaida.'),
 (203, 'lt', 'Failed to clear cache, APCu is not installed!', 'Nepavyko išvalyti talpyklos, APCu neįdiegtas!'),
 (204, 'lt', 'Create', 'Sukurti'),
-(205, 'lt', 'Category with this name already exists. Try a different name', 'Kategorija tokiu pavadinimu jau yra. Pabandykite kitą pavadinimą'),
 (206, 'lt', 'Error adding category. Try again.', 'Klaida pridedant kategoriją. Bandyk iš naujo.'),
 (207, 'lt', 'Category successfully added.', 'Kategorija sėkmingai pridėta.'),
 (208, 'lt', 'Category successfully updated.', 'Kategorija sėkmingai atnaujinta.'),
@@ -418,7 +417,7 @@ INSERT INTO `translations` (`id`, `language_code`, `translation_key`, `translati
 (217, 'lt', 'Core Settings', 'Pagrindiniai nustatymai'),
 (218, 'lt', 'Lines per page:', 'Eilučių per puslapį:'),
 (219, 'lt', 'Add new code', 'Pridėti naują kodą'),
-(220, 'lt', 'That Name or Login Name is already taken. Choose another.', 'That Name or Login Name is already taken. Choose another.'),
+(220, 'lt', 'That Name or Login Name is already taken. Choose another.', 'Tas vardas arba prisijungimo vardas jau užimtas. Pasirinkite kitą.'),
 (221, 'lt', 'Invalid CSRF token. Try again.', 'Neteisingas CSRF žetonas. Bandykite dar kartą.'),
 (222, 'lt', 'Login Name', 'Prisijungimo Vardas'),
 (223, 'lt', 'Login Name or Email', 'Prisijungimo Vardas / El.paštas');
