@@ -60,3 +60,15 @@ body {
 .search-input-long {
     width: 100%; 
 }
+#rows {
+  cursor: pointer;
+}
+#rows:hover {
+  background-color: #f8f9fa;
+}
+#rows option {
+  color: #495057;
+}
+#rows option:hover {
+  background-color: #e9ecef;
+}
