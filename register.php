@@ -1,10 +1,12 @@
-<?php header("Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self';");
+<?php 
+header("Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self';");
 require_once 'template/header.php';
 $db = getDBConnection($config);
-   // Gaunamas kalbos nustatymas iš duomenų bazės  
-    $language_code = getLanguageSetting($db);
-    $translations = getTranslations($db, $language_code);
- 
+
+// Gaunamas kalbos nustatymas iš duomenų bazės  
+$language_code = getLanguageSetting($db);
+$translations = getTranslations($db, $language_code);
+
 if (isset($_SESSION['user_id'])) {
     header('Location: /');
     exit();
@@ -12,8 +14,9 @@ if (isset($_SESSION['user_id'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $csrf_token = validateInput($_POST['csrf_token']);
     if (!validateCSRFToken($csrf_token)) {
-        $error_message = 'Neteisingas CSRF žetonas. Bandykite dar kartą.';
+        $error_message = t("Invalid CSRF token. Try again.");
     } else {
+        $login_name = validateInput($_POST['login_name']);
         $username = validateInput($_POST['username']);
         $password = validateInput($_POST['password']);
         $confirm_password = validateInput($_POST['confirm_password']);
@@ -21,11 +24,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $phone = validateInput($_POST['phone']);
         $email = validateInput($_POST['email']);
 
+        
         if ($password === $confirm_password) {
-            if (isUsernameTaken($username, $db)) {
-                $error_message = t("That Name is already taken. Choose another.");
+            if (isUsernameTaken($username, $db) || isLoginNameTaken($login_name, $db)) {
+                $error_message = t("That Name or Login Name is already taken. Choose another.");
             } else {
-                if (registerUser($username, $password, $surname, $phone, $email, $db)) {
+                if (registerUser($login_name, $username, $password, $surname, $phone, $email, $db)) {
                     header('Location: login.php');
                     exit();
                 } else {
@@ -56,6 +60,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 <?php endif; ?>
 <form method="POST" action="">
+    <div class="form-floating">
+        <input type="text" class="form-control" id="login_name" name="login_name" placeholder="<?php echo t("Login Name");?>" required>
+        <label for="login_name"><?php echo t("Login Name");?></label>
+    </div>
+    <br>
     <div class="form-floating">
         <input type="text" class="form-control" id="username" name="username" placeholder="<?php echo t("User Name");?>" required>
         <label for="username"><?php echo t("User Name");?></label>
