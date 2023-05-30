@@ -25,8 +25,10 @@ if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
     $user_name = getUserNameById($db, $user_id);
 }
+$settings = getSettings($db);
 
-$limit = 10;
+$limit = $settings['posts_per_page'];
+
 $url = isset($_GET['url']) ? intval($_GET['url']) : 1;
 $offset = ($url - 1) * $limit;
 
