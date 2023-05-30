@@ -33,6 +33,11 @@ $offset = ($url - 1) * $limit;
 $current_page_url = getCurrentPageUrl($db);
 $posts = getPostsNews($db, $limit, $offset, $current_page_url);
 
+// Dekodavimas
+foreach ($posts as &$post) {
+    $post['title'] = htmlspecialchars_decode($post['title']);
+    $post['content'] = htmlspecialchars_decode($post['content']);
+}
 $total_posts = countPosts($db);
 $total_urls = ceil($total_posts / $limit);
 
