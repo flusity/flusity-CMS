@@ -79,7 +79,7 @@ if ($mode === 'create' || $post) {
             <button type="button" onclick="underlineText()">Underline</button>
 
             </div>
-            <textarea class="form-control"  contenteditable="true" id="post_content" name="post_content" rows="10" required><?php echo $mode === 'edit' ? htmlspecialchars($post['content']) : ''; ?></textarea>
+            <textarea class="form-control"  contenteditable="true" id="post_content" name="post_content" rows="10" required><?php echo $mode === 'edit' ? htmlspecialchars_decode($post['content']) : ''; ?></textarea>
         </div>
         <div class="form-group">
                 <label for="post_status"><?php echo t("Post status");?></label>

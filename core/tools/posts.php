@@ -78,14 +78,14 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
                             <td><?php echo htmlspecialchars($post['title']); ?></td>
                             <td>
                             <?php
-                                $content = htmlspecialchars($post['content']);
-                                $max_length = 80; 
+                                $content = htmlspecialchars_decode($post['content']);
+                                $max_length = 100; 
                                 if (strlen($content) > $max_length) {
                                     echo substr($content, 0, $max_length) . '...';
                                 } else {
                                     echo $content;
-                                } 
-                              ?>
+                                }
+                            ?>
                             </td>
                             <td><?php echo htmlspecialchars($post['menu_name']); ?></td>
                             <td><?php 

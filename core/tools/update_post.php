@@ -1,13 +1,14 @@
 <?php
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
-  }
+}
 define('IS_ADMIN', true);
 
 define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../') . '/');
 
 require_once ROOT_PATH . 'security/config.php';
 require_once ROOT_PATH . 'core/functions/functions.php';
+
 secureSession();
 // Duomenų gavimas iš duomenų bazės
 $db = getDBConnection($config);
@@ -18,8 +19,8 @@ $result = ['success' => false];
 
 if (isset($_POST['post_id'], $_POST['post_title'], $_POST['post_content'], $_POST['post_menu'], $_POST['post_status'], $_POST['post_tags'], $_POST['role'])) {
     $postId = (int)$_POST['post_id'];
-    $title = $_POST['post_title'];
-    $content = $_POST['post_content'];
+    $title = htmlspecialchars($_POST['post_title'], ENT_QUOTES, 'UTF-8');
+    $content = htmlspecialchars($_POST['post_content'], ENT_QUOTES, 'UTF-8');
     $menuId = (int)$_POST['post_menu'];
     $status = $_POST['post_status'];
     $tags = $_POST['post_tags'];
@@ -35,6 +36,7 @@ if (isset($_POST['post_id'], $_POST['post_title'], $_POST['post_content'], $_POS
     }
 }
 
+
 echo json_encode($result);
 exit;
-
+?>
