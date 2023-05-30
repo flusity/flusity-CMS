@@ -183,6 +183,32 @@ function createDatabaseBackup($db, $backupFilename) {
         return $settings;
     }
     
+    function createPagination($url, $total_urls) {
+        ob_start();
+        ?>
+        <?php if($total_urls > 1): ?>
+            <div class="pagination">
+                <?php if($url > 1): ?>
+                    <a href="?url=1"><<</a>
+                <?php endif; ?>
+    
+                <?php for($i = max(1, $url - 2); $i <= min($url + 2, $total_urls); $i++): ?>
+                    <?php if($i == $url): ?>
+                        <a class="active" href="?url=<?php echo $i; ?>"><?php echo $i; ?></a>
+                    <?php else: ?>
+                        <a href="?url=<?php echo $i; ?>"><?php echo $i; ?></a>
+                    <?php endif; ?>
+                <?php endfor; ?>
+    
+                <?php if($url < $total_urls): ?>
+                    <a href="?url=<?php echo $total_urls; ?>">>></a>
+                <?php endif; ?>
+            </div>
+        <?php endif; ?>
+        <?php
+        return ob_get_clean();
+    }
+
     require_once 'f_users.php';
     require_once 'f_posts.php';
     require_once 'f_menu.php';
@@ -191,4 +217,3 @@ function createDatabaseBackup($db, $backupFilename) {
     require_once 'f_categories.php';
     require_once 'f_translations.php';
     
-   
