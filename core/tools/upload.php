@@ -1,10 +1,9 @@
 <?php
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
-  }
+}
 
 define('IS_ADMIN', true);
-
 define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../') . '/');
 require_once $_SERVER['DOCUMENT_ROOT'] . '/security/config.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/core/functions/functions.php';
@@ -16,9 +15,26 @@ $target_dir = ROOT_PATH . "uploads/";
 
 $uploaded_file = $_FILES["uploaded_file"];
 
+// Allowed file types
+$allowed_file_types = ['image/png', 'image/jpeg', 'image/gif', 'application/pdf', 'application/msword', 'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
+// Maximum file size (5MB)
+$max_file_size = 5 * 1024 * 1024;
+
+if (!in_array($uploaded_file['type'], $allowed_file_types)) {
+    $_SESSION['error_message'] = t("Invalid file type.");
+    header("Location: files.php");
+    exit();
+}
+
+if ($uploaded_file['size'] > $max_file_size) {
+    $_SESSION['error_message'] = t("File size exceeded limit.");
+    header("Location: files.php");
+    exit();
+}
+
 $unique_code = bin2hex(random_bytes(8));
 
-// Susijungemas pavadinimas, kodas ir failo plėtinys
+// Merged name, code and file extension
 $filename_parts = pathinfo($uploaded_file["name"]);
 $new_filename = $filename_parts['filename'] . '_' . $unique_code . '.' . $filename_parts['extension'];
 
@@ -35,3 +51,4 @@ if (move_uploaded_file($uploaded_file["tmp_name"], $target_file)) {//
 
 header("Location: files.php");
 exit();
+?>
