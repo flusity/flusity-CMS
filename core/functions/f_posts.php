@@ -2,30 +2,25 @@
 
 function getPostsNews($db, $limit, $offset, $menuUrl) {
     if ($menuUrl != '') {
-        $stmt = $db->prepare('SELECT posts.* FROM posts JOIN menu ON posts.menu_id = menu.id WHERE menu.page_url = :menu_url LIMIT '.(int)$limit.' OFFSET '.(int)$offset);
+        $stmt = $db->prepare('SELECT posts.* FROM posts JOIN menu ON posts.menu_id = menu.id WHERE menu.page_url = :menu_url AND posts.status = "published" LIMIT '.(int)$limit.' OFFSET '.(int)$offset);
         $stmt->bindValue(':menu_url', $menuUrl, PDO::PARAM_STR);
     } else {
-        $stmt = $db->prepare('SELECT posts.* FROM posts JOIN menu ON posts.menu_id = menu.id WHERE menu.page_url = "index" LIMIT '.(int)$limit.' OFFSET '.(int)$offset);
+        $stmt = $db->prepare('SELECT posts.* FROM posts JOIN menu ON posts.menu_id = menu.id WHERE menu.page_url = "index" AND posts.status = "published" LIMIT '.(int)$limit.' OFFSET '.(int)$offset);
     }
     $stmt->execute();
     return $stmt->fetchAll();    
 }
- 
-    function countPosts($db) {
-        $stmt = $db->prepare('SELECT COUNT(*) FROM posts');
-        $stmt->execute();
-        return $stmt->fetchColumn();
-    }
+
+function countPosts($db) {
+    $stmt = $db->prepare('SELECT COUNT(*) FROM posts WHERE status = "published"');
+    $stmt->execute();
+    return $stmt->fetchColumn(); 
+}
+
 function deletePost($db, $id) {
     $stmt = $db->prepare('DELETE FROM posts WHERE id = :id');
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     return $stmt->execute();
-}
-
-function getPosts($db) {
-    $stmt = $db->prepare('SELECT * FROM posts');
-    $stmt->execute();
-    return $stmt->fetchAll();
 }
 
 function createPost($db, $title, $content, $menu_id, $status, $author, $tags, $role) {
