@@ -67,7 +67,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
             echo '<div class="card h-100" style="padding: 3px; width: 160px;">'; 
     
             // Alternatyvūs paveiksliukai ne vaizdo failams
-            $default_image = '/path/to/default/image.jpg'; // pridėkite numatytąją nuotrauką
+            $default_image = '/img/default.png'; // pridėkite numatytąją nuotrauką
             $file_extension = pathinfo($file['name'], PATHINFO_EXTENSION);
     
             switch (strtolower($file_extension)) {
@@ -75,12 +75,12 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
                    $pdfImage ='img/pdf.png';
                     $default_image = $pdfImage;
                     break;
-                    case 'docx':
-                        $default_image = 'img/docx.png';
-                        break;
-                    case 'xlsx':
-                        $default_image = 'img/xlsx.png';
-                        break;
+                case 'docx':
+                    $default_image = 'img/docx.png';
+                    break;
+                case 'xlsx':
+                    $default_image = 'img/xlsx.png';
+                    break;
                            
                 // pridėkite atitinkamas nuorodas prie kitų failų tipų
             }
