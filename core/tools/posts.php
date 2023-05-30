@@ -24,6 +24,8 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
                 $total_posts = countAllPosts($db);
                 $total_pages = ceil($total_posts / $limit);
                 $allPost = getAllPosts($db);
+                $menuItems = getMenuItems($db);
+                $menuItemsIndexed = array_column($menuItems, null, 'id');
           ?>
         <div class="col-md-10 content-up">
             <div class="col-sm-9">
@@ -57,28 +59,42 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
                         <th style="width: 3%;"><?php echo t("No.");?></th>
                         <th style="width: 17%;"><?php echo t("Title");?></th>
                         <th style="width: 40%;"><?php echo t("Content");?></th>
-                        <th style="width: 13%;"><?php echo t("Public");?></th>
-                        <th style="width: 12%;"><?php echo t("Author");?></th>
-                        <th style="width: 15%;"><?php echo t("Actions");?></th>
+                        <th style="width: 12%;"><?php echo t("Page");?></th>
+                        <th style="width: 3%;"><i title="<?php echo t("Public");?>" class="fas fa-eye"></i></th>
+                        <th style="width: 8%;"><?php echo t("Author");?></th>
+                        <th style="width: 10%;"><?php echo t("Actions");?></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($allPost as $post) { ?>
+                    <?php foreach ($allPost as $post) { 
+                      if (isset($menuItemsIndexed[$post['menu_id']])) {
+                        $post['menu_name'] = $menuItemsIndexed[$post['menu_id']]['name'];
+                        } else {
+                            $post['menu_name'] = '';
+                        }
+                        ?>
                         <tr>
                             <td><?php echo $i++; ?></td>
                             <td><?php echo htmlspecialchars($post['title']); ?></td>
                             <td>
                             <?php
                                 $content = htmlspecialchars($post['content']);
-                                $max_length = 100; 
+                                $max_length = 80; 
                                 if (strlen($content) > $max_length) {
                                     echo substr($content, 0, $max_length) . '...';
                                 } else {
                                     echo $content;
-                                }
-                            ?>
+                                } 
+                              ?>
                             </td>
-                            <td><?php echo htmlspecialchars($post['status']); ?></td>
+                            <td><?php echo htmlspecialchars($post['menu_name']); ?></td>
+                            <td><?php 
+                                      if ($post['status'] == 'published') {
+                                          echo 'On';
+                                      } elseif ($post['status'] == 'draft') {
+                                          echo 'Off';
+                                      }
+                                  ?></td>
                             <td><?php echo htmlspecialchars($user_name); ?></td>
                             <td>
                                 <button type="button" class="btn btn-sm btn-primary" onclick="loadPostEditForm(<?php echo $post['id']; ?>)" title="<?php echo t("Edit");?>">
