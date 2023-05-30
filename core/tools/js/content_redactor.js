@@ -1,4 +1,15 @@
 
+let contentArea = document.getElementById('post_content');
+let displayArea = document.getElementById('display_area');
+
+contentArea.addEventListener('input', function() {
+    displayArea.innerHTML = contentArea.value;
+});
+
+function showHTMLContent() {
+    var htmlContent = document.getElementById("post_content").value;
+    document.getElementById("display_area").innerHTML = htmlContent;
+}
 
 function underlineText() {
     document.execCommand('underline', false, null);
