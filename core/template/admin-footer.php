@@ -44,9 +44,9 @@ $(document).ready(function() {
 
 
   if (content.classList.contains("col-custom")) {
-    content.style.width = "calc(100% - 50px)"; // 50px yra suskleistos šoninės juostos plotis
+    content.style.width = "calc(100% - 50px)"; 
   } else {
-    content.style.width = "calc(100% - 250px)"; // 250px yra išplėstos šoninės juostos plotis
+    content.style.width = "calc(100% - 250px)";
   }
     }
 
@@ -62,5 +62,6 @@ document.getElementById('settingsDropdown').addEventListener('click', function()
 });
 
 </script>
+<script src="../tools/js/content_redactor.js"></script>
 </body>
 </html>
