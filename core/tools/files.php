@@ -76,18 +76,19 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
                     $default_image = $pdfImage;
                     break;
                     case 'docx':
-                        $default_image = '/img/docx.png';
+                        $default_image = 'img/docx.png';
                         break;
-                        case 'xlsx':
-                            $default_image = '/img/xlsx.png';
-                            break;
+                    case 'xlsx':
+                        $default_image = 'img/xlsx.png';
+                        break;
+                           
                 // pridėkite atitinkamas nuorodas prie kitų failų tipų
             }
     
             if ($is_image) {
-                echo '<img src="' . $url . '" class="card-img-top" alt="' . htmlspecialchars($shortName) . '" style="width: 100%; height: 124px; object-fit: cover; border-radius: .25rem;" title="' . htmlspecialchars($shortName) . '">'; // pridėtas 'border-radius: .25rem;'
+                echo '<img src="' . $url . '" class="card-img-top" alt="' . htmlspecialchars($shortName) . '" style="width: 100%; height: 124px; object-fit: cover; border-radius: .25rem;" title="' . htmlspecialchars($shortName) . '">'; 
             } else {
-                echo '<img src="' . $default_image . '" class="card-img-top" alt="' . htmlspecialchars($shortName) . '" style="width: 100px; height: 124px; object-fit: cover; border-radius: .25rem;" title="' . htmlspecialchars($shortName) . '">'; // pridėtas 'border-radius: .25rem;'
+                echo '<img src="' . $default_image . '" class="card-img-top" alt="' . htmlspecialchars($shortName) . '" style="width: 100px; height: 124px; object-fit: cover; border-radius: .25rem;" title="' . htmlspecialchars($shortName) . '">';
             }
 
             echo '<div class="card-body p-0" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); color: white; border-radius: .25rem;">'; 
