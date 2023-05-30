@@ -74,12 +74,14 @@ if ($mode === 'create' || $post) {
         <div class="form-group">
             <label for="post_content"><?php echo t("Content");?></label>
             <div class="toolbar">
-            <button type="button" onclick="boldText()">Bold</button>
-            <button type="button" onclick="italicText()">Italic</button>
-            <button type="button" onclick="underlineText()">Underline</button>
+            <button type="button" onclick="boldText()">b</button>
+            <button type="button" onclick="italicText()"><i>i</i></button>
+            <button type="button" onclick="underlineText()"><u>u</u></button>
 
             </div>
-            <textarea class="form-control"  contenteditable="true" id="post_content" name="post_content" rows="10" required><?php echo $mode === 'edit' ? htmlspecialchars_decode($post['content']) : ''; ?></textarea>
+            <div id="display_area" contenteditable="true"></div>
+
+            <textarea class="form-control"  contenteditable="true" id="post_content" name="post_content" rows="10" required><?php echo $mode === 'edit' ? htmlspecialchars($post['content']) : ''; ?></textarea>
         </div>
         <div class="form-group">
                 <label for="post_status"><?php echo t("Post status");?></label>
