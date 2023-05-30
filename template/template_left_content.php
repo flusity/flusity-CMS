@@ -34,11 +34,7 @@
         <p><?php echo $post['content']; ?></p>
        <?php endforeach; ?>
 
-    <div class="pagination">
-        <?php for ($i = 1; $i <= $total_urls; $i++): ?>
-            <a href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-        <?php endfor; ?>
-    </div>
+       <?php echo createPagination($url, $total_urls); ?>
         </div>
     </div>
 </div>

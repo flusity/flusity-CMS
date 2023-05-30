@@ -54,6 +54,7 @@
         <h2><?php echo $post['title']; ?></h2>
         <p><?php echo $post['content']; ?></p>
        <?php endforeach; ?>
+       <?php echo createPagination($url, $total_urls); ?>
         </div>
     </div>
 </div>
