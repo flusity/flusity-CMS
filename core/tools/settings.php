@@ -13,8 +13,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $footer_text = $_POST['footer_text'];
     $pretty_url = $_POST['pretty_url'];
     $language = $_POST['language']; 
-    updateSettings($db, $site_title, $meta_description, $footer_text, $pretty_url, $language);
-  
+    $posts_per_page = $_POST['posts_per_page'];
+    updateSettings($db, $site_title, $meta_description, $footer_text, $pretty_url, $language, $posts_per_page);
+
     $_SESSION['success_message'] =  t("Settings successfully updated!");
     header("Location: settings.php");
     exit;
@@ -73,6 +74,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="form-group mt-2">
                     <label for="pretty_url"><?php echo t("Pretty URL");?></label>
                     <input type="checkbox" class="form-control-ch" id="pretty_url" name="pretty_url" value="1" <?php echo ($settings['pretty_url'] == 1 ? 'checked' : '');?>>
+                </div>
+                <div class="form-group">
+                    <label for="posts_per_page"><?php echo t("Posts per page");?></label>
+                    <input type="number" class="form-control w-25" id="posts_per_page" name="posts_per_page" value="<?php echo htmlspecialchars($settings['posts_per_page']); ?>" required>
                 </div>
                 <div class="form-group mt-2 mb-2">
                     <label for="language"><?php echo t("Language");?></label>
