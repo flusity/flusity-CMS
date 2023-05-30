@@ -182,30 +182,22 @@ function createDatabaseBackup($db, $backupFilename) {
         $settings = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $settings;
     }
-    
+
     function createPagination($url, $total_urls) {
         ob_start();
-        ?>
-        <?php if($total_urls > 1): ?>
-            <div class="pagination">
-                <?php if($url > 1): ?>
-                    <a href="?url=1"><<</a>
-                <?php endif; ?>
-    
-                <?php for($i = max(1, $url - 2); $i <= min($url + 2, $total_urls); $i++): ?>
-                    <?php if($i == $url): ?>
-                        <a class="active" href="?url=<?php echo $i; ?>"><?php echo $i; ?></a>
-                    <?php else: ?>
-                        <a href="?url=<?php echo $i; ?>"><?php echo $i; ?></a>
-                    <?php endif; ?>
-                <?php endfor; ?>
-    
-                <?php if($url < $total_urls): ?>
-                    <a href="?url=<?php echo $total_urls; ?>">>></a>
-                <?php endif; ?>
-            </div>
-        <?php endif; ?>
-        <?php
+        if($total_urls > 1) {
+            echo '<div class="pagination">';
+            if($url > 1) {
+                echo '<a href="?url=1"><<</a>';
+            }
+            for($i = max(1, $url - 2); $i <= min($url + 2, $total_urls); $i++) {
+                echo ($i == $url) ? '<a class="active" href="?url='.$i.'">'.$i.'</a>' : '<a href="?url='.$i.'">'.$i.'</a>';
+            }
+            if($url < $total_urls) {
+                echo '<a href="?url='.$total_urls.'">>></a>';
+            }
+            echo '</div>';
+        } 
         return ob_get_clean();
     }
 
