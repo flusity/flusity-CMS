@@ -2,16 +2,13 @@
 
 function getPostsNews($db, $limit, $offset, $menuUrl) {
     if ($menuUrl != '') {
-        $stmt = $db->prepare('SELECT posts.* FROM posts JOIN menu ON posts.menu_id = menu.id WHERE menu.page_url = :menu_url LIMIT :limit OFFSET :offset');
+        $stmt = $db->prepare('SELECT posts.* FROM posts JOIN menu ON posts.menu_id = menu.id WHERE menu.page_url = :menu_url LIMIT '.(int)$limit.' OFFSET '.(int)$offset);
         $stmt->bindValue(':menu_url', $menuUrl, PDO::PARAM_STR);
     } else {
-        $stmt = $db->prepare('SELECT posts.* FROM posts JOIN menu ON posts.menu_id = menu.id WHERE menu.page_url = "index" LIMIT :limit OFFSET :offset');
+        $stmt = $db->prepare('SELECT posts.* FROM posts JOIN menu ON posts.menu_id = menu.id WHERE menu.page_url = "index" LIMIT '.(int)$limit.' OFFSET '.(int)$offset);
     }
-
-    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
-    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
     $stmt->execute();
-    return $stmt->fetchAll();
+    return $stmt->fetchAll();    
 }
  
     function countPosts($db) {
