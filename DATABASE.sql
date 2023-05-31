@@ -187,21 +187,23 @@ INSERT INTO `posts` (`id`, `title`, `content`, `author_id`, `role`, `created_at`
 -- Table structure for table `settings`
 --
 
+
 CREATE TABLE `settings` (
   `site_title` varchar(255) NOT NULL,
   `meta_description` text NOT NULL,
   `footer_text` text NOT NULL,
   `pretty_url` int(1) NOT NULL DEFAULT 0,
-  `language` varchar(2) NOT NULL DEFAULT 'en'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `language` varchar(2) NOT NULL DEFAULT 'en',
+  `posts_per_page` int(11) NOT NULL DEFAULT 10
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `settings`
 --
 
-INSERT INTO `settings` (`site_title`, `meta_description`, `footer_text`, `pretty_url`, `language`) VALUES
-('JD website', 'JD website description', 'Copyright &copy; JD Theme 2023', 1, 'lt');
-
+INSERT INTO `settings` (`site_title`, `meta_description`, `footer_text`, `pretty_url`, `language`, `posts_per_page`) VALUES
+('JD website', 'JD website description', 'Copyright &copy; JD Theme 2023', 1, 'lt', 10);
+COMMIT;
 -- --------------------------------------------------------
 
 --
