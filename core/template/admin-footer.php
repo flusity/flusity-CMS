@@ -1,6 +1,5 @@
 <script>
         $(document).ready(function() {
-
             $('a[data-page]').on('click', function(e) {
                 e.preventDefault();
                 const page = $(this).data('page');
@@ -11,7 +10,14 @@
                     }
                 });
             });
-        });
+
+    $('.selectable-image').on('click', function() {
+    var imageName = $(this).data('image-name');
+    var offcanvas = bootstrap.Offcanvas.getInstance(document.getElementById('imageSelectOffcanvas'));
+    offcanvas.hide();
+    addImage(imageName);
+  });
+});
    
     setTimeout(function() {
         var alerts = document.querySelectorAll('.alert');
@@ -42,7 +48,6 @@ $(document).ready(function() {
     content.classList.add("main-content-collapsed-sidebar");
   }
 
-
   if (content.classList.contains("col-custom")) {
     content.style.width = "calc(100% - 50px)"; 
   } else {
@@ -61,7 +66,16 @@ document.getElementById('settingsDropdown').addEventListener('click', function()
   }
 });
 
+var quill = new Quill('#editor', {
+    theme: 'snow'
+});
+
+document.querySelector('#post-form').addEventListener('submit', function() {
+    var content = quill.root.innerHTML;
+    document.querySelector('#post_content').value = content;
+});
 </script>
+   
 <script src="../tools/js/content_redactor.js"></script>
 </body>
 </html>
