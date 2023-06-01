@@ -2,6 +2,9 @@
 define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../') . '/');
 
 require_once ROOT_PATH . 'core/template/header-admin.php';
+$settings = getSettings($db);
+
+$limit_per_page = $settings['posts_per_page'];
 ?>
 <div class="container-fluid ">
     <div class="row">
@@ -16,7 +19,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
             <?php require_once ROOT_PATH . 'core/tools/sidebar.php';?>
         </div>
         <?php   $i = 1;
-                $limit = 10;
+                $limit = $limit_per_page;
                 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
                 $start = ($page - 1) * $limit;
 
