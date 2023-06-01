@@ -9,6 +9,7 @@ secureSession();
 define('IS_ADMIN', true);
 // Duomenų gavimas iš duomenų bazės
 $db = getDBConnection($config);
+$settings = getSettings($db);
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
     $user_name = getUserNameById($db, $user_id);
