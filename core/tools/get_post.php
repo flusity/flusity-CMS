@@ -61,12 +61,10 @@ if ($mode === 'create' || $post) {
                 <?php foreach ($menuId as $menu) : ?>
                     <option value="<?php echo $menu['id']; ?>" <?php echo $mode === 'edit' && $post['menu_id'] === $menu['id'] ? 'selected' : ''; ?>>
                         <?php echo htmlspecialchars($menu['name']); ?>
-                    
                     </option>
                 <?php endforeach; ?>
             </select>
         </div>
-                
         <div class="form-group">
             <label for="post_title"><?php echo t("Name");?></label>
             <input type="text" class="form-control" id="post_title" name="post_title" value="<?php echo $mode === 'edit' ? htmlspecialchars($post['title']) : ''; ?>" required>
@@ -74,13 +72,25 @@ if ($mode === 'create' || $post) {
         <div class="form-group">
             <label for="post_content"><?php echo t("Content");?></label>
             <div class="toolbar">
-            <button type="button" onclick="boldText()">b</button>
-            <button type="button" onclick="italicText()"><i>i</i></button>
-            <button type="button" onclick="underlineText()"><u>u</u></button>
-
+            <button type="button" onclick="paragraphText()" style="height: 35px; width: 35px;">p</button>
+            <button type="button" onclick="boldText()" style="height: 35px; width: 35px;"><b>b</b></button>
+            <button type="button" onclick="italicText()" style="height: 35px; width: 35px;"><i>i</i></button>
+            <button type="button" onclick="underlineText()" style="height: 35px; width: 35px;"><u>u</u></button>
+            <button type="button" onclick="markDel()" style="height: 35px;"><del>d<del></button>
+            <button type="button" onclick="header1()" style="height: 35px;"><p>h1</p></button>
+            <button type="button" onclick="header2()" style="height: 35px;"><p>h2</p></button>
+            <button type="button" onclick="header3()" style="height: 35px;"><p>h3</p></button>
+            <button type="button" onclick="hypertext()" style="height: 35px;"><p>url</p></button>
+            <button type="button" onclick="listTextUl()" style="height: 35px;"><p>ul</p></button>
+            <button type="button" onclick="listTextLi()" style="height: 35px;"><p>li</p></button>
+            <button type="button" onclick="quotationMark()" style="height: 35px;"><p>„“</p></button>
+            <button type="button" onclick="markOl()" style="height: 35px;"><p>1..</p></button>
+            <button type="button" onclick="markSub()" style="height: 35px;"><sub>2</sub></button>
+            <button type="button" onclick="markSup()" style="height: 35px;"><sup>4</sup></button>
+            <button type="button" onclick="markHr()" style="height: 35px;"><p>__</p></button>
+            <button type="button" onclick="markText()" style="height: 35px;"><p><mark>text</mark></p></button>
+            <button type="button" onclick="selectImage()" style="height: 35px;"><img>img</img></button>
             </div>
-            <div id="display_area" contenteditable="true"></div>
-
             <textarea class="form-control"  contenteditable="true" id="post_content" name="post_content" rows="10" required><?php echo $mode === 'edit' ? htmlspecialchars_decode($post['content']) : ''; ?></textarea>
         </div>
         <div class="form-group">
@@ -96,6 +106,20 @@ if ($mode === 'create' || $post) {
      </form>
 
      </div>
+
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="imageSelectOffcanvas" data-bs-backdrop="false" data-bs-scroll="false">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">Select an Image</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <img src="images/img1.jpg" class="selectable-image" data-image-name="img1.jpg">
+    <img src="images/img2.jpg" class="selectable-image" data-image-name="img2.jpg">
+    <!-- More images... -->
+  </div>
+</div>
+
 <?php
 } else {
     echo t('Post not found.');
