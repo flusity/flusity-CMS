@@ -2,8 +2,6 @@
 define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../') . '/');
 
 require_once ROOT_PATH . 'core/template/header-admin.php';
-$settings = getSettings($db);
-
 $limit_per_page = $settings['posts_per_page'];
 ?>
 <div class="container-fluid ">
