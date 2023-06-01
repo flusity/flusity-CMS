@@ -66,26 +66,36 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($allPost as $post) { 
-                      if (isset($menuItemsIndexed[$post['menu_id']])) {
+            <?php foreach ($posts as $post) { 
+                    if (isset($menuItemsIndexed[$post['menu_id']])) {
                         $post['menu_name'] = $menuItemsIndexed[$post['menu_id']]['name'];
-                        } else {
-                            $post['menu_name'] = '';
-                        }
-                        ?>
+                    } else {
+                        $post['menu_name'] = '';
+                    }
+                    ?>
                         <tr>
                             <td><?php echo $i++; ?></td>
                             <td><?php echo htmlspecialchars($post['title']); ?></td>
                             <td>
                             <?php
                                 $content = htmlspecialchars_decode($post['content']);
-                                $max_length = 100; 
+                                $content = preg_replace('/<img[^>]+>/i', '[image or file]', $content);
+                                $content = preg_replace('/<hr[^>]*>/i', '___', $content);
+
+                                // Pakeičiamas visų naujų eilučių simbolis į tarpą
+                                $content = str_replace(array("\r", "\n"), ' ', $content);
+
+                                // Pašalinamos visos HTML žymos
+                                $content = strip_tags($content);
+
+                                $max_length = 150;
                                 if (strlen($content) > $max_length) {
                                     echo substr($content, 0, $max_length) . '...';
                                 } else {
                                     echo $content;
                                 }
                             ?>
+
                             </td>
                             <td><?php echo htmlspecialchars($post['menu_name']); ?></td>
                             <td><?php 
