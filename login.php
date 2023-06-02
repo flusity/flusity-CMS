@@ -1,14 +1,17 @@
 <?php
  require_once 'template/header.php';
 if (isset($_SESSION['user_id'])) {
-    header('Location: index.php');
+    header('Location: /myaccount/' . base64_encode($user['user_name']));
     exit();
 }
 $db = getDBConnection($config);
    // Gaunamas kalbos nustatymas iš duomenų bazės  
     $language_code = getLanguageSetting($db);
     $translations = getTranslations($db, $language_code);
- 
+    $user_name = 'user';
+    $encoded_user_name = base64_encode($user_name);
+    $profile_url = "/myaccount/$encoded_user_name";
+
 $csrf_token = generateCSRFToken();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $csrf_token = $_POST['csrf_token'];

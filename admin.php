@@ -7,7 +7,7 @@
     </div>
 </div>
 
-<div class="container-fluid mt-4 main-content">
+<div class="container-fluid mt-4 main-content admin-layout">
     <div class="row d-flex flex-nowrap">
     <div class="col-md-2 sidebar fixed-sidebar" id="sidebar">
 

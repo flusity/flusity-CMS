@@ -19,21 +19,21 @@
    
 <?php endforeach; ?>
 <?php if (isset($_SESSION['user_id'])): 
-    $isAdmin = checkUserRole($user_id, 'admin', $db);
-    $isModerator = checkUserRole($user_id, 'moderator', $db);
-    $isUser = checkUserRole($user_id, 'user', $db);
-   ?>
+    $isAdmin = checkUserRole($_SESSION['user_id'], 'admin', $db);
+    $isModerator = checkUserRole($_SESSION['user_id'], 'moderator', $db);
+    $isUser = checkUserRole($_SESSION['user_id'], 'user', $db);
+?>
     <?php if ($isAdmin || $isModerator): ?>
         <a class="nav-item" href="admin.php"><?php echo t("Dashboard"); ?></a>
     <?php endif; ?>
-    <?php if ($isUser): ?>
-     <p style=" margin: 10px 0px -3px 0px;"><?php echo t("Hello")." "; ?>, <?php echo htmlspecialchars($user_name); ?>!</p>
+        <?php if ($isUser): ?>
+    <?php $user_name = getUserNameById($db, $_SESSION['user_id']); ?>
+    <p class="nav-item" style="margin-top: 15px;"><?php echo t("Hello!")." "; ?>, <?php echo htmlspecialchars($user_name); ?> <a class="nav-item" href="myaccount.php"><?php echo t("Profile"); ?></a></p>
 <?php endif; ?>
+
 <a class="nav-item" href="logout.php"><?php echo t("Sign out"); ?></a>
 <?php else: ?>
     <a class="nav-item" href="login.php"><?php echo t("Log In"); ?></a>
-   <!--  <p class="mt-3"><?php //echo t("or"); ?></p>
-    <a class="nav-item" href="register.php"><?php //echo t("Sign up"); ?></a> -->
 <?php endif; ?>
 </div>
 </div>
