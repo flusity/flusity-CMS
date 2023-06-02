@@ -14,7 +14,7 @@
           <a class="nav-link dropdown-item" href="<?php echo getFullUrl('/core/tools/settings.php'); ?>"><i class="fas fa-cog"></i> <span class="nav-text"><?php echo t("Settings");?></span></a>
           <a class="nav-link dropdown-item" href="<?php echo getFullUrl('/core/tools/language.php'); ?>"><i class="fas fa-language"></i> <span class="nav-text"><?php echo t("Language");?></span></a>
           <a class="nav-link dropdown-item" href="<?php echo getFullUrl('/core/tools/contact_form.php'); ?>"><i class="fas fa-message"></i> <span class="nav-text"><?php echo t("Contact Form");?></span></a>  
-          <a class="nav-link dropdown-item" href="<?php echo getFullUrl('/core/tools/places.php'); ?>"><i class="fas fa-tags"></i> <span class="nav-text"><?php echo t("Places");?></span></a>
+          <a class="nav-link dropdown-item" href="<?php echo getFullUrl('/core/tools/places.php'); ?>"><i class="fas fa-tags"></i> <span class="nav-text"><?php echo t("Layout Places");?></span></a>
       
         </div>
     </li>

@@ -3,18 +3,15 @@ define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../') . '/');
 
 require_once ROOT_PATH . 'core/template/header-admin.php';
 
-$languages = getAllLanguages($db);
-$settings = getSettings($db);
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
    
     $site_title = $_POST['site_title'];
     $meta_description = $_POST['meta_description'];
-    $footer_text = $_POST['footer_text'];
+    $footer_text_settings = $_POST['footer_text'];
     $pretty_url = $_POST['pretty_url'];
     $language = $_POST['language']; 
     $posts_per_page = $_POST['posts_per_page'];
-    updateSettings($db, $site_title, $meta_description, $footer_text, $pretty_url, $language, $posts_per_page);
+    updateSettings($db, $site_title, $meta_description, $footer_text_settings, $pretty_url, $language, $posts_per_page);
 
     $_SESSION['success_message'] =  t("Settings successfully updated!");
     header("Location: settings.php");
@@ -29,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </div>
 
-<div class="container-fluid mt-4">
+<div class="container-fluid mt-4 admin-layout">
     <div class="row d-flex flex-nowrap">
         <div class="col-md-2 sidebar" id="sidebar">
             <?php require_once ROOT_PATH . 'core/tools/sidebar.php'; ?>

@@ -11,7 +11,7 @@ $limit_per_page = $settings['posts_per_page'];
         </div>
     </div>
 </div>
-<div class="container-fluid mt-4">
+<div class="container-fluid mt-4 admin-layout">
     <div class="row d-flex flex-nowrap">
         <div class="col-md-2 sidebar" id="sidebar">
             <?php require_once ROOT_PATH . 'core/tools/sidebar.php';?>
@@ -198,7 +198,18 @@ $limit_per_page = $settings['posts_per_page'];
       }
     });
   });
-
+  
+  $(document).ready(function() {
+    var $offCanvas = $('#imageSelectOffcanvas');
+    $(document).click(function(event) {
+        if (!$(event.target).closest('.offcanvas').length && $offCanvas.hasClass('show')) {
+            $offCanvas.offcanvas('hide');
+        }
+    });
+    $offCanvas.on('mouseleave', function(event) {
+        $offCanvas.offcanvas('hide');
+    });
+});
   
 </script>
 <script src="js/admin-post-edit.js"></script>

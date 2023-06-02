@@ -10,7 +10,9 @@ define('IS_ADMIN', true);
 // Duomenų gavimas iš duomenų bazės
 $db = getDBConnection($config);
 $settings = getSettings($db);
+$languages = getAllLanguages($db);
 
+$footer_text = isset($settings['footer_text']) ? $settings['footer_text'] : '';
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
     $user_name = getUserNameById($db, $user_id);

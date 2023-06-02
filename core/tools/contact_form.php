@@ -10,7 +10,7 @@ $contactFormSettings = getContactFormSettings($db);
         </div>
     </div>
 </div>
-<div class="container-fluid mt-4">
+<div class="container-fluid mt-4 admin-layout">
     <div class="row d-flex flex-nowrap">
         <div class="col-md-2 sidebar" id="sidebar">
             <?php require_once ROOT_PATH . 'core/tools/sidebar.php'; ?>

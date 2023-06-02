@@ -1,4 +1,6 @@
 
+<?php require_once  $_SERVER['DOCUMENT_ROOT'] . '/template/footer.php';?>
+
 <script>
         $(document).ready(function() {
 

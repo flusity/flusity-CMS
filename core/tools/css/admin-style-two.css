@@ -3,7 +3,10 @@
 body {
   font-family: 'Roboto', sans-serif;
 }
-
+.admin-layout{
+  min-height: 100vh;
+  margin-bottom: 20px;
+}
 .btn-primary {
   background-color: #27ae60;
   border-color: #27ae60;

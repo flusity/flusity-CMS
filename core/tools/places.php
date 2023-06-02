@@ -10,7 +10,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php'; ?>
     </div>
 </div>
 
-<div class="container-fluid mt-4">
+<div class="container-fluid mt-4 admin-layout">
     <div class="row d-flex flex-nowrap">
         <div class="col-md-2 sidebar" id="sidebar">
             <?php require_once ROOT_PATH . 'core/tools/sidebar.php';?>
@@ -33,7 +33,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php'; ?>
                 unset($_SESSION['error_message']);
             } ?>
     </div>
-    <h1><?php echo t("Places");?></h1>
+    <h1><?php echo t("Layout Places");?></h1>
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPlaceModal" data-mode="add">
     <?php echo t("Add Place");?>
      </button>
