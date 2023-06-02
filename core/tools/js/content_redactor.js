@@ -69,6 +69,32 @@ function paragraphText() {
     wrapText('post_content', '<p>', '</p>');
 }
 
+function previewPost() {
+  // Gaukite turinį iš textarea
+  var content = document.getElementById('post_content').value;
+
+  // Patikrinti ar turinys turi paveikslėlio žymę ir pridėti "http://localhost/" prie paveikslėlio URL
+  var parser = new DOMParser();
+  var doc = parser.parseFromString(content, 'text/html');
+  var imgElements = doc.getElementsByTagName('img');
+  for(var i = 0; i < imgElements.length; i++) {
+    var img = imgElements[i];
+    var src = img.getAttribute('src');
+    if(src && !src.startsWith('http')) {
+      img.setAttribute('src', 'http://localhost/' + src);
+    }
+  }
+  content = doc.body.innerHTML;
+
+  // Įkelkite turinį į modalinio lango kūną
+  document.getElementById('previewModalBody').innerHTML = content;
+
+  // Atidarykite modalinį langą
+  var previewModal = new bootstrap.Modal(document.getElementById('previewModal'));
+  previewModal.show();
+}
+
+
 function addImage(imageUrl) {
     var textarea = document.getElementById('post_content'); // Įrašykite savo textarea ID čia
     var urlParts = imageUrl.split('/');
