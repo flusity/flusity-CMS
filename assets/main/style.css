@@ -22,7 +22,9 @@ html, body {
   bottom: 0;
 }
 main {
-  height: calc(100vh - 185px);
+  top: 55px;
+  margin-bottom:40px;
+  height: calc(100vh + 40px);
   flex:1;
 }
 .main {
