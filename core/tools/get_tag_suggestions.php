@@ -13,7 +13,7 @@ $input = isset($_POST['input']) ? trim($_POST['input']) : '';
 $db = getDBConnection($config);
 $tags = getTagSuggestionsFromDatabase($db, $input);
 
-file_put_contents('debug.txt', json_encode($tags));
+//file_put_contents('debug.txt', json_encode($tags));
 // Siunčiamas žymių pasiūlymus JSON formatu
 
 header('Content-Type: text/html');

@@ -67,13 +67,13 @@ $limit_per_page = $settings['posts_per_page'];
                     </tr>
                 </thead>
                 <tbody>
-            <?php foreach ($posts as $post) { 
-                    if (isset($menuItemsIndexed[$post['menu_id']])) {
-                        $post['menu_name'] = $menuItemsIndexed[$post['menu_id']]['name'];
-                    } else {
-                        $post['menu_name'] = '';
-                    }
-                    ?>
+                <?php foreach ($posts as $post) { 
+                        if (isset($menuItemsIndexed[$post['menu_id']])) {
+                            $post['menu_name'] = $menuItemsIndexed[$post['menu_id']]['name'];
+                        } else {
+                            $post['menu_name'] = '';
+                        }
+                ?>
                         <tr>
                             <td><?php echo $i++; ?></td>
                             <td><?php echo htmlspecialchars($post['title']); ?></td>
@@ -85,7 +85,6 @@ $limit_per_page = $settings['posts_per_page'];
 
                                 // Pakeičiamas visų naujų eilučių simbolis į tarpą
                                 $content = str_replace(array("\r", "\n"), ' ', $content);
-
                                 // Pašalinamos visos HTML žymos
                                 $content = strip_tags($content);
 
@@ -96,7 +95,6 @@ $limit_per_page = $settings['posts_per_page'];
                                     echo $content;
                                 }
                             ?>
-
                             </td>
                             <td><?php echo htmlspecialchars($post['menu_name']); ?></td>
                             <td><?php 
@@ -121,16 +119,16 @@ $limit_per_page = $settings['posts_per_page'];
                 </tbody>
             </table>
             <div class="d-flex justify-content-center mt-3">
-    <nav aria-label="Page navigation">
-        <ul class="pagination">
-            <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-                <li class="page-item <?php echo $i == $page ? 'active' : ''; ?>">
-                    <a class="page-link" href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                </li>
-            <?php endfor; ?>
-        </ul>
-    </nav>
-</div>
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                            <li class="page-item <?php echo $i == $page ? 'active' : ''; ?>">
+                                <a class="page-link" href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                            </li>
+                        <?php endfor; ?>
+                    </ul>
+                </nav>
+            </div>
         </div>
     </div>
 </div>
@@ -153,6 +151,17 @@ $limit_per_page = $settings['posts_per_page'];
     </div>
   </div>
 </div>
+
+<div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="imageSelectOffcanvas" data-bs-backdrop="false" data-bs-scroll="true">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">Select an Image</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+
+  </div>
+</div>
+
 <script>
   function loadPostEditForm(postId) {
     loadPostForm('edit', postId);
@@ -182,6 +191,8 @@ $limit_per_page = $settings['posts_per_page'];
       }
     });
   });
+
+  
 </script>
 <script src="js/admin-post-edit.js"></script>
 <?php require_once ROOT_PATH . 'core/template/admin-footer.php';?>

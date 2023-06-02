@@ -61,10 +61,12 @@ if ($mode === 'create' || $post) {
                 <?php foreach ($menuId as $menu) : ?>
                     <option value="<?php echo $menu['id']; ?>" <?php echo $mode === 'edit' && $post['menu_id'] === $menu['id'] ? 'selected' : ''; ?>>
                         <?php echo htmlspecialchars($menu['name']); ?>
+                    
                     </option>
                 <?php endforeach; ?>
             </select>
         </div>
+                
         <div class="form-group">
             <label for="post_title"><?php echo t("Name");?></label>
             <input type="text" class="form-control" id="post_title" name="post_title" value="<?php echo $mode === 'edit' ? htmlspecialchars($post['title']) : ''; ?>" required>
@@ -72,6 +74,8 @@ if ($mode === 'create' || $post) {
         <div class="form-group">
             <label for="post_content"><?php echo t("Content");?></label>
             <div class="toolbar">
+            
+            <button type="button" onclick="textBreak()" style="height: 35px; width: 35px;">br</button>
             <button type="button" onclick="paragraphText()" style="height: 35px; width: 35px;">p</button>
             <button type="button" onclick="boldText()" style="height: 35px; width: 35px;"><b>b</b></button>
             <button type="button" onclick="italicText()" style="height: 35px; width: 35px;"><i>i</i></button>
@@ -90,11 +94,12 @@ if ($mode === 'create' || $post) {
             <button type="button" onclick="markHr()" style="height: 35px;"><p>__</p></button>
             <button type="button" onclick="markText()" style="height: 35px;"><p><mark>text</mark></p></button>
             <button type="button" onclick="selectImage()" style="height: 35px;"><img>img</img></button>
+        
             </div>
             <textarea class="form-control"  contenteditable="true" id="post_content" name="post_content" rows="10" required><?php echo $mode === 'edit' ? htmlspecialchars_decode($post['content']) : ''; ?></textarea>
         </div>
         <div class="form-group">
-                <label for="post_status"><?php echo t("Post status");?></label>
+            <label for="post_status"><?php echo t("Post status");?></label>
             <select class="form-control" id="post_status" name="post_status" required>
             <option value="draft" <?php echo $mode === 'edit' && $post['status'] === 'draft' ? 'selected' : ''; ?>><?php echo t("Draft");?></option>
             <option value="published" <?php echo $mode === 'edit' && $post['status'] === 'published' ? 'selected' : ''; ?>><?php echo t("Published");?></option>
@@ -106,19 +111,6 @@ if ($mode === 'create' || $post) {
      </form>
 
      </div>
-
-
-<div class="offcanvas offcanvas-start" tabindex="-1" id="imageSelectOffcanvas" data-bs-backdrop="false" data-bs-scroll="false">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title">Select an Image</h5>
-    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body">
-    <img src="images/img1.jpg" class="selectable-image" data-image-name="img1.jpg">
-    <img src="images/img2.jpg" class="selectable-image" data-image-name="img2.jpg">
-    <!-- More images... -->
-  </div>
-</div>
 
 <?php
 } else {

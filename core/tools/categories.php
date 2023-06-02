@@ -33,9 +33,9 @@ require_once ROOT_PATH . 'core/template/header-admin.php'; ?>
                 unset($_SESSION['error_message']);
             } ?>
     </div>
-    <h1><?php echo t("Categories");?></h1>
+    <h1><?php echo t("Places");?></h1>
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCategoryModal" data-mode="add">
-    <?php echo t("Add Category");?>
+    <?php echo t("Add Place");?>
      </button>
         <table class="table">
             <thead>
@@ -76,16 +76,16 @@ require_once ROOT_PATH . 'core/template/header-admin.php'; ?>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addCategoryModalLabel"><?php echo t("Add Category");?></h5>
+        <h5 class="modal-title" id="addCategoryModalLabel"><?php echo t("Add Place");?></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form id="add-category-form">
           <div class="form-group">
-            <label for="category_name"><?php echo t("Category Name");?></label>
+            <label for="category_name"><?php echo t("Place Name");?></label>
             <input type="text" class="form-control" id="category_name" name="category_name" required>
           </div>
-          <button type="submit" class="btn btn-primary" id="submit-button"><?php echo t("Add Category");?></button>
+          <button type="submit" class="btn btn-primary" id="submit-button"><?php echo t("Add Place");?></button>
         </form>
       </div>
     </div>
@@ -100,7 +100,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php'; ?>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      <?php echo t("Are you sure you want to delete this category?");?>
+      <?php echo t("Are you sure you want to delete this Place?");?>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?php echo t("Cancel");?></button>
@@ -168,12 +168,12 @@ $('#addCategoryModal').on('show.bs.modal', function (event) {
   if (mode === 'update') {
     const categoryName = button.closest('tr').find('td:nth-child(2)').text();
     $('#category_name').val(categoryName);
-    modal.find('.modal-title').text('Edit Category');
-    modal.find('#submit-button').text('Update Category');
+    modal.find('.modal-title').text('Edit Place');
+    modal.find('#submit-button').text('Update Place');
   } else {
     $('#category_name').val('');
-    modal.find('.modal-title').text('Add Category');
-    modal.find('#submit-button').text('Add Category');
+    modal.find('.modal-title').text('Add Place');
+    modal.find('#submit-button').text('Add Place');
   }
 });
 

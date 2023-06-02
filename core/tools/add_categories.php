@@ -18,12 +18,12 @@ if (defined('IS_ADMIN') && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST
     $result = createCategory($db, $categoryName);
 
     $response = array();
-    if ($result === 'Category added successfully') {
-        $_SESSION['success_message'] = t('Category successfully added.');
-    } elseif ($result === 'Category already exists') {
-        $_SESSION['error_message'] = t('Category with this name already exists. Try a different name.');
+    if ($result === 'Place added successfully') {
+        $_SESSION['success_message'] = t('Place successfully added.');
+    } elseif ($result === 'Place already exists') {
+        $_SESSION['error_message'] = t('Place with this name already exists. Try a different name.');
     } else {
-        $_SESSION['error_message'] = t('Error adding category. Try again.');
+        $_SESSION['error_message'] = t('Error adding place. Try again.');
     }
     echo json_encode($response);
     exit;

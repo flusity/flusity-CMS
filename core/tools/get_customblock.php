@@ -41,7 +41,7 @@ if ($mode === 'create' || $customBlock) {
         <?php endif; ?>
    
         <div class="form-group">
-            <label for="customblock_category_id"><?php echo t('Category');?></label>
+            <label for="customblock_category_id"><?php echo t('Place');?></label>
             <select class="form-control" id="customblock_category_id" name="customblock_category_id" required>
                 <?php foreach ($categories as $category) : ?>
                     <option value="<?php echo $category['id']; ?>" <?php echo $mode === 'edit' && $customBlock['category_id'] === $category['id'] ? 'selected' : ''; ?>>

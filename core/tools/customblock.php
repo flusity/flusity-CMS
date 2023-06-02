@@ -54,7 +54,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
                         <th style="width: 17%;"><?php echo t("Name");?></th>
                         <th style="width: 40%;"><?php echo t("HTML Code");?></th>
                         <th style="width: 13%;"><?php echo t("Menu Place");?></th>
-                        <th style="width: 12%;"><?php echo t("Category");?></th>
+                        <th style="width: 12%;"><?php echo t("Place");?></th>
                         <th style="width: 15%;"><?php echo t("Actions");?></th>
                     </tr>
                 </thead>
