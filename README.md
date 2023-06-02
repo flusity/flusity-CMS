@@ -4,7 +4,7 @@ PHP CMS project, Log In, Sign Up, admin, moderator, user roles, add/edit/delete 
 
 ![banner](http://manowebas.lt/wp-content/themes/manowebas/assets/img/logo.png)
 
-<p><b>Šiame svetainės administratoriaus valdymo skydelyje yra keliatą funkcijų ir įrankių:</b>
+<b>Šiame svetainės administratoriaus valdymo skydelyje yra keliatą funkcijų ir įrankių:</b>
 <ul>
 <li>Dashboard (informacijos suvestinė)</li>
 <li>Users (vartotojai)</li>
@@ -17,7 +17,9 @@ PHP CMS project, Log In, Sign Up, admin, moderator, user roles, add/edit/delete 
 <li>Language (kalba vertimas į lt)</li>
 <li>Settings (nustatymai)</li>
 </ul>
-Svetainė naudoja Bootstrap 5.2.3, FontAwesome 6.1.0 ir jQuery 3.6.0 bibliotekas stiliui ir funkcionalumui užtikrinti. Taip pat yra pritaikytas šriftas "Roboto" ir individualizuoti CSS stiliai, kurie apima šiek tiek neoninio efekto.<br>
+<h3>Profilis</h3> 
+<p>Sukurta paprasto vartotojo sritis</p>
+<p>Svetainė naudoja Bootstrap 5.2.3, FontAwesome 6.1.0 ir jQuery 3.6.0 bibliotekas stiliui ir funkcionalumui užtikrinti. Taip pat yra pritaikytas šriftas "Roboto" ir individualizuoti CSS stiliai, kurie apima šiek tiek neoninio efekto.<br>
   <b>Svetainės struktūra susideda iš šių elementų:</b>
 Fiksuota viršutinė navigacijos juosta su logotipu, puslapio priekio nuoroda ir prisijungimo/atsijungimo mygtukais.
 Šoninė navigacijos juosta (sidebar) su administratoriaus funkcijų ir įrankių sąrašu.
@@ -45,7 +47,7 @@ Atsižvelgiant į šiuos elementus ir funkcijas, svetainė yrap patogus ir funkc
   <p>Prisijungimas prie sistemos: user: Darius, Admin, User, Moderator password: 1234 , Projektas dar tęsiamas, numatoma pridėti daugiau funkcionalumų</p>
   
   /////// En /////////////////
-  <p><b>This website admin control panel contains several features and tools:</b>
+  <b>This website admin control panel contains several features and tools:</b>
 <ul><li>
 <li>Dashboard (information summary)</li>
 <li>Users</li>
@@ -58,7 +60,9 @@ Atsižvelgiant į šiuos elementus ir funkcijas, svetainė yrap patogus ir funkc
 <li>Language (default en)</li>
 <li>Settings</li>
 </ul>
-The site uses Bootstrap 5.2.3, FontAwesome 6.1.0 and jQuery 3.6.0 libraries for styling and functionality. There's also a custom Roboto font and custom CSS styles that include a bit of a neon effect.<br>
+<h3>Profile</h3>
+<p>Common user area created</p>
+<p>The site uses Bootstrap 5.2.3, FontAwesome 6.1.0 and jQuery 3.6.0 libraries for styling and functionality. There's also a custom Roboto font and custom CSS styles that include a bit of a neon effect.<br>
    <b>The website structure consists of the following elements:</b>
 Fixed top navigation bar with logo, page front link and login/logout buttons.
 Sidebar with a list of administrator functions and tools.
