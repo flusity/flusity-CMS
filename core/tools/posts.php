@@ -152,12 +152,10 @@ $limit_per_page = $settings['posts_per_page'];
   </div>
 </div>
 <div class="modal fade" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-body" id="previewModalBody">
-        <!-- Turinys čia bus įkeltas dinamiškai -->
       </div>
-      
     </div>
   </div>
 </div>
