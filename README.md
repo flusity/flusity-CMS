@@ -5,6 +5,7 @@ PHP CMS project, Log In, Sign Up, admin, moderator, user roles, add/edit/delete 
 ![banner](http://manowebas.lt/wp-content/themes/manowebas/assets/img/logo.png)
 
 <b>Šiame svetainės administratoriaus valdymo skydelyje yra keliatą funkcijų ir įrankių:</b>
+<h3>Prietaisų skydelis</h3>
 <ul>
 <li>Dashboard (informacijos suvestinė)</li>
 <li>Users (vartotojai)</li>
@@ -48,6 +49,7 @@ Atsižvelgiant į šiuos elementus ir funkcijas, svetainė yrap patogus ir funkc
   
   /////// En /////////////////
   <b>This website admin control panel contains several features and tools:</b>
+  <h3>Dashboard</h3>
 <ul><li>
 <li>Dashboard (information summary)</li>
 <li>Users</li>
