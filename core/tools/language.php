@@ -115,7 +115,7 @@ if (isset($_GET['edit_id'])) {
             <?php
                 foreach ($translationsWords as $index => $translationWord) {
                     echo "<tr class=\"translation-row\" data-key=\"" . htmlspecialchars($translationWord['translation_key']) . "\" data-value=\"" . htmlspecialchars($translationWord['translation_value']) . "\">";
-                    echo "<td>" . ($index + 1) . "</td>";
+                    echo "<td>" . ($index + 1) . ".</td>";
                     echo "<td>" . htmlspecialchars($translationWord['language_code']) . "</td>";
                     echo "<td>" . htmlspecialchars($translationWord['translation_key']) . "</td>";
                     echo "<td>" . htmlspecialchars($translationWord['translation_value']) . "</td>";
