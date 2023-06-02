@@ -8,7 +8,7 @@ PHP CMS project, Log In, Sign Up, admin, moderator, user roles, add/edit/delete 
 <ul>
 <li>Dashboard (informacijos suvestinė)</li>
 <li>Users (vartotojai)</li>
-<li>Categories (kategorijos)</li>
+<li>Places (Vietos)</li> // "Tai vietos puslapio dalyse kur pateikti blokų info"
 <li>Posts (pranešimai)</li>
 <li>Menu (meniu)</li>
 <li>Block (blokai)</li>
@@ -35,7 +35,7 @@ Atsižvelgiant į šiuos elementus ir funkcijas, svetainė yrap patogus ir funkc
 <li>Sesijos saugumas: secureSession() funkcija apsaugo sesiją naudodama saugesnius nustatymus, tokie kaip saugūs slapukai ir sesijos laiko atnaujinimas. Tai apsaugo nuo kai kurių sesijos grobimo atakų.</li>
 
 <li>Įvesties validacija: validateInput() funkcija naudojama, kad pašalintų HTML žymas, tarpus ir kitus nereikalingus simbolius. Tai padeda apsaugoti nuo kai kurių įterpimo atakų.</li>
-
+  <li>Vartotojų registracijos draudimas su netinkamo pavadinimo vardais, su galimybe juos papildyti, taip pat apsauga registruojant apsimestiniu administratoriaus vardu</li>
 <li>CSRF žetonų naudojimas: CSRF žetonai naudojami, kad apsaugotų nuo CSRF atakų. generateCSRFToken() funkcija generuoja žetoną, o validateCSRFToken() tikrina, ar pateiktas žetonas yra teisingas.</li>
 
 <li>Slaptažodžio saugumas: Slaptažodžiai yra saugomi naudojant password_hash() funkciją, kuri naudoja stiprų šifravimo algoritmą (ARGON2I). Tai apsaugo slaptažodžius nuo atakų, kurios bando atskleisti slaptažodžius iš duomenų bazės.</li>
@@ -49,7 +49,7 @@ Atsižvelgiant į šiuos elementus ir funkcijas, svetainė yrap patogus ir funkc
 <ul><li>
 <li>Dashboard (information summary)</li>
 <li>Users</li>
-<li>Categories</li>
+<li>Places</li>// "These are places in the parts of the page where block info can be presented"
 <li>Posts</li>
 <li>Menu (menu)</li>
 <li>Block</li>
@@ -75,7 +75,7 @@ Considering these elements and functions, the website is a convenient and functi
 <li>Session Security: The secureSession() function secures the session using more secure settings such as secure cookies and updating the session time. This prevents some session hijacking attacks.</li>
 
 <li>Input Validation: The validateInput() function is used to remove HTML tags, spaces, and other unnecessary characters. This helps protect against some injection attacks.</li>
-
+<li> Prohibition of registration of users with incorrect names, with the possibility of adding them, as well as protection against registration under a fake administrator name</li>
 <li>Use of CSRF tokens: CSRF tokens are used to protect against CSRF attacks. The generateCSRFToken() function generates a token, and validateCSRFToken() checks that the provided token is valid.</li>
 
 <li>Password security: Passwords are stored using the password_hash() function, which uses a strong encryption algorithm (ARGON2I). This protects passwords from attacks that attempt to reveal passwords from the database.</li>
