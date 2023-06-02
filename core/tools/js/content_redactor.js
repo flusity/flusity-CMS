@@ -70,10 +70,8 @@ function paragraphText() {
 }
 
 function previewPost() {
-  // Gaukite turinį iš textarea
   var content = document.getElementById('post_content').value;
 
-  // Patikrinti ar turinys turi paveikslėlio žymę ir pridėti "http://localhost/" prie paveikslėlio URL
   var parser = new DOMParser();
   var doc = parser.parseFromString(content, 'text/html');
   var imgElements = doc.getElementsByTagName('img');
@@ -86,20 +84,15 @@ function previewPost() {
   }
   content = doc.body.innerHTML;
 
-  // Įkelkite turinį į modalinio lango kūną
   document.getElementById('previewModalBody').innerHTML = content;
-
-  // Atidarykite modalinį langą
   var previewModal = new bootstrap.Modal(document.getElementById('previewModal'));
   previewModal.show();
 }
 
-
 function addImage(imageUrl) {
-    var textarea = document.getElementById('post_content'); // Įrašykite savo textarea ID čia
+    var textarea = document.getElementById('post_content');
     var urlParts = imageUrl.split('/');
     var relativeUrl = urlParts.slice(3).join('/');
-  
     var imgTag = '<img src="' + relativeUrl + '" width="250px" height="auto" align="left" hspace="15" vspace="15"/>';
     textarea.value += imgTag + '\n';
   }
@@ -108,7 +101,7 @@ function addImage(imageUrl) {
     $.ajax({
         url: 'get_files.php',
         method: 'GET',
-        data: { page: page },  // perduoti puslapio numerį kaip duomenų parametrą
+        data: { page: page },
         dataType: 'json',
       success: function(images) {
         var offcanvasBody = $('#imageSelectOffcanvas .offcanvas-body');
@@ -171,7 +164,6 @@ function addImage(imageUrl) {
       }
     });
   }
-  
  
 function wrapText(elementId, openTag, closeTag) {
     var textarea = document.getElementById(elementId);
