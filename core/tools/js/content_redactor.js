@@ -90,12 +90,19 @@ function previewPost() {
 }
 
 function addImage(imageUrl) {
-    var textarea = document.getElementById('post_content');
-    var urlParts = imageUrl.split('/');
-    var relativeUrl = urlParts.slice(3).join('/');
-    var imgTag = '<img src="' + relativeUrl + '" width="250px" height="auto" align="left" hspace="15" vspace="15"/>';
-    textarea.value += imgTag + '\n';
-  }
+  var textarea = document.getElementById('post_content');
+  var urlParts = imageUrl.split('/');
+  var relativeUrl = urlParts.slice(3).join('/');
+  var imgTag = '<img src="' + relativeUrl + '" width="250px" height="auto" align="left" hspace="15" vspace="15"/>';
+
+  var start = textarea.selectionStart;
+  var end = textarea.selectionEnd;
+  var text = textarea.value;
+  var before = text.substring(0, start);
+  var after  = text.substring(end, text.length);
+  textarea.value = (before + imgTag + '\n' + after);
+}
+
   var page = 0; 
   function selectImage() {
     $.ajax({
