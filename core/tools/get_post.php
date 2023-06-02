@@ -94,6 +94,9 @@ if ($mode === 'create' || $post) {
             <button type="button" onclick="markHr()" style="height: 35px;"><p>__</p></button>
             <button type="button" onclick="markText()" style="height: 35px;"><p><mark>text</mark></p></button>
             <button type="button" onclick="selectImage()" style="height: 35px;"><img>img</img></button>
+            <button type="button" onclick="previewPost()" style="padding: 0px;">
+            <i class="fas fa-expand-arrows-alt" title="Preview"style="size:28px; color: #c2c2c2;"></i>
+            </button>
         
             </div>
             <textarea class="form-control"  contenteditable="true" id="post_content" name="post_content" rows="10" required><?php echo $mode === 'edit' ? htmlspecialchars_decode($post['content']) : ''; ?></textarea>

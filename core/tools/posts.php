@@ -73,7 +73,7 @@ $limit_per_page = $settings['posts_per_page'];
                         } else {
                             $post['menu_name'] = '';
                         }
-                ?>
+                     ?>
                         <tr>
                             <td><?php echo $i++; ?></td>
                             <td><?php echo htmlspecialchars($post['title']); ?></td>
@@ -151,7 +151,16 @@ $limit_per_page = $settings['posts_per_page'];
     </div>
   </div>
 </div>
-
+<div class="modal fade" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-body" id="previewModalBody">
+        <!-- Turinys čia bus įkeltas dinamiškai -->
+      </div>
+      
+    </div>
+  </div>
+</div>
 <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="imageSelectOffcanvas" data-bs-backdrop="false" data-bs-scroll="true">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title">Select an Image</h5>
