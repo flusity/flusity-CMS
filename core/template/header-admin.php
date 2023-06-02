@@ -10,6 +10,7 @@ define('IS_ADMIN', true);
 // Duomenų gavimas iš duomenų bazės
 $db = getDBConnection($config);
 $settings = getSettings($db);
+
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
     $user_name = getUserNameById($db, $user_id);
@@ -33,10 +34,12 @@ if (!checkUserRole($user_id, 'admin', $db) && !checkUserRole($user_id, 'moderato
     <!--  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script> -->
     <link href="/assets/bootstrap-5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/font-awesome/6.1.0/css/all.min.css"> <script src="/assets/dist/js/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="/assets/font-awesome/6.1.0/css/all.min.css">
+    <script src="/assets/dist/js/jquery-3.6.0.min.js"></script>
     <script src="<?php $_SERVER['DOCUMENT_ROOT']; ?>/core/tools/js/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
     <link href="<?php $_SERVER['DOCUMENT_ROOT']; ?>/core/tools/css/admin-style.css" rel="stylesheet">
     <script src="/assets/bootstrap-5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <link href="<?php $_SERVER['DOCUMENT_ROOT']; ?>/core/tools/css/admin-style-two.css" rel="stylesheet"> 
+
 </head>
 <body>

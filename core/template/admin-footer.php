@@ -1,5 +1,7 @@
+
 <script>
         $(document).ready(function() {
+
             $('a[data-page]').on('click', function(e) {
                 e.preventDefault();
                 const page = $(this).data('page');
@@ -10,14 +12,7 @@
                     }
                 });
             });
-
-    $('.selectable-image').on('click', function() {
-    var imageName = $(this).data('image-name');
-    var offcanvas = bootstrap.Offcanvas.getInstance(document.getElementById('imageSelectOffcanvas'));
-    offcanvas.hide();
-    addImage(imageName);
-  });
-});
+        });
    
     setTimeout(function() {
         var alerts = document.querySelectorAll('.alert');
@@ -57,6 +52,7 @@ $(document).ready(function() {
 
     $('#toggleSidebarBtn').on('click', toggleSidebar);
 });
+
 document.getElementById('settingsDropdown').addEventListener('click', function() {
   var submenu = document.getElementById('settingsSubmenu');
   if (submenu.style.display === "none") {
@@ -66,14 +62,6 @@ document.getElementById('settingsDropdown').addEventListener('click', function()
   }
 });
 
-var quill = new Quill('#editor', {
-    theme: 'snow'
-});
-
-document.querySelector('#post-form').addEventListener('submit', function() {
-    var content = quill.root.innerHTML;
-    document.querySelector('#post_content').value = content;
-});
 </script>
    
 <script src="../tools/js/content_redactor.js"></script>
