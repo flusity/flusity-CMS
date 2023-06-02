@@ -75,7 +75,7 @@ $limit_per_page = $settings['posts_per_page'];
                         }
                      ?>
                         <tr>
-                            <td><?php echo $i++; ?></td>
+                            <td><?php echo $i++; ?>.</td>
                             <td><?php echo htmlspecialchars($post['title']); ?></td>
                             <td>
                             <?php
