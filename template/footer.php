@@ -1,4 +1,4 @@
-<footer class="bg-light py-3">
+<footer class="footer bg-light py-3">
     <div class="container-fluid">
     <p class="text-center mb-0">
         <?php print $footer_text; ?>
