@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 02, 2023 at 01:47 PM
+-- Generation Time: Jun 02, 2023 at 02:07 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -38,7 +38,7 @@ CREATE TABLE `contact_form_settings` (
 --
 
 INSERT INTO `contact_form_settings` (`id`, `setting_key`, `setting_value`) VALUES
-(1, 'raktas_457', 'raktas_457');
+(1, 'raktas_457', 'ratest_8956214');
 
 -- --------------------------------------------------------
 
@@ -279,7 +279,7 @@ INSERT INTO `translations` (`id`, `language_code`, `translation_key`, `translati
 (78, 'lt', 'Log In', 'Prisijungti'),
 (79, 'lt', 'Sign up', 'Registruotis'),
 (80, 'lt', 'or', 'arba'),
-(81, 'lt', 'Page Menu', 'Puslapio mniu'),
+(81, 'lt', 'Page Menu', 'Puslapio meniu'),
 (82, 'lt', 'Page URL', 'Puslapio url'),
 (83, 'lt', 'Template', 'Šablonas'),
 (84, 'lt', 'Position', 'Pozicija'),
