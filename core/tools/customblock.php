@@ -15,7 +15,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
             <?php require_once ROOT_PATH . 'core/tools/sidebar.php';?>
         </div>
         <?php
-            $categories = getAllCategories($db);
+            $places = getAllplaces($db);
             $menus = getMenuItems($db);
             $customblocks = getAllCustomBlocks($db);
           ?>
@@ -77,7 +77,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
                               ?>
                             </td>
                             <td><?= htmlspecialchars(findNameById($customBlock['menu_id'], $menus)); ?></td>
-                            <td><?= htmlspecialchars(findNameById($customBlock['category_id'], $categories)); ?></td>
+                            <td><?= htmlspecialchars(findNameById($customBlock['place_id'], $places)); ?></td>
                             <td>
                             <button type="button" class="btn btn-sm btn-primary" onclick="loadCustomBlockEditForm(<?= $customBlock['id']; ?>)" title="<?php echo t("Edit");?>">
                                 <i class="fas fa-edit"></i>

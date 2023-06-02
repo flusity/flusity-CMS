@@ -14,13 +14,13 @@ $db = getDBConnection($config);
 
 $result = ['success' => false];
 
-if (isset($_POST['customblock_name'], $_POST['customblock_menu_id'], $_POST['customblock_category_id'], $_POST['customblock_html_code'])) {
+if (isset($_POST['customblock_name'], $_POST['customblock_menu_id'], $_POST['customblock_place_id'], $_POST['customblock_html_code'])) {
     $name = $_POST['customblock_name'];
     $menu_id = (int)$_POST['customblock_menu_id'];
-    $category_id = (int)$_POST['customblock_category_id'];
+    $place_id = (int)$_POST['customblock_place_id'];
     $html_code = $_POST['customblock_html_code'];
 
-    $insert = createCustomBlock($db, $name, $menu_id, $category_id, $html_code);
+    $insert = createCustomBlock($db, $name, $menu_id, $place_id, $html_code);
                         
     if ($insert) {
         $_SESSION['success_message'] = 'Custom Block sėkmingai pridėtas.';

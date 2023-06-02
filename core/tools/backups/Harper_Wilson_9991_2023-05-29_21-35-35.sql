@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS categories;
+DROP TABLE IF EXISTS places;
 
-CREATE TABLE `categories` (
+CREATE TABLE `places` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -8,16 +8,16 @@ CREATE TABLE `categories` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-INSERT INTO categories VALUES("79","head-box-one","2023-04-14 18:01:16","2023-05-28 11:27:20");
-INSERT INTO categories VALUES("80","news-right-5","2023-04-14 18:12:13","2023-05-28 11:21:48");
-INSERT INTO categories VALUES("83","home-right-5","2023-04-14 18:20:38","2023-05-28 11:15:56");
-INSERT INTO categories VALUES("85","doc-right-5","2023-04-14 18:33:23","2023-05-28 11:20:16");
-INSERT INTO categories VALUES("92","home-left-7","2023-04-19 22:49:36","2023-05-28 11:24:53");
-INSERT INTO categories VALUES("100","head-box-two","2023-05-28 11:27:28","2023-05-28 11:27:28");
-INSERT INTO categories VALUES("101","contact-right-5","2023-05-28 11:28:19","2023-05-28 11:28:19");
-INSERT INTO categories VALUES("102","contact-left-7","2023-05-28 11:30:01","2023-05-28 11:30:01");
-INSERT INTO categories VALUES("103","doc-left-7","2023-05-28 11:30:21","2023-05-28 11:30:21");
-INSERT INTO categories VALUES("104","home-col-down-12","2023-05-28 15:26:33","2023-05-28 15:26:33");
+INSERT INTO places VALUES("79","head-box-one","2023-04-14 18:01:16","2023-05-28 11:27:20");
+INSERT INTO places VALUES("80","news-right-5","2023-04-14 18:12:13","2023-05-28 11:21:48");
+INSERT INTO places VALUES("83","home-right-5","2023-04-14 18:20:38","2023-05-28 11:15:56");
+INSERT INTO places VALUES("85","doc-right-5","2023-04-14 18:33:23","2023-05-28 11:20:16");
+INSERT INTO places VALUES("92","home-left-7","2023-04-19 22:49:36","2023-05-28 11:24:53");
+INSERT INTO places VALUES("100","head-box-two","2023-05-28 11:27:28","2023-05-28 11:27:28");
+INSERT INTO places VALUES("101","contact-right-5","2023-05-28 11:28:19","2023-05-28 11:28:19");
+INSERT INTO places VALUES("102","contact-left-7","2023-05-28 11:30:01","2023-05-28 11:30:01");
+INSERT INTO places VALUES("103","doc-left-7","2023-05-28 11:30:21","2023-05-28 11:30:21");
+INSERT INTO places VALUES("104","home-col-down-12","2023-05-28 15:26:33","2023-05-28 15:26:33");
 
 
 
@@ -40,13 +40,13 @@ CREATE TABLE `custom_blocks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `menu_id` int(10) unsigned DEFAULT NULL,
-  `category_id` int(10) unsigned DEFAULT NULL,
+  `place_id` int(10) unsigned DEFAULT NULL,
   `html_code` text DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `menu_id` (`menu_id`),
-  KEY `category_id` (`category_id`),
+  KEY `place_id` (`place_id`),
   CONSTRAINT `custom_blocks_ibfk_1` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`id`),
-  CONSTRAINT `custom_blocks_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
+  CONSTRAINT `custom_blocks_ibfk_2` FOREIGN KEY (`place_id`) REFERENCES `places` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 INSERT INTO custom_blocks VALUES("2","News col 5","3","80","Testuoju News skyrių");
@@ -157,7 +157,7 @@ INSERT INTO translations VALUES("2","lt","Users","Vartotojai");
 INSERT INTO translations VALUES("4","lt","Dashboard","Prietaisų skydelis");
 INSERT INTO translations VALUES("5","lt","Translation Key","Verčiamas žodis");
 INSERT INTO translations VALUES("6","lt","Translation Value","Išverstas įrašas");
-INSERT INTO translations VALUES("7","lt","Categories","Kategorijos");
+INSERT INTO translations VALUES("7","lt","places","Kategorijos");
 INSERT INTO translations VALUES("26","lt","Language Code","Kalbos Kodas");
 INSERT INTO translations VALUES("27","lt","Translation form","Vertimo forma");
 INSERT INTO translations VALUES("28","lt","Settings successfully updated!","Nustatymai sėkmingai atnaujinti!");
@@ -179,14 +179,14 @@ INSERT INTO translations VALUES("43","lt","Post\'s","Įrašai");
 INSERT INTO translations VALUES("44","lt","Block\'s","Blokai");
 INSERT INTO translations VALUES("45","lt","Usename","Vartotojo Vardas");
 INSERT INTO translations VALUES("46","lt","User successfully updated.","Vartotojas sėkmingai atnaujintas.");
-INSERT INTO translations VALUES("47","lt","Add Category","Pridėti kategoriją");
+INSERT INTO translations VALUES("47","lt","Add place","Pridėti kategoriją");
 INSERT INTO translations VALUES("48","lt","Actions","Veiksmas");
-INSERT INTO translations VALUES("49","lt","Categories","Kategorijos");
+INSERT INTO translations VALUES("49","lt","places","Kategorijos");
 INSERT INTO translations VALUES("50","lt","Name","Pavadinimas");
 INSERT INTO translations VALUES("51","lt","Translation added successfully.","Vertimas sėkmingai pridėtas.");
 INSERT INTO translations VALUES("52","lt","Error: Please fill in all fields.","Klaida: užpildykite visus laukus.");
-INSERT INTO translations VALUES("53","lt","Edit Category","Redaguoti kategoriją");
-INSERT INTO translations VALUES("54","lt","Are you sure you want to delete this category?","Ar tikrai norite ištrinti šią kategoriją?");
+INSERT INTO translations VALUES("53","lt","Edit place","Redaguoti kategoriją");
+INSERT INTO translations VALUES("54","lt","Are you sure you want to delete this place?","Ar tikrai norite ištrinti šią kategoriją?");
 INSERT INTO translations VALUES("55","lt","Add/Edit","Pridėti/Redaguoti");
 INSERT INTO translations VALUES("56","lt","Translation updated successfully.","Vertimas sėkmingai atnaujintas.");
 INSERT INTO translations VALUES("57","lt","Edit","Redaguoti");
@@ -208,7 +208,7 @@ INSERT INTO translations VALUES("72","lt","Value","Vertė");
 INSERT INTO translations VALUES("73","lt","Save settings","Išsaugoti nustatymus");
 INSERT INTO translations VALUES("74","lt","HTML Code","HTML kodas");
 INSERT INTO translations VALUES("75","lt","Menu Place","Meniu vieta");
-INSERT INTO translations VALUES("76","lt","Category","Kategorija");
+INSERT INTO translations VALUES("76","lt","place","Kategorija");
 INSERT INTO translations VALUES("77","lt","Log off","Atsijungti");
 INSERT INTO translations VALUES("78","lt","Log In","Prisijungti");
 INSERT INTO translations VALUES("79","lt","Sign up","Registruotis");
@@ -225,8 +225,8 @@ INSERT INTO translations VALUES("89","lt","Error adding menu item. Try again.","
 INSERT INTO translations VALUES("90","lt","Menu Name","Meniu pavadinimas");
 INSERT INTO translations VALUES("91","lt","Add Menu","Pridėti meniu");
 INSERT INTO translations VALUES("92","lt","Edit Menu","Redaguoti meniu");
-INSERT INTO translations VALUES("93","lt","Category Name","Kategorijos pavadinimas");
-INSERT INTO translations VALUES("94","lt","Add Category","Pridėti kategoriją");
+INSERT INTO translations VALUES("93","lt","place Name","Kategorijos pavadinimas");
+INSERT INTO translations VALUES("94","lt","Add place","Pridėti kategoriją");
 INSERT INTO translations VALUES("95","lt","Posts on pages","Įrašai puslapiuose");
 INSERT INTO translations VALUES("96","lt","Title","Antraštė");
 INSERT INTO translations VALUES("97","lt","Content","Turinys");
@@ -240,22 +240,22 @@ INSERT INTO translations VALUES("104","lt","Draft","Juodraštis");
 INSERT INTO translations VALUES("105","lt","List of backups","Atsarginių kopijų sąrašas");
 INSERT INTO translations VALUES("106","lt","No backups","Nėra atsarginių kopijų.");
 INSERT INTO translations VALUES("107","lt","Custom Blocks","Įvairūs Blokai");
-INSERT INTO translations VALUES("108","lt","Category successfully added.","Kategorijos pridėjimas pavyko.");
-INSERT INTO translations VALUES("109","lt","Error adding category. Try again.","Klaida pridedant kategoriją. Bandykite dar kartą.");
+INSERT INTO translations VALUES("108","lt","place successfully added.","Kategorijos pridėjimas pavyko.");
+INSERT INTO translations VALUES("109","lt","Error adding place. Try again.","Klaida pridedant kategoriją. Bandykite dar kartą.");
 INSERT INTO translations VALUES("110","lt","Record successfully added.","Įrašas sėkmingai sukurtas.");
 INSERT INTO translations VALUES("111","lt","Error adding Record. Try again.","Pridedant įrašą įvyko klaida. Bandyk iš naujo.");
 INSERT INTO translations VALUES("112","lt","The record has been updated successfully.","Įrašas sėkmingai atnaujintas.");
 INSERT INTO translations VALUES("113","lt","Error updating post. Try again.","Klaida atnaujinant įrašą. Bandyk iš naujo.");
-INSERT INTO translations VALUES("114","lt","Category successfully updated.","Kategorija sėkmingai atnaujinta.");
-INSERT INTO translations VALUES("115","lt","Error updating category. Try again.","Klaida atnaujinant kategoriją. Bandykite dar kartą.");
+INSERT INTO translations VALUES("114","lt","place successfully updated.","Kategorija sėkmingai atnaujinta.");
+INSERT INTO translations VALUES("115","lt","Error updating place. Try again.","Klaida atnaujinant kategoriją. Bandykite dar kartą.");
 INSERT INTO translations VALUES("116","lt","Backup deleted successfully!","Atsarginė kopija sėkmingai ištrinta!");
 INSERT INTO translations VALUES("117","lt","Failed to delete backup.","Nepavyko ištrinti atsarginės kopijos.");
 INSERT INTO translations VALUES("118","lt","Error: Please specify a file name.","Klaida: Prašome nurodyti failo pavadinimą.");
-INSERT INTO translations VALUES("119","lt","Add Category","Pridėti kategoriją");
+INSERT INTO translations VALUES("119","lt","Add place","Pridėti kategoriją");
 INSERT INTO translations VALUES("120","lt","Confirm deletion","Patvirtinkite šalinimą");
-INSERT INTO translations VALUES("121","lt","Category successfully deleted.","Kategorija sėkmingai ištrinta.");
-INSERT INTO translations VALUES("122","lt","Error deleting category. Try again.","Klaida trinant kategoriją. Bandykite dar kartą.");
-INSERT INTO translations VALUES("123","lt","Edit Category","Redaguoti kategoriją");
+INSERT INTO translations VALUES("121","lt","place successfully deleted.","Kategorija sėkmingai ištrinta.");
+INSERT INTO translations VALUES("122","lt","Error deleting place. Try again.","Klaida trinant kategoriją. Bandykite dar kartą.");
+INSERT INTO translations VALUES("123","lt","Edit place","Redaguoti kategoriją");
 INSERT INTO translations VALUES("124","lt","File not found.","Failas nerastas.");
 INSERT INTO translations VALUES("125","lt","Surname","Pavardė");
 INSERT INTO translations VALUES("126","lt","Phone","Telefonas");
@@ -337,12 +337,12 @@ INSERT INTO translations VALUES("201","lt","file uploaded successfully.","failas
 INSERT INTO translations VALUES("202","lt","Error loading file.","Įkeliant failą įvyko klaida.");
 INSERT INTO translations VALUES("203","lt","Failed to clear cache, APCu is not installed!","Nepavyko išvalyti talpyklos, APCu neįdiegtas!");
 INSERT INTO translations VALUES("204","lt","Create","Sukurti");
-INSERT INTO translations VALUES("205","lt","Category with this name already exists. Try a different name","Kategorija tokiu pavadinimu jau yra. Pabandykite kitą pavadinimą");
-INSERT INTO translations VALUES("206","lt","Error adding category. Try again.","Klaida pridedant kategoriją. Bandyk iš naujo.");
-INSERT INTO translations VALUES("207","lt","Category successfully added.","Kategorija sėkmingai pridėta.");
-INSERT INTO translations VALUES("208","lt","Category successfully updated.","Kategorija sėkmingai atnaujinta.");
-INSERT INTO translations VALUES("209","lt","Category with this name already exists. Try a different name.","Kategorija tokiu pavadinimu jau yra. Pabandykite kitą pavadinimą.");
-INSERT INTO translations VALUES("210","lt","Error updating category. Try again.","Klaida atnaujinant kategoriją. Bandyk iš naujo.");
+INSERT INTO translations VALUES("205","lt","place with this name already exists. Try a different name","Kategorija tokiu pavadinimu jau yra. Pabandykite kitą pavadinimą");
+INSERT INTO translations VALUES("206","lt","Error adding place. Try again.","Klaida pridedant kategoriją. Bandyk iš naujo.");
+INSERT INTO translations VALUES("207","lt","place successfully added.","Kategorija sėkmingai pridėta.");
+INSERT INTO translations VALUES("208","lt","place successfully updated.","Kategorija sėkmingai atnaujinta.");
+INSERT INTO translations VALUES("209","lt","place with this name already exists. Try a different name.","Kategorija tokiu pavadinimu jau yra. Pabandykite kitą pavadinimą.");
+INSERT INTO translations VALUES("210","lt","Error updating place. Try again.","Klaida atnaujinant kategoriją. Bandyk iš naujo.");
 INSERT INTO translations VALUES("212","lt","Please fill in all fields.","Klaida: užpildykite visus laukus.");
 INSERT INTO translations VALUES("214","lt","Translation added successfully.","Vertimas sėkmingai pridėtas.");
 INSERT INTO translations VALUES("215","lt","Error: Translation word already exists.","Klaida: verčiamas žodis jau yra.");

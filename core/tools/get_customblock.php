@@ -28,7 +28,7 @@ $customBlockId = isset($_GET['customblock_id']) ? (int)$_GET['customblock_id'] :
 $mode = $customBlockId > 0 ? 'edit' : 'create';
 $customBlock = $mode === 'edit' ? getCustomBlockById($db, $customBlockId) : null;
 
-$categories = getCategories($db);
+$places = getplaces($db);
 $menuId = getMenuItems($db);
 
 if ($mode === 'create' || $customBlock) {
@@ -41,11 +41,11 @@ if ($mode === 'create' || $customBlock) {
         <?php endif; ?>
    
         <div class="form-group">
-            <label for="customblock_category_id"><?php echo t('Place');?></label>
-            <select class="form-control" id="customblock_category_id" name="customblock_category_id" required>
-                <?php foreach ($categories as $category) : ?>
-                    <option value="<?php echo $category['id']; ?>" <?php echo $mode === 'edit' && $customBlock['category_id'] === $category['id'] ? 'selected' : ''; ?>>
-                        <?php echo htmlspecialchars($category['name']); ?>
+            <label for="customblock_place_id"><?php echo t('Place');?></label>
+            <select class="form-control" id="customblock_place_id" name="customblock_place_id" required>
+                <?php foreach ($places as $place) : ?>
+                    <option value="<?php echo $place['id']; ?>" <?php echo $mode === 'edit' && $customBlock['place_id'] === $place['id'] ? 'selected' : ''; ?>>
+                        <?php echo htmlspecialchars($place['name']); ?>
                     </option>
                 <?php endforeach; ?>
             </select>

@@ -211,6 +211,6 @@ function createDatabaseBackup($db, $backupFilename) {
     require_once 'f_menu.php';
     require_once 'f_customblock.php';
     require_once 'f_files.php';
-    require_once 'f_categories.php';
+    require_once 'f_places.php';
     require_once 'f_translations.php';
     
