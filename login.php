@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <header id="header">
 <?php require_once 'template/menu-horizontal.php';?>
 </header>
-<section class="container spacer">
+<section class="container spacer footer">
     <main class="main my-4">
     <div class="row">
         <div class="col-sm-4">
