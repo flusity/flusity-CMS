@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 02, 2023 at 01:05 PM
+-- Generation Time: Jun 02, 2023 at 01:47 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -171,7 +171,7 @@ CREATE TABLE `posts` (
 
 INSERT INTO `posts` (`id`, `title`, `content`, `author_id`, `role`, `created_at`, `status`, `menu_id`, `tags`, `updated_at`) VALUES
 (1, 'ggnn', 'bcncvbvcbsrgfsgf dfgfd', 2, 'admin', '2023-04-15 16:08:31', 'draft', 1, 'ddddfdfddd', '2023-04-19 16:17:29'),
-(4, 'Naujas bandymas 3', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies justo ut purus efficitur, eleifend pellentesque risus cursus. Maecenas ex massa, sagittis id metus non, convallis scelerisque ligula. Vivamus aliquam risus accumsan lacinia eleifend. Nunc vestibulum massa a mauris egestas, quis sollicitudin est posuere. Duis lobortis tincidunt leo, vitae condimentum odio mollis at. Nullam mollis lobortis erat, lobortis mollis mi commodo ac. Nunc in lectus vitae mauris imperdiet varius in id neque. Vestibulum orci risus, posuere in velit eget, ullamcorper convallis augue. Mauris nulla dui, iaculis ac ultrices quis, scelerisque a libero.', 2, 'admin', '0000-00-00 00:00:00', 'published', 6, 'nnnn', '2023-04-19 18:36:31'),
+(4, 'Naujas bandymas 3', '&lt;b&gt;Lorem&lt;/b&gt; ipsum dolor sit amet, consectetur adipiscing elit. &lt;img src=&quot;uploads/pexels-dominika-roseclay_2b7dd92bc8d188b4.jpg&quot; width=&quot;250px&quot; height=&quot;auto&quot; align=&quot;left&quot; hspace=&quot;15&quot; vspace=&quot;15&quot;/&gt;\r\nAliquam ultricies justo ut purus efficitur, eleifend pellentesque risus cursus. Maecenas ex massa, sagittis id metus non, convallis scelerisque ligula. Vivamus aliquam risus accumsan lacinia eleifend. Nunc vestibulum massa a mauris egestas, quis sollicitudin est posuere. Duis lobortis tincidunt leo, vitae condimentum odio mollis at. Nullam mollis lobortis erat, lobortis mollis mi commodo ac. Nunc in lectus vitae mauris imperdiet varius in id neque. Vestibulum orci risus, posuere in velit eget, ullamcorper convallis augue. Mauris nulla dui, iaculis ac ultrices quis, scelerisque a libero.', 2, 'admin', '0000-00-00 00:00:00', 'published', 6, 'nnnn', '2023-06-02 10:38:31'),
 (5, 'fthhj', 'gfhjgfhjfghjgfhj', 2, 'user', '0000-00-00 00:00:00', 'draft', 1, 'aaa', '2023-04-19 16:17:29'),
 (8, 'test www', 'dfgdfgfg dfgfg', 2, 'admin', '0000-00-00 00:00:00', 'draft', 3, 'wwwc', '2023-05-25 09:36:58'),
 (10, 'test www', 'tervvr re eshh          šįyįš yįęįšudhhdf  dfhfh fghd', 2, 'admin', '0000-00-00 00:00:00', 'published', 3, 'nnnu', '2023-05-25 09:48:58'),
@@ -252,7 +252,7 @@ INSERT INTO `translations` (`id`, `language_code`, `translation_key`, `translati
 (50, 'lt', 'Name', 'Pavadinimas'),
 (51, 'lt', 'Translation added successfully.', 'Vertimas sėkmingai pridėtas.'),
 (52, 'lt', 'Error: Please fill in all fields.', 'Klaida: užpildykite visus laukus.'),
-(54, 'lt', 'Are you sure you want to delete this place?', 'Ar tikrai norite ištrinti šią Place?'),
+(54, 'lt', 'Are you sure you want to delete this place?', 'Ar tikrai norite ištrinti šią Vietą?'),
 (55, 'lt', 'Add/Edit', 'Pridėti/Redaguoti'),
 (56, 'lt', 'Translation updated successfully.', 'Vertimas sėkmingai atnaujintas.'),
 (57, 'lt', 'Edit', 'Redaguoti'),
@@ -274,7 +274,7 @@ INSERT INTO `translations` (`id`, `language_code`, `translation_key`, `translati
 (73, 'lt', 'Save settings', 'Išsaugoti nustatymus'),
 (74, 'lt', 'HTML Code', 'HTML kodas'),
 (75, 'lt', 'Menu Place', 'Meniu vieta'),
-(76, 'lt', 'place', 'Vieta'),
+(76, 'lt', 'Place', 'Vieta'),
 (77, 'lt', 'Log off', 'Atsijungti'),
 (78, 'lt', 'Log In', 'Prisijungti'),
 (79, 'lt', 'Sign up', 'Registruotis'),
@@ -304,14 +304,12 @@ INSERT INTO `translations` (`id`, `language_code`, `translation_key`, `translati
 (105, 'lt', 'List of backups', 'Atsarginių kopijų sąrašas'),
 (106, 'lt', 'No backups', 'Nėra atsarginių kopijų.'),
 (107, 'lt', 'Custom Blocks', 'Įvairūs Blokai'),
-(108, 'lt', 'place successfully added.', 'Vietos pridėjimas pavyko.'),
 (109, 'lt', 'Error adding place. Try again.', 'Klaida pridedant Place. Bandykite dar kartą.'),
 (110, 'lt', 'Record successfully added.', 'Įrašas sėkmingai sukurtas.'),
 (111, 'lt', 'Error adding Record. Try again.', 'Pridedant įrašą įvyko klaida. Bandyk iš naujo.'),
 (112, 'lt', 'The record has been updated successfully.', 'Įrašas sėkmingai atnaujintas.'),
 (113, 'lt', 'Error updating post. Try again.', 'Klaida atnaujinant įrašą. Bandyk iš naujo.'),
 (114, 'lt', 'place successfully updated.', 'Vieta sėkmingai atnaujinta.'),
-(115, 'lt', 'Error updating place. Try again.', 'Klaida atnaujinant Place. Bandykite dar kartą.'),
 (116, 'lt', 'Backup deleted successfully!', 'Atsarginė kopija sėkmingai ištrinta!'),
 (117, 'lt', 'Failed to delete backup.', 'Nepavyko ištrinti atsarginės kopijos.'),
 (118, 'lt', 'Error: Please specify a file name.', 'Klaida: Prašome nurodyti failo pavadinimą.'),
@@ -401,10 +399,10 @@ INSERT INTO `translations` (`id`, `language_code`, `translation_key`, `translati
 (203, 'lt', 'Failed to clear cache, APCu is not installed!', 'Nepavyko išvalyti talpyklos, APCu neįdiegtas!'),
 (204, 'lt', 'Create', 'Sukurti'),
 (206, 'lt', 'Error adding place. Try again.', 'Klaida pridedant Place. Bandyk iš naujo.'),
-(207, 'lt', 'place successfully added.', 'Vieta sėkmingai pridėta.'),
+(207, 'lt', 'Place successfully added.', 'Vieta sėkmingai pridėta.'),
 (208, 'lt', 'place successfully updated.', 'Vieta sėkmingai atnaujinta.'),
 (209, 'lt', 'place with this name already exists. Try a different name.', 'Vieta tokiu pavadinimu jau yra. Pabandykite kitą pavadinimą.'),
-(210, 'lt', 'Error updating place. Try again.', 'Klaida atnaujinant Place. Bandyk iš naujo.'),
+(210, 'lt', 'Error updating place. Try again.', 'Klaida atnaujinant Vietą. Bandyk iš naujo.'),
 (212, 'lt', 'Please fill in all fields.', 'Klaida: užpildykite visus laukus.'),
 (214, 'lt', 'Translation added successfully.', 'Vertimas sėkmingai pridėtas.'),
 (215, 'lt', 'Error: Translation word already exists.', 'Klaida: verčiamas žodis jau yra.'),
