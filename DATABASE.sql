@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 29, 2023 at 09:50 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.0.28
+-- Generation Time: Jun 02, 2023 at 12:52 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,35 +24,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categories`
---
-
-CREATE TABLE `categories` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Dumping data for table `categories`
---
-
-INSERT INTO `categories` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(79, 'head-box-one', '2023-04-14 15:01:16', '2023-05-28 08:27:20'),
-(80, 'news-right-5', '2023-04-14 15:12:13', '2023-05-28 08:21:48'),
-(83, 'home-right-5', '2023-04-14 15:20:38', '2023-05-28 08:15:56'),
-(85, 'doc-right-5', '2023-04-14 15:33:23', '2023-05-28 08:20:16'),
-(92, 'home-left-7', '2023-04-19 19:49:36', '2023-05-28 08:24:53'),
-(100, 'head-box-two', '2023-05-28 08:27:28', '2023-05-28 08:27:28'),
-(101, 'contact-right-5', '2023-05-28 08:28:19', '2023-05-28 08:28:19'),
-(102, 'contact-left-7', '2023-05-28 08:30:01', '2023-05-28 08:30:01'),
-(103, 'doc-left-7', '2023-05-28 08:30:21', '2023-05-28 08:30:21'),
-(104, 'home-col-down-12', '2023-05-28 12:26:33', '2023-05-28 12:26:33');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `contact_form_settings`
 --
 
@@ -60,7 +31,7 @@ CREATE TABLE `contact_form_settings` (
   `id` int(11) NOT NULL,
   `setting_key` varchar(255) NOT NULL,
   `setting_value` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `contact_form_settings`
@@ -79,15 +50,15 @@ CREATE TABLE `custom_blocks` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `menu_id` int(10) UNSIGNED DEFAULT NULL,
-  `category_id` int(10) UNSIGNED DEFAULT NULL,
+  `place_id` int(10) UNSIGNED DEFAULT NULL,
   `html_code` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `custom_blocks`
 --
 
-INSERT INTO `custom_blocks` (`id`, `name`, `menu_id`, `category_id`, `html_code`) VALUES
+INSERT INTO `custom_blocks` (`id`, `name`, `menu_id`, `place_id`, `html_code`) VALUES
 (2, 'News col 5', 3, 80, 'Testuoju News skyrių'),
 (7, 'Pridėtas Blokas col-sm-5', 6, 83, 'Testuoju bloko pridėjimą į col-sm-5 dalį'),
 (9, 'Testuoju dokumentus', 1, 85, 'Bandomas tekstas dokumentuose'),
@@ -107,7 +78,7 @@ CREATE TABLE `files` (
   `name` varchar(255) NOT NULL,
   `url` varchar(255) NOT NULL,
   `uploaded_at` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `files`
@@ -134,7 +105,7 @@ CREATE TABLE `menu` (
   `template` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `menu`
@@ -145,6 +116,35 @@ INSERT INTO `menu` (`id`, `name`, `page_url`, `position`, `template`, `created_a
 (3, 'NAUJIENOS', 'news', 2, 'template_naujienos', '2023-04-15 21:29:51', '2023-04-19 20:32:46'),
 (6, 'HOME', 'index', 1, 'template_index', '2023-04-16 12:35:26', '2023-04-19 20:38:55'),
 (12, 'Kontaktai', 'contacts', 5, 'template_contacts', '2023-04-21 14:28:01', '2023-05-22 19:41:19');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `places`
+--
+
+CREATE TABLE `places` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `places`
+--
+
+INSERT INTO `places` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(79, 'head-box-one', '2023-04-14 15:01:16', '2023-05-28 08:27:20'),
+(80, 'news-right-5', '2023-04-14 15:12:13', '2023-05-28 08:21:48'),
+(83, 'home-right-5', '2023-04-14 15:20:38', '2023-05-28 08:15:56'),
+(85, 'doc-right-5', '2023-04-14 15:33:23', '2023-05-28 08:20:16'),
+(92, 'home-left-7', '2023-04-19 19:49:36', '2023-05-28 08:24:53'),
+(100, 'head-box-two', '2023-05-28 08:27:28', '2023-05-28 08:27:28'),
+(101, 'contact-right-5', '2023-05-28 08:28:19', '2023-05-28 08:28:19'),
+(102, 'contact-left-7', '2023-05-28 08:30:01', '2023-05-28 08:30:01'),
+(103, 'doc-left-7', '2023-05-28 08:30:21', '2023-05-28 08:30:21'),
+(104, 'home-col-down-12', '2023-05-28 12:26:33', '2023-05-28 12:26:33');
 
 -- --------------------------------------------------------
 
@@ -163,7 +163,7 @@ CREATE TABLE `posts` (
   `menu_id` int(11) DEFAULT NULL,
   `tags` text DEFAULT NULL,
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `posts`
@@ -187,7 +187,6 @@ INSERT INTO `posts` (`id`, `title`, `content`, `author_id`, `role`, `created_at`
 -- Table structure for table `settings`
 --
 
-
 CREATE TABLE `settings` (
   `site_title` varchar(255) NOT NULL,
   `meta_description` text NOT NULL,
@@ -203,7 +202,7 @@ CREATE TABLE `settings` (
 
 INSERT INTO `settings` (`site_title`, `meta_description`, `footer_text`, `pretty_url`, `language`, `posts_per_page`) VALUES
 ('JD website', 'JD website description', 'Copyright &copy; JD Theme 2023', 1, 'lt', 10);
-COMMIT;
+
 -- --------------------------------------------------------
 
 --
@@ -215,7 +214,7 @@ CREATE TABLE `translations` (
   `language_code` varchar(5) NOT NULL,
   `translation_key` varchar(255) NOT NULL,
   `translation_value` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `translations`
@@ -227,7 +226,6 @@ INSERT INTO `translations` (`id`, `language_code`, `translation_key`, `translati
 (4, 'lt', 'Dashboard', 'Prietaisų skydelis'),
 (5, 'lt', 'Translation Key', 'Verčiamas žodis'),
 (6, 'lt', 'Translation Value', 'Išverstas įrašas'),
-(7, 'lt', 'Categories', 'Kategorijos'),
 (26, 'lt', 'Language Code', 'Kalbos Kodas'),
 (27, 'lt', 'Translation form', 'Vertimo forma'),
 (28, 'lt', 'Settings successfully updated!', 'Nustatymai sėkmingai atnaujinti!'),
@@ -249,14 +247,12 @@ INSERT INTO `translations` (`id`, `language_code`, `translation_key`, `translati
 (44, 'lt', 'Block\'s', 'Blokai'),
 (45, 'lt', 'Usename', 'Vartotojo Vardas'),
 (46, 'lt', 'User successfully updated.', 'Vartotojas sėkmingai atnaujintas.'),
-(47, 'lt', 'Add Category', 'Pridėti kategoriją'),
 (48, 'lt', 'Actions', 'Veiksmas'),
-(49, 'lt', 'Categories', 'Kategorijos'),
+(49, 'lt', 'Places', 'Vietos'),
 (50, 'lt', 'Name', 'Pavadinimas'),
 (51, 'lt', 'Translation added successfully.', 'Vertimas sėkmingai pridėtas.'),
 (52, 'lt', 'Error: Please fill in all fields.', 'Klaida: užpildykite visus laukus.'),
-(53, 'lt', 'Edit Category', 'Redaguoti kategoriją'),
-(54, 'lt', 'Are you sure you want to delete this category?', 'Ar tikrai norite ištrinti šią kategoriją?'),
+(54, 'lt', 'Are you sure you want to delete this place?', 'Ar tikrai norite ištrinti šią Place?'),
 (55, 'lt', 'Add/Edit', 'Pridėti/Redaguoti'),
 (56, 'lt', 'Translation updated successfully.', 'Vertimas sėkmingai atnaujintas.'),
 (57, 'lt', 'Edit', 'Redaguoti'),
@@ -278,7 +274,7 @@ INSERT INTO `translations` (`id`, `language_code`, `translation_key`, `translati
 (73, 'lt', 'Save settings', 'Išsaugoti nustatymus'),
 (74, 'lt', 'HTML Code', 'HTML kodas'),
 (75, 'lt', 'Menu Place', 'Meniu vieta'),
-(76, 'lt', 'Category', 'Kategorija'),
+(76, 'lt', 'place', 'Vieta'),
 (77, 'lt', 'Log off', 'Atsijungti'),
 (78, 'lt', 'Log In', 'Prisijungti'),
 (79, 'lt', 'Sign up', 'Registruotis'),
@@ -287,7 +283,6 @@ INSERT INTO `translations` (`id`, `language_code`, `translation_key`, `translati
 (82, 'lt', 'Page URL', 'Puslapio url'),
 (83, 'lt', 'Template', 'Šablonas'),
 (84, 'lt', 'Position', 'Pozicija'),
-(85, 'lt', 'Add Menu', 'Pridėti meniu'),
 (86, 'lt', 'Confirm deletion', 'Patvirtinkite šalinimą'),
 (87, 'lt', 'Are you sure you want to delete this menu?', 'Ar tikrai norite ištrinti šį meniu?'),
 (88, 'lt', 'Menu item successfully added.', 'Meniu punktas sėkmingai pridėtas.'),
@@ -295,8 +290,7 @@ INSERT INTO `translations` (`id`, `language_code`, `translation_key`, `translati
 (90, 'lt', 'Menu Name', 'Meniu pavadinimas'),
 (91, 'lt', 'Add Menu', 'Pridėti meniu'),
 (92, 'lt', 'Edit Menu', 'Redaguoti meniu'),
-(93, 'lt', 'Category Name', 'Kategorijos pavadinimas'),
-(94, 'lt', 'Add Category', 'Pridėti kategoriją'),
+(93, 'lt', 'Place Name', 'Vietos pavadinimas'),
 (95, 'lt', 'Posts on pages', 'Įrašai puslapiuose'),
 (96, 'lt', 'Title', 'Antraštė'),
 (97, 'lt', 'Content', 'Turinys'),
@@ -310,22 +304,21 @@ INSERT INTO `translations` (`id`, `language_code`, `translation_key`, `translati
 (105, 'lt', 'List of backups', 'Atsarginių kopijų sąrašas'),
 (106, 'lt', 'No backups', 'Nėra atsarginių kopijų.'),
 (107, 'lt', 'Custom Blocks', 'Įvairūs Blokai'),
-(108, 'lt', 'Category successfully added.', 'Kategorijos pridėjimas pavyko.'),
-(109, 'lt', 'Error adding category. Try again.', 'Klaida pridedant kategoriją. Bandykite dar kartą.'),
+(108, 'lt', 'place successfully added.', 'Vietos pridėjimas pavyko.'),
+(109, 'lt', 'Error adding place. Try again.', 'Klaida pridedant Place. Bandykite dar kartą.'),
 (110, 'lt', 'Record successfully added.', 'Įrašas sėkmingai sukurtas.'),
 (111, 'lt', 'Error adding Record. Try again.', 'Pridedant įrašą įvyko klaida. Bandyk iš naujo.'),
 (112, 'lt', 'The record has been updated successfully.', 'Įrašas sėkmingai atnaujintas.'),
 (113, 'lt', 'Error updating post. Try again.', 'Klaida atnaujinant įrašą. Bandyk iš naujo.'),
-(114, 'lt', 'Category successfully updated.', 'Kategorija sėkmingai atnaujinta.'),
-(115, 'lt', 'Error updating category. Try again.', 'Klaida atnaujinant kategoriją. Bandykite dar kartą.'),
+(114, 'lt', 'place successfully updated.', 'Vieta sėkmingai atnaujinta.'),
+(115, 'lt', 'Error updating place. Try again.', 'Klaida atnaujinant Place. Bandykite dar kartą.'),
 (116, 'lt', 'Backup deleted successfully!', 'Atsarginė kopija sėkmingai ištrinta!'),
 (117, 'lt', 'Failed to delete backup.', 'Nepavyko ištrinti atsarginės kopijos.'),
 (118, 'lt', 'Error: Please specify a file name.', 'Klaida: Prašome nurodyti failo pavadinimą.'),
-(119, 'lt', 'Add Category', 'Pridėti kategoriją'),
 (120, 'lt', 'Confirm deletion', 'Patvirtinkite šalinimą'),
-(121, 'lt', 'Category successfully deleted.', 'Kategorija sėkmingai ištrinta.'),
-(122, 'lt', 'Error deleting category. Try again.', 'Klaida trinant kategoriją. Bandykite dar kartą.'),
-(123, 'lt', 'Edit Category', 'Redaguoti kategoriją'),
+(121, 'lt', 'place successfully deleted.', 'Vieta sėkmingai ištrinta.'),
+(122, 'lt', 'Error deleting place. Try again.', 'Klaida trinant Place. Bandykite dar kartą.'),
+(123, 'lt', 'Edit Place', 'Redaguoti Vietą'),
 (124, 'lt', 'File not found.', 'Failas nerastas.'),
 (125, 'lt', 'Surname', 'Pavardė'),
 (126, 'lt', 'Phone', 'Telefonas'),
@@ -407,11 +400,11 @@ INSERT INTO `translations` (`id`, `language_code`, `translation_key`, `translati
 (202, 'lt', 'Error loading file.', 'Įkeliant failą įvyko klaida.'),
 (203, 'lt', 'Failed to clear cache, APCu is not installed!', 'Nepavyko išvalyti talpyklos, APCu neįdiegtas!'),
 (204, 'lt', 'Create', 'Sukurti'),
-(206, 'lt', 'Error adding category. Try again.', 'Klaida pridedant kategoriją. Bandyk iš naujo.'),
-(207, 'lt', 'Category successfully added.', 'Kategorija sėkmingai pridėta.'),
-(208, 'lt', 'Category successfully updated.', 'Kategorija sėkmingai atnaujinta.'),
-(209, 'lt', 'Category with this name already exists. Try a different name.', 'Kategorija tokiu pavadinimu jau yra. Pabandykite kitą pavadinimą.'),
-(210, 'lt', 'Error updating category. Try again.', 'Klaida atnaujinant kategoriją. Bandyk iš naujo.'),
+(206, 'lt', 'Error adding place. Try again.', 'Klaida pridedant Place. Bandyk iš naujo.'),
+(207, 'lt', 'place successfully added.', 'Vieta sėkmingai pridėta.'),
+(208, 'lt', 'place successfully updated.', 'Vieta sėkmingai atnaujinta.'),
+(209, 'lt', 'place with this name already exists. Try a different name.', 'Vieta tokiu pavadinimu jau yra. Pabandykite kitą pavadinimą.'),
+(210, 'lt', 'Error updating place. Try again.', 'Klaida atnaujinant Place. Bandyk iš naujo.'),
 (212, 'lt', 'Please fill in all fields.', 'Klaida: užpildykite visus laukus.'),
 (214, 'lt', 'Translation added successfully.', 'Vertimas sėkmingai pridėtas.'),
 (215, 'lt', 'Error: Translation word already exists.', 'Klaida: verčiamas žodis jau yra.'),
@@ -422,7 +415,8 @@ INSERT INTO `translations` (`id`, `language_code`, `translation_key`, `translati
 (220, 'lt', 'That Name or Login Name is already taken. Choose another.', 'Tas vardas arba prisijungimo vardas jau užimtas. Pasirinkite kitą.'),
 (221, 'lt', 'Invalid CSRF token. Try again.', 'Neteisingas CSRF žetonas. Bandykite dar kartą.'),
 (222, 'lt', 'Login Name', 'Prisijungimo Vardas'),
-(223, 'lt', 'Login Name or Email', 'Prisijungimo Vardas / El.paštas');
+(223, 'lt', 'Login Name or Email', 'Prisijungimo Vardas / El.paštas'),
+(224, 'lt', 'Add Place', 'Pridėti Vietą');
 
 -- --------------------------------------------------------
 
@@ -439,7 +433,7 @@ CREATE TABLE `users` (
   `email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
   `role` enum('admin','moderator','user') NOT NULL DEFAULT 'user'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
@@ -457,12 +451,6 @@ INSERT INTO `users` (`id`, `login_name`, `username`, `surname`, `phone`, `email`
 --
 
 --
--- Indexes for table `categories`
---
-ALTER TABLE `categories`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `contact_form_settings`
 --
 ALTER TABLE `contact_form_settings`
@@ -474,7 +462,7 @@ ALTER TABLE `contact_form_settings`
 ALTER TABLE `custom_blocks`
   ADD PRIMARY KEY (`id`),
   ADD KEY `menu_id` (`menu_id`),
-  ADD KEY `category_id` (`category_id`);
+  ADD KEY `place_id` (`place_id`);
 
 --
 -- Indexes for table `files`
@@ -486,6 +474,12 @@ ALTER TABLE `files`
 -- Indexes for table `menu`
 --
 ALTER TABLE `menu`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `places`
+--
+ALTER TABLE `places`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -516,12 +510,6 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `categories`
---
-ALTER TABLE `categories`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
-
---
 -- AUTO_INCREMENT for table `contact_form_settings`
 --
 ALTER TABLE `contact_form_settings`
@@ -546,6 +534,12 @@ ALTER TABLE `menu`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
+-- AUTO_INCREMENT for table `places`
+--
+ALTER TABLE `places`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+
+--
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
@@ -555,7 +549,7 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT for table `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=224;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=225;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -572,7 +566,7 @@ ALTER TABLE `users`
 --
 ALTER TABLE `custom_blocks`
   ADD CONSTRAINT `custom_blocks_ibfk_1` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`id`),
-  ADD CONSTRAINT `custom_blocks_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`);
+  ADD CONSTRAINT `custom_blocks_ibfk_2` FOREIGN KEY (`place_id`) REFERENCES `places` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
