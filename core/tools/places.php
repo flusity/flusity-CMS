@@ -47,10 +47,10 @@ require_once ROOT_PATH . 'core/template/header-admin.php'; ?>
             </thead>
             <tbody>
                 <?php
-                $i=0;
+                $i=1;
                  foreach ($places as $place) { ?>
                     <tr>  
-                        <td><?php $i++; echo htmlspecialchars($i); ?></td>
+                        <td><?php  echo $i++;?>.</td>
                         <td><?php echo htmlspecialchars($place['name']); ?></td>
                         <td>  
                           <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addPlaceModal" data-place-id="<?php echo $place['id']; ?>" data-mode="update" title="<?php echo t("Edit");?>">
