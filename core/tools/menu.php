@@ -40,7 +40,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
             <table class="table">
                 <thead>
                     <tr>
-                        <th style="width: 3%;"><?php echo t("ID");?></th>
+                        <th style="width: 3%;"><?php echo t("No.");?></th>
                         <th style="width: 17%;"><?php echo t("Name");?></th>
                         <th style="width: 30%;"><?php echo t("Page URL");?></th>
                         <th style="width: 22%;"><?php echo t("Template");?></th>
@@ -49,9 +49,10 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($allMenu as $menu) { ?>
+                    <?php $i=1;
+                    foreach ($allMenu as $menu) { ?>
                         <tr>
-                            <td><?php echo htmlspecialchars($menu['id']); ?></td>
+                            <td><?php echo $i++; ?>.</td>
                             <td><?php echo htmlspecialchars($menu['name']); ?></td>
                             <td><?php echo htmlspecialchars($menu['page_url']); ?></td>
                             <td><?php echo htmlspecialchars($menu['template']); ?></td>
