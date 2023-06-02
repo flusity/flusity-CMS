@@ -82,7 +82,14 @@ function getUserNameById($db, $user_id) {
     
     
     function registerUser($login_name, $username, $password, $surname, $phone, $email, $db) {
-        $banned_words = ['admin', 'admina', 'adminai', 'adminas', 'admin1', 'admin2', 'admin3', 'aadmin', 'adminn', 'admi', 'administrator', 'administratorius', 'root', 'master', 'superuser'];
+        $banned_words = [
+            'admin', 'admina', 'adminai', 'adminas', 'admin1', 'admin2', 'admin3', 'aadmin', 'adminn', 'admi', 
+            'administrator', 'administratorius','administruojantis',
+            'root', 
+            'master',
+            'bos','bosas','boss',
+            'superuser', 'supermaster','superadmin','superadministrator','supermoderator','superbos'
+        ];
     
         foreach($banned_words as $word) {
             if (strpos(strtolower($login_name), $word) !== false || 
