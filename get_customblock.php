@@ -1,15 +1,15 @@
 <?php
-function getCustomBlocksByUrlNameAndCategory($db, $page_url, $category_name) {
-    $stmt = $db->prepare("SELECT custom_blocks.* FROM custom_blocks JOIN menu ON custom_blocks.menu_id = menu.id JOIN categories ON custom_blocks.category_id = categories.id WHERE menu.page_url = :page_url AND categories.name = :category_name");
+function getCustomBlocksByUrlNameAndPlace($db, $page_url, $place_name) {
+    $stmt = $db->prepare("SELECT custom_blocks.* FROM custom_blocks JOIN menu ON custom_blocks.menu_id = menu.id JOIN places ON custom_blocks.place_id = places.id WHERE menu.page_url = :page_url AND places.name = :place_name");
     $stmt->bindParam(':page_url', $page_url, PDO::PARAM_STR);
-    $stmt->bindParam(':category_name', $category_name, PDO::PARAM_STR);
+    $stmt->bindParam(':place_name', $place_name, PDO::PARAM_STR);
     $stmt->execute();
 
     return $stmt->fetchAll();
 }
 
-function displayCustomBlockByCategory($db, $page_url, $category_name, $admin_label = null) {
-    $customblocks = getCustomBlocksByUrlNameAndCategory($db, $page_url, $category_name);
+function displayCustomBlockByPlace($db, $page_url, $place_name, $admin_label = null) {
+    $customblocks = getCustomBlocksByUrlNameAndPlace($db, $page_url, $place_name);
 
     foreach ($customblocks as $customBlock) {
         echo '<div class="customblock-widget">';

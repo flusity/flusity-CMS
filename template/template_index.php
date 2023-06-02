@@ -17,7 +17,7 @@
                 <?php 
                     $page_url = getCurrentPageUrl($db);
                     if ($page_url) {
-                        displayCustomBlockByCategory($db, $page_url, 'head-box-one');
+                        displayCustomBlockByplace($db, $page_url, 'head-box-one');
                     } else {
                         print "";
                     }
@@ -32,7 +32,7 @@
                 <?php 
                     $page_url = getCurrentPageUrl($db);
                     if ($page_url) {
-                        displayCustomBlockByCategory($db, $page_url, 'head-box-two');
+                        displayCustomBlockByplace($db, $page_url, 'head-box-two');
                     } else {
                         print "";
                     }
@@ -51,7 +51,7 @@
             <?php 
             $page_url = getCurrentPageUrl($db);
             if ($page_url) {
-                displayCustomBlockByCategory($db, $page_url, 'home-left-7');
+                displayCustomBlockByplace($db, $page_url, 'home-left-7');
             } else {
                 print "";
             }
@@ -61,7 +61,7 @@
             <?php 
             $page_url = getCurrentPageUrl($db);
             if ($page_url) {
-                displayCustomBlockByCategory($db, $page_url, 'home-right-5');
+                displayCustomBlockByplace($db, $page_url, 'home-right-5');
             } else {
                 print "";
             }
@@ -86,7 +86,7 @@
         <?php 
             $page_url = getCurrentPageUrl($db);
             if ($page_url) {
-                displayCustomBlockByCategory($db, $page_url, 'home-col-down-12');
+                displayCustomBlockByplace($db, $page_url, 'home-col-down-12');
             } else {
                 print "";
             }

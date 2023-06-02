@@ -8,7 +8,7 @@
         <?php 
             $page_url = getCurrentPageUrl($db);
             if ($page_url) {
-                displayCustomBlockByCategory($db, $page_url, 'doc-left-7');
+                displayCustomBlockByplace($db, $page_url, 'doc-left-7');
             } else {
                 print "";
             }
@@ -18,7 +18,7 @@
             <?php 
             $page_url = getCurrentPageUrl($db);
             if ($page_url) {
-                displayCustomBlockByCategory($db, $page_url, 'doc-right-5');
+                displayCustomBlockByplace($db, $page_url, 'doc-right-5');
             } else {
                 print "";
             }

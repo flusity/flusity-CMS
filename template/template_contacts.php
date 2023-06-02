@@ -8,7 +8,7 @@
             <?php 
             $page_url = getCurrentPageUrl($db);
             if ($page_url) {
-                displayCustomBlockByCategory($db, $page_url, 'contact-left-7');
+                displayCustomBlockByplace($db, $page_url, 'contact-left-7');
             } else {
                 print "";
             }
@@ -18,7 +18,7 @@
             <?php 
             $page_url = getCurrentPageUrl($db);
             if ($page_url) {
-                displayCustomBlockByCategory($db, $page_url, 'contact-right-5');
+                displayCustomBlockByplace($db, $page_url, 'contact-right-5');
             } else {
                 print "";
             }
@@ -64,7 +64,7 @@
         <?php 
             $page_url = getCurrentPageUrl($db);
             if ($page_url) {
-                displayCustomBlockByCategory($db, $page_url, 'contact-fluid-12');
+                displayCustomBlockByplace($db, $page_url, 'contact-fluid-12');
             } else {
                 print "";
             }

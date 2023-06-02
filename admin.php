@@ -42,11 +42,11 @@
   <div class="row g-2">
   <div class="col-4">
       <div class="p-3 border bg-light">
-        <?php $categories = getCategories($db);
-        $total_categories = count($categories);
+        <?php $places = getplaces($db);
+        $total_places = count($places);
         ?>
-        <h4><?php echo t("Categories");?></h4>
-        <p><?php echo $total_categories; ?></p>
+        <h4><?php echo t("Places");?></h4>
+        <p><?php echo $total_places; ?></p>
       </div>
     </div>
     <div class="col-4">
