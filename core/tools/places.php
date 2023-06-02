@@ -85,7 +85,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php'; ?>
             <label for="place_name"><?php echo t("Place Name");?></label>
             <input type="text" class="form-control" id="place_name" name="place_name" required>
           </div>
-          <button type="submit" class="btn btn-primary" id="submit-button"><?php echo t("Add Place");?></button>
+          <button type="submit" class="btn btn-primary mt-3" id="submit-button"><?php echo t("Add Place");?></button>
         </form>
       </div>
     </div>
