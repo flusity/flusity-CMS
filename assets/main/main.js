@@ -25,9 +25,9 @@
     const headerTitle = document.querySelector('.header__title');
     const headerText = document.querySelector('.header__text');
     const boxLinks = document.querySelectorAll('.box__link'); 
-    const textColor= ['rgba(255, 0, 0, 0.5)', 'rgba(0, 255, 0, 0.5)', 'rgba(0, 0, 255, 0.5)'];
-    const linkColor= ['#c001c1', '#c000c2', '#e2aea2'];
-    const bgColors= ['rgba(29, 204, 225, 0.5)', 'rgba(121, 154, 255, 0.5)', 'rgba(229, 114, 235, 0.5)'];
+    const textColor= ['rgba(52, 52, 52, 0.67)', 'rgba(52, 52, 52, 0.67)'];
+    const linkColor= ['rgba(50, 63, 86, 0.544)', 'rgba(50, 63, 86, 0.544)'];
+    const bgColors= ['rgba(255, 255, 255, 0.85)', 'rgba(255, 255, 255, 0.85)'];
     const boxes = document.querySelectorAll('.box');
     
     const images = [
@@ -52,7 +52,9 @@
       box.style.backgroundColor = bgColors[index];
       box.style.color = textColor[index];
       boxLinks[index].style.color = linkColor[index];
+      boxLinks[index].style.cursor = "pointer"; // pridėjome šią eilutę
     });
+    
     
     let intervalId;
     

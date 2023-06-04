@@ -1,3 +1,4 @@
+@import url('profile.css');
 
 html, body {
   display: flex;
@@ -34,7 +35,6 @@ main {
   font-weight: 200; 
   letter-spacing: 0.05em; 
   text-transform:capitalize; 
-  /*text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);  Teksto seselis */
   text-decoration: none;
   font-size:20px;
 }
@@ -42,7 +42,7 @@ main {
 *, ::after, ::before {
     box-sizing: border-box;
 }
-  /*css for content text*/
+
   .grid-syst {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
@@ -64,6 +64,22 @@ main {
   justify-content: center;
   align-items: flex-start;
 }
+.colll{
+  background: rgba(255, 255, 255, 0.796); 
+  color: rgba(50, 63, 86, 0.544);
+}
+.box-header::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.173); 
+  z-index: 1; 
+  pointer-events: none;
+}
+
 
 .header__content p {
 font-size: 20px; 
@@ -95,8 +111,8 @@ font-size: 16px;
 .box {
   min-height: 200px;
   padding: 20px 15px 19px 25px;
-  border-radius: 1px;
-  border: 1px solid rgb(155, 193, 250);
+  border-radius: 3px;
+  border: 0px solid rgb(155, 193, 250);
   margin: 10px 0; 
   width: 100%
 }
@@ -111,10 +127,15 @@ margin-bottom: 20px;
 font-size: 14px;
 }
 .box__link {
-color: white;
-text-decoration: none;
-transition: color 0.3s ease;
-}
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  }
+  a.box__link.linkbox  {
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+    }
 
 .box__link:hover {
 color: #ddd;
