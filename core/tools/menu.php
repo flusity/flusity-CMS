@@ -38,38 +38,54 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
             <i class="fas fa-plus"></i>
             </button>
             <table class="table">
-                <thead>
-                    <tr>
-                        <th style="width: 3%;"><?php echo t("No.");?></th>
-                        <th style="width: 17%;"><?php echo t("Name");?></th>
-                        <th style="width: 30%;"><?php echo t("Page URL");?></th>
-                        <th style="width: 22%;"><?php echo t("Template");?></th>
-                        <th style="width: 13%;"><?php echo t("Position");?></th>
-                        <th style="width: 15%;"><?php echo t("Actions");?></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php $i=1;
-                    foreach ($allMenu as $menu) { ?>
-                        <tr>
-                            <td><?php echo $i++; ?>.</td>
-                            <td><?php echo htmlspecialchars($menu['name']); ?></td>
-                            <td><?php echo htmlspecialchars($menu['page_url']); ?></td>
-                            <td><?php echo htmlspecialchars($menu['template']); ?></td>
-                            <td><?php echo htmlspecialchars($menu['position']); ?></td>
-                            <td>
-                                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addMenuModal" data-menu-id="<?php echo $menu['id']; ?>" data-mode="update" title="<?php echo t("Edit");?>">
-                                    <i class="fas fa-edit"></i>
-                                </button>
+    <thead>
+        <tr>
+            <th style="width: 3%;"><?php echo t("No.");?></th>
+            <th style="width: 17%;"><?php echo t("Name");?></th>
+            <th style="width: 20%;"><?php echo t("Page URL");?></th>
+            <th style="width: 12%;"><?php echo t("Template");?></th>
+            <th style="width: 10%;"><?php echo t("Position");?></th>
+            <th style="width: 3%;"><?php echo t("Show");?></th>
+            <th style="width: 20%;"><?php echo t("Parent");?></th>
+            <th style="width: 8%;"><?php echo t("Actions");?></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php $i=1;
+        foreach ($allMenu as $menu) { ?>
+            <tr>
+                <td><?php echo $i++; ?>.</td>
+                <td><?php echo htmlspecialchars($menu['name']); ?></td>
+                <td><?php echo htmlspecialchars($menu['page_url']); ?></td>
+                <td><?php echo htmlspecialchars($menu['template']); ?></td>
+                <td><?php echo htmlspecialchars($menu['position']); ?></td>
+                <td><?php echo htmlspecialchars($menu['show_in_menu']); ?></td>
+                <td>
+                    <?php
+                        $parentName = '';
+                        foreach ($allMenu as $menuItem) {
+                            if ($menuItem['id'] == $menu['parent_id']) {
+                                $parentName = $menuItem['name'];
+                                break;
+                            }
+                        }
+                        echo $parentName;
+                    ?>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addMenuModal" data-menu-id="<?php echo $menu['id']; ?>" data-parent-id="<?php echo $menu['parent_id']; ?>" data-mode="update" title="<?php echo t("Edit");?>">
+                        <i class="fas fa-edit"></i>
+                    </button>
 
-                                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteMenuModal" data-menu-id="<?php echo $menu['id']; ?>" title="<?php echo t("Delete");?>">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </td>
-                        </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
+                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteMenuModal" data-menu-id="<?php echo $menu['id']; ?>" title="<?php echo t("Delete");?>">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </td>
+            </tr>
+        <?php } ?>
+    </tbody>
+</table>
+
         </div>
     </div>
 </div>
@@ -106,12 +122,26 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
               <?php endforeach; ?>
           </select>
         </div>
+        <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="show_in_menu" name="show_in_menu">
+          <label class="form-check-label" for="show_in_menu"><?php echo t("Show in menu");?></label>
+        </div>
+        <div class="form-group">
+          <label for="parent_id"><?php echo t("Parent");?></label>
+          <select class="form-control" id="parent_id" name="parent_id">
+              <option value=""><?php echo t("None");?></option>
+              <?php foreach ($allMenu as $menu): ?>
+                  <option value="<?php echo $menu['id']; ?>"><?php echo $menu['name']; ?></option>
+              <?php endforeach; ?>
+          </select>
+        </div>
         <button type="submit" class="btn btn-primary mt-3" id="submit-button"><?php echo t("Add Menu");?></button>
       </form>
     </div>
   </div>
 </div>
 </div>
+
 <!-- Modal -->
 <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
 <div class="modal-dialog">
@@ -130,5 +160,6 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
   </div>
 </div>
 </div>
-<script src="js/admin-menu.js"></script>
+
 <?php require_once ROOT_PATH . 'core/template/admin-footer.php';?>
+<script src="js/admin-menu.js"></script>

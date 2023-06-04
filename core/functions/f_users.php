@@ -25,7 +25,7 @@ function getUserNameById($db, $user_id) {
         $session_name = 'secure_session';
         $secure = true;
         $httponly = true;
-        $inactive = 1200; //20| 15 minučių - 900
+        $inactive = 1800; 
     
         if (session_status() === PHP_SESSION_NONE) {
             ini_set('session.use_only_cookies', 1);
@@ -37,15 +37,13 @@ function getUserNameById($db, $user_id) {
             session_name($session_name);
         }
     
-        // Pradedama ar tęsiama sesija
         if (session_status() !== PHP_SESSION_ACTIVE) {
             session_start();
         }
     
-        // Tikrinama, ar buvo perduotas veiksmas, ir atnaujiname sesija
         if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > $inactive)) {
-            // Sesija nebegalioja
-            if (isset($_SESSION['user_id'])) { // Tikriname, ar naudotojas buvo prisijungęs
+            
+            if (isset($_SESSION['user_id'])) { 
                 session_unset();
                 session_destroy();
                 header("Location: ../../login.php");
@@ -53,13 +51,10 @@ function getUserNameById($db, $user_id) {
             } else {
                 session_unset();
                 session_destroy();
-                header("Location: ../../404.php"); // Nukreipiame į 404 puslapį
+                header("Location: ../../404.php"); 
                 exit;
             }
     }
-
-    
-        // Atnaujiname sesijos laiką
         $_SESSION['last_activity'] = time();
     }
     

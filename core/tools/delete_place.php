@@ -25,6 +25,6 @@
             $_SESSION['error_message'] = t("Error deleting place. Try again.");
         }
     }
-    echo json_encode($response);
+    echo json_encode($result);
     exit;
 ?>

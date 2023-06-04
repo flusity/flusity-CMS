@@ -23,7 +23,7 @@ if (isset($_SESSION['user_id'])) {
     exit;
 }
 
-if (!checkUserRole($user_id, 'admin', $db) && !checkUserRole($user_id, 'moderator', $db)) {
+if (!checkUserRole($user_id, 'admin', $db)) {
     header("Location: 404.php");
     exit;
 }

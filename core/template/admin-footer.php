@@ -1,6 +1,12 @@
 
-<?php require_once  $_SERVER['DOCUMENT_ROOT'] . '/template/footer.php';?>
-
+<?php //require_once  $_SERVER['DOCUMENT_ROOT'] . '/template/footer.php';?>
+<footer class="footer bg-light py-3">
+    <div class="container-fluid">
+    <p class="text-center mb-0">
+        <?php print $footer_text; ?>
+    </p>
+    </div>
+</footer>
 <script>
         $(document).ready(function() {
 
@@ -65,7 +71,11 @@ document.getElementById('settingsDropdown').addEventListener('click', function()
 });
 
 </script>
-   
+
+
+<script src="../../assets/popperjs/popper.min.js"></script>
+<script src="../../assets/bootstrap-5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <script src="../tools/js/content_redactor.js"></script>
 </body>
 </html>

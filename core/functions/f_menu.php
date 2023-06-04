@@ -11,24 +11,29 @@ function getMenuItems($db) {
     $stmt->execute();
     return $stmt->fetchAll();
 }
-function createMenuItem($db, $name, $page_url, $position, $template) {
-    $stmt = $db->prepare('INSERT INTO menu (name, page_url, position, template) VALUES (:name, :page_url, :position, :template)');
+function createMenuItem($db, $name, $page_url, $position, $template, $show_in_menu, $parent_id) {
+    $stmt = $db->prepare('INSERT INTO menu (name, page_url, position, template, show_in_menu, parent_id) VALUES (:name, :page_url, :position, :template, :show_in_menu, :parent_id)');
     $stmt->bindParam(':name', $name, PDO::PARAM_STR);
     $stmt->bindParam(':page_url', $page_url, PDO::PARAM_STR);
     $stmt->bindParam(':position', $position, PDO::PARAM_INT);
     $stmt->bindParam(':template', $template, PDO::PARAM_STR);
+    $stmt->bindParam(':show_in_menu', $show_in_menu, PDO::PARAM_BOOL);
+    $stmt->bindParam(':parent_id', $parent_id, PDO::PARAM_INT);
     return $stmt->execute();
 }
 
-function updateMenuItem($db, $id, $name, $page_url, $position, $template) {
-    $stmt = $db->prepare('UPDATE menu SET name = :name, page_url = :page_url, position = :position, template = :template WHERE id = :id');
+function updateMenuItem($db, $id, $name, $page_url, $position, $template, $show_in_menu, $parent_id) {
+    $stmt = $db->prepare('UPDATE menu SET name = :name, page_url = :page_url, position = :position, template = :template, show_in_menu = :show_in_menu, parent_id = :parent_id WHERE id = :id');
     $stmt->bindParam(':name', $name, PDO::PARAM_STR);
     $stmt->bindParam(':page_url', $page_url, PDO::PARAM_STR);
     $stmt->bindParam(':position', $position, PDO::PARAM_INT);
     $stmt->bindParam(':template', $template, PDO::PARAM_STR);
+    $stmt->bindParam(':show_in_menu', $show_in_menu, PDO::PARAM_BOOL);
+    $stmt->bindParam(':parent_id', $parent_id, PDO::PARAM_INT);
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     return $stmt->execute();
 }
+
 function getMenuByPageUrl($db, $page_url) {
     $stmt = $db->prepare("SELECT * FROM menu WHERE page_url = :page_url");
     $stmt->bindParam(':page_url', $page_url);

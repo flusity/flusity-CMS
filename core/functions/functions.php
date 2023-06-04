@@ -1,5 +1,18 @@
 <?php
 
+function getDBConnection($config) {
+    try {
+        $dsn = 'mysql:host=' . $config['db_host'] . ';dbname=' . $config['db_name'] . ';charset=utf8mb4';
+        $options = [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            PDO::ATTR_EMULATE_PREPARES => false
+        ];
+        return new PDO($dsn, $config['db_user'], $config['db_password'], $options);
+    } catch (PDOException $e) {
+        die('Nepavyko prisijungti prie duomenų bazės: ' . $e->getMessage());
+    }
+}
 
 function getFullUrl($relativePath) {
     $base_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'];
@@ -14,20 +27,6 @@ function generateCSRFToken() {
 }
 function validateCSRFToken($token) {
     return isset($_SESSION['csrf_token']) && hash_equals($_SESSION['csrf_token'], $token);
-}
-
-function getDBConnection($config) {
-    try {
-        $dsn = 'mysql:host=' . $config['db_host'] . ';dbname=' . $config['db_name'] . ';charset=utf8mb4';
-        $options = [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::ATTR_EMULATE_PREPARES => false
-        ];
-        return new PDO($dsn, $config['db_user'], $config['db_password'], $options);
-    } catch (PDOException $e) {
-        die('Nepavyko prisijungti prie duomenų bazės: ' . $e->getMessage());
-    }
 }
 
     function findNameById($id, $items) {
@@ -92,17 +91,17 @@ function getDBConnection($config) {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     
-    function updateSettings($db, $site_title, $meta_description, $footer_text, $pretty_url, $language, $posts_per_page) {
-        $stmt = $db->prepare("UPDATE settings SET site_title = :site_title, meta_description = :meta_description, footer_text = :footer_text, pretty_url = :pretty_url, language = :language, posts_per_page = :posts_per_page");
+    function updateSettings($db, $site_title, $meta_description, $footer_text, $pretty_url, $language, $posts_per_page, $registration_enabled) {
+        $stmt = $db->prepare("UPDATE settings SET site_title = :site_title, meta_description = :meta_description, footer_text = :footer_text, pretty_url = :pretty_url, language = :language, posts_per_page = :posts_per_page, registration_enabled = :registration_enabled");
         $stmt->bindParam(':site_title', $site_title, PDO::PARAM_STR);
         $stmt->bindParam(':meta_description', $meta_description, PDO::PARAM_STR);
         $stmt->bindParam(':footer_text', $footer_text, PDO::PARAM_STR);
         $stmt->bindParam(':pretty_url', $pretty_url, PDO::PARAM_INT);
         $stmt->bindParam(':language', $language, PDO::PARAM_STR);
         $stmt->bindParam(':posts_per_page', $posts_per_page, PDO::PARAM_INT);
+        $stmt->bindParam(':registration_enabled', $registration_enabled, PDO::PARAM_INT);
         return $stmt->execute();
     }
-    
     
     
     function createBackupFilename($db) {

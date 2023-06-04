@@ -20,13 +20,15 @@ $translations = getTranslations($db, $language_code);
 // Duomenų gavimas iš duomenų bazės
 $db = getDBConnection($config);
 
-if (defined('IS_ADMIN') && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'add_menu' && isset($_POST['menu_name']) && isset($_POST['page_url']) && isset($_POST['position']) && isset($_POST['template'])) {
+if (defined('IS_ADMIN') && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'add_menu' && isset($_POST['menu_name']) && isset($_POST['page_url']) && isset($_POST['position']) && isset($_POST['template']) && isset($_POST['show_in_menu']) && isset($_POST['parent_id'])) {
     $menuName = $_POST['menu_name'];
     $page_url = $_POST['page_url'];
     $position = intval($_POST['position']);
     $template = $_POST['template'];
-    $result = createMenuItem($db, $menuName, $page_url, $position, $template);
-
+    $show_in_menu = filter_var($_POST['show_in_menu'], FILTER_VALIDATE_BOOLEAN);
+    $parent_id = intval($_POST['parent_id']);
+    $result = createMenuItem($db, $menuName, $page_url, $position, $template, $show_in_menu, $parent_id);
+    
     $response = array();
     if ($result) {
         $_SESSION['success_message'] = t('Menu item successfully added.');

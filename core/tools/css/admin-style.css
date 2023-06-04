@@ -154,3 +154,45 @@ button {
 button:hover {
   background-color: #e0e0e0;
 }
+
+li.nav-item.tabs-nav-item {
+  margin: 0 10px 0 0; 
+  padding: 0px 1px 0px 0px;
+  background-color: #f8f9fa; 
+  border-radius: 5px; 
+}
+a.nav-link.tabs-nav-item {
+  height: 50px;
+}
+
+.nav-tabs .nav-link {
+  margin: 3px 10px -7px 8px;
+}
+
+li.nav-item.tabs-nav-item a {
+  color: #495057;
+}
+
+li.nav-item.tabs-nav-item a:hover {
+  color: #343a40; 
+  text-decoration: none; 
+}
+a.nav-link.active {
+  padding: 9px 12px 10px 13px;
+}
+li.nav-item.tabs-nav-item a.active {
+  color: #ffffff; 
+  background-color: #343a40;
+}
+
+.nav-tabs {
+  --bs-nav-tabs-border-width: 1px;
+  --bs-nav-tabs-border-color: #dee2e6;
+  --bs-nav-tabs-border-radius: 0.275rem !important;
+  --bs-nav-tabs-link-hover-border-color: #e9ecef #e9ecef #dee2e6;
+  --bs-nav-tabs-link-active-color: #495057;
+  --bs-nav-tabs-link-active-bg: #fff;
+  --bs-nav-tabs-link-active-border-color: #dee2e6 #dee2e6 #fff;
+  border-bottom: 1px solid #495057 !important;
+  margin: 0px 0px 5px 10px;
+}
