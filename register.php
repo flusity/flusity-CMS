@@ -1,9 +1,8 @@
 <?php 
-header("Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self';");
-require_once 'template/header.php';
-$db = getDBConnection($config);
+header("Content-Security-Policy: default-src 'self'; script-src 'self' 'self/js'; style-src 'self'; img-src 'self';");
 
-// Gaunamas kalbos nustatymas iš duomenų bazės  
+require_once 'template/header.php';
+ 
 $language_code = getLanguageSetting($db);
 $translations = getTranslations($db, $language_code);
 
@@ -11,36 +10,14 @@ if (isset($_SESSION['user_id'])) {
     header('Location: /');
     exit();
 }
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $csrf_token = validateInput($_POST['csrf_token']);
-    if (!validateCSRFToken($csrf_token)) {
-        $error_message = t("Invalid CSRF token. Try again.");
-    } else {
-        $login_name = validateInput($_POST['login_name']);
-        $username = validateInput($_POST['username']);
-        $password = validateInput($_POST['password']);
-        $confirm_password = validateInput($_POST['confirm_password']);
-        $surname = validateInput($_POST['surname']);
-        $phone = validateInput($_POST['phone']);
-        $email = validateInput($_POST['email']);
+require_once 'core/tools/set_register.php';
 
-        
-        if ($password === $confirm_password) {
-            if (isUsernameTaken($username, $db) || isLoginNameTaken($login_name, $db)) {
-                $error_message = t("That Name or Login Name is already taken. Choose another.");
-            } else {
-                if (registerUser($login_name, $username, $password, $surname, $phone, $email, $db)) {
-                    header('Location: login.php');
-                    exit();
-                } else {
-                    $error_message = t("User registration failed. Try again.");
-                }
-            }
-        } else {
-            $error_message = t("Passwords do not match. Try again.");
-        }
-    }
-} ?>
+$db = getDBConnection($config);
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $error_message = handleRegister($db, $_POST);
+}
+?>
 <header id="header">
 <?php require_once 'template/menu-horizontal.php';?>
 </header>
@@ -55,10 +32,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="col-sm-4">
 <h1 class="h3 mb-3 fw-normal"><?php echo t("Registration");?></h1>
 <?php if (isset($error_message)): ?>
-    <div class="alert alert-danger" role="alert">
+    <div id="error_message" class="alert alert-danger" role="alert">
         <?php echo htmlspecialchars($error_message); ?>
     </div>
+    <script src="assets/main/autoDismiss.js"></script>
+    <script type="text/javascript">
+        autoDismissError();
+    </script>
 <?php endif; ?>
+
 <form method="POST" action="">
     <div class="form-floating">
         <input type="text" class="form-control" id="login_name" name="login_name" placeholder="<?php echo t("Login Name");?>" required>
@@ -105,4 +87,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 </main>
 </section>
+
 <?php require_once 'template/footer.php';?>

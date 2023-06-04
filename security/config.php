@@ -2,8 +2,8 @@
 
 $config = [
     'db_host' => 'localhost',
-    'db_name' => 'your_database',
+    'db_name' => 'jdbas',
     'db_user' => 'root',
-    'db_password' => 'database_password'
+    'db_password' => 'Slimas1'
 ];
 $language_code = 'lt'; 

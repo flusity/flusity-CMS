@@ -6,7 +6,7 @@ if (!isset($_SESSION['user_id'])) {
     header('Location: index.php');
     exit();
 } else {
-    if (!checkUserRole($_SESSION['user_id'], 'user', $db)) {
+    if (!checkUserRole($_SESSION['user_id'], 'user', $db) && !checkUserRole($_SESSION['user_id'], 'admin', $db) && !checkUserRole($_SESSION['user_id'], 'moderator', $db)) {
         header('Location: index.php');
         exit();
     }
@@ -15,7 +15,8 @@ if (!isset($_SESSION['user_id'])) {
 $language_code = getLanguageSetting($db);
 $translations = getTranslations($db, $language_code);
 
- ?>
+?>
+
 <header id="header">
 <?php require_once 'template/menu-horizontal.php';?>
 </header>
