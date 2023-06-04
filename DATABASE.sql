@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 02, 2023 at 09:47 PM
+-- Generation Time: Jun 04, 2023 at 11:04 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -63,9 +63,9 @@ INSERT INTO `custom_blocks` (`id`, `name`, `menu_id`, `place_id`, `html_code`) V
 (7, 'Pridėtas Blokas col-sm-5', 6, 83, 'Testuoju bloko pridėjimą į col-sm-5 dalį'),
 (9, 'Testuoju dokumentus', 1, 85, 'Bandomas tekstas dokumentuose'),
 (11, 'Test Contact col 5', 12, 101, 'Test Contact block col-sm-5 '),
-(13, ' Box test', 6, 79, ' <h2 class=\"box__title\">Antraštė pirma</h2>\r\n<p class=\"box__text\">Trumpas tekstas box dalis pirmas</p>\r\n   <a href=\"#\" class=\"box__link\">Box Nuoroda 1</a>'),
+(13, ' Box test', 6, 79, ' <h2 class=\"box__title\">Antraštė pirma</h2>\r\n<p class=\"box__text\">Trumpas tekstas box dalis pirmas</p>\r\n   <a href=\"/\" class=\"box__link linkbox\">Box Nuoroda 1</a>'),
 (14, 'Testuoju home-col-down-12', 6, 104, 'Pridedamas bandomasis turinys į home-col-down-12'),
-(15, 'Box test 2', 6, 100, ' <h2 class=\"box__title\">Antraštė angtra</h2>\r\n <p class=\"box__text\">Trumpas tekstas box dalis antras</p>\r\n <a href=\"#\" class=\"box__link\">Box Nuoroda 2</a>');
+(15, 'Box test 2', 6, 100, ' <h2 class=\"box__title\">Antraštė angtra</h2>\r\n <p class=\"box__text\">Trumpas tekstas box dalis antras</p>\r\n <a href=\"#\" class=\"box__link linkbox\">Box Nuoroda 2</a>');
 
 -- --------------------------------------------------------
 
@@ -104,18 +104,21 @@ CREATE TABLE `menu` (
   `position` int(11) NOT NULL,
   `template` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `show_in_menu` tinyint(1) NOT NULL DEFAULT 1,
+  `parent_id` int(11) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `menu`
 --
 
-INSERT INTO `menu` (`id`, `name`, `page_url`, `position`, `template`, `created_at`, `updated_at`) VALUES
-(1, 'Dokumentai', 'dokumentai', 3, 'template_left_content', '2023-04-15 09:00:19', '2023-04-20 10:49:49'),
-(3, 'NAUJIENOS', 'news', 2, 'template_naujienos', '2023-04-15 21:29:51', '2023-04-19 20:32:46'),
-(6, 'HOME', 'index', 1, 'template_index', '2023-04-16 12:35:26', '2023-04-19 20:38:55'),
-(12, 'Kontaktai', 'contacts', 5, 'template_contacts', '2023-04-21 14:28:01', '2023-05-22 19:41:19');
+INSERT INTO `menu` (`id`, `name`, `page_url`, `position`, `template`, `created_at`, `updated_at`, `show_in_menu`, `parent_id`) VALUES
+(1, 'Dokumentai', 'dokumentai', 3, 'template_left_content', '2023-04-15 09:00:19', '2023-06-04 18:51:29', 1, 0),
+(3, 'NAUJIENOS', 'news', 2, 'template_naujienos', '2023-04-15 21:29:51', '2023-06-04 18:51:25', 1, 0),
+(6, 'HOMES', 'index', 1, 'template_index', '2023-04-16 12:35:26', '2023-06-03 18:24:20', 1, 0),
+(12, 'Kontaktai', 'contacts', 5, 'template_contacts', '2023-04-21 14:28:01', '2023-06-04 18:51:33', 1, 0),
+(15, 'Testuoju2', 'test', 7, 'template_left_content', '2023-06-03 18:09:36', '2023-06-03 21:37:33', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -179,7 +182,8 @@ INSERT INTO `posts` (`id`, `title`, `content`, `author_id`, `role`, `created_at`
 (28, 'sdfsdf', 'sdfsdf', 2, 'admin', '2023-04-19 18:18:44', 'published', 3, 'aaa', '2023-05-25 09:25:46'),
 (29, 'hh', 'hhhccccccc', 2, 'admin', '2023-04-19 20:56:21', 'draft', 6, 'hddzf', '2023-05-26 16:21:11'),
 (30, 'nnneeeee', 'xcvxerter e er', 2, 'admin', '2023-04-19 21:11:47', 'draft', 3, 'nnnf', '2023-05-26 10:56:16'),
-(31, 'asda', '&lt;b&gt;adasdasdas&lt;/b&gt;', 2, 'admin', '2023-05-26 13:58:04', 'published', 1, 'nnnn', '2023-06-02 14:12:36');
+(31, 'asda', '&lt;b&gt;adasdasdas&lt;/b&gt;', 2, 'admin', '2023-05-26 13:58:04', 'published', 1, 'nnnn', '2023-06-03 16:27:03'),
+(32, 'xxxxx', '&lt;b&gt;xcvxcvxcvxcv&lt;/b&gt;', 2, 'admin', '2023-06-03 20:31:21', 'published', 6, 'aaa', '2023-06-03 19:29:34');
 
 -- --------------------------------------------------------
 
@@ -193,15 +197,16 @@ CREATE TABLE `settings` (
   `footer_text` text NOT NULL,
   `pretty_url` int(1) NOT NULL DEFAULT 0,
   `language` varchar(2) NOT NULL DEFAULT 'en',
-  `posts_per_page` int(11) NOT NULL DEFAULT 10
+  `posts_per_page` int(11) NOT NULL DEFAULT 10,
+  `registration_enabled` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `settings`
 --
 
-INSERT INTO `settings` (`site_title`, `meta_description`, `footer_text`, `pretty_url`, `language`, `posts_per_page`) VALUES
-('JD website', 'JD website description', 'Copyright &copy; JD Theme 2023', 1, 'lt', 10);
+INSERT INTO `settings` (`site_title`, `meta_description`, `footer_text`, `pretty_url`, `language`, `posts_per_page`, `registration_enabled`) VALUES
+('JD website', 'JD website description', 'Copyright &copy; JD Theme 2023', 1, 'lt', 10, 1);
 
 -- --------------------------------------------------------
 
@@ -415,7 +420,15 @@ INSERT INTO `translations` (`id`, `language_code`, `translation_key`, `translati
 (225, 'lt', 'Posts per page', 'Įrašai per puslapį'),
 (226, 'lt', 'Layout Places', 'Maketo Vietos'),
 (227, 'lt', 'Profile', 'Profilis'),
-(228, 'lt', 'User Area', 'Vartotojo aplinka');
+(228, 'lt', 'User Area', 'Vartotojo aplinka'),
+(229, 'lt', 'You\'ve wandered off into tropical limbo! Nothing to see here.', 'Jūs nuklydote į tropinę nežinią! Nieko jūs čia nepamatysite.'),
+(230, 'lt', 'to return back home.', 'kad grįžti atgal į pagrindinį puslapį'),
+(231, 'lt', 'Click', 'Spauskite'),
+(232, 'lt', 'here', 'čia'),
+(233, 'lt', 'Show', 'Rodomas'),
+(234, 'lt', 'Parent', 'Tėvinis puslapis'),
+(235, 'lt', 'User registration successful. You can now log in.', 'Vartotojo registracija sėkminga. Dabar galite prisijungti.'),
+(236, 'lt', 'Registration Enabled', 'Registracija leidžiama');
 
 -- --------------------------------------------------------
 
@@ -530,31 +543,31 @@ ALTER TABLE `files`
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `places`
 --
 ALTER TABLE `places`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=229;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=237;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Constraints for dumped tables
