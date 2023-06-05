@@ -68,7 +68,10 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
                         <li class="nav-item">
                             <a class="nav-link tabs-nav-item" data-bs-toggle="tab" href="#backup">Database Backup</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item text-center">
+                            <a class="nav-link tabs-nav-item" data-bs-toggle="tab" href="#seo">SEO</a>
+                        </li>
+                        <li class="nav-item text-center">
                             <a class="nav-link tabs-nav-item" data-bs-toggle="tab" href="#cache">Cache</a>
                         </li>
                     </ul>
@@ -147,6 +150,13 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
                                 echo '<p>'. t("No backups").'</p>';
                             }
                         ?>
+                        </div>
+                        <div class="tab-pane fade" id="seo">
+                        
+                        
+
+           
+            
                         </div>
                         <div class="tab-pane fade" id="cache">
                         <form action="clear_cache.php" method="post">
