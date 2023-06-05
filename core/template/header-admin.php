@@ -11,7 +11,7 @@ define('IS_ADMIN', true);
 $db = getDBConnection($config);
 $settings = getSettings($db);
 $languages = getAllLanguages($db);
-
+$site_title = isset($settings['site_title']) ? $settings['site_title'] : '';
 $footer_text = isset($settings['footer_text']) ? $settings['footer_text'] : '';
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
@@ -32,14 +32,12 @@ if (!checkUserRole($user_id, 'admin', $db)) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Index</title>
-    <!--  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script> -->
-    <link href="/assets/bootstrap-5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/font-awesome/6.1.0/css/all.min.css">
+    <title><?php echo $site_title;?></title>
+    <link href="<?php $_SERVER['DOCUMENT_ROOT']; ?>/assets/bootstrap-5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"> 
+    <link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT']; ?>/assets/font-awesome/6.1.0/css/all.min.css">
     <link href="<?php $_SERVER['DOCUMENT_ROOT']; ?>/core/tools/css/admin-style.css" rel="stylesheet">
-    <script src="/assets/bootstrap-5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <link href="<?php $_SERVER['DOCUMENT_ROOT']; ?>/core/tools/css/admin-style-two.css" rel="stylesheet"> 
-    <script src="/assets/dist/js/jquery-3.6.0.min.js"></script>
+    <link href="<?php $_SERVER['DOCUMENT_ROOT']; ?>/core/tools/css/admin-style-two.css" rel="stylesheet">
+    <script src="<?php $_SERVER['DOCUMENT_ROOT']; ?>/assets/dist/js/jquery-3.6.0.min.js"></script>
+     
 </head>
 <body>
