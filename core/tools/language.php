@@ -1,24 +1,22 @@
-
 <?php
-define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../') . '/');
-require_once ROOT_PATH . 'core/template/header-admin.php';
+    define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../') . '/');
+    require_once ROOT_PATH . 'core/template/header-admin.php';
 
-$possible_rows = [15, 35, 75, 150, 250, 350]; // galimos eilučių reikšmės
-$records_per_page = isset($_GET['rows']) ? intval($_GET['rows']) : 15; // pasirinktos eilutės
+    $possible_rows = [15, 35, 75, 150, 250, 350]; // galimos eilučių reikšmės
+    $records_per_page = isset($_GET['rows']) ? intval($_GET['rows']) : 15; // pasirinktos eilutės
 
-$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-$offset = ($page - 1) * $records_per_page;
-$search_term = isset($_GET['search_term']) ? $_GET['search_term'] : '';
-$translationsWords = getTranslationsWords($db, $records_per_page, $offset, $search_term);
+    $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+    $offset = ($page - 1) * $records_per_page;
+    $search_term = isset($_GET['search_term']) ? $_GET['search_term'] : '';
+    $translationsWords = getTranslationsWords($db, $records_per_page, $offset, $search_term);
 
-$total_records = countTranslations($db);
-$total_pages = ceil($total_records / $records_per_page);
-$i=1;
-$editTranslation = null;
-if (isset($_GET['edit_id'])) {
-    $editTranslation = getTranslationById($db, $_GET['edit_id']);
-}
-
+    $total_records = countTranslations($db);
+    $total_pages = ceil($total_records / $records_per_page);
+    $i=1;
+    $editTranslation = null;
+    if (isset($_GET['edit_id'])) {
+        $editTranslation = getTranslationById($db, $_GET['edit_id']);
+    }
 ?>
 <div class="container-fluid">
     <div class="row">
@@ -150,4 +148,29 @@ if (isset($_GET['edit_id'])) {
  </div>
 </div>
 </div>
+<script>
+ document.getElementById('language_code').addEventListener('change', function () {
+        if (this.value === 'new') {
+            document.getElementById('new_language_code').classList.remove('d-none');
+        } else {
+            document.getElementById('new_language_code').classList.add('d-none');
+        }
+ });  
+ 
+ document.querySelector('#search_term').addEventListener('input', function() {
+        if (this.value !== '') {
+            document.querySelector('#clear-search').style.display = 'block';
+        } else {
+            document.querySelector('#clear-search').style.display = 'none';
+        }
+ });
+
+ document.querySelector('#clear-search').addEventListener('click', function() {
+    var searchInput = document.querySelector('#search_term');
+    searchInput.value = '';
+    this.style.display = 'none';
+    var event = new Event('keyup');
+    searchInput.dispatchEvent(event);
+ });
+</script>
 <?php require_once ROOT_PATH . 'core/template/admin-footer.php'; ?>
