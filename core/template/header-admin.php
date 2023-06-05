@@ -1,5 +1,5 @@
-<?php 
-if (session_status() !== PHP_SESSION_ACTIVE) {
+
+<?php if (session_status() !== PHP_SESSION_ACTIVE) {
   session_start();
 }
 require_once $_SERVER['DOCUMENT_ROOT'] . '/security/config.php';
@@ -37,11 +37,9 @@ if (!checkUserRole($user_id, 'admin', $db)) {
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script> -->
     <link href="/assets/bootstrap-5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/font-awesome/6.1.0/css/all.min.css">
-    <script src="/assets/dist/js/jquery-3.6.0.min.js"></script>
-    <script src="<?php $_SERVER['DOCUMENT_ROOT']; ?>/core/tools/js/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
     <link href="<?php $_SERVER['DOCUMENT_ROOT']; ?>/core/tools/css/admin-style.css" rel="stylesheet">
     <script src="/assets/bootstrap-5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <link href="<?php $_SERVER['DOCUMENT_ROOT']; ?>/core/tools/css/admin-style-two.css" rel="stylesheet"> 
-
+    <script src="/assets/dist/js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
