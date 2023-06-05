@@ -81,7 +81,7 @@
   }
     $('#toggleSidebarBtn').on('click', toggleSidebar);
 });
-   
+
 document.getElementById('settingsDropdown').addEventListener('click', function() {
   var submenu = document.getElementById('settingsSubmenu');
   if (submenu.style.display === "none") {
@@ -89,33 +89,6 @@ document.getElementById('settingsDropdown').addEventListener('click', function()
   } else {
     submenu.style.display = "none";
   }
-});
-  
-document.getElementById('language_code').addEventListener('change', function () {
-        if (this.value === 'new') {
-            document.getElementById('new_language_code').classList.remove('d-none');
-        } else {
-            document.getElementById('new_language_code').classList.add('d-none');
-        }
- });
- document.querySelector('#search_term').addEventListener('input', function() {
-        // Show the clear button if the input field is not empty
-        if (this.value !== '') {
-            document.querySelector('#clear-search').style.display = 'block';
-        } else {
-            document.querySelector('#clear-search').style.display = 'none';
-        }
-    });
-
-    document.querySelector('#clear-search').addEventListener('click', function() {
-    // Clear the input field and hide the clear button
-    var searchInput = document.querySelector('#search_term');
-    searchInput.value = '';
-    this.style.display = 'none';
-
-    // Trigger the keyup event
-    var event = new Event('keyup');
-    searchInput.dispatchEvent(event);
 });
 
 </script>
