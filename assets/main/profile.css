@@ -18,6 +18,18 @@
     height: 47px;
     padding: 1px 1px 0px 9px;
     width: 155px;
+    background-color: transparent;
+    color: rgba(63, 63, 63, 0.797);
+}
+.btn-check.navmenubutton:checked+.btn, .btn.navmenubutton.active, .btn.navmenubutton.show, .btn:first-child.navmenubutton:active, :not(.btn-check)+.btn.navmenubutton:active {
+  color: rgba(57, 56, 56, 0.641);;
+  background-color:  rgba(103, 103, 103, 0.042);
+  border-color: rgba(54, 53, 53, 0.277);;
+}
+.btn.navmenubutton:hover {
+  color: rgb(53 52 52 / 88%);
+  background-color: rgba(103, 103, 103, 0.184); ;
+  border-color: rgba(56, 56, 56, 0.042);;
 }
   .user-profile {
     display: flex;
