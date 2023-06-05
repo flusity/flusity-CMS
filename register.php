@@ -1,6 +1,4 @@
 <?php 
-//header("Content-Security-Policy: default-src 'self'; script-src 'self' /assets/main /assets/dist/js /assets/popperjs /assets/bootstrap-5.2.3/dist/js; style-src 'self'; img-src 'self';");
-
 require_once 'template/header.php';
  
 $language_code = getLanguageSetting($db);

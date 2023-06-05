@@ -23,7 +23,7 @@ $footer_text = isset($settings['footer_text']) ? $settings['footer_text'] : '';
 <head>
     <meta charset="UTF-8">
     <title><?php echo $site_title;?></title>
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://ajax.googleapis.com; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self' data: https://fonts.gstatic.com; connect-src *">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' gap:; script-src 'self' data: https://ssl.gstatic.com 'unsafe-eval'; object-src *; img-src 'self' data:; media-src 'self' data:;  style-src 'self' data: 'unsafe-inline'; font-src 'self' data:; connect-src *">
     <link href="assets/bootstrap-5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet"> -->
     <link href="assets/fonts/fonts-quicksand.css" rel="stylesheet">
