@@ -10,7 +10,7 @@
 
 <script src="<?php $_SERVER['DOCUMENT_ROOT']; ?>/core/tools/js/content_redactor.js"></script>
 <script src="<?php $_SERVER['DOCUMENT_ROOT']; ?>/core/tools/js/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
-<script src="../../assets/popperjs/popper.min.js"></script>
+<script src="<?php $_SERVER['DOCUMENT_ROOT']; ?>/assets/popperjs/popper.min.js"></script>
 <script>
         $(document).ready(function() {
 
@@ -73,10 +73,6 @@ document.getElementById('settingsDropdown').addEventListener('click', function()
     submenu.style.display = "none";
   }
 });
-
 </script>
-
-
-
 </body>
 </html>
