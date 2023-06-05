@@ -120,7 +120,11 @@ li.list-group-item {
   max-width: calc(100% - 70px);
 }
 
-@media (max-width: 767.98px) {
+@media (max-width: 768px) {
+  .col-md-10 {
+    flex: 0 0 auto;
+    width: 70%;
+  }
   .sidebar.sidebar-expanded {
     width: 100%;
     position: absolute;
@@ -156,17 +160,23 @@ button:hover {
 }
 
 li.nav-item.tabs-nav-item {
-  margin: 0 10px 0 0; 
-  padding: 0px 1px 0px 0px;
-  background-color: #f8f9fa; 
+  margin: 0 0px 0 0; 
+  padding: 0px 0px 0px 0px;
+  background-color: #f8f9fa00; 
   border-radius: 5px; 
 }
 a.nav-link.tabs-nav-item {
   height: 50px;
+  min-width: 6rem;
+  padding: 0px 4px 0px 4px;
+}
+
+a.tabs-nav-item {
+  padding: 0px 4px 0px 4px;
 }
 
 .nav-tabs .nav-link {
-  margin: 3px 10px -7px 8px;
+  margin: 10px 0px -1px 0px;
 }
 
 li.nav-item.tabs-nav-item a {
@@ -178,7 +188,7 @@ li.nav-item.tabs-nav-item a:hover {
   text-decoration: none; 
 }
 a.nav-link.active {
-  padding: 9px 12px 10px 13px;
+  padding: 8px 12px 16px 13px;
 }
 li.nav-item.tabs-nav-item a.active {
   color: #ffffff; 
@@ -193,6 +203,6 @@ li.nav-item.tabs-nav-item a.active {
   --bs-nav-tabs-link-active-color: #495057;
   --bs-nav-tabs-link-active-bg: #fff;
   --bs-nav-tabs-link-active-border-color: #dee2e6 #dee2e6 #fff;
-  border-bottom: 1px solid #495057 !important;
-  margin: 0px 0px 5px 10px;
+  border-bottom: -1px solid #495057 !important;
+  margin: 0px 0px 0px 0px;
 }
