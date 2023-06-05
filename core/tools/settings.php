@@ -69,7 +69,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
                             <a class="nav-link tabs-nav-item" data-bs-toggle="tab" href="#backup">Database Backup</a>
                         </li>
                         <li class="nav-item text-center">
-                            <a class="nav-link tabs-nav-item" data-bs-toggle="tab" href="#seo">SEO</a>
+                            <a class="nav-link tabs-nav-item" data-bs-toggle="tab" href="#next">Next Setting</a>
                         </li>
                         <li class="nav-item text-center">
                             <a class="nav-link tabs-nav-item" data-bs-toggle="tab" href="#cache">Cache</a>
@@ -151,10 +151,8 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
                             }
                         ?>
                         </div>
-                        <div class="tab-pane fade" id="seo">
-                        
-                        
-
+                        <div class="tab-pane fade" id="next">
+                            
            
             
                         </div>
