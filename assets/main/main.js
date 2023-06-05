@@ -66,9 +66,15 @@
     }
     
     function updateContent(index) {
-      header.style.backgroundImage = `url(${images[index]})`;
-      headerTitle.innerText = data[index].title;
-      headerText.innerText = data[index].text;
+      if(header && headerTitle && headerText) { // tikrinama ar elementai egzistuoja
+        header.style.backgroundImage = `url(${images[index]})`;
+        headerTitle.innerText = data[index].title;
+        headerText.innerText = data[index].text;
+      }
+    }
+    if(header && headerTitle && headerText) {
+      updateContent(0); 
+      startInterval();
     }
     
     updateContent(0);
