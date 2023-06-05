@@ -13,7 +13,6 @@ if (isset($config)) {
 }
 $settings = getSettings($db);
 
-// Check if the keys exist in the array before using them
 $site_title = isset($settings['site_title']) ? $settings['site_title'] : '';
 $meta_description = isset($settings['meta_description']) ? $settings['meta_description'] : '';
 $footer_text = isset($settings['footer_text']) ? $settings['footer_text'] : '';
@@ -25,7 +24,6 @@ $footer_text = isset($settings['footer_text']) ? $settings['footer_text'] : '';
     <title><?php echo $site_title;?></title>
     <meta http-equiv="Content-Security-Policy: script-src 'self' 'unsafe-inline' https://ssl.gstatic.com 'unsafe-eval'">
     <link href="assets/bootstrap-5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet"> -->
     <link href="assets/fonts/fonts-quicksand.css" rel="stylesheet">
     <link href="assets/main/style.css" rel="stylesheet"> <!-- -->
    <style>
