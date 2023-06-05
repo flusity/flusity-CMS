@@ -53,8 +53,7 @@
       box.style.color = textColor[index];
       boxLinks[index].style.color = linkColor[index];
       boxLinks[index].style.cursor = "pointer"; // pridėjome šią eilutę
-    });
-    
+    });  
     
     let intervalId;
     
@@ -72,14 +71,8 @@
         headerText.innerText = data[index].text;
       }
     }
-    if(header && headerTitle && headerText) {
-      updateContent(0); 
-      startInterval();
-    }
     
     updateContent(0);
     startInterval();
     let currentIndex = 0;
     
-
-  
