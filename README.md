@@ -1,6 +1,6 @@
-# CMS-PHP-PDO
+# EASY-CMS
 # 
-PHP CMS project, Log In, Sign Up, admin, moderator, user roles, add/edit/delete post, categories, language, files, menu, custom block, backup.sql, update website settings.
+PHP CMS project, Log In, Sign Up, admin, moderator, user roles, add/edit/delete post, layout places, language, files, menu, custom block, backup.sql, update website settings.
 
 ![banner](http://manowebas.lt/wp-content/themes/manowebas/assets/img/logo.png)
 
