@@ -176,8 +176,13 @@ function createDatabaseBackup($db, $backupFilename) {
                 $backupFiles[] = $file;
             }
         }
+        usort($backupFiles, function($a, $b) use ($backupDir) {
+            return filemtime($backupDir . $b) - filemtime($backupDir . $a);
+        });
+
         return $backupFiles;
     }
+
         
     function getContactFormSettings($db) {
         $stmt = $db->prepare("SELECT * FROM `contact_form_settings`");
