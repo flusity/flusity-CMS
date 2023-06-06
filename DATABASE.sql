@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 06, 2023 at 12:55 PM
+-- Generation Time: Jun 06, 2023 at 02:30 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -177,7 +177,7 @@ CREATE TABLE `posts` (
 
 INSERT INTO `posts` (`id`, `title`, `content`, `author_id`, `role`, `created_at`, `status`, `menu_id`, `tags`, `updated_at`, `description`, `keywords`, `priority`) VALUES
 (1, 'ggnn', 'bcncvbvcbsrgfsgf dfgfd', 2, 'admin', '2023-04-15 16:08:31', 'draft', 1, 'ddddfdfddd', '2023-04-19 16:17:29', NULL, NULL, 0),
-(4, 'Naujas bandymas 3', '&lt;b&gt;Lorem&lt;/b&gt; ipsum dolor sit amet, consectetur adipiscing elit. &lt;img src=&quot;uploads/pexels-dominika-roseclay_2b7dd92bc8d188b4.jpg&quot; width=&quot;250px&quot; height=&quot;auto&quot; align=&quot;left&quot; hspace=&quot;15&quot; vspace=&quot;15&quot;/&gt;\r\nAliquam ultricies justo ut purus efficitur, eleifend pellentesque risus cursus. Maecenas ex massa, sagittis id metus non, convallis scelerisque ligula. Vivamus aliquam risus accumsan lacinia eleifend. Nunc vestibulum massa a mauris egestas, quis sollicitudin est posuere. Duis lobortis tincidunt leo, vitae condimentum odio mollis at. Nullam mollis lobortis erat, lobortis mollis mi commodo ac. Nunc in lectus vitae mauris imperdiet varius in id neque. Vestibulum orci risus, posuere in velit eget, ullamcorper convallis augue. Mauris nulla dui, iaculis ac ultrices quis, scelerisque a libero.', 2, 'admin', '2023-01-01 11:03:58', 'published', 6, 'nnnn', '2023-06-06 07:17:33', 'testuoju description teksto pridėjimą', 'pirmas raktazodis', 0),
+(4, 'Naujas bandymas 3', '&lt;b&gt;Lorem&lt;/b&gt; ipsum dolor sit amet, consectetur adipiscing elit. &lt;img src=&quot;uploads/pexels-dominika-roseclay_2b7dd92bc8d188b4.jpg&quot; width=&quot;250px&quot; height=&quot;auto&quot; align=&quot;left&quot; hspace=&quot;15&quot; vspace=&quot;15&quot;/&gt;\r\nAliquam ultricies justo ut purus efficitur, eleifend pellentesque risus cursus. Maecenas ex massa, sagittis id metus non, convallis scelerisque ligula. Vivamus aliquam risus accumsan lacinia eleifend. Nunc vestibulum massa a mauris egestas, quis sollicitudin est posuere. Duis lobortis tincidunt leo, vitae condimentum odio mollis at. Nullam mollis lobortis erat, lobortis mollis mi commodo ac. Nunc in lectus vitae mauris imperdiet varius in id neque. Vestibulum orci risus, posuere in velit eget, ullamcorper convallis augue. Mauris nulla dui, iaculis ac ultrices quis, scelerisque a libero.', 2, 'admin', '2023-01-01 11:03:58', 'published', 6, 'nnnn', '2023-06-06 10:01:29', 'testuoju description teksto pridėjimą', 'pirmas raktazodis', 1),
 (5, 'fthhj', 'gfhjgfhjfghjgfhj', 2, 'admin', '0000-00-00 00:00:00', 'draft', 1, 'aaa', '2023-06-05 19:40:21', '', '', 0),
 (8, 'test www', 'dfgdfgfg dfgfg', 2, 'admin', '0000-00-00 00:00:00', 'draft', 3, 'wwwc', '2023-05-25 09:36:58', NULL, NULL, 0),
 (10, 'test www', 'tervvr re eshh       &lt;b&gt;   šįyįš yįęįšudhhdf  dfhfh fghd&lt;/b&gt;', 2, 'admin', '0000-00-00 00:00:00', 'published', 3, 'nnnu', '2023-06-04 20:22:48', NULL, NULL, 0),
@@ -187,7 +187,7 @@ INSERT INTO `posts` (`id`, `title`, `content`, `author_id`, `role`, `created_at`
 (30, 'nnneeeee', 'xcvxerter e er', 2, 'admin', '2023-04-19 21:11:47', 'draft', 3, 'nnnf', '2023-05-26 10:56:16', NULL, NULL, 0),
 (31, 'asda', '&lt;b&gt;adasdasdas&lt;/b&gt;', 2, 'admin', '2023-05-26 13:58:04', 'published', 1, 'nnnn', '2023-06-05 20:10:15', '', '', 0),
 (32, 'xxxxx', '&lt;b&gt;xcvxcvxcvxcv&lt;/b&gt;', 2, 'admin', '2023-06-03 20:31:21', 'published', 6, 'aaa', '2023-06-06 07:03:20', 'sdfsdf sdvgsdfsdfddddddddd', 'sdfdsfdf sdfv', 0),
-(33, 'zczx', 'zxcxzczxc rthtrhrth', 2, 'admin', '2023-06-05 23:31:58', 'published', 6, 'nnnu', '2023-06-06 09:37:45', 'ddddddddddddd d  gfgdfgd rthrth ', 'dfhthg  ghfgh fgh', 1),
+(33, 'zczx', 'zxcxzczxc rthtrhrth', 2, 'admin', '2023-06-05 23:31:58', 'published', 6, 'nnnu', '2023-06-06 09:37:45', 'ddddddddddddd d  gfgdfgd rthrth ', 'dfhthg  ghfgh fgh', 0),
 (34, 'zzzzzzzzzzzzz', 'xzczxczx x zx zx', 2, 'admin', '2023-06-05 23:40:09', 'draft', 6, '', '2023-06-06 06:57:15', 'zxc x', 'zzz', 0);
 
 -- --------------------------------------------------------
@@ -204,15 +204,16 @@ CREATE TABLE `settings` (
   `language` varchar(2) NOT NULL DEFAULT 'en',
   `posts_per_page` int(11) NOT NULL DEFAULT 10,
   `registration_enabled` tinyint(1) DEFAULT 1,
-  `session_lifetime` int(11) DEFAULT 1800
+  `session_lifetime` int(11) DEFAULT 1800,
+  `default_keywords` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `settings`
 --
 
-INSERT INTO `settings` (`site_title`, `meta_description`, `footer_text`, `pretty_url`, `language`, `posts_per_page`, `registration_enabled`, `session_lifetime`) VALUES
-('JD website', 'JD website description', 'Copyright &copy; JD Theme 2023', 1, 'lt', 10, 1, 1800);
+INSERT INTO `settings` (`site_title`, `meta_description`, `footer_text`, `pretty_url`, `language`, `posts_per_page`, `registration_enabled`, `session_lifetime`, `default_keywords`) VALUES
+('JD website', 'JD website description', 'Copyright &copy; JD Theme 2023', 1, 'lt', 10, 1, 1800, 'keyword1 keyword2 keyword3 keyword4');
 
 -- --------------------------------------------------------
 
