@@ -13,8 +13,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $posts_per_page = $_POST['posts_per_page'];
     $registration_enabled = isset($_POST['registration_enabled']) ? 1 : 0;
     $session_lifetime = $_POST['session_lifetime'];
-    
-    updateSettings($db, $site_title, $meta_description, $footer_text_settings, $pretty_url, $language, $posts_per_page, $registration_enabled, $session_lifetime); 
+    $default_keywords = $_POST['default_keywords'];
+    updateSettings($db, $site_title, $meta_description, $footer_text_settings, $pretty_url, $language, $posts_per_page, $registration_enabled, $session_lifetime, $default_keywords); 
 
     $_SESSION['success_message'] =  t("Settings successfully updated!");
     header("Location: settings.php");
@@ -83,15 +83,19 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
                             <div class="row">
                                 <div class="col-md-6"> <!-- Left column -->
                                     <div class="form-group">
-                                        <label for="site_title"><?php echo t("Website Name");?></label>
+                                        <label for="site_title"><b><?php echo t("Website Name");?></b></label>
                                         <input type="text" class="form-control" id="site_title" name="site_title" value="<?php echo htmlspecialchars($settings['site_title']); ?>" required>
                                     </div>
                                     <div class="form-group">  
-                                        <label for="meta_description"><?php echo t("META description");?></label>
+                                        <label for="meta_description"><b><?php echo t("META description");?></b></label>
                                         <textarea class="form-control" id="meta_description" name="meta_description" rows="3" required><?php echo htmlspecialchars($settings['meta_description']); ?></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <label for="footer_text"><?php echo t("Footer text");?></label>
+                                        <label for="default_keywords"><b><?php echo t("META Default keywords");?></b></label>
+                                        <textarea class="form-control" id="default_keywords" name="default_keywords" rows="2" required><?php echo htmlspecialchars($settings['default_keywords']); ?></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="footer_text"><b><?php echo t("Footer text");?></b></label>
                                         <textarea class="form-control" id="footer_text" name="footer_text" rows="3" required><?php echo htmlspecialchars($settings['footer_text']); ?></textarea>
                                     </div>
                                 </div>
@@ -108,7 +112,6 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
                                         <label for="language"><?php echo t("Language");?></label>
                                         <select class="form-control-slc" id="language" name="language">
                                             <?php 
-                                                // Pridedame "en" kalbos kodą, jei jo nėra mūsų kalbų sąraše
                                                 $containsEn = array_search('en', array_column($languages, 'language_code')) !== false;
                                                 if (!$containsEn) {
                                                     $languages[] = ['language_code' => 'en'];
