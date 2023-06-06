@@ -14,6 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $registration_enabled = isset($_POST['registration_enabled']) ? 1 : 0;
     $session_lifetime = $_POST['session_lifetime'];
     $default_keywords = $_POST['default_keywords'];
+
     updateSettings($db, $site_title, $meta_description, $footer_text_settings, $pretty_url, $language, $posts_per_page, $registration_enabled, $session_lifetime, $default_keywords); 
 
     $_SESSION['success_message'] =  t("Settings successfully updated!");
@@ -37,7 +38,6 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
         <div class="col-md-2 sidebar" id="sidebar">
             <?php require_once ROOT_PATH . 'core/tools/sidebar.php'; ?>
         </div>
-
         <div class="col-md-10 content-up">
             <div class="col-sm-9">
                 <?php
@@ -61,22 +61,20 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
             <div class="row">
                 <div class="col-sm-12">
                     <h2><?php echo t("Settings");?></h2>
-
                     <ul class="nav nav-tabs">
                         <li class="nav-item tabs-nav-item">
-                            <a class="nav-link active" data-bs-toggle="tab" href="#settings">Website Settings</a>
+                            <a class="nav-link active" data-bs-toggle="tab" href="#settings"><?php echo t("Website Settings");?></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link tabs-nav-item" data-bs-toggle="tab" href="#backup">Database Backup</a>
+                            <a class="nav-link tabs-nav-item" data-bs-toggle="tab" href="#backup"><?php echo t("Database Backup");?></a>
                         </li>
                         <li class="nav-item text-center">
-                            <a class="nav-link tabs-nav-item" data-bs-toggle="tab" href="#next">Next Setting</a>
+                            <a class="nav-link tabs-nav-item" data-bs-toggle="tab" href="#tabs"><?php echo t("Edit Tab's");?></a>
                         </li>
                         <li class="nav-item text-center">
-                            <a class="nav-link tabs-nav-item" data-bs-toggle="tab" href="#cache">Cache</a>
+                            <a class="nav-link tabs-nav-item" data-bs-toggle="tab" href="#cache"><?php echo t("Cache");?></a>
                         </li>
                     </ul>
-
                     <div class="tab-content">
                     <div class="tab-pane fade show active" id="settings">
                         <form method="post">
@@ -99,7 +97,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
                                         <textarea class="form-control" id="footer_text" name="footer_text" rows="3" required><?php echo htmlspecialchars($settings['footer_text']); ?></textarea>
                                     </div>
                                 </div>
-                                <div class="col-md-6"> <!-- Right column -->
+                                <div class="col-md-6"> 
                                     <div class="form-group mt-2">
                                         <label for="pretty_url"><?php echo t("Pretty URL");?></label>
                                         <input type="checkbox" class="form-control-ch" id="pretty_url" name="pretty_url" value="1" <?php echo ($settings['pretty_url'] == 1 ? 'checked' : '');?>>
@@ -136,43 +134,34 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
                             <button type="submit" class="btn btn-primary"><?php echo t("Update Settings");?></button>
                         </form>
                     </div>
-                       
                         <div class="tab-pane fade" id="backup">
-                        <form action="create_backup.php" method="post">
-                            <input type="submit" name="create_backup" value="<?php echo t("Create a backup");?>" class="btn btn-success mt-2">
-                        </form>
+                            <form action="create_backup.php" method="post">
+                                <input type="submit" name="create_backup" value="<?php echo t("Create a backup");?>" class="btn btn-success mt-2">
+                            </form>
                         <?php 
                             $backupDirectory = ROOT_PATH . 'core/tools/backups/';
                             $backupFiles = getBackupFilesList($backupDirectory);
-
                             echo "<h3>".t('List of backups')."</h3>";
-
                             if (count($backupFiles) > 0) {
-                                echo '<ul>';
+                                $i=1;
                                 foreach ($backupFiles as $file) {
-                                    echo "<li><a href='download_backup.php?file=" . urlencode($file) . "'>" . htmlspecialchars($file) . "</a> <a href='delete_backup.php?file=" . urlencode($file) . "' onclick=\"return confirm('Are you sure you want to delete this file?')\">[Ištrinti]</a></li>";
-
+                                    echo "<p>" .$i++.". <a href='download_backup.php?file=" . urlencode($file) . "'>" . htmlspecialchars($file) . "</a> <a href='delete_backup.php?file=" . urlencode($file) . "' onclick=\"return confirm('Are you sure you want to delete this file?')\">[Ištrinti]</a></p>";
                                 }
-                                echo '</ul>';
                             } else {
-                                echo '<p>'. t("No backups").'</p>';
-                            }
-                        ?>
+                                     echo '<p>'. t("No backups").'</p>';
+                            }?>
                         </div>
-                        <div class="tab-pane fade" id="next">
+                        <div class="tab-pane fade" id="tabs">
                             
-           
+                        <!-- Tabs pateikimas -->
             
                         </div>
                         <div class="tab-pane fade" id="cache">
-                        <form action="clear_cache.php" method="post">
-                            <input type="submit" name="clear_cache" value="<?php echo t("Clear Cache");?>" class="btn btn-danger">
-                        </form>
-           
-            
+                            <form action="clear_cache.php" method="post">
+                                <input type="submit" name="clear_cache" value="<?php echo t("Clear Cache");?>" class="btn btn-danger">
+                            </form>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
