@@ -91,8 +91,8 @@ function validateCSRFToken($token) {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     
-    function updateSettings($db, $site_title, $meta_description, $footer_text, $pretty_url, $language, $posts_per_page, $registration_enabled) {
-        $stmt = $db->prepare("UPDATE settings SET site_title = :site_title, meta_description = :meta_description, footer_text = :footer_text, pretty_url = :pretty_url, language = :language, posts_per_page = :posts_per_page, registration_enabled = :registration_enabled");
+    function updateSettings($db, $site_title, $meta_description, $footer_text, $pretty_url, $language, $posts_per_page, $registration_enabled, $session_lifetime) {
+        $stmt = $db->prepare("UPDATE settings SET site_title = :site_title, meta_description = :meta_description, footer_text = :footer_text, pretty_url = :pretty_url, language = :language, posts_per_page = :posts_per_page, registration_enabled = :registration_enabled, session_lifetime = :session_lifetime");
         $stmt->bindParam(':site_title', $site_title, PDO::PARAM_STR);
         $stmt->bindParam(':meta_description', $meta_description, PDO::PARAM_STR);
         $stmt->bindParam(':footer_text', $footer_text, PDO::PARAM_STR);
@@ -100,6 +100,7 @@ function validateCSRFToken($token) {
         $stmt->bindParam(':language', $language, PDO::PARAM_STR);
         $stmt->bindParam(':posts_per_page', $posts_per_page, PDO::PARAM_INT);
         $stmt->bindParam(':registration_enabled', $registration_enabled, PDO::PARAM_INT);
+        $stmt->bindParam(':session_lifetime', $session_lifetime, PDO::PARAM_STR);
         return $stmt->execute();
     }
     
