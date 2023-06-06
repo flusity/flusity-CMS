@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 06, 2023 at 02:30 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Generation Time: Jun 06, 2023 at 10:34 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,7 +31,7 @@ CREATE TABLE `contact_form_settings` (
   `id` int(11) NOT NULL,
   `setting_key` varchar(255) NOT NULL,
   `setting_value` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `contact_form_settings`
@@ -52,7 +52,7 @@ CREATE TABLE `custom_blocks` (
   `menu_id` int(10) UNSIGNED DEFAULT NULL,
   `place_id` int(10) UNSIGNED DEFAULT NULL,
   `html_code` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `custom_blocks`
@@ -78,7 +78,7 @@ CREATE TABLE `files` (
   `name` varchar(255) NOT NULL,
   `url` varchar(255) NOT NULL,
   `uploaded_at` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `files`
@@ -107,7 +107,7 @@ CREATE TABLE `menu` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `show_in_menu` tinyint(1) NOT NULL DEFAULT 1,
   `parent_id` int(11) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `menu`
@@ -131,7 +131,7 @@ CREATE TABLE `places` (
   `name` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `places`
@@ -169,26 +169,25 @@ CREATE TABLE `posts` (
   `description` text DEFAULT NULL,
   `keywords` text DEFAULT NULL,
   `priority` tinyint(1) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `posts`
 --
 
 INSERT INTO `posts` (`id`, `title`, `content`, `author_id`, `role`, `created_at`, `status`, `menu_id`, `tags`, `updated_at`, `description`, `keywords`, `priority`) VALUES
-(1, 'ggnn', 'bcncvbvcbsrgfsgf dfgfd', 2, 'admin', '2023-04-15 16:08:31', 'draft', 1, 'ddddfdfddd', '2023-04-19 16:17:29', NULL, NULL, 0),
-(4, 'Naujas bandymas 3', '&lt;b&gt;Lorem&lt;/b&gt; ipsum dolor sit amet, consectetur adipiscing elit. &lt;img src=&quot;uploads/pexels-dominika-roseclay_2b7dd92bc8d188b4.jpg&quot; width=&quot;250px&quot; height=&quot;auto&quot; align=&quot;left&quot; hspace=&quot;15&quot; vspace=&quot;15&quot;/&gt;\r\nAliquam ultricies justo ut purus efficitur, eleifend pellentesque risus cursus. Maecenas ex massa, sagittis id metus non, convallis scelerisque ligula. Vivamus aliquam risus accumsan lacinia eleifend. Nunc vestibulum massa a mauris egestas, quis sollicitudin est posuere. Duis lobortis tincidunt leo, vitae condimentum odio mollis at. Nullam mollis lobortis erat, lobortis mollis mi commodo ac. Nunc in lectus vitae mauris imperdiet varius in id neque. Vestibulum orci risus, posuere in velit eget, ullamcorper convallis augue. Mauris nulla dui, iaculis ac ultrices quis, scelerisque a libero.', 2, 'admin', '2023-01-01 11:03:58', 'published', 6, 'nnnn', '2023-06-06 10:01:29', 'testuoju description teksto pridėjimą', 'pirmas raktazodis', 1),
-(5, 'fthhj', 'gfhjgfhjfghjgfhj', 2, 'admin', '0000-00-00 00:00:00', 'draft', 1, 'aaa', '2023-06-05 19:40:21', '', '', 0),
-(8, 'test www', 'dfgdfgfg dfgfg', 2, 'admin', '0000-00-00 00:00:00', 'draft', 3, 'wwwc', '2023-05-25 09:36:58', NULL, NULL, 0),
-(10, 'test www', 'tervvr re eshh       &lt;b&gt;   šįyįš yįęįšudhhdf  dfhfh fghd&lt;/b&gt;', 2, 'admin', '0000-00-00 00:00:00', 'published', 3, 'nnnu', '2023-06-04 20:22:48', NULL, NULL, 0),
+(1, 'ggnn', 'bcncvbvcbsrgfsgf dfgfd', 2, 'admin', '2023-04-15 16:08:31', 'draft', 1, '', '2023-06-06 19:17:18', '', '', 0),
+(4, 'Naujas bandymas 3', '&lt;b&gt;Lorem&lt;/b&gt; ipsum dolor sit amet, consectetur adipiscing elit. &lt;img src=&quot;uploads/pexels-dominika-roseclay_2b7dd92bc8d188b4.jpg&quot; width=&quot;250px&quot; height=&quot;auto&quot; align=&quot;left&quot; hspace=&quot;15&quot; vspace=&quot;15&quot;/&gt;\r\nAliquam ultricies justo ut purus efficitur, eleifend pellentesque risus cursus. Maecenas ex massa, sagittis id metus non, convallis scelerisque ligula. Vivamus aliquam risus accumsan lacinia eleifend. Nunc vestibulum massa a mauris egestas, quis sollicitudin est posuere. Duis lobortis tincidunt leo, vitae condimentum odio mollis at. Nullam mollis lobortis erat, lobortis mollis mi commodo ac. Nunc in lectus vitae mauris imperdiet varius in id neque. Vestibulum orci risus, posuere in velit eget, ullamcorper convallis augue. Mauris nulla dui, iaculis ac ultrices quis, scelerisque a libero.', 2, 'admin', '2023-01-01 11:03:58', 'published', 6, 'cccsss, aaa', '2023-06-06 19:28:54', 'testuoju description teksto pridėjimą', 'pirmas raktazodis', 1),
+(5, 'fthhj', 'gfhjgfhjfghjgfhj', 2, 'admin', '0000-00-00 00:00:00', 'draft', 1, '', '2023-06-06 19:17:29', '', '', 0),
+(8, 'test www', 'dfgdfgfg dfgfg', 2, 'admin', '0000-00-00 00:00:00', 'draft', 3, '', '2023-06-06 19:17:43', '', '', 0),
+(10, 'test www', 'tervvr re eshh       &lt;b&gt;   šįyįš yįęįšudhhdf  dfhfh fghd&lt;/b&gt;', 2, 'admin', '0000-00-00 00:00:00', 'published', 3, '', '2023-06-04 20:22:48', NULL, NULL, 0),
 (11, 'sdsrrrrrr', 'fghghgfbfghb fg hh dh dh gfhgfhdfghgf fhj trtyėį  tėįrsh   jjgdjgj', 2, 'admin', '0000-00-00 00:00:00', 'published', 1, '', '2023-05-26 16:21:26', NULL, NULL, 0),
-(28, 'sdfsdf', 'sdfsdf', 2, 'admin', '2023-04-19 18:18:44', 'published', 3, 'aaa', '2023-06-05 20:13:46', '', '', 0),
-(29, 'hh', 'hhhccccccc', 2, 'admin', '2023-04-19 20:56:21', 'draft', 6, 'hddzf', '2023-06-06 06:54:31', '', '', 0),
-(30, 'nnneeeee', 'xcvxerter e er', 2, 'admin', '2023-04-19 21:11:47', 'draft', 3, 'nnnf', '2023-05-26 10:56:16', NULL, NULL, 0),
-(31, 'asda', '&lt;b&gt;adasdasdas&lt;/b&gt;', 2, 'admin', '2023-05-26 13:58:04', 'published', 1, 'nnnn', '2023-06-05 20:10:15', '', '', 0),
-(32, 'xxxxx', '&lt;b&gt;xcvxcvxcvxcv&lt;/b&gt;', 2, 'admin', '2023-06-03 20:31:21', 'published', 6, 'aaa', '2023-06-06 07:03:20', 'sdfsdf sdvgsdfsdfddddddddd', 'sdfdsfdf sdfv', 0),
-(33, 'zczx', 'zxcxzczxc rthtrhrth', 2, 'admin', '2023-06-05 23:31:58', 'published', 6, 'nnnu', '2023-06-06 09:37:45', 'ddddddddddddd d  gfgdfgd rthrth ', 'dfhthg  ghfgh fgh', 0),
-(34, 'zzzzzzzzzzzzz', 'xzczxczx x zx zx', 2, 'admin', '2023-06-05 23:40:09', 'draft', 6, '', '2023-06-06 06:57:15', 'zxc x', 'zzz', 0);
+(28, 'sdfsdf', 'sdfsdf', 2, 'admin', '2023-04-19 18:18:44', 'published', 3, 'cccsss', '2023-06-06 19:28:48', '', '', 0),
+(29, 'hh', 'hhhccccccc', 2, 'admin', '2023-04-19 20:56:21', 'draft', 6, '', '2023-06-06 06:54:31', '', '', 0),
+(30, 'nnneeeee', 'xcvxerter e er', 2, 'admin', '2023-04-19 21:11:47', 'draft', 3, 'aaa', '2023-06-06 19:28:42', '', '', 0),
+(31, 'asda', '&lt;b&gt;adasdasdas&lt;/b&gt;', 2, 'admin', '2023-05-26 13:58:04', 'published', 1, '', '2023-06-06 19:17:59', '', '', 0),
+(32, 'xxxxx', '&lt;b&gt;xcvxcvxcvxcv&lt;/b&gt;', 2, 'admin', '2023-06-03 20:31:21', 'published', 6, '', '2023-06-06 19:17:12', 'sdfsdf sdvgsdfsdfddddddddd', 'sdfdsfdf sdfv', 0),
+(34, 'zzzzzzzzzzzzz', 'xzczxczx x zx zxv erge', 2, 'admin', '2023-06-05 23:40:09', 'draft', 6, '', '2023-06-06 19:03:45', 'zxc x', 'zzz', 0);
 
 -- --------------------------------------------------------
 
@@ -206,7 +205,7 @@ CREATE TABLE `settings` (
   `registration_enabled` tinyint(1) DEFAULT 1,
   `session_lifetime` int(11) DEFAULT 1800,
   `default_keywords` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `settings`
@@ -226,7 +225,7 @@ CREATE TABLE `translations` (
   `language_code` varchar(5) NOT NULL,
   `translation_key` varchar(255) NOT NULL,
   `translation_value` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `translations`
@@ -435,7 +434,11 @@ INSERT INTO `translations` (`id`, `language_code`, `translation_key`, `translati
 (233, 'lt', 'Show', 'Rodomas'),
 (234, 'lt', 'Parent', 'Tėvinis puslapis'),
 (235, 'lt', 'User registration successful. You can now log in.', 'Vartotojo registracija sėkminga. Dabar galite prisijungti.'),
-(236, 'lt', 'Registration Enabled', 'Registracija leidžiama');
+(236, 'lt', 'Registration Enabled', 'Registracija leidžiama'),
+(237, 'lt', 'Session lifetime', 'Sesijos trukmė'),
+(238, 'lt', 'META Default keywords', 'META Numatytieji raktažodžiai'),
+(239, 'lt', 'No tags have been created', 'Nėra sukurta nei vieno Tag žymos'),
+(240, 'lt', 'Edit your Tags', 'Redaguokite savo žymas');
 
 -- --------------------------------------------------------
 
@@ -452,7 +455,7 @@ CREATE TABLE `users` (
   `email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
   `role` enum('admin','moderator','user') NOT NULL DEFAULT 'user'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
@@ -562,13 +565,13 @@ ALTER TABLE `places`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `translations`
 --
 ALTER TABLE `translations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=237;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=241;
 
 --
 -- AUTO_INCREMENT for table `users`
