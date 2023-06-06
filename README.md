@@ -17,6 +17,7 @@ PHP CMS project, Log In, Sign Up, admin, moderator, user roles, add/edit/delete 
 <li>Files (failai)</li>
 <li>Language (kalba vertimas į lt)</li>
 <li>Settings (nustatymai)</li>
+<li>SEO (description keywords system)</li>
 </ul>
 <h3>Profilis</h3> 
 <p>Sukurta paprasto vartotojo sritis</p>
@@ -61,6 +62,7 @@ Atsižvelgiant į šiuos elementus ir funkcijas, svetainė yrap patogus ir funkc
 <li>Files</li>
 <li>Language (default en)</li>
 <li>Settings</li>
+<li>SEO (description keywords system)</li>
 </ul>
 <h3>Profile</h3>
 <p>Common user area created</p>
