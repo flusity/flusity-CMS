@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 04, 2023 at 11:04 PM
+-- Generation Time: Jun 06, 2023 at 11:35 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -165,25 +165,30 @@ CREATE TABLE `posts` (
   `status` enum('draft','published') NOT NULL DEFAULT 'draft',
   `menu_id` int(11) DEFAULT NULL,
   `tags` text DEFAULT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `description` text DEFAULT NULL,
+  `keywords` text DEFAULT NULL,
+  `priority` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `posts`
 --
 
-INSERT INTO `posts` (`id`, `title`, `content`, `author_id`, `role`, `created_at`, `status`, `menu_id`, `tags`, `updated_at`) VALUES
-(1, 'ggnn', 'bcncvbvcbsrgfsgf dfgfd', 2, 'admin', '2023-04-15 16:08:31', 'draft', 1, 'ddddfdfddd', '2023-04-19 16:17:29'),
-(4, 'Naujas bandymas 3', '&lt;b&gt;Lorem&lt;/b&gt; ipsum dolor sit amet, consectetur adipiscing elit. &lt;img src=&quot;uploads/pexels-dominika-roseclay_2b7dd92bc8d188b4.jpg&quot; width=&quot;250px&quot; height=&quot;auto&quot; align=&quot;left&quot; hspace=&quot;15&quot; vspace=&quot;15&quot;/&gt;\r\nAliquam ultricies justo ut purus efficitur, eleifend pellentesque risus cursus. Maecenas ex massa, sagittis id metus non, convallis scelerisque ligula. Vivamus aliquam risus accumsan lacinia eleifend. Nunc vestibulum massa a mauris egestas, quis sollicitudin est posuere. Duis lobortis tincidunt leo, vitae condimentum odio mollis at. Nullam mollis lobortis erat, lobortis mollis mi commodo ac. Nunc in lectus vitae mauris imperdiet varius in id neque. Vestibulum orci risus, posuere in velit eget, ullamcorper convallis augue. Mauris nulla dui, iaculis ac ultrices quis, scelerisque a libero.', 2, 'admin', '0000-00-00 00:00:00', 'published', 6, 'nnnn', '2023-06-02 10:38:31'),
-(5, 'fthhj', 'gfhjgfhjfghjgfhj', 2, 'user', '0000-00-00 00:00:00', 'draft', 1, 'aaa', '2023-04-19 16:17:29'),
-(8, 'test www', 'dfgdfgfg dfgfg', 2, 'admin', '0000-00-00 00:00:00', 'draft', 3, 'wwwc', '2023-05-25 09:36:58'),
-(10, 'test www', 'tervvr re eshh          šįyįš yįęįšudhhdf  dfhfh fghd', 2, 'admin', '0000-00-00 00:00:00', 'published', 3, 'nnnu', '2023-05-25 09:48:58'),
-(11, 'sdsrrrrrr', 'fghghgfbfghb fg hh dh dh gfhgfhdfghgf fhj trtyėį  tėįrsh   jjgdjgj', 2, 'admin', '0000-00-00 00:00:00', 'published', 1, '', '2023-05-26 16:21:26'),
-(28, 'sdfsdf', 'sdfsdf', 2, 'admin', '2023-04-19 18:18:44', 'published', 3, 'aaa', '2023-05-25 09:25:46'),
-(29, 'hh', 'hhhccccccc', 2, 'admin', '2023-04-19 20:56:21', 'draft', 6, 'hddzf', '2023-05-26 16:21:11'),
-(30, 'nnneeeee', 'xcvxerter e er', 2, 'admin', '2023-04-19 21:11:47', 'draft', 3, 'nnnf', '2023-05-26 10:56:16'),
-(31, 'asda', '&lt;b&gt;adasdasdas&lt;/b&gt;', 2, 'admin', '2023-05-26 13:58:04', 'published', 1, 'nnnn', '2023-06-03 16:27:03'),
-(32, 'xxxxx', '&lt;b&gt;xcvxcvxcvxcv&lt;/b&gt;', 2, 'admin', '2023-06-03 20:31:21', 'published', 6, 'aaa', '2023-06-03 19:29:34');
+INSERT INTO `posts` (`id`, `title`, `content`, `author_id`, `role`, `created_at`, `status`, `menu_id`, `tags`, `updated_at`, `description`, `keywords`, `priority`) VALUES
+(1, 'ggnn', 'bcncvbvcbsrgfsgf dfgfd', 2, 'admin', '2023-04-15 16:08:31', 'draft', 1, 'ddddfdfddd', '2023-04-19 16:17:29', NULL, NULL, 0),
+(4, 'Naujas bandymas 3', '&lt;b&gt;Lorem&lt;/b&gt; ipsum dolor sit amet, consectetur adipiscing elit. &lt;img src=&quot;uploads/pexels-dominika-roseclay_2b7dd92bc8d188b4.jpg&quot; width=&quot;250px&quot; height=&quot;auto&quot; align=&quot;left&quot; hspace=&quot;15&quot; vspace=&quot;15&quot;/&gt;\r\nAliquam ultricies justo ut purus efficitur, eleifend pellentesque risus cursus. Maecenas ex massa, sagittis id metus non, convallis scelerisque ligula. Vivamus aliquam risus accumsan lacinia eleifend. Nunc vestibulum massa a mauris egestas, quis sollicitudin est posuere. Duis lobortis tincidunt leo, vitae condimentum odio mollis at. Nullam mollis lobortis erat, lobortis mollis mi commodo ac. Nunc in lectus vitae mauris imperdiet varius in id neque. Vestibulum orci risus, posuere in velit eget, ullamcorper convallis augue. Mauris nulla dui, iaculis ac ultrices quis, scelerisque a libero.', 2, 'admin', '0000-00-00 00:00:00', 'published', 6, 'nnnn', '2023-06-05 20:44:44', 'testuoju description teksto pridėjimą', 'pirmas raktazodis', 1),
+(5, 'fthhj', 'gfhjgfhjfghjgfhj', 2, 'admin', '0000-00-00 00:00:00', 'draft', 1, 'aaa', '2023-06-05 19:40:21', '', '', 0),
+(8, 'test www', 'dfgdfgfg dfgfg', 2, 'admin', '0000-00-00 00:00:00', 'draft', 3, 'wwwc', '2023-05-25 09:36:58', NULL, NULL, 0),
+(10, 'test www', 'tervvr re eshh       &lt;b&gt;   šįyįš yįęįšudhhdf  dfhfh fghd&lt;/b&gt;', 2, 'admin', '0000-00-00 00:00:00', 'published', 3, 'nnnu', '2023-06-04 20:22:48', NULL, NULL, 0),
+(11, 'sdsrrrrrr', 'fghghgfbfghb fg hh dh dh gfhgfhdfghgf fhj trtyėį  tėįrsh   jjgdjgj', 2, 'admin', '0000-00-00 00:00:00', 'published', 1, '', '2023-05-26 16:21:26', NULL, NULL, 0),
+(28, 'sdfsdf', 'sdfsdf', 2, 'admin', '2023-04-19 18:18:44', 'published', 3, 'aaa', '2023-06-05 20:13:46', '', '', 0),
+(29, 'hh', 'hhhccccccc', 2, 'admin', '2023-04-19 20:56:21', 'draft', 6, 'hddzf', '2023-06-05 20:15:13', '', '', 1),
+(30, 'nnneeeee', 'xcvxerter e er', 2, 'admin', '2023-04-19 21:11:47', 'draft', 3, 'nnnf', '2023-05-26 10:56:16', NULL, NULL, 0),
+(31, 'asda', '&lt;b&gt;adasdasdas&lt;/b&gt;', 2, 'admin', '2023-05-26 13:58:04', 'published', 1, 'nnnn', '2023-06-05 20:10:15', '', '', 0),
+(32, 'xxxxx', '&lt;b&gt;xcvxcvxcvxcv&lt;/b&gt;', 2, 'admin', '2023-06-03 20:31:21', 'published', 6, 'aaa', '2023-06-05 20:29:28', 'sdfsdf sdvgsdfsdfddddddddd', 'sdfdsfdf sdfv', 0),
+(33, 'zczx', 'zxcxzczxc', 2, 'admin', '2023-06-05 23:31:58', 'published', 6, 'nnnu', '2023-06-05 20:44:53', '', '', 0),
+(34, 'zzzzzzzzzzzzz', 'xzczxczx x zx zx', 2, 'admin', '2023-06-05 23:40:09', 'draft', 6, '', '2023-06-05 20:50:49', 'zxc x', 'zzz', 1);
 
 -- --------------------------------------------------------
 
@@ -456,7 +461,9 @@ INSERT INTO `users` (`id`, `login_name`, `username`, `surname`, `phone`, `email`
 (4, 'User11', 'User', 'Petraitis', '+37061366841', 'test2@gmail.com', '$argon2i$v=19$m=131072,t=4,p=2$Sm9aWWFZcGFkWnJqTG5wbA$TYxEvzRh3tRU/CYXqQdSvHgAtjHZjgf/HqnpoCL77mY', 'user'),
 (9, 'Moder4', 'Moderator', 'Girinis5', '+37055557847', 'test3@gmail.com', '$argon2i$v=19$m=131072,t=4,p=2$Q09rY1p5bExBcnouWnBjag$4lj8EPZIAjowxL2qEYOn9+F1f9dIzqFCign/nVFfcaI', 'moderator'),
 (14, 'Darkon', 'Darius', 'Jakaitis', '+370678654645', 'testusers@userv.com', '$argon2i$v=19$m=131072,t=4,p=2$Y2dxZkR6TFdUY1pjSC5ZVQ$14ajUVQnKVzLxMlxwkcJApTGfVWDiOxa6xrkEcm/Xh0', 'admin'),
-(16, 'TestuojuV', 'Sokis', 'Getraitis5', '370613664555', 'testre@js.com', '$argon2i$v=19$m=131072,t=4,p=2$ZzFVYnlFSHFmUWg1dGFSTQ$/fh96Kx+jPHiM4l75iiDyaYO9av0i5bFHA7ibWUBK/o', 'user');
+(16, 'TestuojuV', 'Sokis', 'Getraitis5', '370613664555', 'testre@js.com', '$argon2i$v=19$m=131072,t=4,p=2$ZzFVYnlFSHFmUWg1dGFSTQ$/fh96Kx+jPHiM4l75iiDyaYO9av0i5bFHA7ibWUBK/o', 'user'),
+(20, 'dsddssd', 'sdfsd', 'sdfd', '3706121444', 'jakaidaus@gmail.com', '$argon2i$v=19$m=131072,t=4,p=2$Y0JLZlFFNWpvN3h3M0JsbA$57HqXWUudmbIIDzB07lCY3IBgX72RGMEMyuDsO3oyMs', 'user'),
+(21, 'drgdfg', 'dfgdf', 'Petraitisfg', '+3706121448', 'jaadss@gmail.com', '$argon2i$v=19$m=131072,t=4,p=2$b0xHLy9jdS5kVVhtc1RvLg$bB42K05fo2fGjLbAJS2sucxQrYp/IFCLkRsXEWD8UE8', 'user');
 
 --
 -- Indexes for dumped tables
@@ -555,7 +562,7 @@ ALTER TABLE `places`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `translations`
@@ -567,7 +574,7 @@ ALTER TABLE `translations`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Constraints for dumped tables
