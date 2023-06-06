@@ -13,7 +13,7 @@ function header3() {
 }
 
 function hypertext() {
-    wrapText('post_content', '<a href="#" target="_blank">', '</a>');
+    wrapText('post_content', '<a href="#" target="_blank" title="" alt="">', '</a>');
 }
 
 function underlineText() {
@@ -93,7 +93,7 @@ function addImage(imageUrl) {
   var textarea = document.getElementById('post_content');
   var urlParts = imageUrl.split('/');
   var relativeUrl = urlParts.slice(3).join('/');
-  var imgTag = '<img src="' + relativeUrl + '" width="250px" height="auto" align="left" hspace="15" vspace="15"/>';
+  var imgTag = '<img src="' + relativeUrl + '" title=" " alt=" " width="250px" height="auto" align="left" hspace="15" vspace="15"/>';
 
   var start = textarea.selectionStart;
   var end = textarea.selectionEnd;

@@ -8,9 +8,10 @@
 
     require_once ROOT_PATH . 'security/config.php';
     require_once ROOT_PATH . 'core/functions/functions.php';
-    secureSession();
+    
     // Duomenų gavimas iš duomenų bazės
     $db = getDBConnection($config);
+	secureSession($db);
     $language_code = getLanguageSetting($db);
     $translations = getTranslations($db, $language_code);
     

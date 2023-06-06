@@ -4,11 +4,12 @@
 }
 require_once $_SERVER['DOCUMENT_ROOT'] . '/security/config.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/core/functions/functions.php';
-secureSession();
-
-define('IS_ADMIN', true);
 // Duomenų gavimas iš duomenų bazės
 $db = getDBConnection($config);
+secureSession($db);
+
+define('IS_ADMIN', true);
+
 $settings = getSettings($db);
 $languages = getAllLanguages($db);
 $site_title = isset($settings['site_title']) ? $settings['site_title'] : '';

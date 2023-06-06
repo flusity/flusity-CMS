@@ -7,9 +7,10 @@ define('IS_ADMIN', true);
 require_once $_SERVER['DOCUMENT_ROOT'] . '/security/config.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/core/functions/functions.php';
 
-secureSession();
+
 // Duomenų gavimas iš duomenų bazės
 $db = getDBConnection($config);
+secureSession($db);
 // Gaunamas kalbos nustatymas iš duomenų bazės  
 $language_code = getLanguageSetting($db);
 $translations = getTranslations($db, $language_code);

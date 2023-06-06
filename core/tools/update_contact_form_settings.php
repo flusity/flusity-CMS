@@ -7,9 +7,10 @@ define('IS_ADMIN', true);
 
 require_once ROOT_PATH . 'security/config.php';
 require_once ROOT_PATH . 'core/functions/functions.php';
-secureSession();
+
 
 $db = getDBConnection($config);
+secureSession($db);
 $language_code = getLanguageSetting($db);
 $translations = getTranslations($db, $language_code);
 

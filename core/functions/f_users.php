@@ -20,13 +20,17 @@ function getUserNameById($db, $user_id) {
         return trim(strip_tags(htmlspecialchars(stripslashes($input))));
     }
     
-    function secureSession() {
+    function secureSession($db) {
+        //global ;
+    
         // Nustatomi saugųs sesijos parametrai
         $session_name = 'secure_session';
         $secure = true;
         $httponly = true;
-        $inactive = 1800; 
     
+        $settings = getSettings($db);
+        $inactive = isset($settings['session_lifetime']) ? $settings['session_lifetime'] : 1800;  // Gauna parametrą iš settings sql db
+        
         if (session_status() === PHP_SESSION_NONE) {
             ini_set('session.use_only_cookies', 1);
             ini_set('session.cookie_httponly', 1);
@@ -54,9 +58,10 @@ function getUserNameById($db, $user_id) {
                 header("Location: ../../404.php"); 
                 exit;
             }
-    }
+        }
         $_SESSION['last_activity'] = time();
     }
+    
     
     function authenticateUser($login_nameOrEmail, $password) {
         global $config;

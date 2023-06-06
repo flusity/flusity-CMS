@@ -8,9 +8,9 @@ define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../') . '/');
 require_once $_SERVER['DOCUMENT_ROOT'] . '/security/config.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/core/functions/functions.php';
 
-secureSession();
-$db = getDBConnection($config);
 
+$db = getDBConnection($config);
+secureSession($db);
 $target_dir = ROOT_PATH . "uploads/";
 
 $uploaded_file = $_FILES["uploaded_file"];

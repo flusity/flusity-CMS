@@ -8,10 +8,10 @@ define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../') . '/');
 
 require_once ROOT_PATH . 'security/config.php';
 require_once ROOT_PATH . 'core/functions/functions.php';
-secureSession();
+
 // Duomenų gavimas iš duomenų bazės
 $db = getDBConnection($config);
-
+secureSession($db);
 $result = ['success' => false];
 
 if (isset($_POST['customblock_name'], $_POST['customblock_menu_id'], $_POST['customblock_place_id'], $_POST['customblock_html_code'])) {

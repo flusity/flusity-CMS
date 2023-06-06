@@ -6,11 +6,11 @@ define('IS_ADMIN', true);
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/security/config.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/core/functions/functions.php';
-secureSession();
-
-$input = isset($_POST['input']) ? trim($_POST['input']) : '';
 
 $db = getDBConnection($config);
+secureSession($db);
+$input = isset($_POST['input']) ? trim($_POST['input']) : '';
+
 $tags = getTagSuggestionsFromDatabase($db, $input);
 
 //file_put_contents('debug.txt', json_encode($tags));

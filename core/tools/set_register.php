@@ -2,7 +2,8 @@
     session_start();
 }
 
-secureSession();
+secureSession($db);
+
 
 function handleRegister($db, $post) {
     $csrf_token = validateInput($post['csrf_token']);

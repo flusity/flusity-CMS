@@ -9,8 +9,9 @@ define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../') . '/');
 require_once $_SERVER['DOCUMENT_ROOT'] . '/security/config.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/core/functions/functions.php';
 
-secureSession();
+
 $db = getDBConnection($config);
+secureSession($db);
 // Gaunamas kalbos nustatymas iš duomenų bazės  
 $language_code = getLanguageSetting($db);
 $translations = getTranslations($db, $language_code);
