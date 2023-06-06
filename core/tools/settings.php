@@ -11,9 +11,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pretty_url = $_POST['pretty_url'];
     $language = $_POST['language']; 
     $posts_per_page = $_POST['posts_per_page'];
-    $registration_enabled = isset($_POST['registration_enabled']) ? 1 : 0; // Pridedame šią eilutę
-
-    updateSettings($db, $site_title, $meta_description, $footer_text_settings, $pretty_url, $language, $posts_per_page, $registration_enabled); // Perduodame kaip argumentą "updateSettings" funkcijai
+    $registration_enabled = isset($_POST['registration_enabled']) ? 1 : 0;
+    $session_lifetime = $_POST['session_lifetime'];
+    
+    updateSettings($db, $site_title, $meta_description, $footer_text_settings, $pretty_url, $language, $posts_per_page, $registration_enabled, $session_lifetime); 
 
     $_SESSION['success_message'] =  t("Settings successfully updated!");
     header("Location: settings.php");
@@ -118,6 +119,10 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
                                                 </option>
                                             <?php endforeach; ?>
                                         </select>
+                                    </div>
+                                    <div class="form-group mt-2 mb-2">
+                                        <label for="session_lifetime"><?php echo t("Session lifetime");?></label>
+                                        <input type="text" class="form-control  w-25" id="session_lifetime" name="session_lifetime" value="<?php echo htmlspecialchars($settings['session_lifetime']); ?>" required>
                                     </div>
                                     <div class="form-group mt-2 mb-2">
                                     <label for="registration_enabled"><?php echo t("Registration Enabled");?></label>
