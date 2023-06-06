@@ -17,17 +17,20 @@ $translations = getTranslations($db, $language_code);
 
 $result = ['success' => false];
 
-if (isset($_POST['post_id'], $_POST['post_title'], $_POST['post_content'], $_POST['post_menu'], $_POST['post_status'], $_POST['post_tags'], $_POST['role'])) {
+if (isset($_POST['post_id'], $_POST['post_title'], $_POST['post_content'], $_POST['post_menu'], $_POST['post_status'], $_POST['post_tags'], $_POST['role'], $_POST['post_description'], $_POST['post_keywords'])) {
     $postId = (int)$_POST['post_id'];
     $title = htmlspecialchars($_POST['post_title'], ENT_QUOTES, 'UTF-8');
     $content = htmlspecialchars($_POST['post_content'], ENT_QUOTES, 'UTF-8');
     $menuId = (int)$_POST['post_menu'];
+    $priority = isset($_POST['post_priority']) ? (int)$_POST['post_priority'] : 0; // Čia yra pasikeitimas
     $status = $_POST['post_status'];
     $tags = $_POST['post_tags'];
     $role = $_POST['role'];
-
-    $update = updatePost($db, $postId, $title, $content, $menuId, $status, $tags, $role);
-
+    $description = htmlspecialchars($_POST['post_description'], ENT_QUOTES, 'UTF-8');
+    $keywords = htmlspecialchars($_POST['post_keywords'], ENT_QUOTES, 'UTF-8');
+ 
+    $update = updatePost($db, $postId, $title, $content, $menuId, $status, $tags, $role, $description, $keywords, $priority);
+ 
     if ($update) {
         $_SESSION['success_message'] = t('The record has been updated successfully.');
         $result['success'] = true;
@@ -36,7 +39,7 @@ if (isset($_POST['post_id'], $_POST['post_title'], $_POST['post_content'], $_POS
     }
 }
 
-
 echo json_encode($result);
 exit;
+
 ?>
