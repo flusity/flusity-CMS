@@ -7,16 +7,30 @@ require_once ROOT_PATH . 'security/config.php';
 require_once ROOT_PATH . 'core/functions/functions.php';
 
 $db = null;
-
 if (isset($config)) {
     $db = getDBConnection($config);
 }
 secureSession($db);
-$settings = getSettings($db);
 
+$settings = getSettings($db);
 $site_title = isset($settings['site_title']) ? $settings['site_title'] : '';
-//$meta_description = isset($settings['meta_description']) ? $settings['meta_description'] : '';
 $footer_text = isset($settings['footer_text']) ? $settings['footer_text'] : '';
+$meta_description = isset($settings['meta_description']) ? $settings['meta_description'] : '';
+$meta = [
+    'description' => $meta_description,
+    'keywords' => '',
+];
+
+if (!empty($postSeo)) {
+    foreach ($postSeo as $postS) {
+        if ($postS['priority'] == 1) {
+        
+            $meta['description'] = $postS['description'];
+            $meta['keywords'] = $postS['keywords'];
+            break;
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
