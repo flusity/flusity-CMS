@@ -7,7 +7,22 @@
     </p>
     </div>
 </footer>
-
+<script>
+$(document).on('click', '.badge', function() {
+    $(".badge").click(function() {
+        var currentTags = $("#post_tags").val();
+        var clickedTag = $(this).text().trim();
+        
+        if (!currentTags.includes(clickedTag)) {
+            if (currentTags.length > 0) {
+                $("#post_tags").val(currentTags + ", " + clickedTag);
+            } else {
+                $("#post_tags").val(clickedTag);
+            }
+        }
+    });
+});
+</script>
 <script src="<?php $_SERVER['DOCUMENT_ROOT']; ?>/assets/bootstrap-5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="<?php $_SERVER['DOCUMENT_ROOT']; ?>/core/tools/js/content_redactor.js"></script>
 <script src="<?php $_SERVER['DOCUMENT_ROOT']; ?>/core/tools/js/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
@@ -92,5 +107,7 @@ document.getElementById('settingsDropdown').addEventListener('click', function()
 });
 
 </script>
+
+
 </body>
 </html>
