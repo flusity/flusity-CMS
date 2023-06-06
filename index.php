@@ -17,7 +17,6 @@ error_reporting(E_ALL);
  
 secureSession();
 $db = getDBConnection($config);
-   // Gaunamas kalbos nustatymas iš duomenų bazės  
     $language_code = getLanguageSetting($db);
     $translations = getTranslations($db, $language_code);
  
@@ -35,7 +34,9 @@ $offset = ($url - 1) * $limit;
 $current_page_url = getCurrentPageUrl($db);
 $posts = getPostsNews($db, $limit, $offset, $current_page_url);
 
-// Dekodavimas
+$postSeo = getPostSeo($db, $limit, $offset, $current_page_url);
+
+// Dekodavima
 foreach ($posts as &$post) {
     $post['title'] = htmlspecialchars_decode($post['title']);
     $post['content'] = htmlspecialchars_decode($post['content']);
@@ -47,6 +48,20 @@ $menu = getMenuByPageUrl($db, $current_page_url);
 
 $templateName = $menu['template'];
 $templatePath = __DIR__ . "/template/{$templateName}.php";
+$meta = [
+    'description' => '',
+    'keywords' => '',
+];
+if (!empty($postSeo)) {
+    foreach ($postSeo as $postS) {
+        if ($postS['priority'] == 1) {
+        
+            $meta['description'] = $postS['description'];
+            $meta['keywords'] = $postS['keywords'];
+            break;
+        }
+    }
+}
 
 require_once 'template/header.php'; ?>
 
