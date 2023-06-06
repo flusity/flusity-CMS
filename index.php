@@ -15,7 +15,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 $db = getDBConnection($config);
-secureSession($db);
+    secureSession($db);
     $language_code = getLanguageSetting($db);
     $translations = getTranslations($db, $language_code);
  
@@ -33,7 +33,6 @@ $offset = ($url - 1) * $limit;
 
 $current_page_url = getCurrentPageUrl($db);
 $posts = getPostsNews($db, $limit, $offset, $current_page_url);
-
 $postSeo = getPostSeo($db, $limit, $offset, $current_page_url);
 
 // Dekodavima
@@ -45,23 +44,8 @@ $total_posts = countPosts($db);
 $total_urls = ceil($total_posts / $limit);
 
 $menu = getMenuByPageUrl($db, $current_page_url);
-
 $templateName = $menu['template'];
 $templatePath = __DIR__ . "/template/{$templateName}.php";
-$meta = [
-    'description' => '',
-    'keywords' => '',
-];
-if (!empty($postSeo)) {
-    foreach ($postSeo as $postS) {
-        if ($postS['priority'] == 1) {
-        
-            $meta['description'] = $postS['description'];
-            $meta['keywords'] = $postS['keywords'];
-            break;
-        }
-    }
-}
 
 require_once 'template/header.php'; ?>
 
@@ -70,7 +54,7 @@ require_once 'template/header.php'; ?>
 if (file_exists($templatePath)) {
     include $templatePath;
 } else {
-    echo "Šablonas nerastas!";
+    echo t("Template not found!");
 }
 ?>
 <?php require_once 'template/footer.php';?>
