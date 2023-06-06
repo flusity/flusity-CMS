@@ -11,6 +11,7 @@ if (isset($_SESSION['user_id'])) {
 require_once 'core/tools/set_register.php';
 
 $db = getDBConnection($config);
+$registration_enable = isset($settings['registration_enable']) ? $settings['registration_enable'] : '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $error_message = handleRegister($db, $_POST);
@@ -38,7 +39,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         autoDismissError();
     </script>
 <?php endif; ?>
-
+<?php if($registration_enable == 1) {
+    // Show registration form
+    ?>
 <form method="POST" action="">
     <div class="form-floating">
         <input type="text" class="form-control" id="login_name" name="login_name" placeholder="<?php echo t("Login Name");?>" required>
@@ -78,6 +81,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <br>
     <button class="w-100 btn btn-lg btn-primary mb-3" type="submit"><?php echo t("Register");?></button>
 </form>
+<?php } else {
+    // Show registration is currently disabled message
+    echo "<p>" . t("Registration is currently suspended. Please try again later") . "</p>";
+}?>
 <p><?php echo t("Back to"); ?>&nbsp;<a href="/" class="btn-link"><?php echo strtolower(t("Home page")); ?></a>&nbsp;<?php echo t("or"); ?>&nbsp;
 &nbsp;<a href="login.php" class="btn-link"><?php echo strtolower(t("Log In")); ?></a>&nbsp;<p>
 
