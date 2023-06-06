@@ -10,15 +10,17 @@ $db = null;
 if (isset($config)) {
     $db = getDBConnection($config);
 }
+
 secureSession($db);
 
 $settings = getSettings($db);
 $site_title = isset($settings['site_title']) ? $settings['site_title'] : '';
+$meta_default_description = isset($settings['meta_description']) ? $settings['meta_description'] : '';
+$meta_default_keywords = isset($settings['default_keywords']) ? $settings['default_keywords'] : '';
 $footer_text = isset($settings['footer_text']) ? $settings['footer_text'] : '';
-$meta_description = isset($settings['meta_description']) ? $settings['meta_description'] : '';
 $meta = [
-    'description' => $meta_description,
-    'keywords' => '',
+    'description' => $meta_default_description,
+    'keywords' => $meta_default_keywords,
 ];
 
 if (!empty($postSeo)) {
