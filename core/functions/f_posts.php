@@ -130,3 +130,22 @@ function getExistingTags($db) {
     }
     return $tags;
 }
+
+function deleteTagFromAllPosts($db, $tagToRemove) {
+    $sql = "SELECT id, tags FROM posts";
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $tagArray = explode(',', $row['tags'] ?? '');
+        $tagArray = array_map('trim', $tagArray);
+        $tagKey = array_search($tagToRemove, $tagArray);
+        if ($tagKey !== false) {
+            unset($tagArray[$tagKey]);
+            $newTags = implode(',', $tagArray);
+            $updateSql = "UPDATE posts SET tags = :tags WHERE id = :id";
+            $updateStmt = $db->prepare($updateSql);
+            $updateStmt->execute(['tags' => $newTags, 'id' => $row['id']]);
+        }
+    }
+}

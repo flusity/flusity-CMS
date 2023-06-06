@@ -69,7 +69,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
                             <a class="nav-link tabs-nav-item" data-bs-toggle="tab" href="#backup"><?php echo t("Database Backup");?></a>
                         </li>
                         <li class="nav-item text-center">
-                            <a class="nav-link tabs-nav-item" data-bs-toggle="tab" href="#tabs"><?php echo t("Edit Tab's");?></a>
+                            <a class="nav-link tabs-nav-item" data-bs-toggle="tab" href="#tags"><?php echo t("Edit Tag's");?></a>
                         </li>
                         <li class="nav-item text-center">
                             <a class="nav-link tabs-nav-item" data-bs-toggle="tab" href="#cache"><?php echo t("Cache");?></a>
@@ -151,10 +151,25 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
                                      echo '<p>'. t("No backups").'</p>';
                             }?>
                         </div>
-                        <div class="tab-pane fade" id="tabs">
-                            
-                        <!-- Tabs pateikimas -->
-            
+                        <div class="tab-pane fade" id="tags">
+                        <h3><?php echo t("Edit your Tags");?></h3>
+                        <?php $existingTags = getExistingTags($db); ?>
+                        <?php if (!empty($existingTags)): ?>
+                            <?php foreach ($existingTags as $tag): ?>
+                                <span class="badge bg-secondary me-1"><?php echo htmlspecialchars($tag); ?></span>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <p><?php echo t("No tags have been created");?></p>
+                        <?php endif; ?>
+                        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" id="toast-notification">
+                            <div class="toast-header">
+                                <strong class="me-auto"><?php echo t("Notification");?></strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                            </div>
+                            <div class="toast-body">
+                                <?php echo t("Tag has been deleted successfully.");?>
+                            </div>
+                        </div>
                         </div>
                         <div class="tab-pane fade" id="cache">
                             <form action="clear_cache.php" method="post">

@@ -1,5 +1,3 @@
-
-<?php //require_once  $_SERVER['DOCUMENT_ROOT'] . '/template/footer.php';?>
 <footer class="footer bg-light py-3">
     <div class="container-fluid">
     <p class="text-center mb-0">
@@ -7,7 +5,12 @@
     </p>
     </div>
 </footer>
+
 <script>
+  $(document).ready(function() {
+    $('.toast').toast({ autohide: true });
+});
+
 $(document).on('click', '.badge', function() {
     $(".badge").click(function() {
         var currentTags = $("#post_tags").val();
@@ -22,7 +25,33 @@ $(document).on('click', '.badge', function() {
         }
     });
 });
+
+$(document).ready(function() {
+    $('.badge').on('click', function() {
+        var tag = $(this).text();
+        var confirmation = confirm('Ar tikrai norite ištrinti šį tag: ' + tag + '?');
+        if (confirmation) {
+            $.ajax({
+                url: 'delete_tag.php',
+                type: 'POST',
+                data: {tag: tag},
+                success: function(data) {
+                      var toastNotification = new bootstrap.Toast(document.getElementById('toast-notification'));
+                      toastNotification.show();
+
+                      $('#toast-notification').on('hidden.bs.toast', function () {
+                          location.reload();
+                      })
+                  },
+                error: function() {
+                    alert('Error deleting tag.');
+                }
+            });
+        }
+    });
+});
 </script>
+
 <script src="<?php $_SERVER['DOCUMENT_ROOT']; ?>/assets/bootstrap-5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="<?php $_SERVER['DOCUMENT_ROOT']; ?>/core/tools/js/content_redactor.js"></script>
 <script src="<?php $_SERVER['DOCUMENT_ROOT']; ?>/core/tools/js/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
