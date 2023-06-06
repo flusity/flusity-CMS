@@ -22,6 +22,8 @@ $footer_text = isset($settings['footer_text']) ? $settings['footer_text'] : '';
 <head>
     <meta charset="UTF-8">
     <title><?php echo $site_title;?></title>
+    <meta name="description" content="<?php echo $meta['description']; ?>">
+    <meta name="keywords" content="<?php echo $meta['keywords']; ?>">
     <meta http-equiv="Content-Security-Policy: script-src 'self' 'unsafe-inline' https://ssl.gstatic.com 'unsafe-eval'">
     <link href="assets/bootstrap-5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/fonts/fonts-quicksand.css" rel="stylesheet">
