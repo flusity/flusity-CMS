@@ -16,7 +16,7 @@
         $active = $current_page_url === $item['page_url'] ? 'active' : '';
         $generatedUrl = generateMenuUrl($db, $item['page_url']);
      ?>
-        <a class="nav-item <?php echo $active; ?>" href="<?php echo $generatedUrl; ?>"><?php echo htmlspecialchars($item['name']); ?></a>
+        <a class="nav-item nav-url <?php echo $active; ?>" href="<?php echo $generatedUrl; ?>"><?php echo htmlspecialchars($item['name']); ?></a>
          
     <?php }
        endforeach; ?>

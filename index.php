@@ -14,9 +14,8 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
- 
-secureSession();
 $db = getDBConnection($config);
+secureSession($db);
     $language_code = getLanguageSetting($db);
     $translations = getTranslations($db, $language_code);
  
@@ -24,6 +23,7 @@ if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
     $user_name = getUserNameById($db, $user_id);
 }
+
 $settings = getSettings($db);
 
 $limit = $settings['posts_per_page'];
