@@ -13,10 +13,12 @@ PHP CMS project, Log In, Sign Up, admin, moderator, user roles, add/edit/delete 
 <li>Posts (pranešimai)</li>
 <li>Menu (meniu)</li>
 <li>Block (blokai)</li>
+<li>Tags (Žymos)</li>
 <li>Contact Form (kontaktų forma dar kūrimo būsenoje)</li>
 <li>Files (failai)</li>
 <li>Language (kalba vertimas į lt)</li>
 <li>Settings (nustatymai)</li>
+ <li>Database backup (Duomenų bazės kopijų kūrimas)</li>
 <li>SEO (description keywords system)</li>
 </ul>
 <h3>Profilis</h3> 
@@ -58,10 +60,12 @@ Atsižvelgiant į šiuos elementus ir funkcijas, svetainė yrap patogus ir funkc
 <li>Posts</li>
 <li>Menu (menu)</li>
 <li>Block</li>
+ <li>Tags</li>
 <li>Contact Form</li>
 <li>Files</li>
 <li>Language (default en)</li>
 <li>Settings</li>
+<li>Database backup</li>
 <li>SEO (description keywords system)</li>
 </ul>
 <h3>Profile</h3>
