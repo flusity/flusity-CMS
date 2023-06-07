@@ -25,6 +25,11 @@ a.nav-link {
   width: 100%;
   z-index: 11;
   top: 0;
+  background-color: #4b4b4b !important;
+  
+}
+a.navbar{
+  color:rgb(252, 252, 252) !important;
 }
 .sidebar {
   position: fixed;
@@ -81,6 +86,9 @@ a.nav-link.admin-link-item-point{
 .navbar-toggler i {
 color: #333; 
 font-size: 24px;
+}
+.sidebar-bg{
+  background-color: #4b4b4b;
 }
 .tools-settings{
 z-index: 15;
