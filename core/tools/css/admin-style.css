@@ -72,7 +72,12 @@ background: transparent !important;
 .navbar-toggler:focus {
 outline: none;
 }
-
+a.nav-link.admin-link-item {
+  color: #f2f4f5;
+}
+a.nav-link.admin-link-item-point{
+  color: #2d2d2d;
+}
 .navbar-toggler i {
 color: #333; 
 font-size: 24px;
