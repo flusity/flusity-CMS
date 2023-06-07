@@ -12,10 +12,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $language = $_POST['language']; 
     $posts_per_page = $_POST['posts_per_page'];
     $registration_enabled = isset($_POST['registration_enabled']) ? 1 : 0;
-    $session_lifetime = $_POST['session_lifetime']* 60;
+    $session_lifetime = $_POST['session_lifetime'];
     $default_keywords = $_POST['default_keywords'];
-
-    updateSettings($db, $site_title, $meta_description, $footer_text_settings, $pretty_url, $language, $posts_per_page, $registration_enabled, $session_lifetime, $default_keywords); 
+    $session_life =  $session_lifetime;
+    updateSettings($db, $site_title, $meta_description, $footer_text_settings, $pretty_url, $language, $posts_per_page, $registration_enabled, $session_life, $default_keywords); 
 
     $_SESSION['success_message'] =  t("Settings successfully updated!");
     header("Location: settings.php");
