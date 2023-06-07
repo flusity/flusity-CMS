@@ -1,5 +1,5 @@
 # flusity CMS
-# 
+# v2
 PHP CMS project, Log In, Sign Up, admin, moderator, user roles, add/edit/delete post, layout places, language, files, menu, custom block, backup.sql, update website settings.
 
 ![banner](http://manowebas.lt/wp-content/themes/manowebas/assets/img/logo.png)
