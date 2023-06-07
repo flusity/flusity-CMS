@@ -25,8 +25,8 @@ a.nav-link {
   width: 100%;
   z-index: 11;
   top: 0;
-  background-color: #4b4b4b !important;
-  
+  background-color: #322f2f !important;
+  font-weight: 50;
 }
 a.navbar{
   color:rgb(252, 252, 252) !important;
@@ -38,6 +38,7 @@ a.navbar{
   overflow-y: auto;
   width:220px;
   z-index: 9;
+  font-weight: 50;
 }
 main {
   margin-left: 220px;
@@ -88,7 +89,7 @@ color: #333;
 font-size: 24px;
 }
 .sidebar-bg{
-  background-color: #4b4b4b;
+  background-color: #322f2f;
 }
 .tools-settings{
 z-index: 15;
