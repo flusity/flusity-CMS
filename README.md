@@ -1,10 +1,10 @@
-# EASY-CMS
+# flusity CMS
 # 
 PHP CMS project, Log In, Sign Up, admin, moderator, user roles, add/edit/delete post, layout places, language, files, menu, custom block, backup.sql, update website settings.
 
 ![banner](http://manowebas.lt/wp-content/themes/manowebas/assets/img/logo.png)
 
-<b>Šiame svetainės administratoriaus valdymo skydelyje yra keliatą funkcijų ir įrankių:</b>
+<b>Šiame "flusity" svetainės administratoriaus valdymo skydelyje yra keliatą funkcijų ir įrankių:</b>
 <h3>Prietaisų skydelis</h3>
 <ul>
 <li>Dashboard (informacijos suvestinė)</li>
