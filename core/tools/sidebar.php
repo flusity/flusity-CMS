@@ -1,4 +1,8 @@
-<div class="col-md-2 bg-light sidebar nav flex-column" id="sidebar">
+
+
+<div class="col-md-2 sidebar-bg sidebar nav flex-column" id="sidebar">
+                
+
   <ul class="list-group list-group-flush">
     <li class="list-group-item"><a class="nav-link admin-link-item" href="<?php echo getFullUrl('/admin.php'); ?>"><i class="fas fa-tachometer-alt"></i> <span class="nav-text"><?php echo t("Dashboard");?></span></a></li>
     <li class="list-group-item"><a class="nav-link admin-link-item" href="<?php echo getFullUrl('/core/tools/posts.php'); ?>"><i class="fas fa-newspaper"></i> <span class="nav-text"><?php echo t("Posts");?></span></a></li>
@@ -13,15 +17,17 @@
           <a class="nav-link dropdown-item admin-link-item" href="<?php echo getFullUrl('/core/tools/contact_form.php'); ?>"><i class="fas fa-message"></i> <span class="nav-text"><?php echo t("Contact Form");?></span></a>  
           <a class="nav-link dropdown-item admin-link-item" href="<?php echo getFullUrl('/core/tools/places.php'); ?>"><i class="fas fa-tags"></i> <span class="nav-text"><?php echo t("Layout Places");?></span></a>
           <a class="nav-link dropdown-item admin-link-item" href="<?php echo getFullUrl('/core/tools/settings.php'); ?>"><i class="fas fa-cog"></i> <span class="nav-text"><?php echo t("Settings");?></span></a>
+      
         </div>
     </li>
   </ul>
 </div>
+
 <div class="offcanvas offcanvas-start d-md-none" tabindex="-1" id="sidebarOffcanvas" data-bs-scroll="true" data-bs-backdrop="false">
-  <div class="offcanvas-header">
+    <div class="offcanvas-header">
         <button type="button" class="btn-close text-reset ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    
-  </div>
+
+    </div>
     <div class="offcanvas-body" id="sidebarOffcanvasBody">
     
     </div>
