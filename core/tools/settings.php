@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $language = $_POST['language']; 
     $posts_per_page = $_POST['posts_per_page'];
     $registration_enabled = isset($_POST['registration_enabled']) ? 1 : 0;
-    $session_lifetime = $_POST['session_lifetime'];
+    $session_lifetime = $_POST['session_lifetime']* 60;
     $default_keywords = $_POST['default_keywords'];
 
     updateSettings($db, $site_title, $meta_description, $footer_text_settings, $pretty_url, $language, $posts_per_page, $registration_enabled, $session_lifetime, $default_keywords); 
@@ -118,7 +118,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
                                         </select>
                                     </div>
                                     <div class="form-group mt-2 mb-2">
-                                        <label for="session_lifetime"><?php echo t("Session lifetime");?></label>
+                                        <label for="session_lifetime"><?php echo t("Session lifetime in minutes");?></label>
                                         <input type="text" class="form-control  w-25" id="session_lifetime" name="session_lifetime" value="<?php echo htmlspecialchars($settings['session_lifetime']); ?>" required>
                                     </div>
                                     <div class="form-group mt-2 mb-2">
