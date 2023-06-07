@@ -212,7 +212,7 @@ CREATE TABLE `settings` (
 --
 
 INSERT INTO `settings` (`site_title`, `meta_description`, `footer_text`, `pretty_url`, `language`, `posts_per_page`, `registration_enabled`, `session_lifetime`, `default_keywords`) VALUES
-('JD website', 'JD website description', 'Copyright &copy; JD Theme 2023', 1, 'lt', 10, 1, 1800, 'keyword1 keyword2 keyword3 keyword4');
+('JD website', 'JD website description', 'Copyright &copy; JD Theme 2023', 1, 'lt', 10, 1, 10, 'keyword1 keyword2 keyword3 keyword4');
 
 -- --------------------------------------------------------
 
