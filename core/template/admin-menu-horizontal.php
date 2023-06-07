@@ -1,5 +1,8 @@
 <nav class="navbar navbar-expand-lg fixed-top-navbar">
     <a class="navbar-brand ml-5" href="/"><?php require_once $_SERVER['DOCUMENT_ROOT'].'/assets/logo-50.php';?></a>
+        
+        <a class="navbar-brand brand" href="/"><?php echo $settings['site_title']; ?></a>
+    
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
 </button>
