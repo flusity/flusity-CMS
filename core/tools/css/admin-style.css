@@ -15,12 +15,14 @@ ul.list-group.list-group-flush {
 }
 li.list-group-item {
     margin: 2px 0px 3px 0px;
+      background-color: #9fa3a7 !important;
 }
 a.nav-link {
     padding: 0px 0px 8px 0px;
 }
 ul.list-group.list-group-flush {
     margin: 0px 0px 0px 4px;
+    
 }
 button#toggleSidebarBtn {
     margin-left: 14px;
@@ -35,10 +37,13 @@ button#toggleSidebarBtn {
     width: 250px; 
     height: 100%;
     overflow-y: auto;
+    outline: none;
+    box-shadow: 0 0 2px #5e6266db;
+    background-color: #9fa3a7;
 }
 
 .main-content-with-sidebar {
-    padding-left: 250px; 
+    padding-left: 265px; 
 }
 .main-content-collapsed-sidebar {
     padding-left: 100px; 
@@ -65,6 +70,7 @@ button#toggleSidebarBtn {
     margin-top: 70px;
     border-top: none;
     border-left: none;
+    border-right: none;
     border-bottom: none;
     border-radius: none !important;
 }
@@ -75,6 +81,7 @@ li.list-group-item {
 .card.left-nav-items.flex-shrink-0.admin-sidebar{
   box-shadow: none !important;
   border-radius: none !important;
+  background-color: #9fa3a7 !important;
 }
 
 li.list-group-item:hover{
@@ -148,9 +155,9 @@ li.list-group-item {
 }
 
 button {
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 1px solid #5e6266db;
+  border-radius: 2px;
+  border-radius: 2px;
   cursor: pointer;
   padding: 4px 8px;
 }
@@ -163,7 +170,7 @@ li.nav-item.tabs-nav-item {
   margin: 0 0px 0 0; 
   padding: 0px 0px 0px 0px;
   background-color: #f8f9fa00; 
-  border-radius: 5px; 
+  border-radius: 2px; 
 }
 a.nav-link.tabs-nav-item {
   height: 50px;
@@ -205,4 +212,106 @@ li.nav-item.tabs-nav-item a.active {
   --bs-nav-tabs-link-active-border-color: #dee2e6 #dee2e6 #fff;
   border-bottom: -1px solid #495057 !important;
   margin: 0px 0px 0px 0px;
+}
+.btn {
+  background-color: rgb(71, 71, 71)!important;
+  color: rgb(252, 252, 252)!important;
+  border: 1px solid #5e6266db;
+  border-radius: 2px;
+}
+
+.btn:hover, .btn:focus {
+  background-color: rgb(166, 164, 164)!important;
+  color: rgb(52, 52, 52)!important;
+}
+.btn-primary {
+  background-color: #2e4d61;
+  border-color: #2e4d61;
+  border: 1px solid #5e6266db;
+  border-radius: 2px;
+}
+
+.btn-primary:hover {
+  background-color: #3f5a6b;
+  border-color: #3f5a6b;
+}
+
+.btn-primary:focus {
+  background-color: #4c5d68;
+  border-color: #4c5d68;
+  box-shadow: 0 0 0 0.2rem rgba(51, 55, 63, 0.315);
+}
+
+.btn-primary:active {
+  background-color: #4c5d68;
+  border-color: #4c5d68;
+  border: 1px solid #5e6266db;
+  border-radius: 2px;
+}
+
+.btn-primary:active:focus {
+  background-color: #4c5d68;
+  border-color: #4c5d68;
+  box-shadow: 0 0 0 0.2rem rgba(51, 55, 63, 0.315);
+} 
+ @keyframes neon-glow {
+  0% {
+    text-shadow: 0 0 10px #46f6ffaf, 0 0 20px #46f6ffaf, 0 0 30px #46f6ffaf, 0 0 40px #46f6ffaf, 0 0 70px #46f6ffaf, 0 0 80px #46f6ffaf, 0 0 100px #46f6ffaf;
+  }
+
+  100% {
+    text-shadow: 0 0 5px #46f6ffaf, 0 0 10px #46f6ffaf, 0 0 15px #46f6ffaf, 0 0 20px #46f6ffaf, 0 0 35px #46f6ffaf, 0 0 40px #46f6ffaf, 0 0 50px #46f6ffaf;
+  }
+}
+.neon {
+  animation: neon-glow 1s ease-in-out infinite alternate;
+}
+.page-link {
+  background-color: rgb(71, 71, 71)!important;
+  color: rgb(252, 252, 252)!important;
+}
+
+.page-link:hover, .page-link:focus {
+  background-color: rgb(166, 164, 164)!important;
+  color: rgb(52, 52, 52)!important;
+}
+.btn-group .btn {
+  background-color: rgb(71, 71, 71)!important;
+  color: rgb(252, 252, 252)!important;
+  border: 1px solid #5e6266db;
+  border-radius: 2px;
+}
+
+.btn-group .btn:hover, .btn-group .btn:focus {
+  background-color: rgb(166, 164, 164)!important;
+  color: rgb(52, 52, 52)!important;
+}
+.form-control{
+  border: 1px solid #5e6266db !important;
+  border-radius: 2px;
+}
+input {
+  border: 1px solid #5e6266db !important;
+  border-radius: 2px;
+}
+
+input:focus {
+  outline: none!important;
+  box-shadow: 0 1px 5px #5e6266db !important;
+
+}
+select {
+  border: 1px solid #5e6266db!important;
+  border-radius: 2px !important;
+}
+
+select:focus {
+  outline: none!important;
+  box-shadow: 0 1px 5px #5e6266db !important;
+
+}
+.select:focus,.input:focus{
+  outline: none!important;
+  border: 1px solid #5e6266db !important;
+
 }

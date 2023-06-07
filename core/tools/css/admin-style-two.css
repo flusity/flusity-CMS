@@ -7,46 +7,7 @@ body {
   min-height: 100vh;
   margin-bottom: 20px;
 }
-.btn-primary {
-  background-color: #27ae60;
-  border-color: #27ae60;
-}
 
-.btn-primary:hover {
-  background-color: #16a085;
-  border-color: #16a085;
-}
-
-.btn-primary:focus {
-  background-color: #16a085;
-  border-color: #16a085;
-  box-shadow: 0 0 0 0.2rem rgba(39, 174, 96, 0.5);
-}
-
-.btn-primary:active {
-  background-color: #1abc9c;
-  border-color: #1abc9c;
-}
-
-.btn-primary:active:focus {
-  background-color: #1abc9c;
-  border-color: #1abc9c;
-  box-shadow: 0 0 0 0.2rem rgba(26, 188, 156, 0.5);
-}
-
-@keyframes neon-glow {
-  0% {
-    text-shadow: 0 0 10px #27ae60, 0 0 20px #27ae60, 0 0 30px #27ae60, 0 0 40px #27ae60, 0 0 70px #27ae60, 0 0 80px #27ae60, 0 0 100px #27ae60;
-  }
-
-  100% {
-    text-shadow: 0 0 5px #27ae60, 0 0 10px #27ae60, 0 0 15px #27ae60, 0 0 20px #27ae60, 0 0 35px #27ae60, 0 0 40px #27ae60, 0 0 50px #27ae60;
-  }
-}
-        
-.neon {
-  animation: neon-glow 1s ease-in-out infinite alternate;
-}
 .input-wrapper {
     position: relative;
     display: inline-block;
