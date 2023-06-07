@@ -4,18 +4,15 @@ define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../') . '/');
 require_once ROOT_PATH . 'core/template/header-admin.php';
 $limit_per_page = $settings['posts_per_page'];
 ?>
-<div class="container-fluid ">
+<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/core/template/admin-menu-horizontal.php';?>
+  <button class="btn btn-primary position-fixed start-0 translate-middle-y d-md-none tools-settings" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas">
+      <i class="fas fa-bars"></i>
+  </button>
+ <?php require_once  $_SERVER['DOCUMENT_ROOT'] . '/core/tools/sidebar.php';?>
+<div class="container-fluid mt-4 main-content admin-layout">
     <div class="row">
-        <div class="col-sm-12">
-        <?php require_once ROOT_PATH . 'core/template/admin-menu-horizontal.php';?>
-        </div>
-    </div>
-</div>
-<div class="container-fluid mt-4 admin-layout">
-    <div class="row d-flex flex-nowrap">
-        <div class="col-md-2 sidebar" id="sidebar">
-            <?php require_once ROOT_PATH . 'core/tools/sidebar.php';?>
-        </div>
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4  content-up">
+
         <?php   $i = 1;
                 $limit = $limit_per_page;
                 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
@@ -28,7 +25,7 @@ $limit_per_page = $settings['posts_per_page'];
                 $menuItems = getMenuItems($db);
                 $menuItemsIndexed = array_column($menuItems, null, 'id');
           ?>
-        <div class="col-md-10 content-up">
+       
             <div class="col-sm-9">
                 <?php
                 if (isset($_SESSION['success_message'])) {
@@ -129,7 +126,8 @@ $limit_per_page = $settings['posts_per_page'];
                     </ul>
                 </nav>
             </div>
-        </div>
+      
+      </main>
     </div>
 </div>
 

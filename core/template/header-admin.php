@@ -38,7 +38,6 @@ if (!checkUserRole($user_id, 'admin', $db)) {
     <link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT']; ?>/assets/font-awesome/6.1.0/css/all.min.css">
     <link href="<?php $_SERVER['DOCUMENT_ROOT']; ?>/core/tools/css/admin-style.css" rel="stylesheet">
     <link href="<?php $_SERVER['DOCUMENT_ROOT']; ?>/core/tools/css/admin-style-two.css" rel="stylesheet">
-    <script src="<?php $_SERVER['DOCUMENT_ROOT']; ?>/assets/dist/js/jquery-3.6.0.min.js"></script>
-     
+    <script src="<?php $_SERVER['DOCUMENT_ROOT']; ?>/assets/dist/js/jquery-3.6.0.min.js"></script>  
 </head>
 <body>

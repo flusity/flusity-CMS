@@ -1,11 +1,15 @@
-<footer class="footer bg-light py-3">
-    <div class="container-fluid">
-    <p class="text-center mb-0">
+
+<footer class="footer">
+        <div class="container-fluid text-bg-secondary p-3" style="z-index: 999;">
+           <div class="row">
+            <div class="col-12 text-center">
+            <p class="text-center mb-0">
         <?php print $footer_text; ?>
     </p>
-    </div>
-</footer>
-
+            </div>
+           </div>
+       </div>
+    </footer>
 <script>
   $(document).ready(function() {
     $('.toast').toast({ autohide: true });
@@ -97,33 +101,6 @@ $(document).ready(function() {
                 });
             });
 
- function toggleSidebar() {
-  const sidebar = document.getElementById("sidebar");
-  const content = document.getElementById("content");
-
-    if (sidebar.classList.contains("sidebar-collapsed")) {
-      sidebar.classList.remove("sidebar-collapsed");
-      sidebar.classList.add("sidebar-expanded");
-      content.classList.remove("col-custom");
-      content.classList.add("col-md-10");
-      content.classList.remove("main-content-collapsed-sidebar");
-      content.classList.add("main-content-with-sidebar");
-    } else {
-      sidebar.classList.remove("sidebar-expanded");
-      sidebar.classList.add("sidebar-collapsed");
-      content.classList.remove("col-md-10");
-      content.classList.add("col-custom");
-      content.classList.remove("main-content-with-sidebar");
-      content.classList.add("main-content-collapsed-sidebar");
-    }
-
-    if (content.classList.contains("col-custom")) {
-      content.style.width = "calc(100% - 50px)"; 
-    } else {
-      content.style.width = "calc(100% - 250px)";
-    }
-  }
-    $('#toggleSidebarBtn').on('click', toggleSidebar);
 });
 
 document.getElementById('settingsDropdown').addEventListener('click', function() {
@@ -135,8 +112,26 @@ document.getElementById('settingsDropdown').addEventListener('click', function()
   }
 });
 
+        window.addEventListener('DOMContentLoaded', (event) => {
+        var mediaQueryList = window.matchMedia('(max-width: 768px)');
+
+        var sidebar = document.getElementById('sidebar');
+        var sidebarOffcanvasBody = document.getElementById('sidebarOffcanvasBody');
+
+        function handleScreenChange(e) {
+            if (e.matches) {
+                while (sidebar.children.length > 0) {
+                    sidebarOffcanvasBody.appendChild(sidebar.children[0]);
+                }
+            } else {
+                while (sidebarOffcanvasBody.children.length > 0) {
+                    sidebar.appendChild(sidebarOffcanvasBody.children[0]);
+                }
+            }
+        }
+        mediaQueryList.addListener(handleScreenChange);
+        handleScreenChange(mediaQueryList);
+    });
 </script>
-
-
 </body>
 </html>
