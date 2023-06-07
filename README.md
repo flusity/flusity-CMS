@@ -29,7 +29,7 @@ Pagrindinis turinys, kuriame yra keli blokai su skirtingų funkcijų statistika 
 <br><b>Svetainė taip pat turi JavaScript kodą, kuris apima šias funkcijas:</b>
 Puslapio įkėlimas be perkrovimo, kai paspaudžiamos nuorodos su "data-page" atributu.
 Automatiškai uždaryti pranešimus (alerts) po 3 sekundžių.
-Toggle funkcija šoninės navigacijos juostai išplėsti ar suskleisti.
+Offcanvas funkcija šoninės navigacijos juostai išplėsti ar suskleisti.
 Atsižvelgiant į šiuos elementus ir funkcijas, svetainė yrap patogus ir funkcionalus administratoriaus valdymo skydelis.
 </p>
 <b>Šiame projekte pritaikytos apsaugos yra šios:</b>
@@ -74,7 +74,7 @@ Main content containing several blocks with statistics for different functions (
 <br><b>The site also contains JavaScript code that includes the following functions:</b>
 Loading the page without reloading when clicking on links with the "data-page" attribute.
 Automatically close notifications (alerts) after 3 seconds.
-Toggle function to expand or collapse the side navigation bar.
+Offcanvas function to expand or collapse the side navigation bar.
 Considering these elements and functions, the website is a convenient and functional admin control panel.
 </p>
   <ul>
