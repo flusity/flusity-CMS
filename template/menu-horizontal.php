@@ -1,5 +1,5 @@
 <nav class="navbar">   
-     <a href="http://localhost/"  class="navbar-brand"><?php require_once 'assets/logo-50.php'?></a>
+     <a href="http://localhost/"  class="navbar-brand"><img src="/core/tools/img/flusity-b.png" alt="Flusity logo"></a>
      <a class="navbar-brand brand" href="/"><?php echo $settings['site_title']; ?></a>
     
 <div class="navbar-header">
