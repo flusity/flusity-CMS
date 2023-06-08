@@ -2,7 +2,7 @@
 # v2
 PHP CMS project, Log In, Sign Up, admin, moderator, user roles, add/edit/delete post, layout places, language, files, menu, custom block, backup.sql, update website settings.
 
-![banner](http://manowebas.lt/wp-content/themes/manowebas/assets/img/logo.png)
+![banner](http://manowebas.lt/wp-content/uploads/2023/06/flusity-b.png)
 
 <b>Šiame "flusity" svetainės administratoriaus valdymo skydelyje yra keliatą funkcijų ir įrankių:</b>
 <h3>Prietaisų skydelis</h3>
@@ -100,12 +100,14 @@ Considering these elements and functions, the website is a convenient and functi
 Author's address http://www.manowebas.lt
  
 Autoriaus adresas http://www.manowebas.lt
+![banner](http://manowebas.lt/wp-content/uploads/2023/06/admin-dashboard.jpg)
+![banner](http://manowebas.lt/wp-content/uploads/2023/06/log-ser.jpg)
+![banner](http://manowebas.lt/wp-content/uploads/2023/06/rg-user.jpg)
+![banner](http://manowebas.lt/wp-content/uploads/2023/06/users-system.jpg)
+![banner](http://manowebas.lt/wp-content/uploads/2023/06/settings.jpg)
+![banner](http://manowebas.lt/wp-content/uploads/2023/06/posts-system.jpg)
+![banner](http://manowebas.lt/wp-content/uploads/2023/06/files-system.jpg)
 ![banner](http://manowebas.lt/wp-content/uploads/2023/06/front.jpg)
-![banner](http://manowebas.lt/wp-content/uploads/2023/05/registration.jpg)
-![banner](http://manowebas.lt/wp-content/uploads/2023/05/login.jpg)
-![banner](http://manowebas.lt/wp-content/uploads/2023/05/fileup.jpg)
-![banner](http://manowebas.lt/wp-content/uploads/2023/05/settings.jpg)
-![banner](http://manowebas.lt/wp-content/uploads/2023/05/front-new-template.jpg)
 
 
 
