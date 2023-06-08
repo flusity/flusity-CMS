@@ -150,12 +150,12 @@ function addImage(imageUrl) {
         var breakElement  =$('<hr>');
         var divStart = $('<div class="hstack gap-3">');
         var divEnd = $('</div>');
-        var loadMoreButton = $('<button>Load More</button>')
+        var loadMoreButton = $('<button class="btn"><i class="fas fa-angle-right"></i></button>')
         .on('click', function() {
           page++;  
           selectImage();
         });
-        var loadBackButton = $('<button>Load Down</button>')
+        var loadBackButton = $('<button class="btn"><i class="fas fa-angle-left"></i></button>')
         .on('click', function() {
           page--;  
           selectImage();
