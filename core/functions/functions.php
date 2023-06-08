@@ -126,47 +126,52 @@ function createDatabaseBackup($db, $backupFilename) {
         $tables[] = $row[0];
     }
 
-    $backupFileContent = '';
+    $createTableQueries = '';
+    $insertIntoTableQueries = '';
+
     foreach ($tables as $table) {
         $result = $db->query("SELECT * FROM $table");
         $numFields = $result->columnCount();
 
-        $backupFileContent .= "DROP TABLE IF EXISTS $table;";
+        $createTableQueries .= "DROP TABLE IF EXISTS $table;";
         $row2 = $db->query("SHOW CREATE TABLE $table")->fetch(PDO::FETCH_NUM);
-        $backupFileContent .= "\n\n" . $row2[1] . ";\n\n";
+        $createTableQueries .= "\n\n" . $row2[1] . ";\n\n";
 
         for ($i = 0; $i < $numFields; $i++) {
             while ($row = $result->fetch(PDO::FETCH_NUM)) {
-                $backupFileContent .= "INSERT INTO $table VALUES(";
+                $insertIntoTableQueries .= "INSERT INTO $table VALUES(";
                 for ($j = 0; $j < $numFields; $j++) {
                     $row[$j] = addslashes($row[$j]);
                     $row[$j] = preg_replace("/\n/", "\\n", $row[$j]);
                     if (isset($row[$j])) {
-                        $backupFileContent .= '"' . $row[$j] . '"';
-                        } else {
-                        $backupFileContent .= '""';
-                        }
-                        if ($j < ($numFields - 1)) {
-                        $backupFileContent .= ',';
-                        }
-                        }
-                        $backupFileContent .= ");\n";
-                        }
-                        }
-                        $backupFileContent .= "\n\n\n";
-                        }
-                        $backupFolder = 'backups/';
-                        if (!is_dir($backupFolder)) {
-                            mkdir($backupFolder, 0777, true);
-                        }
-                        
-                        $backupFilepath = $backupFolder . $backupFilename;
-                        if (file_put_contents($backupFilepath, $backupFileContent)) {
-                            return true;
-                        } else {
-                            return false;
-                        }
-}                        
+                        $insertIntoTableQueries .= '"' . $row[$j] . '"';
+                    } else {
+                        $insertIntoTableQueries .= '""';
+                    }
+                    if ($j < ($numFields - 1)) {
+                        $insertIntoTableQueries .= ',';
+                    }
+                }
+                $insertIntoTableQueries .= ");\n";
+            }
+        }
+        $insertIntoTableQueries .= "\n\n\n";
+    }
+
+    $backupFolder = 'backups/';
+    if (!is_dir($backupFolder)) {
+        mkdir($backupFolder, 0777, true);
+    }
+    
+    $backupFileContent = $createTableQueries . $insertIntoTableQueries;
+    $backupFilepath = $backupFolder . $backupFilename;
+    if (file_put_contents($backupFilepath, $backupFileContent)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+ 
     
     function getBackupFilesList($backupDir) {
         $files = array_diff(scandir($backupDir), array('..', '.'));
