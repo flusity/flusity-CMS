@@ -17,6 +17,7 @@ $footer_text = isset($settings['footer_text']) ? $settings['footer_text'] : '';
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
     $user_name = getUserNameById($db, $user_id);
+    $language_code = 'lt';
     $translations = getTranslations($db, $language_code);
 
 } else {
