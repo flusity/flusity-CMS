@@ -1,9 +1,10 @@
 # flusity CMS
  v2
 
-PHP CMS project, Log In, Sign Up, admin, moderator, user roles, add/edit/delete post, layout places, language, files, menu, custom block, backup.sql, update website settings.
-CMS flusity naudoja tradicinį serverio pusės generavimo modelį, bet sukurta naudojant šiuolaikines technologijas ir geriausias praktikas.
-CMS flusity uses a traditional server-side generation model, but is built with modern technology and best practices.
+<p>PHP CMS project, Log In, Sign Up, admin, moderator, user roles, add/edit/delete post, layout places, language, files, menu, custom block, backup.sql, update website settings.</p>
+<p><b>CMS flusity</b> naudoja tradicinį serverio pusės generavimo modelį, bet sukurta naudojant šiuolaikines technologijas ir geriausias praktikas.</p>
+<p><b>CMS flusity</b> uses a traditional server-side generation model, but is built with modern technology and best practices.</p>
+
 ![banner](http://manowebas.lt/wp-content/uploads/2023/06/flusity-b.png)
 
 <b>Šiame "flusity" svetainės administratoriaus valdymo skydelyje yra šios funkcijos:</b>
