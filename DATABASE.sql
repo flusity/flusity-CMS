@@ -212,7 +212,7 @@ CREATE TABLE `settings` (
 --
 
 INSERT INTO `settings` (`site_title`, `meta_description`, `footer_text`, `pretty_url`, `language`, `posts_per_page`, `registration_enabled`, `session_lifetime`, `default_keywords`) VALUES
-('flusity', 'JD website description', 'Copyright &copy; flusity JD Theme 2023', 1, 'lt', 10, 1, 30, 'keyword1 keyword2 keyword3 keyword4');
+('Free CMS flusity', 'JD website description', 'Copyright &copy; CMC flusity JD Theme 2023', 1, 'lt', 10, 1, 30, 'keyword1 keyword2 keyword3 keyword4');
 
 -- --------------------------------------------------------
 
