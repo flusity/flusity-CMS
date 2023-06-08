@@ -37,14 +37,14 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
     <table class="table">
         <thead>
             <tr>
-                <th><?php echo t("No.");?></th>
-                <th><?php echo t("Login Name");?></th>
-                <!-- <th><?php // echo t("Username");?></th>
-                <th><?php // echo t("Surname");?></th>
-                <th><?php // echo t("Phone");?></th> -->
-                <th><?php echo t("Email");?></th>
-                <th><?php echo t("Role");?></th>
-                <th><?php echo t("Actions");?></th>
+                <th style="width: 3%;"><?php echo t("No.");?></th>
+                <th style="width: 20%;"><?php echo t("Login Name");?></th>
+                <!-- <th style="width: 20%;"><?php // echo t("Username");?></th>
+                <th style="width: 20%;"><?php // echo t("Surname");?></th>
+                <th style="width: 15%;"><?php // echo t("Phone");?></th> -->
+                <th style="width: 15%;"><?php echo t("Email");?></th>
+                <th style="width: 5%;"><?php echo t("Role");?></th>
+                <th style="width: 8%;"><?php echo t("Actions");?></th>
             </tr>
         </thead>
         <tbody>
