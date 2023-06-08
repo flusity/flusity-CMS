@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 08, 2023 at 12:49 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.0.28
+-- Generation Time: Jun 08, 2023 at 02:52 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,7 +31,7 @@ CREATE TABLE `contact_form_settings` (
   `id` int(11) NOT NULL,
   `setting_key` varchar(255) NOT NULL,
   `setting_value` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `contact_form_settings`
@@ -39,33 +39,6 @@ CREATE TABLE `contact_form_settings` (
 
 INSERT INTO `contact_form_settings` (`id`, `setting_key`, `setting_value`) VALUES
 (1, 'raktas_457', 'raktas_457_test');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `custom_blocks`
---
-
-CREATE TABLE `custom_blocks` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `menu_id` int(10) UNSIGNED DEFAULT NULL,
-  `place_id` int(10) UNSIGNED DEFAULT NULL,
-  `html_code` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Dumping data for table `custom_blocks`
---
-
-INSERT INTO `custom_blocks` (`id`, `name`, `menu_id`, `place_id`, `html_code`) VALUES
-(2, 'News col 5', 3, 80, 'Testuoju News skyrių'),
-(7, 'Pridėtas Blokas col-sm-5', 6, 83, 'Testuoju bloko pridėjimą į col-sm-5 dalį'),
-(9, 'Testuoju dokumentus', 1, 85, 'Bandomas tekstas dokumentuose'),
-(11, 'Test Contact col 5', 12, 101, 'Test Contact block col-sm-5 '),
-(13, ' Box test', 6, 79, ' <h2 class=\"box__title\">Antraštė pirma</h2>\r\n<p class=\"box__text\">Trumpas tekstas box dalis pirmas</p>\r\n   <a href=\"/\" class=\"box__link linkbox\">Box Nuoroda 1</a>'),
-(14, 'Testuoju home-col-down-12', 6, 104, 'Pridedamas bandomasis turinys į home-col-down-12'),
-(15, 'Box test 2', 6, 100, ' <h2 class=\"box__title\">Antraštė angtra</h2>\r\n <p class=\"box__text\">Trumpas tekstas box dalis antras</p>\r\n <a href=\"#\" class=\"box__link linkbox\">Box Nuoroda 2</a>');
 
 -- --------------------------------------------------------
 
@@ -78,7 +51,7 @@ CREATE TABLE `files` (
   `name` varchar(255) NOT NULL,
   `url` varchar(255) NOT NULL,
   `uploaded_at` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `files`
@@ -107,7 +80,7 @@ CREATE TABLE `menu` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `show_in_menu` tinyint(1) NOT NULL DEFAULT 1,
   `parent_id` int(11) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `menu`
@@ -131,7 +104,7 @@ CREATE TABLE `places` (
   `name` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `places`
@@ -169,7 +142,7 @@ CREATE TABLE `posts` (
   `description` text DEFAULT NULL,
   `keywords` text DEFAULT NULL,
   `priority` tinyint(1) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `posts`
@@ -205,14 +178,14 @@ CREATE TABLE `settings` (
   `registration_enabled` tinyint(1) DEFAULT 1,
   `session_lifetime` int(11) DEFAULT 1800,
   `default_keywords` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `settings`
 --
 
 INSERT INTO `settings` (`site_title`, `meta_description`, `footer_text`, `pretty_url`, `language`, `posts_per_page`, `registration_enabled`, `session_lifetime`, `default_keywords`) VALUES
-('Free CMS flusity', 'JD website description', 'Copyright &copy; CMC flusity JD Theme 2023', 1, 'lt', 10, 1, 30, 'keyword1 keyword2 keyword3 keyword4');
+('Free CMS flusity', 'JD website description', 'Copyright &copy; flusity JD Theme 2023', 1, 'lt', 10, 1, 30, 'keyword1 keyword2 keyword3 keyword4');
 
 -- --------------------------------------------------------
 
@@ -225,7 +198,7 @@ CREATE TABLE `translations` (
   `language_code` varchar(5) NOT NULL,
   `translation_key` varchar(255) NOT NULL,
   `translation_value` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `translations`
@@ -455,7 +428,7 @@ CREATE TABLE `users` (
   `email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
   `role` enum('admin','moderator','user') NOT NULL DEFAULT 'user'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
@@ -468,6 +441,33 @@ INSERT INTO `users` (`id`, `login_name`, `username`, `surname`, `phone`, `email`
 (14, 'Darkon', 'Darius', 'Jakaitis', '+370678654645', 'testusers@userv.com', '$argon2i$v=19$m=131072,t=4,p=2$Y2dxZkR6TFdUY1pjSC5ZVQ$14ajUVQnKVzLxMlxwkcJApTGfVWDiOxa6xrkEcm/Xh0', 'admin'),
 (16, 'TestuojuV', 'Sokis', 'Getraitis5', '370613664555', 'testre@js.com', '$argon2i$v=19$m=131072,t=4,p=2$ZzFVYnlFSHFmUWg1dGFSTQ$/fh96Kx+jPHiM4l75iiDyaYO9av0i5bFHA7ibWUBK/o', 'user');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `v_custom_blocks`
+--
+
+CREATE TABLE `v_custom_blocks` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `menu_id` int(10) UNSIGNED DEFAULT NULL,
+  `place_id` int(10) UNSIGNED DEFAULT NULL,
+  `html_code` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `v_custom_blocks`
+--
+
+INSERT INTO `v_custom_blocks` (`id`, `name`, `menu_id`, `place_id`, `html_code`) VALUES
+(2, 'News col 5', 3, 80, 'Testuoju News skyrių'),
+(7, 'Pridėtas Blokas col-sm-5', 6, 83, 'Testuoju bloko pridėjimą į col-sm-5 dalį'),
+(9, 'Testuoju dokumentus', 1, 85, 'Bandomas tekstas dokumentuose'),
+(11, 'Test Contact col 5', 12, 101, 'Test Contact block col-sm-5 '),
+(13, ' Box test', 6, 79, ' <h2 class=\"box__title\">Antraštė pirma</h2>\r\n<p class=\"box__text\">Trumpas tekstas box dalis pirmas</p>\r\n   <a href=\"/\" class=\"box__link linkbox\">Box Nuoroda 1</a>'),
+(14, 'Testuoju home-col-down-12', 6, 104, 'Pridedamas bandomasis turinys į home-col-down-12'),
+(15, 'Box test 2', 6, 100, ' <h2 class=\"box__title\">Antraštė angtra</h2>\r\n <p class=\"box__text\">Trumpas tekstas box dalis antras</p>\r\n <a href=\"#\" class=\"box__link linkbox\">Box Nuoroda 2</a>');
+
 --
 -- Indexes for dumped tables
 --
@@ -477,14 +477,6 @@ INSERT INTO `users` (`id`, `login_name`, `username`, `surname`, `phone`, `email`
 --
 ALTER TABLE `contact_form_settings`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `custom_blocks`
---
-ALTER TABLE `custom_blocks`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `menu_id` (`menu_id`),
-  ADD KEY `place_id` (`place_id`);
 
 --
 -- Indexes for table `files`
@@ -528,6 +520,14 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `login_name` (`login_name`);
 
 --
+-- Indexes for table `v_custom_blocks`
+--
+ALTER TABLE `v_custom_blocks`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `menu_id` (`menu_id`),
+  ADD KEY `place_id` (`place_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -536,12 +536,6 @@ ALTER TABLE `users`
 --
 ALTER TABLE `contact_form_settings`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `custom_blocks`
---
-ALTER TABLE `custom_blocks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `files`
@@ -580,15 +574,21 @@ ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
+-- AUTO_INCREMENT for table `v_custom_blocks`
+--
+ALTER TABLE `v_custom_blocks`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `custom_blocks`
+-- Constraints for table `v_custom_blocks`
 --
-ALTER TABLE `custom_blocks`
-  ADD CONSTRAINT `custom_blocks_ibfk_1` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`id`),
-  ADD CONSTRAINT `custom_blocks_ibfk_2` FOREIGN KEY (`place_id`) REFERENCES `places` (`id`);
+ALTER TABLE `v_custom_blocks`
+  ADD CONSTRAINT `v_custom_blocks_ibfk_1` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`id`),
+  ADD CONSTRAINT `v_custom_blocks_ibfk_2` FOREIGN KEY (`place_id`) REFERENCES `places` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
