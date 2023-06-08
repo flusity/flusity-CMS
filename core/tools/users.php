@@ -73,8 +73,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
             <?php } ?>
         </tbody>
     </table>
-
-            </main>
+  </main>
 </div>
 </div>
 <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
