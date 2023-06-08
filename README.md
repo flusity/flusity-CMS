@@ -17,7 +17,7 @@
 <li>Menu (meniu)</li>
 <li>Block (blokai)</li>
 <li>Tags (Žymos)</li>
-<li style="color:red;">Contact Form (kontaktų forma dar kūrimo būsenoje)</li>
+<li>Contact Form (kontaktų forma dar kūrimo būsenoje)</li>
 <li>Files (failai)</li>
 <li>Language (kalba vertimas į lt)</li>
 <li>Settings (nustatymai)</li>
