@@ -3,8 +3,6 @@
 
 <p>PHP CMS project, Log In, Sign Up, admin, moderator, user roles, add/edit/delete post, layout places, language, files, menu, custom block, backup.sql, update website settings.</p>
 <p><b>CMS flusity</b> naudoja tradicinį serverio pusės generavimo modelį, bet sukurta naudojant šiuolaikines technologijas ir geriausias praktikas.</p>
-<p><b>CMS flusity</b> uses a traditional server-side generation model, but is built with modern technology and best practices.</p>
-
 
 <p><b>CMS flusity</b>"Flusity CMS"</b> naudoja PHP kaip savo pagrindinę serverio pusės programavimo kalbą.<p>
 <p>Projekte naudojama MySQL duomenų bazė.</p>
@@ -61,7 +59,10 @@ Atsižvelgiant į šiuos elementus ir funkcijas, svetainė yrap patogus ir funkc
   <p>Prisijungimas prie sistemos: user: Darius, Admin, User, Moderator password: 1234 , Projektas dar tęsiamas, numatoma pridėti daugiau funkcionalumų</p>
   
   /////// En /////////////////
+  
 <p><b>CMS flusity</b>Flusity CMS</b> uses PHP as its main server-side programming language.<p>
+ <p>CMS flusity uses a traditional server-side generation model, but is built with modern technology and best practices.</p>
+
 <p>The project uses a MySQL database.</p>
 <p>This project uses Bootstrap - one of the most popular front-end frameworks.</p>
 <p>Also uses jQuery, which is an easy-to-use and flexible JavaScript library for efficient DOM manipulation and AJAX requests.</p>
