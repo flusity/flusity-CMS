@@ -338,35 +338,24 @@ textarea:focus {
   border: 1px solid #8ee391b7 !important;
   background-color: #8ee39198 !important;
   border-radius: 2px;
-  margin-bottom: -100px;
-  margin-top:50px;
-  margin-left: 70px;
 }
 .alert.alert-danger.alert-dismissible.fade.show.slow-fade{
   border: 1px solid #ff5353db !important;
   background-color: #ff5353a6 !important;
   border-radius: 2px;
-  border-radius: 2px;
-  margin-bottom: -100px;
-  margin-top:50px;
-  margin-left: 70px;
+ 
 }
 .alert.alert-success{
   border: 1px solid #8ee391b7 !important;
   background-color: #8ee39198 !important;
   border-radius: 2px;
-  margin-bottom: -100px;
-  margin-top:50px;
-  margin-left: 70px;
+
 }
 .alert.alert-danger{
   border: 1px solid #ff5353db !important;
   background-color: #ff5353a6 !important;
   border-radius: 2px;
-  border-radius: 2px;
-  margin-bottom: -100px;
-  margin-top:50px;
-  margin-left: 70px;
+
 }
 
 .btn.file-right i {
