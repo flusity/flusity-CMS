@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="col-sm-4">
         <h2><?php echo t("Login system");?></h2>
         <p><?php echo t("The content management system is intended for personal websites");?>s</p>
-    <?php require_once 'assets/logo.php'?> 
+        <img src="/core/tools/img/flusity-b.png" alt="Flusity logo"> 
 </div>
         <div class="col-sm-4">
 <h1 class="h3 mb-3 fw-normal"><?php echo t("Connect to page"); ?></h1>
