@@ -1,5 +1,7 @@
 <nav class="navbar">   
      <a href="http://localhost/"  class="navbar-brand"><?php require_once 'assets/logo-50.php'?></a>
+     <a class="navbar-brand brand" href="/"><?php echo $settings['site_title']; ?></a>
+    
 <div class="navbar-header">
     <button class="navbar-toggle" id="navUp">
               <span class="bar bar1"></span>

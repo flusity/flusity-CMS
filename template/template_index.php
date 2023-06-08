@@ -5,7 +5,7 @@
     <div class="header__content">
         <h1 class="header__title"></h1>
         <p class="header__text"></p>
-        <a href="#" class="header__link btn"></a>
+       
     </div>
 </div>
 <div class="container-fluid"> 
