@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 06, 2023 at 10:34 PM
+-- Generation Time: Jun 08, 2023 at 12:49 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -177,16 +177,16 @@ CREATE TABLE `posts` (
 
 INSERT INTO `posts` (`id`, `title`, `content`, `author_id`, `role`, `created_at`, `status`, `menu_id`, `tags`, `updated_at`, `description`, `keywords`, `priority`) VALUES
 (1, 'ggnn', 'bcncvbvcbsrgfsgf dfgfd', 2, 'admin', '2023-04-15 16:08:31', 'draft', 1, '', '2023-06-06 19:17:18', '', '', 0),
-(4, 'Naujas bandymas 3', '&lt;b&gt;Lorem&lt;/b&gt; ipsum dolor sit amet, consectetur adipiscing elit. &lt;img src=&quot;uploads/pexels-dominika-roseclay_2b7dd92bc8d188b4.jpg&quot; width=&quot;250px&quot; height=&quot;auto&quot; align=&quot;left&quot; hspace=&quot;15&quot; vspace=&quot;15&quot;/&gt;\r\nAliquam ultricies justo ut purus efficitur, eleifend pellentesque risus cursus. Maecenas ex massa, sagittis id metus non, convallis scelerisque ligula. Vivamus aliquam risus accumsan lacinia eleifend. Nunc vestibulum massa a mauris egestas, quis sollicitudin est posuere. Duis lobortis tincidunt leo, vitae condimentum odio mollis at. Nullam mollis lobortis erat, lobortis mollis mi commodo ac. Nunc in lectus vitae mauris imperdiet varius in id neque. Vestibulum orci risus, posuere in velit eget, ullamcorper convallis augue. Mauris nulla dui, iaculis ac ultrices quis, scelerisque a libero.', 2, 'admin', '2023-01-01 11:03:58', 'published', 6, 'cccsss, aaa', '2023-06-06 19:28:54', 'testuoju description teksto pridėjimą', 'pirmas raktazodis', 1),
+(4, 'Naujas bandymas 3', '&lt;b&gt;Lorem&lt;/b&gt; ipsum dolor sit amet, consectetur adipiscing elit. &lt;img src=&quot;uploads/pexels-dominika-roseclay_2b7dd92bc8d188b4.jpg&quot; width=&quot;250px&quot; height=&quot;auto&quot; align=&quot;left&quot; hspace=&quot;15&quot; vspace=&quot;15&quot;/&gt;\r\nAliquam ultricies justo ut purus efficitur, eleifend pellentesque risus cursus. Maecenas ex massa, sagittis id metus non, convallis scelerisque ligula. Vivamus aliquam risus accumsan lacinia eleifend. Nunc vestibulum massa a mauris egestas, quis sollicitudin est posuere. Duis lobortis tincidunt leo, vitae condimentum odio mollis at. Nullam mollis lobortis erat, lobortis mollis mi commodo ac. Nunc in lectus vitae mauris imperdiet varius in id neque. Vestibulum orci risus, posuere in velit eget, ullamcorper convallis augue. Mauris nulla dui, iaculis ac ultrices quis, scelerisque a libero.', 2, 'admin', '2023-01-01 11:03:58', 'published', 6, 'cccsss', '2023-06-06 19:28:54', 'testuoju description teksto pridėjimą', 'pirmas raktazodis', 1),
 (5, 'fthhj', 'gfhjgfhjfghjgfhj', 2, 'admin', '0000-00-00 00:00:00', 'draft', 1, '', '2023-06-06 19:17:29', '', '', 0),
 (8, 'test www', 'dfgdfgfg dfgfg', 2, 'admin', '0000-00-00 00:00:00', 'draft', 3, '', '2023-06-06 19:17:43', '', '', 0),
 (10, 'test www', 'tervvr re eshh       &lt;b&gt;   šįyįš yįęįšudhhdf  dfhfh fghd&lt;/b&gt;', 2, 'admin', '0000-00-00 00:00:00', 'published', 3, '', '2023-06-04 20:22:48', NULL, NULL, 0),
 (11, 'sdsrrrrrr', 'fghghgfbfghb fg hh dh dh gfhgfhdfghgf fhj trtyėį  tėįrsh   jjgdjgj', 2, 'admin', '0000-00-00 00:00:00', 'published', 1, '', '2023-05-26 16:21:26', NULL, NULL, 0),
 (28, 'sdfsdf', 'sdfsdf', 2, 'admin', '2023-04-19 18:18:44', 'published', 3, 'cccsss', '2023-06-06 19:28:48', '', '', 0),
 (29, 'hh', 'hhhccccccc', 2, 'admin', '2023-04-19 20:56:21', 'draft', 6, '', '2023-06-06 06:54:31', '', '', 0),
-(30, 'nnneeeee', 'xcvxerter e er', 2, 'admin', '2023-04-19 21:11:47', 'draft', 3, 'aaa', '2023-06-06 19:28:42', '', '', 0),
+(30, 'nnneeeee', 'xcvxerter e er', 2, 'admin', '2023-04-19 21:11:47', 'draft', 3, '', '2023-06-06 19:28:42', '', '', 0),
 (31, 'asda', '&lt;b&gt;adasdasdas&lt;/b&gt;', 2, 'admin', '2023-05-26 13:58:04', 'published', 1, '', '2023-06-06 19:17:59', '', '', 0),
-(32, 'xxxxx', '&lt;b&gt;xcvxcvxcvxcv&lt;/b&gt;', 2, 'admin', '2023-06-03 20:31:21', 'published', 6, '', '2023-06-06 19:17:12', 'sdfsdf sdvgsdfsdfddddddddd', 'sdfdsfdf sdfv', 0),
+(32, 'xxxxx', '&lt;b&gt;xcvxcvxcvxcv&lt;/b&gt;', 2, 'admin', '2023-06-03 20:31:21', 'published', 6, 'nnbbb', '2023-06-08 02:54:45', 'sdfsdf sdvgsdfsdfddddddddd', 'sdfdsfdf sdfv', 0),
 (34, 'zzzzzzzzzzzzz', 'xzczxczx x zx zxv erge', 2, 'admin', '2023-06-05 23:40:09', 'draft', 6, '', '2023-06-06 19:03:45', 'zxc x', 'zzz', 0);
 
 -- --------------------------------------------------------
@@ -212,7 +212,7 @@ CREATE TABLE `settings` (
 --
 
 INSERT INTO `settings` (`site_title`, `meta_description`, `footer_text`, `pretty_url`, `language`, `posts_per_page`, `registration_enabled`, `session_lifetime`, `default_keywords`) VALUES
-('JD website', 'JD website description', 'Copyright &copy; JD Theme 2023', 1, 'lt', 10, 1, 10, 'keyword1 keyword2 keyword3 keyword4');
+('flusity', 'JD website description', 'Copyright &copy; flusity JD Theme 2023', 1, 'lt', 10, 1, 30, 'keyword1 keyword2 keyword3 keyword4');
 
 -- --------------------------------------------------------
 
@@ -415,7 +415,7 @@ INSERT INTO `translations` (`id`, `language_code`, `translation_key`, `translati
 (214, 'lt', 'Translation added successfully.', 'Vertimas sėkmingai pridėtas.'),
 (215, 'lt', 'Error: Translation word already exists.', 'Klaida: verčiamas žodis jau yra.'),
 (216, 'lt', 'Block', 'Blokai'),
-(217, 'lt', 'Core Settings', 'Pagrindiniai nustatymai'),
+(217, 'lt', 'Core Settings', 'Sistemos įrankiai'),
 (218, 'lt', 'Lines per page:', 'Eilučių per puslapį:'),
 (219, 'lt', 'Add new code', 'Pridėti naują kodą'),
 (220, 'lt', 'That Name or Login Name is already taken. Choose another.', 'Tas vardas arba prisijungimo vardas jau užimtas. Pasirinkite kitą.'),
@@ -435,7 +435,7 @@ INSERT INTO `translations` (`id`, `language_code`, `translation_key`, `translati
 (234, 'lt', 'Parent', 'Tėvinis puslapis'),
 (235, 'lt', 'User registration successful. You can now log in.', 'Vartotojo registracija sėkminga. Dabar galite prisijungti.'),
 (236, 'lt', 'Registration Enabled', 'Registracija leidžiama'),
-(237, 'lt', 'Session lifetime', 'Sesijos trukmė'),
+(237, 'lt', 'Session lifetime in minutes', 'Sesijos trukmė minutėmis'),
 (238, 'lt', 'META Default keywords', 'META Numatytieji raktažodžiai'),
 (239, 'lt', 'No tags have been created', 'Nėra sukurta nei vieno Tag žymos'),
 (240, 'lt', 'Edit your Tags', 'Redaguokite savo žymas');
