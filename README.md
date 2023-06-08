@@ -6,6 +6,12 @@
 <p><b>CMS flusity</b> uses a traditional server-side generation model, but is built with modern technology and best practices.</p>
 
 ![banner](http://manowebas.lt/wp-content/uploads/2023/06/flusity-b.png)
+<p><b>CMS flusity</b>"Flusity CMS"</b> naudoja PHP kaip savo pagrindinę serverio pusės programavimo kalbą.<p>
+<p>Projekte naudojama MySQL duomenų bazė.</p>
+<p>Šiame Projekte naudojamas "Bootstrap" - tai vienas iš populiariausių "front-end" karkasų.</p>
+<p>Taip pat naudojamas jQuery, kuri yra lengva naudoti ir lanksti JavaScript biblioteka, skirta efektyviam DOM manipuliavimui ir AJAX užklausoms.</p>
+<p>Kaip ir daugumoje interneto svetainių, "Flusity-CMS" naudoja HTML ir CSS svetainės struktūrai ir stiliui.</p>
+<p>Projekte taip pat naudojama "Model-View-Controller" (MVC) architektūra, kuri padeda išlaikyti kodą tvarkingą ir gerai organizuotą.</p>
 
 <b>Šiame "flusity" svetainės administratoriaus valdymo skydelyje yra šios funkcijos:</b>
 <h3>Prietaisų skydelis</h3>
@@ -37,6 +43,7 @@ Automatiškai uždaryti pranešimus (alerts) po 3 sekundžių.
 Offcanvas funkcija šoninės navigacijos juostai išplėsti ar suskleisti.
 Atsižvelgiant į šiuos elementus ir funkcijas, svetainė yrap patogus ir funkcionalus administratoriaus valdymo skydelis.
 </p>
+<br>
 <b>Šiame projekte pritaikytos apsaugos yra šios:</b>
 <ul>
 <li>Content Security Policy (CSP): Kodo pradžioje yra CSP antraštė, kuri apriboja išorinių išteklių naudojimą. CSP padeda apsaugoti nuo kai kurių įterpimo atakų, tokių kaip Cross-Site Scripting (XSS).</li>
@@ -54,7 +61,14 @@ Atsižvelgiant į šiuos elementus ir funkcijas, svetainė yrap patogus ir funkc
   <p>Prisijungimas prie sistemos: user: Darius, Admin, User, Moderator password: 1234 , Projektas dar tęsiamas, numatoma pridėti daugiau funkcionalumų</p>
   
   /////// En /////////////////
-  <b>This site admin control panel includes the following features:</b>
+<p><b>CMS flusity</b>Flusity CMS</b> uses PHP as its main server-side programming language.<p>
+<p>The project uses a MySQL database.</p>
+<p>This project uses Bootstrap - one of the most popular front-end frameworks.</p>
+<p>Also uses jQuery, which is an easy-to-use and flexible JavaScript library for efficient DOM manipulation and AJAX requests.</p>
+<p>Like most websites, Flusity-CMS uses HTML and CSS to structure and style the website.</p>
+<p>The project also uses Model-View-Controller (MVC) architecture, which helps keep the code neat and well-organized.</p>
+<br>
+<b>This site admin control panel includes the following features:</b>
   <h3>Dashboard</h3>
 <ul><li>
 <li>Dashboard (information summary)</li>
