@@ -368,3 +368,13 @@ textarea:focus {
   margin-top:50px;
   margin-left: 70px;
 }
+
+.btn.file-right i {
+  font-size: 1.7em;
+}
+.btn.file-left i {
+  font-size: 1.7em;
+}
+.flusity-logo{
+  margin-bottom:2px
+}
