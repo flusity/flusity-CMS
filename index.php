@@ -1,12 +1,9 @@
-<?php if (session_status() !== PHP_SESSION_ACTIVE) {
-  session_start();
-}
+<?php
 /*
  @CMS flusity
  Author Darius Jakaitis, author web site http://www.manowebas.lt
 */
-require_once 'security/config.php';
-require_once 'core/functions/functions.php';
+require_once 'pre.php';
 require_once 'get_customblock.php';
 
 ini_set('display_errors', 1);
@@ -34,7 +31,6 @@ $current_page_url = getCurrentPageUrl($db);
 $posts = getPostsNews($db, $limit, $offset, $current_page_url);
 $postSeo = getPostSeo($db, $limit, $offset, $current_page_url);
 
-// Dekodavima
 foreach ($posts as &$post) {
     $post['title'] = htmlspecialchars_decode($post['title']);
     $post['content'] = htmlspecialchars_decode($post['content']);
