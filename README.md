@@ -1,5 +1,7 @@
 # flusity CMS
 # v2
+# CMS flusity naudoja tradicinį serverio pusės generavimo modelį, bet sukurta naudojant šiuolaikines technologijas ir geriausias praktikas.
+# CMS flusity uses a traditional server-side generation model, but is built with modern technology and best practices.
 PHP CMS project, Log In, Sign Up, admin, moderator, user roles, add/edit/delete post, layout places, language, files, menu, custom block, backup.sql, update website settings.
 
 ![banner](http://manowebas.lt/wp-content/uploads/2023/06/flusity-b.png)
