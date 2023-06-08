@@ -2,9 +2,8 @@
   session_start();
 }
 /*
- @MiniFrame css karkasas Lic GNU
+ @CMS flusity
  Author Darius Jakaitis, author web site http://www.manowebas.lt
- fix-content
 */
 require_once 'security/config.php';
 require_once 'core/functions/functions.php';
