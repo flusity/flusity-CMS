@@ -1,19 +1,13 @@
-<?php  
+<?php  session_start(); 
 //session_unset(); 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-session_start(); 
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/core/functions/functions.php';
 $language_code = isset($_SESSION['language']) ? $_SESSION['language'] : 'en';
 $stage = 1;
-
+//$stage = isset($_SESSION['stage']) ? $_SESSION['stage'] : 1;
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['admin_username']) && isset($_POST['admin_password'])) {
         $stage = 2;
-        
 
         $db_host = $_SESSION['db_host'];
         $db_name = $_SESSION['db_name'];
@@ -33,6 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($registrationSuccessful) {
                 $_SESSION['success_message'] = "Admin successfully created!";
                 $_SESSION['stage'] = 3;
+                $stage = 3;
                 $stmt = $db->prepare("UPDATE users SET role='admin' WHERE login_name=:login_name");
                 $stmt->bindParam(':login_name', $login_name);
                 $stmt->execute();
@@ -40,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 $_SESSION['error_message'] = "Error creating administrator: User with such email. The email or login name already exists, or the name you selected is on the blacklist.";
                 header("Location: install-flusity.php");
-                exit;
+                //exit;
             }
 
         } catch (PDOException $e) {
@@ -61,21 +56,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         try {
             $db = new PDO("mysql:host={$db_host};dbname={$db_name};charset=utf8", $db_user, $db_password);
-            
+
             $_SESSION['success_message'] = "<p class='d-flex justify-content-center align-items-center'>Database and system configuration installation successful!</p> <p class='d-flex justify-content-center align-items-center'><b>Very important:&nbsp;</b> You can now create an admin user</p>";
             $_SESSION['alert-warning'] = "<p class='d-flex justify-content-center align-items-center'>
             You may not create an Admin user, then you will be able to log in with the <br>Login Name: Admin7 and the password: 1234 <br> for which you must change the password and other data after logging in.
             </p>";
-           
-            
-             $language_code = getLanguageSetting($db);
-             $translations = getTranslations($db, $language_code);
             try {
-                $sql = file_get_contents('../install/db.sql');
+                $sql = file_get_contents('db.sql');
                 $db->exec($sql);
 
                 $stage = 2;
-               
             } catch(PDOException $e) {
                 $_SESSION['error_message'] = "Error importing data: " . $e->getMessage();
                 header("Location: install-flusity.php");
@@ -152,14 +142,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           if (isset($_SESSION['success_message'])) {
             echo "<div class='alert alert-success alert-dismissible fade show slow-fade'>
                     " . $_SESSION['success_message'];
-
-            
-                    if (isset($_SESSION['stage']) && $_SESSION['stage'] == 3) : ?>
-                        <br><?php //echo $_SESSION['stage'];?>
-                        <a href="http://localhost/login.php"><?php echo t('Click here to log in'); ?></a>
+                    if (isset($_SESSION['stage']) && $_SESSION['stage'] < 2) : ?>
+                           <button type='button' class='btn-close install-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                   
                     <?php else : ?>
-                        <button type='button' class='btn-close install-close' data-bs-dismiss='alert' aria-label='Close'></button>
-                    <?php endif;
+                        
+                   <?php endif;
             
             echo "</div>";
             unset($_SESSION['success_message']);
@@ -171,7 +159,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>";
                 unset($_SESSION['alert-warning']);
             }
-
+            if (isset($_SESSION['alert-warning'])) {
+                echo "<div class='alert alert-warning alert-dismissible fade show slow-fade'>
+                        " . $_SESSION['alert-warning'] . "
+                        <button type='button' class='btn-close install-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                    </div>";
+                unset($_SESSION['alert-warning']);
+            }
             if (isset($_SESSION['error_message'])) {
                 echo "<div class='alert alert-danger alert-dismissible fade show slow-fade'>
                         " . htmlspecialchars($_SESSION['error_message']) . "
@@ -215,7 +209,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <button type="submit" class="btn btn-primary w-100">Install</button>
             </form>
         </div>
-    <?php elseif ($stage == 2 && (!isset($_SESSION['stage']) || $language_code !='')): 
+    <?php elseif ($stage == 2 && $language_code !=''): 
   
         ?>
         <div class="col-4">
@@ -248,7 +242,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <button type="submit" class="btn btn-primary w-100">Create Admin</button>
             </form>
         </div>
-    <?php endif; ?>
+        <?php elseif ($stage == 3 ): ?>
+<div class="col-4">
+    <h1 class="mt-5 mb-3"><?php echo t("Admin Creation Successful");?></h1>
+    <p>
+        Sveikiname! Sėkmingai sukūrėte administratoriaus paskyrą. Dabar galite prisijungti prie sistemos naudodamiesi administratoriaus prisijungimo duomenimis. 
+    </p>
+    <a href="http://localhost/login.php" class="btn btn-primary">Prisijungti</a>
+</div>
+<?php endif; ?>
     </div>
 </div>
 
