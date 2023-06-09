@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 
             } else {
                 $_SESSION['error_message'] = "Error creating administrator: User with such email. The email or login name already exists, or the name you selected is on the blacklist.";
-                //session_unset(); // pridėkite šią eilutę
+                //session_unset(); // 
                 $_SESSION['stage'] = 2;
                 header("Location: install-flusity.php?stage=2");
                 exit;
