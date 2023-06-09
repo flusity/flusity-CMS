@@ -50,7 +50,15 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
         echo "<h3>";?><?php echo t("File list");?><?php echo "</h3>";
         echo '<div class="row row-cols-1 row-cols-md-3 g-4">';
         foreach ($files as $file) {
-            $url = $file['url'];
+            $fileUrl = $file['url'];
+            
+            if (strpos($fileUrl, 'http://localhost') === 0) {
+                // Jei URL prasideda nuo "http://localhost", naudoti nuorodą be "http://localhost"
+                $url = str_replace('http://localhost', '', $fileUrl);
+            } else {
+                // Kitu atveju naudoti visą URL
+                $url = $fileUrl;
+            }
             $is_image = preg_match('/\.(gif|jpe?g|png)$/i', $file['name']);
     
             $filename_parts = explode('_', $file['name']);
