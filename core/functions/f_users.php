@@ -101,8 +101,8 @@ function getUserNameById($db, $user_id) {
             }
         }
     
-        $hashed_password = password_hash($password, PASSWORD_ARGON2I, ['memory_cost' => 1<<17, 'time_cost' => 4, 'threads' => 2]);
-    
+       // $hashed_password = password_hash($password, PASSWORD_ARGON2I, ['memory_cost' => 1<<17, 'time_cost' => 4, 'threads' => 2]);
+       $hashed_password = password_hash($password, PASSWORD_BCRYPT);
         $stmt = $db->prepare("SELECT COUNT(*) FROM users WHERE email = :email OR login_name = :login_name");
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':login_name', $login_name);
@@ -162,7 +162,8 @@ function updateUser($db, $id, $username, $surname, $phone, $email, $role, $passw
     $stmt->bindParam(':role', $role, PDO::PARAM_STR);
 
     if ($password !== null) {
-        $hashed_password = password_hash($password, PASSWORD_ARGON2I, ['memory_cost' => 1<<17, 'time_cost' => 4, 'threads' => 2]);
+       // $hashed_password = password_hash($password, PASSWORD_ARGON2I, ['memory_cost' => 1<<17, 'time_cost' => 4, 'threads' => 2]);
+       $hashed_password = password_hash($password, PASSWORD_BCRYPT);
         $stmt->bindParam(':password', $hashed_password, PDO::PARAM_STR);
     }
 
