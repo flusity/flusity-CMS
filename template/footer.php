@@ -6,7 +6,6 @@
     </div>
 </footer>
 <script src="assets/main/main.js"></script>
-<script src="assets/dist/js/jquery-3.6.0.min.js"></script>
 <script src="assets/popperjs/popper.min.js"></script>
 <script src="assets/bootstrap-5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
