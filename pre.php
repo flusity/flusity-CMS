@@ -18,7 +18,7 @@ if (
     empty($config['db_password']) ||
     empty($config['db_name']) 
 ) {
-    header("Location: install-flusity.php");
+    header("Location: install/install-flusity.php");
     exit;
 }
 
@@ -26,6 +26,6 @@ try {
     $db = getDBConnection($config);
 } catch (PDOException $e) {
     error_log('Database connection error: ' . $e->getMessage());
-    header("Location: install-flusity.php");
+    header("Location: install/install-flusity.php");
     exit;
 }
