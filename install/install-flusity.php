@@ -3,8 +3,8 @@
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/core/functions/functions.php';
 $language_code = isset($_SESSION['language']) ? $_SESSION['language'] : 'en';
-$stage = 1;
-//$stage = isset($_SESSION['stage']) ? $_SESSION['stage'] : 1;
+//$stage = 1;
+$stage = isset($_SESSION['stage']) ? $_SESSION['stage'] : 1;
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['admin_username']) && isset($_POST['admin_password'])) {
         $stage = 2;
@@ -34,9 +34,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 
             } else {
                 $_SESSION['error_message'] = "Error creating administrator: User with such email. The email or login name already exists, or the name you selected is on the blacklist.";
-                header("Location: install-flusity.php");
-                //exit;
+                //session_unset(); // pridėkite šią eilutę
+                $_SESSION['stage'] = 2;
+                header("Location: install-flusity.php?stage=2");
+                exit;
             }
+            
+            
 
         } catch (PDOException $e) {
             $_SESSION['error_message'] = "Error creating admin: " . $e->getMessage();
@@ -144,9 +148,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     " . $_SESSION['success_message'];
                     if (isset($_SESSION['stage']) && $_SESSION['stage'] < 2) : ?>
                            <button type='button' class='btn-close install-close' data-bs-dismiss='alert' aria-label='Close'></button>
-                   
                     <?php else : ?>
-                        
                    <?php endif;
             
             echo "</div>";
@@ -179,7 +181,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </div>
 <div class="container">
     <div class="row justify-content-center align-items-center">
-    <?php  if ($stage == 1):?>
+    <?php  if ($stage == 1): 
+       // echo "Stage: $stage<br>";
+        ?>
         <div class="col-4">
             <h1 class="mt-5 mb-3">Flusity CMS install</h1>
             <form action="install-flusity.php" method="post">
@@ -245,9 +249,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php elseif ($stage == 3 ): ?>
 <div class="col-4">
     <h1 class="mt-5 mb-3"><?php echo t("Admin Creation Successful");?></h1>
+    <div class="alert alert-warning" role="alert">
+ <p> <b><?php echo t("VERY IMPORTANT:");?></b>&nbsp;<?php echo t("Remember to be sure to delete or rename to a complex name from the FTP install folder, as this can be an easy way to damage your site!");?></p>
+</div>
     <p>
-        Sveikiname! Sėkmingai sukūrėte administratoriaus paskyrą. Dabar galite prisijungti prie sistemos naudodamiesi administratoriaus prisijungimo duomenimis. 
-    </p>
+        <?php echo t("Congratulations! You have successfully created an administrator account. You can now log in to the system using your administrator credentials.");?>
+        <!-- Sveikiname! Sėkmingai sukūrėte administratoriaus paskyrą. Dabar galite prisijungti prie sistemos naudodamiesi administratoriaus prisijungimo duomenimis. 
+    --> 
+</p>
     <a href="http://localhost/login.php" class="btn btn-primary">Prisijungti</a>
 </div>
 <?php endif; ?>
