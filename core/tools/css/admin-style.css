@@ -367,3 +367,9 @@ textarea:focus {
 .flusity-logo{
   margin-bottom:2px
 }
+button.btn-close:hover {
+  background-color: transparent;
+  border: none;
+  box-shadow:none;
+  filter: brightness(0) saturate(100%) invert(38%) sepia(51%) saturate(2788%) hue-rotate(1deg) brightness(90%) contrast(88%);
+}

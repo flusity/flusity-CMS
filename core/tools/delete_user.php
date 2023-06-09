@@ -18,13 +18,17 @@
 
         $userId = intval($_POST['user_id']);
         $result = deleteUser($db, $userId);
-
+    
         if ($result) {
-            $_SESSION['success_message'] = 'User deleted successfully.';
+            $_SESSION['success_message'] = t('User deleted successfully.');
         } else {
-            $_SESSION['error_message'] = 'Error deleting User. Try again.';
+            if (checkUserRole($userId, 'admin', $db) && countAdmins($db) <= 1){
+                $_SESSION['error_message'] = t('Cannot delete the last admin.');
+            } else {
+                $_SESSION['error_message'] = t('Error deleting User. Try again.');
+            }
         }
     }
-
-    header("Location: users.php");
+    
+    echo json_encode($result);
     exit;

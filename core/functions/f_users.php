@@ -178,8 +178,23 @@ function getUserById($db, $id) {
     return $stmt->fetch();
 }
 
+function countAdmins($db) {
+    $stmt = $db->prepare("SELECT COUNT(*) FROM users WHERE role = 'admin'");
+    $stmt->execute();
+    return $stmt->fetchColumn();
+}
+
 function deleteUser($db, $id) {
-    $stmt = $db->prepare('DELETE FROM users WHERE id = :id');
+    $stmt = $db->prepare('SELECT role FROM users WHERE id = :id');
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-    return $stmt->execute();
+    $stmt->execute();
+    $role = $stmt->fetchColumn();
+
+    if ($role === 'admin' && countAdmins($db) <= 1) {
+        return false;
+    } else {
+        $stmt = $db->prepare('DELETE FROM users WHERE id = :id');
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
 }
