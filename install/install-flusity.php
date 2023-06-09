@@ -1,9 +1,8 @@
-<?php  session_start(); 
+<?php session_start(); 
 //session_unset(); 
-
 require_once $_SERVER['DOCUMENT_ROOT'] . '/core/functions/functions.php';
 $language_code = isset($_SESSION['language']) ? $_SESSION['language'] : 'en';
-//$stage = 1;
+
 $stage = isset($_SESSION['stage']) ? $_SESSION['stage'] : 1;
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['admin_username']) && isset($_POST['admin_password'])) {
@@ -34,13 +33,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 
             } else {
                 $_SESSION['error_message'] = "Error creating administrator: User with such email. The email or login name already exists, or the name you selected is on the blacklist.";
-                //session_unset(); // 
                 $_SESSION['stage'] = 2;
+                //session_unset();
                 header("Location: install-flusity.php?stage=2");
                 exit;
             }
-            
-            
 
         } catch (PDOException $e) {
             $_SESSION['error_message'] = "Error creating admin: " . $e->getMessage();
@@ -60,30 +57,52 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         try {
             $db = new PDO("mysql:host={$db_host};dbname={$db_name};charset=utf8", $db_user, $db_password);
-
+            
             $_SESSION['success_message'] = "<p class='d-flex justify-content-center align-items-center'>Database and system configuration installation successful!</p> <p class='d-flex justify-content-center align-items-center'><b>Very important:&nbsp;</b> You can now create an admin user</p>";
             $_SESSION['alert-warning'] = "<p class='d-flex justify-content-center align-items-center'>
             You may not create an Admin user, then you will be able to log in with the <br>Login Name: Admin7 and the password: 1234 <br> for which you must change the password and other data after logging in.
             </p>";
-            try {
-                $sql = file_get_contents('db.sql');
-                $db->exec($sql);
+            
+            $directory = $_SERVER['DOCUMENT_ROOT'].'/core/tools/backups/'; 
+            $files = scandir($directory); 
 
+            $sql_files = array_filter($files, function($filename) {
+                return pathinfo($filename, PATHINFO_EXTENSION) === 'sql'; 
+            });
+
+            $newest_file = '';
+            $newest_file_time = 0;
+
+            foreach ($sql_files as $file) {
+                $file_time = filemtime($directory . $file);
+                if ($file_time > $newest_file_time) {
+                    $newest_file = $file;
+                    $newest_file_time = $file_time;
+                }
+            }
+
+            if ($newest_file !== '') {
+                $newest_file_path = $directory . $newest_file;
+                $sql = file_get_contents($newest_file_path); 
+                $db->exec($sql);
                 $stage = 2;
-            } catch(PDOException $e) {
-                $_SESSION['error_message'] = "Error importing data: " . $e->getMessage();
-                header("Location: install-flusity.php");
-                exit;
+            } else {
+                // Failų nerasta
+                throw new Exception("No SQL files found in the directory");
             }
 
         } catch (PDOException $e) {
-            $_SESSION['error_message'] = "Error connecting to database: " . $e->getMessage();
+            $_SESSION['error_message'] = "Error connecting to database or importing data: " . $e->getMessage();
+            header("Location: install-flusity.php");
+            exit;
+        } catch (Exception $e) {
+            $_SESSION['error_message'] = $e->getMessage();
             header("Location: install-flusity.php");
             exit;
         }
     }
+
     if ($stage == 2) {
-    
         $config_text = "<?php\n\n\$config = [\n";
         $config_text .= "  'db_host' => '{$db_host}',\n";
         $config_text .= "  'db_name' => '{$db_name}',\n";
@@ -99,6 +118,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
+
 
 ?>
 <!doctype html>
