@@ -52,7 +52,7 @@ Atsižvelgiant į šiuos elementus ir funkcijas, svetainė yrap patogus ir funkc
   <li>Vartotojų registracijos draudimas su netinkamo pavadinimo vardais, su galimybe juos papildyti, taip pat apsauga registruojant apsimestiniu administratoriaus vardu</li>
 <li>CSRF žetonų naudojimas: CSRF žetonai naudojami, kad apsaugotų nuo CSRF atakų. generateCSRFToken() funkcija generuoja žetoną, o validateCSRFToken() tikrina, ar pateiktas žetonas yra teisingas.</li>
 
-<li>Slaptažodžio saugumas: Slaptažodžiai yra saugomi naudojant password_hash() funkciją, kuri naudoja stiprų šifravimo algoritmą (ARGON2I). Tai apsaugo slaptažodžius nuo atakų, kurios bando atskleisti slaptažodžius iš duomenų bazės.</li>
+<li>Slaptažodžio saugumas: Slaptažodžiai yra saugomi naudojant password_hash() funkciją, kuri naudoja stiprų šifravimo algoritmą (PASSWORD_BCRYPT arba galima nustatyti į ARGON2I rankiniu būdu). Tai apsaugo slaptažodžius nuo atakų, kurios bando atskleisti slaptažodžius iš duomenų bazės.</li>
 
 <li>Duomenų bazės saugumas: Duomenų bazės užklausos yra paruoštos naudojant PDO paruoštas pareiškimus, kurie apsaugo nuo SQL injekcijos atakų.</li>
   </ul>
@@ -108,7 +108,7 @@ Considering these elements and functions, the website is a convenient and functi
 <li> Prohibition of registration of users with incorrect names, with the possibility of adding them, as well as protection against registration under a fake administrator name</li>
 <li>Use of CSRF tokens: CSRF tokens are used to protect against CSRF attacks. The generateCSRFToken() function generates a token, and validateCSRFToken() checks that the provided token is valid.</li>
 
-<li>Password security: Passwords are stored using the password_hash() function, which uses a strong encryption algorithm (ARGON2I). This protects passwords from attacks that attempt to reveal passwords from the database.</li>
+<li>Password security: Passwords are stored using the password_hash() function, which uses a strong encryption algorithm (PASSWORD_BCRYPT or can be set to ARGON2I manually). This protects passwords from attacks that attempt to reveal passwords from the database.</li>
 
 <li>Database security: Database queries are prepared using PDO prepared statements that protect against SQL injection attacks.</li>
    </ul>
