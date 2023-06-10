@@ -1,5 +1,4 @@
 <?php
-
 function getDBConnection($config) {
     try {
         $dsn = 'mysql:host=' . $config['db_host'] . ';dbname=' . $config['db_name'] . ';charset=utf8mb4';
@@ -38,7 +37,6 @@ function validateCSRFToken($token) {
         return null;
     }
 
-    
     function getCurrentPageUrl($db) {
         // Gaukite nustatymus iš duomenų bazės
         $stmt = $db->prepare("SELECT * FROM settings");
@@ -80,7 +78,7 @@ function validateCSRFToken($token) {
     
     
 function getTemplates($dir, $templateName) {
-    $templateFiles = glob($dir . $templateName . "/template_*.php");
+    $templateFiles = glob($dir . $templateName . "/template/template_*.php");
     $templates = [];
 
     foreach ($templateFiles as $file) {
@@ -110,7 +108,6 @@ function getTemplates($dir, $templateName) {
         $stmt->bindParam(':default_keywords', $default_keywords, PDO::PARAM_STR);
         return $stmt->execute();
     }
-    
     
     function createBackupFilename($db) {
         $names = [
@@ -177,8 +174,6 @@ function createDatabaseBackup($db, $backupFilename) {
         return false;
     }
 }
- 
-    
     function getBackupFilesList($backupDir) {
         $files = array_diff(scandir($backupDir), array('..', '.'));
         $backupFiles = [];
@@ -219,9 +214,6 @@ function createDatabaseBackup($db, $backupFilename) {
         } 
         return ob_get_clean();
     }
-
-
-    
 
     require_once 'f_users.php';
     require_once 'f_posts.php';
