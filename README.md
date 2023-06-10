@@ -1,7 +1,7 @@
 # flusity CMS
  ![banner](http://manowebas.lt/wp-content/uploads/2023/06/flusity-b.png) v2
 
-<p>PHP CMS project,Install, Log In, Sign Up, admin, moderator, user roles, add/edit/delete (post, layout places, language, files, menu, custom block, user,  backup.sql), update website settings.</p>
+<p>PHP CMS project, Install, Log In, Sign Up, admin, moderator, user roles, add/edit/delete (post, layout places, language, files, menu, themes, custom block, user,  backup.sql), update website settings.</p>
 <p><b>CMS flusity</b> naudoja tradicinį serverio pusės generavimo modelį, bet sukurta naudojant šiuolaikines technologijas ir geriausias praktikas.</p>
 
 <p>CMS flusity naudoja PHP kaip savo pagrindinę serverio pusės programavimo kalbą.<p>
@@ -27,6 +27,7 @@
 <li>Settings (nustatymai)</li>
  <li>Database backup (Duomenų bazės kopijų kūrimas)</li>
 <li>SEO (description keywords system)</li>
+<li>Themes (puslapio temos)</li>
 </ul>
 <h3>Profilis</h3> 
 <p>Sukurta paprasto vartotojo sritis</p>
@@ -85,6 +86,7 @@ Atsižvelgiant į šiuos elementus ir funkcijas, svetainė yrap patogus ir funkc
 <li>Settings</li>
 <li>Database backup</li>
 <li>SEO (description keywords system)</li>
+ <li>Themes</li>
 </ul>
 <h3>Profile</h3>
 <p>Common user area created</p>
