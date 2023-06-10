@@ -47,18 +47,17 @@ require_once ROOT_PATH . 'core/template/header-admin.php'; ?>
 <div class="container">
     <div class="row">
     <?php foreach ($themes as $theme) {
-        // Patikriname, ar tema yra aplanke ir ar ji yra įdiegta
         $isInstalled = is_dir($_SERVER['DOCUMENT_ROOT'] . '/cover/themes/' . $theme['name']) && $theme['name'] === $currentTheme;
     ?>
       
         <div class="col-md-6 mb-3">
             <div class="card">
                 <div class="row g-0">
-                    <div class="col-md-7">
-                        <img src="<?php echo $theme['theme_thumb']; ?>" class="img-fluid rounded-start p-1" alt="theme image" style="max-width: 380px; max-height: 250px;">
+                    <div class="col-md-6">
+                        <img src="<?php echo $theme['theme_thumb']; ?>" class="img-fluid rounded-start p-1" alt="theme image" style="max-width: 380px; max-height: 250px; width: 98%;">
                     </div>
-                    <div class="col-md-5">
-                        <div class="card-body">
+                    <div class="col-md-6">
+                        <div class="card-body pl-2">
                             <h5 class="card-title"><?php echo htmlspecialchars($theme['name']); ?></h5>
                             <p class="card-text">
                                 <strong><?php echo t("Version");?>:</strong> <?php echo htmlspecialchars($theme['version']); ?><br/>
