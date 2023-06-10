@@ -1,5 +1,6 @@
 <?php 
-require_once 'template/header.php';
+ require_once 'pre.php';
+ require_once getThemePath($db, '/template/header.php'); 
  
 $language_code = getLanguageSetting($db);
 $translations = getTranslations($db, $language_code);
@@ -10,7 +11,6 @@ if (isset($_SESSION['user_id'])) {
 }
 require_once 'core/tools/set_register.php';
 
-//$db = getDBConnection($config);
 $registration_enable = isset($settings['registration_enable']) ? $settings['registration_enable'] : '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 <header id="header">
-<?php require_once 'template/menu-horizontal.php';?>
+<?php  require_once getThemePath($db, '/template/menu-horizontal.php'); ?>
 </header>
 <section class="container spacer footer">
     <main class="main my-4">
@@ -34,10 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div id="error_message" class="alert alert-danger" role="alert">
         <?php echo htmlspecialchars($error_message); ?>
     </div>
-    <script src="assets/main/autoDismiss.js"></script>
-    <script type="text/javascript">
-        autoDismissError();
-    </script>
+ 
 <?php endif; ?>
 <?php //if($registration_enable == 1) { ?>
 <form method="POST" action="">
@@ -89,5 +86,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 </main>
 </section>
-
-<?php require_once 'template/footer.php';?>
+<?php  require_once getThemePath($db, '/template/footer.php'); ?>

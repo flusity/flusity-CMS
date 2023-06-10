@@ -1,5 +1,8 @@
-<?php
- require_once 'template/header.php';
+
+<?php 
+    require_once 'pre.php';
+    require_once getThemePath($db, '/template/header.php'); 
+
 if (isset($_SESSION['user_id'])) {
     header('Location: /myaccount/' . base64_encode($user['user_name']));
     exit();
@@ -33,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 } ?>
 <header id="header">
-<?php require_once 'template/menu-horizontal.php';?>
+<?php  require_once getThemePath($db, '/template/menu-horizontal.php');  ?>
 </header>
 <section class="container spacer footer">
     <main class="main my-4">
@@ -82,4 +85,4 @@ $csrf_token = generateCSRFToken();
 </div>
 </main>
 </section>
-<?php require_once 'template/footer.php';?>
+<?php  require_once getThemePath($db, '/template/footer.php'); ?>

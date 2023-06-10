@@ -239,21 +239,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="col-4">
             <h1 class="mt-5 mb-3"><?php echo t("Create Admin User");?></h1>
             <form action="install-flusity.php" method="post">
+            <div class="mb-3">
+                    <label for="login_name" class="form-label">Login Name</label>
+                    <input type="text" class="form-control" id="login_name" name="login_name" required>
+                </div>
                 <div class="mb-3">
                     <label for="admin_username" class="form-label">Administrator Username</label>
                     <input type="text" class="form-control" id="admin_username" name="admin_username" required>
                 </div>
                 <div class="mb-3">
-                    <label for="admin_password" class="form-label">Administrator Password</label>
-                    <input type="password" class="form-control" id="admin_password" name="admin_password" required>
-                </div>
-                <div class="mb-3">
-                    <label for="login_name" class="form-label">Login Name</label>
-                    <input type="text" class="form-control" id="login_name" name="login_name" required>
-                </div>
-                <div class="mb-3">
                     <label for="surname" class="form-label">Surname</label>
                     <input type="text" class="form-control" id="surname" name="surname" required>
+                </div>
+                <div class="mb-3">
+                    <label for="admin_password" class="form-label">Administrator Password</label>
+                    <input type="password" class="form-control" id="admin_password" name="admin_password" required>
                 </div>
                 <div class="mb-3">
                     <label for="phone" class="form-label">Phone</label>
@@ -277,7 +277,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <!-- Sveikiname! Sėkmingai sukūrėte administratoriaus paskyrą. Dabar galite prisijungti prie sistemos naudodamiesi administratoriaus prisijungimo duomenimis. 
     --> 
 </p>
-    <a href="http://localhost/login.php" class="btn btn-primary">Prisijungti</a>
+<a href="<?php echo getBaseUrl(); ?>/login.php" class="btn btn-primary">Prisijungti</a>
+
 </div>
 <?php endif; ?>
     </div>

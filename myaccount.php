@@ -1,5 +1,6 @@
 <?php
-require_once 'template/header.php';
+   require_once 'pre.php';
+   require_once getThemePath($db, '/template/header.php'); 
 $db = getDBConnection($config);
 
 if (!isset($_SESSION['user_id'])) {
@@ -18,17 +19,15 @@ $translations = getTranslations($db, $language_code);
 ?>
 
 <header id="header">
-<?php require_once 'template/menu-horizontal.php';?>
+<?php require_once getThemePath($db, '/template/menu-horizontal.php'); ?>
 </header>
 <section class="container spacer footer">
     <main class="main my-4">
     <div class="row">
         <div class="col-sm-4">
-        <h2><?php echo t("User Area");?></h2>
-
-        
+        <h2><?php echo t("User Area");?></h2>    
 </div>
 </div>
 </main>
 </section>
-<?php require_once 'template/footer.php';?>
+<?php require_once getThemePath($db, '/template/footer.php'); ?>

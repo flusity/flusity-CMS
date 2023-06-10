@@ -3,8 +3,10 @@
  @CMS flusity
  Author Darius Jakaitis, author web site http://www.manowebas.lt
 */
+
 require_once 'pre.php';
 require_once 'get_customblock.php';
+
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -21,6 +23,7 @@ if (isset($_SESSION['user_id'])) {
 }
 
 $settings = getSettings($db);
+$themeName = $settings['theme'];
 
 $limit = $settings['posts_per_page'];
 
@@ -40,16 +43,14 @@ $total_urls = ceil($total_posts / $limit);
 
 $menu = getMenuByPageUrl($db, $current_page_url);
 $templateName = $menu['template'];
-$templatePath = __DIR__ . "/template/{$templateName}.php";
+$templatePath = "cover/themes/{$themeName}/template/{$templateName}.php";
 
-require_once 'template/header.php'; ?>
-
-    
-<?php 
+require_once "cover/themes/{$themeName}/template/header.php";
 if (file_exists($templatePath)) {
     include $templatePath;
 } else {
     echo t("Template not found!");
 }
+
+require_once "cover/themes/{$themeName}/template/footer.php";
 ?>
-<?php require_once 'template/footer.php';?>
