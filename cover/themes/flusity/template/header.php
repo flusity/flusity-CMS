@@ -42,8 +42,8 @@ if (!empty($postSeo)) {
     <link href="../assets/bootstrap-5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="../assets/dist/js/jquery-3.6.0.min.js"></script>
     <link href="../assets/fonts/fonts-quicksand.css" rel="stylesheet">
-    <link href="../assets/main/style.css" rel="stylesheet">
-    <link href="../assets/main/site.css" rel="stylesheet">
+    <link href="<?php echo getThemePath($db, 'css/style.css'); ?>" rel="stylesheet">
+    <link href="<?php echo getThemePath($db, 'css/site.css'); ?>" rel="stylesheet">
    <style>
     .navbar-shrink {
         height: 80px;
