@@ -79,16 +79,17 @@ function validateCSRFToken($token) {
     }
     
     
-    function getTemplates($dir) {
-        $templateFiles = glob($dir . "/template_*.php");
-        $templates = [];
-    
-        foreach ($templateFiles as $file) {
-            $templates[] = basename($file, ".php");
-        }
-    
-        return $templates;
+function getTemplates($dir, $templateName) {
+    $templateFiles = glob($dir . $templateName . "/template_*.php");
+    $templates = [];
+
+    foreach ($templateFiles as $file) {
+        $templates[] = basename($file, ".php");
     }
+
+    return $templates;
+}
+
 
     function getSettings($db) {
         $stmt = $db->prepare("SELECT * FROM settings");
