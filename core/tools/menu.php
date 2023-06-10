@@ -114,7 +114,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
       <?php
           $settings = getSettings($db);
           $templateName = $settings['theme']; 
-          $dir = "../../cover/themes/";
+          $dir = ROOT_PATH ."cover/themes/";
           $templates = getTemplates($dir, $templateName);
       ?>
     <select class="form-control" id="template" name="template">
