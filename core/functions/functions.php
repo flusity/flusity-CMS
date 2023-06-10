@@ -72,6 +72,11 @@ function validateCSRFToken($token) {
         return $default_url_name;
     }
     
+    function getBaseUrl() {
+        $protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? "https" : "http";
+        $domain = $_SERVER['HTTP_HOST'];
+        return $protocol . "://" . $domain;
+    }
     
     
     function getTemplates($dir) {
@@ -224,4 +229,5 @@ function createDatabaseBackup($db, $backupFilename) {
     require_once 'f_files.php';
     require_once 'f_places.php';
     require_once 'f_translations.php';
+    require_once 'f_themes.php';
     
