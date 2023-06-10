@@ -111,13 +111,17 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
         </div>
         <div class="form-group">
           <label for="template"><?php echo t("Template");?></label>
-         <?php $templates = getTemplates("../../template/"); 
-         ?>
-          <select class="form-control" id="template" name="template">
-              <?php foreach ($templates as $template): ?>
-                  <option value="<?php echo $template; ?>"><?php echo $template; ?></option>
-              <?php endforeach; ?>
-          </select>
+      <?php
+          $settings = getSettings($db);
+          $templateName = $settings['theme']; 
+          $dir = "../../cover/themes/";
+          $templates = getTemplates($dir, $templateName);
+      ?>
+    <select class="form-control" id="template" name="template">
+        <?php foreach ($templates as $template): ?>
+            <option value="<?php echo $template; ?>"><?php echo $template; ?></option>
+        <?php endforeach; ?>
+    </select>
         </div>
         <div class="form-group form-check">
           <input type="checkbox" class="form-check-input" id="show_in_menu" name="show_in_menu">
