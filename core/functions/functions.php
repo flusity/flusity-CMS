@@ -1,4 +1,5 @@
 <?php
+
 function getDBConnection($config) {
     try {
         $dsn = 'mysql:host=' . $config['db_host'] . ';dbname=' . $config['db_name'] . ';charset=utf8mb4';
@@ -37,6 +38,7 @@ function validateCSRFToken($token) {
         return null;
     }
 
+    
     function getCurrentPageUrl($db) {
         // Gaukite nustatymus iš duomenų bazės
         $stmt = $db->prepare("SELECT * FROM settings");
@@ -95,8 +97,8 @@ function getTemplates($dir, $templateName) {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     
-    function updateSettings($db, $site_title, $meta_description, $footer_text, $pretty_url, $language, $posts_per_page, $registration_enabled, $session_lifetime, $default_keywords) {
-        $stmt = $db->prepare("UPDATE settings SET site_title = :site_title, meta_description = :meta_description, footer_text = :footer_text, pretty_url = :pretty_url, language = :language, posts_per_page = :posts_per_page, registration_enabled = :registration_enabled, session_lifetime = :session_lifetime, default_keywords = :default_keywords");
+    function updateSettings($db, $site_title, $meta_description, $footer_text, $pretty_url, $language, $posts_per_page, $registration_enabled, $session_lifetime, $default_keywords, $brand_icone) {
+        $stmt = $db->prepare("UPDATE settings SET site_title = :site_title, meta_description = :meta_description, footer_text = :footer_text, pretty_url = :pretty_url, language = :language, posts_per_page = :posts_per_page, registration_enabled = :registration_enabled, session_lifetime = :session_lifetime, default_keywords = :default_keywords" . ($brand_icone != "" ? ", brand_icone = :brand_icone" : ""));
         $stmt->bindParam(':site_title', $site_title, PDO::PARAM_STR);
         $stmt->bindParam(':meta_description', $meta_description, PDO::PARAM_STR);
         $stmt->bindParam(':footer_text', $footer_text, PDO::PARAM_STR);
@@ -106,8 +108,14 @@ function getTemplates($dir, $templateName) {
         $stmt->bindParam(':registration_enabled', $registration_enabled, PDO::PARAM_INT);
         $stmt->bindParam(':session_lifetime', $session_lifetime, PDO::PARAM_STR);
         $stmt->bindParam(':default_keywords', $default_keywords, PDO::PARAM_STR);
+        
+        if ($brand_icone != "") {
+            $stmt->bindParam(':brand_icone', $brand_icone, PDO::PARAM_STR);
+        }
+        
         return $stmt->execute();
     }
+    
     
     function createBackupFilename($db) {
         $names = [
@@ -174,6 +182,8 @@ function createDatabaseBackup($db, $backupFilename) {
         return false;
     }
 }
+ 
+    
     function getBackupFilesList($backupDir) {
         $files = array_diff(scandir($backupDir), array('..', '.'));
         $backupFiles = [];
@@ -214,6 +224,9 @@ function createDatabaseBackup($db, $backupFilename) {
         } 
         return ob_get_clean();
     }
+
+
+    
 
     require_once 'f_users.php';
     require_once 'f_posts.php';

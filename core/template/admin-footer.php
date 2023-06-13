@@ -132,6 +132,7 @@ document.getElementById('settingsDropdown').addEventListener('click', function()
         mediaQueryList.addListener(handleScreenChange);
         handleScreenChange(mediaQueryList);
     });
+    
 </script>
 </body>
 </html>

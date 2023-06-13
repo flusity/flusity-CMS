@@ -38,3 +38,24 @@ function countFilesInDatabase($db) {
     $stmt->execute();
     return $stmt->fetchColumn();
 }
+
+function getCurrentImage($db) {
+    // Pirmiausia gauname brand_icone reikšmę iš settings lentelės
+    $query = $db->prepare("SELECT brand_icone FROM settings LIMIT 1");
+    $query->execute();
+    $result = $query->fetch(PDO::FETCH_ASSOC);
+    $filename = $result ? $result['brand_icone'] : false;
+
+    // Tada, jei turime failo pavadinimą, ieškome jo URL files lentelėje
+    if ($filename) {
+        $query = $db->prepare("SELECT url FROM files WHERE name = :name LIMIT 1");
+        $query->bindParam(':name', $filename);
+        $query->execute();
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+        return $result ? $result['url'] : false;
+    }
+    return false;
+}
+
+
+

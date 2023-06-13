@@ -36,3 +36,13 @@ body {
 #rows option:hover {
   background-color: #e9ecef;
 }
+.image-container {
+  height: 200px; /* Galite nustatyti bet kokį norimą aukštį */
+  overflow: hidden; /* Paslepia dalis, kurios neįeina į aukštį */
+}
+
+.image-container img {
+  
+  width: 100%;
+ /* object-fit: cover;  Užtikrina, kad paveikslėlis visada užpildytų visą konteinerį */
+}

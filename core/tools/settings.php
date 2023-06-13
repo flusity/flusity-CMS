@@ -3,24 +3,6 @@ define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../') . '/');
 
 require_once ROOT_PATH . 'core/template/header-admin.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-   
-    $site_title = $_POST['site_title'];
-    $meta_description = $_POST['meta_description'];
-    $footer_text_settings = $_POST['footer_text'];
-    $pretty_url = $_POST['pretty_url'];
-    $language = $_POST['language']; 
-    $posts_per_page = $_POST['posts_per_page'];
-    $registration_enabled = isset($_POST['registration_enabled']) ? 1 : 0;
-    $session_lifetime = $_POST['session_lifetime'];
-    $default_keywords = $_POST['default_keywords'];
-    $session_life =  $session_lifetime;
-    updateSettings($db, $site_title, $meta_description, $footer_text_settings, $pretty_url, $language, $posts_per_page, $registration_enabled, $session_life, $default_keywords); 
-
-    $_SESSION['success_message'] =  t("Settings successfully updated!");
-    header("Location: settings.php");
-    exit;
-}
 ?>
 
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/core/template/admin-menu-horizontal.php';?>
@@ -53,9 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ?>
             </div>
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-sm-12 mt-2">
                     <h2><?php echo t("Settings");?></h2>
-                    <ul class="nav nav-tabs">
+                    <ul class="nav nav-tabs  mt-2">
                         <li class="nav-item tabs-nav-item">
                             <a class="nav-link active" data-bs-toggle="tab" href="#settings"><?php echo t("Website Settings");?></a>
                         </li>
@@ -71,28 +53,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </ul>
                     <div class="tab-content">
                     <div class="tab-pane fade show active" id="settings">
-                        <form method="post">
-                            <div class="row">
-                                <div class="col-md-6"> <!-- Left column -->
-                                    <div class="form-group">
+                    <form id="update-settings-form" action="actions/update_setting.php" method="post" enctype="multipart/form-data">
+                        <div class="row">
+                                <div class="col-md-6  border border-dark-subtle mt-2 mb-2"> <!-- Left column -->
+                                    <div class="form-group mt-2">
                                         <label for="site_title"><b><?php echo t("Website Name");?></b></label>
                                         <input type="text" class="form-control" id="site_title" name="site_title" value="<?php echo htmlspecialchars($settings['site_title']); ?>" required>
                                     </div>
-                                    <div class="form-group">  
+                                    <div class="form-group mt-2">  
                                         <label for="meta_description"><b><?php echo t("META description");?></b></label>
                                         <textarea class="form-control" id="meta_description" name="meta_description" rows="3" required><?php echo htmlspecialchars($settings['meta_description']); ?></textarea>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group mt-2">
                                         <label for="default_keywords"><b><?php echo t("META Default keywords");?></b></label>
                                         <textarea class="form-control" id="default_keywords" name="default_keywords" rows="2" required><?php echo htmlspecialchars($settings['default_keywords']); ?></textarea>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group mt-2">
                                         <label for="footer_text"><b><?php echo t("Footer text");?></b></label>
                                         <textarea class="form-control" id="footer_text" name="footer_text" rows="3" required><?php echo htmlspecialchars($settings['footer_text']); ?></textarea>
                                     </div>
                                 </div>
-                                <div class="col-md-6"> 
-                                    <div class="form-group mt-2">
+                                <div class="col-md-3 border border-dark-subtle mt-2 mb-2"> 
+                                    <div class="form-group mt-3 w-100">
                                         <label for="pretty_url"><?php echo t("Pretty URL");?></label>
                                         <input type="checkbox" class="form-control-ch" id="pretty_url" name="pretty_url" value="1" <?php echo ($settings['pretty_url'] == 1 ? 'checked' : '');?>>
                                     </div>
@@ -117,13 +99,86 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     </div>
                                     <div class="form-group mt-2 mb-2">
                                         <label for="session_lifetime"><?php echo t("Session lifetime in minutes");?></label>
-                                        <input type="text" class="form-control  w-25" id="session_lifetime" name="session_lifetime" value="<?php echo htmlspecialchars($settings['session_lifetime']); ?>" required>
+                                        <input type="text" class="form-control  w-50" id="session_lifetime" name="session_lifetime" value="<?php echo htmlspecialchars($settings['session_lifetime']); ?>" required>
                                     </div>
                                     <div class="form-group mt-2 mb-2">
                                     <label for="registration_enabled"><?php echo t("Registration Enabled");?></label>
                                     <input type="checkbox" class="form-control-ch" id="registration_enabled" name="registration_enabled" value="1" <?php echo ($settings['registration_enabled'] == 1 ? 'checked' : '');?>>
                                 </div>
-                                </div>
+                            </div>
+                       
+                            <?php $currentImage = getCurrentImage($db); ?>
+
+<div class="col-md-3 border border-dark-subtle mt-2 mb-2" style="position: relative;"> 
+    <h3><?php echo t("Page Brand icone");?></h3>
+
+    <div class="row justify-content-end">
+        <label for="brand_icone"><?php echo t("Brand pictures");?></label>
+        <div class="col-auto mb-2">
+            <!-- <input class="form-control" id="brand_icone" type="file" name="brand_icone" onchange="previewImage(event)"> -->
+            <input class="form-control" id="brand_icone" type="file" name="brand_icone" onchange="previewImage(event)" data-upload-method="direct">
+
+        </div>
+    </div>
+    
+    <div id="preview" <?php if (!$currentImage) echo 'style="display: none;"'; ?>>
+    <img id="preview_image" src="<?php echo $currentImage; ?>" alt="Preview image" style="max-width: 100%;">
+    
+</div> 
+
+    <div class="toast align-items-center text-bg-warning border-0" role="alert" style="margin-top:30px" aria-live="assertive" aria-atomic="true" id="toast" style="position: absolute; top: 20px; right: 20px;">
+        <div class="d-flex">
+            <div class="toast-body" id="toast-body">
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+
+
+
+
+
+
+<!-- Atvaizduoja paveikslėlių peržiūrą -->
+<div class="row">
+
+<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Toggle right offcanvas</button>
+
+<div class="offcanvas offcanvas-end" style="background-color: #494f55fa;" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasRightLabel">Offcanvas right</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body" id="offcanvasBody" style="background-color: #494f55fa;">
+ 
+  
+  </div>
+  <div class="offcanvas-footer">
+    <button class="btn btn-primary prev">Previous</button>
+    <button class="btn btn-primary next">Next</button>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
                             </div>
                             <button type="submit" class="btn btn-primary"><?php echo t("Update Settings");?></button>
                         </form>
@@ -172,8 +227,129 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                     </div>
                 </div>
-            </div>
-                        </main>
-    </div>
+               </div>
+            </main>
+       </div>
 </div>
+
+
+<script>
+var MAX_FILE_SIZE = 102400; // 100KB
+var MAX_DIMENSION = 500; // 500px
+
+function previewImage(event) {
+    var fileInput = event.target;
+    var uploadMethod = fileInput.dataset.uploadMethod;
+    
+    if (uploadMethod === 'direct') {
+        previewImageDirect(fileInput);
+    } else if (uploadMethod === 'offcanvas') {
+        previewImageOffcanvas(fileInput);
+    }
+}
+
+function previewImageDirect(fileInput) {
+    var file = fileInput.files[0];
+
+    // Check if the file is an image
+    if (!file.type.startsWith('image/')) { 
+        showToast("File is not an image.");
+        return;
+    }
+
+    // Check the file size
+    if (file.size > MAX_FILE_SIZE) {
+        showToast("File size should be less than " + MAX_FILE_SIZE / 1024 + "KB.");
+        return;
+    }
+
+    var imgPreview = document.getElementById('preview_image');
+
+    // Create a URL for the file
+    var url = URL.createObjectURL(file);
+    
+    imgPreview.onload = function() {
+        // Check the image dimensions
+        if (this.naturalWidth > MAX_DIMENSION || this.naturalHeight > MAX_DIMENSION) {
+            showToast("Image dimensions should be " + MAX_DIMENSION + "x" + MAX_DIMENSION + " pixels or less.");
+            URL.revokeObjectURL(url); // Clean up
+            return;
+        }
+
+        document.getElementById('preview').style.display = "block";
+    };
+
+    imgPreview.onerror = function() {
+        showToast("Error loading image.");
+        URL.revokeObjectURL(url); 
+    };
+
+    imgPreview.src = url;
+}
+
+function previewImageOffcanvas(fileInput) {
+    var imgPreview = document.getElementById('preview_image');
+
+    // Get the URL from the fileInput, depending on how it is set in your offcanvas implementation
+    var url = getURLFromOffcanvasSelection(fileInput);
+
+    imgPreview.src = url;
+}
+
+
+
+
+
+$(document).on('change', 'input[name="brand_icone_id"]', function() {
+    var selectedImageUrl = $(this).siblings('img').attr('src');
+    $('#preview_image').attr('src', selectedImageUrl);
+});
+
+
+
+function showToast(message) {
+    var toastEl = document.getElementById('toast');
+    document.getElementById('toast-body').innerText = message;
+    
+    var toast = new bootstrap.Toast(toastEl);
+    toast.show();
+}
+
+
+
+
+var index = 0;
+    var loadImages = function() {
+        $.ajax({
+            url: 'get_images.php',
+            method: 'GET',
+            data: {
+                index: index
+            },
+            success: function(data) {
+                $('#offcanvasBody').html(data);
+            }
+        });
+    };
+    
+    $('#offcanvasRight').on('show.bs.offcanvas', function () {
+        loadImages();
+    });
+    
+    
+    $('.prev').click(function() {
+        index = Math.max(0, index - 6);
+        loadImages();
+        return false; 
+    });
+    $('.next').click(function() {
+        index += 9;
+        loadImages();
+        return false; 
+    });
+
+
+
+
+</script>
 <?php require_once ROOT_PATH . 'core/template/admin-footer.php'; ?>
