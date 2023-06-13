@@ -41,20 +41,21 @@ function getMenuByPageUrl($db, $page_url) {
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 function generateMenuUrl($db, $page_url) {
-    // Gaukite nustatymus iš duomenų bazės
     $stmt = $db->prepare("SELECT * FROM settings");
     $stmt->execute();
     $settings = $stmt->fetch(PDO::FETCH_ASSOC);
 
     $base_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'];
     
-    // Jei pretty_url nustatymas yra 1, grąžinkite "gražų" URL
     if ($settings['pretty_url'] == 1) {
+        if ($page_url == 'index') {
+            return $base_url;
+        }
         return $base_url . '/' . $page_url;
     }
-    // Jei pretty_url nustatymas nėra 1, grąžinkite įprastą URL
     else {
         return $base_url . '/?page=' . $page_url;
     }
 }
+
 
