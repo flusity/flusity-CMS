@@ -206,6 +206,15 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
 </div>
 <script>
 $(document).ready(function() {
+    $('.overlay').hover(
+    function() {
+      $(this).append('<span class="select-overlay">Select</span>');
+    },
+    function() {
+      $(this).find('.select-overlay').remove();
+    }
+  );
+  
   $('#update-settings-form').submit(function(e) {
     e.preventDefault();
     var formData = new FormData(this);
@@ -300,7 +309,7 @@ function previewImageOffcanvas(fileInput) {
 
 
 
-$(document).on('change', 'input[name="brand_icone_id"]', function() {
+$(document).on('click', 'input[name="brand_icone_id"]', function() {
     var selectedImageUrl = $(this).siblings('img').attr('src');
     $('#preview_image').attr('src', selectedImageUrl);
 });

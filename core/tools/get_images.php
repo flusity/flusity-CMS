@@ -23,10 +23,9 @@ foreach ($slicedFiles as $file) {
         echo '<div class="row">';
     }
 
-    echo '<div class="col-md-4 mt-1 border border-dark-subtle image-container">';
+    echo '<div class="col-md-4 mt-1 border border-dark-subtle image-container overlay">';
     echo '<img class="img-fluid" name="brand_icone" src="' . $file['url'] . '" alt="' . $file['name'] . '" />';
     echo '<input type="radio" class="radio" id="brand_icone_id" name="brand_icone_id" value="' . $file['id'] . '" />';
-   
     echo '</div>';
 
     if ($counter % 3 == 2) {

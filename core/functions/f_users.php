@@ -21,8 +21,8 @@ function getUserNameById($db, $user_id) {
     }
     
     function secureSession($db) {
-        //global ;
-    
+       
+        $base_url = getBaseUrl();
         // Nustatomi saugųs sesijos parametrai
         $session_name = 'secure_session';
         $secure = true;
@@ -51,13 +51,19 @@ function getUserNameById($db, $user_id) {
             if (isset($_SESSION['user_id'])) { 
                 session_unset();
                 session_destroy();
-                header("Location: ../../login.php");
+                
+                $redirect_login = $base_url . "/login.php";
+                header("Location: " . $redirect_login);
                 exit;
+             
             } else {
                 session_unset();
                 session_destroy();
-                header("Location: ../../404.php"); 
+                
+                $redirect_404 = $base_url . "/404.php";
+                header("Location: " . $redirect_404);
                 exit;
+                
             }
         }
         $_SESSION['last_activity'] = time();
@@ -96,7 +102,7 @@ function getUserNameById($db, $user_id) {
             if (strpos(strtolower($login_name), $word) !== false || 
                 strpos(strtolower($username), $word) !== false || 
                 strpos(strtolower($email), $word) !== false) {
-                // The input contains a banned word
+                
                 return false;
             }
         }
