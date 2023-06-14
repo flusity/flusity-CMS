@@ -132,9 +132,6 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
 										<button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
 									</div>
 								</div>
-
-
-								<!-- Atvaizduoja paveikslėlių peržiūrą -->
 								<div class="row">
 									<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Toggle right offcanvas</button>
 										<div class="offcanvas offcanvas-end" style="background-color: #494f55fa;" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
@@ -147,8 +144,8 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
 											
 											</div>
 											<div class="offcanvas-footer">
-												<button class="btn btn-primary prev">Previous</button>
-												<button class="btn btn-primary next">Next</button>
+                                                <button class="btn file-left prev"><i class="fas fa-angle-left"></i></button>
+                                                <button class="btn file-right next"><i class="fas fa-angle-right"></i></button>
 											</div>
 										</div>
 								</div>
@@ -303,14 +300,10 @@ function previewImageOffcanvas(fileInput) {
 
 
 
-
-
 $(document).on('change', 'input[name="brand_icone_id"]', function() {
     var selectedImageUrl = $(this).siblings('img').attr('src');
     $('#preview_image').attr('src', selectedImageUrl);
 });
-
-
 
 function showToast(message) {
     var toastEl = document.getElementById('toast');
