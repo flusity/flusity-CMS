@@ -23,9 +23,8 @@ if (defined('IS_ADMIN') && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST
     // Check if the page_url already exists
     $existingMenu = getMenuByPageUrl($db, $page_url);
     if($existingMenu) {
-        $_SESSION['error_message'] =  t('The page_url already exists. Please choose a different one.');
-        echo json_encode($response);
-        exit;
+        $page_url .= '-' . date('i');
+        $_SESSION['info_message'] = t('The page_url was modified as it was already taken.');
     }
 
     $position = intval($_POST['position']);
@@ -43,3 +42,4 @@ if (defined('IS_ADMIN') && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST
     echo json_encode($response);
     exit;
 }
+?>

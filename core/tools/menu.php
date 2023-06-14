@@ -22,12 +22,19 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
                     unset($_SESSION['success_message']);
                 }
                 if (isset($_SESSION['error_message'])) {
-                    echo "<div class='alert alert-danger alert-dismissible fade show slow-fade'>
-                        " . htmlspecialchars($_SESSION['error_message']) . "
-                        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-                    </div>";
-                    unset($_SESSION['error_message']);
-                }
+                  echo "<div class='alert alert-danger alert-dismissible fade show slow-fade'>
+                      " . htmlspecialchars($_SESSION['error_message']) . "
+                      <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                  </div>";
+                  unset($_SESSION['error_message']);
+              }
+              if (isset($_SESSION['info_message'])) {
+                echo "<div class='alert alert-info alert-dismissible fade show slow-fade'>
+                    " . htmlspecialchars($_SESSION['info_message']) . "
+                    <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                </div>";
+                unset($_SESSION['info_message']);
+            }
                 ?>
             </div>
             <h2><?php echo t("Page Menu");?></h2>
@@ -44,7 +51,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
                       <th style="width: 10%;"><?php echo t("Position");?></th>
                       <th style="width: 3%;"><?php echo t("Show");?></th>
                       <th style="width: 20%;"><?php echo t("Parent");?></th>
-                      <th style="width: 8%;"><?php echo t("Actions");?></th>
+                      <th style="width: 12%;"><?php echo t("Actions");?></th>
                   </tr>
               </thead>
               <tbody>
