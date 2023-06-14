@@ -53,7 +53,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
                     </ul>
                     <div class="tab-content">
                     <div class="tab-pane fade show active" id="settings">
-                    <form id="update-settings-form" action="actions/update_setting.php" method="post" enctype="multipart/form-data">
+                    <form id="update-settings-form"  method="post" enctype="multipart/form-data">
                         <div class="row">
                                 <div class="col-md-6  border border-dark-subtle mt-2 mb-2"> <!-- Left column -->
                                     <div class="form-group mt-2">
@@ -78,6 +78,11 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
                                         <label for="pretty_url"><?php echo t("Pretty URL");?></label>
                                         <input type="checkbox" class="form-control-ch" id="pretty_url" name="pretty_url" value="1" <?php echo ($settings['pretty_url'] == 1 ? 'checked' : '');?>>
                                     </div>
+									 <div class="form-group mt-2 mb-2">
+                                    <label for="registration_enabled"><?php echo t("Registration Enabled");?></label>
+                                    <input type="checkbox" class="form-control-ch" id="registration_enabled" name="registration_enabled" value="1" <?php echo ($settings['registration_enabled'] == 1 ? 'checked' : '');?>>
+                               
+                                </div>
                                     <div class="form-group">
                                         <label for="posts_per_page"><?php echo t("Posts per page");?></label>
                                         <input type="number" class="form-control w-25" id="posts_per_page" name="posts_per_page" value="<?php echo htmlspecialchars($settings['posts_per_page']); ?>" required>
@@ -101,86 +106,57 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
                                         <label for="session_lifetime"><?php echo t("Session lifetime in minutes");?></label>
                                         <input type="text" class="form-control  w-50" id="session_lifetime" name="session_lifetime" value="<?php echo htmlspecialchars($settings['session_lifetime']); ?>" required>
                                     </div>
-                                    <div class="form-group mt-2 mb-2">
-                                    <label for="registration_enabled"><?php echo t("Registration Enabled");?></label>
-                                    <input type="checkbox" class="form-control-ch" id="registration_enabled" name="registration_enabled" value="1" <?php echo ($settings['registration_enabled'] == 1 ? 'checked' : '');?>>
-                                </div>
                             </div>
                        
-                            <?php $currentImage = getCurrentImage($db); ?>
+							<?php $currentImage = getCurrentImage($db); ?>
 
-<div class="col-md-3 border border-dark-subtle mt-2 mb-2" style="position: relative;"> 
-    <h3><?php echo t("Page Brand icone");?></h3>
+							<div class="col-md-3 border border-dark-subtle mt-2 mb-2" style="position: relative;"> 
+							<h3><?php echo t("Page Brand icone");?></h3>
 
-    <div class="row justify-content-end">
-        <label for="brand_icone"><?php echo t("Brand pictures");?></label>
-        <div class="col-auto mb-2">
-            <!-- <input class="form-control" id="brand_icone" type="file" name="brand_icone" onchange="previewImage(event)"> -->
-            <input class="form-control" id="brand_icone" type="file" name="brand_icone" onchange="previewImage(event)" data-upload-method="direct">
+								<div class="row justify-content-end">
+									<label for="brand_icone"><?php echo t("Brand pictures");?></label>
+									<div class="col-auto mb-2">
+										<!-- <input class="form-control" id="brand_icone" type="file" name="brand_icone" onchange="previewImage(event)"> -->
+										<input class="form-control" id="brand_icone" type="file" name="brand_icone" onchange="previewImage(event)" data-upload-method="direct">
+									</div>
+								</div>
+					
+								<div id="preview" <?php if (!$currentImage) echo 'style="display: none;"'; ?>>
+								<img id="preview_image" src="<?php echo $currentImage; ?>" alt="Preview image" style="max-width: 100%;">
+								</div> 
 
-        </div>
-    </div>
-    
-    <div id="preview" <?php if (!$currentImage) echo 'style="display: none;"'; ?>>
-    <img id="preview_image" src="<?php echo $currentImage; ?>" alt="Preview image" style="max-width: 100%;">
-    
-</div> 
-
-    <div class="toast align-items-center text-bg-warning border-0" role="alert" style="margin-top:30px" aria-live="assertive" aria-atomic="true" id="toast" style="position: absolute; top: 20px; right: 20px;">
-        <div class="d-flex">
-            <div class="toast-body" id="toast-body">
-            </div>
-            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-    </div>
+								<div class="toast align-items-center text-bg-warning border-0" role="alert" style="margin-top:30px" aria-live="assertive" aria-atomic="true" id="toast" style="position: absolute; top: 20px; right: 20px;">
+									<div class="d-flex">
+										<div class="toast-body" id="toast-body">
+										</div>
+										<button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+									</div>
+								</div>
 
 
+								<!-- Atvaizduoja paveikslėlių peržiūrą -->
+								<div class="row">
+									<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Toggle right offcanvas</button>
+										<div class="offcanvas offcanvas-end" style="background-color: #494f55fa;" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+											<div class="offcanvas-header">
+												<h5 class="offcanvas-title" id="offcanvasRightLabel">Offcanvas right</h5>
+												<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+											</div>
+											<div class="offcanvas-body" id="offcanvasBody" style="background-color: #494f55fa;">
+											
+											
+											</div>
+											<div class="offcanvas-footer">
+												<button class="btn btn-primary prev">Previous</button>
+												<button class="btn btn-primary next">Next</button>
+											</div>
+										</div>
+								</div>
+								
+							</div>
 
-
-
-
-<!-- Atvaizduoja paveikslėlių peržiūrą -->
-<div class="row">
-
-<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Toggle right offcanvas</button>
-
-<div class="offcanvas offcanvas-end" style="background-color: #494f55fa;" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasRightLabel">Offcanvas right</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body" id="offcanvasBody" style="background-color: #494f55fa;">
- 
-  
-  </div>
-  <div class="offcanvas-footer">
-    <button class="btn btn-primary prev">Previous</button>
-    <button class="btn btn-primary next">Next</button>
-  </div>
-</div>
-</div>
-
-
-
-
-
-
-
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-                            </div>
-                            <button type="submit" class="btn btn-primary"><?php echo t("Update Settings");?></button>
+                         </div>
+                            <input type="submit" class="btn btn-primary" value="<?php echo t("Update Settings");?>"/>
                         </form>
                     </div>
                         <div class="tab-pane fade" id="backup">
@@ -231,9 +207,38 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
             </main>
        </div>
 </div>
-
-
 <script>
+$(document).ready(function() {
+  $('#update-settings-form').submit(function(e) {
+    e.preventDefault();
+    var formData = new FormData(this);
+    if (!$('#pretty_url').is(':checked')) {
+        formData.append('pretty_url', 0);
+    }
+    if (!$('#registration_enabled').is(':checked')) {
+        formData.append('registration_enabled', 0);
+    }
+    $.ajax({
+        url: 'actions/update_setting.php',
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false
+            }).done(function(data) { 
+                location.reload();
+            if (data.success_message) {
+                alert(data.success_message);
+            }
+            if (data.error_message) {
+                alert(data.error_message);
+            }
+            }).fail(function() {
+            alert('Error while updating settings.');
+            });
+        });
+});
+
+
 var MAX_FILE_SIZE = 102400; // 100KB
 var MAX_DIMENSION = 500; // 500px
 
