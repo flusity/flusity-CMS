@@ -13,7 +13,9 @@ secureSession($db);
 $language_code = getLanguageSetting($db);
 $translations = getTranslations($db, $language_code);
 
-$result = ['success_message' => false];
+$result = ['error_message' => false];
+$updateResult = ['error_message' => false];
+
 if (isset($_POST['site_title'], $_POST['meta_description'], $_POST['footer_text'], $_POST['pretty_url'], $_POST['language'],
  $_POST['posts_per_page'], $_POST['registration_enabled'], $_POST['session_lifetime'], $_POST['default_keywords'])) { 
 
@@ -32,14 +34,12 @@ if (isset($_POST['site_title'], $_POST['meta_description'], $_POST['footer_text'
   
         if (!in_array($uploaded_file['type'], $allowed_file_types)) {
             $_SESSION['error_message'] = t("Invalid file type.");
-            header("Location: ../settings.php");
-            exit();
+           
         } 
 
         if ($uploaded_file['size'] > $max_file_size) {
             $_SESSION['error_message'] = t("File size exceeded limit.");
-            header("Location: ../settings.php");
-            exit();
+           
         } 
 
         if (move_uploaded_file($uploaded_file["tmp_name"], $target_file)) {
@@ -48,8 +48,7 @@ if (isset($_POST['site_title'], $_POST['meta_description'], $_POST['footer_text'
             $_SESSION['success_message'] = "File" ." ". basename($uploaded_file["name"]) . " " .t("file uploaded successfully.");
         } else {
             $_SESSION['error_message'] = t("Error loading file.");
-            header("Location: ../settings.php");
-            exit();
+         
         }
     } elseif (isset($_POST['brand_icone_id']) && !empty($_POST['brand_icone_id'])) {
         // Fetch the file using its id
@@ -60,10 +59,14 @@ if (isset($_POST['site_title'], $_POST['meta_description'], $_POST['footer_text'
     $site_title = $_POST['site_title'];
     $meta_description = $_POST['meta_description'];
     $footer_text_settings = $_POST['footer_text'];
-    $pretty_url = $_POST['pretty_url'];
+    $pretty_url = $_POST['pretty_url']; 
+    //$pretty_url = isset($_POST['pretty_url']) ? 1 : 0;
+    $registration_enabled = $_POST['registration_enabled'];
+   // $registration_enabled = isset($_POST['registration_enabled']) ? 1 : 0;
+
     $language = $_POST['language']; 
     $posts_per_page = $_POST['posts_per_page'];
-    $registration_enabled = isset($_POST['registration_enabled']) ? 1 : 0;
+  
     $session_lifetime = $_POST['session_lifetime'];
     $default_keywords = $_POST['default_keywords'];
     $session_life =  $session_lifetime;
@@ -72,15 +75,13 @@ if (isset($_POST['site_title'], $_POST['meta_description'], $_POST['footer_text'
 
     if ($updateResult) {
         $_SESSION['success_message'] =  t('Settings successfully updated.');
-        header("Location: ../settings.php");
-        exit();
+   
     } else {
         $_SESSION['error_message'] = t('Error updating settings. Try again.');
-        header("Location: ../settings.php");
-        exit();
+    
     }
  }
 
-echo json_encode($updateResult);
-exit;
+echo json_encode($updateResult); // nurodoma klaidos vieta
+
 ?>
