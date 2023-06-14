@@ -45,7 +45,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
                             <a class="nav-link tabs-nav-item" data-bs-toggle="tab" href="#backup"><?php echo t("Database Backup");?></a>
                         </li>
                         <li class="nav-item text-center">
-                            <a class="nav-link tabs-nav-item" data-bs-toggle="tab" href="#tags"><?php echo t("Edit Tag's");?></a>
+                            <a class="nav-link tabs-nav-item" data-bs-toggle="tab" href="#tags"><?php echo t("Delete Tag's");?></a>
                         </li>
                         <li class="nav-item text-center">
                             <a class="nav-link tabs-nav-item" data-bs-toggle="tab" href="#cache"><?php echo t("Cache");?></a>
@@ -174,7 +174,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
                             }?>
                         </div>
                         <div class="tab-pane fade" id="tags">
-                        <h3><?php echo t("Edit your Tags");?></h3>
+                        <h3><?php echo t("Delete your Tags");?></h3>
                         <?php $existingTags = getExistingTags($db); ?>
                         <?php if (!empty($existingTags)): ?>
                             <?php foreach ($existingTags as $tag): ?>

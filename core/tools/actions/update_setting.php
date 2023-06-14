@@ -82,6 +82,6 @@ if (isset($_POST['site_title'], $_POST['meta_description'], $_POST['footer_text'
     }
  }
 
-echo json_encode($updateResult); // nurodoma klaidos vieta
+echo json_encode($updateResult); 
 
 ?>

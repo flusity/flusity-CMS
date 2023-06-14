@@ -6,6 +6,24 @@ function deleteMenuItem($db, $id) {
     return $stmt->execute();
 }
 
+
+
+/* function deleteMenuItem($db, $id) {
+    $stmt = $db->prepare('SELECT * FROM menu WHERE id = :id');
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    $menuItem = $stmt->fetch();
+
+    if ($menuItem['page_url'] === 'index') {
+        return false;
+    }
+
+    $stmt = $db->prepare('DELETE FROM menu WHERE id = :id');
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    return $stmt->execute();
+}
+ */
+
 function getMenuItems($db) {
     $stmt = $db->prepare('SELECT * FROM menu ORDER BY position');
     $stmt->execute();
@@ -58,4 +76,10 @@ function generateMenuUrl($db, $page_url) {
     }
 }
 
+function getMenuItemById($db, $id) {
+    $stmt = $db->prepare("SELECT * FROM menu WHERE id = :id");
+    $stmt->bindParam(':id', $id);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
 

@@ -35,56 +35,55 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
             <i class="fas fa-plus"></i>
             </button>
             <table class="table">
-    <thead>
-        <tr>
-            <th style="width: 3%;"><?php echo t("No.");?></th>
-            <th style="width: 17%;"><?php echo t("Name");?></th>
-            <th style="width: 20%;"><?php echo t("Page URL");?></th>
-            <th style="width: 12%;"><?php echo t("Template");?></th>
-            <th style="width: 10%;"><?php echo t("Position");?></th>
-            <th style="width: 3%;"><?php echo t("Show");?></th>
-            <th style="width: 20%;"><?php echo t("Parent");?></th>
-            <th style="width: 8%;"><?php echo t("Actions");?></th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php $i=1;
-        foreach ($allMenu as $menu) { ?>
-            <tr>
-                <td><?php echo $i++; ?>.</td>
-                <td><?php echo htmlspecialchars($menu['name']); ?></td>
-                <td><?php echo htmlspecialchars($menu['page_url']); ?></td>
-                <td><?php echo htmlspecialchars($menu['template']); ?></td>
-                <td><?php echo htmlspecialchars($menu['position']); ?></td>
-                <td><?php echo htmlspecialchars($menu['show_in_menu']); ?></td>
-                <td>
-                    <?php
-                        $parentName = '';
-                        foreach ($allMenu as $menuItem) {
-                            if ($menuItem['id'] == $menu['parent_id']) {
-                                $parentName = $menuItem['name'];
-                                break;
-                            }
-                        }
-                        echo $parentName;
-                    ?>
-                </td>
-                <td>
-                    <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addMenuModal" data-menu-id="<?php echo $menu['id']; ?>" data-parent-id="<?php echo $menu['parent_id']; ?>" data-mode="update" title="<?php echo t("Edit");?>">
-                        <i class="fas fa-edit"></i>
-                    </button>
+              <thead>
+                  <tr>
+                      <th style="width: 3%;"><?php echo t("No.");?></th>
+                      <th style="width: 17%;"><?php echo t("Name");?></th>
+                      <th style="width: 20%;"><?php echo t("Page URL");?></th>
+                      <th style="width: 12%;"><?php echo t("Template");?></th>
+                      <th style="width: 10%;"><?php echo t("Position");?></th>
+                      <th style="width: 3%;"><?php echo t("Show");?></th>
+                      <th style="width: 20%;"><?php echo t("Parent");?></th>
+                      <th style="width: 8%;"><?php echo t("Actions");?></th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <?php $i=1;
+                  foreach ($allMenu as $menu) { ?>
+                      <tr>
+                          <td><?php echo $i++; ?>.</td>
+                          <td><?php echo htmlspecialchars($menu['name']); ?></td>
+                          <td><?php echo htmlspecialchars($menu['page_url']); ?></td>
+                          <td><?php echo htmlspecialchars($menu['template']); ?></td>
+                          <td><?php echo htmlspecialchars($menu['position']); ?></td>
+                          <td><?php echo htmlspecialchars($menu['show_in_menu']); ?></td>
+                          <td>
+                              <?php
+                                  $parentName = '';
+                                  foreach ($allMenu as $menuItem) {
+                                      if ($menuItem['id'] == $menu['parent_id']) {
+                                          $parentName = $menuItem['name'];
+                                          break;
+                                      }
+                                  }
+                                  echo $parentName;
+                              ?>
+                          </td>
+                          <td>
+                              <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addMenuModal" data-menu-id="<?php echo $menu['id']; ?>" data-parent-id="<?php echo $menu['parent_id']; ?>" data-mode="update" title="<?php echo t("Edit");?>">
+                                  <i class="fas fa-edit"></i>
+                              </button>
 
-                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteMenuModal" data-menu-id="<?php echo $menu['id']; ?>" title="<?php echo t("Delete");?>">
-                        <i class="fas fa-trash-alt"></i>
-                    </button>
-                </td>
-            </tr>
-        <?php } ?>
-    </tbody>
-</table>
-
-                      </main>
-    </div>
+                              <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteMenuModal" data-menu-id="<?php echo $menu['id']; ?>" title="<?php echo t("Delete");?>">
+                                  <i class="fas fa-trash-alt"></i>
+                              </button>
+                          </td>
+                      </tr>
+                  <?php } ?>
+              </tbody>
+          </table>
+    </main>
+  </div>
 </div>
 
 <!-- Modal -->
