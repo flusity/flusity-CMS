@@ -110,9 +110,13 @@ function getTemplates($dir, $templateName) {
         $stmt->bindParam(':default_keywords', $default_keywords, PDO::PARAM_STR);
         
         if ($brand_icone != "") {
-            $stmt->bindParam(':brand_icone', $brand_icone, PDO::PARAM_STR);
+            $stmt->bindValue(':brand_icone', $brand_icone, PDO::PARAM_STR);
         }
-        
+        if ($stmt->execute()) {
+            return ['success_message' => true];
+        } else {
+            return ['error_message' => $stmt->errorInfo()];
+        }
         return $stmt->execute();
     }
     
