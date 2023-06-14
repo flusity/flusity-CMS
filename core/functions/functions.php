@@ -1,5 +1,4 @@
 <?php
-
 function getDBConnection($config) {
     try {
         $dsn = 'mysql:host=' . $config['db_host'] . ';dbname=' . $config['db_name'] . ';charset=utf8mb4';
@@ -40,7 +39,6 @@ function validateCSRFToken($token) {
 
     
     function getCurrentPageUrl($db) {
-        // Gaukite nustatymus iš duomenų bazės
         $stmt = $db->prepare("SELECT * FROM settings");
         $stmt->execute();
         $settings = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -67,8 +65,6 @@ function validateCSRFToken($token) {
                 }
             }
         }
-    
-        // Jei nerandamas joks kitas URL pavadinimas, grąžina numatytąjį
         return $default_url_name;
     }
     
@@ -89,7 +85,6 @@ function getTemplates($dir, $templateName) {
 
     return $templates;
 }
-
 
     function getSettings($db) {
         $stmt = $db->prepare("SELECT * FROM settings");

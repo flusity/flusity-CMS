@@ -30,7 +30,7 @@ function getUserNameById($db, $user_id) {
     
         $settings = getSettings($db);
         $session=$settings['session_lifetime']*60;
-        $inactive = isset($session) ? $session : 1000;  // Gauna parametrą iš settings sql db
+        $inactive = isset($session) ? $session : 1000;  // Gauna parametrą iš settings sql db jei nustatyta 
         
         if (session_status() === PHP_SESSION_NONE) {
             ini_set('session.use_only_cookies', 1);
