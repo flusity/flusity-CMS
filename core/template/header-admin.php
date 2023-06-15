@@ -38,11 +38,11 @@ if (!checkUserRole($user_id, 'admin', $db)) {
 <head>
     <meta charset="UTF-8">
     <title><?php echo $site_title;?></title>
-    <link href="<?php $_SERVER['DOCUMENT_ROOT']; ?>/assets/bootstrap-5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"> 
+    <link href="/assets/bootstrap-5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"> 
     <link rel="stylesheet" href="<?php $_SERVER['DOCUMENT_ROOT']; ?>/assets/font-awesome/6.1.0/css/all.min.css">
-    <link href='<?php $_SERVER['DOCUMENT_ROOT']; ?>/core/tools/css/font-raleway.css' rel='stylesheet'>
-    <link href="<?php $_SERVER['DOCUMENT_ROOT']; ?>/core/tools/css/admin-style.css" rel="stylesheet">
-    <link href="<?php $_SERVER['DOCUMENT_ROOT']; ?>/core/tools/css/admin-style-two.css" rel="stylesheet">
-    <script src="<?php $_SERVER['DOCUMENT_ROOT']; ?>/assets/dist/js/jquery-3.6.0.min.js"></script>  
+    <link href='/core/tools/css/font-raleway.css' rel='stylesheet'>
+    <link href="/core/tools/css/admin-style.css" rel="stylesheet">
+    <link href="/core/tools/css/admin-style-two.css" rel="stylesheet">
+    <script src="/assets/dist/js/jquery-3.6.0.min.js"></script>  
 </head>
 <body>
