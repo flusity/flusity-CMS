@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $stmt = $db->prepare("UPDATE users SET role='admin' WHERE login_name=:login_name");
                 $stmt->bindParam(':login_name', $login_name);
                 $stmt->execute();
-                
+                session_unset();
             } else {
                 $_SESSION['error_message'] = "Error creating administrator: User with such email. The email or login name already exists, or the name you selected is on the blacklist.";
                 $_SESSION['stage'] = 2;
