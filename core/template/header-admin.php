@@ -4,6 +4,8 @@
 }
 require_once $_SERVER['DOCUMENT_ROOT'] . '/security/config.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/core/functions/functions.php';
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '/core/classes/sidebar_class.php';
 // Duomenų gavimas iš duomenų bazės
 $db = getDBConnection($config);
 secureSession($db);

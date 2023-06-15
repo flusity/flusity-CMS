@@ -132,7 +132,36 @@ document.getElementById('settingsDropdown').addEventListener('click', function()
         mediaQueryList.addListener(handleScreenChange);
         handleScreenChange(mediaQueryList);
     });
-    
+    document.getElementById("settingsDropdown").addEventListener("click", function(event) {
+    var submenu = document.getElementById("settingsSubmenu");
+    if (submenu.style.display === "none") {
+        submenu.style.display = "block";
+    } else {
+        submenu.style.display = "none";
+    }
+    event.preventDefault(); // Čia sustabdomas numatytasis nuorodos veikimas
+});
+var dropdown = document.getElementById("settingsDropdown");
+var submenuLinks = document.querySelectorAll('#settingsSubmenu a');
+if (dropdown) {
+    dropdown.addEventListener("click", function(event) {
+        var submenu = document.getElementById("settingsSubmenu");
+        if (submenu.style.display === "none") {
+            submenu.style.display = "block";
+        } else {
+            submenu.style.display = "none";
+        }
+        event.preventDefault();
+    });
+
+    submenuLinks.forEach(function(link) {
+        link.addEventListener("click", function(event) {
+            event.stopPropagation();
+        });
+    });
+}
+
+
 </script>
 </body>
 </html>
