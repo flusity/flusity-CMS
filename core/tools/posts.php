@@ -2,7 +2,7 @@
 define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../') . '/');
 
 require_once ROOT_PATH . 'core/template/header-admin.php';
-$limit_per_page = $settings['posts_per_page'];
+
 ?>
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/core/template/admin-menu-horizontal.php';?>
   <button class="btn btn-primary position-fixed start-0 translate-middle-y d-md-none tools-settings" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas">
@@ -13,15 +13,23 @@ $limit_per_page = $settings['posts_per_page'];
     <div class="row">
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4  content-up">
 
-        <?php   $i = 1;
-                $limit = $limit_per_page;
-                $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-                $start = ($page - 1) * $limit;
+<?php   
+    $possible_rows = [5, 15, 45, 55, 75, 150, 250, 350]; // galimos eilučių reikšmės
+    $records_per_page = isset($_GET['rows']) ? intval($_GET['rows']) : 5; // pasirinktos eilutės
 
-                $posts = getAllPostsPagination($db, $start, $limit);
+        $i = 1;
+       
+        
+                $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+                $offset = ($page - 1) * $records_per_page;
+                $search_term = isset($_GET['search_term']) ? $_GET['search_term'] : '';
+            
+                $start = ($page - 1) * $records_per_page;
+
+                $posts = getAllPostsPagination($db, $start, $records_per_page, $search_term);
                 $total_posts = countAllPosts($db);
-                $total_pages = ceil($total_posts / $limit);
-                $allPost = getAllPosts($db);
+                $total_pages = ceil($total_posts / $records_per_page);
+               // $allPost = getAllPosts($db);
                 $menuItems = getMenuItems($db);
                 $menuItemsIndexed = array_column($menuItems, null, 'id');
           ?>
@@ -49,8 +57,35 @@ $limit_per_page = $settings['posts_per_page'];
             <button type="button" class="btn btn-sm btn-primary" onclick="loadPostForm('create')" title="Add">
               <i class="fas fa-pencil"></i>
             </button>
-            <!-- Išveda Puslapio redagavimo langą -->
+            <div class="col-md-12 mt-3">
+                 <!-- Išveda Puslapio redagavimo langą -->
             <div id="get-post-edit"></div>
+               <div class="row">
+                <div class="col-md-1">
+                <form method="GET" id="rows-form">
+                <label for="rows"><?php echo t("Per page:");?></label>
+                <select name="rows" class="form-select" id="rows" onchange="document.getElementById('rows-form').submit()">
+                    <?php foreach($possible_rows as $rows): ?>
+                        <option value="<?php echo $rows; ?>" <?php echo ($rows == $records_per_page ? 'selected' : ''); ?>>
+                            <?php echo $rows; ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </form>
+                </div>
+                <div class="col-md-9">
+                <label for="search_term"><?php echo t("Search for posts or pages");?></label>
+                <div class="input-wrapper">
+                     <input type="text" id="search_term" class="form-control search-input-long" name="search_term" placeholder="<?php echo t("Search post...");?>">
+                    <span id="clear-search" class="clear-button">&times;</span>
+                 </div>
+
+                </div>
+            
+          </div>
+        </div>
+         
+           
             <table class="table">
                 <thead>
                     <tr>
@@ -71,9 +106,10 @@ $limit_per_page = $settings['posts_per_page'];
                             $post['menu_name'] = '';
                         }
                      ?>
-                        <tr>
-                            <td><?php echo $i++; ?>.</td>
+                      <tr class="posts-row" data-key="<?php echo htmlspecialchars($post['title']); ?>" data-value="<?php echo htmlspecialchars($post['content']); ?>" data-menu_name="<?php echo htmlspecialchars($post['menu_name']); ?>">
+                           <td><?php echo $i++; ?>.</td>
                             <td><?php echo htmlspecialchars($post['title']); ?></td>
+                            
                             <td>
                             <?php
                                 $content = htmlspecialchars_decode($post['content']);
@@ -116,15 +152,26 @@ $limit_per_page = $settings['posts_per_page'];
                 </tbody>
             </table>
             <div class="d-flex justify-content-center mt-3">
-                <nav aria-label="Page navigation">
-                    <ul class="pagination">
-                        <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-                            <li class="page-item <?php echo $i == $page ? 'active' : ''; ?>">
-                                <a class="page-link" href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>?page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                            </li>
-                        <?php endfor; ?>
-                    </ul>
-                </nav>
+            <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li class="page-item <?php echo ($page <= 1) ? 'disabled' : ''; ?>">
+                    <a class="page-link" href="?page=<?php echo $page - 1; ?>" aria-label="Previous">
+                    <span aria-hidden="true">«</span>
+                     </a>
+                 </li>
+          <?php  $num_pages_to_display = 5;
+                 for ($i = max(1, $page - $num_pages_to_display); $i <= min($page + $num_pages_to_display, $total_pages); $i++): ?>
+                    <li class="page-item <?php echo ($i == $page) ? 'active' : ''; ?>">
+                        <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                    </li>
+            <?php endfor; ?>
+                    <li class="page-item <?php echo ($page >= $total_pages) ? 'disabled' : ''; ?>">
+                        <a class="page-link" href="?page=<?php echo $page + 1; ?>" aria-label="Next">
+                        <span aria-hidden="true">»</span>
+                        </a>
+                    </li>
+            </ul>
+        </nav>
             </div>
       
       </main>
@@ -209,6 +256,40 @@ $limit_per_page = $settings['posts_per_page'];
     });
 });
   
+ document.querySelector('#search_term').addEventListener('input', function() {
+        if (this.value !== '') {
+            document.querySelector('#clear-search').style.display = 'block';
+        } else {
+            document.querySelector('#clear-search').style.display = 'none';
+        }
+ });
+
+ document.querySelector('#clear-search').addEventListener('click', function() {
+    var searchInput = document.querySelector('#search_term');
+    searchInput.value = '';
+    this.style.display = 'none';
+    var event = new Event('keyup');
+    searchInput.dispatchEvent(event);
+ });
+ 
+ $(document).ready(function() {
+    $('#search_term').on('keyup', function() {
+        var search_term = $(this).val().toLowerCase();
+
+        $('.posts-row').each(function() {
+            var key = $(this).data('key').toLowerCase();
+            var value = $(this).data('value').toLowerCase();
+            var menu_name = $(this).data('menu_name').toLowerCase();
+
+            if (key.includes(search_term) || value.includes(search_term) || menu_name.includes(search_term)) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    });
+});
+
 </script>
 <script src="js/admin-post-edit.js"></script>
 <?php require_once ROOT_PATH . 'core/template/admin-footer.php';?>
