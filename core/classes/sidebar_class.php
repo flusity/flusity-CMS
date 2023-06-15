@@ -9,10 +9,10 @@ class Sidebar {
     }
 
     public function getSidebarItems()
-    {
-        $stmt = $this->db->query('SELECT * FROM sidebar ORDER BY id');
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+{
+    $stmt = $this->db->query('SELECT * FROM sidebar ORDER BY IFNULL(order_number, 999999), id');
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 
     public function render()
 {
