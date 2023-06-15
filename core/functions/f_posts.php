@@ -104,10 +104,16 @@ function countAllPosts($db) {
     return $stmt->fetchColumn();
 }
 
-function getAllPostsPagination($db, $start, $limit) {
-    $stmt = $db->prepare("SELECT * FROM posts ORDER BY created_at DESC LIMIT :start, :limit");
-    $stmt->bindParam(':start', $start, PDO::PARAM_INT);
-    $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+function getAllPostsPagination($db, $start, $limit, $search_term = '') {
+    if ($search_term === '') {
+        $stmt = $db->prepare("SELECT posts.*, menu.name AS menu_name FROM posts LEFT JOIN menu ON posts.menu_id = menu.id ORDER BY created_at DESC LIMIT :start, :limit");
+    } else {
+        $stmt = $db->prepare("SELECT posts.*, menu.name AS menu_name FROM posts LEFT JOIN menu ON posts.menu_id = menu.id WHERE posts.title LIKE :search_term OR posts.content LIKE :search_term OR menu.name LIKE :search_term ORDER BY created_at DESC LIMIT :start, :limit");
+        $stmt->bindValue(':search_term', '%' . $search_term . '%', PDO::PARAM_STR);
+    }
+
+    $stmt->bindValue(':start', (int) $start, PDO::PARAM_INT);
+    $stmt->bindValue(':limit', (int) $limit, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
