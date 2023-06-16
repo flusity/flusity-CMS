@@ -57,7 +57,7 @@ Atsižvelgiant į šiuos elementus ir funkcijas, svetainė yrap patogus ir funkc
 
 <li>Duomenų bazės saugumas: Duomenų bazės užklausos yra paruoštos naudojant PDO paruoštas pareiškimus, kurie apsaugo nuo SQL injekcijos atakų.</li>
   </ul>
-  <p>Prisijungimas prie sistemos: user: Darius, Admin, User, Moderator password: 1234 , Projektas dar tęsiamas, numatoma pridėti daugiau funkcionalumų</p>
+  <p>Prisijungimas prie sistemos: Demo User Name: Tester and password: 1234 , Projektas dar tęsiamas, numatoma pridėti daugiau funkcionalumų</p>
   
   /////// En /////////////////
   
@@ -114,7 +114,7 @@ Considering these elements and functions, the website is a convenient and functi
 
 <li>Database security: Database queries are prepared using PDO prepared statements that protect against SQL injection attacks.</li>
    </ul>
-   <p>Login to system user: Darius, Admin, User, Moderator password: 1234 ,The project is still ongoing, it is planned to add more functionalities</p>
+   <p>Login to system user:  Demo User Name: Tester and password: 1234 ,The project is still ongoing, it is planned to add more functionalities</p>
    <br>
    
 Author's address http://www.manowebas.lt
