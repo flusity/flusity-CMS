@@ -28,7 +28,7 @@
         $isUser = checkUserRole($_SESSION['user_id'], 'user', $db);
     ?>
     <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle rounded-pill navmenubutton" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+    <button class="btn btn-secondary dropdown-toggle rounded-pill navmenubutton" style="width: auto;" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
     <div class="user-profile">
         <?php echo htmlspecialchars(getUserNameById($db, $_SESSION['user_id'])); ?>
         <div class="profile-picture-container">
