@@ -13,7 +13,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php'; ?>
 
 <?php 
     $themes = getAllThemes();
-    $currentTheme = getCurrentTheme($db); // jūs turite pakeisti $db į jūsų duomenų bazės objektą
+    $currentTheme = getCurrentTheme($db); 
 
 ?>
 
