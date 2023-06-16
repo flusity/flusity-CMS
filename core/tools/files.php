@@ -31,7 +31,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
                 ?>
             </div>
             <h2><?php echo t("Files");?></h2>
-            <div class="col-sm-10">
+            <div class="col-sm-12">
 
                 <form action="upload.php" method="POST" enctype="multipart/form-data">
                 <div class="row justify-content-end">
