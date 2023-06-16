@@ -1,5 +1,5 @@
 <header id="header" class="no-header">
-<?php require_once 'template/menu-horizontal.php';?>
+<?php require_once 'menu-horizontal.php';?>
 </header>
 <main class="main">
  <div class="container spacer">
@@ -47,4 +47,3 @@
     </div>
 </div>
 
-    <?php require_once 'template/footer.php';?>

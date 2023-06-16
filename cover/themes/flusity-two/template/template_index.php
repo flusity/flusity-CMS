@@ -1,6 +1,6 @@
 
 <header id="header" class="header">
-<?php require_once 'template/menu-horizontal.php';?>
+<?php require_once 'menu-horizontal.php';?>
 <div class="box-header">
     <div class="header__content">
         <h1 class="header__title"></h1>
