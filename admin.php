@@ -29,7 +29,7 @@
       </div>
       <div class="row g-2">
     <div class="col-2">
-        <div class="p-3 border bg-light cms-front-shadow">
+        <div class="p-3 border cms-front-shadow">
             <i class="fas fa-map-marker-alt fa-2x"></i> <!-- FontAwesome ikona -->
             <?php 
             $places = getplaces($db);
@@ -40,7 +40,7 @@
         </div>
     </div>
     <div class="col-2">
-        <div class="p-3 border bg-light cms-front-shadow">
+        <div class="p-3 border cms-front-shadow">
             <i class="fas fa-users fa-2x"></i> <!-- FontAwesome ikona -->
             <?php 
             $allUsers = getAllUsers($db);
@@ -51,7 +51,7 @@
         </div>
     </div>
     <div class="col-2">
-        <div class="p-3 border bg-light cms-front-shadow">
+        <div class="p-3 border cms-front-shadow">
             <i class="fas fa-newspaper fa-2x"></i> <!-- FontAwesome ikona -->
             <?php 
             $allPosts = getAllPosts($db);
@@ -62,7 +62,7 @@
         </div>
     </div>
     <div class="col-2">
-        <div class="p-3 border bg-light cms-front-shadow">
+        <div class="p-3 border cms-front-shadow">
             <i class="fas fa-bars fa-2x"></i> <!-- FontAwesome ikona -->
             <?php 
             $allMenu = getMenuItems($db);
@@ -73,7 +73,7 @@
         </div>
     </div>
     <div class="col-2">
-        <div class="p-3 border bg-light cms-front-shadow">
+        <div class="p-3 border cms-front-shadow">
             <i class="fas fa-cubes fa-2x"></i> <!-- FontAwesome ikona -->
             <?php 
             $allBlock = getCustomBlocks($db);
@@ -84,7 +84,7 @@
         </div>
     </div>
     <div class="col-2">
-        <div class="p-3 border bg-light cms-front-shadow">
+        <div class="p-3 border cms-front-shadow">
             <i class="fas fa-file fa-2x"></i> <!-- FontAwesome ikona -->
             <?php 
             $totalFiles = countFilesInDatabase($db);
@@ -94,7 +94,7 @@
         </div>
     </div>
     <div class="col-2">
-        <div class="p-3 border bg-light cms-front-shadow">
+        <div class="p-3 border cms-front-shadow">
             <i class="fas fa-puzzle-piece fa-2x"></i> <!-- FontAwesome ikona -->
             <?php 
             $totalAddons= totalAddons($db);
