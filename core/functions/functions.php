@@ -148,4 +148,5 @@ function getTemplates($dir, $templateName) {
     require_once 'f_places.php';
     require_once 'f_translations.php';
     require_once 'f_themes.php';
+    require_once 'f_addons.php';
     

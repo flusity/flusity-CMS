@@ -10,10 +10,12 @@ require_once ROOT_PATH . 'core/template/header-admin.php'; ?>
 <div class="container-fluid mt-4 main-content admin-layout">
     <div class="row">
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 content-up">
-        <?php 
-            $themes = getAllThemes();
-            $currentTheme = getCurrentTheme($db); 
-        ?>
+
+          <?php 
+              $themes = getAllThemes();
+              $currentTheme = getCurrentTheme($db);
+
+          ?>
 
     <div class="col-sm-9">
         <?php  if (isset($_SESSION['success_message'])) {

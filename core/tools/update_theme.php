@@ -12,6 +12,8 @@ require_once ROOT_PATH . 'core/functions/functions.php';
 
 $db = getDBConnection($config);
 secureSession($db);
+$language_code = getLanguageSetting($db);
+$translations = getTranslations($db, $language_code);
 
 if (defined('IS_ADMIN') && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'install_theme' && isset($_POST['theme'])) {
     $themeName = $_POST['theme'];

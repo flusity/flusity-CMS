@@ -120,3 +120,14 @@ body {
 .image-container.overlay::after {
   background: none;
 }
+li.list-group-item.addon-card {
+  background: none !important;
+}
+.uninstall-addon{
+  cursor:pointer;
+  color: #e66f44;
+}
+.uninstall-addon:hover{
+  cursor:pointer;
+  color: #d62d2d;
+}
