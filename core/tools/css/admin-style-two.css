@@ -132,5 +132,11 @@ li.list-group-item.addon-card {
   color: #d62d2d;
 }
 .cms-front-shadow {
+  background: rgba(254, 254, 254, 0.827);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.cms-front-shadow:hover {
+  background: rgba(226, 224, 224, 0.29);
+  box-shadow: inset 0 5 30px #ffffff;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.089), 0 6px 18px 0 rgba(0, 0, 0, 0.19);
 }
