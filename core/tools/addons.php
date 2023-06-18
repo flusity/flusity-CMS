@@ -80,30 +80,41 @@ require_once ROOT_PATH . 'core/template/header-admin.php'; ?>
                                 </a>
                     
                                 <?php if ($isActive) { ?>
-                                  <button type="button" class="btn btn-primary float-end" title="<?php echo t("Edit");?>"><i class="fa fa-tools"></i></button>
+                                  <button type="button" class="btn btn-primary float-end" title="<?php echo t("Settings");?>"><i class="fa fa-tools"></i></button>
                                   <?php } ?>
 
                             <?php } else { ?>
-                                <button type="button" class="btn btn-success link-success" onclick="installAddon('<?php echo $addon['name_addon']; ?>')" data-addon-name="<?php echo $addon['name_addon']; ?>" title="<?php echo t("install");?>"><?php echo t("Install");?></button>
+                               <button type="button" class="btn btn-success link-success install-addon" data-addon-name="<?php echo $addon['name_addon']; ?>" title="<?php echo t("install");?>"><?php echo t("Install");?></button>
+
                                 <button type="button" class="btn btn-primary float-end delete-addon" data-addon-name="<?php echo $addon['name_addon']; ?>" title="<?php echo t("delete");?>"><i class="fa fa-trash-alt link-danger"></i></button>
                                
-                                <div id="deleteToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                                <div class="toast-body">
-                                Are you sure you want to delete this addon?
-                                    <div class="mt-2 pt-2 border-top">
-                                    <button id="deleteAddonConfirm" type="button" class="btn btn-primary btn-sm">Delete</button>
-                                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="toast">Close</button>
-                                    </div>
-                                </div>
-                                </div>
+                                
                                 <?php } ?>
                         </li>
                     </ul>
                 </div>
+
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item addon-card">An item</li>
+                
+                </ul>
+                
             </div>
         </div>
-        
-        <div class="toast" role="alert" aria-live="assertive" aria-autohide="false" id="deleteAddonToast">
+        <div id="deleteToast" class="toast" role="alert" aria-live="assertive" aria-autohide="false">
+    <div class="toast-header">
+        <strong class="me-auto">Addon Delete</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+        Are you sure you want to delete this addon?
+        <div class="mt-2 pt-2 border-top">
+            <button id="deleteAddonConfirm" type="button" class="btn btn-primary btn-sm">Delete</button>
+            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="toast">Close</button>
+        </div>
+    </div>
+</div>
+        <div id="uninstallAddonToast" class="toast" role="alert" aria-live="assertive" aria-autohide="false">
                 <div class="toast-header">
                     <strong class="me-auto">Addon Uninstall</strong>
                     <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -111,7 +122,8 @@ require_once ROOT_PATH . 'core/template/header-admin.php'; ?>
                 <div class="toast-body">
                     Are you sure you want to uninstall this addon?
                 <div class="mt-2 pt-2 border-top">
-                    <button id="deleteAddonConfirm" type="button" class="btn btn-primary btn-sm">Uninstall</button>
+                <button id="uninstallAddonConfirm" type="button" class="btn btn-primary btn-sm">Uninstall</button>
+
                     <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="toast">Close</button>
                 </div>
             </div>
@@ -128,98 +140,113 @@ require_once ROOT_PATH . 'core/template/header-admin.php'; ?>
 </div>
 
 <script>
-    $(document).ready(function () {
-    var deleteAddonToast = new bootstrap.Toast(document.getElementById('deleteAddonToast'));
+  $(document).ready(function () {
+    var uninstallAddonToast = new bootstrap.Toast(document.getElementById('uninstallAddonToast'));
+    var deleteToast = new bootstrap.Toast(document.getElementById('deleteToast'));
 
     $('.uninstall-addon').on('click', function(e) {
         e.preventDefault();
         var addonName = $(this).data('addon-name');
         var position = $(this).offset();
-        $('#deleteAddonToast').css({
+        $('#uninstallAddonToast').css({
             position: 'absolute', 
             top: position.top,
             left: position.left,
-        });
-        $('#deleteAddonToast').css({
-            'z-index': 9999
-        });
+        }).css({'z-index': 9999});
 
-        $('#deleteAddonConfirm').off('click').on('click', function() {
-            deleteAddonToast.hide();
-
-            $.ajax({
-                type: 'POST',
-                url: 'actions/uninstall_addon.php',
-                data: {'addonName': addonName, 'action': 'uninstall_addon'},
-                dataType: 'json',
-                success: function(response) {
-                    console.log(response);
-                    if (response.success) {
-                        location.reload(); 
-                    } else {
-                        location.reload(); 
-                    }
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.log(textStatus, errorThrown);
-                }
-            });
+        $('#uninstallAddonConfirm').off('click').on('click', function() {
+            uninstallAddonToast.hide();
+            uninstallAddon(addonName);
         });
 
-        deleteAddonToast.show();
+        uninstallAddonToast.show();
     });
 
+    $('.delete-addon').on('click', function(e) {
+        e.preventDefault();
+        var addonName = $(this).data('addon-name');
+        var position = $(this).offset();
+        $('#deleteToast').css({
+            position: 'absolute', 
+            top: position.top,
+            left: position.left,
+        }).css({'z-index': 9999});
 
-
-
-    var deleteAddonName; 
-
-$('.delete-addon').on('click', function(e) {
-  e.preventDefault();
-  deleteAddonName = $(this).data('addon-name');
-  var deleteToast = new bootstrap.Toast(document.getElementById('deleteToast'));
-  deleteToast.show();
-});
-
-$('#deleteAddonConfirm').on('click', function(e) {
-  e.preventDefault();
-  $.ajax({
-    type: 'POST',
-    url: 'actions/delete_addon.php',
-    data: {'addonName': deleteAddonName, 'action': 'delete_addon'},
-    dataType: 'json',
-    success: function(response) {
-        console.log(response);
-        if (response.success) {
-            location.reload(); 
-        } else {
-            alert('Failed to delete addon ' + deleteAddonName);
-            location.reload(); 
-        }
-    },
-    error: function(jqXHR, textStatus, errorThrown) {
-        console.log(textStatus, errorThrown);
-    }
-  });
-});
-});
-
-    function installAddon(addonName) {
-      $.ajax({
-            type: "POST",
-            url: "actions/install_addon.php",
-            data: {action: "install_addon", addon: addonName},
-            success: function(response) {
-                console.log("Response: ", response);
-                location.reload(); 
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log("Error: ", textStatus, errorThrown);
-                alert('Error while installing the Addon');
-            }
+        $('#deleteAddonConfirm').off('click').on('click', function() {
+            deleteToast.hide();
+            deleteAddon(addonName);
         });
 
-    }
+        deleteToast.show();
+    });
+
+    $('.install-addon').on('click', function(e) {
+        e.preventDefault();
+        var addonName = $(this).data('addon-name');
+        installAddon(addonName);
+    });
+});
+
+function uninstallAddon(addonName) {
+    $.ajax({
+        type: 'POST',
+        url: 'actions/uninstall_addon.php',
+        data: {'addonName': addonName, 'action': 'uninstall_addon'},
+        dataType: 'json',
+        success: function(response) {
+            console.log(response);
+            if (response.success) {
+                location.reload(); 
+            } else {
+                location.reload(); 
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
+        }
+    });
+}
+
+function deleteAddon(addonName) {
+    $.ajax({
+        type: 'POST',
+        url: 'actions/delete_addon.php',
+        data: {'addonName': addonName, 'action': 'delete_addon'},
+        dataType: 'json',
+        success: function(response) {
+            console.log(response);
+            if (response.success) {
+                location.reload(); 
+            } else {
+                alert('Failed to delete addon ' + addonName);
+                location.reload(); 
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
+        }
+    });
+}
+
+
+function installAddon(addonName) {
+    $.ajax({
+        type: "POST",
+        url: "actions/install_addon.php",
+        data: {action: "install_addon", addon: addonName},
+        success: function(response) {
+            console.log("Response: ", response);
+            location.reload(); 
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log("Error: ", textStatus, errorThrown);
+            alert('Error while installing the Addon');
+        }
+    });
+}
+
+
+
 
 </script>
 <?php require_once ROOT_PATH . 'core/template/admin-footer.php';?>
