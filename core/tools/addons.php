@@ -78,49 +78,44 @@ require_once ROOT_PATH . 'core/template/header-admin.php'; ?>
                                 <a href="#" class="uninstall-addon" data-addon-name="<?php echo $addon['name_addon']; ?>" title="<?php echo t("Uninstall");?>">
                                     <i class="fa fa-times" style="font-size: 22px; margin-left:5px;"></i>
                                 </a>
-                    
-                                <?php if ($isActive) { ?>
-                                    <button type="button" class="btn btn-primary float-end settings-addon" data-addon-name="<?php echo $addon['name_addon']; ?>" title="<?php echo t("Settings");?>"><i class="fa fa-tools"></i></button>
+                        <?php if ($isActive) { ?>
+                                    <a href="#" class="float-end settings-addon" data-addon-name="<?php echo $addon['name_addon']; ?>" title="<?php echo t("Settings");?>"><i class="fas fa-chevron-down"></i></a>
                                    <?php } ?>
-
-                            <?php } else { ?>
+                        <?php } else { ?>
                                <button type="button" class="btn btn-success link-success install-addon" data-addon-name="<?php echo $addon['name_addon']; ?>" title="<?php echo t("install");?>"><?php echo t("Install");?></button>
-
                                 <button type="button" class="btn btn-primary float-end delete-addon" data-addon-name="<?php echo $addon['name_addon']; ?>" title="<?php echo t("delete");?>"><i class="fa fa-trash-alt link-danger"></i></button>
-                               
-                                
-                                <?php } ?>
+                            <?php } ?>
                         </li>
                     </ul>
                 </div>
 
                 <ul class="list-group list-group-flush settings-panel" style="display: none;">
-        <li class="list-group-item addon-card">
-            <div class="form-check">
-    
-            <input id="flexCheckChecked-<?php echo $addon['name_addon']; ?>" class="form-check-input" type="checkbox"  data-addon-name="<?php echo $addon['name_addon']; ?>" value="" checked disabled>
-                <label class="form-check-label" for="flexCheckChecked-<?php echo $addon['name_addon']; ?>">
-                    <?php echo t('Show in front dashboard');?>
-                </label>
-            </div>
-        </li>
-    </ul>
+                    <li class="list-group-item addon-card">
+                        <div class="form-check">
+                
+                        <input id="flexCheckChecked-<?php echo $addon['name_addon']; ?>" class="form-check-input" type="checkbox"  data-addon-name="<?php echo $addon['name_addon']; ?>" value="" checked disabled>
+                            <label class="form-check-label" for="flexCheckChecked-<?php echo $addon['name_addon']; ?>">
+                                <?php echo t('Show in front dashboard');?>
+                            </label>
+                        </div>
+                    </li>
+                </ul>
 
             </div>
         </div>
         <div id="deleteToast" class="toast" role="alert" aria-live="assertive" aria-autohide="false">
-    <div class="toast-header">
-        <strong class="me-auto">Addon Delete</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-    </div>
-    <div class="toast-body">
-        Are you sure you want to delete this addon?
-        <div class="mt-2 pt-2 border-top">
-            <button id="deleteAddonConfirm" type="button" class="btn btn-primary btn-sm">Delete</button>
-            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="toast">Close</button>
+            <div class="toast-header">
+                <strong class="me-auto">Addon Delete</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Are you sure you want to delete this addon?
+                <div class="mt-2 pt-2 border-top">
+                    <button id="deleteAddonConfirm" type="button" class="btn btn-primary btn-sm">Delete</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="toast">Close</button>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
         <div id="uninstallAddonToast" class="toast" role="alert" aria-live="assertive" aria-autohide="false">
                 <div class="toast-header">
                     <strong class="me-auto">Addon Uninstall</strong>
@@ -149,18 +144,16 @@ require_once ROOT_PATH . 'core/template/header-admin.php'; ?>
 <script>
   $(document).ready(function () {
 
-    $('.settings-addon').on('click', function(e) {
-    e.preventDefault();
-    var $settingsPanel = $(this).closest('.card').find(".settings-panel");
-    $settingsPanel.find('input[type=checkbox]').prop('disabled', false);
-    $settingsPanel.slideToggle(); // Pakeiskite į slideToggle
-});
-
-
-
-
     var uninstallAddonToast = new bootstrap.Toast(document.getElementById('uninstallAddonToast'));
     var deleteToast = new bootstrap.Toast(document.getElementById('deleteToast'));
+
+        $('.settings-addon').on('click', function(e) {
+        e.preventDefault();
+        var $settingsPanel = $(this).closest('.card').find(".settings-panel");
+        $settingsPanel.find('input[type=checkbox]').prop('disabled', false);
+        $settingsPanel.slideToggle(); // Pakeiskite į slideToggle
+    });
+
 
     $('.uninstall-addon').on('click', function(e) {
         e.preventDefault();
