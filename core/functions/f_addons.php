@@ -49,16 +49,17 @@ function installAddon($db, $name_addon) {
 
         // If addon does not exist in the database
         if (!$addonExists) {
-            $stmt = $db->prepare("INSERT INTO tjd_addons (name_addon, version, author, description_addon, sidebar_id, active) VALUES (:name_addon, :version, :author, :description_addon, :sidebar_id, :active)");
+            $stmt = $db->prepare("INSERT INTO tjd_addons (name_addon, version, author, description_addon, sidebar_id, active, show_front) VALUES (:name_addon, :version, :author, :description_addon, :sidebar_id, :active, :show_front)");
             $stmt->bindParam(':name_addon', $name_addon, PDO::PARAM_STR);
             $stmt->bindParam(':version', $version, PDO::PARAM_STR);
             $stmt->bindParam(':author', $author, PDO::PARAM_STR);
             $stmt->bindParam(':description_addon', $description_addon, PDO::PARAM_STR);
             $active = 1;  
-            $sidebar_id = 8; 
+            $sidebar_id = 8;
+            $show_front = 0;
             $stmt->bindParam(':sidebar_id', $sidebar_id, PDO::PARAM_INT);
             $stmt->bindParam(':active', $active, PDO::PARAM_INT); 
-          
+            $stmt->bindParam(':show_front', $show_front, PDO::PARAM_INT);
             return $stmt->execute();
         }
     }
@@ -110,4 +111,10 @@ function totalAddons($db) {
     $totalAddons = $stmt->fetchColumn();
     
     return $totalAddons;
+}
+function updateAddonShowFront($db, $name_addon, $show_front) {
+    $stmt = $db->prepare("UPDATE tjd_addons SET show_front = :show_front WHERE name_addon = :name_addon");
+    $stmt->bindParam(':show_front', $show_front, PDO::PARAM_INT);
+    $stmt->bindParam(':name_addon', $name_addon, PDO::PARAM_STR);
+    return $stmt->execute();
 }

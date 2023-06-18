@@ -17,6 +17,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php'; ?>
 ?>
 
     <div class="col-sm-9">
+    <div class="message"></div>
         <?php  if (isset($_SESSION['success_message'])) {
                 echo "<div class='alert alert-success alert-dismissible fade show slow-fade'>
                         " . htmlspecialchars($_SESSION['success_message']) . "
@@ -51,6 +52,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php'; ?>
           if ($installedAddon['name_addon'] == $addon['name_addon']) {
               $isInstalled = true;
               $isActive = isActiveAddon($addon['name_addon'], $db);
+              $showFront = $installedAddon['show_front'];
               break;
           }
       }
@@ -92,10 +94,9 @@ require_once ROOT_PATH . 'core/template/header-admin.php'; ?>
                 <ul class="list-group list-group-flush settings-panel" style="display: none;">
                     <li class="list-group-item addon-card">
                         <div class="form-check">
-                
-                        <input id="flexCheckChecked-<?php echo $addon['name_addon']; ?>" class="form-check-input" type="checkbox"  data-addon-name="<?php echo $addon['name_addon']; ?>" value="" checked disabled>
-                            <label class="form-check-label" for="flexCheckChecked-<?php echo $addon['name_addon']; ?>">
-                                <?php echo t('Show in front dashboard');?>
+                       
+                        <input id="flexCheckChecked-<?php echo $addon['name_addon']; ?>" class="form-check-input" type="checkbox" data-addon-name="<?php echo $addon['name_addon']; ?>" <?php echo (($showFront ?? 0) == 1 ? 'checked' : ''); ?>>
+                        <?php echo t('Show in front dashboard');?>
                             </label>
                         </div>
                     </li>
@@ -143,15 +144,56 @@ require_once ROOT_PATH . 'core/template/header-admin.php'; ?>
 
 <script>
   $(document).ready(function () {
-
     var uninstallAddonToast = new bootstrap.Toast(document.getElementById('uninstallAddonToast'));
     var deleteToast = new bootstrap.Toast(document.getElementById('deleteToast'));
 
-        $('.settings-addon').on('click', function(e) {
+    function updateAddonSetting(addonName, showFront) {
+        $.ajax({
+    url: 'actions/update_addon_setting.php',
+    type: 'POST',
+    data: {
+        'addon_name': addonName,
+        'show_front': showFront
+    },
+    success: function(data) {
+    var parsedData = JSON.parse(data);
+
+    if (parsedData.error_message) {
+        console.error('Error: ' + parsedData.error_message);
+        
+        // $('.message').html(parsedData.error_message).addClass('alert alert-danger');
+    } else if (parsedData.success_message) {
+        console.log('Success: ' + parsedData.success_message);
+       
+        $('.message').html(parsedData.success_message).addClass('alert alert-success');
+    } else {
+        console.log('Show front setting updated successfully for addon: ' + addonName);
+    }
+    location.reload();
+},
+    error: function(xhr, status, error) {
+       // $(".error-message").html('<div class="alert alert-danger alert-dismissible fade show slow-fade"> Ajax error: ' + error +
+         //               '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>');
+        console.error('Ajax error:', error);
+    }
+});
+
+}
+    $('.settings-addon').on('click', function(e) {
         e.preventDefault();
-        var $settingsPanel = $(this).closest('.card').find(".settings-panel");
+        var $settingsPanel = $(this).closest('.card').find('.settings-panel');
         $settingsPanel.find('input[type=checkbox]').prop('disabled', false);
-        $settingsPanel.slideToggle(); // Pakeiskite į slideToggle
+        $settingsPanel.slideToggle();
+    });
+
+    $('input[type=checkbox]').on('change', function() {
+        var addonName = $(this).data('addon-name');
+        var showFront = $(this).is(':checked') ? 1 : null;
+        var $checkbox = $(this);
+
+        updateAddonSetting(addonName, showFront);
+        var $settingsPanel = $(this).closest('.settings-panel');
+    $settingsPanel.slideToggle();
     });
 
 
