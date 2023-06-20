@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['stage'] = 3;
               
                 $stage = 3;
-                $stmt = $db->prepare("UPDATE ".$table_prefix."_users SET role='admin' WHERE login_name=:login_name");
+                $stmt = $db->prepare("UPDATE ".$table_prefix."_flussi_users SET role='admin' WHERE login_name=:login_name");
                 $stmt->bindParam(':login_name', $login_name);
                 $stmt->execute();
                 session_unset();
