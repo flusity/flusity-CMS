@@ -9,10 +9,10 @@ require_once ROOT_PATH . 'security/config.php';
 require_once ROOT_PATH . 'core/functions/functions.php';
 
 
-$db = getDBConnection($config);
-secureSession($db);
-$language_code = getLanguageSetting($db);
-$translations = getTranslations($db, $language_code);
+ $db = getDBConnection($config);
+secureSession($db, $prefix);
+$language_code = getLanguageSetting($db, $prefix);
+$translations = getTranslations($db, $prefix, $language_code);
 
 if (defined('IS_ADMIN') && $_SERVER['REQUEST_METHOD'] === 'POST') {
     foreach ($_POST as $key => $value) {

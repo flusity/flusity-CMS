@@ -10,7 +10,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
     <div class="row">
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 content-up">
 
-        <?php $allMenu = getMenuItems($db); ?>
+        <?php $allMenu = getMenuItems($db, $prefix); ?>
         
             <div class="col-sm-9">
                 <?php
@@ -118,7 +118,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
         <div class="form-group">
           <label for="template"><?php echo t("Template");?></label>
       <?php
-          $settings = getSettings($db);
+          $settings = getSettings($db, $prefix);
           $templateName = $settings['theme']; 
           $dir = ROOT_PATH ."cover/themes/";
           $templates = getTemplates($dir, $templateName);

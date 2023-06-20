@@ -1,6 +1,6 @@
 <div class="col-md-2 sidebar-bg sidebar nav flex-column" id="sidebar">
  <?php
-   $sidebar = new Sidebar($db);
+   $sidebar = new Sidebar($db, $prefix);
    echo $sidebar->render();
  ?>
 </div>

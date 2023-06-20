@@ -9,8 +9,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/security/config.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/core/functions/functions.php';
 
 
-$db = getDBConnection($config);
-secureSession($db);
+ $db = getDBConnection($config);
+secureSession($db, $prefix);
 $target_dir = ROOT_PATH . "uploads/";
 
 $uploaded_file = $_FILES["uploaded_file"];
@@ -44,7 +44,7 @@ if (move_uploaded_file($uploaded_file["tmp_name"], $target_file)) {//
     $file_url = $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['HTTP_HOST'] . "/uploads/" . $new_filename;
     
     $_SESSION['success_message'] = "File" ." ". basename($uploaded_file["name"]) . " " .t("file uploaded successfully.");
-    saveFileToDatabase($db, $new_filename, $file_url);
+    saveFileToDatabase($db, $prefix, $new_filename, $file_url);
 } else {
     $_SESSION['error_message'] = t("Error loading file.");
 }

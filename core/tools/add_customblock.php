@@ -10,8 +10,8 @@ require_once ROOT_PATH . 'security/config.php';
 require_once ROOT_PATH . 'core/functions/functions.php';
 
 // Duomenų gavimas iš duomenų bazės
-$db = getDBConnection($config);
-secureSession($db);
+ $db = getDBConnection($config);
+secureSession($db, $prefix);
 $result = ['success' => false];
 
 if (isset($_POST['customblock_name'], $_POST['customblock_menu_id'], $_POST['customblock_place_id'], $_POST['customblock_html_code'])) {
@@ -20,7 +20,7 @@ if (isset($_POST['customblock_name'], $_POST['customblock_menu_id'], $_POST['cus
     $place_id = (int)$_POST['customblock_place_id'];
     $html_code = $_POST['customblock_html_code'];
 
-    $insert = createCustomBlock($db, $name, $menu_id, $place_id, $html_code);
+    $insert = createCustomBlock($db, $prefix, $name, $menu_id, $place_id, $html_code);
                         
     if ($insert) {
         $_SESSION['success_message'] = 'Custom Block sėkmingai pridėtas.';

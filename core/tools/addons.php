@@ -13,7 +13,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php'; ?>
 
 <?php 
      $systemAddons = getAllSystemAddons();
-     $installedAddons = getAllAddons($db); 
+     $installedAddons = getAllAddons($db, $prefix); 
 ?>
 
     <div class="col-sm-9">
@@ -51,7 +51,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php'; ?>
       foreach($installedAddons as $installedAddon) {
           if ($installedAddon['name_addon'] == $addon['name_addon']) {
               $isInstalled = true;
-              $isActive = isActiveAddon($addon['name_addon'], $db);
+              $isActive = isActiveAddon($addon['name_addon'], $db, $prefix);
               $showFront = $installedAddon['show_front'];
               break;
           }
@@ -160,8 +160,6 @@ require_once ROOT_PATH . 'core/template/header-admin.php'; ?>
 
     if (parsedData.error_message) {
         console.error('Error: ' + parsedData.error_message);
-        
-        // $('.message').html(parsedData.error_message).addClass('alert alert-danger');
     } else if (parsedData.success_message) {
         console.log('Success: ' + parsedData.success_message);
        

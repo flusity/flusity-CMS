@@ -10,10 +10,10 @@ require_once ROOT_PATH . 'security/config.php';
 require_once ROOT_PATH . 'core/functions/functions.php';
 
 // Duomenų gavimas iš duomenų bazės
-$db = getDBConnection($config);
-secureSession($db);
-$language_code = getLanguageSetting($db);
-$translations = getTranslations($db, $language_code);
+ $db = getDBConnection($config);
+secureSession($db, $prefix);
+$language_code = getLanguageSetting($db, $prefix);
+$translations = getTranslations($db, $prefix, $language_code);
 
 $result = ['success' => false];
 
@@ -24,7 +24,7 @@ if (isset($_POST['customblock_id'], $_POST['customblock_name'], $_POST['custombl
     $placeId = (int)$_POST['customblock_place_id'];
     $htmlCode = $_POST['customblock_html_code'];
 
-    $update = updateCustomBlock($db, $customBlockId, $name, $menuId, $placeId, $htmlCode);
+    $update = updateCustomBlock($db, $prefix, $customBlockId, $name, $menuId, $placeId, $htmlCode);
 
     if ($update) {
         $_SESSION['success_message'] = t('The Block has been updated successfully.');

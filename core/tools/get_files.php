@@ -9,13 +9,13 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/security/config.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/core/functions/functions.php';
 
 
-$db = getDBConnection($config);
-secureSession($db);
+ $db = getDBConnection($config);
+secureSession($db, $prefix);
 $itemsPerPage = 16;
 $page = $_GET['page'] ?? 0;
 $offset = $page * $itemsPerPage;
 
-$query = $db->prepare("SELECT * FROM files LIMIT :offset, :itemsPerPage");
+$query = $db->prepare("SELECT * FROM ".$prefix['table_prefix']."_files LIMIT :offset, :itemsPerPage");
 $query->bindParam(':offset', $offset, PDO::PARAM_INT);
 $query->bindParam(':itemsPerPage', $itemsPerPage, PDO::PARAM_INT);
 $query->execute();

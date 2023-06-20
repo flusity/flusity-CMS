@@ -35,21 +35,21 @@ function getAllSystemAddons() {
 }
 
 
-function installAddon($db, $name_addon) {
+function installAddon($db, $prefix, $name_addon) {
     $addonsDirectory = $_SERVER['DOCUMENT_ROOT'] . '/cover/addons/';
     $addonDetailsPath = $addonsDirectory . $name_addon . '/' . $name_addon . '.php';
     if(file_exists($addonDetailsPath)) {
         include $addonDetailsPath;
 
         // Check if addon already exists
-        $stmt = $db->prepare("SELECT * FROM tjd_addons WHERE name_addon = :name_addon");
+        $stmt = $db->prepare('SELECT * FROM  '.$prefix['table_prefix'].'_tjd_addons WHERE name_addon = :name_addon');
         $stmt->bindParam(':name_addon', $name_addon, PDO::PARAM_STR);
         $stmt->execute();
         $addonExists = $stmt->fetch(PDO::FETCH_ASSOC);
 
         // If addon does not exist in the database
         if (!$addonExists) {
-            $stmt = $db->prepare("INSERT INTO tjd_addons (name_addon, version, author, description_addon, sidebar_id, active, show_front) VALUES (:name_addon, :version, :author, :description_addon, :sidebar_id, :active, :show_front)");
+            $stmt = $db->prepare('INSERT INTO  '.$prefix['table_prefix'].'_tjd_addons (name_addon, version, author, description_addon, sidebar_id, active, show_front) VALUES (:name_addon, :version, :author, :description_addon, :sidebar_id, :active, :show_front)');
             $stmt->bindParam(':name_addon', $name_addon, PDO::PARAM_STR);
             $stmt->bindParam(':version', $version, PDO::PARAM_STR);
             $stmt->bindParam(':author', $author, PDO::PARAM_STR);
@@ -66,22 +66,22 @@ function installAddon($db, $name_addon) {
 }
 
 
-function getAllAddons($db) {
-    $stmt = $db->prepare("SELECT * FROM tjd_addons");
+function getAllAddons($db, $prefix) {
+    $stmt = $db->prepare("SELECT * FROM  ".$prefix['table_prefix']."_tjd_addons");
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function isActiveAddon($addonName, $db) {
-    $query = $db->prepare('SELECT active FROM tjd_addons WHERE name_addon = :name');
+function isActiveAddon($addonName, $db, $prefix) {
+    $query = $db->prepare("SELECT active FROM  ".$prefix['table_prefix']."_tjd_addons WHERE name_addon = :name");
     $query->execute([':name' => $addonName]);
     $addon = $query->fetch();
 
     return $addon && $addon['active'] == 1;
 }
 
-function uninstallAddon($db, $name_addon) {
-    $stmt = $db->prepare("DELETE FROM tjd_addons WHERE name_addon = :name_addon");
+function uninstallAddon($db, $prefix, $name_addon) {
+    $stmt = $db->prepare("DELETE FROM  ".$prefix['table_prefix']."_tjd_addons WHERE name_addon = :name_addon");
     $stmt->bindParam(':name_addon', $name_addon, PDO::PARAM_STR);
     return $stmt->execute();
 }
@@ -104,16 +104,16 @@ function deleteDirectory($dir) {
     return rmdir($dir);
 }
 
-function totalAddons($db) {
-    $stmt = $db->prepare("SELECT COUNT(*) FROM tjd_addons");
+function totalAddons($db, $prefix) {
+    $stmt = $db->prepare("SELECT COUNT(*) FROM  ".$prefix['table_prefix']."_tjd_addons");
     $stmt->execute();
     
     $totalAddons = $stmt->fetchColumn();
     
     return $totalAddons;
 }
-function updateAddonShowFront($db, $name_addon, $show_front) {
-    $stmt = $db->prepare("UPDATE tjd_addons SET show_front = :show_front WHERE name_addon = :name_addon");
+function updateAddonShowFront($db, $prefix, $name_addon, $show_front) {
+    $stmt = $db->prepare('UPDATE '.$prefix['table_prefix'].'_tjd_addons SET show_front = :show_front WHERE name_addon = :name_addon');
     $stmt->bindParam(':show_front', $show_front, PDO::PARAM_INT);
     $stmt->bindParam(':name_addon', $name_addon, PDO::PARAM_STR);
     return $stmt->execute();

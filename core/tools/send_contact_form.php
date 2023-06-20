@@ -14,7 +14,7 @@ require_once ROOT_PATH . 'core/PHPMailer/src/Exception.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-$db = getDBConnection($config);
+ $db = getDBConnection($config);
 
 $mail = new PHPMailer(true);
 

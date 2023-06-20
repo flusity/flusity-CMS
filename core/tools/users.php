@@ -11,7 +11,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 content-up">
 
         <?php
-          $users = getAllUsers($db);
+          $users = getAllUsers($db, $prefix);
           ?>
     
     <div class="col-sm-9">

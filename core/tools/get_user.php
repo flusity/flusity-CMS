@@ -8,28 +8,28 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/security/config.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/core/functions/functions.php';
 
 
-$db = getDBConnection($config);
-secureSession($db);
-$language_code = getLanguageSetting($db);
-$translations = getTranslations($db, $language_code);
+ $db = getDBConnection($config);
+secureSession($db, $prefix);
+$language_code = getLanguageSetting($db, $prefix);
+$translations = getTranslations($db, $prefix, $language_code);
 
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
-    $user_name = getUserNameById($db, $user_id);
+    $user_name = getUserNameById($db, $prefix, $user_id);
 
 } else {
     header("Location: 404.php");
     exit;
 }
 
-if (!checkUserRole($user_id, 'admin', $db) && !checkUserRole($user_id, 'moderator', $db)) {
+if (!checkUserRole($user_id, 'admin', $db, $prefix) && !checkUserRole($user_id, 'moderator', $db, $prefix)) {
     header("Location: 404.php");
     exit;
 }
 
 $userId = isset($_GET['user_id']) ? (int)$_GET['user_id'] : 0;
 
-$user = getUserById($db, $userId);
+$user = getUserById($db, $prefix, $userId);
 
 if ($user) { ?>
 <div id="edit-user-content mb-3">

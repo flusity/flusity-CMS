@@ -2,10 +2,10 @@
     session_start();
 }
 
-secureSession($db);
+secureSession($db, $prefix);
 
 
-function handleRegister($db, $post) {
+function handleRegister($db, $prefix, $post) {
     $csrf_token = validateInput($post['csrf_token']);
     if (!validateCSRFToken($csrf_token)) {
         return t("Invalid CSRF token. Try again.");
@@ -19,10 +19,10 @@ function handleRegister($db, $post) {
         $email = validateInput($post['email']);
 
         if ($password === $confirm_password) {
-            if (isUsernameTaken($username, $db) || isLoginNameTaken($login_name, $db)) {
+            if (isUsernameTaken($username, $db, $prefix) || isLoginNameTaken($login_name, $db, $prefix)) {
                 return t("That Name or Login Name is already taken. Choose another.");
             } else {
-                if (registerUser($login_name, $username, $password, $surname, $phone, $email, $db)) {
+                if (registerUser($login_name, $username, $password, $surname, $phone, $email, $db, $prefix)) {
                     $_SESSION['success_message'] = t("User registration successful. You can now log in.");
                     header('Location: login.php');
                     exit();

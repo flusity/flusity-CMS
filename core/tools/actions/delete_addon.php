@@ -7,10 +7,10 @@ define('IS_ADMIN', true);
 require_once $_SERVER['DOCUMENT_ROOT'] . '/security/config.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/core/functions/functions.php';
 $addon_path = $_SERVER['DOCUMENT_ROOT'] . '/cover/addons/';
-$db = getDBConnection($config);
-secureSession($db);
-$language_code = getLanguageSetting($db);
-$translations = getTranslations($db, $language_code);
+ $db = getDBConnection($config);
+secureSession($db, $prefix);
+$language_code = getLanguageSetting($db, $prefix);
+$translations = getTranslations($db, $prefix, $language_code);
 
 $response = array();
 

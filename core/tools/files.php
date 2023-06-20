@@ -46,7 +46,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
 
                 </form>
                 <?php
-           $files = getFilesListFromDatabase($db);
+           $files = getFilesListFromDatabase($db, $prefix);
         echo "<h3>";?><?php echo t("File list");?><?php echo "</h3>";
         echo '<div class="row row-cols-1 row-cols-md-3 g-4">';
         foreach ($files as $file) {

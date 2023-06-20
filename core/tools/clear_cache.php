@@ -6,9 +6,9 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
   require_once $_SERVER['DOCUMENT_ROOT'] . '/core/functions/functions.php';
   define('IS_ADMIN', true);
     // Duomenų gavimas iš duomenų bazės
-    $db = getDBConnection($config);
-    $language_code = getLanguageSetting($db);
-    $translations = getTranslations($db, $language_code);
+     $db = getDBConnection($config);
+    $language_code = getLanguageSetting($db, $prefix);
+    $translations = getTranslations($db, $prefix, $language_code);
 
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");

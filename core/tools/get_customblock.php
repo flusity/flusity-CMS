@@ -8,29 +8,29 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/security/config.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/core/functions/functions.php';
 
 
-$db = getDBConnection($config);
-secureSession($db);
-$language_code = getLanguageSetting($db);
-$translations = getTranslations($db, $language_code);
+ $db = getDBConnection($config);
+secureSession($db, $prefix);
+$language_code = getLanguageSetting($db, $prefix);
+$translations = getTranslations($db, $prefix, $language_code);
 
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
-    $user_name = getUserNameById($db, $user_id);
+    $user_name = getUserNameById($db, $prefix, $user_id);
 } else {
     header("Location: 404.php");
     exit;
 }
 
-if (!checkUserRole($user_id, 'admin', $db) && !checkUserRole($user_id, 'moderator', $db)) {
+if (!checkUserRole($user_id, 'admin', $db, $prefix) && !checkUserRole($user_id, 'moderator', $db, $prefix)) {
     header("Location: 404.php");
     exit;
 }
 $customBlockId = isset($_GET['customblock_id']) ? (int)$_GET['customblock_id'] : 0;
 $mode = $customBlockId > 0 ? 'edit' : 'create';
-$customBlock = $mode === 'edit' ? getCustomBlockById($db, $customBlockId) : null;
+$customBlock = $mode === 'edit' ? getCustomBlockById($db, $prefix, $customBlockId) : null;
 
-$places = getplaces($db);
-$menuId = getMenuItems($db);
+$places = getplaces($db, $prefix);
+$menuId = getMenuItems($db, $prefix);
 
 if ($mode === 'create' || $customBlock) {
 ?>

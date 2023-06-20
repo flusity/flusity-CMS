@@ -9,11 +9,11 @@ require_once ROOT_PATH . 'security/config.php';
 require_once ROOT_PATH . 'core/functions/functions.php';
 
 // Duomenų gavimas iš duomenų bazės
-$db = getDBConnection($config);
-secureSession($db);
+ $db = getDBConnection($config);
+secureSession($db, $prefix);
 // Gaunamas kalbos nustatymas iš duomenų bazės  
-$language_code = getLanguageSetting($db);
-$translations = getTranslations($db, $language_code);
+$language_code = getLanguageSetting($db, $prefix);
+$translations = getTranslations($db, $prefix, $language_code);
 
 if (isset($_POST['translation_key']) && isset($_POST['translation_value']) && isset($_POST['language_code'])) {
     $translation_key = trim($_POST['translation_key']);
@@ -24,7 +24,7 @@ if (isset($_POST['translation_key']) && isset($_POST['translation_value']) && is
         $language_code = trim($_POST['new_language_code']);
     }
 
-    $result = addTranslation($db, $language_code, $translation_key, $translation_value);
+    $result = addTranslation($db, $prefix, $language_code, $translation_key, $translation_value);
     if ($result === 'Translation key already exists') {
         $_SESSION['error_message'] = t("Error: Translation word already exists.");
     } else {

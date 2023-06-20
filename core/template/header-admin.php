@@ -6,29 +6,39 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/security/config.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/core/functions/functions.php';
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/core/classes/sidebar_class.php';
+
+$configurations = require $_SERVER['DOCUMENT_ROOT'] . '/security/config.php';
+
 // Duomenų gavimas iš duomenų bazės
-$db = getDBConnection($config);
-secureSession($db);
+
+$prefix = $configurations['prefix'];
+$config = $configurations['config'];
+
+
+
+// Duomenų gavimas iš duomenų bazės
+ $db = getDBConnection($config);
+secureSession($db, $prefix);
 
 define('IS_ADMIN', true);
 
-$settings = getSettings($db);
-$languages = getAllLanguages($db);
+$settings = getSettings($db, $prefix);
+$languages = getAllLanguages($db, $prefix);
 $site_title = isset($settings['site_title']) ? $settings['site_title'] : '';
 $footer_text = isset($settings['footer_text']) ? $settings['footer_text'] : '';
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
-    $user_name = getUserNameById($db, $user_id);
+    $user_name = getUserNameById($db, $prefix, $user_id);
     // Gaunamas kalbos nustatymas iš duomenų bazės  
-    $language_code = getLanguageSetting($db);
-    $translations = getTranslations($db, $language_code);
+    $language_code = getLanguageSetting($db, $prefix);
+    $translations = getTranslations($db, $prefix, $language_code);
 
 } else {
     header("Location: 404.php");
     exit;
 }
 
-if (!checkUserRole($user_id, 'admin', $db)) {
+if (!checkUserRole($user_id, 'admin', $db, $prefix)) {
     header("Location: 404.php");
     exit;
 }

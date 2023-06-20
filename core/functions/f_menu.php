@@ -1,36 +1,18 @@
 <?php
 // Meniu
-function deleteMenuItem($db, $id) {
-    $stmt = $db->prepare('DELETE FROM menu WHERE id = :id');
+function deleteMenuItem($db, $prefix, $id) {
+    $stmt = $db->prepare('DELETE FROM '.$prefix['table_prefix'].'_menu WHERE id = :id');
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     return $stmt->execute();
 }
 
-
-
-/* function deleteMenuItem($db, $id) {
-    $stmt = $db->prepare('SELECT * FROM menu WHERE id = :id');
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-    $stmt->execute();
-    $menuItem = $stmt->fetch();
-
-    if ($menuItem['page_url'] === 'index') {
-        return false;
-    }
-
-    $stmt = $db->prepare('DELETE FROM menu WHERE id = :id');
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-    return $stmt->execute();
-}
- */
-
-function getMenuItems($db) {
-    $stmt = $db->prepare('SELECT * FROM menu ORDER BY position');
+function getMenuItems($db, $prefix) {
+    $stmt = $db->prepare('SELECT * FROM '.$prefix['table_prefix'].'_menu ORDER BY position');
     $stmt->execute();
     return $stmt->fetchAll();
 }
-function createMenuItem($db, $name, $page_url, $position, $template, $show_in_menu, $parent_id) {
-    $stmt = $db->prepare('INSERT INTO menu (name, page_url, position, template, show_in_menu, parent_id) VALUES (:name, :page_url, :position, :template, :show_in_menu, :parent_id)');
+function createMenuItem($db, $prefix, $name, $page_url, $position, $template, $show_in_menu, $parent_id) {
+    $stmt = $db->prepare('INSERT INTO '.$prefix['table_prefix'].'_menu (name, page_url, position, template, show_in_menu, parent_id) VALUES (:name, :page_url, :position, :template, :show_in_menu, :parent_id)');
     $stmt->bindParam(':name', $name, PDO::PARAM_STR);
     $stmt->bindParam(':page_url', $page_url, PDO::PARAM_STR);
     $stmt->bindParam(':position', $position, PDO::PARAM_INT);
@@ -40,8 +22,8 @@ function createMenuItem($db, $name, $page_url, $position, $template, $show_in_me
     return $stmt->execute();
 }
 
-function updateMenuItem($db, $id, $name, $page_url, $position, $template, $show_in_menu, $parent_id) {
-    $stmt = $db->prepare('UPDATE menu SET name = :name, page_url = :page_url, position = :position, template = :template, show_in_menu = :show_in_menu, parent_id = :parent_id WHERE id = :id');
+function updateMenuItem($db, $prefix, $id, $name, $page_url, $position, $template, $show_in_menu, $parent_id) {
+    $stmt = $db->prepare('UPDATE '.$prefix['table_prefix'].'_menu SET name = :name, page_url = :page_url, position = :position, template = :template, show_in_menu = :show_in_menu, parent_id = :parent_id WHERE id = :id');
     $stmt->bindParam(':name', $name, PDO::PARAM_STR);
     $stmt->bindParam(':page_url', $page_url, PDO::PARAM_STR);
     $stmt->bindParam(':position', $position, PDO::PARAM_INT);
@@ -52,14 +34,14 @@ function updateMenuItem($db, $id, $name, $page_url, $position, $template, $show_
     return $stmt->execute();
 }
 
-function getMenuByPageUrl($db, $page_url) {
-    $stmt = $db->prepare("SELECT * FROM menu WHERE page_url = :page_url");
+function getMenuByPageUrl($db, $prefix, $page_url) {
+    $stmt = $db->prepare("SELECT * FROM ".$prefix['table_prefix']."_menu WHERE page_url = :page_url");
     $stmt->bindParam(':page_url', $page_url);
     $stmt->execute();
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
-function generateMenuUrl($db, $page_url) {
-    $stmt = $db->prepare("SELECT * FROM settings");
+function generateMenuUrl($db, $prefix, $page_url) {
+    $stmt = $db->prepare("SELECT * FROM ".$prefix['table_prefix']."_settings");
     $stmt->execute();
     $settings = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -76,8 +58,8 @@ function generateMenuUrl($db, $page_url) {
     }
 }
 
-function getMenuItemById($db, $id) {
-    $stmt = $db->prepare("SELECT * FROM menu WHERE id = :id");
+function getMenuItemById($db, $prefix, $id) {
+    $stmt = $db->prepare("SELECT * FROM ".$prefix['table_prefix']."_menu WHERE id = :id");
     $stmt->bindParam(':id', $id);
     $stmt->execute();
     return $stmt->fetch(PDO::FETCH_ASSOC);

@@ -11,10 +11,10 @@ require_once ROOT_PATH . 'core/functions/functions.php';
 
 
 // Duomenų gavimas iš duomenų bazės
-$db = getDBConnection($config);
-secureSession($db);
-$language_code = getLanguageSetting($db);
-$translations = getTranslations($db, $language_code);
+ $db = getDBConnection($config);
+secureSession($db, $prefix);
+$language_code = getLanguageSetting($db, $prefix);
+$translations = getTranslations($db, $prefix, $language_code);
 
 $result = ['success' => false];
 
@@ -30,7 +30,7 @@ if (isset($_POST['post_id'], $_POST['post_title'], $_POST['post_content'], $_POS
     $description = htmlspecialchars($_POST['post_description'], ENT_QUOTES, 'UTF-8');
     $keywords = htmlspecialchars($_POST['post_keywords'], ENT_QUOTES, 'UTF-8');
  
-    $update = updatePost($db, $postId, $title, $content, $menuId, $status, $tags, $role, $description, $keywords, $priority);
+    $update = updatePost($db, $prefix, $postId, $title, $content, $menuId, $status, $tags, $role, $description, $keywords, $priority);
  
     if ($update) {
         $_SESSION['success_message'] = t('The record has been updated successfully.');

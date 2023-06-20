@@ -13,6 +13,7 @@ function getDBConnection($config) {
     }
 }
 
+
 function getFullUrl($relativePath) {
     $base_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'];
     return $base_url . $relativePath;
@@ -38,18 +39,15 @@ function validateCSRFToken($token) {
     }
 
     
-    function getCurrentPageUrl($db) {
-        $stmt = $db->prepare("SELECT * FROM settings");
+    function getCurrentPageUrl($db, $prefix) {
+        $stmt = $db->prepare("SELECT * FROM ".$prefix['table_prefix']."_settings");
         $stmt->execute();
         $settings = $stmt->fetch(PDO::FETCH_ASSOC);
     
         $current_url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-        $menus = getMenuItems($db);
-    
-        // Nustato numatytąjį URL pavadinimą
+        $menus = getMenuItems($db, $prefix);
         $default_url_name = 'index';
         
-        // Jei pretty_url nustatymas yra 1, tikrina "gražų" URL
         if($settings['pretty_url'] == 1){
             foreach ($menus as $menu) {
                 $menu_url = "http://" . $_SERVER['HTTP_HOST'] . '/' . $menu['page_url'];
@@ -86,14 +84,15 @@ function getTemplates($dir, $templateName) {
     return $templates;
 }
 
-    function getSettings($db) {
-        $stmt = $db->prepare("SELECT * FROM settings");
+function getSettings($db, $prefix) {
+    $stmt = $db->prepare("SELECT * FROM ".$prefix['table_prefix']."_settings");
+
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     
-    function updateSettings($db, $site_title, $meta_description, $footer_text, $pretty_url, $language, $posts_per_page, $registration_enabled, $session_lifetime, $default_keywords, $brand_icone) {
-        $stmt = $db->prepare("UPDATE settings SET site_title = :site_title, meta_description = :meta_description, footer_text = :footer_text, pretty_url = :pretty_url, language = :language, posts_per_page = :posts_per_page, registration_enabled = :registration_enabled, session_lifetime = :session_lifetime, default_keywords = :default_keywords" . ($brand_icone != "" ? ", brand_icone = :brand_icone" : ""));
+    function updateSettings($db, $prefix, $site_title, $meta_description, $footer_text, $pretty_url, $language, $posts_per_page, $registration_enabled, $session_lifetime, $default_keywords, $brand_icone) {
+        $stmt = $db->prepare("UPDATE ".$prefix['table_prefix']."_settings  SET site_title = :site_title, meta_description = :meta_description, footer_text = :footer_text, pretty_url = :pretty_url, language = :language, posts_per_page = :posts_per_page, registration_enabled = :registration_enabled, session_lifetime = :session_lifetime, default_keywords = :default_keywords" . ($brand_icone != "" ? ", brand_icone = :brand_icone" : ""));
         $stmt->bindParam(':site_title', $site_title, PDO::PARAM_STR);
         $stmt->bindParam(':meta_description', $meta_description, PDO::PARAM_STR);
         $stmt->bindParam(':footer_text', $footer_text, PDO::PARAM_STR);
@@ -113,8 +112,8 @@ function getTemplates($dir, $templateName) {
     
 
         
-    function getContactFormSettings($db) {
-        $stmt = $db->prepare("SELECT * FROM `contact_form_settings`");
+    function getContactFormSettings($db, $prefix) {
+        $stmt = $db->prepare("SELECT * FROM ".$prefix['table_prefix']."_settings");
         $stmt->execute();
         $settings = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $settings;

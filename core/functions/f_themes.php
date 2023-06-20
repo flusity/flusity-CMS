@@ -33,19 +33,19 @@ function getAllThemes() {
     return $themes;
 }
 
-function updateThemeSetting($db, $themeName) {
-    $stmt = $db->prepare("UPDATE settings SET theme = :theme");
+function updateThemeSetting($db, $prefix, $themeName) {
+    $stmt = $db->prepare("UPDATE ".$prefix['table_prefix']."_settings SET theme = :theme");
     $stmt->bindParam(':theme', $themeName, PDO::PARAM_STR);
     return $stmt->execute();
 }
 
-function getCurrentTheme($db) {
-    $stmt = $db->prepare("SELECT theme FROM settings LIMIT 1");
+function getCurrentTheme($db, $prefix) {
+    $stmt = $db->prepare("SELECT theme FROM ".$prefix['table_prefix']."_settings LIMIT 1");
     $stmt->execute();
     return $stmt->fetchColumn();
 }
-function getThemePath($db, $filename) {
-    $settings = getSettings($db);
+function getThemePath($db, $prefix, $filename) {
+    $settings = getSettings($db, $prefix);
     $templateName = $settings['theme'];
     return "cover/themes/{$templateName}/{$filename}";
 }

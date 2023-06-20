@@ -1,24 +1,27 @@
 <?php
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
-  }
+}
 define('IS_ADMIN', true);
 
 define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../') . '/');
+$configurations = require $_SERVER['DOCUMENT_ROOT'] . '/security/config.php';
 
-require_once ROOT_PATH . 'security/config.php';
+// Čia jūs gaunate $config ir $prefix kintamuosius
+$config = $configurations['config'];
+$prefix = $configurations['prefix'];
+
 require_once ROOT_PATH . 'core/functions/functions.php';
 
-// Duomenų gavimas iš duomenų bazės
 $db = getDBConnection($config);
-secureSession($db);
-$language_code = getLanguageSetting($db);
-$translations = getTranslations($db, $language_code);
+secureSession($db, $prefix);
+$language_code = getLanguageSetting($db, $prefix);
+$translations = getTranslations($db, $prefix, $language_code);
 
 if (defined('IS_ADMIN') && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'update_place' && isset($_POST['place_id']) && isset($_POST['place_name'])) {
     $placeId = $_POST['place_id'];
     $placeName = $_POST['place_name'];
-    $result = updatePlace($db, $placeId, $placeName);
+    $result = updatePlace($db, $prefix, $placeId, $placeName);
 
     $response = array();
     if ($result === 'Place updated successfully') {

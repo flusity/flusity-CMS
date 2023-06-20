@@ -108,7 +108,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
                                     </div>
                             </div>
                        
-							<?php $currentImage = getCurrentImage($db); ?>
+							<?php $currentImage = getCurrentImage($db, $prefix); ?>
 
 							<div class="col-md-3 border border-dark-subtle mt-2 mb-2" style="position: relative;"> 
 							<h3><?php echo t("Page Brand icone");?></h3>
@@ -175,7 +175,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
                         </div>
                         <div class="tab-pane fade" id="tags">
                         <h3><?php echo t("Delete your Tags");?></h3>
-                        <?php $existingTags = getExistingTags($db); ?>
+                        <?php $existingTags = getExistingTags($db, $prefix); ?>
                         <?php if (!empty($existingTags)): ?>
                             <?php foreach ($existingTags as $tag): ?>
                                 <span class="badge bg-secondary me-1"><?php echo htmlspecialchars($tag); ?></span>

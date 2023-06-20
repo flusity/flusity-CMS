@@ -10,9 +10,9 @@ require_once ROOT_PATH . 'security/config.php';
 require_once ROOT_PATH . 'core/functions/functions.php';
 
 
-$db = getDBConnection($config);
-secureSession($db);
+ $db = getDBConnection($config);
+secureSession($db, $prefix);
 if (isset($_POST['tag'])) {
-    deleteTagFromAllPosts($db, $_POST['tag']);
+    deleteTagFromAllPosts($db, $prefix, $_POST['tag']);
 }
 ?>

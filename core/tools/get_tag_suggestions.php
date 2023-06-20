@@ -7,11 +7,11 @@ define('IS_ADMIN', true);
 require_once $_SERVER['DOCUMENT_ROOT'] . '/security/config.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/core/functions/functions.php';
 
-$db = getDBConnection($config);
-secureSession($db);
+ $db = getDBConnection($config);
+secureSession($db, $prefix);
 $input = isset($_POST['input']) ? trim($_POST['input']) : '';
 
-$tags = getTagSuggestionsFromDatabase($db, $input);
+$tags = getTagSuggestionsFromDatabase($db, $prefix, $input);
 
 //file_put_contents('debug.txt', json_encode($tags));
 // Siunčiamas žymių pasiūlymus JSON formatu
@@ -20,7 +20,7 @@ header('Content-Type: text/html');
 
 echo json_encode($tags);
 
-function getTagSuggestionsFromDatabase($db, $input) {
+function getTagSuggestionsFromDatabase($db, $prefix, $input) {
     $query = "SELECT DISTINCT `tags` FROM `posts` WHERE `tags` LIKE :input LIMIT 10";
     $stmt = $db->prepare($query);
     $search_term = '%' . $input . '%';

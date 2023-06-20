@@ -7,15 +7,15 @@ define('IS_ADMIN', true);
 require_once $_SERVER['DOCUMENT_ROOT'] . '/security/config.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/core/functions/functions.php';
 
-$db = getDBConnection($config);
-secureSession($db);
-$language_code = getLanguageSetting($db);
-$translations = getTranslations($db, $language_code);
+ $db = getDBConnection($config);
+secureSession($db, $prefix);
+$language_code = getLanguageSetting($db, $prefix);
+$translations = getTranslations($db, $prefix, $language_code);
 
 if (defined('IS_ADMIN') && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'uninstall_addon' && isset($_POST['addonName'])) {
 
     $addonName = $_POST['addonName'];
-    $result = uninstallAddon($db, $addonName);
+    $result = uninstallAddon($db, $prefix, $addonName);
     $response = array();
     if ($result) {
         $_SESSION['success_message'] = t("Addon successfully uninstalled.");

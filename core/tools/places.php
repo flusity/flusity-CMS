@@ -11,7 +11,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php'; ?>
     <div class="row">
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 content-up">
 
-<?php $places = getAllPlaces($db); ?>
+<?php $places = getAllPlaces($db, $prefix); ?>
 
     <div class="col-sm-9">
         <?php  if (isset($_SESSION['success_message'])) {

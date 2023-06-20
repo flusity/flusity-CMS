@@ -8,14 +8,14 @@
     $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
     $offset = ($page - 1) * $records_per_page;
     $search_term = isset($_GET['search_term']) ? $_GET['search_term'] : '';
-    $translationsWords = getTranslationsWords($db, $records_per_page, $offset, $search_term);
+    $translationsWords = getTranslationsWords($db, $prefix, $records_per_page, $offset, $search_term);
 
-    $total_records = countTranslations($db);
+    $total_records = countTranslations($db, $prefix);
     $total_pages = ceil($total_records / $records_per_page);
     $i=1;
     $editTranslation = null;
     if (isset($_GET['edit_id'])) {
-        $editTranslation = getTranslationById($db, $_GET['edit_id']);
+        $editTranslation = getTranslationById($db, $prefix, $_GET['edit_id']);
     }
 ?>
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/core/template/admin-menu-horizontal.php';?>
@@ -56,7 +56,7 @@
                 <label for="language_code"><?php echo t("Language Code");?></label>
                 <select class="form-select" id="language_code" name="language_code" required>
                     <?php
-                        $languages = getAllLanguages($db);
+                        $languages = getAllLanguages($db, $prefix);
                         $selectedLanguageCode = isset($selectedTranslation) ? $selectedTranslation['language_code'] : '';
                         foreach ($languages as $language) {
                             $selected = $language['language_code'] === $selectedLanguageCode ? 'selected' : '';

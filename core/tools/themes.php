@@ -13,7 +13,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php'; ?>
 
           <?php 
               $themes = getAllThemes();
-              $currentTheme = getCurrentTheme($db);
+              $currentTheme = getCurrentTheme($db, $prefix);
 
           ?>
 

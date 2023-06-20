@@ -26,11 +26,11 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
             
                 $start = ($page - 1) * $records_per_page;
 
-                $posts = getAllPostsPagination($db, $start, $records_per_page, $search_term);
-                $total_posts = countAllPosts($db);
+                $posts = getAllPostsPagination($db, $prefix, $start, $records_per_page, $search_term);
+                $total_posts = countAllPosts($db, $prefix);
                 $total_pages = ceil($total_posts / $records_per_page);
-               // $allPost = getAllPosts($db);
-                $menuItems = getMenuItems($db);
+               // $allPost = getAllPosts($db, $prefix);
+                $menuItems = getMenuItems($db, $prefix);
                 $menuItemsIndexed = array_column($menuItems, null, 'id');
           ?>
        

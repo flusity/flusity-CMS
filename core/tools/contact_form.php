@@ -1,7 +1,7 @@
 <?php
 define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../') . '/');
 require_once ROOT_PATH . 'core/template/header-admin.php';
-$contactFormSettings = getContactFormSettings($db);
+$contactFormSettings = getContactFormSettings($db, $prefix);
 ?>
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/core/template/admin-menu-horizontal.php';?>
   <button class="btn btn-primary position-fixed start-0 translate-middle-y d-md-none tools-settings" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas">

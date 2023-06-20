@@ -10,10 +10,10 @@ require_once ROOT_PATH . 'security/config.php';
 require_once ROOT_PATH . 'core/functions/functions.php';
 
 
-$db = getDBConnection($config);
-secureSession($db);
-$language_code = getLanguageSetting($db);
-$translations = getTranslations($db, $language_code);
+ $db = getDBConnection($config);
+secureSession($db, $prefix);
+$language_code = getLanguageSetting($db, $prefix);
+$translations = getTranslations($db, $prefix, $language_code);
 
 $result = ['success' => false];
 
@@ -30,7 +30,7 @@ if (isset($_POST['post_title'], $_POST['post_content'], $_POST['post_menu'], $_P
     $keywords = $_POST['post_keywords'];
     $priority = isset($_POST['post_priority']) ? (int)$_POST['post_priority'] : 0; // Pakeitimas čia
 
-    $insert = createPost($db, $title, $content, $menuId, $status, $author, $tags, $role, $description, $keywords, $priority);
+    $insert = createPost($db, $prefix, $title, $content, $menuId, $status, $author, $tags, $role, $description, $keywords, $priority);
  
     if ($insert) {
         $_SESSION['success_message'] = t('Record successfully added.');

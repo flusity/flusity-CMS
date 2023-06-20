@@ -1,34 +1,37 @@
 <?php
 /////////////// user ////////////////
-function checkUserRole($userId, $role, $db) {
-    $stmt = $db->prepare('SELECT role FROM users WHERE id = :user_id');
+function checkUserRole($userId, $role, $db, $prefix) {
+    $stmt = $db->prepare('SELECT role FROM '.$prefix['table_prefix'].'_users WHERE id = :user_id');
     $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
     $stmt->execute();
 
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     return $result && $result['role'] === $role;
 }
-function getUserNameById($db, $user_id) {
-    $stmt = $db->prepare("SELECT username FROM users WHERE id = :user_id");
+
+function getUserNameById($db, $prefix, $user_id) {
+    $stmt = $db->prepare("SELECT username FROM ".$prefix['table_prefix']."_users WHERE id = :user_id");
     $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
     $stmt->execute();
 
     return $stmt->fetchColumn();
 }
+
+function validateInput($input) {
+    return trim(strip_tags(htmlspecialchars(stripslashes($input))));
+}
+
     
-    function validateInput($input) {
-        return trim(strip_tags(htmlspecialchars(stripslashes($input))));
-    }
-    
-    function secureSession($db) {
-       
+    function secureSession($db, $prefix) {
+        global $prefix; // naudojame globalų kintamąjį
+
         $base_url = getBaseUrl();
         // Nustatomi saugųs sesijos parametrai
         $session_name = 'secure_session';
         $secure = true;
         $httponly = true;
     
-        $settings = getSettings($db);
+        $settings = getSettings($db, $prefix);
         $session=$settings['session_lifetime']*60;
         $inactive = isset($session) ? $session : 1000;  // Gauna parametrą iš settings sql db jei nustatyta 
         
@@ -70,11 +73,11 @@ function getUserNameById($db, $user_id) {
     }
     
     
-    function authenticateUser($login_nameOrEmail, $password) {
+    function authenticateUser($login_nameOrEmail, $password, $prefix) {
         global $config;
     
         $db = getDBConnection($config);
-        $stmt = $db->prepare('SELECT id, password, role FROM users WHERE login_name = :login_name OR email = :email');
+        $stmt = $db->prepare('SELECT id, password, role FROM '.$prefix['table_prefix'].'_users WHERE login_name = :login_name OR email = :email');
         $stmt->bindValue(':login_name', $login_nameOrEmail, PDO::PARAM_STR);
         $stmt->bindValue(':email', $login_nameOrEmail, PDO::PARAM_STR);
         $stmt->execute();
@@ -88,7 +91,7 @@ function getUserNameById($db, $user_id) {
     }
     
     
-    function registerUser($login_name, $username, $password, $surname, $phone, $email, $db) {
+    function registerUser($login_name, $username, $password, $surname, $phone, $email, $db, $prefix) {
         $banned_words = [
             'admin', 'admina', 'adminai', 'adminas', 'admin1', 'admin2', 'admin3', 'aadmin', 'adminn', 'admi', 
             'administrator', 'administratorius','administruojantis',
@@ -109,7 +112,7 @@ function getUserNameById($db, $user_id) {
     
        // $hashed_password = password_hash($password, PASSWORD_ARGON2I, ['memory_cost' => 1<<17, 'time_cost' => 4, 'threads' => 2]);
        $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-        $stmt = $db->prepare("SELECT COUNT(*) FROM users WHERE email = :email OR login_name = :login_name");
+        $stmt = $db->prepare("SELECT COUNT(*) FROM ".$prefix['table_prefix']."_users WHERE email = :email OR login_name = :login_name");
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':login_name', $login_name);
         $stmt->execute();
@@ -119,7 +122,7 @@ function getUserNameById($db, $user_id) {
             return false;
         }
     
-        $stmt = $db->prepare("INSERT INTO users (login_name, username, password, surname, phone, email) VALUES (:login_name, :username, :password, :surname, :phone, :email)");
+        $stmt = $db->prepare("INSERT INTO ".$prefix['table_prefix']."_users (login_name, username, password, surname, phone, email) VALUES (:login_name, :username, :password, :surname, :phone, :email)");
         $stmt->bindParam(':login_name', $login_name);
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':password', $hashed_password);
@@ -130,28 +133,28 @@ function getUserNameById($db, $user_id) {
     }
     
     
-    function isLoginNameTaken($login_name, $db) {
-        $stmt = $db->prepare("SELECT COUNT(*) FROM users WHERE login_name = :login_name");
+    function isLoginNameTaken($login_name, $db, $prefix) {
+        $stmt = $db->prepare("SELECT COUNT(*) FROM ".$prefix['table_prefix']."_users WHERE login_name = :login_name");
         $stmt->bindParam(':login_name', $login_name, PDO::PARAM_STR);
         $stmt->execute();
         $count = $stmt->fetchColumn();
         return $count > 0;
     }
-    function isUsernameTaken($username, $db) {
-        $stmt = $db->prepare("SELECT COUNT(*) FROM users WHERE username = :username");
+    function isUsernameTaken($username, $db, $prefix) {
+        $stmt = $db->prepare("SELECT COUNT(*) FROM ".$prefix['table_prefix']."_users WHERE username = :username");
         $stmt->bindParam(':username', $username, PDO::PARAM_STR);
         $stmt->execute();
         $count = $stmt->fetchColumn();
         return $count > 0;
     }
     
-    function getAllUsers($db) {
-    $stmt = $db->prepare("SELECT * FROM users");
+    function getAllUsers($db, $prefix) {
+    $stmt = $db->prepare('SELECT * FROM  '.$prefix['table_prefix'].'_users');
     $stmt->execute();
     return $stmt->fetchAll();
 }
-function updateUser($db, $id, $username, $surname, $phone, $email, $role, $password = null) {
-    $sql = "UPDATE users SET username = :username, surname = :surname, phone = :phone, email = :email, role = :role";
+function updateUser($db, $prefix, $id, $username, $surname, $phone, $email, $role, $password = null) {
+    $sql = "UPDATE ".$prefix['table_prefix']."_users SET username = :username, surname = :surname, phone = :phone, email = :email, role = :role";
 
     if ($password !== null) {
         $sql .= ", password = :password";
@@ -178,29 +181,29 @@ function updateUser($db, $id, $username, $surname, $phone, $email, $role, $passw
     return $stmt->execute();
 }
 
-function getUserById($db, $id) {
-    $stmt = $db->prepare("SELECT * FROM users WHERE id = :id");
+function getUserById($db, $prefix, $id) {
+    $stmt = $db->prepare("SELECT * FROM ".$prefix['table_prefix']."_users WHERE id = :id");
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetch();
 }
 
-function countAdmins($db) {
-    $stmt = $db->prepare("SELECT COUNT(*) FROM users WHERE role = 'admin'");
+function countAdmins($db, $prefix) {
+    $stmt = $db->prepare("SELECT COUNT(*) FROM ".$prefix['table_prefix']."_users WHERE role = 'admin'");
     $stmt->execute();
     return $stmt->fetchColumn();
 }
 
-function deleteUser($db, $id) {
-    $stmt = $db->prepare('SELECT role FROM users WHERE id = :id');
+function deleteUser($db, $prefix, $id) {
+    $stmt = $db->prepare('SELECT role FROM '.$prefix['table_prefix'].'_users WHERE id = :id');
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
     $role = $stmt->fetchColumn();
 
-    if ($role === 'admin' && countAdmins($db) <= 1) {
+    if ($role === 'admin' && countAdmins($db, $prefix) <= 1) {
         return false;
     } else {
-        $stmt = $db->prepare('DELETE FROM users WHERE id = :id');
+        $stmt = $db->prepare('DELETE FROM '.$prefix['table_prefix'].'_users WHERE id = :id');
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         return $stmt->execute();
     }

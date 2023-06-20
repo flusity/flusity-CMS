@@ -9,11 +9,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/core/functions/functions.php';
 
 
 // Duomenų gavimas iš duomenų bazės
-$db = getDBConnection($config);
-secureSession($db);
+ $db = getDBConnection($config);
+secureSession($db, $prefix);
 // Gaunamas kalbos nustatymas iš duomenų bazės  
-$language_code = getLanguageSetting($db);
-$translations = getTranslations($db, $language_code);
+$language_code = getLanguageSetting($db, $prefix);
+$translations = getTranslations($db, $prefix, $language_code);
 
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
@@ -24,16 +24,16 @@ if (isset($_SESSION['user_id'])) {
     exit;
 }
 
-if (!checkUserRole($user_id, 'admin', $db) && !checkUserRole($user_id, 'moderator', $db)) {
+if (!checkUserRole($user_id, 'admin', $db, $prefix) && !checkUserRole($user_id, 'moderator', $db, $prefix)) {
     header("Location: 404.php");
     exit;
 }
 
 $postId = isset($_GET['post_id']) ? (int)$_GET['post_id'] : 0;
 $mode = $postId > 0 ? 'edit' : 'create';
-$post = $mode === 'edit' ? getPostById($db, $postId) : null;
-$existingTags = getExistingTags($db);
-$menuId = getMenuItems($db);
+$post = $mode === 'edit' ? getPostById($db, $prefix, $postId) : null;
+$existingTags = getExistingTags($db, $prefix);
+$menuId = getMenuItems($db, $prefix);
 
 if ($mode === 'create' || $post) {
 ?>

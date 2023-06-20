@@ -10,14 +10,14 @@ define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../') . '/');
 require_once ROOT_PATH . 'security/config.php';
 require_once ROOT_PATH . 'core/functions/functions.php';
 
-$db = getDBConnection($config);
-secureSession($db);
-$language_code = getLanguageSetting($db);
-$translations = getTranslations($db, $language_code);
+ $db = getDBConnection($config);
+secureSession($db, $prefix);
+$language_code = getLanguageSetting($db, $prefix);
+$translations = getTranslations($db, $prefix, $language_code);
 
 if (defined('IS_ADMIN') && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'install_theme' && isset($_POST['theme'])) {
     $themeName = $_POST['theme'];
-    $result = updateThemeSetting($db, $themeName);
+    $result = updateThemeSetting($db, $prefix, $themeName);
     
     $response = array();
     if ($result) {

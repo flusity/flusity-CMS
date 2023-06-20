@@ -12,9 +12,9 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 content-up">
 
         <?php
-            $places = getAllplaces($db);
-            $menus = getMenuItems($db);
-            $customblocks = getAllCustomBlocks($db);
+            $places = getAllplaces($db, $prefix);
+            $menus = getMenuItems($db, $prefix);
+            $customblocks = getAllCustomBlocks($db, $prefix);
           ?>
        
             <div class="col-sm-9">

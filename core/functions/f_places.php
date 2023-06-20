@@ -1,12 +1,12 @@
 <?php
-function getPlaces($db) {
-    $stmt = $db->prepare('SELECT * FROM places');
+function getPlaces($db, $prefix) {
+    $stmt = $db->prepare('SELECT * FROM '.$prefix['table_prefix'].'_places');
     $stmt->execute();
     return $stmt->fetchAll();
 }
-function createPlace($db, $name) {
+function createPlace($db, $prefix, $name) {
     // Patikrina, ar kategorija su tokiu pavadinimu jau egzistuoja
-    $stmt = $db->prepare('SELECT * FROM places WHERE name = :name');
+    $stmt = $db->prepare('SELECT * FROM  '.$prefix['table_prefix'].'_places WHERE name = :name');
     $stmt->bindParam(':name', $name, PDO::PARAM_STR);
     $stmt->execute();
 
@@ -16,7 +16,7 @@ function createPlace($db, $name) {
     }
 
     // Jei kategorijos nėra, pridedame ją
-    $stmt = $db->prepare('INSERT INTO places (name) VALUES (:name)');
+    $stmt = $db->prepare('INSERT INTO  '.$prefix['table_prefix'].'_places (name) VALUES (:name)');
     $stmt->bindParam(':name', $name, PDO::PARAM_STR);
     if ($stmt->execute()) {
         // Jei įterpimo operacija buvo sėkminga, grąžiname teigiamą rezultatą
@@ -27,15 +27,15 @@ function createPlace($db, $name) {
     }
 }
 
-function getAllPlaces($db) {
-    $stmt = $db->prepare("SELECT * FROM places");
+function getAllPlaces($db, $prefix) {
+    $stmt = $db->prepare('SELECT * FROM  '.$prefix['table_prefix'].'_places');
     $stmt->execute();
 
     return $stmt->fetchAll();
 }
-function updatePlace($db, $id, $name) {
+function updatePlace($db, $prefix, $id, $name) {
     // Patikrina, ar kategorija su tokiu pavadinimu jau egzistuoja (išskyrus atnaujinamąją)
-    $stmt = $db->prepare('SELECT * FROM places WHERE name = :name AND id != :id');
+    $stmt = $db->prepare('SELECT * FROM '.$prefix['table_prefix'].'_places WHERE name = :name AND id != :id');
     $stmt->bindParam(':name', $name, PDO::PARAM_STR);
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
@@ -46,7 +46,7 @@ function updatePlace($db, $id, $name) {
     }
 
     // Jei kategorijos nėra, atnaujiname ją
-    $stmt = $db->prepare('UPDATE places SET name = :name WHERE id = :id');
+    $stmt = $db->prepare('UPDATE  '.$prefix['table_prefix'].'_places SET name = :name WHERE id = :id');
     $stmt->bindParam(':name', $name, PDO::PARAM_STR);
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     if ($stmt->execute()) {
@@ -58,8 +58,8 @@ function updatePlace($db, $id, $name) {
     }
 }
 
-function deletePlace($db, $id) {
-    $stmt = $db->prepare('DELETE FROM places WHERE id = :id');
+function deletePlace($db, $prefix, $id) {
+    $stmt = $db->prepare('DELETE FROM  '.$prefix['table_prefix'].'_places WHERE id = :id');
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     return $stmt->execute();
 }

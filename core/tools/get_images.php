@@ -8,13 +8,13 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/security/config.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/core/functions/functions.php';
 define('ROOT_PATH', $_SERVER['DOCUMENT_ROOT'] . '/');
 
-$db = getDBConnection($config);
-secureSession($db);
-$language_code = getLanguageSetting($db);
-$translations = getTranslations($db, $language_code);
-$db = getDBConnection($config);
+ $db = getDBConnection($config);
+secureSession($db, $prefix);
+$language_code = getLanguageSetting($db, $prefix);
+$translations = getTranslations($db, $prefix, $language_code);
+ $db = getDBConnection($config);
 $index = isset($_GET['index']) ? $_GET['index'] : 0;
-$files = getFilesListFromDatabase($db);
+$files = getFilesListFromDatabase($db, $prefix);
 $slicedFiles = array_slice($files, $index, 9);
 
 $counter = 0;

@@ -10,14 +10,14 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav ml-5 mt-2">
             <li class="nav-item active">
-              <?php $settings = getSettings($db); // Funkcija, kuri gauna nustatymus iš duomenų bazės
+              <?php $settings = getSettings($db, $prefix); // Funkcija, kuri gauna nustatymus iš duomenų bazės
                 ?>
                 <a class="nav-link admin-link-item" href="<?php echo $settings['pretty_url'] == 1 ? "/" : "../../?page"; ?>"><?php echo t("Front page"); ?></a>
             </li>
             <?php if (isset($_SESSION['user_id'])): 
-                $isAdmin = checkUserRole($user_id, 'admin', $db);
-                $isModerator = checkUserRole($user_id, 'moderator', $db);
-                $isUser = checkUserRole($user_id, 'user', $db);
+                $isAdmin = checkUserRole($user_id, 'admin', $db, $prefix);
+                $isModerator = checkUserRole($user_id, 'moderator', $db, $prefix);
+                $isUser = checkUserRole($user_id, 'user', $db, $prefix);
             ?>
         <?php if ($isAdmin || $isModerator): ?>
             <li class="nav-item">

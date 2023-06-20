@@ -9,17 +9,17 @@ define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../') . '/');
 require_once ROOT_PATH . 'security/config.php';
 require_once ROOT_PATH . 'core/functions/functions.php';
 
-$db = getDBConnection($config);
-secureSession($db);
+ $db = getDBConnection($config);
+secureSession($db, $prefix);
 // Gaunamas kalbos nustatymas iš duomenų bazės  
-$language_code = getLanguageSetting($db);
-$translations = getTranslations($db, $language_code);
+$language_code = getLanguageSetting($db, $prefix);
+$translations = getTranslations($db, $prefix, $language_code);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['create_backup'])) {
-        $backupFilename = createBackupFilename($db);
+        $backupFilename = createBackupFilename($db, $prefix);
 
-        if (createDatabaseBackup($db, $backupFilename)) {
+        if (createDatabaseBackup($db, $prefix, $backupFilename)) {
             $_SESSION['success_message'] = t("Backup successfully created.");
         } else {
             $_SESSION['error_message'] = t("Failed to create a backup.");

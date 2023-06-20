@@ -1,18 +1,19 @@
 <?php 
 class Sidebar {
 
-    private $db;
+    private $db, $prefix;
 
-    public function __construct(PDO $db)
+    public function __construct(PDO $db, $prefix)
     {
         $this->db = $db;
+        $this->prefix = $prefix;
     }
 
     public function getSidebarItems()
-{
-    $stmt = $this->db->query('SELECT * FROM sidebar ORDER BY IFNULL(order_number, 999999), id');
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
+    {
+        $stmt = $this->db->query("SELECT * FROM " . $this->prefix['table_prefix'] . "_sidebar ORDER BY IFNULL(order_number, 999999), id");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     public function render()
 {

@@ -11,11 +11,11 @@ require_once ROOT_PATH . 'core/functions/functions.php';
 
 
 // Duomenų gavimas iš duomenų bazės
-$db = getDBConnection($config);
-secureSession($db);
+ $db = getDBConnection($config);
+secureSession($db, $prefix);
 // Gaunamas kalbos nustatymas iš duomenų bazės  
-$language_code = getLanguageSetting($db);
-$translations = getTranslations($db, $language_code);
+$language_code = getLanguageSetting($db, $prefix);
+$translations = getTranslations($db, $prefix, $language_code);
 
 $result = ['success' => false];
 
@@ -28,7 +28,7 @@ if (isset($_POST['user_id'], $_POST['user_username'], $_POST['user_surname'], $_
     $role = $_POST['user_role'];
 
     // Patikrinti ar username yra unikalus
-    $stmt = $db->prepare("SELECT COUNT(*) FROM users WHERE username = :username AND id != :id");
+    $stmt = $db->prepare("SELECT COUNT(*) FROM ".$prefix['table_prefix']."_users WHERE username = :username AND id != :id");
     $stmt->bindParam(':username', $username);
     $stmt->bindParam(':id', $userId);
     $stmt->execute();
@@ -49,7 +49,7 @@ if (isset($_POST['user_id'], $_POST['user_username'], $_POST['user_surname'], $_
         exit;
     }
 
-    $updated = updateUser($db, $userId, $username, $surname, $phone, $email, $role, $password);
+    $updated = updateUser($db, $prefix, $userId, $username, $surname, $phone, $email, $role, $password);
 
     if ($updated) {
         $_SESSION['success_message'] = t('User successfully updated.');
