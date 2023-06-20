@@ -10,7 +10,7 @@
 <p>Taip pat naudojamas jQuery, kuri yra lengva naudoti ir lanksti JavaScript biblioteka, skirta efektyviam DOM manipuliavimui ir AJAX užklausoms.</p>
 <p>Kaip ir daugumoje interneto svetainių, "Flusity-CMS" naudoja HTML ir CSS svetainės struktūrai ir stiliui.</p>
 <p>Projekte taip pat naudojama "Model-View-Controller" (MVC) architektūra, kuri padeda išlaikyti kodą tvarkingą ir gerai organizuotą.</p>
-
+<p>Įdiegtas prefix palaikymas kuri leidžia veiksmingiau tvarkyti duomenų bazę, nes sukuria aiškią struktūrą ir padeda išvengti pavadinimų konfliktų, ypač kai naudojamas vienas ir tas pats CMS įvairioms svetainėms arba kai įtraukiami įvairūs plėtiniai ir moduliai. Tai ypač naudinga didelėse sistemose ir padeda gerinti saugumą bei duomenų organizavimą.</p>
 <b>Šiame "flusity" svetainės administratoriaus valdymo skydelyje yra šios funkcijos:</b>
 <h3>Prietaisų skydelis</h3>
 <ul>
@@ -69,6 +69,7 @@ Atsižvelgiant į šiuos elementus ir funkcijas, svetainė yrap patogus ir funkc
 <p>Also uses jQuery, which is an easy-to-use and flexible JavaScript library for efficient DOM manipulation and AJAX requests.</p>
 <p>Like most websites, Flusity-CMS uses HTML and CSS to structure and style the website.</p>
 <p>The project also uses Model-View-Controller (MVC) architecture, which helps keep the code neat and well-organized.</p>
+<p>The implementation of prefix support allows for more efficient database management as it creates a clear structure and helps avoid naming conflicts, especially when the same CMS is used for various websites or when various plugins and modules are included. This is particularly beneficial in large systems and aids in enhancing security and data organization.</p>
 <br>
 <b>This site admin control panel includes the following features:</b>
   <h3>Dashboard</h3>
