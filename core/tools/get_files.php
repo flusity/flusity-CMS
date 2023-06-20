@@ -15,7 +15,7 @@ $itemsPerPage = 16;
 $page = $_GET['page'] ?? 0;
 $offset = $page * $itemsPerPage;
 
-$query = $db->prepare("SELECT * FROM ".$prefix['table_prefix']."_files LIMIT :offset, :itemsPerPage");
+$query = $db->prepare("SELECT * FROM ".$prefix['table_prefix']."_flussi_files LIMIT :offset, :itemsPerPage");
 $query->bindParam(':offset', $offset, PDO::PARAM_INT);
 $query->bindParam(':itemsPerPage', $itemsPerPage, PDO::PARAM_INT);
 $query->execute();

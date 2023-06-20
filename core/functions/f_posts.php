@@ -2,46 +2,46 @@
 
 function getPostsNews($db, $prefix, $limit, $offset, $menuUrl) {
     if ($menuUrl != '') {
-        $stmt = $db->prepare('SELECT '.$prefix['table_prefix'].'_posts.* FROM '.$prefix['table_prefix'].'_posts JOIN '.$prefix['table_prefix'].'_menu ON '.$prefix['table_prefix'].'_posts.menu_id = '.$prefix['table_prefix'].'_menu.id WHERE '.$prefix['table_prefix'].'_menu.page_url = :menu_url AND '.$prefix['table_prefix'].'_posts.status = "published" LIMIT '.(int)$limit.' OFFSET '.(int)$offset);
+        $stmt = $db->prepare('SELECT '.$prefix['table_prefix'].'_flussi_posts.* FROM '.$prefix['table_prefix'].'_flussi_posts JOIN '.$prefix['table_prefix'].'_flussi_menu ON '.$prefix['table_prefix'].'_flussi_posts.menu_id = '.$prefix['table_prefix'].'_flussi_menu.id WHERE '.$prefix['table_prefix'].'_flussi_menu.page_url = :menu_url AND '.$prefix['table_prefix'].'_flussi_posts.status = "published" LIMIT '.(int)$limit.' OFFSET '.(int)$offset);
         $stmt->bindValue(':menu_url', $menuUrl, PDO::PARAM_STR);
     } else {
-        $stmt = $db->prepare('SELECT '.$prefix['table_prefix'].'_posts.* FROM '.$prefix['table_prefix'].'_posts JOIN '.$prefix['table_prefix'].'_menu ON '.$prefix['table_prefix'].'_posts.menu_id = '.$prefix['table_prefix'].'_menu.id WHERE '.$prefix['table_prefix'].'_menu.page_url = "index" AND '.$prefix['table_prefix'].'_posts.status = "published" LIMIT '.(int)$limit.' OFFSET '.(int)$offset);
+        $stmt = $db->prepare('SELECT '.$prefix['table_prefix'].'_flussi_posts.* FROM '.$prefix['table_prefix'].'_flussi_posts JOIN '.$prefix['table_prefix'].'_flussi_menu ON '.$prefix['table_prefix'].'_flussi_posts.menu_id = '.$prefix['table_prefix'].'_flussi_menu.id WHERE '.$prefix['table_prefix'].'_flussi_menu.page_url = "index" AND '.$prefix['table_prefix'].'_flussi_posts.status = "published" LIMIT '.(int)$limit.' OFFSET '.(int)$offset);
     }
     $stmt->execute();
     return $stmt->fetchAll();    
 }
 function getPostSeo($db, $prefix, $limit, $offset, $menuUrl) {
     if ($menuUrl != '') {
-        $stmt = $db->prepare('SELECT '.$prefix['table_prefix'].'_posts.* FROM '.$prefix['table_prefix'].'_posts JOIN '.$prefix['table_prefix'].'_menu ON '.$prefix['table_prefix'].'_posts.menu_id = '.$prefix['table_prefix'].'_menu.id WHERE '.$prefix['table_prefix'].'_menu.page_url = :menu_url AND '.$prefix['table_prefix'].'_posts.status = "published" AND '.$prefix['table_prefix'].'_posts.priority = 1 ORDER BY GREATEST('.$prefix['table_prefix'].'_posts.created_at, '.$prefix['table_prefix'].'_posts.updated_at) DESC, '.$prefix['table_prefix'].'_posts.id DESC LIMIT '.(int)$limit.' OFFSET '.(int)$offset);
+        $stmt = $db->prepare('SELECT '.$prefix['table_prefix'].'_flussi_posts.* FROM '.$prefix['table_prefix'].'_flussi_posts JOIN '.$prefix['table_prefix'].'_flussi_menu ON '.$prefix['table_prefix'].'_flussi_posts.menu_id = '.$prefix['table_prefix'].'_flussi_menu.id WHERE '.$prefix['table_prefix'].'_flussi_menu.page_url = :menu_url AND '.$prefix['table_prefix'].'_flussi_posts.status = "published" AND '.$prefix['table_prefix'].'_flussi_posts.priority = 1 ORDER BY GREATEST('.$prefix['table_prefix'].'_flussi_posts.created_at, '.$prefix['table_prefix'].'_flussi_posts.updated_at) DESC, '.$prefix['table_prefix'].'_flussi_posts.id DESC LIMIT '.(int)$limit.' OFFSET '.(int)$offset);
         $stmt->bindValue(':menu_url', $menuUrl, PDO::PARAM_STR);
     } else {
-        $stmt = $db->prepare('SELECT '.$prefix['table_prefix'].'_posts.* FROM '.$prefix['table_prefix'].'_posts JOIN '.$prefix['table_prefix'].'_menu ON '.$prefix['table_prefix'].'_posts.menu_id = '.$prefix['table_prefix'].'_menu.id WHERE '.$prefix['table_prefix'].'_menu.page_url = "index" AND '.$prefix['table_prefix'].'_posts.status = "published" AND '.$prefix['table_prefix'].'_posts.priority = 1 ORDER BY GREATEST('.$prefix['table_prefix'].'_posts.created_at, '.$prefix['table_prefix'].'_posts.updated_at) DESC, '.$prefix['table_prefix'].'_posts.id DESC LIMIT '.(int)$limit.' OFFSET '.(int)$offset);
+        $stmt = $db->prepare('SELECT '.$prefix['table_prefix'].'_flussi_posts.* FROM '.$prefix['table_prefix'].'_flussi_posts JOIN '.$prefix['table_prefix'].'_flussi_menu ON '.$prefix['table_prefix'].'_flussi_posts.menu_id = '.$prefix['table_prefix'].'_flussi_menu.id WHERE '.$prefix['table_prefix'].'_flussi_menu.page_url = "index" AND '.$prefix['table_prefix'].'_flussi_posts.status = "published" AND '.$prefix['table_prefix'].'_flussi_posts.priority = 1 ORDER BY GREATEST('.$prefix['table_prefix'].'_flussi_posts.created_at, '.$prefix['table_prefix'].'_flussi_posts.updated_at) DESC, '.$prefix['table_prefix'].'_flussi_posts.id DESC LIMIT '.(int)$limit.' OFFSET '.(int)$offset);
     }
     $stmt->execute();
     return $stmt->fetchAll();
 }
 
 function countPosts($db, $prefix) {
-    $stmt = $db->prepare('SELECT COUNT(*) FROM '.$prefix['table_prefix'].'_posts WHERE status = "published"');
+    $stmt = $db->prepare('SELECT COUNT(*) FROM '.$prefix['table_prefix'].'_flussi_posts WHERE status = "published"');
     $stmt->execute();
     return $stmt->fetchColumn(); 
 }
 
 function deletePost($db, $prefix, $id) {
-    $stmt = $db->prepare('DELETE FROM '.$prefix['table_prefix'].'_posts WHERE id = :id');
+    $stmt = $db->prepare('DELETE FROM '.$prefix['table_prefix'].'_flussi_posts WHERE id = :id');
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     return $stmt->execute();
 }
 
 function createPost($db, $prefix, $title, $content, $menu_id, $status, $author, $tags, $role, $description, $keywords, $priority) {
     if($priority == 1) {
-        $stmtPriority = $db->prepare('UPDATE '.$prefix['table_prefix'].'_posts SET priority = 0 WHERE menu_id = :menu_id');
+        $stmtPriority = $db->prepare('UPDATE '.$prefix['table_prefix'].'_flussi_posts SET priority = 0 WHERE menu_id = :menu_id');
         $stmtPriority->bindValue(':menu_id', $menu_id, PDO::PARAM_INT);
         $stmtPriority->execute();
     }
     $current_date = date('Y-m-d H:i:s'); 
 
-    $stmt = $db->prepare('INSERT INTO '.$prefix['table_prefix'].'_posts (title, content, menu_id, status, author_id, tags, role, created_at, updated_at, description, keywords, priority) VALUES (:title, :content, :menu_id, :status, :author_id, :tags, :role, :created_at, :updated_at, :description, :keywords, :priority)');
+    $stmt = $db->prepare('INSERT INTO '.$prefix['table_prefix'].'_flussi_posts (title, content, menu_id, status, author_id, tags, role, created_at, updated_at, description, keywords, priority) VALUES (:title, :content, :menu_id, :status, :author_id, :tags, :role, :created_at, :updated_at, :description, :keywords, :priority)');
     $stmt->bindParam(':role', $role, PDO::PARAM_STR);
     $stmt->bindParam(':title', $title, PDO::PARAM_STR);
     $stmt->bindParam(':content', $content, PDO::PARAM_STR);
@@ -59,14 +59,14 @@ function createPost($db, $prefix, $title, $content, $menu_id, $status, $author, 
 
 function updatePost($db, $prefix, $postId, $title, $content, $menu_id, $status, $tags, $role, $description, $keywords, $priority) {
     if($priority == 1) {
-        $stmtPriority = $db->prepare('UPDATE '.$prefix['table_prefix'].'_posts SET priority = 0 WHERE menu_id = :menu_id AND id != :post_id');
+        $stmtPriority = $db->prepare('UPDATE '.$prefix['table_prefix'].'_flussi_posts SET priority = 0 WHERE menu_id = :menu_id AND id != :post_id');
         $stmtPriority->bindValue(':menu_id', $menu_id, PDO::PARAM_INT);
         $stmtPriority->bindValue(':post_id', $postId, PDO::PARAM_INT);
         $stmtPriority->execute();
     }
     $current_date = date('Y-m-d H:i:s'); 
 
-    $stmt = $db->prepare('UPDATE '.$prefix['table_prefix'].'_posts SET title = :title, content = :content, menu_id = :menu_id, status = :status, tags = :tags, role = :role, updated_at = :updated_at, description = :description, keywords = :keywords, priority = :priority WHERE id = :post_id');
+    $stmt = $db->prepare('UPDATE '.$prefix['table_prefix'].'_flussi_posts SET title = :title, content = :content, menu_id = :menu_id, status = :status, tags = :tags, role = :role, updated_at = :updated_at, description = :description, keywords = :keywords, priority = :priority WHERE id = :post_id');
     $stmt->bindParam(':role', $role, PDO::PARAM_STR);
     $stmt->bindParam(':title', $title, PDO::PARAM_STR);
     $stmt->bindParam(':content', $content, PDO::PARAM_STR);
@@ -83,7 +83,7 @@ function updatePost($db, $prefix, $postId, $title, $content, $menu_id, $status, 
 
 
 function getPostById($db, $prefix, $postId) {
-    $query = "SELECT * FROM ".$prefix['table_prefix']."_posts WHERE id = :postId";
+    $query = "SELECT * FROM ".$prefix['table_prefix']."_flussi_posts WHERE id = :postId";
     $statement = $db->prepare($query);
     $statement->bindParam(':postId', $postId, PDO::PARAM_INT);
     $statement->execute();
@@ -92,23 +92,23 @@ function getPostById($db, $prefix, $postId) {
 }
 
 function getAllPosts($db, $prefix) {
-    $stmt = $db->prepare("SELECT * FROM ".$prefix['table_prefix']."_posts");
+    $stmt = $db->prepare("SELECT * FROM ".$prefix['table_prefix']."_flussi_posts");
     $stmt->execute();
 
     return $stmt->fetchAll();
 }
 
 function countAllPosts($db, $prefix) {
-    $stmt = $db->prepare("SELECT COUNT(*) FROM ".$prefix['table_prefix']."_posts");
+    $stmt = $db->prepare("SELECT COUNT(*) FROM ".$prefix['table_prefix']."_flussi_posts");
     $stmt->execute();
     return $stmt->fetchColumn();
 }
 
 function getAllPostsPagination($db, $prefix, $start, $limit, $search_term = '') {
     if ($search_term === '') {
-        $stmt = $db->prepare("SELECT ".$prefix['table_prefix']."_posts.*, ".$prefix['table_prefix']."_menu.name AS menu_name FROM ".$prefix['table_prefix']."_posts LEFT JOIN ".$prefix['table_prefix']."_menu ON ".$prefix['table_prefix']."_posts.menu_id = ".$prefix['table_prefix']."_menu.id ORDER BY created_at DESC LIMIT :start, :limit");
+        $stmt = $db->prepare("SELECT ".$prefix['table_prefix']."_flussi_posts.*, ".$prefix['table_prefix']."_flussi_menu.name AS menu_name FROM ".$prefix['table_prefix']."_flussi_posts LEFT JOIN ".$prefix['table_prefix']."_flussi_menu ON ".$prefix['table_prefix']."_flussi_posts.menu_id = ".$prefix['table_prefix']."_flussi_menu.id ORDER BY created_at DESC LIMIT :start, :limit");
     } else {
-        $stmt = $db->prepare("SELECT ".$prefix['table_prefix']."_posts.*, ".$prefix['table_prefix']."_menu.name AS menu_name FROM ".$prefix['table_prefix']."_posts LEFT JOIN menu ON ".$prefix['table_prefix']."_posts.menu_id = ".$prefix['table_prefix']."_menu.id WHERE ".$prefix['table_prefix']."_posts.title LIKE :search_term OR ".$prefix['table_prefix']."_posts.content LIKE :search_term OR ".$prefix['table_prefix']."_menu.name LIKE :search_term ORDER BY created_at DESC LIMIT :start, :limit");
+        $stmt = $db->prepare("SELECT ".$prefix['table_prefix']."_flussi_posts.*, ".$prefix['table_prefix']."_flussi_menu.name AS menu_name FROM ".$prefix['table_prefix']."_flussi_posts LEFT JOIN menu ON ".$prefix['table_prefix']."_flussi_posts.menu_id = ".$prefix['table_prefix']."_flussi_menu.id WHERE ".$prefix['table_prefix']."_flussi_posts.title LIKE :search_term OR ".$prefix['table_prefix']."_flussi_posts.content LIKE :search_term OR ".$prefix['table_prefix']."_flussi_menu.name LIKE :search_term ORDER BY created_at DESC LIMIT :start, :limit");
         $stmt->bindValue(':search_term', '%' . $search_term . '%', PDO::PARAM_STR);
     }
 
@@ -120,7 +120,7 @@ function getAllPostsPagination($db, $prefix, $start, $limit, $search_term = '') 
 
 
 function getExistingTags($db, $prefix) {
-    $sql = "SELECT tags FROM ".$prefix['table_prefix']."_posts";
+    $sql = "SELECT tags FROM ".$prefix['table_prefix']."_flussi_posts";
     $stmt = $db->prepare($sql);
     $stmt->execute();
     $tags = [];
@@ -138,7 +138,7 @@ function getExistingTags($db, $prefix) {
 }
 
 function deleteTagFromAllPosts($db, $prefix, $tagToRemove) {
-    $sql = "SELECT id, tags FROM ".$prefix['table_prefix']."_posts";
+    $sql = "SELECT id, tags FROM ".$prefix['table_prefix']."_flussi_posts";
     $stmt = $db->prepare($sql);
     $stmt->execute();
 
@@ -149,7 +149,7 @@ function deleteTagFromAllPosts($db, $prefix, $tagToRemove) {
         if ($tagKey !== false) {
             unset($tagArray[$tagKey]);
             $newTags = implode(',', $tagArray);
-            $updateSql = "UPDATE ".$prefix['table_prefix']."_posts SET tags = :tags WHERE id = :id";
+            $updateSql = "UPDATE ".$prefix['table_prefix']."_flussi_posts SET tags = :tags WHERE id = :id";
             $updateStmt = $db->prepare($updateSql);
             $updateStmt->execute(['tags' => $newTags, 'id' => $row['id']]);
         }

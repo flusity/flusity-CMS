@@ -1,7 +1,7 @@
 <?php
 /////////////// user ////////////////
 function checkUserRole($userId, $role, $db, $prefix) {
-    $stmt = $db->prepare('SELECT role FROM '.$prefix['table_prefix'].'_users WHERE id = :user_id');
+    $stmt = $db->prepare('SELECT role FROM '.$prefix['table_prefix'].'_flussi_users WHERE id = :user_id');
     $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
     $stmt->execute();
 
@@ -10,7 +10,7 @@ function checkUserRole($userId, $role, $db, $prefix) {
 }
 
 function getUserNameById($db, $prefix, $user_id) {
-    $stmt = $db->prepare("SELECT username FROM ".$prefix['table_prefix']."_users WHERE id = :user_id");
+    $stmt = $db->prepare("SELECT username FROM ".$prefix['table_prefix']."_flussi_users WHERE id = :user_id");
     $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
     $stmt->execute();
 
@@ -77,7 +77,7 @@ function validateInput($input) {
         global $config;
     
         $db = getDBConnection($config);
-        $stmt = $db->prepare('SELECT id, password, role FROM '.$prefix['table_prefix'].'_users WHERE login_name = :login_name OR email = :email');
+        $stmt = $db->prepare('SELECT id, password, role FROM '.$prefix['table_prefix'].'_flussi_users WHERE login_name = :login_name OR email = :email');
         $stmt->bindValue(':login_name', $login_nameOrEmail, PDO::PARAM_STR);
         $stmt->bindValue(':email', $login_nameOrEmail, PDO::PARAM_STR);
         $stmt->execute();
@@ -112,7 +112,7 @@ function validateInput($input) {
     
        // $hashed_password = password_hash($password, PASSWORD_ARGON2I, ['memory_cost' => 1<<17, 'time_cost' => 4, 'threads' => 2]);
        $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-        $stmt = $db->prepare("SELECT COUNT(*) FROM ".$prefix['table_prefix']."_users WHERE email = :email OR login_name = :login_name");
+        $stmt = $db->prepare("SELECT COUNT(*) FROM ".$prefix['table_prefix']."_flussi_users WHERE email = :email OR login_name = :login_name");
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':login_name', $login_name);
         $stmt->execute();
@@ -122,7 +122,7 @@ function validateInput($input) {
             return false;
         }
     
-        $stmt = $db->prepare("INSERT INTO ".$prefix['table_prefix']."_users (login_name, username, password, surname, phone, email) VALUES (:login_name, :username, :password, :surname, :phone, :email)");
+        $stmt = $db->prepare("INSERT INTO ".$prefix['table_prefix']."_flussi_users (login_name, username, password, surname, phone, email) VALUES (:login_name, :username, :password, :surname, :phone, :email)");
         $stmt->bindParam(':login_name', $login_name);
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':password', $hashed_password);
@@ -134,14 +134,14 @@ function validateInput($input) {
     
     
     function isLoginNameTaken($login_name, $db, $prefix) {
-        $stmt = $db->prepare("SELECT COUNT(*) FROM ".$prefix['table_prefix']."_users WHERE login_name = :login_name");
+        $stmt = $db->prepare("SELECT COUNT(*) FROM ".$prefix['table_prefix']."_flussi_users WHERE login_name = :login_name");
         $stmt->bindParam(':login_name', $login_name, PDO::PARAM_STR);
         $stmt->execute();
         $count = $stmt->fetchColumn();
         return $count > 0;
     }
     function isUsernameTaken($username, $db, $prefix) {
-        $stmt = $db->prepare("SELECT COUNT(*) FROM ".$prefix['table_prefix']."_users WHERE username = :username");
+        $stmt = $db->prepare("SELECT COUNT(*) FROM ".$prefix['table_prefix']."_flussi_users WHERE username = :username");
         $stmt->bindParam(':username', $username, PDO::PARAM_STR);
         $stmt->execute();
         $count = $stmt->fetchColumn();
@@ -149,12 +149,12 @@ function validateInput($input) {
     }
     
     function getAllUsers($db, $prefix) {
-    $stmt = $db->prepare('SELECT * FROM  '.$prefix['table_prefix'].'_users');
+    $stmt = $db->prepare('SELECT * FROM  '.$prefix['table_prefix'].'_flussi_users');
     $stmt->execute();
     return $stmt->fetchAll();
 }
 function updateUser($db, $prefix, $id, $username, $surname, $phone, $email, $role, $password = null) {
-    $sql = "UPDATE ".$prefix['table_prefix']."_users SET username = :username, surname = :surname, phone = :phone, email = :email, role = :role";
+    $sql = "UPDATE ".$prefix['table_prefix']."_flussi_users SET username = :username, surname = :surname, phone = :phone, email = :email, role = :role";
 
     if ($password !== null) {
         $sql .= ", password = :password";
@@ -182,20 +182,20 @@ function updateUser($db, $prefix, $id, $username, $surname, $phone, $email, $rol
 }
 
 function getUserById($db, $prefix, $id) {
-    $stmt = $db->prepare("SELECT * FROM ".$prefix['table_prefix']."_users WHERE id = :id");
+    $stmt = $db->prepare("SELECT * FROM ".$prefix['table_prefix']."_flussi_users WHERE id = :id");
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetch();
 }
 
 function countAdmins($db, $prefix) {
-    $stmt = $db->prepare("SELECT COUNT(*) FROM ".$prefix['table_prefix']."_users WHERE role = 'admin'");
+    $stmt = $db->prepare("SELECT COUNT(*) FROM ".$prefix['table_prefix']."_flussi_users WHERE role = 'admin'");
     $stmt->execute();
     return $stmt->fetchColumn();
 }
 
 function deleteUser($db, $prefix, $id) {
-    $stmt = $db->prepare('SELECT role FROM '.$prefix['table_prefix'].'_users WHERE id = :id');
+    $stmt = $db->prepare('SELECT role FROM '.$prefix['table_prefix'].'_flussi_users WHERE id = :id');
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
     $role = $stmt->fetchColumn();
@@ -203,7 +203,7 @@ function deleteUser($db, $prefix, $id) {
     if ($role === 'admin' && countAdmins($db, $prefix) <= 1) {
         return false;
     } else {
-        $stmt = $db->prepare('DELETE FROM '.$prefix['table_prefix'].'_users WHERE id = :id');
+        $stmt = $db->prepare('DELETE FROM '.$prefix['table_prefix'].'_flussi_users WHERE id = :id');
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         return $stmt->execute();
     }

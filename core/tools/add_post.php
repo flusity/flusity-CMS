@@ -28,7 +28,7 @@ if (isset($_POST['post_title'], $_POST['post_content'], $_POST['post_menu'], $_P
     $author = $_SESSION['user_id']; 
     $description = $_POST['post_description'];
     $keywords = $_POST['post_keywords'];
-    $priority = isset($_POST['post_priority']) ? (int)$_POST['post_priority'] : 0; // Pakeitimas čia
+    $priority = isset($_POST['post_priority']) ? (int)$_POST['post_priority'] : 0; 
 
     $insert = createPost($db, $prefix, $title, $content, $menuId, $status, $author, $tags, $role, $description, $keywords, $priority);
  

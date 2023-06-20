@@ -11,7 +11,7 @@ class Sidebar {
 
     public function getSidebarItems()
     {
-        $stmt = $this->db->query("SELECT * FROM " . $this->prefix['table_prefix'] . "_sidebar ORDER BY IFNULL(order_number, 999999), id");
+        $stmt = $this->db->query("SELECT * FROM " . $this->prefix['table_prefix'] . "_flussi_sidebar ORDER BY IFNULL(order_number, 999999), id");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 

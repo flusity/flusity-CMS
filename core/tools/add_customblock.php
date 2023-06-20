@@ -1,7 +1,7 @@
 <?php
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
-  }
+}
 define('IS_ADMIN', true);
 
 define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../') . '/');
@@ -9,9 +9,12 @@ define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../') . '/');
 require_once ROOT_PATH . 'security/config.php';
 require_once ROOT_PATH . 'core/functions/functions.php';
 
-// Duomenų gavimas iš duomenų bazės
+
  $db = getDBConnection($config);
 secureSession($db, $prefix);
+$language_code = getLanguageSetting($db, $prefix);
+$translations = getTranslations($db, $prefix, $language_code);
+
 $result = ['success' => false];
 
 if (isset($_POST['customblock_name'], $_POST['customblock_menu_id'], $_POST['customblock_place_id'], $_POST['customblock_html_code'])) {

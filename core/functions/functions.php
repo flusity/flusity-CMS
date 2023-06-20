@@ -40,7 +40,7 @@ function validateCSRFToken($token) {
 
     
     function getCurrentPageUrl($db, $prefix) {
-        $stmt = $db->prepare("SELECT * FROM ".$prefix['table_prefix']."_settings");
+        $stmt = $db->prepare("SELECT * FROM ".$prefix['table_prefix']."_flussi_settings");
         $stmt->execute();
         $settings = $stmt->fetch(PDO::FETCH_ASSOC);
     
@@ -85,14 +85,14 @@ function getTemplates($dir, $templateName) {
 }
 
 function getSettings($db, $prefix) {
-    $stmt = $db->prepare("SELECT * FROM ".$prefix['table_prefix']."_settings");
+    $stmt = $db->prepare("SELECT * FROM ".$prefix['table_prefix']."_flussi_settings");
 
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     
     function updateSettings($db, $prefix, $site_title, $meta_description, $footer_text, $pretty_url, $language, $posts_per_page, $registration_enabled, $session_lifetime, $default_keywords, $brand_icone) {
-        $stmt = $db->prepare("UPDATE ".$prefix['table_prefix']."_settings  SET site_title = :site_title, meta_description = :meta_description, footer_text = :footer_text, pretty_url = :pretty_url, language = :language, posts_per_page = :posts_per_page, registration_enabled = :registration_enabled, session_lifetime = :session_lifetime, default_keywords = :default_keywords" . ($brand_icone != "" ? ", brand_icone = :brand_icone" : ""));
+        $stmt = $db->prepare("UPDATE ".$prefix['table_prefix']."_flussi_settings  SET site_title = :site_title, meta_description = :meta_description, footer_text = :footer_text, pretty_url = :pretty_url, language = :language, posts_per_page = :posts_per_page, registration_enabled = :registration_enabled, session_lifetime = :session_lifetime, default_keywords = :default_keywords" . ($brand_icone != "" ? ", brand_icone = :brand_icone" : ""));
         $stmt->bindParam(':site_title', $site_title, PDO::PARAM_STR);
         $stmt->bindParam(':meta_description', $meta_description, PDO::PARAM_STR);
         $stmt->bindParam(':footer_text', $footer_text, PDO::PARAM_STR);
@@ -113,7 +113,7 @@ function getSettings($db, $prefix) {
 
         
     function getContactFormSettings($db, $prefix) {
-        $stmt = $db->prepare("SELECT * FROM ".$prefix['table_prefix']."_settings");
+        $stmt = $db->prepare("SELECT * FROM ".$prefix['table_prefix']."_flussi_settings");
         $stmt->execute();
         $settings = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $settings;

@@ -28,7 +28,7 @@ if (isset($_POST['user_id'], $_POST['user_username'], $_POST['user_surname'], $_
     $role = $_POST['user_role'];
 
     // Patikrinti ar username yra unikalus
-    $stmt = $db->prepare("SELECT COUNT(*) FROM ".$prefix['table_prefix']."_users WHERE username = :username AND id != :id");
+    $stmt = $db->prepare("SELECT COUNT(*) FROM ".$prefix['table_prefix']."_flussi_users WHERE username = :username AND id != :id");
     $stmt->bindParam(':username', $username);
     $stmt->bindParam(':id', $userId);
     $stmt->execute();

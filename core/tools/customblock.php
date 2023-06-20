@@ -41,6 +41,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
 
               <i class="fas fa-plus"></i>
             </button>
+            <div class="col-md-12 mt-3">
             <!-- Išveda customblock redagavimo langą -->
             <div id="get-customblock-edit"></div>
 
@@ -88,7 +89,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
                 <?php endforeach; ?>
             </tbody>
          </table>
-        
+         </div>
                                 </main>
     </div>
 </div>
