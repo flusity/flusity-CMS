@@ -3,14 +3,14 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
   }
 
-$db = null;
+ $db = null;
 if (isset($config)) {
-    $db = getDBConnection($config);
+     $db = getDBConnection($config);
 }
 
-secureSession($db);
+secureSession($db, $prefix);
 
-$settings = getSettings($db);
+$settings = getSettings($db, $prefix);
 $site_title = isset($settings['site_title']) ? $settings['site_title'] : '';
 $site_brand_icone = isset($settings['brand_icone']) ? $settings['brand_icone'] : '';
 $meta_default_description = isset($settings['meta_description']) ? $settings['meta_description'] : '';
@@ -47,8 +47,8 @@ if (!empty($postSeo)) {
     <link href="../assets/bootstrap-5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="../assets/dist/js/jquery-3.6.0.min.js"></script>
     <link href="../assets/fonts/fonts-quicksand.css" rel="stylesheet">
-    <link href="<?php echo getThemePath($db, 'css/style.css'); ?>" rel="stylesheet">
-    <link href="<?php echo getThemePath($db, 'css/site.css'); ?>" rel="stylesheet">
+    <link href="<?php echo getThemePath($db, $prefix, 'css/style.css'); ?>" rel="stylesheet">
+    <link href="<?php echo getThemePath($db, $prefix, 'css/site.css'); ?>" rel="stylesheet">
    <style>
     .navbar-shrink {
         height: 80px;

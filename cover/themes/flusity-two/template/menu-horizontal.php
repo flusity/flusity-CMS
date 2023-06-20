@@ -10,27 +10,27 @@
             </button>
     <div class="navbar-menu nav-items">
     <?php
-        $menuItems = getMenuItems($db);
-        $current_page_url = getCurrentPageUrl($db);
+        $menuItems = getMenuItems($db, $prefix);
+        $current_page_url = getCurrentPageUrl($db, $prefix);
 
     foreach ($menuItems as $item):
         if ($item['show_in_menu'] == 1){
         $active = $current_page_url === $item['page_url'] ? 'active' : '';
-        $generatedUrl = generateMenuUrl($db, $item['page_url']);
+        $generatedUrl = generateMenuUrl($db, $prefix, $item['page_url']);
      ?>
         <a class="nav-item nav-url <?php echo $active; ?>" href="<?php echo $generatedUrl; ?>"><?php echo htmlspecialchars($item['name']); ?></a>
          
     <?php }
        endforeach; ?>
     <?php if (isset($_SESSION['user_id'])): 
-        $isAdmin = checkUserRole($_SESSION['user_id'], 'admin', $db);
-        $isModerator = checkUserRole($_SESSION['user_id'], 'moderator', $db);
-        $isUser = checkUserRole($_SESSION['user_id'], 'user', $db);
+        $isAdmin = checkUserRole($_SESSION['user_id'], 'admin', $db, $prefix);
+        $isModerator = checkUserRole($_SESSION['user_id'], 'moderator', $db, $prefix);
+        $isUser = checkUserRole($_SESSION['user_id'], 'user', $db, $prefix);
     ?>
     <div class="dropdown">
     <button class="btn btn-secondary dropdown-toggle rounded-pill navmenubutton" style="width: auto;" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
     <div class="user-profile">
-        <?php echo htmlspecialchars(getUserNameById($db, $_SESSION['user_id'])); ?>
+        <?php echo htmlspecialchars(getUserNameById($db, $prefix, $_SESSION['user_id'])); ?>
         <div class="profile-picture-container">
             <img src="assets/img/user-profile.png" alt="Profile Picture" class="profile-picture">
         </div>

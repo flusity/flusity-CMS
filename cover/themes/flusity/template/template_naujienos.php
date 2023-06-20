@@ -9,9 +9,9 @@
         </div>
         <div class="col-sm-5">
             <?php 
-            $page_url = getCurrentPageUrl($db);
+            $page_url = getCurrentPageUrl($db, $prefix);
             if ($page_url) {
-                displayCustomBlockByplace($db, $page_url, 'news-right-5');
+                displayCustomBlockByplace($db, $prefix, $page_url, 'news-right-5');
             } else {
                 print "";
             }

@@ -15,9 +15,9 @@
            <div class="row">
                 <div class="col-10 ml-1">
                 <?php 
-                    $page_url = getCurrentPageUrl($db);
+                    $page_url = getCurrentPageUrl($db, $prefix);
                     if ($page_url) {
-                        displayCustomBlockByplace($db, $page_url, 'head-box-one');
+                        displayCustomBlockByplace($db, $prefix, $page_url, 'head-box-one');
                     } else {
                         print "";
                     }
@@ -30,9 +30,9 @@
             <div class="row">
                 <div class="col-10 ml-1">
                 <?php 
-                    $page_url = getCurrentPageUrl($db);
+                    $page_url = getCurrentPageUrl($db, $prefix);
                     if ($page_url) {
-                        displayCustomBlockByplace($db, $page_url, 'head-box-two');
+                        displayCustomBlockByplace($db, $prefix, $page_url, 'head-box-two');
                     } else {
                         print "";
                     }
@@ -49,9 +49,9 @@
     <div class="row">
         <div class="col-sm-7">
             <?php 
-            $page_url = getCurrentPageUrl($db);
+            $page_url = getCurrentPageUrl($db, $prefix);
             if ($page_url) {
-                displayCustomBlockByplace($db, $page_url, 'home-left-7');
+                displayCustomBlockByplace($db, $prefix, $page_url, 'home-left-7');
             } else {
                 print "";
             }
@@ -59,9 +59,9 @@
         </div>
         <div class="col-sm-5">
             <?php 
-            $page_url = getCurrentPageUrl($db);
+            $page_url = getCurrentPageUrl($db, $prefix);
             if ($page_url) {
-                displayCustomBlockByplace($db, $page_url, 'home-right-5');
+                displayCustomBlockByplace($db, $prefix, $page_url, 'home-right-5');
             } else {
                 print "";
             }
@@ -84,9 +84,9 @@
     <div class="row">
         <div class="col-sm-12 text-center"> 
         <?php 
-            $page_url = getCurrentPageUrl($db);
+            $page_url = getCurrentPageUrl($db, $prefix);
             if ($page_url) {
-                displayCustomBlockByplace($db, $page_url, 'home-col-down-12');
+                displayCustomBlockByplace($db, $prefix, $page_url, 'home-col-down-12');
             } else {
                 print "";
             }

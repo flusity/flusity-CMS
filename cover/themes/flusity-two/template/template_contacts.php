@@ -6,9 +6,9 @@
     <div class="row">
         <div class="col-sm-7">
             <?php 
-            $page_url = getCurrentPageUrl($db);
+            $page_url = getCurrentPageUrl($db, $prefix);
             if ($page_url) {
-                displayCustomBlockByplace($db, $page_url, 'contact-left-7');
+                displayCustomBlockByplace($db, $prefix, $page_url, 'contact-left-7');
             } else {
                 print "";
             }
@@ -16,9 +16,9 @@
         </div>
         <div class="col-sm-5">
             <?php 
-            $page_url = getCurrentPageUrl($db);
+            $page_url = getCurrentPageUrl($db, $prefix);
             if ($page_url) {
-                displayCustomBlockByplace($db, $page_url, 'contact-right-5');
+                displayCustomBlockByplace($db, $prefix, $page_url, 'contact-right-5');
             } else {
                 print "";
             }
@@ -62,9 +62,9 @@
     <div class="row">
         <div class="col-sm-12 text-center"> 
         <?php 
-            $page_url = getCurrentPageUrl($db);
+            $page_url = getCurrentPageUrl($db, $prefix);
             if ($page_url) {
-                displayCustomBlockByplace($db, $page_url, 'contact-fluid-12');
+                displayCustomBlockByplace($db, $prefix, $page_url, 'contact-fluid-12');
             } else {
                 print "";
             }
