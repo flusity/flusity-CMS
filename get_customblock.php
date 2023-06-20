@@ -1,6 +1,6 @@
 <?php
-function getCustomBlocksByUrlNameAndPlace($db, $page_url, $place_name) {
-    $stmt = $db->prepare("SELECT v_custom_blocks.* FROM v_custom_blocks JOIN menu ON v_custom_blocks.menu_id = menu.id JOIN places ON v_custom_blocks.place_id = places.id WHERE menu.page_url = :page_url AND places.name = :place_name");
+function getCustomBlocksByUrlNameAndPlace($db, $prefix, $page_url, $place_name) {
+    $stmt = $db->prepare("SELECT ".$prefix['table_prefix']."_v_custom_blocks.* FROM ".$prefix['table_prefix']."_v_custom_blocks JOIN ".$prefix['table_prefix']."_menu ON ".$prefix['table_prefix']."_v_custom_blocks.menu_id = ".$prefix['table_prefix']."_menu.id JOIN ".$prefix['table_prefix']."_places ON ".$prefix['table_prefix']."_v_custom_blocks.place_id = ".$prefix['table_prefix']."_places.id WHERE ".$prefix['table_prefix']."_menu.page_url = :page_url AND ".$prefix['table_prefix']."_places.name = :place_name");
     $stmt->bindParam(':page_url', $page_url, PDO::PARAM_STR);
     $stmt->bindParam(':place_name', $place_name, PDO::PARAM_STR);
     $stmt->execute();
@@ -8,8 +8,8 @@ function getCustomBlocksByUrlNameAndPlace($db, $page_url, $place_name) {
     return $stmt->fetchAll();
 }
 
-function displayCustomBlockByPlace($db, $page_url, $place_name, $admin_label = null) {
-    $customblocks = getCustomBlocksByUrlNameAndPlace($db, $page_url, $place_name);
+function displayCustomBlockByPlace($db, $prefix, $page_url, $place_name, $admin_label = null) {
+    $customblocks = getCustomBlocksByUrlNameAndPlace($db, $prefix, $page_url, $place_name);
 
     foreach ($customblocks as $customBlock) {
         echo '<div class="customblock-widget">';

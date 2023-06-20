@@ -32,7 +32,7 @@
         <div class="p-3 border cms-front-shadow">
             <i class="fas fa-map-marker-alt fa-2x"></i> <!-- FontAwesome ikona -->
             <?php 
-            $places = getplaces($db);
+            $places = getplaces($db, $prefix);
             $total_places = count($places);
             ?>
             <h4><?php echo t("Places");?></h4>
@@ -43,7 +43,7 @@
         <div class="p-3 border cms-front-shadow">
             <i class="fas fa-users fa-2x"></i> <!-- FontAwesome ikona -->
             <?php 
-            $allUsers = getAllUsers($db);
+            $allUsers = getAllUsers($db, $prefix);
             $totalUsers = count($allUsers);
             ?>
             <h4><?php echo t("User's");?></h4>
@@ -54,7 +54,7 @@
         <div class="p-3 border cms-front-shadow">
             <i class="fas fa-newspaper fa-2x"></i> <!-- FontAwesome ikona -->
             <?php 
-            $allPosts = getAllPosts($db);
+            $allPosts = getAllPosts($db, $prefix);
             $totalPosts = count($allPosts);
             ?>
             <h4><?php echo t("Post's");?></h4>
@@ -65,7 +65,7 @@
         <div class="p-3 border cms-front-shadow">
             <i class="fas fa-bars fa-2x"></i> <!-- FontAwesome ikona -->
             <?php 
-            $allMenu = getMenuItems($db);
+            $allMenu = getMenuItems($db, $prefix);
             $totalMenu = count($allMenu);
             ?>
             <h4><?php echo t("Menu");?></h4>
@@ -76,7 +76,7 @@
         <div class="p-3 border cms-front-shadow">
             <i class="fas fa-cubes fa-2x"></i> <!-- FontAwesome ikona -->
             <?php 
-            $allBlock = getCustomBlocks($db);
+            $allBlock = getCustomBlocks($db, $prefix);
             $totalBlock = count($allBlock);
             ?>
             <h4><?php echo t("Block's");?></h4>
@@ -87,7 +87,7 @@
         <div class="p-3 border cms-front-shadow">
             <i class="fas fa-file fa-2x"></i> <!-- FontAwesome ikona -->
             <?php 
-            $totalFiles = countFilesInDatabase($db);
+            $totalFiles = countFilesInDatabase($db, $prefix);
             ?>
             <h4><?php echo t("Files");?></h4>
             <p><?php echo $totalFiles; ?></p>
@@ -97,7 +97,7 @@
         <div class="p-3 border cms-front-shadow">
             <i class="fas fa-puzzle-piece fa-2x"></i> <!-- FontAwesome ikona -->
             <?php 
-            $totalAddons= totalAddons($db);
+            $totalAddons= totalAddons($db, $prefix);
             ?>
             <h4><?php echo t("Addons");?></h4>
             <p><?php echo $totalAddons; ?></p>

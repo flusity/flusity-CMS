@@ -13,16 +13,17 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 $db = getDBConnection($config);
-    secureSession($db);
-    $language_code = getLanguageSetting($db);
-    $translations = getTranslations($db, $language_code);
+//$prefix = getPrefix($prefix);
+    secureSession($db, $prefix);
+    $language_code = getLanguageSetting($db, $prefix);
+    $translations = getTranslations($db, $prefix, $language_code);
  
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
-    $user_name = getUserNameById($db, $user_id);
+    $user_name = getUserNameById($db, $prefix, $user_id);
 }
 
-$settings = getSettings($db);
+$settings = getSettings($db, $prefix);
 $themeName = $settings['theme'];
 
 $limit = $settings['posts_per_page'];
@@ -30,18 +31,18 @@ $limit = $settings['posts_per_page'];
 $url = isset($_GET['url']) ? intval($_GET['url']) : 1;
 $offset = ($url - 1) * $limit;
 
-$current_page_url = getCurrentPageUrl($db);
-$posts = getPostsNews($db, $limit, $offset, $current_page_url);
-$postSeo = getPostSeo($db, $limit, $offset, $current_page_url);
+$current_page_url = getCurrentPageUrl($db, $prefix);
+$posts = getPostsNews($db, $prefix, $limit, $offset, $current_page_url);
+$postSeo = getPostSeo($db, $prefix, $limit, $offset, $current_page_url);
 
 foreach ($posts as &$post) {
     $post['title'] = htmlspecialchars_decode($post['title']);
     $post['content'] = htmlspecialchars_decode($post['content']);
 }
-$total_posts = countPosts($db);
+$total_posts = countPosts($db, $prefix);
 $total_urls = ceil($total_posts / $limit);
 
-$menu = getMenuByPageUrl($db, $current_page_url);
+$menu = getMenuByPageUrl($db, $prefix, $current_page_url);
 $templateName = $menu['template'];
 $templatePath = "cover/themes/{$themeName}/template/{$templateName}.php";
 

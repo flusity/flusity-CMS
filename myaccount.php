@@ -1,25 +1,25 @@
 <?php
    require_once 'pre.php';
-   require_once getThemePath($db, '/template/header.php'); 
-$db = getDBConnection($config);
+   require_once getThemePath($db, $prefix, '/template/header.php'); 
+ $db = getDBConnection($config);
 
 if (!isset($_SESSION['user_id'])) {
     header('Location: index.php');
     exit();
 } else {
-    if (!checkUserRole($_SESSION['user_id'], 'user', $db) && !checkUserRole($_SESSION['user_id'], 'admin', $db) && !checkUserRole($_SESSION['user_id'], 'moderator', $db)) {
+    if (!checkUserRole($_SESSION['user_id'], 'user', $db, $prefix) && !checkUserRole($_SESSION['user_id'], 'admin', $db, $prefix) && !checkUserRole($_SESSION['user_id'], 'moderator', $db, $prefix)) {
         header('Location: index.php');
         exit();
     }
 }
 
-$language_code = getLanguageSetting($db);
-$translations = getTranslations($db, $language_code);
+$language_code = getLanguageSetting($db, $prefix);
+$translations = getTranslations($db, $prefix, $language_code);
 
 ?>
 
 <header id="header">
-<?php require_once getThemePath($db, '/template/menu-horizontal.php'); ?>
+<?php require_once getThemePath($db, $prefix, '/template/menu-horizontal.php'); ?>
 </header>
 <section class="container spacer footer">
     <main class="main my-4">
@@ -30,4 +30,4 @@ $translations = getTranslations($db, $language_code);
 </div>
 </main>
 </section>
-<?php require_once getThemePath($db, '/template/footer.php'); ?>
+<?php require_once getThemePath($db, $prefix, '/template/footer.php'); ?>

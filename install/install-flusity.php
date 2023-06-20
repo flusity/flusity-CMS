@@ -1,4 +1,5 @@
-<?php session_start(); 
+<?php
+session_start(); 
 //session_unset(); 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/core/functions/functions.php';
 $language_code = isset($_SESSION['language']) ? $_SESSION['language'] : 'en';
@@ -10,6 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $db_host = $_SESSION['db_host'];
         $db_name = $_SESSION['db_name'];
+        $table_prefix = $_SESSION['table_prefix'];
         $db_user = $_SESSION['db_user'];
         $db_password = $_SESSION['db_password'];
         $admin_username = $_POST['admin_username'];
@@ -20,14 +22,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = $_POST['email'];
 
         try {
+            $configurations = require $_SERVER['DOCUMENT_ROOT'] . '/security/config.php';
+
+           $prefix = $configurations['prefix'];
+
             $db = new PDO("mysql:host={$db_host};dbname={$db_name};charset=utf8", $db_user, $db_password);
-            $registrationSuccessful = registerUser($login_name, $admin_username, $admin_password, $surname, $phone, $email, $db);
-            
+            $registrationSuccessful = registerUser($login_name, $admin_username, $admin_password, $surname, $phone, $email, $db, $prefix);
+              
             if ($registrationSuccessful) {
                 $_SESSION['success_message'] = "Admin successfully created!";
                 $_SESSION['stage'] = 3;
+              
                 $stage = 3;
-                $stmt = $db->prepare("UPDATE users SET role='admin' WHERE login_name=:login_name");
+                $stmt = $db->prepare("UPDATE ".$table_prefix."_users SET role='admin' WHERE login_name=:login_name");
                 $stmt->bindParam(':login_name', $login_name);
                 $stmt->execute();
                 session_unset();
@@ -49,11 +56,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $db_name = $_POST['db_name'];
         $db_user = $_POST['db_user'];
         $db_password = $_POST['db_password'];
+        $table_prefix = $_POST['table_prefix'];
 
         $_SESSION['db_host'] = $db_host;
         $_SESSION['db_name'] = $db_name;
         $_SESSION['db_user'] = $db_user;
         $_SESSION['db_password'] = $db_password;
+        $_SESSION['table_prefix'] = $table_prefix;
 
         try {
             $db = new PDO("mysql:host={$db_host};dbname={$db_name};charset=utf8", $db_user, $db_password);
@@ -64,32 +73,56 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </p>";
             
             $directory = $_SERVER['DOCUMENT_ROOT'].'/core/tools/backups/'; 
-            $files = scandir($directory); 
+        $files = scandir($directory); 
 
-            $sql_files = array_filter($files, function($filename) {
-                return pathinfo($filename, PATHINFO_EXTENSION) === 'sql'; 
-            });
+        $sql_files = array_filter($files, function($filename) {
+            return pathinfo($filename, PATHINFO_EXTENSION) === 'sql'; 
+        });
 
-            $newest_file = '';
-            $newest_file_time = 0;
+        $newest_file = '';
+        $newest_file_time = 0;
 
-            foreach ($sql_files as $file) {
-                $file_time = filemtime($directory . $file);
-                if ($file_time > $newest_file_time) {
-                    $newest_file = $file;
-                    $newest_file_time = $file_time;
-                }
+        foreach ($sql_files as $file) {
+            $file_time = filemtime($directory . $file);
+            if ($file_time > $newest_file_time) {
+                $newest_file = $file;
+                $newest_file_time = $file_time;
             }
+        }
 
-            if ($newest_file !== '') {
-                $newest_file_path = $directory . $newest_file;
-                $sql = file_get_contents($newest_file_path); 
-                $db->exec($sql);
-                $stage = 2;
-            } else {
-                // Failų nerasta
-                throw new Exception("No SQL files found in the directory");
-            }
+        if ($newest_file !== '') {
+            $newest_file_path = $directory . $newest_file;
+            $sql = file_get_contents($newest_file_path); 
+
+            $create_table_pattern = '/(CREATE TABLE\s+`?)(\w+)(`?)/i';
+            $insert_into_pattern = '/(INSERT INTO\s+`?)(\w+)(`?)/i';
+            $drop_table_pattern = '/(DROP TABLE IF EXISTS\s+`?)(\w+)(`?)/i';
+            $foreignKeyPattern = '/(CONSTRAINT\s+`?)(\w+)(`\s+FOREIGN KEY \(`?\w+`?\) REFERENCES `?)(\w+)(`?)/i';
+
+        $replacement = function ($matches) {
+            $table_prefix = $_SESSION['table_prefix'];
+            return $matches[1] . $table_prefix . '_' . $matches[2] . $matches[3];
+        };
+
+        $sql = preg_replace_callback($create_table_pattern, $replacement, $sql);
+
+        $sql = preg_replace_callback($insert_into_pattern, $replacement, $sql);
+
+        $sql = preg_replace_callback($drop_table_pattern, $replacement, $sql);
+
+        $foreignKeyReplacement = function ($matches) {
+            $table_prefix = $_SESSION['table_prefix'];
+            return $matches[1] . $table_prefix . '_' . $matches[2] . $matches[3] . $table_prefix . '_' . $matches[4] . $matches[5];
+        };
+
+        $sql = preg_replace_callback($foreignKeyPattern, $foreignKeyReplacement, $sql);
+
+        $db->exec($sql);
+
+            $stage = 2;
+        } else {
+            throw new Exception("No SQL files found in the directory");
+        }
 
         } catch (PDOException $e) {
             $_SESSION['error_message'] = "Error connecting to database or importing data: " . $e->getMessage();
@@ -103,12 +136,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if ($stage == 2) {
-        $config_text = "<?php\n\n\$config = [\n";
+        $config_text = "<?php\n\n";
+        $config_text .= "\$config = [\n";
         $config_text .= "  'db_host' => '{$db_host}',\n";
         $config_text .= "  'db_name' => '{$db_name}',\n";
         $config_text .= "  'db_user' => '{$db_user}',\n";
         $config_text .= "  'db_password' => '{$db_password}',\n";
         $config_text .= "];\n\n";
+        
+        $config_text .= "\$prefix = [\n";
+        $config_text .= "  'table_prefix' => '{$table_prefix}',\n";
+        $config_text .= "];\n";
+
+        $config_text .= "return ['config' => \$config, 'prefix' => \$prefix];\n"; 
+    
     
         $config_path = $_SERVER['DOCUMENT_ROOT'].'/security/config.php';
         if (is_writable(dirname($config_path))) {
@@ -117,10 +158,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "Cannot write to directory.";
         }
     }
+    
 }
 
 
 ?>
+
 <!doctype html>
 <html lang="en">
 
@@ -221,6 +264,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="mb-3">
                     <label for="db_name" class="form-label">Database Name</label>
                     <input type="text" class="form-control" id="db_name" name="db_name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="table_prefix" class="form-label">Table prefix</label>
+                    <input type="text" class="form-control" id="table_prefix" name="table_prefix" required>
                 </div>
                 <div class="mb-3">
                     <label for="db_user" class="form-label">Database User Name</label>

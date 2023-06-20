@@ -7,21 +7,21 @@
  fix-content
 */
 require_once 'pre.php';
-$db = getDBConnection($config);
+ $db = getDBConnection($config);
   
-    $language_code = getLanguageSetting($db);
-    $translations = getTranslations($db, $language_code);
-    secureSession($db);
+    $language_code = getLanguageSetting($db, $prefix);
+    $translations = getTranslations($db, $prefix, $language_code);
+    secureSession($db, $prefix);
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
-    $user_name = getUserNameById($db, $user_id);
+    $user_name = getUserNameById($db, $prefix, $user_id);
 }
 
-require_once getThemePath($db, '/template/header.php'); ?>
+require_once getThemePath($db, $prefix, '/template/header.php'); ?>
 
 <header id="header">
 <?php
-require_once getThemePath($db, '/template/menu-horizontal.php'); ?>
+require_once getThemePath($db, $prefix, '/template/menu-horizontal.php'); ?>
 
 </header>
 <section class="container spacer footer">
@@ -37,4 +37,4 @@ require_once getThemePath($db, '/template/menu-horizontal.php'); ?>
 </main>
 </section>
 
-<?php require_once getThemePath($db, '/template/footer.php'); ?>
+<?php require_once getThemePath($db, $prefix, '/template/footer.php'); ?>

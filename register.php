@@ -1,9 +1,9 @@
 <?php 
  require_once 'pre.php';
- require_once getThemePath($db, '/template/header.php'); 
+ require_once getThemePath($db, $prefix, '/template/header.php'); 
  
-$language_code = getLanguageSetting($db);
-$translations = getTranslations($db, $language_code);
+$language_code = getLanguageSetting($db, $prefix);
+$translations = getTranslations($db, $prefix, $language_code);
 
 if (isset($_SESSION['user_id'])) {
     header('Location: /');
@@ -14,11 +14,11 @@ require_once 'core/tools/set_register.php';
 $registration_enable = isset($settings['registration_enabled']) ? $settings['registration_enabled'] : '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $error_message = handleRegister($db, $_POST);
+    $error_message = handleRegister($db, $prefix, $_POST);
 }
 ?>
 <header id="header">
-<?php  require_once getThemePath($db, '/template/menu-horizontal.php'); ?>
+<?php  require_once getThemePath($db, $prefix, '/template/menu-horizontal.php'); ?>
 </header>
 <section class="container spacer footer">
     <main class="main my-4">
@@ -86,4 +86,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 </main>
 </section>
-<?php  require_once getThemePath($db, '/template/footer.php'); ?>
+<?php  require_once getThemePath($db, $prefix, '/template/footer.php'); ?>

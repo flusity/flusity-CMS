@@ -1,16 +1,16 @@
 
 <?php 
     require_once 'pre.php';
-    require_once getThemePath($db, '/template/header.php'); 
+    require_once getThemePath($db, $prefix, '/template/header.php'); 
 
 if (isset($_SESSION['user_id'])) {
     header('Location: /myaccount/' . base64_encode($user['user_name']));
     exit();
 }
-$db = getDBConnection($config);
+ $db = getDBConnection($config);
    // Gaunamas kalbos nustatymas iš duomenų bazės  
-    $language_code = getLanguageSetting($db);
-    $translations = getTranslations($db, $language_code);
+    $language_code = getLanguageSetting($db, $prefix);
+    $translations = getTranslations($db, $prefix, $language_code);
     $user_name = 'user';
     $encoded_user_name = base64_encode($user_name);
     $profile_url = "/myaccount/$encoded_user_name";
@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $login_nameOrEmail = validateInput($_POST['login_name']);
     $password = validateInput($_POST['password']);
 
-    if ($user = authenticateUser($login_nameOrEmail, $password)) {
+    if ($user = authenticateUser($login_nameOrEmail, $password, $prefix)) {
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['user_role'] = $user['role'];
         session_regenerate_id(true);
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 } ?>
 <header id="header">
-<?php  require_once getThemePath($db, '/template/menu-horizontal.php');  ?>
+<?php  require_once getThemePath($db, $prefix, '/template/menu-horizontal.php');  ?>
 </header>
 <section class="container spacer footer">
     <main class="main my-4">
@@ -85,4 +85,4 @@ $csrf_token = generateCSRFToken();
 </div>
 </main>
 </section>
-<?php  require_once getThemePath($db, '/template/footer.php'); ?>
+<?php  require_once getThemePath($db, $prefix, '/template/footer.php'); ?>
