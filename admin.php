@@ -44,6 +44,7 @@
                 $isInstalled = true;
                 $isActive = isActiveAddon($addon['name_addon'], $db, $prefix);
                 $showFront = $installedAddon['show_front'];
+               
                 break;
             }
         }
@@ -59,7 +60,9 @@
             $name_addon_get = str_replace('_', ' ', htmlspecialchars($addon['name_addon']));
             $name_addon_get = ucwords($name_addon_get);
             echo '<h3>' . $name_addon_get . '</h3>';
-            echo '<a href="#" class="but">'.t('Go to').' '.$name_addon_get.'</a>';
+            //echo '<a href="#" class="but">'.t('Go to').' '.$name_addon_get.'</a>';
+            echo '<a class="nav-link" href="'. getFullUrl('/core/tools/addons_model.php') . '?name=' . urlencode($name_addon_get) . '&id=' . urlencode(getAddonId($db, $prefix, $addon['name_addon'])) .'"><span class="nav-text">'.t('Go to').' '. $name_addon_get .'</span></a>';
+
             echo '</div>';
             echo '</div>';
             echo '</div>
