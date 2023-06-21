@@ -34,8 +34,7 @@
       </div>
       
       <div class="row mt-3 mb-5">
-      <div class="col-3">
-    <div class="p-3 border cms-front-shadow d-flex gap-2 fs-5">
+      
     <?php 
     foreach ($systemAddons as $addon) {
         $isInstalled = false;
@@ -50,6 +49,8 @@
         }
 
         if($isInstalled && $isActive && $showFront == 1) {
+            echo '<div class="col-3">';
+            echo '<div class="p-3 border cms-front-shadow d-flex gap-2 fs-5">';
             echo '<div class="addon d-flex">';
             echo '<div>';
             echo '<img src="'.htmlspecialchars($addon['addons_thumb']).'" alt="'.htmlspecialchars($addon['name_addon']).'" class="img-fluid rounded-start p-1" style="max-width: 100px; max-height: 100px; width: 90%;">';
@@ -61,11 +62,12 @@
             echo '<a href="#" class="but">'.t('Go to').' '.$name_addon_get.'</a>';
             echo '</div>';
             echo '</div>';
+            echo '</div>
+            </div>';
         }
     }
     ?>
-    </div>
-</div>
+    
 
 </div>
 
