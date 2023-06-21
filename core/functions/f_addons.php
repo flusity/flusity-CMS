@@ -118,3 +118,11 @@ function updateAddonShowFront($db, $prefix, $name_addon, $show_front) {
     $stmt->bindParam(':name_addon', $name_addon, PDO::PARAM_STR);
     return $stmt->execute();
 }
+function getAddonId($db, $prefix, $name_addon) {
+    $stmt = $db->prepare("SELECT id FROM  ".$prefix['table_prefix']."_flussi_tjd_addons WHERE name_addon = :name_addon");
+    $stmt->bindParam(':name_addon', $name_addon, PDO::PARAM_STR);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $result ? $result['id'] : null;
+}

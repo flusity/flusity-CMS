@@ -73,6 +73,7 @@ a.navbar{
 .btn-close:hover {
   filter: invert(1) opacity(0.9);
 }
+
 main {
   margin-left: 220px;
   margin-top: 156px; 

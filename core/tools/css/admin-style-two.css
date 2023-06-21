@@ -4,7 +4,8 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 .admin-layout{
-  min-height: 100vh;
+ 
+  height: calc(100vh - 96px); 
   margin-bottom: 20px;
 }
 
