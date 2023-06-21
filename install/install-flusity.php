@@ -31,14 +31,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: install-flusity.php?stage=2");
             exit;
         }
-        $blacklist = ['forbiddenword1', 'forbiddenword2', 'forbiddenword3', 'forbiddencharacter1', 'forbiddencharacter2'];
+/*         $blacklist = ['word1', 'word2', 'word3', 'character1', 'character2'];
         foreach ($blacklist as $word) {
-            if (strpos($admin_username, $word) !== false || strpos($admin_password, $word) !== false || strpos($email, $word) !== false) {
-                $_SESSION['error_message'] = "Your username, password, or email contains a forbidden word or character.";
+            if (strpos($admin_username, $word) !== false || strpos($email, $word) !== false) {
+                $_SESSION['error_message'] = "Your username or email contains a forbidden word or character.";
                 header("Location: install-flusity.php?stage=2");
                 exit;
             }
-        }
+        } */
         try {
             
             $db = new PDO("mysql:host={$db_host};dbname={$db_name};charset=utf8", $db_user, $db_password);
