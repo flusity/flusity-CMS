@@ -3,6 +3,11 @@
   <button class="btn btn-primary position-fixed start-0 translate-middle-y d-md-none tools-settings" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas">
       <i class="fas fa-bars"></i>
   </button>
+  <?php 
+     $systemAddons = getAllSystemAddons();
+     $installedAddons = getAllAddons($db, $prefix); 
+?>
+
  <?php require_once  $_SERVER['DOCUMENT_ROOT'] . '/core/tools/sidebar.php';?>
 <div class="container-fluid mt-4 main-content admin-layout">
     <div class="row">
@@ -27,7 +32,45 @@
             }
         ?>
       </div>
+      
+      <div class="row mt-3 mb-5">
+      <div class="col-3">
+    <div class="p-3 border cms-front-shadow d-flex gap-2 fs-5">
+    <?php 
+    foreach ($systemAddons as $addon) {
+        $isInstalled = false;
+        $isActive = false;
+        foreach($installedAddons as $installedAddon) {
+            if ($installedAddon['name_addon'] == $addon['name_addon']) {
+                $isInstalled = true;
+                $isActive = isActiveAddon($addon['name_addon'], $db, $prefix);
+                $showFront = $installedAddon['show_front'];
+                break;
+            }
+        }
+
+        if($isInstalled && $isActive && $showFront == 1) {
+            echo '<div class="addon d-flex">';
+            echo '<div>';
+            echo '<img src="'.htmlspecialchars($addon['addons_thumb']).'" alt="'.htmlspecialchars($addon['name_addon']).'" class="img-fluid rounded-start p-1" style="max-width: 100px; max-height: 100px; width: 90%;">';
+            echo '</div>';
+            echo '<div class="pl-2">';
+            $name_addon_get = str_replace('_', ' ', htmlspecialchars($addon['name_addon']));
+            $name_addon_get = ucwords($name_addon_get);
+            echo '<h3>' . $name_addon_get . '</h3>';
+            echo '<a href="#" class="but">'.t('Go to').' '.$name_addon_get.'</a>';
+            echo '</div>';
+            echo '</div>';
+        }
+    }
+    ?>
+    </div>
+</div>
+
+</div>
+
       <div class="row g-2">
+      <h4><?php echo t("Existing system components");?></h4>
     <div class="col-2">
         <div class="p-3 border cms-front-shadow d-flex gap-2 fs-5">
             <p><i class="fas fa-map-marker-alt fa-2x"></i> <!-- FontAwesome ikona -->
