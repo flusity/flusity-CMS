@@ -8,24 +8,39 @@ $stage = isset($_SESSION['stage']) ? $_SESSION['stage'] : 1;
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['admin_username']) && isset($_POST['admin_password'])) {
         $stage = 2;
+        $prxConfig = require $_SERVER['DOCUMENT_ROOT'] . '/security/config.php';
+        $prefix = $prxConfig['prefix'];
 
         $db_host = $_SESSION['db_host'];
         $db_name = $_SESSION['db_name'];
         $table_prefix = $_SESSION['table_prefix'];
         $db_user = $_SESSION['db_user'];
         $db_password = $_SESSION['db_password'];
+
         $admin_username = $_POST['admin_username'];
         $admin_password = $_POST['admin_password']; 
         $login_name = $_POST['login_name'];
         $surname = $_POST['surname'];
         $phone = $_POST['phone'];
-        $email = $_POST['email'];
+        //$email = $_POST['email'];
+        $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
 
+        // Check if email is valid
+        if ($email === false) {
+            $_SESSION['error_message'] = "Invalid email address provided.";
+            header("Location: install-flusity.php?stage=2");
+            exit;
+        }
+        $blacklist = ['forbiddenword1', 'forbiddenword2', 'forbiddenword3', 'forbiddencharacter1', 'forbiddencharacter2'];
+        foreach ($blacklist as $word) {
+            if (strpos($admin_username, $word) !== false || strpos($admin_password, $word) !== false || strpos($email, $word) !== false) {
+                $_SESSION['error_message'] = "Your username, password, or email contains a forbidden word or character.";
+                header("Location: install-flusity.php?stage=2");
+                exit;
+            }
+        }
         try {
-            $configurations = require $_SERVER['DOCUMENT_ROOT'] . '/security/config.php';
-
-           $prefix = $configurations['prefix'];
-
+            
             $db = new PDO("mysql:host={$db_host};dbname={$db_name};charset=utf8", $db_user, $db_password);
             $registrationSuccessful = registerUser($login_name, $admin_username, $admin_password, $surname, $phone, $email, $db, $prefix);
               
@@ -52,11 +67,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit;
         }
     } else {
-        $db_host = $_POST['db_host'];
-        $db_name = $_POST['db_name'];
-        $db_user = $_POST['db_user'];
-        $db_password = $_POST['db_password'];
-        $table_prefix = $_POST['table_prefix'];
+        $db_host = filter_input(INPUT_POST, 'db_host', FILTER_SANITIZE_STRING);
+        $db_name = filter_input(INPUT_POST, 'db_name', FILTER_SANITIZE_STRING);
+        $db_user = filter_input(INPUT_POST, 'db_user', FILTER_SANITIZE_STRING);
+        $db_password = filter_input(INPUT_POST, 'db_password', FILTER_SANITIZE_STRING);
+        $table_prefix = preg_replace('/[^a-zA-Z0-9_]/', '', $_POST['table_prefix']);
+
 
         $_SESSION['db_host'] = $db_host;
         $_SESSION['db_name'] = $db_name;
@@ -69,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
             $_SESSION['success_message'] = "<p class='d-flex justify-content-center align-items-center'>Database and system configuration installation successful!</p> <p class='d-flex justify-content-center align-items-center'><b>Very important:&nbsp;</b> You can now create an admin user</p>";
             $_SESSION['alert-warning'] = "<p class='d-flex justify-content-center align-items-center'>
-            You may not create an Admin user, then you will be able to log in with the <br>Login Name: Admin7 and the password: 1234 <br> for which you must change the password and other data after logging in.
+            You may not create an Admin user, then you will be able to log in with the <br>Login Name: Tester and the password: 1234 <br> for which you must change the password and other data after logging in.
             </p>";
             
             $directory = $_SERVER['DOCUMENT_ROOT'].'/core/tools/backups/'; 
