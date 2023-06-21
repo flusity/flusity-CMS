@@ -8,12 +8,47 @@ class Sidebar {
         $this->db = $db;
         $this->prefix = $prefix;
     }
-
-    public function getSidebarItems()
+    public function getAddonsItems()
     {
-        $stmt = $this->db->query("SELECT * FROM " . $this->prefix['table_prefix'] . "_flussi_sidebar ORDER BY IFNULL(order_number, 999999), id");
+        $stmt = $this->db->query("SELECT * FROM " . $this->prefix['table_prefix'] . "_flussi_tjd_addons");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
+    public function getSidebarItems()
+{
+    $stmt = $this->db->query("SELECT * FROM " . $this->prefix['table_prefix'] . "_flussi_sidebar ORDER BY IFNULL(order_number, 999999), id");
+    $sidebarItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Get additional items from the addons table
+    $addonItems = $this->getAddonsItems();
+
+    foreach ($sidebarItems as &$item) {
+        if (!isset($item['children'])) {
+            $item['children'] = [];
+        }
+
+        foreach ($addonItems as $addon) {
+            if ($addon['sidebar_id'] == $item['id'] && $addon['active'] == 1) {
+                // Change the keys here based on what you want to display for addon items
+                $addonSidebarItem = [
+                    'id' => $addon['id'],
+                    'parent_id' => $addon['sidebar_id'],
+                    'icon' => $addon['icon'], // use actual icon from the table
+                    'title' => $addon['name_addon'],
+                    'url' => $addon['url'], // use actual url from the table
+                ];
+                
+
+                $item['children'][] = $addonSidebarItem;
+            }
+        }
+    }
+    unset($item);
+
+    return $sidebarItems;
+
+    
+}
 
     public function render()
 {
@@ -55,6 +90,11 @@ class Sidebar {
     $html .= '</ul>';
 
     return $html;
+
+   // $sidebarItems = $this->getSidebarItems();
+    
+   // var_dump($sidebarItems);
+   // exit;
 }
 
 }
