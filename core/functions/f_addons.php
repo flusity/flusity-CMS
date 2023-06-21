@@ -49,15 +49,15 @@ function installAddon($db, $prefix, $name_addon) {
 
         // If addon does not exist in the database
         if (!$addonExists) {
-            $stmt = $db->prepare('INSERT INTO  '.$prefix['table_prefix'].'_flussi_tjd_addons (name_addon, version, author, description_addon, sidebar_id, active, show_front) VALUES (:name_addon, :version, :author, :description_addon, :sidebar_id, :active, :show_front)');
+            $stmt = $db->prepare('INSERT INTO  '.$prefix['table_prefix'].'_flussi_tjd_addons (name_addon, version, author, description_addon, active, show_front) VALUES (:name_addon, :version, :author, :description_addon, :active, :show_front)');
             $stmt->bindParam(':name_addon', $name_addon, PDO::PARAM_STR);
             $stmt->bindParam(':version', $version, PDO::PARAM_STR);
             $stmt->bindParam(':author', $author, PDO::PARAM_STR);
             $stmt->bindParam(':description_addon', $description_addon, PDO::PARAM_STR);
             $active = 1;  
-            $sidebar_id = 8;
+           
             $show_front = 0;
-            $stmt->bindParam(':sidebar_id', $sidebar_id, PDO::PARAM_INT);
+          
             $stmt->bindParam(':active', $active, PDO::PARAM_INT); 
             $stmt->bindParam(':show_front', $show_front, PDO::PARAM_INT);
             return $stmt->execute();
