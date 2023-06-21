@@ -5,7 +5,7 @@ body {
 }
 .admin-layout{
  
-  height: calc(100vh - 96px); 
+  min-height: calc(100vh - 96px); 
   margin-bottom: 20px;
 }
 
