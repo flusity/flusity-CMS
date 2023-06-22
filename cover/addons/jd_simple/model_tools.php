@@ -1,7 +1,5 @@
 <?php 
-
- $id = intval($_GET['id']);
-
+$id = intval($_GET['id']);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') 
 {
@@ -14,7 +12,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             throw new Exception("File upload error.");
         }
 
-        // New part for file upload handling
         $uploaded_file = $_FILES["file_id"];
         $unique_code = bin2hex(random_bytes(8));
         $filename_parts = pathinfo($uploaded_file["name"]);
@@ -43,6 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             $stmt->execute();
 
             $_SESSION['success_message'] = "File uploaded successfully.";
+            $_SESSION['uploaded_file'] = $file_url;
         } else {
             throw new Exception("Error moving uploaded file.");
         }
@@ -56,6 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 }
 ?>
 
+<div class="col-md-12">
 <div class="row d-flex">
     <form method="POST" action="" enctype="multipart/form-data">
         <div class="col-md-6">
@@ -68,15 +67,78 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                 <textarea class="form-control" name="description" id="simpleFormControlTextarea" rows="3"></textarea>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-3">
             <div class="mb-3">
                 <label for="file_id" class="form-label"><?php echo t('Image');?></label>
-                <input class="form-control form-control-sm" name="file_id" id="formFileSm" type="file">
+                <input class="form-control form-control-sm" name="file_id" id="formFileSm" type="file" onchange="previewFile(this)">
             </div>
-            <img src="..." class="img-thumbnail" alt="...">
+            <img id="preview" src="<?php echo $_SESSION['uploaded_file'] ?? '...'; ?>" class="img-thumbnail" alt="...">
         </div>
-        <div class="col-md-12">
+        
             <button type="submit" name="submit" class="btn btn-primary"><?php echo t('Submit');?></button>
-        </div>
+        
     </form>
+    <div class="col-md-6">
+        dešiniau
+    </div>
 </div>
+</div>
+<script>
+
+function previewFile(input) {
+    var file = input.files[0];
+    if (file) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('preview').src = e.target.result;
+        }
+        reader.readAsDataURL(file);
+    }
+}
+
+
+$('#formFileSm').change(function(event) {
+    previewImage(event);
+});
+
+function previewImage(event) {
+    var fileInput = event.target;
+    var file = fileInput.files[0];
+
+    // Check if the file is an image
+    if (!file.type.startsWith('image/')) { 
+        alert("File is not an image.");
+        return;
+    }
+
+    // Check the file size
+    if (file.size > MAX_FILE_SIZE) {
+        alert("File size should be less than " + MAX_FILE_SIZE / 1024 + "KB.");
+        return;
+    }
+
+    var imgPreview = document.querySelector('.img-thumbnail');
+
+    // Create a URL for the file
+    var url = URL.createObjectURL(file);
+    
+    imgPreview.onload = function() {
+        // Check the image dimensions
+        if (this.naturalWidth > MAX_DIMENSION || this.naturalHeight > MAX_DIMENSION) {
+            alert("Image dimensions should be " + MAX_DIMENSION + "x" + MAX_DIMENSION + " pixels or less.");
+            URL.revokeObjectURL(url); // Clean up
+            return;
+        }
+
+        // Update the src of the preview image
+        imgPreview.src = url;
+    };
+
+    imgPreview.onerror = function() {
+        alert("Error loading image.");
+        URL.revokeObjectURL(url); 
+    };
+
+    imgPreview.src = url;
+}
+</script>
