@@ -49,8 +49,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     }
     header('Location: ../../core/tools/addons_model.php?name=jd_simple&id='.$id);
     exit();
-    
-   
 }
 ?>
 
@@ -74,9 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             </div>
             <img id="preview" src="<?php echo $_SESSION['uploaded_file'] ?? '...'; ?>" class="img-thumbnail" alt="...">
         </div>
-        
             <button type="submit" name="submit" class="btn btn-primary"><?php echo t('Submit');?></button>
-        
     </form>
     <div class="col-md-6">
         dešiniau
@@ -105,13 +101,11 @@ function previewImage(event) {
     var fileInput = event.target;
     var file = fileInput.files[0];
 
-    // Check if the file is an image
     if (!file.type.startsWith('image/')) { 
         alert("File is not an image.");
         return;
     }
 
-    // Check the file size
     if (file.size > MAX_FILE_SIZE) {
         alert("File size should be less than " + MAX_FILE_SIZE / 1024 + "KB.");
         return;
@@ -119,7 +113,6 @@ function previewImage(event) {
 
     var imgPreview = document.querySelector('.img-thumbnail');
 
-    // Create a URL for the file
     var url = URL.createObjectURL(file);
     
     imgPreview.onload = function() {
@@ -129,8 +122,6 @@ function previewImage(event) {
             URL.revokeObjectURL(url); // Clean up
             return;
         }
-
-        // Update the src of the preview image
         imgPreview.src = url;
     };
 
