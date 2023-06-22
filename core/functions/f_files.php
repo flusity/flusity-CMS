@@ -56,5 +56,37 @@ function getCurrentImage($db, $prefix) {
     return false;
 }
 
+function handleFileUpload($db, $table_prefix, $target_dir, $allowed_file_types, $max_file_size) {
+    $uploaded_file = $_FILES["uploaded_file"];
 
+    if (!in_array($uploaded_file['type'], $allowed_file_types)) {
+        $_SESSION['error_message'] = t("Invalid file type.");
+        return false;
+    }
 
+    if ($uploaded_file['size'] > $max_file_size) {
+        $_SESSION['error_message'] = t("File size exceeded limit.");
+        return false;
+    }
+
+    $unique_code = bin2hex(random_bytes(8));
+    $filename_parts = pathinfo($uploaded_file["name"]);
+    $new_filename = $filename_parts['filename'] . '_' . $unique_code . '.' . $filename_parts['extension'];
+
+    $target_file = $target_dir . basename($new_filename);
+
+    if (move_uploaded_file($uploaded_file["tmp_name"], $target_file)) {
+        $file_url = $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['HTTP_HOST'] . "/uploads/" . $new_filename;
+        $_SESSION['success_message'] = "File" ." ". basename($uploaded_file["name"]) . " " .t("file uploaded successfully.");
+
+        $stmt = $db->prepare("INSERT INTO " . $table_prefix . "_flussi_files (name, url) VALUES (:name, :url)");
+        $stmt->bindParam(':name', $new_filename, PDO::PARAM_STR);
+        $stmt->bindParam(':url', $file_url, PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $db->lastInsertId();
+    } else {
+        $_SESSION['error_message'] = t("Error loading file.");
+        return false;
+    }
+}
