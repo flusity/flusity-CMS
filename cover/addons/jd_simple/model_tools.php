@@ -53,23 +53,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     exit();
     
    
-} ob_end_flush();?>
+}
+?>
 
 <div class="row d-flex">
     <form method="POST" action="" enctype="multipart/form-data">
         <div class="col-md-6">
             <div class="mb-3">
-                <label for="simpleFormControlInput" class="form-label">Title</label>
+                <label for="simpleFormControlInput" class="form-label"><?php echo t('Title');?></label>
                 <input type="text" class="form-control" name="title" id="simpleFormControlInput" placeholder="Title">
             </div>
             <div class="mb-3">
-                <label for="simpleFormControlTextarea" class="form-label">Description</label>
+                <label for="simpleFormControlTextarea" class="form-label"><?php echo t('Description');?></label>
                 <textarea class="form-control" name="description" id="simpleFormControlTextarea" rows="3"></textarea>
             </div>
         </div>
         <div class="col-md-6">
             <div class="mb-3">
-                <label for="file_id" class="form-label">Small file input example</label>
+                <label for="file_id" class="form-label"><?php echo t('Image');?></label>
                 <input class="form-control form-control-sm" name="file_id" id="formFileSm" type="file">
             </div>
             <img src="..." class="img-thumbnail" alt="...">
