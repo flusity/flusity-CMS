@@ -28,39 +28,48 @@ require_once ROOT_PATH . 'core/template/header-admin.php'; ?>
                             unset($_SESSION['error_message']);
                         } ?>
                 </div>
-<?php 
-    $systemAddons = getAllSystemAddons();
-    $installedAddons = getAllAddons($db, $prefix); 
+        <?php 
+            $systemAddons = getAllSystemAddons();
+            $installedAddons = getAllAddons($db, $prefix); 
 
-    if (!isset($_GET['name']) || !isset($_GET['id'])) {
-        // Čia galite apdoroti situaciją, kai nuoroda neturi reikiamų parametrų
-        echo "Parametrų nėra.";
-        return;
-    }
-    $name = htmlspecialchars($_GET['name']);
-    $id = htmlspecialchars($_GET['id']);
+            if (!isset($_GET['name']) || !isset($_GET['id'])) {
 
-    foreach ($systemAddons as $addon) {
-        foreach($installedAddons as $installedAddon) {
-            if ($installedAddon['name_addon'] !== $addon['name_addon']) {
-                continue;
+                echo "Parametrų nėra.";
+                return;
             }
-            $isInstalled = true;
-            $isActive = isActiveAddon($addon['name_addon'], $db, $prefix);
-            $showFront = $installedAddon['show_front'];
-            if(!$isInstalled || !$isActive || $showFront != 1) {
-                continue;
+            $name = htmlspecialchars($_GET['name']);
+            $id = intval($_GET['id']); // naudojamas intval() užtikrinimui, kad 'id' yra sveikasis skaičius
+
+            foreach ($systemAddons as $addon) {
+                if($addon['name_addon'] !== $name || getAddonId($db, $prefix, $addon['name_addon']) !== $id) {
+                    continue; // praleidžia ciklą, jei addon'as neatitinka gautų parametrų
+                }
+
+                $isInstalled = isActiveAddon($name, $db, $prefix);
+                if(!$isInstalled) {
+                    continue;
+                }
+
+                foreach($installedAddons as $installedAddon) {
+                    if ($installedAddon['name_addon'] !== $name) {
+                        continue;
+                    }
+                    $isActive = $installedAddon['active'];
+                    $showFront = $installedAddon['show_front'];
+                    if(!$isActive || $showFront != 1) {
+                        continue;
+                    }
+
+                    $addonPath = $_SERVER['DOCUMENT_ROOT'] . "/cover/addons/$name/model_tools.php";
+                    if (!file_exists($addonPath)) {
+                        echo "Addon'o '$name' model_tools.php failas nerastas.";
+                        continue;
+                    }
+                    include $addonPath;
+                    break; // nutraukiamas ciklas, kai addon'as rastas ir apdorojamas
+                }
             }
-    
-            $addonPath = $_SERVER['DOCUMENT_ROOT'] . "/cover/addons/$addon[name_addon]/model_tools.php";
-            if (!file_exists($addonPath)) {
-                echo "Addon'o '$addon[name_addon]' model_tools.php failas nerastas.";
-                continue;
-            }
-            include $addonPath;
-        }
-    }
-?>
+        ?>
     </main>
   </div>
 </div>

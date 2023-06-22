@@ -34,7 +34,6 @@ function getAllSystemAddons() {
     return $addons;
 }
 
-
 function installAddon($db, $prefix, $name_addon) {
     $addonsDirectory = $_SERVER['DOCUMENT_ROOT'] . '/cover/addons/';
     $addonDetailsPath = $addonsDirectory . $name_addon . '/' . $name_addon . '.php';
@@ -54,16 +53,32 @@ function installAddon($db, $prefix, $name_addon) {
             $stmt->bindParam(':version', $version, PDO::PARAM_STR);
             $stmt->bindParam(':author', $author, PDO::PARAM_STR);
             $stmt->bindParam(':description_addon', $description_addon, PDO::PARAM_STR);
-            $active = 1;  
-           
+            $active = 1;
             $show_front = 0;
-          
             $stmt->bindParam(':active', $active, PDO::PARAM_INT); 
             $stmt->bindParam(':show_front', $show_front, PDO::PARAM_INT);
-            return $stmt->execute();
+            $stmt->execute();
+
+            // Check if there is a database script for the addon
+            $addonDatabaseScriptPath = $addonsDirectory . $name_addon . '/' . $name_addon . '_data_base.php';
+            if(file_exists($addonDatabaseScriptPath)) {
+                include $addonDatabaseScriptPath;
+
+                if(isset($databaseScript)) {
+                    // Execute the database script
+                    $stmt = $db->prepare($databaseScript);
+                    $stmt->execute();
+                }
+            }
+
+            return true;
         }
     }
+
+    return false;
 }
+
+
 
 
 function getAllAddons($db, $prefix) {
@@ -81,6 +96,19 @@ function isActiveAddon($addonName, $db, $prefix) {
 }
 
 function uninstallAddon($db, $prefix, $name_addon) {
+    $addonsDirectory = $_SERVER['DOCUMENT_ROOT'] . '/cover/addons/';
+    $addonDatabaseScriptPath = $addonsDirectory . $name_addon . '/' . $name_addon . '_data_base.php';
+
+    // Check if there is a database script for the addon 
+    if(file_exists($addonDatabaseScriptPath)) {
+        include $addonDatabaseScriptPath;
+
+        if(isset($databaseDropScript)) {
+            // Execute the database drop script
+            $db->exec($databaseDropScript);
+        }
+    }
+
     $stmt = $db->prepare("DELETE FROM  ".$prefix['table_prefix']."_flussi_tjd_addons WHERE name_addon = :name_addon");
     $stmt->bindParam(':name_addon', $name_addon, PDO::PARAM_STR);
     return $stmt->execute();
