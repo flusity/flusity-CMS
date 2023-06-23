@@ -75,5 +75,8 @@ ob_end_flush();
     </main>
   </div>
 </div>
+<script>
 
+
+</script>
 <?php require_once ROOT_PATH . 'core/template/admin-footer.php';?>
