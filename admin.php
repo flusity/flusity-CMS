@@ -3,7 +3,7 @@
   <button class="btn btn-primary position-fixed start-0 translate-middle-y d-md-none tools-settings" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas">
       <i class="fas fa-bars"></i>
   </button>
-  <?php 
+<?php 
      $systemAddons = getAllSystemAddons();
      $installedAddons = getAllAddons($db, $prefix); 
 ?>
@@ -34,8 +34,7 @@
       </div>
       
       <div class="row mt-3 mb-5">
-      
-    <?php 
+<?php 
     foreach ($systemAddons as $addon) {
         $isInstalled = false;
         $isActive = false;
@@ -44,7 +43,7 @@
                 $isInstalled = true;
                 $isActive = isActiveAddon($addon['name_addon'], $db, $prefix);
                 $showFront = $installedAddon['show_front'];
-               
+            
                 break;
             }
         }
@@ -68,9 +67,7 @@
             </div>';
         }
     }
-    ?>
-    
-
+?>
 </div>
 
       <div class="row g-2">
