@@ -60,7 +60,6 @@
             $name_addon_get = str_replace('_', ' ', htmlspecialchars($addon['name_addon']));
             $name_addon_get = ucwords($name_addon_get);
             echo '<h3>' . $name_addon_get . '</h3>';
-            //echo '<a href="#" class="but">'.t('Go to').' '.$name_addon_get.'</a>';
             echo '<a class="nav-link" href="'. getFullUrl('/core/tools/addons_model.php') . '?name=' . htmlspecialchars($addon['name_addon']) . '&id=' . urlencode(getAddonId($db, $prefix, $addon['name_addon'])) .'"><span class="nav-text">'.t('Go to').' '. $name_addon_get .'</span></a>';
 
             echo '</div>';
