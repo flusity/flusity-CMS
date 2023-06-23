@@ -1,4 +1,5 @@
 <?php 
+
 $id = intval($_GET['id']);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') 
@@ -40,7 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             $stmt->execute();
 
             $_SESSION['success_message'] = "File uploaded successfully.";
-            $_SESSION['uploaded_file'] = $file_url;
         } else {
             throw new Exception("Error moving uploaded file.");
         }
@@ -53,32 +53,46 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 ?>
 
 <div class="col-md-12">
-<div class="row d-flex">
-    <form method="POST" action="" enctype="multipart/form-data">
-        <div class="col-md-6">
-            <div class="mb-3">
-                <label for="simpleFormControlInput" class="form-label"><?php echo t('Title');?></label>
-                <input type="text" class="form-control" name="title" id="simpleFormControlInput" placeholder="Title">
+    <div class="row d-flex">
+        <form method="POST" action="" enctype="multipart/form-data" class="col-md-9">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="mb-3">
+                        <label for="simpleFormControlInput" class="form-label"><?php echo t('Title');?></label>
+                        <input type="text" class="form-control" name="title" id="simpleFormControlInput" placeholder="Title" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="simpleFormControlTextarea" class="form-label"><?php echo t('Description');?></label>
+                        <textarea class="form-control" name="description" id="simpleFormControlTextarea" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" name="submit" class="btn btn-primary"><?php echo t('Submit');?></button>
+                </div>
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label for="file_id" class="form-label"><?php echo t('Image');?></label>
+                        <input class="form-control form-control-sm" name="file_id" id="formFileSm" type="file" onchange="previewFile(this)">
+                    </div>
+                    <img id="preview" src="<?php echo $_SESSION['uploaded_file'] ?? '...'; ?>" class="img-thumbnail" alt="...">
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="simpleFormControlTextarea" class="form-label"><?php echo t('Description');?></label>
-                <textarea class="form-control" name="description" id="simpleFormControlTextarea" rows="3"></textarea>
-            </div>
-        </div>
+        </form>
         <div class="col-md-3">
-            <div class="mb-3">
-                <label for="file_id" class="form-label"><?php echo t('Image');?></label>
-                <input class="form-control form-control-sm" name="file_id" id="formFileSm" type="file" onchange="previewFile(this)">
-            </div>
-            <img id="preview" src="<?php echo $_SESSION['uploaded_file'] ?? '...'; ?>" class="img-thumbnail" alt="...">
+            <?php
+            // Getting last 5 addons entries to display on the right
+            $stmt = $db->prepare("SELECT title, description FROM " . $prefix['table_prefix'] . "_jd_simple ORDER BY id DESC LIMIT 5");
+            $stmt->execute();
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($results as $result) {
+                echo '<h5>' . $result['title'] . '</h5>';
+                echo '<p>' . $result['description'] . '</p>';
+                echo '<hr>';
+            }
+            ?>
         </div>
-            <button type="submit" name="submit" class="btn btn-primary"><?php echo t('Submit');?></button>
-    </form>
-    <div class="col-md-6">
-        dešiniau
     </div>
 </div>
-</div>
+
+   
 <script>
 
 function previewFile(input) {
