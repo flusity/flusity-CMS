@@ -154,3 +154,45 @@ function getAddonId($db, $prefix, $name_addon) {
 
     return $result ? $result['id'] : null;
 }
+function uploadFile($uploaded_file, $db, $prefix, $subfolder = null) {
+    
+    if(!$subfolder) {
+        $subfolder = "jd_simple_img";
+    }
+
+    $unique_code = bin2hex(random_bytes(8));
+    $filename_parts = pathinfo($uploaded_file["name"]);
+
+    // Replacing space with underscore in the filename
+    $filename = str_replace(' ', '_', $filename_parts['filename']);
+    
+    $new_filename = $filename . '_' . $unique_code . '.' . $filename_parts['extension'];
+
+    $target_dir = $_SERVER['DOCUMENT_ROOT'] . "/uploads/";
+    $addonImages = $subfolder . "/";
+
+    if (!is_dir($target_dir . $addonImages)) {
+        mkdir($target_dir . $addonImages, 0777, true);
+    }
+
+    $target_file = $target_dir . $new_filename;
+    $target_file_addon = $target_dir . $addonImages . $new_filename;
+
+    if (move_uploaded_file($uploaded_file["tmp_name"], $target_file)) {
+        copy($target_file, $target_file_addon);
+
+        $file_url = $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['HTTP_HOST'] . "/uploads/" . $new_filename;
+        $img_url = $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['HTTP_HOST'] . "/uploads/" . $addonImages . $new_filename;
+        $img_name = $new_filename;
+
+        // Add the new file to the "files" table
+        $stmt_files = $db->prepare("INSERT INTO " . $prefix['table_prefix'] . "_flussi_files (name, url) VALUES (:name, :url)");
+        $stmt_files->bindParam(':name', $new_filename, PDO::PARAM_STR);
+        $stmt_files->bindParam(':url', $file_url, PDO::PARAM_STR);
+        $stmt_files->execute();
+
+        return ['img_url' => $img_url, 'img_name' => $img_name];
+    } else {
+        throw new Exception("Error moving uploaded file.");
+    }
+}
