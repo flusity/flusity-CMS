@@ -52,7 +52,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 }
 ?>
 
-
 <div class="col-md-12">
     <div class="row d-flex">
         <form id="update-addon-form"  method="POST" action="" enctype="multipart/form-data" class="col-md-9">
@@ -85,8 +84,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                             </div>
                             <div class="offcanvas-body" id="offcanvasBody" style="background-color: #494f55fa;">
-                            
-                            
                             </div>
                             <div class="offcanvas-footer">
                                 <button class="btn file-left prev"><i class="fas fa-angle-left"></i></button>
@@ -97,21 +94,73 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             </div>
         </form>
         <div class="col-md-3">
-            <?php
-            $stmt = $db->prepare("SELECT title, description FROM " . $prefix['table_prefix'] . "_jd_simple ORDER BY id DESC LIMIT 5");
-            $stmt->execute();
-            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            foreach ($results as $result) {
-                echo '<h5>' . $result['title'] . '</h5>';
-                echo '<p>' . $result['description'] . '</p>';
-                echo '<hr>';
-            }
-            ?>
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col" width="20%"><?php echo t("Image");?></th>
+                        <th scope="col" width="20%"><?php echo t("Title");?></th>
+                        <th scope="col" width="60%"><?php echo t("Description");?></th>
+                        <th scope="col" width="8%"><?php echo t("Actions");?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php
+                $get_params = $_GET;
+                unset($get_params['page']);
+                
+                $get_param_str = '';
+                if (!empty($get_params)) {
+                    $get_param_str = http_build_query($get_params) . '&';
+                }
+                    $addons_per_page = 5;
+                    $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+                    $offset = ($page > 1) ? ($page - 1) * $addons_per_page : 0;
+
+                    $stmt = $db->prepare("SELECT COUNT(*) FROM " . $prefix['table_prefix'] . "_jd_simple");
+                    $stmt->execute();
+                    $total_addons = $stmt->fetchColumn();
+
+                    $stmt = $db->prepare("SELECT id, title, description, img_url FROM " . $prefix['table_prefix'] . "_jd_simple ORDER BY id DESC LIMIT :limit OFFSET :offset");
+                    $stmt->bindParam(':limit', $addons_per_page, PDO::PARAM_INT);
+                    $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+                    $stmt->execute();
+                    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                    foreach ($results as $result) {
+
+                        echo '<tr>';
+                        if($result['img_url'] != '') {
+                            echo '<td><img src="' . $result['img_url'] . '" alt="Addon Image" style="width: 50px; height: 50px;"></td>';
+                        } else {
+                            echo '<td>No Image</td>';
+                        }
+                        echo '<td>' . $result['title'] . '</td>';
+                        // Limit description to 30 characters
+                        $short_description = mb_substr($result['description'], 0, 30);
+                        echo '<td>' . $short_description . '...</td>';
+                        echo '<td>';
+                        echo '<a href="edit_addon_post.php?id=' . $result['id'] . '"><i class="fa fa-edit"></i></a> ';
+                        echo '<a href="delete_addon_post.php?id=' . $result['id'] . '"><i class="fa fa-trash"></i></a>';
+                        echo '</td>';
+                        echo '</tr>';
+                    } ?>
+                </tbody>
+            </table>
+                <?php 
+                $total_pages = ceil($total_addons / $addons_per_page);
+
+                for ($i = 1; $i <= $total_pages; $i++) {
+                    if ($i == $page) {
+                        echo $i . " ";
+                    } else {
+                        echo "<a class='btn btn-primary' href='?" . $get_param_str . "page=" . $i . "'>" . $i . "</a> ";
+                    }
+                }
+                ?>
         </div>
     </div>
 </div>
 
-   
 <script>
     $('#file_id').change(function(event) {
     var file = this.files[0];
@@ -165,7 +214,4 @@ var loadImages = function() {
     });
 };
 
-
 </script>
-
-
