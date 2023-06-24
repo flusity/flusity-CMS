@@ -78,5 +78,30 @@ ob_end_flush();
 <script>
 
 
+$('#offcanvasRight').on('show.bs.offcanvas', function () {
+    loadImages();
+});
+
+$('.prev').click(function() {
+    index = Math.max(0, index - 6);
+    loadImages();
+    return false; 
+});
+$('.next').click(function() {
+    index += 6;
+    loadImages();
+    return false; 
+});
+
+$('#file_id').change(function(event) {
+    var file = this.files[0];
+    if (file) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('preview_image').src = e.target.result;
+        }
+        reader.readAsDataURL(file);
+    }
+});
 </script>
 <?php require_once ROOT_PATH . 'core/template/admin-footer.php';?>
