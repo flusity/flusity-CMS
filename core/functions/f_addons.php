@@ -78,9 +78,6 @@ function installAddon($db, $prefix, $name_addon) {
     return false;
 }
 
-
-
-
 function getAllAddons($db, $prefix) {
     $stmt = $db->prepare("SELECT * FROM  ".$prefix['table_prefix']."_flussi_tjd_addons");
     $stmt->execute();
@@ -157,7 +154,7 @@ function getAddonId($db, $prefix, $name_addon) {
 function uploadFile($uploaded_file, $db, $prefix, $subfolder = null) {
     
     if(!$subfolder) {
-        $subfolder = "jd_simple_img";
+        $subfolder = "addon_default";
     }
 
     $unique_code = bin2hex(random_bytes(8));
