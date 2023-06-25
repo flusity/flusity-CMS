@@ -105,3 +105,5 @@ $('#file_id').change(function(event) {
 });
 </script>
 <?php require_once ROOT_PATH . 'core/template/admin-footer.php';?>
+<script>
+

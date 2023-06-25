@@ -78,6 +78,9 @@ function installAddon($db, $prefix, $name_addon) {
     return false;
 }
 
+
+
+
 function getAllAddons($db, $prefix) {
     $stmt = $db->prepare("SELECT * FROM  ".$prefix['table_prefix']."_flussi_tjd_addons");
     $stmt->execute();
@@ -106,10 +109,21 @@ function uninstallAddon($db, $prefix, $name_addon) {
         }
     }
 
+    // Delete addon images directory
+    $imgDirectory = $_SERVER['DOCUMENT_ROOT'] . '/uploads/' . $name_addon . '_img/';
+    if(is_dir($imgDirectory)) {
+        $files = array_diff(scandir($imgDirectory), array('.','..'));
+        foreach ($files as $file) {
+            unlink($imgDirectory . $file); 
+        }
+        rmdir($imgDirectory);
+    }
+
     $stmt = $db->prepare("DELETE FROM  ".$prefix['table_prefix']."_flussi_tjd_addons WHERE name_addon = :name_addon");
     $stmt->bindParam(':name_addon', $name_addon, PDO::PARAM_STR);
     return $stmt->execute();
 }
+
 
 function deleteDirectory($dir) {
     if (!file_exists($dir)) {
@@ -193,3 +207,4 @@ function uploadFile($uploaded_file, $db, $prefix, $subfolder = null) {
         throw new Exception("Error moving uploaded file.");
     }
 }
+

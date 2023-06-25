@@ -34,6 +34,7 @@ $menuId = getMenuItems($db, $prefix);
 
 if ($mode === 'create' || $customBlock) {
 ?>
+<div class="col-md-6">
 <div id="customblock-form-content">
     <form id="customblock-form">
         <input type="hidden" name="mode" value="<?php echo $mode; ?>">
@@ -74,9 +75,14 @@ if ($mode === 'create' || $customBlock) {
         <button type="button" class="btn btn-secondary" id="cancel-customblock"><?php echo $mode === 'edit' ? 'Cancel' : 'Back'; ?></button>
     </form>
 </div>
+</div>
+
 <?php
 } else {
     echo t('Block not found.');
 }
 ?>
 
+<div class="col-md-6">
+
+</div>
