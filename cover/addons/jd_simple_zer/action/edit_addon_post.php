@@ -25,6 +25,7 @@ function getAddonById($db, $prefix, $addonId) {
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') 
 { 
+    $addonPostId = intval($_POST['addon_post_edit_id']); 
     $id = intval($_POST['id']); 
     
     try {
@@ -69,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         $stmt->bindParam(':img_name', $img_name, PDO::PARAM_STR);
         $stmt->bindParam(':menu_id', $menu_id, PDO::PARAM_INT);
         $stmt->bindParam(':place_id', $place_id, PDO::PARAM_INT);
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->bindParam(':id', $addonPostId, PDO::PARAM_INT);
 
         $stmt->execute();
         ///$_SESSION['success_message'] = t("success.");
@@ -77,11 +78,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         $_SESSION['error_message'] = $e->getMessage();
     }
 
-    header('Location: ' . $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/core/tools/addons_model.php?name=jd_simple_zer&id=' . $id);
+    header('Location: ' . $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/core/tools/addons_model.php?name=jd_simple_zer&id='.$id.'&addon_post_edit_id=' . $addonPostId);
 
     exit();
 /*   
-$addon = getAddonById($db, $prefix, $id );
+$addon = getAddonById($db, $prefix, $addonPostId );
 var_dump($addon); */
 }
 ?>
