@@ -16,14 +16,14 @@
 <h3>Prietaisų skydelis</h3>
 <ul>
 <li>Dashboard (informacijos suvestinė)</li>
-<li>Users (vartotojai)</li>
+<li>Users (vartotojai) baigtumo vertė 2%</li>
 <li>Places (Vietos)</li> // "Tai vietos puslapio dalyse kur pateikti blokų info"
 <li>Posts (pranešimai)</li>
 <li>Menu (meniu)</li>
 <li>Addons (papildiniai)</li>
 <li>Block (blokai)</li>
 <li>Tags (Žymos)</li>
-<li>Contact Form (kontaktų forma dar kūrimo būsenoje)</li>
+<li>Contact Form (contact form still under development, completion value 3%)</li>
 <li>Files (failai)</li>
 <li>Language (kalba vertimas į lt)</li>
 <li>Settings (nustatymai)</li>
@@ -77,8 +77,8 @@ Atsižvelgiant į šiuos elementus ir funkcijas, svetainė yrap patogus ir funkc
   <h3>Dashboard</h3>
 <ul><li>
 <li>Dashboard (information summary)</li>
-<li>Users</li>
-<li>Places</li>// "These are places in the parts of the page where block info can be presented"
+<li>Users completion valuation 2%</li>
+<li>Places // "These are places in the parts of the page where block info can be presented"</li>
 <li>Posts</li>
 <li>Menu</li>
 <li>Addons</li>
