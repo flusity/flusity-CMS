@@ -20,7 +20,6 @@ $mode = $addonId > 0 ? 'edit' : 'create';
 
 $addon = $mode === 'edit' ? getAddonById($db, $prefix, $name_addon, $addonId) : null;
 
-//$addon = getAddonById($db, $prefix, $addonId);
 //var_dump($addon);
 
 if ($mode === 'create' || $addon) {
@@ -33,10 +32,9 @@ if ($mode === 'create' || $addon) {
     <form id="update-addon-form" method="POST" action="../../cover/addons/jd_simple/action/<?php echo $mode === 'edit' ? 'edit_addon_post.php' : 'add_addon.php'; ?>" enctype="multipart/form-data" class="col-md-10">
 
     <input type="hidden" name="mode" value="<?php echo $mode; ?>">
-    <input type="hidden" name="addon_post_edit_id" value="<?php echo $addon['id']; ?>">
+     <input type="hidden" name="addon_post_edit_id" value="<?php echo isset($addon['id']) ? $addon['id'] : ''; ?>">
     <input type="hidden" class="form-control" name="id" value="<?php echo $id; ?>">
-    
-       
+     
     <div class="row">
                 <div class="col-md-8">
    
@@ -89,10 +87,12 @@ if ($mode === 'create' || $addon) {
                     <div class="mb-3">
                         <label for="file_id" class="form-label"><?php echo t('Image');?></label>
                         <input class="form-control form-control-sm" name="file_id" id="file_id" type="file" onchange="previewFile(this)">
-                    </div>
+                        <input type="hidden" name="file_id"  id="file_id" value="<?php echo isset($addon['img_url']) ? $addon['img_url'] : ''; ?>">
+               </div>
                   
                     <div id="image_container">
                         <img id="preview_image"  style="max-width: 100%;" src="<?php echo $mode === 'edit' ? $addon['img_url'] : ''; ?>">
+                       
                     </div>
 
                     <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><?php echo t('files Library');?></button>
@@ -208,6 +208,14 @@ if ($mode === 'create' || $addon) {
     }
 });
 
+function previewImageOffcanvas(fileInput) {
+    var imgPreview = document.getElementById('preview_image');
+
+    // Get the URL from the fileInput, depending on how it is set in your offcanvas implementation
+    var url = getURLFromOffcanvasSelection(fileInput);
+
+    imgPreview.src = url;
+}
  $(document).on('click', '.brand_icone_id', function() {
     var selectedFileId = $(this).val();
     $('#selected_file_id').val(selectedFileId);
