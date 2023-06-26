@@ -17,7 +17,7 @@
 <ul>
 <li>Dashboard (informacijos suvestinė)</li>
 <li>Users (vartotojai) baigtumo vertė 2%</li>
-<li>Places (Vietos)</li> // "Tai vietos puslapio dalyse kur pateikti blokų info"
+<li>Places (Vietos) // "Tai vietos puslapio dalyse kur pateikti blokų info"</li> 
 <li>Posts (pranešimai)</li>
 <li>Menu (meniu)</li>
 <li>Addons (papildiniai)</li>
