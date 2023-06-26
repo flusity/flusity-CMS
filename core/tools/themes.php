@@ -65,9 +65,9 @@ require_once ROOT_PATH . 'core/template/header-admin.php'; ?>
                                 <strong><?php echo t("Description");?>:</strong> <?php echo htmlspecialchars($theme['description']); ?>
                             </p>
                             <?php if ($isInstalled) { ?>
-                                <?php echo t("Instaled");?>&nbsp;<i class="fa-solid fa-check"></i>
+                                <?php echo t("Enabled");?>&nbsp;<i class="fa-solid fa-check"></i>
                             <?php } else { ?>
-                                <button type="button" class="btn btn-primary" onclick="installTheme('<?php echo $theme['name']; ?>')" data-theme-name="<?php echo $theme['name']; ?>" title="<?php echo t("select");?>"><?php echo t("Install");?></button>
+                                <button type="button" class="btn btn-primary" onclick="installTheme('<?php echo $theme['name']; ?>')" data-theme-name="<?php echo $theme['name']; ?>" title="<?php echo t("select");?>"><?php echo t("Activate");?></button>
                             <?php } ?>
                          </div>
                     </div>
@@ -120,7 +120,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php'; ?>
                 location.reload(); 
             },
             error: function() {
-                alert('Error while installing the theme');
+                alert('Error while Activating the theme');
             }
         });
     }
