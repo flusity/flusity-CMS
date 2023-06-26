@@ -165,6 +165,15 @@ function getAddonId($db, $prefix, $name_addon) {
 
     return $result ? $result['id'] : null;
 }
+function getAddonById($db, $prefix, $name_addon, $addonId) {
+    $query = 'SELECT * FROM '.$prefix['table_prefix'].'_'.$name_addon.' WHERE id = :addonId';
+    $statement = $db->prepare($query);
+    $statement->bindParam(':addonId', $addonId, PDO::PARAM_INT);
+    $statement->execute();
+
+    return $statement->fetch(PDO::FETCH_ASSOC);
+}
+
 function uploadFile($uploaded_file, $db, $prefix, $subfolder = null) {
     
     if(!$subfolder) {
