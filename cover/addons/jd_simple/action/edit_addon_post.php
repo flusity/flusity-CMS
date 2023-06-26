@@ -14,6 +14,7 @@ secureSession($db, $prefix);
 $language_code = getLanguageSetting($db, $prefix);
 $translations = getTranslations($db, $prefix, $language_code);
 
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') 
 { 
     $addonPostId = intval($_POST['addon_post_edit_id']); 
