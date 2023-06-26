@@ -1,7 +1,7 @@
 # flusity CMS
 
  ![banner](http://manowebas.lt/wp-content/uploads/2023/06/flusity-b.png) v2
- <p>95% completion</p>
+ <p>94% completion</p>
 <p>PHP CMS project, Install, Log In, Sign Up, admin, moderator, user roles, add/edit/delete (post, layout places, language, files, menu, themes, custom block, addon (plugin) system, user,  backup.sql), update website settings.</p>
 <p><b>CMS flusity</b> naudoja tradicinį serverio pusės generavimo modelį, bet sukurta naudojant šiuolaikines technologijas ir geriausias praktikas.</p>
 
@@ -23,7 +23,7 @@
 <li>Addons (papildiniai)</li>
 <li>Block (blokai)</li>
 <li>Tags (Žymos)</li>
-<li>Contact Form (kontaktų forma dar kūrimo būsenoje, baigtumo vertė 3%)</li>
+<li>Contact Form (kontaktų forma dar kūrimo būsenoje, iki galutinio baigtumo vertė 3%)</li>
 <li>Files (failai)</li>
 <li>Language (kalba vertimas į lt)</li>
 <li>Settings (nustatymai)</li>
@@ -84,7 +84,7 @@ Atsižvelgiant į šiuos elementus ir funkcijas, svetainė yrap patogus ir funkc
 <li>Addons</li>
 <li>Block</li>
  <li>Tags</li>
-<li>Contact Form (contact form still under development, completion value 3%)</li>
+<li>Contact Form (contact form still under development, to final completion value 3%)</li>
 <li>Files</li>
 <li>Language (default en)</li>
 <li>Settings</li>
