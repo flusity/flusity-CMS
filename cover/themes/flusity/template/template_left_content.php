@@ -8,8 +8,7 @@
         <?php 
             $page_url = getCurrentPageUrl($db, $prefix);
             if ($page_url) {
-                displayCustomBlockByplace($db, $prefix, $page_url, 'doc-left-7');
-                displayAddon($db, $prefix, $page_url, 'doc-left-7');
+                displayPlace($db, $prefix, $page_url, 'doc-left-7');
             } else {
                 print "";
             }
@@ -19,8 +18,7 @@
             <?php 
             $page_url = getCurrentPageUrl($db, $prefix);
             if ($page_url) {
-                displayCustomBlockByplace($db, $prefix, $page_url, 'doc-right-5');
-                displayAddon($db, $prefix, $page_url, 'doc-right-5');
+                displayPlace($db, $prefix, $page_url, 'doc-right-5');
             } else {
                 print "";
             }
