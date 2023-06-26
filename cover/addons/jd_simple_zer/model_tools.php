@@ -85,7 +85,12 @@ if ($mode === 'create' || $addon) {
                         <textarea class="form-control" name="description" id="simpleFormControlTextarea" rows="3" required><?php echo $mode === 'edit' ? htmlspecialchars($addon['description']) : ''; ?></textarea>
 
                     </div>
+                   
+
                     <button type="submit" name="submit" class="btn btn-primary"><?php echo t('Submit');?></button>
+                     <?php if (isset($_GET['addon_post_edit_id'])): ?>
+                        <a href="addons_model.php?name=jd_simple_zer&id=<?php echo $_GET['id'] ?>" class="btn btn-secondary"><?php echo t('Cancel');?></a>
+                    <?php endif; ?>
                 </div>
                 <div class="col-md-4">
                     <div class="mb-3">
@@ -94,8 +99,8 @@ if ($mode === 'create' || $addon) {
                     </div>
                   
                     <div id="image_container">
-    <img id="preview_image"  style="max-width: 100%;" src="<?php echo $mode === 'edit' ? $addon['img_url'] : ''; ?>">
-</div>
+                        <img id="preview_image"  style="max-width: 100%;" src="<?php echo $mode === 'edit' ? $addon['img_url'] : ''; ?>">
+                    </div>
 
                     <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><?php echo t('files Library');?></button>
                         <div class="offcanvas offcanvas-end" style="background-color: #494f55fa;" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">

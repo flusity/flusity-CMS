@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         $_SESSION['error_message'] = $e->getMessage();
     }
 
-    header('Location: ' . $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/core/tools/addons_model.php?name=jd_simple_zer&id='.$id); //.'&addon_post_edit_id=' . $addonPostId
+    header('Location: ' . $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/core/tools/addons_model.php?name=jd_simple_zer&id='.$id);//.'&addon_post_edit_id=' . $addonPostId
 
     exit();
 

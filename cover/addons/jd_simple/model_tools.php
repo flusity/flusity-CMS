@@ -85,6 +85,10 @@ if ($mode === 'create' || $addon) {
 
                     </div>
                     <button type="submit" name="submit" class="btn btn-primary"><?php echo t('Submit');?></button>
+                    <?php if (isset($_GET['addon_post_edit_id'])): ?>
+                        <a href="addons_model.php?name=jd_simple&id=<?php echo $_GET['id'] ?>" class="btn btn-secondary"><?php echo t('Cancel');?></a>
+                    <?php endif; ?>
+                </div>
                 </div>
                 <div class="col-md-4">
                     <div class="mb-3">
