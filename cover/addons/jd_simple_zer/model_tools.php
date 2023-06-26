@@ -5,8 +5,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 
 $name_addon ='jd_simple_zer';
 
-
-$id = intval($_GET['id']);
+$id = intval(htmlspecialchars($_GET['id']));
 
 $placesId = getplaces($db, $prefix);
 $menuId = getMenuItems($db, $prefix);
@@ -16,8 +15,8 @@ $stmt->bindParam(':id', $id);
 $stmt->execute();
 $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
+$addonId = isset($_GET['addon_post_edit_id']) ? (int)htmlspecialchars($_GET['addon_post_edit_id']) : 0;
 
-$addonId = isset($_GET['addon_post_edit_id']) ? (int)$_GET['addon_post_edit_id'] : 0;
 $mode = $addonId > 0 ? 'edit' : 'create';
 $addon = $mode === 'edit' ? getAddonById($db, $prefix, $name_addon, $addonId) : null;
 
@@ -83,7 +82,7 @@ if ($mode === 'create' || $addon) {
 
                     <button type="submit" name="submit" class="btn btn-primary"><?php echo t('Submit');?></button>
                      <?php if (isset($_GET['addon_post_edit_id'])): ?>
-                        <a href="addons_model.php?name=jd_simple_zer&id=<?php echo $_GET['id'] ?>" class="btn btn-secondary"><?php echo t('Cancel');?></a>
+                        <a href="addons_model.php?name=jd_simple_zer&id=<?php echo htmlspecialchars($_GET['id']) ?>" class="btn btn-secondary"><?php echo t('Cancel');?></a>
                     <?php endif; ?>
                 </div>
                 <div class="col-md-4">
@@ -159,15 +158,15 @@ if ($mode === 'create' || $addon) {
                         }
                         echo '<td>' . $result['title'] . '</td>';
                         
-                        $short_description = mb_substr($result['description'], 0, 60);
-                        $short_menu = $result['menu_name'];
-                        $short_place = $result['place_name'];
+                        $short_description = htmlspecialchars(mb_substr($result['description'], 0, 60));
+                        $short_menu = htmlspecialchars($result['menu_name']);
+                        $short_place = htmlspecialchars($result['place_name']);
                         echo '<td>' . $short_description . '...</td>';
                         echo '<td>' . $short_menu . '</td>';
                         echo '<td>' . $short_place . '</td>';
                         echo '<td>';
-                        echo '<a href="addons_model.php?name=jd_simple_zer&id=' . $_GET['id'] . '&addon_post_edit_id=' . $result['id'] . '"><i class="fa fa-edit"></i></a> ';
-                        echo '<a href="../../cover/addons/jd_simple_zer/action/delete_addon_post.php?name=jd_simple_zer&id=' . $_GET['id'] . '&addon_post_id=' . $result['id'] . '"><i class="fa fa-trash"></i></a>';
+                        echo '<a href="addons_model.php?name=jd_simple_zer&id=' . htmlspecialchars($_GET['id']) . '&addon_post_edit_id=' . htmlspecialchars($result['id']) . '"><i class="fa fa-edit"></i></a> ';
+                        echo '<a href="../../cover/addons/jd_simple_zer/action/delete_addon_post.php?name=jd_simple_zer&id=' . htmlspecialchars($_GET['id']) . '&addon_post_id=' . htmlspecialchars($result['id']) . '"><i class="fa fa-trash"></i></a>';
                         echo '</td>';
                         echo '</tr>';
                     } ?></form>
