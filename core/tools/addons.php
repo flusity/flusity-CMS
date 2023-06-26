@@ -64,14 +64,20 @@ require_once ROOT_PATH . 'core/template/header-admin.php'; ?>
                         <img src="<?php echo $addon['addons_thumb']; ?>" class="img-fluid rounded-start p-1" alt="addon image" style="max-width: 300px; max-height: 200px; width: 98%;">
                     </div>
                     <div class="col-md-8">
-                        <div class="card-body pl-2">
-                            <h5 class="card-title"><?php echo htmlspecialchars($addon['name_addon']); ?></h5>
-                            <p class="card-text">
-                                <strong><?php echo t("Version");?>:</strong> <?php echo htmlspecialchars($addon['version']); ?><br/>
-                                <strong><?php echo t("Author");?>:</strong> <?php echo htmlspecialchars($addon['author']); ?><br/>
-                                <strong><?php echo t("Description");?>:</strong> <?php echo htmlspecialchars($addon['description']); ?>
-                            </p>
-                        </div>
+                    <div class="card-body pl-2">
+                        <h5 class="card-title"><?php echo htmlspecialchars($addon['name_addon']); ?></h5>
+                        <p class="card-text">
+                            <strong><?php echo t("Version");?>:</strong> <?php echo htmlspecialchars($addon['version']); ?><br/>
+                            <strong><?php echo t("Author");?>:</strong> <?php echo htmlspecialchars($addon['author']); ?><br/>
+                            <strong><?php echo t("Description");?>:</strong> <?php echo htmlspecialchars($addon['description']); ?><br/>
+                            <?php 
+                            if($isActive) {
+                                echo '<a href="addons_model.php?name=' . urlencode($addon['name_addon']) . '&id=' . urlencode($installedAddon['id'] ?? '') . '">'. t("Go to Addon").'</a>';
+                            }
+                            ?>
+                        </p>
+                    </div>
+
                     </div>  
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item addon-card"> 

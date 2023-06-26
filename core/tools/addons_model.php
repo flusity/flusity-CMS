@@ -57,7 +57,7 @@ ob_start();
             }
             $isActive = $installedAddon['active'];
             $showFront = $installedAddon['show_front'];
-            if(!$isActive || $showFront != 1) {
+            if(!$isActive) {
                 continue;
             }
 
