@@ -138,6 +138,39 @@ function getSettings($db, $prefix) {
     }
 
 
+    
+    function displayPlace($db, $prefix, $page_url, $place_name, $admin_label = null) {
+        // Display custom blocks
+        $customblocks = getCustomBlocksByUrlNameAndPlace($db, $prefix, $page_url, $place_name);
+    
+        foreach ($customblocks as $customBlock) {
+            echo '<div class="customblock-widget">';
+            if ($admin_label) {
+                echo '<h3>' . htmlspecialchars($admin_label) . '</h3>';
+            } else {
+                echo '<h3>' . htmlspecialchars($customBlock['name']) . '</h3>';
+            }
+            echo '<div>' . $customBlock['html_code'] . '</div>';
+            echo '</div>';
+        }
+    
+        // Display addons
+        $addonsDirectory = $_SERVER['DOCUMENT_ROOT'] . '/cover/addons/';
+    
+        foreach(glob($addonsDirectory . "/*", GLOB_ONLYDIR) as $dir) {
+            $content = basename($dir);
+            $addons = getAddonsByUrlNameAndPlace($db, $prefix, $content, $page_url, $place_name);
+    
+            foreach ($addons as $addon) {
+                $viewPath = $dir . "/view.php";
+                if (file_exists($viewPath)) {
+                    include_once($viewPath);
+                }
+            }
+        }
+    }
+    
+    
     require_once 'f_users.php';
     require_once 'f_backup.php';
     require_once 'f_posts.php';

@@ -50,7 +50,7 @@ function getCustomBlocksByUrlNameAndPlace($db, $prefix, $page_url, $place_name) 
 
     return $stmt->fetchAll();
 }
-
+/* 
 function displayCustomBlockByPlace($db, $prefix, $page_url, $place_name, $admin_label = null) {
 
     $customblocks = getCustomBlocksByUrlNameAndPlace($db, $prefix, $page_url, $place_name);
@@ -66,4 +66,4 @@ function displayCustomBlockByPlace($db, $prefix, $page_url, $place_name, $admin_
         echo '</div>';
     }
     
-}
+} */

@@ -233,45 +233,21 @@ function getAddonsByUrlNameAndPlace($db, $prefix, $addon, $page_url, $place_name
 
     return $stmt->fetchAll();
 }
+/* 
+function displayAddonByPlace($db, $prefix, $page_url, $place_name, $admin_label = null) {
+    $addonsDirectory = $_SERVER['DOCUMENT_ROOT'] . '/cover/addons/';
 
-function displayAddon($db, $prefix, $page_url, $place_name, $admin_label = null) {
-   
-    $addonssDirectory = $_SERVER['DOCUMENT_ROOT'] . '/cover/addons/';
-    $dirContent = scandir($addonssDirectory);
-    $addonDetails = [];
+    foreach(glob($addonsDirectory . "/*", GLOB_ONLYDIR) as $dir) {
+        $content = basename($dir);
+        $addons = getAddonsByUrlNameAndPlace($db, $prefix, $content, $page_url, $place_name);
 
-    foreach($dirContent as $content) {
-        if($content != '.' && $content != '..') {
-            $addonsDirectory = $addonssDirectory . $content;
-            if(is_dir($addonsDirectory)) {
-                $addonsDetailsPath = $addonsDirectory . '/' . $content . '.php';
-                if(file_exists($addonsDetailsPath)) {
-                    include $addonsDetailsPath;
-                    $addonsThumbPath = $addonsDirectory . '/thumbnail.png';
-                    if(file_exists($addonsThumbPath)) {
-                        $addonsThumbUrl = '/cover/addons/' . $content . '/thumbnail.png';
-                    } else {
-                        $addonsThumbUrl = '/core/tools/img/defaultAddonsImage.png';
-                    }
-                    
-                    $addonDetails[] = [
-                        'name_addon' => $name_addon,
-                        'version' => $version,
-                        'author' => $author,
-                        'description' => $description_addon,
-                        'addons_thumb' => $addonsThumbUrl,
-                    ];
-
-                    $addons = getAddonsByUrlNameAndPlace($db, $prefix, $content, $page_url, $place_name);
-
-                    foreach ($addons as $addon) {
-                   
-                            include("cover/addons/{$content}/view.php");
-                        
-                    }
-                }
+        foreach ($addons as $addon) {
+            $viewPath = $dir . "/view.php";
+            if (file_exists($viewPath)) {
+                include_once($viewPath);
             }
         }
     }
-}
+} */
+
 
