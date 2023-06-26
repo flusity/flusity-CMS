@@ -18,6 +18,8 @@
                     $page_url = getCurrentPageUrl($db, $prefix);
                     if ($page_url) {
                         displayCustomBlockByplace($db, $prefix, $page_url, 'head-box-one');
+                        displayAddon($db, $prefix, $page_url, 'head-box-one');
+
                     } else {
                         print "";
                     }
@@ -33,6 +35,7 @@
                     $page_url = getCurrentPageUrl($db, $prefix);
                     if ($page_url) {
                         displayCustomBlockByplace($db, $prefix, $page_url, 'head-box-two');
+                        displayAddon($db, $prefix, $page_url, 'head-box-two');
                     } else {
                         print "";
                     }
@@ -52,6 +55,7 @@
             $page_url = getCurrentPageUrl($db, $prefix);
             if ($page_url) {
                 displayCustomBlockByplace($db, $prefix, $page_url, 'home-left-7');
+                displayAddon($db, $prefix, $page_url, 'home-left-7');
             } else {
                 print "";
             }
@@ -62,6 +66,7 @@
             $page_url = getCurrentPageUrl($db, $prefix);
             if ($page_url) {
                 displayCustomBlockByplace($db, $prefix, $page_url, 'home-right-5');
+                displayAddon($db, $prefix, $page_url, 'home-right-5');
             } else {
                 print "";
             }
@@ -87,6 +92,7 @@
             $page_url = getCurrentPageUrl($db, $prefix);
             if ($page_url) {
                 displayCustomBlockByplace($db, $prefix, $page_url, 'home-col-down-12');
+                displayAddon($db, $prefix, $page_url, 'home-col-down-12');
             } else {
                 print "";
             }
