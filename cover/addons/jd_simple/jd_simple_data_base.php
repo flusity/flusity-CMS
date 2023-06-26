@@ -12,6 +12,7 @@ $databaseScript = "CREATE TABLE IF NOT EXISTS {$prefix['table_prefix']}_jd_simpl
     img_name VARCHAR(255) NOT NULL,
     menu_id int(11) DEFAULT NULL,
     place_id int(11) DEFAULT NULL,
+    addon_id int(11) DEFAULT NULL,
     created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 )";
