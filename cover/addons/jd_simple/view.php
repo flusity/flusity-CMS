@@ -1,9 +1,4 @@
 <?php
-
-function displayAddon($db, $prefix, $page_url, $place_name, $admin_label = null) {
-    $addon_name="jd_simple";
-    $addons = getAddonsByUrlNameAndPlace($db, $prefix, $addon_name, $page_url, $place_name);
-
     foreach ($addons as $addon) {
         echo '<div class="customblock-widget">';
         if ($admin_label) {
@@ -15,6 +10,4 @@ function displayAddon($db, $prefix, $page_url, $place_name, $admin_label = null)
         echo '<div><img src="' . $addon['img_url'] . '" title="' . htmlspecialchars($addon['title']) . '"/></div>';
         echo '</div>';
     }
-}
-
 ?>
