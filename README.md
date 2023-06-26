@@ -23,7 +23,7 @@
 <li>Addons (papildiniai)</li>
 <li>Block (blokai)</li>
 <li>Tags (Žymos)</li>
-<li>Contact Form (contact form still under development, completion value 3%)</li>
+<li>Contact Form (kontaktų forma dar kūrimo būsenoje, baigtumo vertė 3%)</li>
 <li>Files (failai)</li>
 <li>Language (kalba vertimas į lt)</li>
 <li>Settings (nustatymai)</li>
@@ -84,7 +84,7 @@ Atsižvelgiant į šiuos elementus ir funkcijas, svetainė yrap patogus ir funkc
 <li>Addons</li>
 <li>Block</li>
  <li>Tags</li>
-<li>Contact Form</li>
+<li>Contact Form (contact form still under development, completion value 3%)</li>
 <li>Files</li>
 <li>Language (default en)</li>
 <li>Settings</li>
