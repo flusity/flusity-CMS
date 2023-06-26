@@ -38,7 +38,9 @@ if (!empty($postSeo)) {
     <meta charset="UTF-8">
     <title><?php echo $site_title;?></title>
     
-    <meta name="viewport" content="width=device-width, initial-scale=1">   
+    <meta name="viewport" content="width=device-width, initial-scale=1">  
+    <meta name="GENERATOR" content="flusity" />
+    <meta name="AUTHOR" content="jd flusity" /> 
     <meta name="description" content="<?= isset($meta['description']) ? $meta['description'] : '' ?>">
     <meta name="keywords" content="<?= isset($meta['keywords']) ? $meta['keywords'] : '' ?>">
     <meta http-equiv="Content-Security-Policy: script-src 'self' 'unsafe-inline' https://ssl.gstatic.com 'unsafe-eval'">
