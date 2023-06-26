@@ -1,4 +1,5 @@
 # flusity CMS
+ 95% completion
  ![banner](http://manowebas.lt/wp-content/uploads/2023/06/flusity-b.png) v2
 
 <p>PHP CMS project, Install, Log In, Sign Up, admin, moderator, user roles, add/edit/delete (post, layout places, language, files, menu, themes, custom block, addon (plugin) system, user,  backup.sql), update website settings.</p>
