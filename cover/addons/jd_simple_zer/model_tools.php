@@ -3,14 +3,8 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
 
-function getAddonById($db, $prefix, $addonId) {
-    $query = 'SELECT * FROM '.$prefix['table_prefix'].'_jd_simple_zer WHERE id = :addonId';
-    $statement = $db->prepare($query);
-    $statement->bindParam(':addonId', $addonId, PDO::PARAM_INT);
-    $statement->execute();
+$name_addon ='jd_simple_zer';
 
-    return $statement->fetch(PDO::FETCH_ASSOC);
-}
 
 $id = intval($_GET['id']);
 
@@ -25,7 +19,7 @@ $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
 $addonId = isset($_GET['addon_post_edit_id']) ? (int)$_GET['addon_post_edit_id'] : 0;
 $mode = $addonId > 0 ? 'edit' : 'create';
-$addon = $mode === 'edit' ? getAddonById($db, $prefix, $addonId) : null;
+$addon = $mode === 'edit' ? getAddonById($db, $prefix, $name_addon, $addonId) : null;
 
 //$addon = getAddonById($db, $prefix, $addonId);
 //var_dump($addon);
