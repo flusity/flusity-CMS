@@ -17,7 +17,8 @@
                 <?php 
                     $page_url = getCurrentPageUrl($db, $prefix);
                     if ($page_url) {
-                        displayCustomBlockByplace($db, $prefix, $page_url, 'head-box-one');
+                        displayPlace($db, $prefix, $page_url, 'head-box-one');
+
                     } else {
                         print "";
                     }
@@ -32,7 +33,7 @@
                 <?php 
                     $page_url = getCurrentPageUrl($db, $prefix);
                     if ($page_url) {
-                        displayCustomBlockByplace($db, $prefix, $page_url, 'head-box-two');
+                        displayPlace($db, $prefix, $page_url, 'head-box-two');
                     } else {
                         print "";
                     }
@@ -51,7 +52,7 @@
             <?php 
             $page_url = getCurrentPageUrl($db, $prefix);
             if ($page_url) {
-                displayCustomBlockByplace($db, $prefix, $page_url, 'home-left-7');
+                displayPlace($db, $prefix, $page_url, 'home-left-7');
             } else {
                 print "";
             }
@@ -61,7 +62,7 @@
             <?php 
             $page_url = getCurrentPageUrl($db, $prefix);
             if ($page_url) {
-                displayCustomBlockByplace($db, $prefix, $page_url, 'home-right-5');
+                displayPlace($db, $prefix, $page_url, 'home-right-5');
             } else {
                 print "";
             }
@@ -86,7 +87,8 @@
         <?php 
             $page_url = getCurrentPageUrl($db, $prefix);
             if ($page_url) {
-                displayCustomBlockByplace($db, $prefix, $page_url, 'home-col-down-12');
+                displayPlace($db, $prefix, $page_url, 'home-col-down-12');
+                
             } else {
                 print "";
             }
