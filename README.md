@@ -19,6 +19,7 @@
 <li>Places (Vietos)</li> // "Tai vietos puslapio dalyse kur pateikti blokų info"
 <li>Posts (pranešimai)</li>
 <li>Menu (meniu)</li>
+<li>Addons (papildiniai)</li>
 <li>Block (blokai)</li>
 <li>Tags (Žymos)</li>
 <li>Contact Form (kontaktų forma dar kūrimo būsenoje)</li>
@@ -78,7 +79,8 @@ Atsižvelgiant į šiuos elementus ir funkcijas, svetainė yrap patogus ir funkc
 <li>Users</li>
 <li>Places</li>// "These are places in the parts of the page where block info can be presented"
 <li>Posts</li>
-<li>Menu (menu)</li>
+<li>Menu</li>
+<li>Addons</li>
 <li>Block</li>
  <li>Tags</li>
 <li>Contact Form</li>
