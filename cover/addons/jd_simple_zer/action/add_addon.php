@@ -54,14 +54,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         $description = $_POST['description'];
         $place_id = $_POST['addon_place_id'];
         $menu_id = $_POST['addon_menu_id'];
-
-        $stmt = $db->prepare("INSERT INTO " . $prefix['table_prefix'] . "_jd_simple_zer (title, description, img_url, img_name, menu_id, place_id) VALUES (:title, :description, :img_url, :img_name, :menu_id, :place_id)");
+        $addon_id = $id;
+        $stmt = $db->prepare("INSERT INTO " . $prefix['table_prefix'] . "_jd_simple_zer (title, description, img_url, img_name, menu_id, place_id, addon_id) VALUES (:title, :description, :img_url, :img_name, :menu_id, :place_id, :addon_id)");
         $stmt->bindParam(':title', $title, PDO::PARAM_STR);
         $stmt->bindParam(':description', $description, PDO::PARAM_STR);
         $stmt->bindParam(':img_url', $img_url, PDO::PARAM_STR);
         $stmt->bindParam(':img_name', $img_name, PDO::PARAM_STR);
         $stmt->bindParam(':menu_id', $menu_id, PDO::PARAM_INT);
         $stmt->bindParam(':place_id', $place_id, PDO::PARAM_INT);
+        $stmt->bindParam(':addon_id', $addon_id, PDO::PARAM_INT);
     
         $stmt->execute();
         

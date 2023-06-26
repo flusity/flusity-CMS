@@ -34,6 +34,7 @@ if ($mode === 'create' || $addon) {
 ?>
 
 <div class="col-md-12">
+    <h4><?php echo t('Addon JD Simple zer');?></h4>
     <div class="row d-flex">
 
     <form id="update-addon-form" method="POST" action="../../cover/addons/jd_simple_zer/action/<?php echo $mode === 'edit' ? 'edit_addon_post.php' : 'add_addon.php'; ?>" enctype="multipart/form-data" class="col-md-10">
