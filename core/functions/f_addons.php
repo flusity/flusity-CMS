@@ -219,7 +219,13 @@ function uploadFile($uploaded_file, $db, $prefix, $subfolder = null) {
 
 function getAddonsByUrlNameAndPlace($db, $prefix, $addon, $page_url, $place_name) {
     
-    $stmt = $db->prepare("SELECT ".$prefix['table_prefix']."_".$addon.".* FROM ".$prefix['table_prefix']."_".$addon." JOIN ".$prefix['table_prefix']."_flussi_menu ON ".$prefix['table_prefix']."_".$addon.".menu_id = ".$prefix['table_prefix']."_flussi_menu.id JOIN ".$prefix['table_prefix']."_flussi_places ON ".$prefix['table_prefix']."_".$addon.".place_id = ".$prefix['table_prefix']."_flussi_places.id WHERE ".$prefix['table_prefix']."_flussi_tjd_addons.id = ".$prefix['table_prefix']."_".$addon.".addon_id AND ".$prefix['table_prefix']."_flussi_menu.page_url = :page_url AND ".$prefix['table_prefix']."_flussi_places.name = :place_name");
+    $stmt = $db->prepare("SELECT ".$prefix['table_prefix']."_".$addon.".* FROM ".$prefix['table_prefix']."_".$addon." 
+    JOIN ".$prefix['table_prefix']."_flussi_menu ON ".$prefix['table_prefix']."_".$addon.".menu_id = ".$prefix['table_prefix']."_flussi_menu.id 
+    JOIN ".$prefix['table_prefix']."_flussi_places ON ".$prefix['table_prefix']."_".$addon.".place_id = ".$prefix['table_prefix']."_flussi_places.id 
+    JOIN ".$prefix['table_prefix']."_flussi_tjd_addons ON ".$prefix['table_prefix']."_".$addon.".addon_id = ".$prefix['table_prefix']."_flussi_tjd_addons.id 
+    WHERE ".$prefix['table_prefix']."_flussi_menu.page_url = :page_url 
+    AND ".$prefix['table_prefix']."_flussi_places.name = :place_name"); 
+    
     $stmt->bindParam(':page_url', $page_url, PDO::PARAM_STR);
     $stmt->bindParam(':place_name', $place_name, PDO::PARAM_STR);
     $stmt->execute();
