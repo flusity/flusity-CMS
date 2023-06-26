@@ -14,15 +14,6 @@ secureSession($db, $prefix);
 $language_code = getLanguageSetting($db, $prefix);
 $translations = getTranslations($db, $prefix, $language_code);
 
-function getAddonById($db, $prefix, $addonId) {
-    $query = 'SELECT * FROM '.$prefix['table_prefix'].'_jd_simple WHERE id = :addonId';
-    $statement = $db->prepare($query);
-    $statement->bindParam(':addonId', $addonId, PDO::PARAM_INT);
-    $statement->execute();
-
-    return $statement->fetch(PDO::FETCH_ASSOC);
-}
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') 
 { 
     $addonPostId = intval($_POST['addon_post_edit_id']); 
