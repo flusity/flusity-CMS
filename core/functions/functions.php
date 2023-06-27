@@ -111,9 +111,8 @@ function getSettings($db, $prefix) {
     }
     
 
-        
     function getContactFormSettings($db, $prefix) {
-        $stmt = $db->prepare("SELECT * FROM ".$prefix['table_prefix']."_flussi_settings");
+        $stmt = $db->prepare("SELECT * FROM ".$prefix['table_prefix']."_flussi_contact_form_settings");
         $stmt->execute();
         $settings = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $settings;
