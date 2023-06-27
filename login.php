@@ -1,12 +1,24 @@
 
 <?php 
-    require_once 'pre.php';
+    if (session_status() !== PHP_SESSION_ACTIVE) {
+        session_start();
+    }
+/*
+ @MiniFrame css karkasas Lic GNU
+ Author Darius Jakaitis, author web site http://www.manowebas.lt
+ fix-content
+*/  
+    require_once 'core/functions/functions.php';
+    
+    list($db, $config, $prefix) = initializeSystem();
+    secureSession($db, $prefix);
+
     require_once getThemePath($db, $prefix, '/template/header.php'); 
 
-if (isset($_SESSION['user_id'])) {
+ if (isset($_SESSION['user_id'])) {
     header('Location: /myaccount/' . base64_encode($user['user_name']));
     exit();
-}
+ }
  $db = getDBConnection($config);
    // Gaunamas kalbos nustatymas iš duomenų bazės  
     $language_code = getLanguageSetting($db, $prefix);
@@ -15,8 +27,8 @@ if (isset($_SESSION['user_id'])) {
     $encoded_user_name = base64_encode($user_name);
     $profile_url = "/myaccount/$encoded_user_name";
 
-$csrf_token = generateCSRFToken();
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+ $csrf_token = generateCSRFToken();
+ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $csrf_token = $_POST['csrf_token'];
     if (!validateCSRFToken($csrf_token)) {
         die('Bad CSRF token.');
@@ -35,34 +47,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error_message = t('Invalid Login Name/email or password.');
     }
 } ?>
-<header id="header">
-<?php  require_once getThemePath($db, $prefix, '/template/menu-horizontal.php');  ?>
-</header>
-<section class="container spacer footer">
-    <main class="main my-4">
-    <div class="row">
-        <div class="col-sm-4">
-        <h2><?php echo t("Login system");?></h2>
-        <p><?php echo t("The content management system is intended for personal websites");?>s</p>
-        <img src="/core/tools/img/flusity-b.png" alt="Flusity logo"> 
-</div>
-        <div class="col-sm-4">
-<h1 class="h3 mb-3 fw-normal"><?php echo t("Connect to page"); ?></h1>
-<?php if (isset($error_message)): ?>
-    <div class="alert alert-danger" role="alert">
-        <?php echo htmlspecialchars($error_message, ENT_QUOTES, 'UTF-8'); ?>
+    <header id="header">
+    <?php  require_once getThemePath($db, $prefix, '/template/menu-horizontal.php');  ?>
+    </header>
+    <section class="container spacer footer">
+        <main class="main my-4">
+        <div class="row">
+            <div class="col-sm-4">
+            <h2><?php echo t("Login system");?></h2>
+            <p><?php echo t("The content management system is intended for personal websites");?>s</p>
+            <img src="/core/tools/img/flusity-b.png" alt="Flusity logo"> 
     </div>
-<?php endif; 
-if (isset($_SESSION['success_message'])): ?>
-    <div class="alert alert-success alert-dismissible fade show slow-fade">
-        <?php echo htmlspecialchars($_SESSION['success_message']); ?>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    <?php unset($_SESSION['success_message']); ?>
-<?php endif; 
+            <div class="col-sm-4">
+    <h1 class="h3 mb-3 fw-normal"><?php echo t("Connect to page"); ?></h1>
+    <?php if (isset($error_message)): ?>
+        <div class="alert alert-danger" role="alert">
+            <?php echo htmlspecialchars($error_message, ENT_QUOTES, 'UTF-8'); ?>
+        </div>
+    <?php endif; 
+    if (isset($_SESSION['success_message'])): ?>
+        <div class="alert alert-success alert-dismissible fade show slow-fade">
+            <?php echo htmlspecialchars($_SESSION['success_message']); ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <?php unset($_SESSION['success_message']); ?>
+    <?php endif; 
 
-$csrf_token = generateCSRFToken();
-?>
+    $csrf_token = generateCSRFToken();
+    ?>
 <form method="POST" action="">
 <div class="form-floating">
     <input type="text" class="form-control" id="login_name" name="login_name" placeholder="<?php echo t("Login Name or Email"); ?>" required>
