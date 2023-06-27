@@ -15,23 +15,25 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
  $db = getDBConnection($config);
+ require_once ROOT_PATH . '../../security/mail_config.php';
 
+$mail_config = include(ROOT_PATH . '../../security/mail_config.php');
+ 
 $mail = new PHPMailer(true);
 
 try {
     //Server settings
     $mail->isSMTP();
-    $mail->Host       = 'smtp.example.com';// smtp.gmail.com
+    $mail->Host       = $mail_config['host'];
     $mail->SMTPAuth   = true;
-    $mail->Username   = 'your-email@gmail.com'; // Įveskite savo Gmail el. pašto adresą
-    $mail->Password   = 'your-email-password'; // Įveskite savo Gmail el. pašto slaptažodį
+    $mail->Username   = $mail_config['username'];
+    $mail->Password   = $mail_config['password'];
+    $mail->SMTPSecure = $mail_config['secure'] === 'tls' ? PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS : PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS;
+    $mail->Port       = $mail_config['port'];
     
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->Port       = 587;
-
-    $mail->setFrom('your-email@example.com', 'Mailer');
-    $mail->addAddress('recipient@example.com', 'Recipient Name');
-
+    $mail->setFrom($mail_config['setFrom'], 'Mailer');
+    $mail->addAddress($mail_config['addAddress'], 'Admin');   
+    
     $mail->isHTML(true);
     $mail->Subject = 'Here is the subject';
     $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
