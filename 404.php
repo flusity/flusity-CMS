@@ -6,15 +6,12 @@
  Author Darius Jakaitis, author web site http://www.manowebas.lt
  fix-content
 */
-require_once 'core/functions/functions.php';
-$baseUrl = getBaseUrl();
-list($db, $config, $prefix) = initializeSystem();
-secureSession($db, $prefix);
-$language_code = getLanguageSetting($db, $prefix);
-$translations = getTranslations($db, $prefix, $language_code);
-
-$db = getDBConnection($config);
-
+require_once 'pre.php';
+ $db = getDBConnection($config);
+  
+    $language_code = getLanguageSetting($db, $prefix);
+    $translations = getTranslations($db, $prefix, $language_code);
+    secureSession($db, $prefix);
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
     $user_name = getUserNameById($db, $prefix, $user_id);

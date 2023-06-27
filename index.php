@@ -3,15 +3,19 @@
  @CMS flusity
  Author Darius Jakaitis, author web site http://www.manowebas.lt
 */
-require_once 'core/functions/functions.php';
-$baseUrl = getBaseUrl();
-list($db, $config, $prefix) = initializeSystem();
-secureSession($db, $prefix);
-$language_code = getLanguageSetting($db, $prefix);
-$translations = getTranslations($db, $prefix, $language_code);
+
+require_once 'pre.php';
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 $db = getDBConnection($config);
-
+//$prefix = getPrefix($prefix);
+    secureSession($db, $prefix);
+    $language_code = getLanguageSetting($db, $prefix);
+    $translations = getTranslations($db, $prefix, $language_code);
+ 
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
     $user_name = getUserNameById($db, $prefix, $user_id);
