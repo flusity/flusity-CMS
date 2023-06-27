@@ -124,7 +124,7 @@ Considering these elements and functions, the website is a convenient and functi
 Author's address http://www.manowebas.lt
  
 Autoriaus adresas http://www.manowebas.lt
-![banner]([http://manowebas.lt/wp-content/uploads/2023/06/dashboard.jpg](http://manowebas.lt/wp-content/uploads/2023/06/dashboard.jpg))
+![banner](http://manowebas.lt/wp-content/uploads/2023/06/dashboard.jpg)
 ![banner](http://manowebas.lt/wp-content/uploads/2023/06/log-ser.jpg)
 ![banner](http://manowebas.lt/wp-content/uploads/2023/06/rg-user.jpg)
 ![banner](http://manowebas.lt/wp-content/uploads/2023/06/users-system.jpg)
