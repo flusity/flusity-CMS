@@ -11,7 +11,7 @@
             <?php 
             $page_url = getCurrentPageUrl($db, $prefix);
             if ($page_url) {
-                displayCustomBlockByplace($db, $prefix, $page_url, 'news-right-5');
+                displayPlace($db, $prefix, $page_url, 'news-right-5');
             } else {
                 print "";
             }
