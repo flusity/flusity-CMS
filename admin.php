@@ -51,15 +51,15 @@
         if($isInstalled && $isActive && $showFront == 1) {
             $name_addon_get = str_replace('_', ' ', htmlspecialchars($addon['name_addon']));
             $name_addon_get = ucwords($name_addon_get);
-            echo '<div class="col-3">';
+            echo '<div class="col-md-3">';
             echo '<a class="nav-link" href="'. getFullUrl('/core/tools/addons_model.php') . '?name=' . htmlspecialchars($addon['name_addon']) . '&id=' . urlencode(getAddonId($db, $prefix, $addon['name_addon'])) .'" title="Addon '. $name_addon_get .'"><div class="p-3 border cms-front-shadow d-flex gap-2 fs-5">';
             echo '<div class="addon d-flex">';
             echo '<div>';
             echo '<img src="'.htmlspecialchars($addon['addons_thumb']).'" alt="'.htmlspecialchars($addon['name_addon']).'" class="img-fluid rounded-start p-1" style="max-width: 100px; max-height: 100px; width: 90%;">';
             echo '</div>';
             echo '<div class="pl-2">';
-            echo '<h3>' . $name_addon_get . '</h3>';
-            echo '<span class="nav-text">'.t('Go to').' '. $name_addon_get .'</span>';
+            echo '<h4>' . $name_addon_get . '</h4>';
+            echo '<span class="nav-text text-primary fs-6">'.t('Go to').' '. $name_addon_get .'</span>';
 
             echo '</div>';
             echo '</div>';
