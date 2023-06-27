@@ -1,4 +1,11 @@
-<?php header("Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self';");
+<?php require_once 'core/functions/functions.php';
+$baseUrl = getBaseUrl();
+list($db, $config, $prefix) = initializeSystem();
+secureSession($db, $prefix);
+$language_code = getLanguageSetting($db, $prefix);
+$translations = getTranslations($db, $prefix, $language_code);
+
+$db = getDBConnection($config);
 
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();

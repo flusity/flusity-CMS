@@ -1,7 +1,14 @@
 <?php
-   require_once 'pre.php';
+  require_once 'core/functions/functions.php';
+  $baseUrl = getBaseUrl();
+  list($db, $config, $prefix) = initializeSystem();
+  secureSession($db, $prefix);
+  $language_code = getLanguageSetting($db, $prefix);
+  $translations = getTranslations($db, $prefix, $language_code);
+  
+  $db = getDBConnection($config);
+  
    require_once getThemePath($db, $prefix, '/template/header.php'); 
- $db = getDBConnection($config);
 
 if (!isset($_SESSION['user_id'])) {
     header('Location: index.php');
@@ -12,9 +19,6 @@ if (!isset($_SESSION['user_id'])) {
         exit();
     }
 }
-
-$language_code = getLanguageSetting($db, $prefix);
-$translations = getTranslations($db, $prefix, $language_code);
 
 ?>
 
