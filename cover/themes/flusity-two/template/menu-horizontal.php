@@ -32,7 +32,7 @@
     <div class="user-profile">
         <?php echo htmlspecialchars(getUserNameById($db, $prefix, $_SESSION['user_id'])); ?>
         <div class="profile-picture-container">
-            <img src="assets/img/user-profile.png" alt="Profile Picture" class="profile-picture">
+            <img src="/assets/img/user-profile.png" alt="Profile Picture" class="profile-picture">
         </div>
     </div>
 </button>
