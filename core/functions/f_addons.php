@@ -219,13 +219,23 @@ function uploadFile($uploaded_file, $db, $prefix, $subfolder = null) {
 
 
 function getAddonsByUrlNameAndPlace($db, $prefix, $addon, $page_url, $place_name) {
-    
+
+    // Check if there are entries in the table
+    $stmt_check = $db->prepare("SELECT COUNT(*) FROM ".$prefix['table_prefix']."_flussi_tjd_addons");
+    $stmt_check->execute();
+    $count = $stmt_check->fetchColumn();
+
+    if($count == 0) {
+        return []; // return empty array if there are no entries in the table
+    }
+
+    // Proceed with the rest of your function if entries exist
     $stmt = $db->prepare("SELECT ".$prefix['table_prefix']."_".$addon.".* FROM ".$prefix['table_prefix']."_".$addon." 
     JOIN ".$prefix['table_prefix']."_flussi_menu ON ".$prefix['table_prefix']."_".$addon.".menu_id = ".$prefix['table_prefix']."_flussi_menu.id 
     JOIN ".$prefix['table_prefix']."_flussi_places ON ".$prefix['table_prefix']."_".$addon.".place_id = ".$prefix['table_prefix']."_flussi_places.id 
     JOIN ".$prefix['table_prefix']."_flussi_tjd_addons ON ".$prefix['table_prefix']."_".$addon.".addon_id = ".$prefix['table_prefix']."_flussi_tjd_addons.id 
     WHERE ".$prefix['table_prefix']."_flussi_menu.page_url = :page_url 
-    AND ".$prefix['table_prefix']."_flussi_places.name = :place_name"); 
+    AND ".$prefix['table_prefix']."_flussi_places.name = :place_name"); // 228 eilutė
     
     $stmt->bindParam(':page_url', $page_url, PDO::PARAM_STR);
     $stmt->bindParam(':place_name', $place_name, PDO::PARAM_STR);
@@ -233,6 +243,7 @@ function getAddonsByUrlNameAndPlace($db, $prefix, $addon, $page_url, $place_name
 
     return $stmt->fetchAll();
 }
+
 /* 
 function displayAddonByPlace($db, $prefix, $page_url, $place_name, $admin_label = null) {
     $addonsDirectory = $_SERVER['DOCUMENT_ROOT'] . '/cover/addons/';
