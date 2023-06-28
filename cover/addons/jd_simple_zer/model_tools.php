@@ -3,7 +3,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
 
-$name_addon ='jd_simple';
+$name_addon ='jd_simple_zer';
 
 $id = intval(htmlspecialchars($_GET['id']));
 
@@ -29,7 +29,7 @@ if ($mode === 'create' || $addon) {
     <h4><?php echo t('Addon JD Simple');?></h4>
     <div class="row d-flex">
 
-    <form id="update-addon-form" method="POST" action="../../cover/addons/jd_simple/action/<?php echo $mode === 'edit' ? 'edit_addon_post.php' : 'add_addon.php'; ?>" enctype="multipart/form-data" class="col-md-10">
+    <form id="update-addon-form" method="POST" action="../../cover/addons/jd_simple_zer/action/<?php echo $mode === 'edit' ? 'edit_addon_post.php' : 'add_addon.php'; ?>" enctype="multipart/form-data" class="col-md-10">
 
     <input type="hidden" name="mode" value="<?php echo $mode; ?>">
      <input type="hidden" name="addon_post_edit_id" value="<?php echo isset($addon['id']) ? $addon['id'] : ''; ?>">
@@ -80,7 +80,7 @@ if ($mode === 'create' || $addon) {
 
                     <button type="submit" name="submit" class="btn btn-primary"><?php echo t('Submit');?></button>
                      <?php if (isset($_GET['addon_post_edit_id'])): ?>
-                        <a href="addons_model.php?name=jd_simple&id=<?php echo htmlspecialchars($_GET['id']) ?>" class="btn btn-secondary"><?php echo t('Cancel');?></a>
+                        <a href="addons_model.php?name=jd_simple_zer&id=<?php echo htmlspecialchars($_GET['id']) ?>" class="btn btn-secondary"><?php echo t('Cancel');?></a>
                        <?php endif; ?>
                 </div>
                 <div class="col-md-4">
@@ -165,8 +165,8 @@ if ($mode === 'create' || $addon) {
                         echo '<td>' . $short_menu . '</td>';
                         echo '<td>' . $short_place . '</td>';
                         echo '<td>';
-                        echo '<a href="addons_model.php?name=jd_simple&id=' . htmlspecialchars($_GET['id']) . '&addon_post_edit_id=' . htmlspecialchars($result['id']) . '"><i class="fa fa-edit"></i></a> ';
-                        echo '<a href="../../cover/addons/jd_simple/action/delete_addon_post.php?name=jd_simple&id=' . htmlspecialchars($_GET['id']) . '&addon_post_id=' . htmlspecialchars($result['id']) . '"><i class="fa fa-trash"></i></a>';
+                        echo '<a href="addons_model.php?name=jd_simple_zer&id=' . htmlspecialchars($_GET['id']) . '&addon_post_edit_id=' . htmlspecialchars($result['id']) . '"><i class="fa fa-edit"></i></a> ';
+                        echo '<a href="../../cover/addons/jd_simple_zer/action/delete_addon_post.php?name=jd_simple_zer&id=' . htmlspecialchars($_GET['id']) . '&addon_post_id=' . htmlspecialchars($result['id']) . '"><i class="fa fa-trash"></i></a>';
                         echo '</td>';
                         echo '</tr>';
                     } ?></form>
