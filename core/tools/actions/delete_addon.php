@@ -18,7 +18,7 @@ if(isset($_POST['action']) && $_POST['action'] == 'delete_addon'){
     $addonName = $_POST['addonName'];
     
     // Check if the addon exists in the database
-    $stmt = $db->prepare("SELECT * FROM tjd_addons WHERE name_addon = :name_addon");
+    $stmt = $db->prepare("SELECT * FROM ".$prefix['table_prefix']."_flussi_tjd_addons WHERE name_addon = :name_addon");
     $stmt->bindParam(':name_addon', $addonName);
     $stmt->execute();
 
