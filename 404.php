@@ -23,16 +23,13 @@ if (isset($_SESSION['user_id'])) {
 require_once getThemePath($db, $prefix, '/template/header.php'); ?>
 
 <header id="header">
-<?php
-require_once getThemePath($db, $prefix, '/template/menu-horizontal.php'); ?>
-
 </header>
 <section class="container spacer footer">
     <main class="main my-4">
     <div class="row">
         <div class="col-sm-8 mx-auto text-center">
         <h2><?php echo t("Oops...");?></h2>
-        <img src="assets/img/green-llama.png" alt="lama">
+        <img src="/assets/img/green-llama.png" alt="lama">
         <p><?php echo t("You've wandered off into tropical limbo! Nothing to see here.");?></p>
         <p><?php echo t("Click");?> <a href="/"><?php echo t("here");?></a>, &nbsp;<?php echo t("to return back home.");?></p>
 </div>
