@@ -84,7 +84,7 @@ if ($no_image_provided) {
         $_SESSION['error_message'] = $e->getMessage();
     }
 
-    header('Location: ' . $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/core/tools/addons_model.php?name=jd_simple&id='.$id);
+    header('Location: ' . $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/core/tools/addons_model.php?name=jd_simple_zer&id='.$id);
 
     exit();
 

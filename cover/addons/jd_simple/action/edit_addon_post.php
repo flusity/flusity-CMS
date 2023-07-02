@@ -86,6 +86,7 @@ if ($no_image_provided) {
 
     header('Location: ' . $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/core/tools/addons_model.php?name=jd_simple&id='.$id);
 
+
     exit();
 
 }
