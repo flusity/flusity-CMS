@@ -24,6 +24,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         $img_name = null;
         $addonFolder ="jd_simple_img"; // Addon default directory
 
+        // Check if directory exists and if not, create it
+        if (!is_dir($_SERVER['DOCUMENT_ROOT'] . "/uploads/".$addonFolder)) {
+            mkdir($_SERVER['DOCUMENT_ROOT'] . "/uploads/".$addonFolder, 0755);
+        }
+
         if (isset($_FILES['file_id']) && $_FILES['file_id']['error'] == 0) {
             $uploaded_file = $_FILES["file_id"];
             $result = uploadFile($uploaded_file, $db, $prefix, $addonFolder);
@@ -43,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                 $img_name = $file['name'];
                 $_SESSION['success_message'] = t("File inserting to addon directory successfully.");
             } else {
-                throw new Exception(t("Error copying existing file."));
+                throw new Exception(t("Error copying existing file.". $error['message']));
             }
         } else {
            
@@ -63,6 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         $stmt->bindParam(':menu_id', $menu_id, PDO::PARAM_INT);
         $stmt->bindParam(':place_id', $place_id, PDO::PARAM_INT);
         $stmt->bindParam(':addon_id', $addon_id, PDO::PARAM_INT);
+    
         $stmt->execute();
         
     } catch (Exception $e) {
