@@ -92,14 +92,12 @@ $(document).ready(function() {
     var num1 = Math.floor(Math.random() * 10);
     var num2 = Math.floor(Math.random() * 10);
 
-
     $("#captchaQuestion").text(num1 + " + " + num2 + " = ?");
 
     $("#contact-form").submit(function(event) {
         event.preventDefault();
 
         var formData = $(this).serialize(); 
-
         var captcha = $("#captcha").val();
 
         if (parseInt(captcha) === num1 + num2) {
@@ -125,7 +123,6 @@ $(document).ready(function() {
                 }
             });
         } else {
-            
             $("#responseMessage").text('Klaida: neteisingai įvestas patikrinimo atsakymas');
             $("#responseModal .modal-body").addClass("text-danger");
             $("#responseModal .modal-body i").addClass("fa-times-circle").removeClass("fa-check-circle");
@@ -137,5 +134,11 @@ $(document).ready(function() {
         $("#captchaQuestion").text(num1 + " + " + num2 + " = ?");
         $("#captcha").val("");
     });
+
+    // Perkrauna puslapį kai modalinis langas uždaromas
+    $('#responseModal').on('hidden.bs.modal', function (e) {
+        location.reload();
+    })
 });
+
 </script>
