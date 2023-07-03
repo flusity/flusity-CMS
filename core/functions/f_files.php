@@ -90,3 +90,4 @@ function handleFileUpload($db, $table_prefix, $target_dir, $allowed_file_types, 
         return false;
     }
 }
+
