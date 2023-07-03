@@ -5,7 +5,7 @@
     </p>
     </div>
 </footer>
-<script src="<?php echo getThemePath($db, $prefix, '/js/main.js'); ?>"></script>
+<script src="<?php echo getThemePath($db, $prefix, 'js/main.js'); ?>"></script>
 <script src="/assets/popperjs/popper.min.js"></script>
 <script src="/assets/bootstrap-5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

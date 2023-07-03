@@ -72,4 +72,49 @@
         </div>
     </div>
 </div>
-            </main>
+</main>
+<div class="modal high-z-index" tabindex="-1" id="responseModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+   
+        <button type="button" class="btn-close uniqueCloseButton"  data-bs-dismiss="modal" aria-label="Close"></button>
+      
+      <div class="modal-body">
+        <i class="fas fa-check-circle fa-3x"></i>
+        <p id="responseMessage"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$(document).ready(function() {
+    $("#contact-form").submit(function(event) {
+        event.preventDefault();
+
+        var formData = $(this).serialize(); 
+        $.ajax({
+            type: "POST",
+            url: "../../core/tools/send_contact_form.php",
+            data: formData,
+            dataType: "json",
+            success: function(response) {
+                $("#responseMessage").text(response.message);
+                if (response.status === "success") {
+                    $("#responseModal .modal-body").addClass("text-success");
+                    $("#responseModal .modal-body i").addClass("fa-check-circle").removeClass("fa-times-circle");
+                } else {
+                    $("#responseModal .modal-body").addClass("text-danger");
+                    $("#responseModal .modal-body i").addClass("fa-times-circle").removeClass("fa-check-circle");
+                }
+                $("#responseModal").modal("show");
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(jqXHR, textStatus, errorThrown);
+                alert("An error occurred, please try again");
+            }
+       });
+
+    });
+});
+</script>

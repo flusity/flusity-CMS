@@ -467,3 +467,18 @@ nav.navbar {
     width: 100%
   }
 }
+.modal.high-z-index {
+  z-index: 99999; 
+}
+
+.uniqueCloseButton.btn-close {
+	filter: none; 
+  color: black !important;;
+}
+
+.uniqueCloseButton .btn-close:hover {
+  color: black !important;;
+}
+.modal .btn-close:hover {
+    background-color: rgba(0, 0, 0, 0);
+}
