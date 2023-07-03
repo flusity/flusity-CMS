@@ -13,5 +13,10 @@
         <label for="message"><?php echo t("Message"); ?></label>
         <textarea  class="form-control" id="message" name="message" rows="4" required></textarea>
     </div>
-    <button  class="w-100 btn btn-lg btn-primary mb-3" type="submit"><?php echo t("Send"); ?></button>
+    <div class="form-group">
+    <label for="captcha"><?php echo t("Human Check"); ?>: <span id="captchaQuestion"></span></label>
+    <input type="text" class="form-control" id="captcha" name="captcha" required>
+</div>
+
+    <button  class="w-100 btn btn-lg btn-primary mb-3 mt-5" type="submit"><?php echo t("Send"); ?></button>
 </form>

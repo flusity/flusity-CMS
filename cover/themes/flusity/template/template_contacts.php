@@ -1,3 +1,4 @@
+
 <header id="header" class="no-header">
 <?php require_once 'menu-horizontal.php';?>
 </header>
@@ -86,35 +87,55 @@
     </div>
   </div>
 </div>
-
 <script>
 $(document).ready(function() {
+    var num1 = Math.floor(Math.random() * 10);
+    var num2 = Math.floor(Math.random() * 10);
+
+
+    $("#captchaQuestion").text(num1 + " + " + num2 + " = ?");
+
     $("#contact-form").submit(function(event) {
         event.preventDefault();
 
         var formData = $(this).serialize(); 
-        $.ajax({
-            type: "POST",
-            url: "../../core/tools/send_contact_form.php",
-            data: formData,
-            dataType: "json",
-            success: function(response) {
-                $("#responseMessage").text(response.message);
-                if (response.status === "success") {
-                    $("#responseModal .modal-body").addClass("text-success");
-                    $("#responseModal .modal-body i").addClass("fa-check-circle").removeClass("fa-times-circle");
-                } else {
-                    $("#responseModal .modal-body").addClass("text-danger");
-                    $("#responseModal .modal-body i").addClass("fa-times-circle").removeClass("fa-check-circle");
-                }
-                $("#responseModal").modal("show");
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log(jqXHR, textStatus, errorThrown);
-                alert("An error occurred, please try again");
-            }
-       });
 
+        var captcha = $("#captcha").val();
+
+        if (parseInt(captcha) === num1 + num2) {
+            $.ajax({
+                type: "POST",
+                url: "../../core/tools/send_contact_form.php",
+                data: formData,
+                dataType: "json",
+                success: function(response) {
+                    $("#responseMessage").text(response.message);
+                    if (response.status === "success") {
+                        $("#responseModal .modal-body").addClass("text-success");
+                        $("#responseModal .modal-body i").addClass("fa-check-circle").removeClass("fa-times-circle");
+                    } else {
+                        $("#responseModal .modal-body").addClass("text-danger");
+                        $("#responseModal .modal-body i").addClass("fa-times-circle").removeClass("fa-check-circle");
+                    }
+                    $("#responseModal").modal("show");
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR, textStatus, errorThrown);
+                    alert("An error occurred, please try again");
+                }
+            });
+        } else {
+            
+            $("#responseMessage").text('Klaida: neteisingai įvestas patikrinimo atsakymas');
+            $("#responseModal .modal-body").addClass("text-danger");
+            $("#responseModal .modal-body i").addClass("fa-times-circle").removeClass("fa-check-circle");
+            $('#responseModal').modal('show');
+        }
+
+        num1 = Math.floor(Math.random() * 10);
+        num2 = Math.floor(Math.random() * 10);
+        $("#captchaQuestion").text(num1 + " + " + num2 + " = ?");
+        $("#captcha").val("");
     });
 });
 </script>
