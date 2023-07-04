@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 28, 2023 at 03:13 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Generation Time: Jul 04, 2023 at 08:45 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,59 +18,60 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `my_website`
+-- Database: `jdbas`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rex_flussi_contact_form_settings`
+-- Table structure for table `flussi_contact_form_settings`
 --
 
-CREATE TABLE `rex_flussi_contact_form_settings` (
+CREATE TABLE `flussi_contact_form_settings` (
   `id` int(11) NOT NULL,
-  `setting_key` varchar(255) NOT NULL,
-  `setting_value` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `email_subject` varchar(255) NOT NULL,
+  `email_body` text NOT NULL,
+  `email_success_message` varchar(255) NOT NULL,
+  `email_error_message` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `rex_flussi_contact_form_settings`
+-- Dumping data for table `flussi_contact_form_settings`
 --
 
-INSERT INTO `rex_flussi_contact_form_settings` (`id`, `setting_key`, `setting_value`) VALUES
-(1, 'raktas_457', 'raktas_457_test');
+INSERT INTO `flussi_contact_form_settings` (`id`, `email_subject`, `email_body`, `email_success_message`, `email_error_message`) VALUES
+(1, 'New message from Contact Form', 'We received a message from:', 'Email has been sent successfully', 'Failed to send the email');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rex_flussi_files`
+-- Table structure for table `flussi_files`
 --
 
-CREATE TABLE `rex_flussi_files` (
+CREATE TABLE `flussi_files` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `url` varchar(255) NOT NULL,
   `uploaded_at` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `rex_flussi_files`
+-- Dumping data for table `flussi_files`
 --
 
-INSERT INTO `rex_flussi_files` (`id`, `name`, `url`, `uploaded_at`) VALUES
+INSERT INTO `flussi_files` (`id`, `name`, `url`, `uploaded_at`) VALUES
 (4, 'pexels-dominika-roseclay_2b7dd92bc8d188b4.jpg', 'http://localhost/uploads/pexels-dominika-roseclay_2b7dd92bc8d188b4.jpg', '2023-05-28 15:59:43'),
 (5, 'pexels-quang-nguyen_8ca6b53cdb562332.jpg', 'http://localhost/uploads/pexels-quang-nguyen_8ca6b53cdb562332.jpg', '2023-05-28 17:18:46'),
 (18, 'flusity-b_a252d067e7fe12f7.png', 'http://localhost/uploads/flusity-b_a252d067e7fe12f7.png', '2023-06-28 11:12:37'),
-(19, 'Anketa_a551bd9389a75b02.docx', 'http://localhost/uploads/Anketa_a551bd9389a75b02.docx', '2023-06-28 14:45:53'),
-(20, 'test_b3978d6afa170fcc.jpg', 'http://localhost/uploads/test_b3978d6afa170fcc.jpg', '2023-06-28 15:07:25');
+(19, 'pexels-fauxels-3184285_04daf37625bd4ad7.jpg', 'http://localhost/uploads/pexels-fauxels-3184285_04daf37625bd4ad7.jpg', '2023-07-02 10:46:44');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rex_flussi_menu`
+-- Table structure for table `flussi_menu`
 --
 
-CREATE TABLE `rex_flussi_menu` (
+CREATE TABLE `flussi_menu` (
   `id` int(11) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
   `page_url` varchar(255) DEFAULT NULL,
@@ -80,13 +81,13 @@ CREATE TABLE `rex_flussi_menu` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `show_in_menu` tinyint(1) NOT NULL DEFAULT 1,
   `parent_id` int(11) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `rex_flussi_menu`
+-- Dumping data for table `flussi_menu`
 --
 
-INSERT INTO `rex_flussi_menu` (`id`, `name`, `page_url`, `position`, `template`, `created_at`, `updated_at`, `show_in_menu`, `parent_id`) VALUES
+INSERT INTO `flussi_menu` (`id`, `name`, `page_url`, `position`, `template`, `created_at`, `updated_at`, `show_in_menu`, `parent_id`) VALUES
 (1, 'Dokumentai', 'dokumentai', 3, 'template_left_content', '2023-04-15 09:00:19', '2023-06-16 05:53:35', 1, NULL),
 (3, 'NAUJIENOS', 'news', 2, 'template_naujienos', '2023-04-15 21:29:51', '2023-06-16 05:53:37', 1, NULL),
 (6, 'HOMES', 'index', 1, 'template_index', '2023-04-16 12:35:26', '2023-06-20 19:59:31', 1, 0),
@@ -96,21 +97,21 @@ INSERT INTO `rex_flussi_menu` (`id`, `name`, `page_url`, `position`, `template`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rex_flussi_places`
+-- Table structure for table `flussi_places`
 --
 
-CREATE TABLE `rex_flussi_places` (
+CREATE TABLE `flussi_places` (
   `id` int(11) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `rex_flussi_places`
+-- Dumping data for table `flussi_places`
 --
 
-INSERT INTO `rex_flussi_places` (`id`, `name`, `created_at`, `updated_at`) VALUES
+INSERT INTO `flussi_places` (`id`, `name`, `created_at`, `updated_at`) VALUES
 (1, 'head-box-one', '2023-04-14 15:01:16', '2023-05-28 08:27:20'),
 (2, 'news-right-5', '2023-04-14 15:12:13', '2023-05-28 08:21:48'),
 (3, 'home-right-5', '2023-04-14 15:20:38', '2023-05-28 08:15:56'),
@@ -125,10 +126,10 @@ INSERT INTO `rex_flussi_places` (`id`, `name`, `created_at`, `updated_at`) VALUE
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rex_flussi_posts`
+-- Table structure for table `flussi_posts`
 --
 
-CREATE TABLE `rex_flussi_posts` (
+CREATE TABLE `flussi_posts` (
   `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `content` text NOT NULL,
@@ -142,13 +143,13 @@ CREATE TABLE `rex_flussi_posts` (
   `description` text DEFAULT NULL,
   `keywords` text DEFAULT NULL,
   `priority` tinyint(1) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `rex_flussi_posts`
+-- Dumping data for table `flussi_posts`
 --
 
-INSERT INTO `rex_flussi_posts` (`id`, `title`, `content`, `author_id`, `role`, `created_at`, `status`, `menu_id`, `tags`, `updated_at`, `description`, `keywords`, `priority`) VALUES
+INSERT INTO `flussi_posts` (`id`, `title`, `content`, `author_id`, `role`, `created_at`, `status`, `menu_id`, `tags`, `updated_at`, `description`, `keywords`, `priority`) VALUES
 (1, 'ggnn', 'bcncvbvcbsrgfsgf dfgfd', 2, 'admin', '2023-04-15 16:08:31', 'draft', 1, NULL, '2023-06-06 19:17:18', NULL, NULL, 0),
 (2, 'Naujas bandymas 3', '&lt;b&gt;Lorem&lt;/b&gt; ipsum dolor sit amet, consectetur adipiscing elit. &lt;img src=&quot;uploads/pexels-dominika-roseclay_2b7dd92bc8d188b4.jpg&quot; width=&quot;250px&quot; height=&quot;auto&quot; align=&quot;left&quot; hspace=&quot;15&quot; vspace=&quot;15&quot;/&gt;\n\n\n\nAliquam ultricies justo ut purus efficitur, eleifend pellentesque risus cursus. Maecenas ex massa, sagittis id metus non, convallis scelerisque ligula. Vivamus aliquam risus accumsan lacinia eleifend. Nunc vestibulum massa a mauris egestas, quis sollicitudin est posuere. Duis lobortis tincidunt leo, vitae condimentum odio mollis at. Nullam mollis lobortis erat, lobortis mollis mi commodo ac. Nunc in lectus vitae mauris imperdiet varius in id neque. Vestibulum orci risus, posuere in velit eget, ullamcorper convallis augue. Mauris nulla dui, iaculis ac ultrices quis, scelerisque a libero.', 2, 'admin', '2023-01-01 11:03:58', 'published', 6, 'news', '2023-06-10 15:28:38', 'Flusity is a contemporary PHP CMS project utilizing MVC architecture, MySQL database, and Bootstrap front-end framework. It includes the management of users, posts, menu, blocks and other elements, as well as security and SEO features.', 'free cms flusity, php cms, cms, website', 1),
 (3, 'fthhj', 'gfhjgfhjfghjgfhj', 2, 'admin', '2023-01-01 02:04:48', 'draft', 1, NULL, '2023-06-06 19:17:29', NULL, NULL, 0),
@@ -165,10 +166,10 @@ INSERT INTO `rex_flussi_posts` (`id`, `title`, `content`, `author_id`, `role`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rex_flussi_settings`
+-- Table structure for table `flussi_settings`
 --
 
-CREATE TABLE `rex_flussi_settings` (
+CREATE TABLE `flussi_settings` (
   `site_title` varchar(255) NOT NULL,
   `meta_description` text NOT NULL,
   `footer_text` text NOT NULL,
@@ -181,35 +182,35 @@ CREATE TABLE `rex_flussi_settings` (
   `theme` varchar(255) DEFAULT 'default_theme',
   `brand_icone` varchar(255) DEFAULT NULL,
   `table_prefix` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `rex_flussi_settings`
+-- Dumping data for table `flussi_settings`
 --
 
-INSERT INTO `rex_flussi_settings` (`site_title`, `meta_description`, `footer_text`, `pretty_url`, `language`, `posts_per_page`, `registration_enabled`, `session_lifetime`, `default_keywords`, `theme`, `brand_icone`, `table_prefix`) VALUES
+INSERT INTO `flussi_settings` (`site_title`, `meta_description`, `footer_text`, `pretty_url`, `language`, `posts_per_page`, `registration_enabled`, `session_lifetime`, `default_keywords`, `theme`, `brand_icone`, `table_prefix`) VALUES
 ('Free CMS flusity', 'Flusity is a contemporary PHP CMS project utilizing MVC architecture, MySQL database, and Bootstrap front-end framework. It includes the management of users, posts, menu, blocks and other elements, as well as security and SEO features.', 'Copyright &copy; flusity JD Theme 2023', 1, 'lt', 10, 0, 30, 'free cms, php, free website, cms, content management system, free cms flusity, php cms, website ', 'flusity', 'flusity-b_a252d067e7fe12f7.png', 'jdfsite');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rex_flussi_sidebar`
+-- Table structure for table `flussi_sidebar`
 --
 
-CREATE TABLE `rex_flussi_sidebar` (
+CREATE TABLE `flussi_sidebar` (
   `id` int(11) UNSIGNED NOT NULL,
   `title` varchar(255) NOT NULL,
   `icon` varchar(255) NOT NULL,
   `url` varchar(255) DEFAULT NULL,
   `parent_id` int(11) UNSIGNED DEFAULT NULL,
   `order_number` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `rex_flussi_sidebar`
+-- Dumping data for table `flussi_sidebar`
 --
 
-INSERT INTO `rex_flussi_sidebar` (`id`, `title`, `icon`, `url`, `parent_id`, `order_number`) VALUES
+INSERT INTO `flussi_sidebar` (`id`, `title`, `icon`, `url`, `parent_id`, `order_number`) VALUES
 (1, 'Dashboard', 'fas fa-tachometer-alt', '/admin.php', NULL, 1),
 (2, 'Posts', 'fas fa-newspaper', '/core/tools/posts.php', NULL, 2),
 (3, 'Block', 'fas fa-shapes', '/core/tools/customblock.php', NULL, 3),
@@ -227,10 +228,10 @@ INSERT INTO `rex_flussi_sidebar` (`id`, `title`, `icon`, `url`, `parent_id`, `or
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rex_flussi_tjd_addons`
+-- Table structure for table `flussi_tjd_addons`
 --
 
-CREATE TABLE `rex_flussi_tjd_addons` (
+CREATE TABLE `flussi_tjd_addons` (
   `id` int(11) NOT NULL,
   `name_addon` varchar(255) DEFAULT NULL,
   `description_addon` text DEFAULT NULL,
@@ -240,33 +241,34 @@ CREATE TABLE `rex_flussi_tjd_addons` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `show_front` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `rex_flussi_tjd_addons`
+-- Dumping data for table `flussi_tjd_addons`
 --
 
-INSERT INTO `rex_flussi_tjd_addons` (`id`, `name_addon`, `description_addon`, `active`, `version`, `author`, `created_at`, `updated_at`, `show_front`) VALUES
-(20, 'jd_simple', 'This test addon', 1, '1v', 'JD Flusite', '2023-06-28 12:05:38', '2023-06-28 12:05:38', 0);
+INSERT INTO `flussi_tjd_addons` (`id`, `name_addon`, `description_addon`, `active`, `version`, `author`, `created_at`, `updated_at`, `show_front`) VALUES
+(10, 'jd_simple', 'This test addon', 1, '1v', 'JD Flusite', '2023-07-02 07:06:18', '2023-07-02 07:06:24', 1),
+(12, 'jd_simple_zer', 'This test addon', 1, '1v', 'JD Flusite Zer', '2023-07-02 07:55:53', '2023-07-02 07:59:53', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rex_flussi_translations`
+-- Table structure for table `flussi_translations`
 --
 
-CREATE TABLE `rex_flussi_translations` (
+CREATE TABLE `flussi_translations` (
   `id` int(11) NOT NULL,
   `language_code` varchar(5) NOT NULL,
   `translation_key` varchar(255) NOT NULL,
   `translation_value` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `rex_flussi_translations`
+-- Dumping data for table `flussi_translations`
 --
 
-INSERT INTO `rex_flussi_translations` (`id`, `language_code`, `translation_key`, `translation_value`) VALUES
+INSERT INTO `flussi_translations` (`id`, `language_code`, `translation_key`, `translation_value`) VALUES
 (1, 'lt', 'Language', 'Kalba'),
 (2, 'lt', 'Users', 'Vartotojai'),
 (4, 'lt', 'Dashboard', 'Prietaisų skydelis'),
@@ -484,10 +486,10 @@ INSERT INTO `rex_flussi_translations` (`id`, `language_code`, `translation_key`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rex_flussi_users`
+-- Table structure for table `flussi_users`
 --
 
-CREATE TABLE `rex_flussi_users` (
+CREATE TABLE `flussi_users` (
   `id` int(11) NOT NULL,
   `login_name` varchar(50) NOT NULL,
   `username` varchar(50) NOT NULL,
@@ -496,34 +498,34 @@ CREATE TABLE `rex_flussi_users` (
   `email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
   `role` enum('admin','moderator','user') NOT NULL DEFAULT 'user'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `rex_flussi_users`
+-- Dumping data for table `flussi_users`
 --
 
-INSERT INTO `rex_flussi_users` (`id`, `login_name`, `username`, `surname`, `phone`, `email`, `password`, `role`) VALUES
+INSERT INTO `flussi_users` (`id`, `login_name`, `username`, `surname`, `phone`, `email`, `password`, `role`) VALUES
 (1, 'Tester', 'Admin', 'tester', '8615523111', 'tests@gl.com', '$2y$10$4xw8Ssej8MPQBGHRnqXlieHU6qlKQUKpDgTIj8ZqJg0sCWU6WXIOa', 'admin');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rex_flussi_v_custom_blocks`
+-- Table structure for table `flussi_v_custom_blocks`
 --
 
-CREATE TABLE `rex_flussi_v_custom_blocks` (
+CREATE TABLE `flussi_v_custom_blocks` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `menu_id` int(10) UNSIGNED DEFAULT NULL,
   `place_id` int(10) UNSIGNED DEFAULT NULL,
   `html_code` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `rex_flussi_v_custom_blocks`
+-- Dumping data for table `flussi_v_custom_blocks`
 --
 
-INSERT INTO `rex_flussi_v_custom_blocks` (`id`, `name`, `menu_id`, `place_id`, `html_code`) VALUES
+INSERT INTO `flussi_v_custom_blocks` (`id`, `name`, `menu_id`, `place_id`, `html_code`) VALUES
 (1, ' Box test', 6, 1, ' <h2 class=\"box__title\">Antraštė pirma</h2>\n\n\n\n\n\n\n\n<p class=\"box__text\">Trumpas tekstas box dalis pirmas</p>\n\n\n\n\n\n\n\n   <a href=\"/\" class=\"box__link linkbox\">Box Nuoroda 1</a>'),
 (2, 'News col 5', 3, 2, 'Testuoju News skyrių'),
 (3, 'Pridėtas Blokas col-sm-5', 6, 3, 'Testuoju bloko pridėjimą į col-sm-5 dalį'),
@@ -535,10 +537,10 @@ INSERT INTO `rex_flussi_v_custom_blocks` (`id`, `name`, `menu_id`, `place_id`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rex_jd_simple`
+-- Table structure for table `jd_simple`
 --
 
-CREATE TABLE `rex_jd_simple` (
+CREATE TABLE `jd_simple` (
   `id` int(11) UNSIGNED NOT NULL,
   `title` varchar(255) NOT NULL,
   `description` text DEFAULT NULL,
@@ -549,91 +551,123 @@ CREATE TABLE `rex_jd_simple` (
   `addon_id` int(11) DEFAULT NULL,
   `created` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `rex_jd_simple`
+-- Dumping data for table `jd_simple`
 --
 
-INSERT INTO `rex_jd_simple` (`id`, `title`, `description`, `img_url`, `img_name`, `menu_id`, `place_id`, `addon_id`, `created`, `updated`) VALUES
-(1, 'rgdfhg', 'čęįčęėš  dfggh', 'http://localhost/uploads/jd_simple_img/test_b3978d6afa170fcc.jpg', 'test_b3978d6afa170fcc.jpg', 6, 10, 20, '2023-06-28 12:07:25', '2023-06-28 12:07:25');
+INSERT INTO `jd_simple` (`id`, `title`, `description`, `img_url`, `img_name`, `menu_id`, `place_id`, `addon_id`, `created`, `updated`) VALUES
+(1, 'dgdfg', 'fdgdfg', 'http://localhost/uploads/jd_simple_img/flusity-b_a252d067e7fe12f7.png', 'flusity-b_a252d067e7fe12f7.png', 6, 10, 10, '2023-07-02 07:59:05', '2023-07-02 07:59:05');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `jd_simple_zer`
+--
+
+CREATE TABLE `jd_simple_zer` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
+  `img_url` varchar(255) NOT NULL,
+  `img_name` varchar(255) NOT NULL,
+  `menu_id` int(11) DEFAULT NULL,
+  `place_id` int(11) DEFAULT NULL,
+  `addon_id` int(11) DEFAULT NULL,
+  `created` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `jd_simple_zer`
+--
+
+INSERT INTO `jd_simple_zer` (`id`, `title`, `description`, `img_url`, `img_name`, `menu_id`, `place_id`, `addon_id`, `created`, `updated`) VALUES
+(2, 'dfsd', 'dsf', 'http://localhost/uploads/jd_simple_zer_img/pexels-dominika-roseclay_2b7dd92bc8d188b4.jpg', 'pexels-dominika-roseclay_2b7dd92bc8d188b4.jpg', 1, 9, 12, '2023-07-02 08:01:03', '2023-07-02 08:04:40');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `rex_flussi_contact_form_settings`
+-- Indexes for table `flussi_contact_form_settings`
 --
-ALTER TABLE `rex_flussi_contact_form_settings`
+ALTER TABLE `flussi_contact_form_settings`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `rex_flussi_files`
+-- Indexes for table `flussi_files`
 --
-ALTER TABLE `rex_flussi_files`
+ALTER TABLE `flussi_files`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `rex_flussi_menu`
+-- Indexes for table `flussi_menu`
 --
-ALTER TABLE `rex_flussi_menu`
+ALTER TABLE `flussi_menu`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `rex_flussi_places`
+-- Indexes for table `flussi_places`
 --
-ALTER TABLE `rex_flussi_places`
+ALTER TABLE `flussi_places`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `rex_flussi_posts`
+-- Indexes for table `flussi_posts`
 --
-ALTER TABLE `rex_flussi_posts`
+ALTER TABLE `flussi_posts`
   ADD PRIMARY KEY (`id`),
   ADD KEY `author_id` (`author_id`),
   ADD KEY `menu_id` (`menu_id`);
 
 --
--- Indexes for table `rex_flussi_sidebar`
+-- Indexes for table `flussi_sidebar`
 --
-ALTER TABLE `rex_flussi_sidebar`
+ALTER TABLE `flussi_sidebar`
   ADD PRIMARY KEY (`id`),
   ADD KEY `parent_id` (`parent_id`);
 
 --
--- Indexes for table `rex_flussi_tjd_addons`
+-- Indexes for table `flussi_tjd_addons`
 --
-ALTER TABLE `rex_flussi_tjd_addons`
+ALTER TABLE `flussi_tjd_addons`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `rex_flussi_translations`
+-- Indexes for table `flussi_translations`
 --
-ALTER TABLE `rex_flussi_translations`
+ALTER TABLE `flussi_translations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `rex_flussi_users`
+-- Indexes for table `flussi_users`
 --
-ALTER TABLE `rex_flussi_users`
+ALTER TABLE `flussi_users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`),
   ADD UNIQUE KEY `email` (`email`),
   ADD UNIQUE KEY `login_name` (`login_name`);
 
 --
--- Indexes for table `rex_flussi_v_custom_blocks`
+-- Indexes for table `flussi_v_custom_blocks`
 --
-ALTER TABLE `rex_flussi_v_custom_blocks`
+ALTER TABLE `flussi_v_custom_blocks`
   ADD PRIMARY KEY (`id`),
   ADD KEY `menu_id` (`menu_id`),
   ADD KEY `place_id` (`place_id`);
 
 --
--- Indexes for table `rex_jd_simple`
+-- Indexes for table `jd_simple`
 --
-ALTER TABLE `rex_jd_simple`
+ALTER TABLE `jd_simple`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `jd_simple_zer`
+--
+ALTER TABLE `jd_simple_zer`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -641,87 +675,93 @@ ALTER TABLE `rex_jd_simple`
 --
 
 --
--- AUTO_INCREMENT for table `rex_flussi_contact_form_settings`
+-- AUTO_INCREMENT for table `flussi_contact_form_settings`
 --
-ALTER TABLE `rex_flussi_contact_form_settings`
+ALTER TABLE `flussi_contact_form_settings`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `rex_flussi_files`
+-- AUTO_INCREMENT for table `flussi_files`
 --
-ALTER TABLE `rex_flussi_files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+ALTER TABLE `flussi_files`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
--- AUTO_INCREMENT for table `rex_flussi_menu`
+-- AUTO_INCREMENT for table `flussi_menu`
 --
-ALTER TABLE `rex_flussi_menu`
+ALTER TABLE `flussi_menu`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT for table `rex_flussi_places`
+-- AUTO_INCREMENT for table `flussi_places`
 --
-ALTER TABLE `rex_flussi_places`
+ALTER TABLE `flussi_places`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `rex_flussi_posts`
+-- AUTO_INCREMENT for table `flussi_posts`
 --
-ALTER TABLE `rex_flussi_posts`
+ALTER TABLE `flussi_posts`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT for table `rex_flussi_sidebar`
+-- AUTO_INCREMENT for table `flussi_sidebar`
 --
-ALTER TABLE `rex_flussi_sidebar`
+ALTER TABLE `flussi_sidebar`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT for table `rex_flussi_tjd_addons`
+-- AUTO_INCREMENT for table `flussi_tjd_addons`
 --
-ALTER TABLE `rex_flussi_tjd_addons`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
---
--- AUTO_INCREMENT for table `rex_flussi_translations`
---
-ALTER TABLE `rex_flussi_translations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=216;
-
---
--- AUTO_INCREMENT for table `rex_flussi_users`
---
-ALTER TABLE `rex_flussi_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `rex_flussi_v_custom_blocks`
---
-ALTER TABLE `rex_flussi_v_custom_blocks`
+ALTER TABLE `flussi_tjd_addons`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `rex_jd_simple`
+-- AUTO_INCREMENT for table `flussi_translations`
 --
-ALTER TABLE `rex_jd_simple`
+ALTER TABLE `flussi_translations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=216;
+
+--
+-- AUTO_INCREMENT for table `flussi_users`
+--
+ALTER TABLE `flussi_users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `flussi_v_custom_blocks`
+--
+ALTER TABLE `flussi_v_custom_blocks`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `jd_simple`
+--
+ALTER TABLE `jd_simple`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `jd_simple_zer`
+--
+ALTER TABLE `jd_simple_zer`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `rex_flussi_sidebar`
+-- Constraints for table `flussi_sidebar`
 --
-ALTER TABLE `rex_flussi_sidebar`
-  ADD CONSTRAINT `rex_flussi_sidebar_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `rex_flussi_sidebar` (`id`);
+ALTER TABLE `flussi_sidebar`
+  ADD CONSTRAINT `flussi_sidebar_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `flussi_sidebar` (`id`);
 
 --
--- Constraints for table `rex_flussi_v_custom_blocks`
+-- Constraints for table `flussi_v_custom_blocks`
 --
-ALTER TABLE `rex_flussi_v_custom_blocks`
-  ADD CONSTRAINT `rex_flussi_v_custom_blocks_ibfk_1` FOREIGN KEY (`menu_id`) REFERENCES `rex_flussi_menu` (`id`),
-  ADD CONSTRAINT `rex_flussi_v_custom_blocks_ibfk_2` FOREIGN KEY (`place_id`) REFERENCES `rex_flussi_places` (`id`);
+ALTER TABLE `flussi_v_custom_blocks`
+  ADD CONSTRAINT `flussi_v_custom_blocks_ibfk_1` FOREIGN KEY (`menu_id`) REFERENCES `flussi_menu` (`id`),
+  ADD CONSTRAINT `flussi_v_custom_blocks_ibfk_2` FOREIGN KEY (`place_id`) REFERENCES `flussi_places` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
