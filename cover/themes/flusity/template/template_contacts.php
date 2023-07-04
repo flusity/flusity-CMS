@@ -135,7 +135,6 @@ $(document).ready(function() {
         $("#captcha").val("");
     });
 
-    // Perkrauna puslapį kai modalinis langas uždaromas
     $('#responseModal').on('hidden.bs.modal', function (e) {
         location.reload();
     })
