@@ -109,14 +109,6 @@ function getSettings($db, $prefix) {
         
         return $stmt->execute();
     }
-    
-
-    function getContactFormSettings($db, $prefix) {
-        $stmt = $db->prepare("SELECT * FROM ".$prefix['table_prefix']."_flussi_contact_form_settings");
-        $stmt->execute();
-        $settings = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $settings;
-    }
 
     function createPagination($url, $total_urls) {
         ob_start();
@@ -203,6 +195,7 @@ function getSettings($db, $prefix) {
     
     
     require_once 'f_users.php';
+    require_once 'f_contact_form.php';
     require_once 'f_backup.php';
     require_once 'f_posts.php';
     require_once 'f_menu.php';
