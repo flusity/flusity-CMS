@@ -37,12 +37,15 @@ if ($user) { ?>
         <div class="row">
         <div class="col-12 mb-1">
             <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">
-                <div class="form-group mb-3 mt-3">
-                    <label for="login_name"><?php echo t("Login Name:");?></label>
-                    &nbsp;<b><?php echo htmlspecialchars($user['login_name']); ?></b>
-                </div>
+               
                 </div>
                 <div class="col-6 mb-3">
+                <div class="form-group mb-3 mt-3">
+                    <label for="login_name"><?php echo t("Login Name:");?></label>
+                    &nbsp;<b><?php// echo htmlspecialchars($user['login_name']); ?></b>
+                    <input type="text" class="form-control" id="login_name" name="login_name" value="<?php echo htmlspecialchars($user['login_name']); ?>" required>
+                
+                </div>
                 <div class="form-group">
                     <label for="user_username"><?php echo t("Username");?></label>
                     <input type="text" class="form-control" id="user_username" name="user_username" value="<?php echo htmlspecialchars($user['username']); ?>" required>
