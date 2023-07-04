@@ -153,8 +153,9 @@ function validateInput($input) {
     $stmt->execute();
     return $stmt->fetchAll();
 }
-function updateUser($db, $prefix, $id, $username, $surname, $phone, $email, $role, $password = null) {
-    $sql = "UPDATE ".$prefix['table_prefix']."_flussi_users SET username = :username, surname = :surname, phone = :phone, email = :email, role = :role";
+// updateUser($db, $prefix, $userId, $login_name, $username, $surname, $phone, $email, $role, $password);
+function updateUser($db, $prefix, $id, $login_name, $username, $surname, $phone, $email, $role, $password = null) {
+    $sql = "UPDATE ".$prefix['table_prefix']."_flussi_users SET login_name = :login_name, username = :username, surname = :surname, phone = :phone, email = :email, role = :role";
 
     if ($password !== null) {
         $sql .= ", password = :password";
@@ -164,6 +165,7 @@ function updateUser($db, $prefix, $id, $username, $surname, $phone, $email, $rol
 
     $stmt = $db->prepare($sql);
 
+    $stmt->bindParam(':login_name', $login_name, PDO::PARAM_STR);
     $stmt->bindParam(':username', $username, PDO::PARAM_STR);
     $stmt->bindParam(':surname', $surname, PDO::PARAM_STR);
     $stmt->bindParam(':phone', $phone, PDO::PARAM_STR);
