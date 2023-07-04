@@ -15,17 +15,17 @@ $language_code = getLanguageSetting($db, $prefix);
 $translations = getTranslations($db, $prefix, $language_code);
 
 if (defined('IS_ADMIN') && $_SERVER['REQUEST_METHOD'] === 'POST') {
-    foreach ($_POST as $key => $value) {
-        $stmt = $db->prepare("UPDATE `contact_form_settings` SET `setting_value` = :value WHERE `setting_key` = :key");
-        $stmt->bindParam(':value', $value);
-        $stmt->bindParam(':key', $key);
-        $result = $stmt->execute();
+    $stmt = $db->prepare("UPDATE `".$prefix['table_prefix']."_flussi_contact_form_settings` SET `email_subject` = :email_subject, `email_body` = :email_body, `email_success_message` = :email_success_message, `email_error_message` = :email_error_message WHERE `id` = 1");
+    $stmt->bindParam(':email_subject', $_POST['emailSubject']);
+    $stmt->bindParam(':email_body', $_POST['emailBody']);
+    $stmt->bindParam(':email_success_message', $_POST['emailSuccessMessage']);
+    $stmt->bindParam(':email_error_message', $_POST['emailErrorMessage']);
+    $result = $stmt->execute();
 
-        if ($result) {
-            $_SESSION['success_message'] = t('Settings successfully updated.');
-        } else {
-            $_SESSION['error_message'] = t('Error updating settings. Try again.');
-        }
+    if ($result) {
+        $_SESSION['success_message'] = t('Settings successfully updated.');
+    } else {
+        $_SESSION['error_message'] = t('Error updating settings. Try again.');
     }
 }
 

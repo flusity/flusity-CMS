@@ -7,15 +7,23 @@ define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../') . '/');
 require_once ROOT_PATH . 'core/functions/functions.php';
 require_once ROOT_PATH . 'security/config.php';
 
+$db = getDBConnection($config);
+secureSession($db, $prefix);
+$settings = getContactFormSettings($db, $prefix);
+
+$email_subject = !empty($settings['email_subject']) ? $settings['email_subject'] : 'New message from Contact Form';
+$email_body = !empty($settings['email_body']) ? $settings['email_body'] : 'We received a message from:';
+$email_success_message = !empty($settings['email_success_message']) ? $settings['email_success_message'] : 'Email has been sent successfully';
+$email_error_message = !empty($settings['email_error_message']) ? $settings['email_error_message'] : 'Failed to send the email';
+
+
 require_once ROOT_PATH . 'core/phpmailer/src/PHPMailer.php';
 require_once ROOT_PATH . 'core/phpmailer/src/SMTP.php';
-//require_once ROOT_PATH . 'core/phpmailer/src/POP3.php';
 require_once ROOT_PATH . 'core/phpmailer/src/Exception.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
- $db = getDBConnection($config);
  require_once ROOT_PATH . 'security/mail_config.php';
 
 $mail_config = include(ROOT_PATH . 'security/mail_config.php');
@@ -29,11 +37,11 @@ try {
     $mail->SMTPAuth   = true;
     $mail->Username   = $mail_config['username'];
     $mail->Password   = $mail_config['password'];
-    $mail->SMTPSecure = $mail_config['secure'];// === 'tls' ? PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS : PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS;
+    $mail->SMTPSecure = $mail_config['secure'];
     $mail->Port       = $mail_config['port'];
     
-    $mail->setFrom($mail_config['setFrom'], 'Flusity');
-    $mail->addAddress($mail_config['addAddress'], 'Admin');   
+    $mail->setFrom($mail_config['setFrom'], 'Flusity'); //'Flusity' galimybė keisti tekstą formoje
+    $mail->addAddress($mail_config['addAddress'], 'Admin');   // 'Admin' galimybė keisti tekstą formoje
     
     $mail->isHTML(true);
     $mail->CharSet = 'UTF-8';
@@ -42,22 +50,21 @@ try {
     $email = $_POST['email'];
     $message = $_POST['message'];
 
-    $mail->Subject = 'Naujas pranešimas iš ' . $name;
-    $mail->Body    = 'Gavome pranešimą iš: <b>' . $name . '</b> (' . $email . ')<br><br>' . $message;
-
-
+    $mail->Subject = $email_subject . ' ' . $name;
+    $mail->Body    = $email_body . '<br><br>' . $message . "<br><br> Sent by: " . $email;
+    
     $mail->send();
 
     $response = [
         'status' => 'success',
-        'message' => 'Laiškas sėkmingai išsiųstas'
+        'message' => $email_success_message
     ];
     echo json_encode($response);
 
 } catch (Exception $e) {
     $response = [
         'status' => 'error',
-        'message' => 'Nepavyko išsiųsti laiško'
+        'message' => $email_error_message
     ];
     echo json_encode($response);
 }

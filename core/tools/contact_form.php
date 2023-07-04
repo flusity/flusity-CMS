@@ -32,16 +32,22 @@ $contactFormSettings = getContactFormSettings($db, $prefix);
             </div>
             <h2><?php echo t("Contact form"); ?></h2>
             <form id="contactForm" method="post" action="update_contact_form_settings.php">
-                <?php foreach ($contactFormSettings as $setting_contact): ?>
-                    <div class="form-group">
-                        <label for="<?php echo $setting_contact['setting_key']; ?>"><?php echo t("Key"); ?>:</label>
-                        <input type="text" class="form-control" id="<?php echo $setting_contact['setting_key']; ?>" name="<?php echo $setting_contact['setting_key']; ?>" value="<?php echo $setting_contact['setting_key']; ?>" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="<?php echo $setting_contact['setting_key']; ?>Value"><?php echo t("Value"); ?>:</label>
-                        <input type="text" class="form-control" id="<?php echo $setting_contact['setting_key']; ?>Value" name="<?php echo $setting_contact['setting_key']; ?>Value" value="<?php echo $setting_contact['setting_value']; ?>" required>
-                    </div>
-                <?php endforeach; ?>
+                <div class="form-group">
+                    <label for="emailSubject"><?php echo t("Email Subject"); ?>:</label>
+                    <input type="text" class="form-control" id="emailSubject" name="emailSubject" value="<?php echo $contactFormSettings['email_subject']; ?>" required>
+                </div>
+                <div class="form-group">
+                    <label for="emailBody"><?php echo t("Email Body"); ?>:</label>
+                    <textarea class="form-control" id="emailBody" name="emailBody" required><?php echo $contactFormSettings['email_body']; ?></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="emailSuccessMessage"><?php echo t("Success Message"); ?>:</label>
+                    <input type="text" class="form-control" id="emailSuccessMessage" name="emailSuccessMessage" value="<?php echo $contactFormSettings['email_success_message']; ?>" required>
+                </div>
+                <div class="form-group">
+                    <label for="emailErrorMessage"><?php echo t("Error Message"); ?>:</label>
+                    <input type="text" class="form-control" id="emailErrorMessage" name="emailErrorMessage" value="<?php echo $contactFormSettings['email_error_message']; ?>" required>
+                </div>
                 <button type="submit" class="btn btn-primary mt-3"><?php echo t("Save settings"); ?></button>
             </form>
                 </main>
