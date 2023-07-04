@@ -1,7 +1,7 @@
 # flusity CMS
 
  ![banner](http://manowebas.lt/wp-content/uploads/2023/06/flusity-b.png) v2
- <p>94% completion</p>
+ <p>97% completion</p>
 <p>PHP CMS project, Install, Log In, Sign Up, admin, moderator, user roles, add/edit/delete (post, layout places, language, files, menu, themes, custom block, addon (plugin) system, user,  backup.sql), update website settings.</p>
 <p><b>CMS flusity</b> naudoja tradicinį serverio pusės generavimo modelį, bet sukurta naudojant šiuolaikines technologijas ir geriausias praktikas.</p>
 
@@ -16,14 +16,14 @@
 <h3>Prietaisų skydelis</h3>
 <ul>
 <li>Dashboard (informacijos suvestinė)</li>
-<li>Users (vartotojai) baigtumo vertė 10%</li>
-<li>Places (Vietos) // "Tai vietos puslapio dalyse kur pateikti blokų info"</li> 
+<li>Users (vartotojai)</li>
+<li>Places (Vietos) "Tai vietos puslapio dalyse kur pateikti blokų info"</li> 
 <li>Posts (pranešimai)</li>
 <li>Menu (meniu)</li>
 <li>Addons (papildiniai)</li>
 <li>Block (blokai)</li>
 <li>Tags (Žymos)</li>
-<li>Contact Form (kontaktų forma dar kūrimo būsenoje, iki galutinio baigtumo vertė 50-60%)</li>
+<li>Contact Form </li>
 <li>Files (failai)</li>
 <li>Language (kalba vertimas į lt)</li>
 <li>Settings (nustatymai)</li>
@@ -77,14 +77,14 @@ Atsižvelgiant į šiuos elementus ir funkcijas, svetainė yrap patogus ir funkc
   <h3>Dashboard</h3>
 <ul><li>
 <li>Dashboard (information summary)</li>
-<li>Users completion valuation 10%</li>
+<li>Users</li>
 <li>Places // "These are places in the parts of the page where block info can be presented"</li>
 <li>Posts</li>
 <li>Menu</li>
 <li>Addons</li>
 <li>Block</li>
  <li>Tags</li>
-<li>Contact Form (contact form still under development, to final completion value 50-60%)</li>
+<li>Contact Form</li>
 <li>Files</li>
 <li>Language (default en)</li>
 <li>Settings</li>
