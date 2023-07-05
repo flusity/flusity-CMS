@@ -21,7 +21,6 @@
         header('Location: /');
         exit();
     }
-    require_once 'core/tools/set_register.php';
 
     $registration_enable = isset($settings['registration_enabled']) ? $settings['registration_enabled'] : '';
 
