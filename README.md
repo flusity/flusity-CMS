@@ -1,13 +1,12 @@
 # flusity CMS
-
- ![banner](http://manowebas.lt/wp-content/uploads/2023/06/flusity-b.png) v2
- <h4> Flusity - tai unikalus pavadinimas, kuris atspindi misiją. Jis kilo iš "flussi" ir "city" žodžių, 
-                  simbolizuojančių duomenų srauto ir plėtros koncepcijas, viską sujungiant į harmoningą "miestą", 
-                  kuriame viskas juda laisvai ir efektyviai.</h4>
  <p>97% completion</p>
-<p>PHP CMS project, Install, Log In, Sign Up, admin, moderator, user roles, add/edit/delete (post, layout places, language, files, menu, themes, custom block, addon (plugin) system, user,  backup.sql), update website settings.</p>
-<p><b>CMS flusity</b> naudoja tradicinį serverio pusės generavimo modelį, bet sukurta naudojant šiuolaikines technologijas ir geriausias praktikas.</p>
+ 
+ ![banner](http://manowebas.lt/wp-content/uploads/2023/06/flusity-b.png) v2
+ <h4> Flusity - tai unikalus pavadinimas, kuris atspindi misiją. Jis kilo iš "flussi" ir "city" žodžių, simbolizuojančių duomenų srauto ir plėtros koncepcijas, viską sujungiant į harmoningą "miestą", kuriame viskas juda laisvai ir efektyviai.</h4>
 
+
+<p><b>CMS flusity</b> naudoja tradicinį serverio pusės generavimo modelį, bet sukurta naudojant šiuolaikines technologijas ir geriausias praktikas.</p>
+<p>PHP TVS projektas, įdiegimas, prisijungimas, registracija, administratorius, moderatorius, vartotojo vaidmenys, pridėjimas / redagavimas / ištrynimas (įrašas, išdėstymo vietos, kalba, failai, meniu, temos, pasirinktinis blokas, priedo (papildo) sistema, naudotojas, backup.sql), atnaujinkite svetainės nustatymus.</p>
 <p>CMS flusity naudoja PHP kaip savo pagrindinę serverio pusės programavimo kalbą.<p>
 <p>Projekte naudojama MySQL duomenų bazė.</p>
 <p>Šiame Projekte naudojamas "Bootstrap" - tai vienas iš populiariausių "front-end" karkasų.</p>
@@ -65,7 +64,9 @@ Atsižvelgiant į šiuos elementus ir funkcijas, svetainė yrap patogus ir funkc
   <p>Prisijungimas prie sistemos: Demo User Name: Tester and password: 1234 , Projektas dar tęsiamas, numatoma pridėti daugiau funkcionalumų</p>
   
   /////// En /////////////////
-  
+
+  <h4> Flusity is a unique name that reflects the mission. It originated from the words "flussi" and "city", symbolizing the concepts of data flow and development, connecting everything into a harmonious "city" where everything moves freely and efficiently.</h4>
+<p>PHP CMS project, Install, Log In, Sign Up, admin, moderator, user roles, add/edit/delete (post, layout places, language, files, menu, themes, custom block, addon (plugin) system, user,  backup.sql), update website settings.</p>
 <p><b>CMS flusity</b>Flusity CMS</b> uses PHP as its main server-side programming language.<p>
  <p>CMS flusity uses a traditional server-side generation model, but is built with modern technology and best practices.</p>
 
