@@ -1,6 +1,9 @@
 # flusity CMS
 
  ![banner](http://manowebas.lt/wp-content/uploads/2023/06/flusity-b.png) v2
+ <h4> Flusity - tai unikalus pavadinimas, kuris atspindi misiją. Jis kilo iš "flussi" ir "city" žodžių, 
+                  simbolizuojančių duomenų srauto ir plėtros koncepcijas, viską sujungiant į harmoningą "miestą", 
+                  kuriame viskas juda laisvai ir efektyviai.</h4>
  <p>97% completion</p>
 <p>PHP CMS project, Install, Log In, Sign Up, admin, moderator, user roles, add/edit/delete (post, layout places, language, files, menu, themes, custom block, addon (plugin) system, user,  backup.sql), update website settings.</p>
 <p><b>CMS flusity</b> naudoja tradicinį serverio pusės generavimo modelį, bet sukurta naudojant šiuolaikines technologijas ir geriausias praktikas.</p>
