@@ -64,7 +64,7 @@ if ($mode === 'create' || $customBlock) {
         </div>
         <div class="form-group">
             <label for="customblock_name"><?php echo t('Name');?></label>
-            <input type="text" class="form-control" id="customblock_name" name="customblock_name" value="<?php echo $mode === 'edit' ? htmlspecialchars($customBlock['name']) : ''; ?>" required>
+            <input type="text" class="form-control" id="customblock_name" name="customblock_name" value="<?php echo $mode === 'edit' ? htmlspecialchars($customBlock['name']) : ''; ?>" >
         </div>
         <div class="form-group">
             <label for="customblock_html_code"><?php echo t('Content');?></label>
