@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 04, 2023 at 08:45 AM
+-- Generation Time: Jul 09, 2023 at 05:10 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `jdbas`
+-- Database: `dda`
 --
 
 -- --------------------------------------------------------
@@ -88,11 +88,8 @@ CREATE TABLE `flussi_menu` (
 --
 
 INSERT INTO `flussi_menu` (`id`, `name`, `page_url`, `position`, `template`, `created_at`, `updated_at`, `show_in_menu`, `parent_id`) VALUES
-(1, 'Dokumentai', 'dokumentai', 3, 'template_left_content', '2023-04-15 09:00:19', '2023-06-16 05:53:35', 1, NULL),
-(3, 'NAUJIENOS', 'news', 2, 'template_naujienos', '2023-04-15 21:29:51', '2023-06-16 05:53:37', 1, NULL),
 (6, 'HOMES', 'index', 1, 'template_index', '2023-04-16 12:35:26', '2023-06-20 19:59:31', 1, 0),
-(12, 'Kontaktai', 'contacts', 5, 'template_contacts', '2023-04-21 14:28:01', '2023-06-16 05:53:43', 1, NULL),
-(15, 'Testuoju2', 'test', 7, 'template_left_content', '2023-06-03 18:09:36', '2023-06-03 21:37:33', 0, 1);
+(12, 'Kontaktai', 'contacts', 5, 'template_contacts', '2023-04-21 14:28:01', '2023-06-16 05:53:43', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -189,7 +186,7 @@ CREATE TABLE `flussi_settings` (
 --
 
 INSERT INTO `flussi_settings` (`site_title`, `meta_description`, `footer_text`, `pretty_url`, `language`, `posts_per_page`, `registration_enabled`, `session_lifetime`, `default_keywords`, `theme`, `brand_icone`, `table_prefix`) VALUES
-('Free CMS flusity', 'Flusity is a contemporary PHP CMS project utilizing MVC architecture, MySQL database, and Bootstrap front-end framework. It includes the management of users, posts, menu, blocks and other elements, as well as security and SEO features.', 'Copyright &copy; flusity JD Theme 2023', 1, 'lt', 10, 0, 30, 'free cms, php, free website, cms, content management system, free cms flusity, php cms, website ', 'flusity', 'flusity-b_a252d067e7fe12f7.png', 'jdfsite');
+('Free CMS flusity', 'Flusity is a contemporary PHP CMS project utilizing MVC architecture, MySQL database, and Bootstrap front-end framework. It includes the management of users, posts, menu, blocks and other elements, as well as security and SEO features.', 'Copyright &copy; flusity JD Theme 2023', 1, 'lt', 10, 0, 30, 'free cms, php, free website, cms, content management system, free cms flusity, php cms, website ', 'flusity-cms', 'flusity-b_a252d067e7fe12f7.png', 'jdfsite');
 
 -- --------------------------------------------------------
 
@@ -505,7 +502,8 @@ CREATE TABLE `flussi_users` (
 --
 
 INSERT INTO `flussi_users` (`id`, `login_name`, `username`, `surname`, `phone`, `email`, `password`, `role`) VALUES
-(1, 'Tester', 'Admin', 'tester', '8615523111', 'tests@gl.com', '$2y$10$4xw8Ssej8MPQBGHRnqXlieHU6qlKQUKpDgTIj8ZqJg0sCWU6WXIOa', 'admin');
+(1, 'Tester', 'Admin', 'tester', '8615523111', 'tests@gl.com', '$2y$10$4xw8Ssej8MPQBGHRnqXlieHU6qlKQUKpDgTIj8ZqJg0sCWU6WXIOa', 'admin'),
+(12, 'Darius', 'Bester', 'Petraitis', '370524879522', 'jakius@gail.com', '$2y$10$ba9nOVjX/z23XlnEawyJyusfVrtZaJgwVpxFdzBsdNFsuo6lkKvy2', 'admin');
 
 -- --------------------------------------------------------
 
@@ -726,7 +724,7 @@ ALTER TABLE `flussi_translations`
 -- AUTO_INCREMENT for table `flussi_users`
 --
 ALTER TABLE `flussi_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `flussi_v_custom_blocks`
@@ -755,13 +753,6 @@ ALTER TABLE `jd_simple_zer`
 --
 ALTER TABLE `flussi_sidebar`
   ADD CONSTRAINT `flussi_sidebar_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `flussi_sidebar` (`id`);
-
---
--- Constraints for table `flussi_v_custom_blocks`
---
-ALTER TABLE `flussi_v_custom_blocks`
-  ADD CONSTRAINT `flussi_v_custom_blocks_ibfk_1` FOREIGN KEY (`menu_id`) REFERENCES `flussi_menu` (`id`),
-  ADD CONSTRAINT `flussi_v_custom_blocks_ibfk_2` FOREIGN KEY (`place_id`) REFERENCES `flussi_places` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
