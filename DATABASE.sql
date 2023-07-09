@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 09, 2023 at 05:20 PM
+-- Generation Time: Jul 09, 2023 at 05:24 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -174,7 +174,7 @@ CREATE TABLE `flussi_settings` (
 --
 
 INSERT INTO `flussi_settings` (`site_title`, `meta_description`, `footer_text`, `pretty_url`, `language`, `posts_per_page`, `registration_enabled`, `session_lifetime`, `default_keywords`, `theme`, `brand_icone`, `table_prefix`) VALUES
-('Free CMS flusity', 'Flusity is a contemporary PHP CMS project utilizing MVC architecture, MySQL database, and Bootstrap front-end framework. It includes the management of users, posts, menu, blocks and other elements, as well as security and SEO features.', 'Copyright &copy; flusity JD Theme 2023', 1, 'lt', 10, 0, 30, 'free cms, php, free website, cms, content management system, free cms flusity, php cms, website ', 'flusity-cms', 'flusity-b_a252d067e7fe12f7.png', 'jdfsite');
+('Free CMS flusity', 'Flusity is a contemporary PHP CMS project utilizing MVC architecture, MySQL database, and Bootstrap front-end framework. It includes the management of users, posts, menu, blocks and other elements, as well as security and SEO features.', 'Copyright &copy; flusity JD Theme 2023', 1, 'lt', 10, 0, 30, 'free cms, php, free website, cms, content management system, free cms flusity, php cms, website ', 'flusity', 'flusity-b_a252d067e7fe12f7.png', 'jdfsite');
 
 -- --------------------------------------------------------
 
