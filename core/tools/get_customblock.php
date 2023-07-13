@@ -55,6 +55,7 @@ if ($mode === 'create' || $customBlock) {
         <div class="form-group">
             <label for="customblock_menu_id"><?php echo t('Menu');?></label>
             <select class="form-control" id="customblock_menu_id" name="customblock_menu_id" required>
+                <option value="0"><?php echo t('To all pages');?></option>
                 <?php foreach ($menuId as $menu) : ?>
                     <option value="<?php echo $menu['id']; ?>" <?php echo $mode === 'edit' && $customBlock['menu_id'] === $menu['id'] ? 'selected' : ''; ?>>
                         <?php echo htmlspecialchars($menu['name']); ?>
@@ -64,7 +65,7 @@ if ($mode === 'create' || $customBlock) {
         </div>
         <div class="form-group">
             <label for="customblock_name"><?php echo t('Name');?></label>
-            <input type="text" class="form-control" id="customblock_name" name="customblock_name" value="<?php echo $mode === 'edit' ? htmlspecialchars($customBlock['name']) : ''; ?>" >
+            <input type="text" class="form-control" id="customblock_name" name="customblock_name" value="<?php echo $mode === 'edit' ? htmlspecialchars($customBlock['name']) : ''; ?>" required>
         </div>
         <div class="form-group">
             <label for="customblock_html_code"><?php echo t('Content');?></label>

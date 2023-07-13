@@ -42,7 +42,6 @@ if ($user) { ?>
                 <div class="col-6 mb-3">
                 <div class="form-group mb-3 mt-3">
                     <label for="login_name"><?php echo t("Login Name:");?></label>
-                    &nbsp;<b><?php// echo htmlspecialchars($user['login_name']); ?></b>
                     <input type="text" class="form-control" id="login_name" name="login_name" value="<?php echo htmlspecialchars($user['login_name']); ?>" required>
                 
                 </div>

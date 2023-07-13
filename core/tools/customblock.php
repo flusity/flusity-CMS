@@ -74,7 +74,10 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
                                   }
                               ?>
                             </td>
-                            <td><?= htmlspecialchars(findNameById($customBlock['menu_id'], $menus)); ?></td>
+                            <td>
+                                <?= $customBlock['menu_id'] == 0 ? t('All pages') : htmlspecialchars(findNameById($customBlock['menu_id'], $menus)); ?>
+                            </td>
+
                             <td><?= htmlspecialchars(findNameById($customBlock['place_id'], $places)); ?></td>
                             <td>
                             <button type="button" class="btn btn-sm btn-primary" onclick="loadCustomBlockEditForm(<?= $customBlock['id']; ?>)" title="<?php echo t("Edit");?>">
