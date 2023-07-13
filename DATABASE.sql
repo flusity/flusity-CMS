@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 09, 2023 at 05:24 PM
+-- Generation Time: Jul 13, 2023 at 02:31 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `dda`
+-- Database: `ddas`
 --
 
 -- --------------------------------------------------------
@@ -114,7 +114,10 @@ INSERT INTO `flussi_places` (`id`, `name`, `created_at`, `updated_at`) VALUES
 (6, 'head-box-two', '2023-05-28 08:27:28', '2023-05-28 08:27:28'),
 (7, 'contact-right-5', '2023-05-28 08:28:19', '2023-05-28 08:28:19'),
 (8, 'contact-left-7', '2023-05-28 08:30:01', '2023-05-28 08:30:01'),
-(10, 'home-col-down-12', '2023-05-28 12:26:33', '2023-05-28 12:26:33');
+(10, 'home-col-down-12', '2023-05-28 12:26:33', '2023-05-28 12:26:33'),
+(12, 'footer-col4-1', '2023-07-13 12:10:02', '2023-07-13 12:10:02'),
+(13, 'footer-col4-2', '2023-07-13 12:10:09', '2023-07-13 12:10:09'),
+(14, 'footer-col4-3', '2023-07-13 12:10:13', '2023-07-13 12:10:13');
 
 -- --------------------------------------------------------
 
@@ -174,7 +177,7 @@ CREATE TABLE `flussi_settings` (
 --
 
 INSERT INTO `flussi_settings` (`site_title`, `meta_description`, `footer_text`, `pretty_url`, `language`, `posts_per_page`, `registration_enabled`, `session_lifetime`, `default_keywords`, `theme`, `brand_icone`, `table_prefix`) VALUES
-('Free CMS flusity', 'Flusity is a contemporary PHP CMS project utilizing MVC architecture, MySQL database, and Bootstrap front-end framework. It includes the management of users, posts, menu, blocks and other elements, as well as security and SEO features.', 'Copyright &copy; flusity JD Theme 2023', 1, 'lt', 10, 0, 30, 'free cms, php, free website, cms, content management system, free cms flusity, php cms, website ', 'flusity', 'flusity-b_a252d067e7fe12f7.png', 'jdfsite');
+('Free CMS flusity', 'Flusity is a contemporary PHP CMS project utilizing MVC architecture, MySQL database, and Bootstrap front-end framework. It includes the management of users, posts, menu, blocks and other elements, as well as security and SEO features.', 'Copyright &copy; flusity JD Theme 2023', 1, 'lt', 10, 0, 30, 'free cms, php, free website, cms, content management system, free cms flusity, php cms, website ', 'flusity-cms', 'flusity-b_a252d067e7fe12f7.png', 'jdfsite');
 
 -- --------------------------------------------------------
 
@@ -465,7 +468,9 @@ INSERT INTO `flussi_translations` (`id`, `language_code`, `translation_key`, `tr
 (212, 'lt', 'AddOns', 'Papildiniai'),
 (213, 'lt', 'Themes', 'Išvaizda'),
 (214, 'lt', 'No addons found in the system.', 'Sistemoje nerasta jokių priedų.'),
-(215, 'lt', 'Website addons', 'Svetainės papildiniai');
+(215, 'lt', 'Website addons', 'Svetainės papildiniai'),
+(216, 'lt', 'To all pages', 'Visuose puslapiuose'),
+(217, 'lt', 'All pages', 'Visi puslapiai');
 
 -- --------------------------------------------------------
 
@@ -489,8 +494,7 @@ CREATE TABLE `flussi_users` (
 --
 
 INSERT INTO `flussi_users` (`id`, `login_name`, `username`, `surname`, `phone`, `email`, `password`, `role`) VALUES
-(1, 'Tester', 'Admin', 'tester', '8615523111', 'tests@gl.com', '$2y$10$4xw8Ssej8MPQBGHRnqXlieHU6qlKQUKpDgTIj8ZqJg0sCWU6WXIOa', 'admin'),
-(12, 'Darius', 'Bester', 'Petraitis', '370524879522', 'jakius@gail.com', '$2y$10$ba9nOVjX/z23XlnEawyJyusfVrtZaJgwVpxFdzBsdNFsuo6lkKvy2', 'admin');
+(1, 'Tester', 'Admin', 'tester', '8615523111', 'tests@gl.com', '$2y$10$4xw8Ssej8MPQBGHRnqXlieHU6qlKQUKpDgTIj8ZqJg0sCWU6WXIOa', 'admin');
 
 -- --------------------------------------------------------
 
@@ -515,7 +519,10 @@ INSERT INTO `flussi_v_custom_blocks` (`id`, `name`, `menu_id`, `place_id`, `html
 (3, 'Pridėtas Blokas col-sm-5', 6, 3, 'Testuoju bloko pridėjimą į col-sm-5 dalį'),
 (5, 'Test Contact col 5', 12, 7, 'Test Contact block col-sm-5 '),
 (6, 'Testuoju home-col-down-12', 6, 10, 'Pridedamas bandomasis turinys į home-col-down-12'),
-(7, 'Box test 2', 6, 6, ' <h2 class=\"box__title\">Antraštė angtra</h2>\n\n\n\n <p class=\"box__text\">Trumpas tekstas box dalis antras</p>\n\n\n\n <a href=\"#\" class=\"box__link linkbox\">Box Nuoroda 2</a>');
+(7, 'Box test 2', 6, 6, ' <h2 class=\"box__title\">Antraštė angtra</h2>\n\n\n\n <p class=\"box__text\">Trumpas tekstas box dalis antras</p>\n\n\n\n <a href=\"#\" class=\"box__link linkbox\">Box Nuoroda 2</a>'),
+(13, 'Test footer 1', 0, 12, 'Test footer place 1'),
+(14, 'Test footer 2', 0, 13, 'Test footer place 2'),
+(15, 'Test footer 3', 0, 14, 'Test footer place 3');
 
 -- --------------------------------------------------------
 
@@ -641,13 +648,13 @@ ALTER TABLE `flussi_files`
 -- AUTO_INCREMENT for table `flussi_menu`
 --
 ALTER TABLE `flussi_menu`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `flussi_places`
 --
 ALTER TABLE `flussi_places`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `flussi_posts`
@@ -671,19 +678,19 @@ ALTER TABLE `flussi_tjd_addons`
 -- AUTO_INCREMENT for table `flussi_translations`
 --
 ALTER TABLE `flussi_translations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=216;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=218;
 
 --
 -- AUTO_INCREMENT for table `flussi_users`
 --
 ALTER TABLE `flussi_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `flussi_v_custom_blocks`
 --
 ALTER TABLE `flussi_v_custom_blocks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `jd_simple`
