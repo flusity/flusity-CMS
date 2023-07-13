@@ -54,6 +54,7 @@ if ($mode === 'create' || $addon) {
                     <div class="col-md-6 mb-3">
                         <label for="addon_menu_id"><?php echo t('Menu');?></label>
                         <select class="form-control" id="addon_menu_id" name="addon_menu_id" required>
+                        <option value="0"><?php echo t('To all pages');?></option>
                             <?php foreach ($menuId as $menu) : ?>
                                 <option value="<?php echo $menu['id']; ?>"
                                 <?php echo ($mode === 'edit' && $addon['menu_id'] == $menu['id']) ? 'selected' : ''; ?>>
@@ -162,7 +163,8 @@ if ($mode === 'create' || $addon) {
                         $short_menu = htmlspecialchars($result['menu_name']);
                         $short_place = htmlspecialchars($result['place_name']);
                         echo '<td>' . $short_description . '...</td>';
-                        echo '<td>' . $short_menu . '</td>';
+                        echo '<td>' . (isset($result['menu_id']) && $result['menu_id'] != 0 ? htmlspecialchars($result['menu_name']) : t('All pages')) . '</td>';
+                       
                         echo '<td>' . $short_place . '</td>';
                         echo '<td>';
                         echo '<a href="addons_model.php?name=jd_simple&id=' . htmlspecialchars($_GET['id']) . '&addon_post_edit_id=' . htmlspecialchars($result['id']) . '"><i class="fa fa-edit"></i></a> ';

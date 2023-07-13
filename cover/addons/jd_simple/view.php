@@ -7,7 +7,7 @@
             echo '<h3>' . htmlspecialchars($addon['title']) . '</h3>';
         }
         echo '<div>' . $addon['description'] . '</div>';
-        echo '<div><img src="' . $addon['img_url'] . '" title="' . htmlspecialchars($addon['title']) . '"/></div>';
+        echo '<div><img src="' . $addon['img_url'] . '" title="' . htmlspecialchars($addon['title']) . '" width="200px"/></div>';
         echo '</div>';
     }
 ?>
