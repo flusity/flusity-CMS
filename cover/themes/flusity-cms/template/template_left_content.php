@@ -1,34 +1,42 @@
-<header id="header" class="no-header">
+<header class="header easy-header">
+    <div class="overlay"></div>
+    <canvas id="canvas"></canvas>
 <?php require_once 'menu-horizontal.php';?>
+        <div class="col-md-12 easy-hello-box">
+            <h1>
+              <span class="easy-word">Flusity free CMS for all</span>
+          </h1>
+        </div>
 </header>
-<main class="main">
- <div class="container spacer">
+<main class="main mt-5" id="main">
+<?php
+    if (isset($_SESSION['success_message'])) {
+        echo "<div class='alert alert-success alert-dismissible fade show slow-fade'>
+            " . htmlspecialchars($_SESSION['success_message']) . "
+            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+        </div>";
+        unset($_SESSION['success_message']);
+    }
+
+    if (isset($_SESSION['error_message'])) {
+        echo "<div class='alert alert-danger alert-dismissible fade show slow-fade'>
+            " . htmlspecialchars($_SESSION['error_message']) . "
+            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+        </div>";
+        unset($_SESSION['error_message']);
+    }
+    ?>
+  <div class="container">
     <div class="row">
-        <div class="col-sm-7">
+        <div class="col-sm-12"> 
         <?php 
             $page_url = getCurrentPageUrl($db, $prefix);
             if ($page_url) {
-                displayPlace($db, $prefix, $page_url, 'doc-left-7');
+                displayPlace($db, $prefix, $page_url, 'doc-full-12-1');
             } else {
                 print "";
             }
             ?>
-        </div>
-        <div class="col-sm-5">
-            <?php 
-            $page_url = getCurrentPageUrl($db, $prefix);
-            if ($page_url) {
-                displayPlace($db, $prefix, $page_url, 'doc-right-5');
-            } else {
-                print "";
-            }
-            ?>
-        </div>
-    </div>
-</div>
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12"> 
         <?php foreach ($posts as &$post): ?>
         <h2><?php echo $post['title']; ?></h2>
         <p><?php echo $post['content']; ?></p>
@@ -38,12 +46,18 @@
         </div>
     </div>
 </div>
-        </main>
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-12 text-center"> 
-            <p>Your other content col-sm</p>
+        <?php 
+            $page_url = getCurrentPageUrl($db, $prefix);
+            if ($page_url) {
+                displayPlace($db, $prefix, $page_url, 'doc-full-12-2');
+            } else {
+                print "";
+            }
+            ?>
         </div>
     </div>
 </div>
-
+</main>
