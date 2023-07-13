@@ -217,17 +217,15 @@ function uploadFile($uploaded_file, $db, $prefix, $subfolder = null) {
     }
 }
 
-
 function getAddonsByUrlNameAndPlace($db, $prefix, $addon, $page_url, $place_name) {
-    
     try {
         $stmt = $db->prepare("SELECT ".$prefix['table_prefix']."_".$addon.".* FROM ".$prefix['table_prefix']."_".$addon." 
-        JOIN ".$prefix['table_prefix']."_flussi_menu ON ".$prefix['table_prefix']."_".$addon.".menu_id = ".$prefix['table_prefix']."_flussi_menu.id 
-        JOIN ".$prefix['table_prefix']."_flussi_places ON ".$prefix['table_prefix']."_".$addon.".place_id = ".$prefix['table_prefix']."_flussi_places.id 
-        JOIN ".$prefix['table_prefix']."_flussi_tjd_addons ON ".$prefix['table_prefix']."_".$addon.".addon_id = ".$prefix['table_prefix']."_flussi_tjd_addons.id 
-        WHERE ".$prefix['table_prefix']."_flussi_menu.page_url = :page_url 
+        LEFT JOIN ".$prefix['table_prefix']."_flussi_menu ON ".$prefix['table_prefix']."_".$addon.".menu_id = ".$prefix['table_prefix']."_flussi_menu.id 
+        LEFT JOIN ".$prefix['table_prefix']."_flussi_places ON ".$prefix['table_prefix']."_".$addon.".place_id = ".$prefix['table_prefix']."_flussi_places.id 
+        LEFT JOIN ".$prefix['table_prefix']."_flussi_tjd_addons ON ".$prefix['table_prefix']."_".$addon.".addon_id = ".$prefix['table_prefix']."_flussi_tjd_addons.id 
+        WHERE (".$prefix['table_prefix']."_flussi_menu.page_url = :page_url OR ".$prefix['table_prefix']."_".$addon.".menu_id = 0) 
         AND ".$prefix['table_prefix']."_flussi_places.name = :place_name"); 
-        
+
         $stmt->bindParam(':page_url', $page_url, PDO::PARAM_STR);
         $stmt->bindParam(':place_name', $place_name, PDO::PARAM_STR);
         $stmt->execute();
@@ -238,6 +236,7 @@ function getAddonsByUrlNameAndPlace($db, $prefix, $addon, $page_url, $place_name
         return [];
     }
 }
+
 
 /* 
 function displayAddonByPlace($db, $prefix, $page_url, $place_name, $admin_label = null) {
