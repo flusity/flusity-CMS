@@ -69,7 +69,9 @@ if ($mode === 'create' || $customBlock) {
         </div>
         <div class="form-group">
             <label for="customblock_html_code"><?php echo t('Content');?></label>
-            <textarea class="form-control" id="customblock_html_code" name="customblock_html_code" rows="10" required><?php echo $mode === 'edit' ? htmlspecialchars($customBlock['html_code']) : ''; ?></textarea>
+         
+            <textarea class="form-control" id="customblock_html_code" name="customblock_html_code" rows="10"><?php echo $mode === 'edit' ? htmlspecialchars($customBlock['html_code']) : ''; ?></textarea>
+            
         </div>
 
         <button type="submit" class="btn btn-primary"><?php echo $mode === 'edit' ? 'Update Block' : 'Add Block'; ?></button>

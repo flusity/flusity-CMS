@@ -12,6 +12,16 @@ function loadCustomBlockForm(mode, customBlockId = null) {
 }
 
 function initializeCustomBlockForm(mode) {
+    ClassicEditor
+    .create( document.querySelector( '#customblock_html_code' ), {
+        // toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
+    } )
+    .then( editor => {
+        window.editor = editor;
+    } )
+    .catch( err => {
+        console.error( err.stack );
+    } );
     const customBlockForm = document.querySelector('#customblock-form');
     if (customBlockForm) {
         customBlockForm.addEventListener('submit', function (event) {
