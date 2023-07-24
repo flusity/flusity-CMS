@@ -1,7 +1,10 @@
 <?php
 
-function getAllCustomBlocks($db, $prefix) {
-    $stmt = $db->prepare('SELECT * FROM '.$prefix['table_prefix'].'_flussi_v_custom_blocks');
+function getAllCustomBlocks($db, $prefix, $start, $limit) {
+    $stmt = $db->prepare('SELECT * FROM '.$prefix['table_prefix'].'_flussi_v_custom_blocks'.' LIMIT :start, :limit');
+ 
+    $stmt->bindParam(':start', $start, PDO::PARAM_INT);
+    $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetchAll();
 }
