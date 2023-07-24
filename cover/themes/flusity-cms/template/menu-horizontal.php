@@ -46,9 +46,9 @@
       </div>
     </div>
 <?php else: ?>
-    <li class="nav-item">
-    <a class="nav-link" href="login.php"><?php echo t("Log In"); ?></a>
-</li>
+   <!--  <li class="nav-item">
+    <a class="nav-link" href="login.php"><?php //echo t("Log In"); ?></a>
+</li> -->
 <?php endif; ?>
 </div></ul>
             </div>

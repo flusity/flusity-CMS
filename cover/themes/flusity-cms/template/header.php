@@ -51,7 +51,9 @@ if (!empty($postSeo)) {
     <link href="/assets/fonts/fonts-quicksand.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="<?php echo getThemePath($db, $prefix, 'css/style.css'); ?>">
     <link rel="stylesheet" type="text/css"  href="<?php echo getThemePath($db, $prefix, 'css/site.css'); ?>">
-    
+    <script src="/assets/dist/js/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/assets/dist/js/ui/1.12.1/themes/base/jquery-ui.css">
+
    <style>
     .navbar-shrink {
         height: 80px;

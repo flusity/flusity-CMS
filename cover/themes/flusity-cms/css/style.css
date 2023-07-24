@@ -281,3 +281,6 @@ text-align: center;
 .no-register{
 	min-height:140px;
 }
+.answer-option {
+    cursor: move;
+}

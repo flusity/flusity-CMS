@@ -8,7 +8,7 @@
           </h1>
         </div>
 </header>
-<main class="main mt-0" id="main">
+<main class="main mt-5" id="main">
 <?php
     if (isset($_SESSION['success_message'])) {
         echo "<div class='alert alert-success alert-dismissible fade show slow-fade'>
@@ -28,37 +28,12 @@
     ?>
   <div class="container">
     <div class="row">
-        <div class="col-sm-4"> 
-        <?php 
-            $page_url = getCurrentPageUrl($db, $prefix);
-            if ($page_url) {
-                displayPlace($db, $prefix, $page_url, 'doc-full-12-1');
-            } else {
-                print "";
-            }
-            ?>
-        </div>
-        <div class="col-sm-8"> 
+        <div class="col-sm-12"> 
         <?php foreach ($posts as &$post): ?>
         <h2><?php echo $post['title']; ?></h2>
         <p><?php echo $post['content']; ?></p>
-       <?php endforeach; ?>
-
-       <?php echo createPagination($url, $total_urls); ?>
-        </div>
-    </div>
-</div>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-12 text-center"> 
-        <?php 
-            $page_url = getCurrentPageUrl($db, $prefix);
-            if ($page_url) {
-                displayPlace($db, $prefix, $page_url, 'doc-full-12-2');
-            } else {
-                print "";
-            }
-            ?>
+        <?php endforeach; ?>
+        <?php echo createPagination($url, $total_urls); ?>
         </div>
     </div>
 </div>
