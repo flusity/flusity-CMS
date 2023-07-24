@@ -2,20 +2,27 @@
 define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../') . '/');
 require_once ROOT_PATH . 'core/template/header-admin.php';
 ?>
-<?php require_once $_SERVER['DOCUMENT_ROOT'] . '/core/template/admin-menu-horizontal.php';?>
+<?php require_once ROOT_PATH . '/core/template/admin-menu-horizontal.php';?>
   <button class="btn btn-primary position-fixed start-0 translate-middle-y d-md-none tools-settings" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas">
       <i class="fas fa-bars"></i>
   </button>
- <?php require_once  $_SERVER['DOCUMENT_ROOT'] . '/core/tools/sidebar.php';?>
+ <?php require_once  ROOT_PATH . '/core/tools/sidebar.php';?>
 <div class="container-fluid mt-4 main-content admin-layout">
     <div class="row">
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 content-up">
+            <?php
+              $i = 1;  
+        $items_per_page = isset($_GET['rows']) ? intval($_GET['rows']) : 5; // selected rows
+        $total_items = count(getAllPlaces($db, $prefix));
+        $total_pages = ceil($total_items / $items_per_page);
+        $current_page = isset($_GET['page']) && is_numeric($_GET['page']) ? intval($_GET['page']) : 1;
+        $start = ($current_page - 1) * $items_per_page;
 
-        <?php
-            $places = getAllplaces($db, $prefix);
-            $menus = getMenuItems($db, $prefix);
-            $customblocks = getAllCustomBlocks($db, $prefix);
-          ?>
+        $places = getAllPlaces($db, $prefix); // It appears that this function call is duplicate
+        $menus = getMenuItems($db, $prefix); // It appears that this function call is duplicate
+        $customblocks = getAllCustomBlocks($db, $prefix, $start, $items_per_page ); // Make sure to include this function in your code
+?>
+
        
             <div class="col-sm-9">
                 <?php
@@ -92,6 +99,35 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
                 <?php endforeach; ?>
             </tbody>
          </table>
+
+         <div class="d-flex justify-content-center mt-3">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li class="page-item <?php echo ($current_page <= 1) ? 'disabled' : ''; ?>">
+                    <a class="page-link" href="?page=<?php echo $current_page - 1; ?>" aria-label="Previous">
+                        <span aria-hidden="true">«</span>
+                    </a>
+                </li>
+                <?php
+                $num_pages_to_display = 5;
+                for ($i = max(1, $current_page - $num_pages_to_display); $i <= min($current_page + $num_pages_to_display, $total_pages); $i++):
+                ?>
+                    <li class="page-item <?php echo ($i == $current_page) ? 'active' : ''; ?>">
+                        <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                    </li>
+                <?php endfor; ?>
+                <li class="page-item <?php echo ($current_page >= $total_pages) ? 'disabled' : ''; ?>">
+                    <a class="page-link" href="?page=<?php echo $current_page + 1; ?>" aria-label="Next">
+                        <span aria-hidden="true">»</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+</div>
+
+
+
+
          </div>
                                 </main>
     </div>
