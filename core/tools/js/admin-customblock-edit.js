@@ -12,7 +12,7 @@ function loadCustomBlockForm(mode, customBlockId = null) {
 }
 
 function initializeCustomBlockForm(mode) {
-    ClassicEditor
+ /*    ClassicEditor
     .create( document.querySelector( '#customblock_html_code' ), {
         // toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
     } )
@@ -21,7 +21,7 @@ function initializeCustomBlockForm(mode) {
     } )
     .catch( err => {
         console.error( err.stack );
-    } );
+    } ); */
     const customBlockForm = document.querySelector('#customblock-form');
     if (customBlockForm) {
         customBlockForm.addEventListener('submit', function (event) {
@@ -56,7 +56,3 @@ function initializeCustomBlockForm(mode) {
         });
     }
 }
-
-
-  
-  
