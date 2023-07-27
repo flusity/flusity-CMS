@@ -178,42 +178,6 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="confirmDeleteModalLabel"><?php echo t("Confirm deletion");?></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      <?php echo t("Are you sure you want to delete this post?");?> 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?php echo t("Cancel");?></button>
-        <button type="button" class="btn btn-danger delete-post-btn" id="confirm-delete-btn"><?php echo t("Delete");?></button>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="modal fade" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl">
-    <div class="modal-content">
-      <div class="modal-body" id="previewModalBody">
-      </div>
-    </div>
-  </div>
-</div>
-<div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="imageSelectOffcanvas" data-bs-backdrop="false" data-bs-scroll="true">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title">Select an Image</h5>
-    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body">
-
-  </div>
-</div>
-
 <script>
   function loadPostEditForm(postId) {
     loadPostForm('edit', postId);
@@ -243,19 +207,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
       }
     });
   });
-  
-  $(document).ready(function() {
-    var $offCanvas = $('#imageSelectOffcanvas');
-    $(document).click(function(event) {
-        if (!$(event.target).closest('.offcanvas').length && $offCanvas.hasClass('show')) {
-            $offCanvas.offcanvas('hide');
-        }
-    });
-    $offCanvas.on('mouseleave', function(event) {
-        $offCanvas.offcanvas('hide');
-    });
-});
-  
+
  document.querySelector('#search_term').addEventListener('input', function() {
         if (this.value !== '') {
             document.querySelector('#clear-search').style.display = 'block';

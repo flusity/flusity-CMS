@@ -34,7 +34,7 @@ $menuId = getMenuItems($db, $prefix);
 
 if ($mode === 'create' || $customBlock) {
 ?>
-<div class="col-md-6">
+<div class="col-md-8">
 <div id="customblock-form-content">
     <form id="customblock-form">
         <input type="hidden" name="mode" value="<?php echo $mode; ?>">
@@ -69,8 +69,34 @@ if ($mode === 'create' || $customBlock) {
         </div>
         <div class="form-group">
             <label for="customblock_html_code"><?php echo t('Content');?></label>
-         
-            <textarea class="form-control" id="customblock_html_code" name="customblock_html_code" rows="10"><?php echo $mode === 'edit' ? htmlspecialchars($customBlock['html_code']) : ''; ?></textarea>
+            <div class="toolbar">
+            
+            <button type="button" onclick="textBreak()" style="height: 35px; width: 35px;">br</button>
+            <button type="button" onclick="paragraphText()" style="height: 35px; width: 35px;">p</button>
+            <button type="button" onclick="boldText()" style="height: 35px; width: 35px;"><b>b</b></button>
+            <button type="button" onclick="italicText()" style="height: 35px; width: 35px;"><i>i</i></button>
+            <button type="button" onclick="underlineText()" style="height: 35px; width: 35px;"><u>u</u></button>
+            <button type="button" onclick="markDel()" style="height: 35px;"><del>d<del></button>
+            <button type="button" onclick="header1()" style="height: 35px;"><p>h1</p></button>
+            <button type="button" onclick="header2()" style="height: 35px;"><p>h2</p></button>
+            <button type="button" onclick="header3()" style="height: 35px;"><p>h3</p></button>
+            <button type="button" onclick="hypertext()" style="height: 35px;"><p>url</p></button>
+            <button type="button" onclick="listTextUl()" style="height: 35px;"><p>ul</p></button>
+            <button type="button" onclick="listTextLi()" style="height: 35px;"><p>li</p></button>
+            <button type="button" onclick="quotationMark()" style="height: 35px;"><p>„“</p></button>
+            <button type="button" onclick="markOl()" style="height: 35px;"><p>1..</p></button>
+            <button type="button" onclick="markSub()" style="height: 35px;"><sub>2</sub></button>
+            <button type="button" onclick="markSup()" style="height: 35px;"><sup>4</sup></button>
+            <button type="button" onclick="markHr()" style="height: 35px;"><p>__</p></button>
+            <button type="button" onclick="markText()" style="height: 35px;"><p><mark>text</mark></p></button>
+            <button type="button" onclick="selectImage()" style="height: 35px;"><img>img</img></button>
+            <button type="button" onclick="previewPost('post_content')" style="padding: 0px;">
+
+            <i class="fas fa-expand-arrows-alt" title="Preview"style="size:28px; color: #c2c2c2;"></i>
+            </button>
+        
+            </div>
+            <textarea class="form-control" id="post_content" name="customblock_html_code" rows="10"><?php echo $mode === 'edit' ? htmlspecialchars($customBlock['html_code']) : ''; ?></textarea>
             
         </div>
 
@@ -86,6 +112,6 @@ if ($mode === 'create' || $customBlock) {
 }
 ?>
 
-<div class="col-md-6">
+<div class="col-md-4">
 
 </div>

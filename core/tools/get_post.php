@@ -86,7 +86,7 @@ if ($mode === 'create' || $post) {
             <button type="button" onclick="markHr()" style="height: 35px;"><p>__</p></button>
             <button type="button" onclick="markText()" style="height: 35px;"><p><mark>text</mark></p></button>
             <button type="button" onclick="selectImage()" style="height: 35px;"><img>img</img></button>
-            <button type="button" onclick="previewPost()" style="padding: 0px;">
+            <button type="button" onclick="previewPost('post_content')" style="padding: 0px;">
             <i class="fas fa-expand-arrows-alt" title="Preview"style="size:28px; color: #c2c2c2;"></i>
             </button>
         

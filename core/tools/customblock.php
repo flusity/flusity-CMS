@@ -18,9 +18,9 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
         $current_page = isset($_GET['page']) && is_numeric($_GET['page']) ? intval($_GET['page']) : 1;
         $start = ($current_page - 1) * $items_per_page;
 
-        $places = getAllPlaces($db, $prefix); // It appears that this function call is duplicate
-        $menus = getMenuItems($db, $prefix); // It appears that this function call is duplicate
-        $customblocks = getAllCustomBlocks($db, $prefix, $start, $items_per_page ); // Make sure to include this function in your code
+        $places = getAllPlaces($db, $prefix); 
+        $menus = getMenuItems($db, $prefix); 
+        $customblocks = getAllCustomBlocks($db, $prefix, $start, $items_per_page );
 ?>
 
        
@@ -49,7 +49,6 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
               <i class="fas fa-plus"></i>
             </button>
             <div class="col-md-12 mt-3">
-            <!-- Išveda customblock redagavimo langą -->
             <div id="get-customblock-edit"></div>
 
             <table class="table">
@@ -124,34 +123,11 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
             </ul>
         </nav>
 </div>
-
-
-
-
-         </div>
-                                </main>
-    </div>
+ </div>
+</main>
+</div>
 </div>
 
-<!-- Modal -->
-
-<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="confirmDeleteModalLabel"><?php echo t("Confirm deletion");?></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      <?php echo t("Are you sure you want to delete this block?");?> 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?php echo t("Cancel");?></button>
-        <button type="button" class="btn btn-danger  delete-customblock-btn" id="confirm-delete-btn"><?php echo t("Delete");?></button>
-      </div>
-    </div>
-  </div>
-</div>
 <script>
 
   function loadCustomBlockEditForm(customBlockId) {
@@ -159,18 +135,15 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
   }
   
 $(document).ready(function () {
-    // Paspaudus ištrynimo mygtuką, atidaro patvirtinimo modalą
     $('button[data-bs-target="#deleteCustomblockModal"]').on('click', function () {
         const customblockId = $(this).data('custom-block-id');
       $('#confirmDeleteModal').data('customblock-id', customblockId);
       $('#confirmDeleteModal').modal('show');
     });
   
-    // Paspaudus patvirtinimo mygtuką, ištrina kategoriją
     $('#confirm-delete-btn').on('click', function () {
       const customblockId = $('#confirmDeleteModal').data('customblock-id');
-      
-      // Siunčia POST užklausą į delete_customblock.php failą
+    
       $.ajax({
         type: 'POST',
         url: 'delete_customblock.php',
@@ -179,12 +152,10 @@ $(document).ready(function () {
           customblock_id: customblockId
         },
         success: function(response) {
-          // Uždaro modalą ir peradresuoja į customblock.php puslapį
           $('#confirmDeleteModal').modal('hide');
           window.location.href = 'customblock.php';
         },
         error: function(jqXHR, textStatus, errorThrown) {
-          // Rodo klaidos pranešimą
           console.error(textStatus, errorThrown);
         }
       });
