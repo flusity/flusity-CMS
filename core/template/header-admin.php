@@ -1,6 +1,7 @@
 <?php if (session_status() !== PHP_SESSION_ACTIVE) {
   session_start();
 }
+
 require_once $_SERVER['DOCUMENT_ROOT'] . '/security/config.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/core/functions/functions.php';
 
@@ -53,6 +54,6 @@ if (!checkUserRole($user_id, 'admin', $db, $prefix)) {
     <link href="/core/tools/css/admin-style.css" rel="stylesheet">
     <link href="/core/tools/css/admin-style-two.css" rel="stylesheet">
     <script src="/assets/dist/js/jquery-3.6.0.min.js"></script>  
-    <link type="text/css" href="/assets/ckeditor/sample/css/sample.css" rel="stylesheet" media="screen" />
+<!--     <link type="text/css" href="/assets/ckeditor/sample/css/sample.css" rel="stylesheet" media="screen" /> -->
 </head>
 <body>
