@@ -1,7 +1,7 @@
 # flusity CMS
  <p>97% completion</p>
  
- ![banner](http://manowebas.lt/wp-content/uploads/2023/06/flusity-b.png) v2
+ ![banner](http://manowebas.lt/wp-content/uploads/2023/06/flusity-b.png) v23.07.07
  <h4> Flusity - tai unikalus pavadinimas, kuris atspindi misiją. Jis kilo iš "flussi" ir "city" žodžių, simbolizuojančių duomenų srauto ir plėtros koncepcijas, viską sujungiant į harmoningą "miestą", kuriame viskas juda laisvai ir efektyviai.</h4>
 
 
