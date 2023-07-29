@@ -8,18 +8,32 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo01">
 <ul class="navbar-nav mb-2 mb-lg-0">
             <?php
-        $menuItems = getMenuItems($db, $prefix);
+        $menuItems = getParentMenuItems($db, $prefix);
         $current_page_url = getCurrentPageUrl($db, $prefix);
 
-    foreach ($menuItems as $item):
-        if ($item['show_in_menu'] == 1){
-        $active = $current_page_url === $item['page_url'] ? 'active' : '';
-        $generatedUrl = generateMenuUrl($db, $prefix, $item['page_url']);?>
-    <li class="nav-item">
-    <a class="nav-link <?php echo $active; ?>" href="<?php echo $generatedUrl; ?>"><?php echo htmlspecialchars($item['name']); ?></a>
-    </li>
-    <?php }
-       endforeach; ?>
+        foreach ($menuItems as $item):
+            if ($item['show_in_menu'] == 1){
+            $active = $current_page_url === $item['page_url'] ? 'active' : '';
+            $generatedUrl = generateMenuUrl($db, $prefix, $item['page_url']);?>
+        <li class="nav-item">
+        <a class="nav-link <?php echo $active; ?>" href="<?php echo $generatedUrl; ?>"><?php echo htmlspecialchars($item['name']); ?></a>
+        <?php
+                $subMenuItems = getSubMenuItems($db, $prefix, $item['id']);
+                if(count($subMenuItems) > 0) {
+                    echo '<ul class="submenu">';
+                    foreach ($subMenuItems as $subItem) {
+                        $activeSub = $current_page_url === $subItem['page_url'] ? 'active' : '';
+                        $generatedSubUrl = generateMenuUrl($db, $prefix, $subItem['page_url']);
+                        echo '<li class="nav-item">';
+                        echo '<a class="nav-link ' . $activeSub . '" href="' . $generatedSubUrl . '">' . htmlspecialchars($subItem['name']) . '</a>';
+                        echo '</li>';
+                    }
+                    echo '</ul>';
+                }
+            ?>
+        </li>
+        <?php }
+           endforeach;?>
     <?php if (isset($_SESSION['user_id'])): 
         $isAdmin = checkUserRole($_SESSION['user_id'], 'admin', $db, $prefix);
         $isModerator = checkUserRole($_SESSION['user_id'], 'moderator', $db, $prefix);

@@ -48,6 +48,7 @@ if (!empty($postSeo)) {
     <link rel="shortcut icon" href="/uploads/<?php echo $site_brand_icone;?>" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="/assets/bootstrap-5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="/assets/dist/js/jquery-3.6.0.min.js"></script>
+    <script src="<?php echo getThemePath($db, $prefix, 'js/jdmenu.js'); ?>"></script><!-- jdmenu -->
     <link href="/assets/fonts/fonts-quicksand.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="<?php echo getThemePath($db, $prefix, 'css/style.css'); ?>">
     <link rel="stylesheet" type="text/css"  href="<?php echo getThemePath($db, $prefix, 'css/site.css'); ?>">
