@@ -11,6 +11,17 @@ function getMenuItems($db, $prefix) {
     $stmt->execute();
     return $stmt->fetchAll();
 }
+function getSubMenuItems($db, $prefix, $parentId) {
+    $stmt = $db->prepare('SELECT * FROM ' . $prefix['table_prefix'] . '_flussi_menu WHERE parent_id = ? ORDER BY position');
+    $stmt->execute([$parentId]);
+    return $stmt->fetchAll();
+}
+function getParentMenuItems($db, $prefix) {
+    $stmt = $db->prepare('SELECT * FROM '.$prefix['table_prefix'].'_flussi_menu WHERE parent_id IS NULL OR parent_id = 0 ORDER BY position');
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+
 function createMenuItem($db, $prefix, $name, $page_url, $position, $template, $show_in_menu, $parent_id) {
     $stmt = $db->prepare('INSERT INTO '.$prefix['table_prefix'].'_flussi_menu (name, page_url, position, template, show_in_menu, parent_id) VALUES (:name, :page_url, :position, :template, :show_in_menu, :parent_id)');
     $stmt->bindParam(':name', $name, PDO::PARAM_STR);
