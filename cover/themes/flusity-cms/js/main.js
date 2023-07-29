@@ -49,31 +49,6 @@ window.onresize = resizeCanvas;
 
 // Generate lines
 
-
-// Draw lines
-/* function drawLines() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)'; // white lines with 50% opacity
-  for (var i = 0; i < lines.length; i++) {
-    var line = lines[i];
-    ctx.beginPath();
-    ctx.moveTo(line.x, line.y);
-    ctx.lineTo(line.x + line.length * Math.cos(line.angle), line.y + line.length * Math.sin(line.angle));
-    ctx.stroke();
-    
-    // Move line
-    line.x += line.speed * Math.cos(line.angle);
-    line.y += line.speed * Math.sin(line.angle);
-    
-    // If line is out of bounds, reset it
-    if (line.x < 0 || line.y < 0 || line.x > canvas.width || line.y > canvas.height) {
-      lines[i] = generateLine(mouseX, mouseY);
-    }
-  }
-  
-  requestAnimationFrame(drawLines); // repeat
-} */
-
 var colors = ['rgba(0, 255, 0, 0.15)', 'rgba(0, 0, 255, 0.15)', 'rgba(255, 0, 0, 0.15)', 'rgba(255, 255, 0, 0.15)'];
 
 // Generate lines
