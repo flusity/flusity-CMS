@@ -10,6 +10,15 @@ function getPostsNews($db, $prefix, $limit, $offset, $menuUrl) {
     $stmt->execute();
     return $stmt->fetchAll();    
 }
+
+function displayEditButton($postId) {
+    if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
+        echo '<a href="/core/tools/posts.php?edit_post_id='.$postId.'" class="edit-link"><img src="core/tools/img/pencil.png" width="20px" title="'.t("Edit").'"></a>';
+       
+    }
+}
+
+
 function getPostSeo($db, $prefix, $limit, $offset, $menuUrl) {
     if ($menuUrl != '') {
         $stmt = $db->prepare('SELECT '.$prefix['table_prefix'].'_flussi_posts.* FROM '.$prefix['table_prefix'].'_flussi_posts JOIN '.$prefix['table_prefix'].'_flussi_menu ON '.$prefix['table_prefix'].'_flussi_posts.menu_id = '.$prefix['table_prefix'].'_flussi_menu.id WHERE '.$prefix['table_prefix'].'_flussi_menu.page_url = :menu_url AND '.$prefix['table_prefix'].'_flussi_posts.status = "published" AND '.$prefix['table_prefix'].'_flussi_posts.priority = 1 ORDER BY GREATEST('.$prefix['table_prefix'].'_flussi_posts.created_at, '.$prefix['table_prefix'].'_flussi_posts.updated_at) DESC, '.$prefix['table_prefix'].'_flussi_posts.id DESC LIMIT '.(int)$limit.' OFFSET '.(int)$offset);

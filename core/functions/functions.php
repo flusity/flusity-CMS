@@ -175,6 +175,13 @@ function getSettings($db, $prefix) {
             }
             echo '<div>' . $customBlock['html_code'] . '</div>';
             echo '</div>';
+            
+            if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
+               
+                echo '<a href="/core/tools/customblock.php?edit_customblock_id='.$customBlock['id'].'" class="edit-link"><img src="core/tools/img/pencil.png" width="20px" title="'.t("Edit").'"></a>';
+                               // 
+                } else {}
+            
         }
     
         // Display addons

@@ -174,6 +174,14 @@ function getAddonById($db, $prefix, $name_addon, $addonId) {
     return $statement->fetch(PDO::FETCH_ASSOC);
 }
 
+function displayAddonEditButton($db, $prefix, $addon) {
+    if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
+        $addon_id = getAddonId($db, $prefix, 'jd_simple');
+        echo '<a href="/core/tools/addons_model.php?name=jd_simple&id='.$addon_id.'&addon_post_edit_id='.$addon['id'].'" class="edit-link"><img src="core/tools/img/pencil.png" width="20px" title="'.t("Edit").'"></a>';
+    }
+}
+
+
 function uploadFile($uploaded_file, $db, $prefix, $subfolder = null) {
     
     if(!$subfolder) {
@@ -232,27 +240,8 @@ function getAddonsByUrlNameAndPlace($db, $prefix, $addon, $page_url, $place_name
 
         return $stmt->fetchAll();
     } catch (PDOException $e) {
-        //echo "Klaida vykdant užklausą: " . $e->getMessage();
         return [];
     }
 }
-
-
-/* 
-function displayAddonByPlace($db, $prefix, $page_url, $place_name, $admin_label = null) {
-    $addonsDirectory = $_SERVER['DOCUMENT_ROOT'] . '/cover/addons/';
-
-    foreach(glob($addonsDirectory . "/*", GLOB_ONLYDIR) as $dir) {
-        $content = basename($dir);
-        $addons = getAddonsByUrlNameAndPlace($db, $prefix, $content, $page_url, $place_name);
-
-        foreach ($addons as $addon) {
-            $viewPath = $dir . "/view.php";
-            if (file_exists($viewPath)) {
-                include_once($viewPath);
-            }
-        }
-    }
-} */
 
 
