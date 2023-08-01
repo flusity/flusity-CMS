@@ -12,17 +12,17 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 content-up">
             <?php
               $i = 1;  
-        $items_per_page = isset($_GET['rows']) ? intval($_GET['rows']) : 5; // selected rows
-        $total_items = count(getAllPlaces($db, $prefix));
-        $total_pages = ceil($total_items / $items_per_page);
-        $current_page = isset($_GET['page']) && is_numeric($_GET['page']) ? intval($_GET['page']) : 1;
-        $start = ($current_page - 1) * $items_per_page;
+                $items_per_page = isset($_GET['rows']) ? intval($_GET['rows']) : 5; // selected rows
+                $total_items = count(getAllPlaces($db, $prefix));
+                $total_pages = ceil($total_items / $items_per_page);
+                $current_page = isset($_GET['page']) && is_numeric($_GET['page']) ? intval($_GET['page']) : 1;
+                $start = ($current_page - 1) * $items_per_page;
 
-        $places = getAllPlaces($db, $prefix); 
-        $menus = getMenuItems($db, $prefix); 
-        $customblocks = getAllCustomBlocks($db, $prefix, $start, $items_per_page );
-?>
-
+                $places = getAllPlaces($db, $prefix); 
+                $menus = getMenuItems($db, $prefix); 
+                $customblocks = getAllCustomBlocks($db, $prefix, $start, $items_per_page );
+             
+              ?>
        
             <div class="col-sm-9">
                 <?php
@@ -41,7 +41,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
                     </div>";
                     unset($_SESSION['error_message']);
                 }
-                ?>
+               ?>
             </div>
             <h2><?php echo t("Custom Blocks");?></h2>
             <button type="button" class="btn btn-sm btn-primary" onclick="loadCustomBlockForm('create')" title="<?php echo t("Add");?>">
@@ -49,7 +49,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
               <i class="fas fa-plus"></i>
             </button>
             <div class="col-md-12 mt-3">
-            <div id="get-customblock-edit"></div>
+            <div id="get-customblock-edit"></div><!-- Selektorius -->
 
             <table class="table">
                 <thead>
@@ -162,5 +162,12 @@ $(document).ready(function () {
     });
   });
 </script>
+<?php
+if (isset($_GET['edit_customblock_id'])) {
+    $edit_customblock_id = $_GET['edit_customblock_id'];
+    echo "<script>loadCustomBlockEditForm($edit_customblock_id);</script>";
+}
+?>
 <script src="js/admin-customblock-edit.js"></script>
+
 <?php require_once ROOT_PATH . 'core/template/admin-footer.php';?>

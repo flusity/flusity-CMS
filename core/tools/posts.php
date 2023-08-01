@@ -18,8 +18,6 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
     $records_per_page = isset($_GET['rows']) ? intval($_GET['rows']) : 5; // pasirinktos eilutės
 
         $i = 1;
-       
-        
                 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
                 $offset = ($page - 1) * $records_per_page;
                 $search_term = isset($_GET['search_term']) ? $_GET['search_term'] : '';
@@ -29,7 +27,6 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
                 $posts = getAllPostsPagination($db, $prefix, $start, $records_per_page, $search_term);
                 $total_posts = countAllPosts($db, $prefix);
                 $total_pages = ceil($total_posts / $records_per_page);
-               // $allPost = getAllPosts($db, $prefix);
                 $menuItems = getMenuItems($db, $prefix);
                 $menuItemsIndexed = array_column($menuItems, null, 'id');
           ?>
@@ -243,5 +240,12 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
 });
 
 </script>
+<?php
+if (isset($_GET['edit_post_id'])) {
+    $edit_post_id = $_GET['edit_post_id'];
+    echo "<script>loadPostEditForm($edit_post_id);</script>";
+}
+?>
+
 <script src="js/admin-post-edit.js"></script>
 <?php require_once ROOT_PATH . 'core/template/admin-footer.php';?>
