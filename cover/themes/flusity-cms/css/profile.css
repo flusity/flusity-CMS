@@ -13,11 +13,28 @@
     object-fit: cover;
     object-position: center;
 }
+:root {
+  --mobile-view-width: 768px;
+}
 
+@media (max-width: var(--mobile-view-width)) {
+  
+.element.style{
+  width: 100%;
+}
   button.navmenubutton {
     height: 47px;
     padding: 1px 1px 0px 9px;
-    width: 155px;
+    
+    background-color: transparent;
+    color: rgba(63, 63, 63, 0.797);
+     width: 100%;
+}
+}
+  button.navmenubutton {
+    height: 47px;
+    padding: 1px 1px 0px 9px;
+    width: auto;
     background-color: transparent;
     color: rgba(63, 63, 63, 0.797);
 }

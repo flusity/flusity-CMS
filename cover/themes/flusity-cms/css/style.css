@@ -8,6 +8,7 @@ html, body {
 }
 
 body { background-color: #fafafa; font-family: 'Quicksand', sans-serif; }
+p{ font-size: 18px;}
 .row {
   --bs-gutter-x: 0;
 }
@@ -90,17 +91,76 @@ height: 50px;
 .navbar .navbar-brand,
 .navbar .nav-link {
 transition: all 0.4s;
-font-size: 22px; 
+font-size: 25px; 
 }
-
+.navbar-brand {
+  text-decoration: none;
+  white-space: nowrap;
+  margin-top: -10px;
+}
 .navbar.scrolled .navbar-brand,
 .navbar.scrolled .nav-link {
-  transform: scale(0.75);
+  transform: scale(0.85);
   transition: all 0.6s;
 }
 .navbar-collapse.show {
   background-color: #ffffff;
 }
+.navbar-toggler {
+  padding: var(--bs-navbar-toggler-padding-y) var(--bs-navbar-toggler-padding-x);
+  font-size: var(--bs-navbar-toggler-font-size);
+  line-height: 0;
+  color: var(--bs-navbar-color);
+  background-color: transparent;
+  border: var(--bs-border-width) solid var(--bs-navbar-toggler-border-color);
+  border-radius: var(--bs-navbar-toggler-border-radius);
+  transition: var(--bs-navbar-toggler-transition);
+  margin-top: -20px;
+}
+
+.navbar-nav {
+  --bs-nav-link-padding-x: 0;
+  --bs-nav-link-padding-y: 0.5rem;
+  --bs-nav-link-font-weight: ;
+  --bs-nav-link-color: var(--bs-navbar-color);
+  --bs-nav-link-hover-color: var(--bs-navbar-hover-color);
+  --bs-nav-link-disabled-color: var(--bs-navbar-disabled-color);
+  display: flex;
+  flex-direction: column;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+  padding: 10px;
+}
+/*Sub Menu*/
+.submenu li {
+  list-style-type: none;  /* Paslepia buletus */
+}
+
+.submenu {
+  margin-top: 15px; 
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.submenu a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.submenu a:hover {
+  background-color: #f1f1f1;
+}
+
+/*sub menu end*/
+
+
 .col-md-8.hello-box{
 position: relative; 
 z-index: 1000;
@@ -139,7 +199,11 @@ min-height:60px;
 }
 }
 
-
+@media (min-width: 576px){
+nav .container {
+   margin-bottom: -3px; 
+}
+}
 .word {
 font-size: 64px; font-weight: 100;
 opacity: 0;
@@ -244,9 +308,19 @@ color:#f5f5f5;
 min-height: 250px;
 background-color: #677378e0;
 padding: 20px 30px;
+color: #f8f8f8e9;
+}
+.social-section ul li a{
+  color: #000097e9;
+  text-decoration: none;
+}
+.social-section ul li a:hover{
+  color: #b7b7c8e9;
 }
 
-
+.social-section .customblock-widget h3{
+  color: #212121;
+}
 
 /*Footer dalis*/
 .footer{
