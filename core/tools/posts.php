@@ -141,7 +141,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
                                 </button>
 
                                 <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeletePostModal" data-post-id="<?php echo $post['id']; ?>" title="<?php echo t("Delete");?>">
-   
+                                    
                                 <i class="fas fa-trash-alt"></i>
                                 </button>
                             </td>
@@ -235,7 +235,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
 });
 
    
-$('button[data-bs-target="#deletePostModal"]').on('click', function () {
+$('button[data-bs-target="#confirmDeletePostModal"]').on('click', function () {
     const postId = $(this).data('post-id');
     $('#confirmDeletePostModal').data('post-id', postId);
     $('#confirmDeletePostModal').modal('show');
