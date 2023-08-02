@@ -25,6 +25,8 @@
         }
     }
 
-    header("Location: customblock.php");
+  //  header("Location: customblock.php");
+  //  exit;
+    echo json_encode($result);
     exit;
 ?>

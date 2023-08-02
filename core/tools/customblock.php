@@ -90,7 +90,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
                                 <i class="fas fa-edit"></i>
                             </button>
                         
-                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteCustomblockModal" data-custom-block-id="<?php echo $customBlock['id']; ?>" title="<?php echo t("Delete");?>">
+                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#confirmCustomDeleteModal" data-custom-block-id="<?php echo $customBlock['id']; ?>" title="<?php echo t("Delete");?>">
                             <i class="fas fa-trash-alt"></i>
                             </button>
                         </td>
@@ -127,22 +127,39 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
 </main>
 </div>
 </div>
-
+<!-- Modal -->
+<div class="modal fade" id="confirmCustomDeleteModal" tabindex="-1" aria-labelledby="confirmCustomDeleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmCustomDeleteModalLabel"><?php echo t("Confirm deletion");?></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <?php echo t("Are you sure you want to delete this block?");?> 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?php echo t("Cancel");?></button>
+        <button type="button" class="btn btn-danger  delete-customblock-btn" id="confirm-custom-delete-btn"><?php echo t("Delete");?></button>
+      </div>
+    </div>
+  </div>
+</div>
 <script>
 
   function loadCustomBlockEditForm(customBlockId) {
     loadCustomBlockForm('edit', customBlockId);
   }
   
-$(document).ready(function () {
-    $('button[data-bs-target="#deleteCustomblockModal"]').on('click', function () {
+  $(document).ready(function () {
+    $('button[data-bs-target="#confirmCustomDeleteModal"]').on('click', function () {
         const customblockId = $(this).data('custom-block-id');
-      $('#confirmDeleteModal').data('customblock-id', customblockId);
-      $('#confirmDeleteModal').modal('show');
+      $('#confirmCustomDeleteModal').data('customblock-id', customblockId);
+      $('#confirmCustomDeleteModal').modal('show');
     });
   
-    $('#confirm-delete-btn').on('click', function () {
-      const customblockId = $('#confirmDeleteModal').data('customblock-id');
+    $('#confirm-custom-delete-btn').on('click', function () {
+      const customblockId = $('#confirmCustomDeleteModal').data('customblock-id');
     
       $.ajax({
         type: 'POST',
@@ -152,7 +169,7 @@ $(document).ready(function () {
           customblock_id: customblockId
         },
         success: function(response) {
-          $('#confirmDeleteModal').modal('hide');
+          $('#confirmCustomDeleteModal').modal('hide');
           window.location.href = 'customblock.php';
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -160,7 +177,7 @@ $(document).ready(function () {
         }
       });
     });
-  });
+    });
 </script>
 <?php
 if (isset($_GET['edit_customblock_id'])) {
