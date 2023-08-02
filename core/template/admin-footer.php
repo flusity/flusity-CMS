@@ -68,6 +68,25 @@ $(document).on('click', '.badge', function() {
     });
 });
 
+$('#confirm-delete-btn').on('click', function () {
+    const postId = $('#confirmDeleteModal').data('post-id');
+    $.ajax({
+      type: 'POST',
+      url: 'delete_post.php',
+      data: {
+        action: 'delete_post',
+        post_id: postId
+      },
+      success: function(response) {
+        $('#confirmDeleteModal').modal('hide');
+        window.location.href = 'posts.php';
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.error(textStatus, errorThrown);
+      }
+    });
+  });
+
 $(document).ready(function() {
     $('.toast').toast({ autohide: true });
     $('.badge').on('click', function() {
