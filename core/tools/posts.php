@@ -140,8 +140,9 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
                                     <i class="fas fa-edit"></i>
                                 </button>
 
-                                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deletePostModal" data-post-id="<?php echo $post['id']; ?>" title="<?php echo t("Delete");?>">
-                                    <i class="fas fa-trash-alt"></i>
+                                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeletePostModal" data-post-id="<?php echo $post['id']; ?>" title="<?php echo t("Delete");?>">
+   
+                                <i class="fas fa-trash-alt"></i>
                                 </button>
                             </td>
                         </tr>
