@@ -53,7 +53,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php'; ?>
                           <i class="fas fa-edit"></i>
                           </button>
                         
-                          <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deletePlaceModal" data-place-id="<?php echo $place['id']; ?>" title="<?php echo t("Delete");?>">
+                          <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-place-id="<?php echo $place['id']; ?>" title="<?php echo t("Delete");?>">
                               <i class="fas fa-trash-alt"></i>
                           </button>
                         </td>
@@ -173,19 +173,14 @@ $('#addPlaceModal').on('show.bs.modal', function (event) {
   }
 });
 
-$(document).ready(function () {
-  // Paspaudus ištrynimo mygtuką, atidaro patvirtinimo modalą
-  $('button[data-bs-target="#deletePlaceModal"]').on('click', function () {
+  $('button[data-bs-target="#confirmDeleteModal"]').on('click', function () {
     const placeId = $(this).data('place-id');
     $('#confirmDeleteModal').data('place-id', placeId);
     $('#confirmDeleteModal').modal('show');
   });
 
-  // Paspaudus patvirtinimo mygtuką, ištrina kategoriją
   $('#confirm-delete-btn').on('click', function () {
     const placeId = $('#confirmDeleteModal').data('place-id');
-    
-    // Siunčia POST užklausą į delete_place.php failą
     $.ajax({
       type: 'POST',
       url: 'delete_place.php',
@@ -194,7 +189,6 @@ $(document).ready(function () {
         place_id: placeId
       },
       success: function(response) {
-        // Uždaro modalą ir peradresuoja į places.php puslapį
         $('#confirmDeleteModal').modal('hide');
         window.location.href = 'places.php';
       },
@@ -203,7 +197,7 @@ $(document).ready(function () {
       }
     });
   });
-});
+
 
 </script>
 <?php require_once ROOT_PATH . 'core/template/admin-footer.php';?>
