@@ -175,16 +175,29 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
     </div>
 </div>
 
+<div class="modal fade" id="confirmDeletePostModal" tabindex="-1" aria-labelledby="cconfirmDeletePostModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmDeletePostModalLabel"><?php echo t("Confirm deletion");?></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <?php echo t("Are you sure you want to delete this post?");?> 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?php echo t("Cancel");?></button>
+        <button type="button" class="btn btn-danger  delete-post-btn" id="confirm-delete-post-btn"><?php echo t("Delete");?></button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
   function loadPostEditForm(postId) {
     loadPostForm('edit', postId);
   }
-  
-  $('button[data-bs-target="#deletePostModal"]').on('click', function () {
-    const postId = $(this).data('post-id');
-    $('#confirmDeleteModal').data('post-id', postId);
-    $('#confirmDeleteModal').modal('show');
-  });
+ 
   
  document.querySelector('#search_term').addEventListener('input', function() {
         if (this.value !== '') {
@@ -227,6 +240,6 @@ if (isset($_GET['edit_post_id'])) {
     echo "<script>loadPostEditForm($edit_post_id);</script>";
 }
 ?>
-
 <script src="js/admin-post-edit.js"></script>
+
 <?php require_once ROOT_PATH . 'core/template/admin-footer.php';?>

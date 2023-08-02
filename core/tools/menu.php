@@ -150,11 +150,11 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+<div class="modal fade" id="confirmDeleteMenuModal" tabindex="-1" aria-labelledby="confirmDeleteMenuModalLabel" aria-hidden="true">
 <div class="modal-dialog">
   <div class="modal-content">
     <div class="modal-header">
-      <h5 class="modal-title" id="confirmDeleteModalLabel"><?php echo t("Confirm deletion");?></h5>
+      <h5 class="modal-title" id="confirmDeleteMenuModalLabel"><?php echo t("Confirm deletion");?></h5>
       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="modal-body">
@@ -162,11 +162,39 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?php echo t("Cancel");?></button>
-      <button type="button" class="btn btn-danger  delete-menu-btn" id="confirm-delete-btn"><?php echo t("Delete");?></button>
+      <button type="button" class="btn btn-danger  delete-menu-btn" id="confirm-delete-menu-btn"><?php echo t("Delete");?></button>
     </div>
   </div>
 </div>
 </div>
+<script>
 
+  
+$('button[data-bs-target="#deleteMenuModal"]').on('click', function () {
+const menuId = $(this).data('menu-id');
+$('#confirmDeleteMenuModal').data('menu-id', menuId);
+$('#confirmDeleteMenuModal').modal('show');
+});
+
+$('#confirm-delete-menu-btn').on('click', function () {
+const menuId = $('#confirmDeleteMenuModal').data('menu-id');
+$.ajax({
+  type: 'POST',
+  url: 'delete_menu.php',
+  data: {
+    action: 'delete_menu_item',
+    menu_item_id: menuId
+  },
+  success: function(response) {
+    $('#confirmDeleteMenuModal').modal('hide');
+    window.location.href = 'menu.php';
+  },
+  error: function(jqXHR, textStatus, errorThrown) {
+    console.error(textStatus, errorThrown);
+  }
+});
+
+});
+</script>
 <?php require_once ROOT_PATH . 'core/template/admin-footer.php';?>
 <script src="js/admin-menu.js"></script>

@@ -29,7 +29,7 @@
         $result = deleteMenuItem($db, $prefix, $menuItemId);
 
         if ($result) {
-            $_SESSION['success_message'] = t("Menu item successfully deleted.");
+            $_SESSION['success_message'] = t("Menu and page item successfully deleted.");
         } else {
             $_SESSION['error_message'] = t("Error deleting menu item. Try again.");
         }
