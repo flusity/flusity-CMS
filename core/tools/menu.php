@@ -81,7 +81,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
                                   <i class="fas fa-edit"></i>
                               </button>
 
-                              <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteMenuModal" data-menu-id="<?php echo $menu['id']; ?>" title="<?php echo t("Delete");?>">
+                              <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteMenuModal" data-menu-id="<?php echo $menu['id']; ?>" title="<?php echo t("Delete");?>">
                                   <i class="fas fa-trash-alt"></i>
                               </button>
                           </td>
@@ -170,7 +170,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
 <script>
 
   
-$('button[data-bs-target="#deleteMenuModal"]').on('click', function () {
+$('button[data-bs-target="#confirmDeleteMenuModal"]').on('click', function () {
 const menuId = $(this).data('menu-id');
 $('#confirmDeleteMenuModal').data('menu-id', menuId);
 $('#confirmDeleteMenuModal').modal('show');
