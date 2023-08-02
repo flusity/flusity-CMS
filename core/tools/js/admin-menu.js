@@ -106,30 +106,4 @@ $(document).ready(function() {
   
 });
 
-$(document).ready(function () {
-$('button[data-bs-target="#deleteMenuModal"]').on('click', function () {
-const menuId = $(this).data('menu-id');
-$('#confirmDeleteModal').data('menu-id', menuId);
-$('#confirmDeleteModal').modal('show');
-});
 
-$('#confirm-delete-btn').on('click', function () {
-const menuId = $('#confirmDeleteModal').data('menu-id');
-$.ajax({
-  type: 'POST',
-  url: 'delete_menu.php',
-  data: {
-    action: 'delete_menu_item',
-    menu_item_id: menuId
-  },
-  success: function(response) {
-    $('#confirmDeleteModal').modal('hide');
-    window.location.href = 'menu.php';
-  },
-  error: function(jqXHR, textStatus, errorThrown) {
-    console.error(textStatus, errorThrown);
-  }
-});
-
-});
-});
