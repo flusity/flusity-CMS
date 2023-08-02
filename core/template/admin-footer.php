@@ -47,32 +47,6 @@ $(document).on('click', '.badge', function() {
     });
 });
 
-   
-  $('button[data-bs-target="#deletePostModal"]').on('click', function () {
-    const postId = $(this).data('post-id');
-    $('#confirmDeletePostModal').data('post-id', postId);
-    $('#confirmDeletePostModal').modal('show');
-  });
-
-$('#confirm-delete-post-btn').on('click', function () {
-    const postId = $('#confirmDeletePostModal').data('post-id');
-    $.ajax({
-      type: 'POST',
-      url: 'delete_post.php',
-      data: {
-        action: 'delete_post',
-        post_id: postId
-      },
-      success: function(response) {
-        $('#confirmDeletePostModal').modal('hide');
-        window.location.href = 'posts.php';
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-        console.error(textStatus, errorThrown);
-      }
-    });
-  });
-
 $(document).ready(function() {
     $('.toast').toast({ autohide: true });
     $('.badge').on('click', function() {
@@ -103,7 +77,6 @@ $(document).ready(function() {
 <script src="/core/tools/js/content_redactor.js"></script>
 <script src="/core/tools/js/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
 <script src="/assets/popperjs/popper.min.js"></script>
-
 
 <script>
   $(document).ready(function() {
@@ -193,6 +166,5 @@ submenuLinks.forEach(function(link) {
 });
 
 </script>
-
 </body>
 </html>
