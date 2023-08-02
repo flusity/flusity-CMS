@@ -11,27 +11,6 @@
        </div>
     </footer>
     
-<!-- Modal -->
-
-<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="confirmDeleteModalLabel"><?php echo t("Confirm deletion");?></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      <?php echo t("Are you sure you want to delete this block?");?> 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?php echo t("Cancel");?></button>
-        <button type="button" class="btn btn-danger  delete-customblock-btn" id="confirm-delete-btn"><?php echo t("Delete");?></button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal -->
 <div class="modal fade" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
@@ -68,8 +47,15 @@ $(document).on('click', '.badge', function() {
     });
 });
 
-$('#confirm-delete-btn').on('click', function () {
-    const postId = $('#confirmDeleteModal').data('post-id');
+   
+  $('button[data-bs-target="#deletePostModal"]').on('click', function () {
+    const postId = $(this).data('post-id');
+    $('#confirmDeletePostModal').data('post-id', postId);
+    $('#confirmDeletePostModal').modal('show');
+  });
+
+$('#confirm-delete-post-btn').on('click', function () {
+    const postId = $('#confirmDeletePostModal').data('post-id');
     $.ajax({
       type: 'POST',
       url: 'delete_post.php',
@@ -78,7 +64,7 @@ $('#confirm-delete-btn').on('click', function () {
         post_id: postId
       },
       success: function(response) {
-        $('#confirmDeleteModal').modal('hide');
+        $('#confirmDeletePostModal').modal('hide');
         window.location.href = 'posts.php';
       },
       error: function(jqXHR, textStatus, errorThrown) {
