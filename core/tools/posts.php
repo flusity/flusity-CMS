@@ -233,6 +233,32 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
     });
 });
 
+   
+$('button[data-bs-target="#deletePostModal"]').on('click', function () {
+    const postId = $(this).data('post-id');
+    $('#confirmDeletePostModal').data('post-id', postId);
+    $('#confirmDeletePostModal').modal('show');
+  });
+
+$('#confirm-delete-post-btn').on('click', function () {
+    const postId = $('#confirmDeletePostModal').data('post-id');
+    $.ajax({
+      type: 'POST',
+      url: 'delete_post.php',
+      data: {
+        action: 'delete_post',
+        post_id: postId
+      },
+      success: function(response) {
+        $('#confirmDeletePostModal').modal('hide');
+        window.location.href = 'posts.php';
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.error(textStatus, errorThrown);
+      }
+    });
+  });
+
 </script>
 <?php
 if (isset($_GET['edit_post_id'])) {

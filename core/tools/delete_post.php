@@ -25,6 +25,6 @@
             $_SESSION['error_message'] = t("Error deleting post. Try again.");
         }
     }
-    header("Location: posts.php");
+    echo json_encode($result);
     exit;
 ?>
