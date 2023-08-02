@@ -186,25 +186,6 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
     $('#confirmDeleteModal').modal('show');
   });
   
-  $('#confirm-delete-btn').on('click', function () {
-    const postId = $('#confirmDeleteModal').data('post-id');
-    $.ajax({
-      type: 'POST',
-      url: 'delete_post.php',
-      data: {
-        action: 'delete_post',
-        post_id: postId
-      },
-      success: function(response) {
-        $('#confirmDeleteModal').modal('hide');
-        window.location.href = 'posts.php';
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-        console.error(textStatus, errorThrown);
-      }
-    });
-  });
-
  document.querySelector('#search_term').addEventListener('input', function() {
         if (this.value !== '') {
             document.querySelector('#clear-search').style.display = 'block';
