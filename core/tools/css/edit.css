@@ -46,6 +46,8 @@
 
 .myDropdown-menu button:hover {
     background-color: #ebf4fa;
+    
+    color: rgb(52, 50, 56);
 }
 button.add-link{
     background: transparent;
