@@ -45,11 +45,19 @@ $templateName = $menu['template'];
 $templatePath = "cover/themes/{$themeName}/template/{$templateName}.php";
 
 require_once "cover/themes/{$themeName}/template/header.php";
+if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
+    echo '<link rel="stylesheet" href="/core/tools/css/edit.css">';
+}
+
 if (file_exists($templatePath)) {
     include $templatePath;
 } else {
     echo t("Template not found!");
 }
-
 require_once "cover/themes/{$themeName}/template/footer.php";
-?>
+
+if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
+    echo '<script src="/core/template/js/edit.js"></script>';
+}
+
+?> 
