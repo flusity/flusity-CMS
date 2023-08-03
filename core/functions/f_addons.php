@@ -177,7 +177,7 @@ function getAddonById($db, $prefix, $name_addon, $addonId) {
 function displayAddonEditButton($db, $prefix, $addon) {
     if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
         $addon_id = getAddonId($db, $prefix, 'jd_simple');
-        echo '<a href="/core/tools/addons_model.php?name=jd_simple&id='.$addon_id.'&addon_post_edit_id='.$addon['id'].'" class="edit-link"><img src="core/tools/img/pencil.png" width="20px" title="'.t("Edit").'"></a>';
+        echo '<a href="/core/tools/addons_model.php?name=jd_simple&id='.$addon_id.'&addon_post_edit_id='.$addon['id'].'" class="edit-link"><img src="core/tools/img/pencil.png" width="20px" title="'.t("Edit Addon").'"></a>';
     }
 }
 

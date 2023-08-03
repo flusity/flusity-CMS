@@ -1,9 +1,5 @@
 <?php
-function getPlaces($db, $prefix) {
-    $stmt = $db->prepare('SELECT * FROM '.$prefix['table_prefix'].'_flussi_places');
-    $stmt->execute();
-    return $stmt->fetchAll();
-}
+
 function createPlace($db, $prefix, $name) {
     // Patikrina, ar kategorija su tokiu pavadinimu jau egzistuoja
     $stmt = $db->prepare('SELECT * FROM  '.$prefix['table_prefix'].'_flussi_places WHERE name = :name');
@@ -25,6 +21,11 @@ function createPlace($db, $prefix, $name) {
         // Jei įterpimo operacija nepavyko, grąžiname klaidą
         return 'Error adding place';
     }
+}
+function getPlaces($db, $prefix) {
+    $stmt = $db->prepare('SELECT * FROM '.$prefix['table_prefix'].'_flussi_places');
+    $stmt->execute();
+    return $stmt->fetchAll();
 }
 
 function getAllPlaces($db, $prefix) {

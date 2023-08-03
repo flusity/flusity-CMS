@@ -161,10 +161,15 @@ function getSettings($db, $prefix) {
         return array($db, $config, $prefix);
     }
     
-    
     function displayPlace($db, $prefix, $page_url, $place_name, $admin_label = null) {
-        // Display custom blocks
+        $class = (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') ? 'highlight' : '';
+    
+        echo '<div class="customblock-container ' . $class . '">';
+    
         $customblocks = getCustomBlocksByUrlNameAndPlace($db, $prefix, $page_url, $place_name);
+    
+        if (empty($customblocks) && isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
+        }
     
         foreach ($customblocks as $customBlock) {
             echo '<div class="customblock-widget">';
@@ -175,16 +180,12 @@ function getSettings($db, $prefix) {
             }
             echo '<div>' . $customBlock['html_code'] . '</div>';
             echo '</div>';
-            
+    
             if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
-               
-                echo '<a href="/core/tools/customblock.php?edit_customblock_id='.$customBlock['id'].'" class="edit-link"><img src="core/tools/img/pencil.png" width="20px" title="'.t("Edit").'"></a>';
-                               // 
-                } else {}
-            
+                echo '<a href="/core/tools/customblock.php?edit_customblock_id='.$customBlock['id'].'" class="edit-link"><img src="core/tools/img/pencil.png" width="20px" title="'.t("Edit Block").'"></a>';
+            }
         }
     
-        // Display addons
         $addonsDirectory = $_SERVER['DOCUMENT_ROOT'] . '/cover/addons/';
     
         foreach(glob($addonsDirectory . "/*", GLOB_ONLYDIR) as $dir) {
@@ -198,8 +199,55 @@ function getSettings($db, $prefix) {
                 }
             }
         }
+    
+        if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
+            echo '
+            <div class="myDropdown">
+                <button class="add-link">
+                    <img src="core/tools/img/plus.png" width="20px" title="'. t("Add New") .'">
+                </button>
+                <div class="myDropdown-menu">
+                    <button class="add-option-btn dropdown-item" onclick="window.location.href=\'/core/tools/customblock.php?customblock_place=' . htmlspecialchars($place_name) . '\'">+ Customblock</button>';
+        
+            $allAddons = getAllAddons($db, $prefix);
+            foreach ($allAddons as $addon) {
+                echo '<button class="add-option-btn dropdown-item" onclick="window.location.href=\'/core/tools/addons_model.php?name=' . $addon['name_addon'] . '&id=' . $addon['id'] . '&place_name=' . htmlspecialchars($place_name) . '\'">' . htmlspecialchars($addon['name_addon']) . '</button>';
+            }
+            
+            echo '</div>
+            </div>';
+        }
+        
+    
+        echo '</div>';
     }
     
+    
+    function checkIfAdmin() {
+     
+        if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    function getDataFromDatabase($db, $prefix, $page_url, $place_id) {
+
+        $query = "SELECT * FROM {$prefix}_places WHERE page_url = ? AND place_id = ?";
+        $stmt = $db->prepare($query);
+        $stmt->bind_param("ss", $page_url, $place_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $data = $result->fetch_assoc();
+    
+        if ($data) {
+            return $data;
+        } else {
+            return false;
+        }
+    }
+
     
     require_once 'f_users.php';
     require_once 'f_contact_form.php';
