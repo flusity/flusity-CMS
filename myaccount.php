@@ -26,7 +26,15 @@
             exit();
         }
     }
+    if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
+        echo '<link rel="stylesheet" href="/core/tools/css/edit.css">';
+    }
 ?>
+
 <?php require_once getThemePath($db, $prefix, 'template/myaccount_form.php'); ?>
       
-<?php require_once getThemePath($db, $prefix, '/template/footer.php'); ?>
+<?php require_once getThemePath($db, $prefix, '/template/footer.php'); 
+if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
+    echo '<script src="/core/template/js/edit.js"></script>';
+}
+?>
