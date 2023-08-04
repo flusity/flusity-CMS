@@ -25,13 +25,18 @@ if (!checkUserRole($user_id, 'admin', $db, $prefix) && !checkUserRole($user_id, 
     header("Location: 404.php");
     exit;
 }
-$customBlockId = isset($_GET['customblock_id']) ? (int)$_GET['customblock_id'] : 0;
+$customBlockId = isset($_GET['customblock_id']) ? (int)$_GET['customblock_id'] : 0; // redaguojant ID skaičius
+$customBlockPlace = isset($_GET['customblock_id']) ? $_GET['customblock_id'] : null; // paima pavadinimą
+
 $mode = $customBlockId > 0 ? 'edit' : 'create';
 $customBlock = $mode === 'edit' ? getCustomBlockById($db, $prefix, $customBlockId) : null;
 
 $places = getplaces($db, $prefix);
 $menuId = getMenuItems($db, $prefix);
 
+    $selected_place_id = getPlaceIdByName($db, $prefix, $customBlockPlace);
+
+//print_r($_GET);
 if ($mode === 'create' || $customBlock) {
 ?>
 <div class="col-md-8">
@@ -43,15 +48,19 @@ if ($mode === 'create' || $customBlock) {
         <?php endif; ?>
    
         <div class="form-group">
-            <label for="customblock_place_id"><?php echo t('Place');?></label>
-            <select class="form-control" id="customblock_place_id" name="customblock_place_id" required>
-                <?php foreach ($places as $place) : ?>
-                    <option value="<?php echo $place['id']; ?>" <?php echo $mode === 'edit' && $customBlock['place_id'] === $place['id'] ? 'selected' : ''; ?>>
-                        <?php echo htmlspecialchars($place['name']); ?>
-                    </option>
-                <?php endforeach; ?>
-            </select>
-        </div>
+    <label for="customblock_place_id"><?php echo t('Place');?></label>
+    <select class="form-control" id="customblock_place_id" name="customblock_place_id" required>
+        <?php foreach ($places as $place) : ?>
+            <option value="<?php echo $place['id']; ?>" 
+                <?php 
+                if (($mode === 'edit' && $customBlock['place_id'] === $place['id']) || 
+                    ($mode === 'create' && $selected_place_id === $place['id'])) echo 'selected'; 
+                ?>>
+                <?php echo htmlspecialchars($place['name']); ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+</div>
         <div class="form-group">
             <label for="customblock_menu_id"><?php echo t('Menu');?></label>
             <select class="form-control" id="customblock_menu_id" name="customblock_menu_id" required>

@@ -29,13 +29,13 @@ ob_start();
                         unset($_SESSION['error_message']);
                     } ?>
                 </div>
-                <?php 
+                <?php //print_r($_GET); // place_name
                     $systemAddons = getAllSystemAddons();
                     $installedAddons = getAllAddons($db, $prefix); 
 
                     if (!isset($_GET['name']) || !isset($_GET['id'])) {
 
-                        echo "Parametrų nėra.";
+                        echo t("There are no parameters.");
                         return;
                     }
                     $name = htmlspecialchars($_GET['name']);
@@ -63,7 +63,7 @@ ob_start();
 
                             $addonPath = $_SERVER['DOCUMENT_ROOT'] . "/cover/addons/$name/model_tools.php";
                             if (!file_exists($addonPath)) {
-                                echo "Addon'o '$name' model_tools.php failas nerastas.";
+                                echo "Addon's '$name' model_tools.php file not found.";
                                 continue;
                             }
                             include $addonPath;

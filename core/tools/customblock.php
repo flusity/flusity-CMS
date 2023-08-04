@@ -185,6 +185,12 @@ if (isset($_GET['edit_customblock_id'])) {
     echo "<script>loadCustomBlockEditForm($edit_customblock_id);</script>";
 }
 ?>
+<?php
+if (isset($_GET['add_customblock'])) {
+    $add_customblock_place = $_GET['add_customblock'];
+    echo "<script>loadCustomBlockEditForm('$add_customblock_place');</script>";
+}
+?>
 <script src="js/admin-customblock-edit.js"></script>
 
 <?php require_once ROOT_PATH . 'core/template/admin-footer.php';?>
