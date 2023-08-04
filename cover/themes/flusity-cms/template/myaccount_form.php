@@ -18,7 +18,7 @@
           </h1>
         </div>
 </header>
-<main class="main mt-5" id="main">
+<main class="main mt-0" id="main">
 <?php
     if (isset($_SESSION['success_message'])) {
         echo "<div class='alert alert-success alert-dismissible fade show slow-fade'>
@@ -41,5 +41,29 @@
         <div class="col-sm-4">
         <h2><?php echo t("User Area");?></h2>    
 </div>
+</div>
+<div class="container mt-0">
+    <div class="row">
+      <div class="col-md-6 mb-2 p-2">
+            <?php 
+            $page_url = getCurrentPageUrl($db, $prefix);
+            if ($page_url) {
+                displayPlace($db, $prefix, $page_url, 'acc-left-7');
+            } else {
+                print "";
+            }
+            ?>
+        </div>
+        <div class="col-md-6 p-2">
+            <?php 
+            $page_url = getCurrentPageUrl($db, $prefix);
+            if ($page_url) {
+                displayPlace($db, $prefix, $page_url, 'acc-right-5');
+            } else {
+                print "";
+            }
+            ?>
+        </div>
+    </div>
 </div>
 </main>
