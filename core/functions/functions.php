@@ -201,22 +201,27 @@ function getSettings($db, $prefix) {
         }
     
         if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
-            echo '
-            <div class="myDropdown">
-                <button class="add-link">
-                    <img src="core/tools/img/plus.png" width="20px" title="'. t("Add New") .'">
-                </button>
-                <div class="myDropdown-menu">
-                    <button class="add-option-btn dropdown-item" onclick="window.location.href=\'/core/tools/customblock.php?add_customblock=' . htmlspecialchars($place_name) . '\'">+ Customblock</button>';
-        
-            $allAddons = getAllAddons($db, $prefix);
-            foreach ($allAddons as $addon) {
-                echo '<button class="add-option-btn dropdown-item" onclick="window.location.href=\'/core/tools/addons_model.php?name=' . $addon['name_addon'] . '&id=' . $addon['id'] . '&place_name=' . htmlspecialchars($place_name) . '\'">' . htmlspecialchars($addon['name_addon']) . '</button>';
-            }
-            
-            echo '</div>
-            </div>';
-        }
+    echo '
+    <div class="myDropdown">
+        <button class="add-link">
+            <img src="core/tools/img/plus.png" width="20px" title="'. t("Add New") .'">
+        </button>
+        <div class="myDropdown-menu">
+            <button class="add-option-btn dropdown-item" onclick="window.location.href=\'/core/tools/customblock.php?add_customblock=' . htmlspecialchars($place_name) . '\'">+ Customblock</button>
+            <button class="add-option-btn dropdown-item addons-button">+ Addons</button>
+            <div id="addons-menu">';
+
+    $allAddons = getAllAddons($db, $prefix);
+    foreach ($allAddons as $addon) {
+        echo '<button class="add-option-btn dropdown-item" onclick="window.location.href=\'/core/tools/addons_model.php?name=' . $addon['name_addon'] . '&id=' . $addon['id'] . '&place_name=' . htmlspecialchars($place_name) . '\'">' . htmlspecialchars($addon['name_addon']) . '</button>';
+    }
+
+    echo '</div>
+        </div>
+    </div>';
+}
+
+
         
     
         echo '</div>';
