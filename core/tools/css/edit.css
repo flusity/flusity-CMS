@@ -32,6 +32,7 @@
     z-index: 1;
     border-radius: 5px;
     border:1px solid #789546;
+    height:auto;
    
 }
 
@@ -51,9 +52,14 @@
 }
 button.add-link{
     background: transparent;
+
     
     border: none !important;
 }
 button.add-link:hover{
     background: transparent;
 }
+
+#addons-menu{display: none;} 
+#addons-menu:hover{  color: rgb(52, 50, 56);} 
+button.add-option-btn.dropdown-item.addons-button{  color: rgb(52, 50, 56);   font-weight: bold;} 
