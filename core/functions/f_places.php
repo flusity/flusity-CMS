@@ -58,6 +58,13 @@ function updatePlace($db, $prefix, $id, $name) {
         return 'Error updating place';
     }
 }
+function getPlaceIdByName($db, $prefix, $placeName) {
+    $stmt = $db->prepare('SELECT id FROM '.$prefix['table_prefix'].'_flussi_places WHERE name = :name');
+    $stmt->execute([':name' => $placeName]);
+    $result = $stmt->fetch();
+
+    return $result ? $result['id'] : null;
+}
 
 function deletePlace($db, $prefix, $id) {
     $stmt = $db->prepare('DELETE FROM  '.$prefix['table_prefix'].'_flussi_places WHERE id = :id');

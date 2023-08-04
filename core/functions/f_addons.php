@@ -181,7 +181,13 @@ function displayAddonEditButton($db, $prefix, $addon) {
     }
 }
 
+function getAddonIdByName($db, $prefix, $AddonName) {
+    $stmt = $db->prepare('SELECT id FROM '.$prefix['table_prefix'].'_flussi_tjd_addons WHERE name_addon = :name_addon');
+    $stmt->execute([':name_addon' => $AddonName]);
+    $result = $stmt->fetch();
 
+    return $result ? $result['id'] : null;
+}
 function uploadFile($uploaded_file, $db, $prefix, $subfolder = null) {
     
     if(!$subfolder) {
