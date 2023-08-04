@@ -16,11 +16,12 @@ $stmt->execute();
 $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
 $addonId = isset($_GET['addon_post_edit_id']) ? (int)htmlspecialchars($_GET['addon_post_edit_id']) : 0;
+$addonPlace = isset($_GET['place_name']) ? $_GET['place_name'] : null; // paima pavadinimą
+
 $mode = $addonId > 0 ? 'edit' : 'create';
+$selected_place_id = getPlaceIdByName($db, $prefix, $addonPlace);
 
 $addon = $mode === 'edit' ? getAddonById($db, $prefix, $name_addon, $addonId) : null;
-
-//var_dump($addon);
 
 if ($mode === 'create' || $addon) {
 ?>
@@ -36,84 +37,76 @@ if ($mode === 'create' || $addon) {
     <input type="hidden" class="form-control" name="id" value="<?php echo $id; ?>">
      
     <div class="row">
-                <div class="col-md-8">
-   
-                <div class="form-group row">
-                    <div class="col-md-5 mb-3">
-                            <label for="addon_place_id"><?php echo t('Place');?></label>
-                            <select class="form-control" id="addon_place_id" name="addon_place_id" required>
-                                <?php foreach ($placesId as $place) : ?>
-                                    <option value="<?php echo $place['id']; ?>" 
-                                    <?php echo ($mode === 'edit' && $addon['place_id'] == $place['id']) ? 'selected' : ''; ?>>
-                                        <?php echo htmlspecialchars($place['name']); ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </select>
-                    </div>
-                    <div class="col-md-1"></div>
-                    <div class="col-md-6 mb-3">
-                        <label for="addon_menu_id"><?php echo t('Menu');?></label>
-                        <select class="form-control" id="addon_menu_id" name="addon_menu_id" required>
-                        <option value="0"><?php echo t('To all pages');?></option>
-                            <?php foreach ($menuId as $menu) : ?>
-                                <option value="<?php echo $menu['id']; ?>"
-                                <?php echo ($mode === 'edit' && $addon['menu_id'] == $menu['id']) ? 'selected' : ''; ?>>
-                                    <?php echo htmlspecialchars($menu['name']); ?>
-                                </option>
-                            <?php endforeach; ?>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="simpleFormControlInput" class="form-label"><?php echo t('Title');?></label>
-                      
-                        <input type="text" class="form-control" name="title" id="simpleFormControlInput" placeholder="Title" value="<?php echo $mode === 'edit' ? htmlspecialchars($addon['title']) : ''; ?>" required>
-
-
-                    </div>
-                    <div class="mb-3">
-                        <label for="simpleFormControlTextarea" class="form-label"><?php echo t('Description');?></label>
-                        <textarea class="form-control" name="description" id="simpleFormControlTextarea" rows="3" required><?php echo $mode === 'edit' ? htmlspecialchars($addon['description']) : ''; ?></textarea>
-
-                    </div>
-                   
-
-                    <button type="submit" name="submit" class="btn btn-primary"><?php echo t('Submit');?></button>
-                     <?php if (isset($_GET['addon_post_edit_id'])): ?>
-                        <a href="addons_model.php?name=jd_simple&id=<?php echo htmlspecialchars($_GET['id']) ?>" class="btn btn-secondary"><?php echo t('Cancel');?></a>
-                       <?php endif; ?>
-                </div>
-                <div class="col-md-4">
-                    <div class="mb-3">
-                        <label for="file_id" class="form-label"><?php echo t('Image');?></label>
-                        <input class="form-control form-control-sm" name="file_id" id="file_id" type="file" onchange="previewFile(this)">
-                        <input type="hidden" name="file_id"  id="file_id" value="<?php echo isset($addon['img_url']) ? $addon['img_url'] : ''; ?>">
-               </div>
-                  
-                    <div id="image_container">
-                        <img id="preview_image"  style="max-width: 100%;" src="<?php echo $mode === 'edit' ? $addon['img_url'] : ''; ?>">
-                       
-                    </div>
-
-                    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><?php echo t('files Library');?></button>
-                        <div class="offcanvas offcanvas-end" style="background-color: #494f55fa;" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-                            <div class="offcanvas-header">
-                                <h5 class="offcanvas-title" id="offcanvasRightLabel">Offcanvas right</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                            </div>
-                            <div class="offcanvas-body" id="offcanvasBody" style="background-color: #494f55fa;">
-                            </div>
-                            <div class="offcanvas-footer">
-                                <button class="btn file-left prev"><i class="fas fa-angle-left"></i></button>
-                                <button class="btn file-right next"><i class="fas fa-angle-right"></i></button>
-                            </div>
-                        </div>
+        <div class="col-md-8">
+        <div class="form-group row">
+            <div class="col-md-5 mb-3">
+                    <label for="addon_place_id"><?php echo t('Place');?></label>
+                    <select class="form-control" id="addon_place_id" name="addon_place_id" required>
+                        
+                    <?php foreach ($placesId as $place) : ?>
+                            <option value="<?php echo $place['id']; ?>" 
+                                <?php 
+                                if (($mode === 'edit' && $addon['place_id'] === $place['id']) || 
+                                    ($mode === 'create' && $selected_place_id === $place['id'])) echo 'selected'; 
+                                ?>>
+                                <?php echo htmlspecialchars($place['name']); ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-6 mb-3">
+                <label for="addon_menu_id"><?php echo t('Menu');?></label>
+                <select class="form-control" id="addon_menu_id" name="addon_menu_id" required>
+                <option value="0"><?php echo t('To all pages');?></option>
+                    <?php foreach ($menuId as $menu) : ?>
+                        <option value="<?php echo $menu['id']; ?>"
+                        <?php echo ($mode === 'edit' && $addon['menu_id'] == $menu['id']) ? 'selected' : ''; ?>>
+                            <?php echo htmlspecialchars($menu['name']); ?>
+                        </option>
+                    <?php endforeach; ?>
+                    </select>
                 </div>
             </div>
-        
-
-
+            <div class="mb-3">
+                <label for="simpleFormControlInput" class="form-label"><?php echo t('Title');?></label>
+                
+                <input type="text" class="form-control" name="title" id="simpleFormControlInput" placeholder="Title" value="<?php echo $mode === 'edit' ? htmlspecialchars($addon['title']) : ''; ?>" required>
+            </div>
+            <div class="mb-3">
+                <label for="simpleFormControlTextarea" class="form-label"><?php echo t('Description');?></label>
+                <textarea class="form-control" name="description" id="simpleFormControlTextarea" rows="3" required><?php echo $mode === 'edit' ? htmlspecialchars($addon['description']) : ''; ?></textarea>
+            </div>
+            <button type="submit" name="submit" class="btn btn-primary"><?php echo t('Submit');?></button>
+                <?php if (isset($_GET['addon_post_edit_id'])): ?>
+                <a href="addons_model.php?name=jd_simple&id=<?php echo htmlspecialchars($_GET['id']) ?>" class="btn btn-secondary"><?php echo t('Cancel');?></a>
+                <?php endif; ?>
+        </div>
+        <div class="col-md-4">
+            <div class="mb-3">
+                <label for="file_id" class="form-label"><?php echo t('Image');?></label>
+                <input class="form-control form-control-sm" name="file_id" id="file_id" type="file" onchange="previewFile(this)">
+                <input type="hidden" name="file_id"  id="file_id" value="<?php echo isset($addon['img_url']) ? $addon['img_url'] : ''; ?>">
+        </div>
+            
+            <div id="image_container">
+                <img id="preview_image"  style="max-width: 100%;" src="<?php echo $mode === 'edit' ? $addon['img_url'] : ''; ?>">
+            </div>
+            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><?php echo t('files Library');?></button>
+                <div class="offcanvas offcanvas-end" style="background-color: #494f55fa;" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasRightLabel">Offcanvas right</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body" id="offcanvasBody" style="background-color: #494f55fa;">
+                    </div>
+                    <div class="offcanvas-footer">
+                        <button class="btn file-left prev"><i class="fas fa-angle-left"></i></button>
+                        <button class="btn file-right next"><i class="fas fa-angle-right"></i></button>
+                    </div>
+                </div>
+        </div>
+    </div>
         <div class="col-md-12">
             <table class="table table-sm">
                 <thead>
