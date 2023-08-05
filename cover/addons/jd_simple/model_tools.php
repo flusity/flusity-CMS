@@ -9,7 +9,7 @@ $id = intval(htmlspecialchars($_GET['id']));
 
 $placesId = getplaces($db, $prefix);
 $menuId = getMenuItems($db, $prefix);
-$getAddons = getAllAddons($db, $prefix);
+
 $stmt = $db->prepare("SELECT * FROM " . $prefix['table_prefix'] . "_jd_simple WHERE id = :id");
 $stmt->bindParam(':id', $id);
 $stmt->execute();
