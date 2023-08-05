@@ -44,6 +44,7 @@ $menu = getMenuByPageUrl($db, $prefix, $current_page_url);
 $templateName = $menu['template'];
 $templatePath = "cover/themes/{$themeName}/template/{$templateName}.php";
 
+require_once "join.php";
 require_once "cover/themes/{$themeName}/template/header.php";
 if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
     echo '<link rel="stylesheet" href="/core/tools/css/edit.css">';

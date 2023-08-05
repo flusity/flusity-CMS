@@ -12,6 +12,7 @@
     list($db, $config, $prefix) = initializeSystem();
     secureSession($db, $prefix);
 
+    require_once "join.php";
     require_once getThemePath($db, $prefix, '/template/header.php'); 
  
     $language_code = getLanguageSetting($db, $prefix);

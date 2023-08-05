@@ -14,7 +14,8 @@
     $language_code = getLanguageSetting($db, $prefix);
     $translations = getTranslations($db, $prefix, $language_code);
 
-   require_once getThemePath($db, $prefix, '/template/header.php'); 
+    require_once "join.php";
+    require_once getThemePath($db, $prefix, '/template/header.php'); 
     $db = getDBConnection($config);
 
     if (!isset($_SESSION['user_id'])) {
