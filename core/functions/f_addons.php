@@ -174,12 +174,26 @@ function getAddonById($db, $prefix, $name_addon, $addonId) {
     return $statement->fetch(PDO::FETCH_ASSOC);
 }
 
-function displayAddonEditButton($db, $prefix, $addon) {
+/* function displayAddonEditButton1($db, $prefix, $addon) {
     if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
         $addon_id = getAddonId($db, $prefix, 'jd_simple');
         echo '<a href="/core/tools/addons_model.php?name=jd_simple&id='.$addon_id.'&addon_post_edit_id='.$addon['id'].'" class="edit-link"><img src="core/tools/img/pencil.png" width="20px" title="'.t("Edit Addon").'"></a>';
     }
+} */
+
+function displayAddonEditButton($db, $prefix, $addone, $currentAddonName) {
+    $addons = getAllAddons($db, $prefix);
+    if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
+        foreach ($addons as $addon) {
+            if ($addon['name_addon'] == $currentAddonName) {
+                $addon_id = getAddonId($db, $prefix, $addon['name_addon']);
+                echo '<a href="/core/tools/addons_model.php?name='.$addon['name_addon'].'&id='.$addon_id.'&addon_post_edit_id='.$addone['id'].'" class="edit-link"><img src="core/tools/img/pencil.png" width="20px" title="'.t("Edit Addon").'"></a>';
+                break;
+            }
+        }
+    }
 }
+
 
 function getAddonIdByName($db, $prefix, $AddonName) {
     $stmt = $db->prepare('SELECT id FROM '.$prefix['table_prefix'].'_flussi_tjd_addons WHERE name_addon = :name_addon');
