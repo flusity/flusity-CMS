@@ -9,7 +9,7 @@ $id = intval(htmlspecialchars($_GET['id']));
 
 $placesId = getplaces($db, $prefix);
 $menuId = getMenuItems($db, $prefix);
-
+$getAddons = getAllAddons($db, $prefix);
 $stmt = $db->prepare("SELECT * FROM " . $prefix['table_prefix'] . "_jd_simple WHERE id = :id");
 $stmt->bindParam(':id', $id);
 $stmt->execute();
@@ -135,33 +135,38 @@ if ($mode === 'create' || $addon) {
                     $stmt = $db->prepare("SELECT COUNT(*) FROM " . $prefix['table_prefix'] . "_jd_simple");
                     $stmt->execute();
                     $total_addons = $stmt->fetchColumn();
-                    $stmt = $db->prepare("SELECT addons.id, addons.title, addons.description, addons.img_url, menu.name as menu_name, places.name as place_name FROM " . $prefix['table_prefix'] . "_jd_simple as addons LEFT JOIN " . $prefix['table_prefix'] . "_flussi_menu as menu ON addons.menu_id = menu.id LEFT JOIN " . $prefix['table_prefix'] . "_flussi_places as places ON addons.place_id = places.id ORDER BY addons.id DESC LIMIT :limit OFFSET :offset");
+                    $stmt = $db->prepare("SELECT addons.id, addons.title, addons.description, addons.img_url, menu.name as menu_name, places.name as place_name, addons.menu_id
+                    FROM " . $prefix['table_prefix'] . "_jd_simple as addons LEFT JOIN " .
+                     $prefix['table_prefix'] . "_flussi_menu as menu ON addons.menu_id = menu.id LEFT JOIN " .
+                      $prefix['table_prefix'] . "_flussi_places as places ON addons.place_id = places.id ORDER BY addons.id DESC LIMIT :limit OFFSET :offset");
 
                     $stmt->bindParam(':limit', $addons_per_page, PDO::PARAM_INT);
                     $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
                     $stmt->execute();
-                    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    $addonResults = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                    foreach ($results as $result) {
+                    foreach ($addonResults as $addonRes) {
 
                         echo '<tr>';
-                        if($result['img_url'] != '') {
-                            echo '<td><img src="' . $result['img_url'] . '" alt="Addon Image" style="width: 35px; height: 35px;"></td>';
+                        if($addonRes['img_url'] != '') {
+                            echo '<td><img src="' . $addonRes['img_url'] . '" alt="Addon Image" style="width: 35px; height: 35px;"></td>';
                         } else {
                             echo '<td>No Image</td>';
                         }
-                        echo '<td>' . $result['title'] . '</td>';
+                        echo '<td>' . $addonRes['title'] . '</td>';
                         
-                        $short_description = htmlspecialchars(mb_substr($result['description'], 0, 60));
-                        $short_menu = htmlspecialchars($result['menu_name']);
-                        $short_place = htmlspecialchars($result['place_name']);
+                        $short_description = htmlspecialchars(mb_substr($addonRes['description'], 0, 60));
+                        $short_menu = htmlspecialchars($addonRes['menu_name']);
+                        $short_place = htmlspecialchars($addonRes['place_name']);
+                        $shot_menu_id = htmlspecialchars($addonRes['menu_id']);
                         echo '<td>' . $short_description . '...</td>';
-                        echo '<td>' . (isset($result['menu_id']) && $result['menu_id'] != 0 ? htmlspecialchars($result['menu_name']) : t('All pages')) . '</td>';
                        
+                        echo '<td>';  if($shot_menu_id >0 ){ echo $short_menu; } else { echo t('All pages');} 
+                        echo '</td>';
                         echo '<td>' . $short_place . '</td>';
                         echo '<td>';
-                        echo '<a href="addons_model.php?name=jd_simple&id=' . htmlspecialchars($_GET['id']) . '&addon_post_edit_id=' . htmlspecialchars($result['id']) . '"><i class="fa fa-edit"></i></a> ';
-                        echo '<a href="../../cover/addons/jd_simple/action/delete_addon_post.php?name=jd_simple&id=' . htmlspecialchars($_GET['id']) . '&addon_post_id=' . htmlspecialchars($result['id']) . '"><i class="fa fa-trash"></i></a>';
+                        echo '<a href="addons_model.php?name=jd_simple&id=' . htmlspecialchars($_GET['id']) . '&addon_post_edit_id=' . htmlspecialchars($addonRes['id']) . '"><i class="fa fa-edit"></i></a> ';
+                        echo '<a href="../../cover/addons/jd_simple/action/delete_addon_post.php?name=jd_simple&id=' . htmlspecialchars($_GET['id']) . '&addon_post_id=' . htmlspecialchars($addonRes['id']) . '"><i class="fa fa-trash"></i></a>';
                         echo '</td>';
                         echo '</tr>';
                     } ?></form>
