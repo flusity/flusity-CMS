@@ -191,13 +191,13 @@ function getSettings($db, $prefix) {
         foreach(glob($addonsDirectory . "/*", GLOB_ONLYDIR) as $dir) {
             $content = basename($dir);
             $addons = getAddonsByUrlNameAndPlace($db, $prefix, $content, $page_url, $place_name);
-    
             foreach ($addons as $addon) {
                 $viewPath = $dir . "/view.php";
                 if (file_exists($viewPath)) {
-                    include_once($viewPath);
+                    require ($viewPath);
                 }
             }
+            
         }
     
         if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
