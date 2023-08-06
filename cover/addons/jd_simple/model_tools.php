@@ -17,11 +17,14 @@ $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
 $addonId = isset($_GET['addon_post_edit_id']) ? (int)htmlspecialchars($_GET['addon_post_edit_id']) : 0;
 $addonPlace = isset($_GET['place_name']) ? $_GET['place_name'] : null; // paima pavadinimą
+$addonMenuId = isset($_GET['menu']) ? $_GET['menu'] : null; // paima id
 
 $mode = $addonId > 0 ? 'edit' : 'create';
 $selected_place_id = getPlaceIdByName($db, $prefix, $addonPlace);
 
 $addon = $mode === 'edit' ? getAddonById($db, $prefix, $name_addon, $addonId) : null;
+
+$selectedMenuId = ($mode === 'edit' && $addon) ? $addon['menu_id'] : $addonMenuId;
 
 if ($mode === 'create' || $addon) {
 ?>
@@ -59,12 +62,12 @@ if ($mode === 'create' || $addon) {
                 <label for="addon_menu_id"><?php echo t('Menu');?></label>
                 <select class="form-control" id="addon_menu_id" name="addon_menu_id" required>
                 <option value="0"><?php echo t('To all pages');?></option>
-                    <?php foreach ($menuId as $menu) : ?>
+                <?php  foreach ($menuId as $menu) : ?>
                         <option value="<?php echo $menu['id']; ?>"
-                        <?php echo ($mode === 'edit' && $addon['menu_id'] == $menu['id']) ? 'selected' : ''; ?>>
+                        <?php echo ($selectedMenuId == $menu['id']) ? 'selected' : ''; ?>>
                             <?php echo htmlspecialchars($menu['name']); ?>
                         </option>
-                    <?php endforeach; ?>
+                    <?php endforeach;?>
                     </select>
                 </div>
             </div>
