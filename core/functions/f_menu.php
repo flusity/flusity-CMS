@@ -51,6 +51,21 @@ function getMenuByPageUrl($db, $prefix, $page_url) {
     $stmt->execute();
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
+function getMenuNameByPageUrl($db, $prefix, $page_url) {
+    $stmt = $db->prepare("SELECT name FROM ".$prefix['table_prefix']."_flussi_menu WHERE page_url = :page_url");
+    $stmt->bindParam(':page_url', $page_url);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result['name'];
+}
+function getMenuIdByPageUrl($db, $prefix, $page_url) {
+    $stmt = $db->prepare("SELECT id FROM ".$prefix['table_prefix']."_flussi_menu WHERE page_url = :page_url");
+    $stmt->bindParam(':page_url', $page_url);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result['id'];
+}
+
 function generateMenuUrl($db, $prefix, $page_url) {
     $stmt = $db->prepare("SELECT * FROM ".$prefix['table_prefix']."_flussi_settings");
     $stmt->execute();

@@ -211,10 +211,11 @@ function getSettings($db, $prefix) {
             <button class="add-option-btn dropdown-item addons-button">+ Addons</button>
             <div id="addons-menu">';
 
-                $allAddons = getAllAddons($db, $prefix);
-                foreach ($allAddons as $addon) {
-                    echo '<button class="add-option-btn dropdown-item" onclick="window.location.href=\'/core/tools/addons_model.php?name=' . $addon['name_addon'] . '&id=' . $addon['id'] . '&place_name=' . htmlspecialchars($place_name) . '\'">' . htmlspecialchars($addon['name_addon']) . '</button>';
-                }
+            $allAddons = getAllAddons($db, $prefix);
+            foreach ($allAddons as $addon) {
+                $menuName = getMenuIdByPageUrl($db, $prefix, $page_url);
+                echo '<button class="add-option-btn dropdown-item" onclick="window.location.href=\'/core/tools/addons_model.php?name=' . $addon['name_addon'] . '&id=' . $addon['id'] . '&place_name=' . htmlspecialchars($place_name) . '&menu='.$menuName.'\'">' . htmlspecialchars($addon['name_addon']) . '</button>';
+            }
 
                 echo '</div>
                     </div>
@@ -223,16 +224,7 @@ function getSettings($db, $prefix) {
         echo '</div>';
     }
     
-    
-    function checkIfAdmin() {
-     
-        if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    
+
     function getDataFromDatabase($db, $prefix, $page_url, $place_id) {
 
         $query = "SELECT * FROM {$prefix}_places WHERE page_url = ? AND place_id = ?";

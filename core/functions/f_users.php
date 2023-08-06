@@ -9,6 +9,15 @@ function checkUserRole($userId, $role, $db, $prefix) {
     return $result && $result['role'] === $role;
 }
 
+    
+function checkIfAdmin() {
+     
+    if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 function countAdmins($db, $prefix) {
     $stmt = $db->prepare("SELECT COUNT(*) FROM ".$prefix['table_prefix']."_flussi_users WHERE role = 'admin'");
