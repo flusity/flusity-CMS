@@ -22,7 +22,6 @@ $addonMenuId = isset($_GET['menu']) ? $_GET['menu'] : null; // paima id
 $mode = $addonId > 0 ? 'edit' : 'create';
 $selected_place_id = getPlaceIdByName($db, $prefix, $addonPlace);
 
-
 $addon = $mode === 'edit' ? getAddonById($db, $prefix, $name_addon, $addonId) : null;
 
 $selectedMenuId = ($mode === 'edit' && $addon) ? $addon['menu_id'] : $addonMenuId;
