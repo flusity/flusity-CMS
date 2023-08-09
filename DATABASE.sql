@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 13, 2023 at 02:31 PM
+-- Generation Time: Aug 09, 2023 at 03:40 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ddas`
+-- Database: `weberis`
 --
 
 -- --------------------------------------------------------
@@ -60,9 +60,8 @@ CREATE TABLE `flussi_files` (
 --
 
 INSERT INTO `flussi_files` (`id`, `name`, `url`, `uploaded_at`) VALUES
-(4, 'pexels-dominika-roseclay_2b7dd92bc8d188b4.jpg', 'http://localhost/uploads/pexels-dominika-roseclay_2b7dd92bc8d188b4.jpg', '2023-05-28 15:59:43'),
-(5, 'pexels-quang-nguyen_8ca6b53cdb562332.jpg', 'http://localhost/uploads/pexels-quang-nguyen_8ca6b53cdb562332.jpg', '2023-05-28 17:18:46'),
-(18, 'flusity-b_a252d067e7fe12f7.png', 'http://localhost/uploads/flusity-b_a252d067e7fe12f7.png', '2023-06-28 11:12:37');
+(20, 'pexels-dominika-roseclay_2b7dd92bc8d188b4_b6617d36205e378a.jpg', 'http://localhost/uploads/pexels-dominika-roseclay_2b7dd92bc8d188b4_b6617d36205e378a.jpg', '2023-08-08 08:20:20'),
+(22, '7646653_31fe34f9d98144d4.jpg', 'http://localhost/uploads/7646653_31fe34f9d98144d4.jpg', '2023-08-08 20:36:24');
 
 -- --------------------------------------------------------
 
@@ -88,7 +87,8 @@ CREATE TABLE `flussi_menu` (
 
 INSERT INTO `flussi_menu` (`id`, `name`, `page_url`, `position`, `template`, `created_at`, `updated_at`, `show_in_menu`, `parent_id`) VALUES
 (6, 'HOMES', 'index', 1, 'template_index', '2023-04-16 12:35:26', '2023-06-20 19:59:31', 1, 0),
-(12, 'Kontaktai', 'contacts', 5, 'template_contacts', '2023-04-21 14:28:01', '2023-06-16 05:53:43', 1, NULL);
+(12, 'Contact', 'contacts', 2, 'template_contacts', '2023-04-21 14:28:01', '2023-08-08 17:24:55', 1, 0),
+(20, 'LOGIN', 'login', 3, 'template_login_form', '2023-08-08 16:03:28', '2023-08-08 16:11:48', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -108,16 +108,13 @@ CREATE TABLE `flussi_places` (
 --
 
 INSERT INTO `flussi_places` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'head-box-one', '2023-04-14 15:01:16', '2023-05-28 08:27:20'),
-(3, 'home-right-5', '2023-04-14 15:20:38', '2023-05-28 08:15:56'),
-(5, 'home-left-7', '2023-04-19 19:49:36', '2023-05-28 08:24:53'),
-(6, 'head-box-two', '2023-05-28 08:27:28', '2023-05-28 08:27:28'),
 (7, 'contact-right-5', '2023-05-28 08:28:19', '2023-05-28 08:28:19'),
 (8, 'contact-left-7', '2023-05-28 08:30:01', '2023-05-28 08:30:01'),
-(10, 'home-col-down-12', '2023-05-28 12:26:33', '2023-05-28 12:26:33'),
 (12, 'footer-col4-1', '2023-07-13 12:10:02', '2023-07-13 12:10:02'),
 (13, 'footer-col4-2', '2023-07-13 12:10:09', '2023-07-13 12:10:09'),
-(14, 'footer-col4-3', '2023-07-13 12:10:13', '2023-07-13 12:10:13');
+(14, 'footer-col4-3', '2023-07-13 12:10:13', '2023-07-13 12:10:13'),
+(15, 'head-pulse-animated', '2023-08-07 19:45:30', '2023-08-07 19:45:30'),
+(16, 'right-my-history', '2023-08-07 19:48:00', '2023-08-07 19:48:00');
 
 -- --------------------------------------------------------
 
@@ -146,10 +143,8 @@ CREATE TABLE `flussi_posts` (
 --
 
 INSERT INTO `flussi_posts` (`id`, `title`, `content`, `author_id`, `role`, `created_at`, `status`, `menu_id`, `tags`, `updated_at`, `description`, `keywords`, `priority`) VALUES
-(2, 'Naujas bandymas 3', '&lt;b&gt;Lorem&lt;/b&gt; ipsum dolor sit amet, consectetur adipiscing elit. &lt;img src=&quot;uploads/pexels-dominika-roseclay_2b7dd92bc8d188b4.jpg&quot; width=&quot;250px&quot; height=&quot;auto&quot; align=&quot;left&quot; hspace=&quot;15&quot; vspace=&quot;15&quot;/&gt;\n\n\n\nAliquam ultricies justo ut purus efficitur, eleifend pellentesque risus cursus. Maecenas ex massa, sagittis id metus non, convallis scelerisque ligula. Vivamus aliquam risus accumsan lacinia eleifend. Nunc vestibulum massa a mauris egestas, quis sollicitudin est posuere. Duis lobortis tincidunt leo, vitae condimentum odio mollis at. Nullam mollis lobortis erat, lobortis mollis mi commodo ac. Nunc in lectus vitae mauris imperdiet varius in id neque. Vestibulum orci risus, posuere in velit eget, ullamcorper convallis augue. Mauris nulla dui, iaculis ac ultrices quis, scelerisque a libero.', 2, 'admin', '2023-01-01 11:03:58', 'published', 6, 'news', '2023-06-10 15:28:38', 'Flusity is a contemporary PHP CMS project utilizing MVC architecture, MySQL database, and Bootstrap front-end framework. It includes the management of users, posts, menu, blocks and other elements, as well as security and SEO features.', 'free cms flusity, php cms, cms, website', 1),
-(8, 'hh', 'hhhccccccc', 2, 'admin', '2023-04-19 20:56:21', 'draft', 6, NULL, '2023-06-06 06:54:31', NULL, NULL, 0),
-(11, 'xxxxx', '&lt;b&gt;xcvxcvxcvxcv&lt;/b&gt;&lt;mark&gt;&lt;/mark&gt;', 2, 'admin', '2023-06-03 20:31:21', 'published', 6, NULL, '2023-06-20 14:09:05', 'sdfsdf sdvgsdfsdfddddddddd', 'sdfdsfdf sdfv', 0),
-(12, 'zzzzzzzzzzzzz', 'xzczxczx x zx zxv erge', 2, 'admin', '2023-06-05 23:40:09', 'draft', 6, NULL, '2023-06-20 14:08:20', 'zxc x', 'zzz', 0);
+(2, 'New attempt', '&lt;p&gt;&lt;b&gt;Lorem&lt;/b&gt; ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;\r\n&lt;img src=&quot;uploads/pexels-dominika-roseclay_2b7dd92bc8d188b4_b6617d36205e378a.jpg&quot; title=&quot; &quot; alt=&quot; &quot; width=&quot;250px&quot; height=&quot;auto&quot; align=&quot;left&quot; hspace=&quot;15&quot; vspace=&quot;15&quot;/&gt;\r\n&lt;p&gt;Aliquam ultricies justo ut purus efficitur, eleifend pellentesque risus cursus. Maecenas ex massa, sagittis id metus non, convallis scelerisque ligula. Vivamus aliquam risus accumsan lacinia eleifend. Nunc vestibulum massa a mauris egestas, quis sollicitudin est posuere. Duis lobortis tincidunt leo, vitae condimentum odio mollis at. Nullam mollis lobortis erat, lobortis mollis mi commodo ac. Nunc in lectus vitae mauris imperdiet varius in id neque. Vestibulum orci risus, posuere in velit eget, ullamcorper convallis augue. Mauris nulla dui, iaculis ac ultrices quis, scelerisque a libero.&lt;/p&gt;', 2, 'admin', '2023-01-01 11:03:58', 'published', 6, 'news', '2023-08-08 19:17:02', 'Flusity is a contemporary PHP CMS project utilizing MVC architecture, MySQL database, and Bootstrap front-end framework. It includes the management of users, posts, menu, blocks and other elements, as well as security and SEO features.', 'free cms flusity, php cms, cms, website', 1),
+(16, 'Lorem ipsum dolor sit', '&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut consequuntur magnam, excepturi aliquid ex itaque esse est vero natus quae optio aperiam soluta voluptatibus corporis atque iste neque sit tempora!&lt;/p&gt;', 1, 'admin', '2023-08-08 19:51:48', 'published', 6, 'word', '2023-08-08 19:17:56', '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -177,7 +172,7 @@ CREATE TABLE `flussi_settings` (
 --
 
 INSERT INTO `flussi_settings` (`site_title`, `meta_description`, `footer_text`, `pretty_url`, `language`, `posts_per_page`, `registration_enabled`, `session_lifetime`, `default_keywords`, `theme`, `brand_icone`, `table_prefix`) VALUES
-('Free CMS flusity', 'Flusity is a contemporary PHP CMS project utilizing MVC architecture, MySQL database, and Bootstrap front-end framework. It includes the management of users, posts, menu, blocks and other elements, as well as security and SEO features.', 'Copyright &copy; flusity JD Theme 2023', 1, 'lt', 10, 0, 30, 'free cms, php, free website, cms, content management system, free cms flusity, php cms, website ', 'flusity-cms', 'flusity-b_a252d067e7fe12f7.png', 'jdfsite');
+('Free CMS flusity', 'Flusity is a contemporary PHP CMS project utilizing MVC architecture, MySQL database, and Bootstrap front-end framework. It includes the management of users, posts, menu, blocks and other elements, as well as security and SEO features.', 'Copyright &copy; flusity JD Theme 2023', 1, 'en', 10, 1, 30, 'free cms, php, free website, cms, content management system, free cms flusity, php cms, website ', 'free-time', 'flusity-b_a252d067e7fe12f7.png', 'jdfsite');
 
 -- --------------------------------------------------------
 
@@ -236,7 +231,8 @@ CREATE TABLE `flussi_tjd_addons` (
 --
 
 INSERT INTO `flussi_tjd_addons` (`id`, `name_addon`, `description_addon`, `active`, `version`, `author`, `created_at`, `updated_at`, `show_front`) VALUES
-(10, 'jd_simple', 'This test addon', 1, '1v', 'JD Flusite', '2023-07-02 07:06:18', '2023-07-02 07:06:24', 1);
+(10, 'jd_simple', 'This test addon', 1, '1v', 'JD Flusite', '2023-07-02 07:06:18', '2023-07-02 07:06:24', 1),
+(14, 'jd_simple_zer', 'This test addon', 1, '1v', 'JD Flusite Zer', '2023-08-08 16:52:26', '2023-08-08 16:52:37', 1);
 
 -- --------------------------------------------------------
 
@@ -515,22 +511,15 @@ CREATE TABLE `flussi_v_custom_blocks` (
 --
 
 INSERT INTO `flussi_v_custom_blocks` (`id`, `name`, `menu_id`, `place_id`, `html_code`) VALUES
-(1, ' Box test', 6, 1, ' <h2 class=\"box__title\">Antraštė pirma</h2>\n\n\n\n\n\n\n\n<p class=\"box__text\">Trumpas tekstas box dalis pirmas</p>\n\n\n\n\n\n\n\n   <a href=\"/\" class=\"box__link linkbox\">Box Nuoroda 1</a>'),
-(3, 'Pridėtas Blokas col-sm-5', 6, 3, 'Testuoju bloko pridėjimą į col-sm-5 dalį'),
-(5, 'Test Contact col 5', 12, 7, 'Test Contact block col-sm-5 '),
-(6, 'Testuoju home-col-down-12', 6, 10, 'Pridedamas bandomasis turinys į home-col-down-12'),
-(7, 'Box test 2', 6, 6, ' <h2 class=\"box__title\">Antraštė angtra</h2>\n\n\n\n <p class=\"box__text\">Trumpas tekstas box dalis antras</p>\n\n\n\n <a href=\"#\" class=\"box__link linkbox\">Box Nuoroda 2</a>'),
-(13, 'Test footer 1', 0, 12, 'Test footer place 1'),
-(14, 'Test footer 2', 0, 13, 'Test footer place 2'),
-(15, 'Test footer 3', 0, 14, 'Test footer place 3');
+(16, '', 0, 15, ' <h1 class=\"pulse animated\">Your Website</h1><span class=\"pulse animated subheading\">This is your web</span>');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jd_simple`
+-- Table structure for table `adaxwkoi_jd_simple`
 --
 
-CREATE TABLE `jd_simple` (
+CREATE TABLE `adaxwkoi_jd_simple` (
   `id` int(11) UNSIGNED NOT NULL,
   `title` varchar(255) NOT NULL,
   `description` text DEFAULT NULL,
@@ -543,12 +532,32 @@ CREATE TABLE `jd_simple` (
   `updated` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `jd_simple`
+-- Table structure for table `adaxwkoi_jd_simple_zer`
 --
 
-INSERT INTO `jd_simple` (`id`, `title`, `description`, `img_url`, `img_name`, `menu_id`, `place_id`, `addon_id`, `created`, `updated`) VALUES
-(1, 'dgdfg', 'fdgdfg', 'http://localhost/uploads/jd_simple_img/flusity-b_a252d067e7fe12f7.png', 'flusity-b_a252d067e7fe12f7.png', 6, 10, 10, '2023-07-02 07:59:05', '2023-07-02 07:59:05');
+CREATE TABLE `adaxwkoi_jd_simple_zer` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
+  `img_url` varchar(255) NOT NULL,
+  `img_name` varchar(255) NOT NULL,
+  `readmore` varchar(255) NOT NULL,
+  `menu_id` int(11) DEFAULT NULL,
+  `place_id` int(11) DEFAULT NULL,
+  `addon_id` int(11) DEFAULT NULL,
+  `created` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `adaxwkoi_jd_simple_zer`
+--
+
+INSERT INTO `adaxwkoi_jd_simple_zer` (`id`, `title`, `description`, `img_url`, `img_name`, `readmore`, `menu_id`, `place_id`, `addon_id`, `created`, `updated`) VALUES
+(1, 'My History', 'Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.', 'http://localhost/uploads/jd_simple_img/7646653_31fe34f9d98144d4.jpg', '7646653_31fe34f9d98144d4.jpg', 'contacts', 6, 16, 14, '2023-08-08 17:00:50', '2023-08-08 17:38:00');
 
 --
 -- Indexes for dumped tables
@@ -623,9 +632,15 @@ ALTER TABLE `flussi_v_custom_blocks`
   ADD KEY `place_id` (`place_id`);
 
 --
--- Indexes for table `jd_simple`
+-- Indexes for table `adaxwkoi_jd_simple`
 --
-ALTER TABLE `jd_simple`
+ALTER TABLE `adaxwkoi_jd_simple`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `adaxwkoi_jd_simple_zer`
+--
+ALTER TABLE `adaxwkoi_jd_simple_zer`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -642,25 +657,25 @@ ALTER TABLE `flussi_contact_form_settings`
 -- AUTO_INCREMENT for table `flussi_files`
 --
 ALTER TABLE `flussi_files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `flussi_menu`
 --
 ALTER TABLE `flussi_menu`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `flussi_places`
 --
 ALTER TABLE `flussi_places`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `flussi_posts`
 --
 ALTER TABLE `flussi_posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `flussi_sidebar`
@@ -672,7 +687,7 @@ ALTER TABLE `flussi_sidebar`
 -- AUTO_INCREMENT for table `flussi_tjd_addons`
 --
 ALTER TABLE `flussi_tjd_addons`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `flussi_translations`
@@ -684,18 +699,24 @@ ALTER TABLE `flussi_translations`
 -- AUTO_INCREMENT for table `flussi_users`
 --
 ALTER TABLE `flussi_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `flussi_v_custom_blocks`
 --
 ALTER TABLE `flussi_v_custom_blocks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
--- AUTO_INCREMENT for table `jd_simple`
+-- AUTO_INCREMENT for table `adaxwkoi_jd_simple`
 --
-ALTER TABLE `jd_simple`
+ALTER TABLE `adaxwkoi_jd_simple`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `adaxwkoi_jd_simple_zer`
+--
+ALTER TABLE `adaxwkoi_jd_simple_zer`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
