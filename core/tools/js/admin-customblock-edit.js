@@ -1,5 +1,13 @@
-function loadCustomBlockForm(mode, customBlockId = null) {
-    const url = mode === 'edit' ? 'get_customblock.php?customblock_id=' + customBlockId : 'get_customblock.php';
+
+function loadCustomBlockForm(mode, customBlock) {
+    let url = 'get_customblock.php';
+
+    if (mode === 'edit') {
+        url += '?customblock_id=' + customBlock;
+    } else if (mode === 'create') {
+        url += '?customblock_place=' + customBlock;
+    }
+
     fetch(url)
         .then(response => response.text())
         .then(html => {
@@ -10,6 +18,20 @@ function loadCustomBlockForm(mode, customBlockId = null) {
             console.error('Error loading customblock form:', error);
         });
 }
+
+
+/* function loadCustomBlockForm(mode, customBlockId = null) {
+    const url = mode === 'edit' ? 'get_customblock.php?customblock_id=' + customBlockId : 'get_customblock.php';
+    fetch(url)
+        .then(response => response.text())
+        .then(html => {
+            document.querySelector('#get-customblock-edit').innerHTML = html;
+            initializeCustomBlockForm(mode);
+        })
+        .catch(error => {
+            console.error('Error loading customblock form:', error);
+        });
+} */
 
 function initializeCustomBlockForm(mode) {
  /*    ClassicEditor
@@ -39,12 +61,12 @@ function initializeCustomBlockForm(mode) {
                 if (data.success) {
                     window.location.href = 'customblock.php';
                 } else {
-                    alert(mode === 'edit' ? 'Klaida atnaujinant customblock' : 'Klaida pridedant customblock');
+                    alert(mode === 'edit' ? 'Error updating customblock' : 'Klaida pridedant customblock');
                 }
             })
             .catch(error => {
                 console.error('Klaida:', error);
-                alert(mode === 'edit' ? 'Klaida atnaujinant customblock2' : 'Klaida pridedant customblock2');
+                alert(mode === 'edit' ? 'Error updating customblock2' : 'Klaida pridedant customblock2');
             });
         });
     }
