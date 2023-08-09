@@ -172,7 +172,7 @@ function getSettings($db, $prefix) {
         }
     
         foreach ($customblocks as $customBlock) {
-            echo '<div class="customblock-widget_'.$customBlock['id'].'">';
+            echo '<div class="customblock-widget-'.$customBlock['id'].'">';
             if ($admin_label) {
                 echo '<h3>' . htmlspecialchars($admin_label) . '</h3>';
             } else {
