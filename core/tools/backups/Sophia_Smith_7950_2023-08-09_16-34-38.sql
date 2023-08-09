@@ -173,10 +173,9 @@ CREATE TABLE `jd_simple_zer` (
 INSERT INTO flussi_contact_form_settings VALUES("1","New message from Contact Form","We received a message from:","Email has been sent successfully","Failed to send the email");
 
 
-
+INSERT INTO flussi_files VALUES(19, 'flusity-b_a252d067e7fe12f7_019b936138264d1f.png', 'http://localhost/uploads/flusity-b_a252d067e7fe12f7_019b936138264d1f.png', '2023-08-09 23:05:49');
 INSERT INTO flussi_files VALUES("20","pexels-dominika-roseclay_2b7dd92bc8d188b4_b6617d36205e378a.jpg","http://localhost/uploads/pexels-dominika-roseclay_2b7dd92bc8d188b4_b6617d36205e378a.jpg","2023-08-08 08:20:20");
 INSERT INTO flussi_files VALUES("23","7646653_f9f1c35fca142b93.jpg","http://localhost/uploads/7646653_f9f1c35fca142b93.jpg","2023-08-09 17:33:11");
-
 
 
 INSERT INTO flussi_menu VALUES("6","HOMES","index","1","template_index","2023-04-16 15:35:26","2023-06-20 22:59:31","1","0");
@@ -195,12 +194,14 @@ INSERT INTO flussi_places VALUES("16","right-my-history","2023-08-07 22:48:00","
 
 
 
-INSERT INTO flussi_posts VALUES("2","New attempt","&lt;p&gt;&lt;b&gt;Lorem&lt;/b&gt; ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;\n&lt;img src=&quot;uploads/pexels-dominika-roseclay_2b7dd92bc8d188b4_b6617d36205e378a.jpg&quot; title=&quot; &quot; alt=&quot; &quot; width=&quot;250px&quot; height=&quot;auto&quot; align=&quot;left&quot; hspace=&quot;15&quot; vspace=&quot;15&quot;/&gt;\n&lt;p&gt;Aliquam ultricies justo ut purus efficitur, eleifend pellentesque risus cursus. Maecenas ex massa, sagittis id metus non, convallis scelerisque ligula. Vivamus aliquam risus accumsan lacinia eleifend. Nunc vestibulum massa a mauris egestas, quis sollicitudin est posuere. Duis lobortis tincidunt leo, vitae condimentum odio mollis at. Nullam mollis lobortis erat, lobortis mollis mi commodo ac. Nunc in lectus vitae mauris imperdiet varius in id neque. Vestibulum orci risus, posuere in velit eget, ullamcorper convallis augue. Mauris nulla dui, iaculis ac ultrices quis, scelerisque a libero.&lt;/p&gt;","2","admin","2023-01-01 11:03:58","published","6","news","2023-08-08 22:17:02","Flusity is a contemporary PHP CMS project utilizing MVC architecture, MySQL database, and Bootstrap front-end framework. It includes the management of users, posts, menu, blocks and other elements, as well as security and SEO features.","free cms flusity, php cms, cms, website","1");
+INSERT INTO flussi_posts VALUES("2","New attempt","&lt;p&gt;&lt;b&gt;Lorem&lt;/b&gt; ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;
+\n&lt;img src=&quot;uploads/pexels-dominika-roseclay_2b7dd92bc8d188b4_b6617d36205e378a.jpg&quot; title=&quot; &quot; alt=&quot; &quot; width=&quot;250px&quot; height=&quot;auto&quot; align=&quot;left&quot; hspace=&quot;15&quot; vspace=&quot;15&quot;/&gt;
+\n&lt;p&gt;Aliquam ultricies justo ut purus efficitur, eleifend pellentesque risus cursus. Maecenas ex massa, sagittis id metus non, convallis scelerisque ligula. Vivamus aliquam risus accumsan lacinia eleifend. Nunc vestibulum massa a mauris egestas, quis sollicitudin est posuere. Duis lobortis tincidunt leo, vitae condimentum odio mollis at. Nullam mollis lobortis erat, lobortis mollis mi commodo ac. Nunc in lectus vitae mauris imperdiet varius in id neque. Vestibulum orci risus, posuere in velit eget, ullamcorper convallis augue. Mauris nulla dui, iaculis ac ultrices quis, scelerisque a libero.&lt;/p&gt;","2","admin","2023-01-01 11:03:58","published","6","news","2023-08-08 22:17:02","Flusity is a contemporary PHP CMS project utilizing MVC architecture, MySQL database, and Bootstrap front-end framework. It includes the management of users, posts, menu, blocks and other elements, as well as security and SEO features.","free cms flusity, php cms, cms, website","1");
 INSERT INTO flussi_posts VALUES("16","Lorem ipsum dolor sit","&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut consequuntur magnam, excepturi aliquid ex itaque esse est vero natus quae optio aperiam soluta voluptatibus corporis atque iste neque sit tempora!&lt;/p&gt;","1","admin","2023-08-08 19:51:48","published","6","word","2023-08-08 22:17:56",NULL,NULL,"0");
 
 
 
-INSERT INTO flussi_settings VALUES("Free CMS flusity","Flusity is a contemporary PHP CMS project utilizing MVC architecture, MySQL database, and Bootstrap front-end framework. It includes the management of users, posts, menu, blocks and other elements, as well as security and SEO features.","Copyright &copy; flusity JD Theme 2023","1","en","10","1","30","free cms, php, free website, cms, content management system, free cms flusity, php cms, website ","free-time","flusity-b_a252d067e7fe12f7.png","jdfsite");
+INSERT INTO flussi_settings VALUES("Free CMS flusity","Flusity is a contemporary PHP CMS project utilizing MVC architecture, MySQL database, and Bootstrap front-end framework. It includes the management of users, posts, menu, blocks and other elements, as well as security and SEO features.","Copyright &copy; flusity JD Theme 2023","1","en","10","1","30","free cms, php, free website, cms, content management system, free cms flusity, php cms, website ","free-time","flusity-b_a252d067e7fe12f7_019b936138264d1f.png","jdfsite");
 
 
 
