@@ -102,7 +102,18 @@ if ($mode === 'create' || $addon) {
                 <img id="preview_image"  style="max-width: 100%;" src="<?php echo $mode === 'edit' ? $addon['img_url'] : ''; ?>">
             </div>
             <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><?php echo t('files Library');?></button>
-                <div class="offcanvas offcanvas-end" style="background-color: #494f55fa;" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+          
+            <!-- Demo view start-->
+            <div class="card"><img class="card-img-top w-100 d-block" width="294" height="160" src="/cover/addons/jd_simple_zer/img/7646653_f9f1c35fca142b93.jpg">
+                        <div class="card-body">
+                            <h4 class="card-title">DEMO</h4>
+                            <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
+                            <button class="btn btn-primary" id="readMoreButton" type="button" style="background: rgba(255,231,229,0.6);box-shadow: 2px 3px 10px rgb(207,207,207);color: rgb(162,162,162);font-family: Anaheim, sans-serif;font-size: 17px;height: 46.5px;margin: 0px;padding: 12px 25px;width: 158.675px;">Button</button>
+                        </div>
+                    </div>
+            <!-- Demo view end -->
+            
+            <div class="offcanvas offcanvas-end" style="background-color: #494f55fa;" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
                     <div class="offcanvas-header">
                         <h5 class="offcanvas-title" id="offcanvasRightLabel">Offcanvas right</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
