@@ -241,6 +241,20 @@ function getSettings($db, $prefix) {
         }
     }
 
+    function includeThemeTemplate($themeName, $templateName, $db, $prefix) {
+        global $db, $prefix, $meta, $site_brand_icone, $posts, $url, $total_urls;  
+       
+        $templateDirectory = "cover/themes/{$themeName}/template/";
+        $templateFilePath = $templateDirectory . $templateName . '.php';
+        
+        if (file_exists($templateFilePath)) {
+            require_once $templateFilePath;
+        } else {
+            echo t("Template {$templateName} not found!");
+        }
+    }
+    
+    
     
     require_once 'f_users.php';
     require_once 'f_contact_form.php';
