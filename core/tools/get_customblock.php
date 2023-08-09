@@ -25,20 +25,22 @@ if (!checkUserRole($user_id, 'admin', $db, $prefix) && !checkUserRole($user_id, 
     header("Location: 404.php");
     exit;
 }
+$customBlockPlace = isset($_GET['customblock_id']) ? $_GET['customblock_id'] : null; // paima pavadinimą  customblock_place_id
 $customBlockId = isset($_GET['customblock_id']) ? (int)$_GET['customblock_id'] : 0; // redaguojant ID skaičius
-$customBlockPlace = isset($_GET['customblock_id']) ? $_GET['customblock_id'] : null; // paima pavadinimą
+ //  print_r($_GET);
+$selected_place_name = $_GET['customblock_place'];
+$selected_place_id = getPlaceIdByName($db, $prefix, $selected_place_name);
 
 $mode = $customBlockId > 0 ? 'edit' : 'create';
-$customBlock = $mode === 'edit' ? getCustomBlockById($db, $prefix, $customBlockId) : null;
+$customBlock = $mode === 'edit' ? getCustomBlockById($db, $prefix, $customBlockId) : $selected_place_id;
 
 $places = getplaces($db, $prefix);
 $menuId = getMenuItems($db, $prefix);
 
-    $selected_place_id = getPlaceIdByName($db, $prefix, $customBlockPlace);
 
-//print_r($_GET);
 if ($mode === 'create' || $customBlock) {
 ?>
+
 <div class="col-md-8">
 <div id="customblock-form-content">
     <form id="customblock-form">
@@ -74,7 +76,7 @@ if ($mode === 'create' || $customBlock) {
         </div>
         <div class="form-group">
             <label for="customblock_name"><?php echo t('Name');?></label>
-            <input type="text" class="form-control" id="customblock_name" name="customblock_name" value="<?php echo $mode === 'edit' ? htmlspecialchars($customBlock['name']) : ''; ?>" required>
+            <input type="text" class="form-control" id="customblock_name" name="customblock_name" value="<?php echo $mode === 'edit' ? htmlspecialchars($customBlock['name']) : ''; ?>">
         </div>
         <div class="form-group">
             <label for="customblock_html_code"><?php echo t('Content');?></label>

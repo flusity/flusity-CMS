@@ -147,8 +147,11 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
 </div>
 <script>
 
-  function loadCustomBlockEditForm(customBlockId) {
+function loadCustomBlockEditForm(customBlockId) {
     loadCustomBlockForm('edit', customBlockId);
+  }
+  function loadCustomBlocCreateForm(customBlockPlace) {
+    loadCustomBlockForm('create', customBlockPlace);
   }
   
   $(document).ready(function () {
@@ -184,11 +187,9 @@ if (isset($_GET['edit_customblock_id'])) {
     $edit_customblock_id = $_GET['edit_customblock_id'];
     echo "<script>loadCustomBlockEditForm($edit_customblock_id);</script>";
 }
-?>
-<?php
-if (isset($_GET['add_customblock'])) {
-    $add_customblock_place = $_GET['add_customblock'];
-    echo "<script>loadCustomBlockEditForm('$add_customblock_place');</script>";
+if (isset($_GET['customblock_place'])) {
+    $customblock_place = $_GET['customblock_place'];
+    echo "<script>loadCustomBlocCreateForm('$customblock_place');</script>";
 }
 ?>
 <script src="js/admin-customblock-edit.js"></script>
