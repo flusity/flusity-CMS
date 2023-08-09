@@ -207,7 +207,7 @@ function getSettings($db, $prefix) {
             <img src="core/tools/img/plus.png" width="20px" title="'. t("Add New") .'">
         </button>
         <div class="myDropdown-menu">
-            <button class="add-option-btn dropdown-item" onclick="window.location.href=\'/core/tools/customblock.php?add_customblock=' . htmlspecialchars($place_name) . '\'">+ Customblock</button>
+            <button class="add-option-btn dropdown-item" onclick="window.location.href=\'/core/tools/customblock.php?customblock_place=' . htmlspecialchars($place_name) . '\'">+ Customblock</button>
             <button class="add-option-btn dropdown-item addons-button">+ Addons</button>
             <div id="addons-menu">';
 
