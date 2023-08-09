@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 09, 2023 at 03:40 PM
+-- Generation Time: Aug 09, 2023 at 04:01 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -231,7 +231,6 @@ CREATE TABLE `flussi_tjd_addons` (
 --
 
 INSERT INTO `flussi_tjd_addons` (`id`, `name_addon`, `description_addon`, `active`, `version`, `author`, `created_at`, `updated_at`, `show_front`) VALUES
-(10, 'jd_simple', 'This test addon', 1, '1v', 'JD Flusite', '2023-07-02 07:06:18', '2023-07-02 07:06:24', 1),
 (14, 'jd_simple_zer', 'This test addon', 1, '1v', 'JD Flusite Zer', '2023-08-08 16:52:26', '2023-08-08 16:52:37', 1);
 
 -- --------------------------------------------------------
@@ -516,25 +515,6 @@ INSERT INTO `flussi_v_custom_blocks` (`id`, `name`, `menu_id`, `place_id`, `html
 -- --------------------------------------------------------
 
 --
--- Table structure for table `adaxwkoi_jd_simple`
---
-
-CREATE TABLE `adaxwkoi_jd_simple` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `description` text DEFAULT NULL,
-  `img_url` varchar(255) NOT NULL,
-  `img_name` varchar(255) NOT NULL,
-  `menu_id` int(11) DEFAULT NULL,
-  `place_id` int(11) DEFAULT NULL,
-  `addon_id` int(11) DEFAULT NULL,
-  `created` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `adaxwkoi_jd_simple_zer`
 --
 
@@ -632,12 +612,6 @@ ALTER TABLE `flussi_v_custom_blocks`
   ADD KEY `place_id` (`place_id`);
 
 --
--- Indexes for table `adaxwkoi_jd_simple`
---
-ALTER TABLE `adaxwkoi_jd_simple`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `adaxwkoi_jd_simple_zer`
 --
 ALTER TABLE `adaxwkoi_jd_simple_zer`
@@ -705,13 +679,7 @@ ALTER TABLE `flussi_users`
 -- AUTO_INCREMENT for table `flussi_v_custom_blocks`
 --
 ALTER TABLE `flussi_v_custom_blocks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
-
---
--- AUTO_INCREMENT for table `adaxwkoi_jd_simple`
---
-ALTER TABLE `adaxwkoi_jd_simple`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `adaxwkoi_jd_simple_zer`
