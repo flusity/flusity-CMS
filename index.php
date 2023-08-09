@@ -3,6 +3,7 @@
  @CMS flusity
  Author Darius Jakaitis, author web site http://www.manowebas.lt
 */
+
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
@@ -13,8 +14,6 @@ list($db, $config, $prefix) = initializeSystem();
 secureSession($db, $prefix);
 $language_code = getLanguageSetting($db, $prefix);
 $translations = getTranslations($db, $prefix, $language_code);
-
-//$db = getDBConnection($config);
 
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
@@ -42,23 +41,16 @@ $total_urls = ceil($total_posts / $limit);
 
 $menu = getMenuByPageUrl($db, $prefix, $current_page_url);
 $templateName = $menu['template'];
-$templatePath = "cover/themes/{$themeName}/template/{$templateName}.php";
 
 require_once "join.php";
-require_once "cover/themes/{$themeName}/template/header.php";
+includeThemeTemplate($themeName, 'header', $db, $prefix);
 if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
     echo '<link rel="stylesheet" href="/core/tools/css/edit.css">';
 }
-
-if (file_exists($templatePath)) {
-    include $templatePath;
-} else {
-    echo t("Template not found!");
-}
-require_once "cover/themes/{$themeName}/template/footer.php";
+includeThemeTemplate($themeName, $templateName, $db, $prefix); 
+includeThemeTemplate($themeName, 'footer', $db, $prefix);
 
 if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
     echo '<script src="/core/template/js/edit.js"></script>';
 }
-
-?> 
+?>

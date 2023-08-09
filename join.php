@@ -1,16 +1,4 @@
 <?php 
-if (session_status() !== PHP_SESSION_ACTIVE) {
-    session_start();
-  }
-
- $db = null;
-if (isset($config)) {
-     $db = getDBConnection($config);
-}
-
-secureSession($db, $prefix);
-
-$settings = getSettings($db, $prefix);
 $site_title = isset($settings['site_title']) ? $settings['site_title'] : '';
 $site_brand_icone = isset($settings['brand_icone']) ? $settings['brand_icone'] : '';
 $meta_default_description = isset($settings['meta_description']) ? $settings['meta_description'] : '';
