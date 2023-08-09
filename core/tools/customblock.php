@@ -11,9 +11,15 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
     <div class="row">
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 content-up">
             <?php
-              $i = 1;  
-                $items_per_page = isset($_GET['rows']) ? intval($_GET['rows']) : 5; // selected rows
-                $total_items = count(getAllPlaces($db, $prefix));
+              
+              $items_per_page = isset($_GET['rows']) ? intval($_GET['rows']) : 5; // selected rows
+
+               // $total_items = count(getAllPlaces($db, $prefix));
+               // $total_pages = ceil($total_items / $items_per_page);
+               $stmt = $db->prepare('SELECT COUNT(*) as total FROM ' . $prefix['table_prefix'] . '_flussi_v_custom_blocks');
+                $stmt->execute();
+                $total_items = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+
                 $total_pages = ceil($total_items / $items_per_page);
                 $current_page = isset($_GET['page']) && is_numeric($_GET['page']) ? intval($_GET['page']) : 1;
                 $start = ($current_page - 1) * $items_per_page;
