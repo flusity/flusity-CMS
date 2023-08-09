@@ -25,10 +25,12 @@ if (!checkUserRole($user_id, 'admin', $db, $prefix) && !checkUserRole($user_id, 
     header("Location: 404.php");
     exit;
 }
-$customBlockPlace = isset($_GET['customblock_id']) ? $_GET['customblock_id'] : null; // paima pavadinimą  customblock_place_id
+$customBlockPlace = isset($_GET['customblock_place']) ? $_GET['customblock_place'] : null;
+
 $customBlockId = isset($_GET['customblock_id']) ? (int)$_GET['customblock_id'] : 0; // redaguojant ID skaičius
  //  print_r($_GET);
-$selected_place_name = $_GET['customblock_place'];
+ $selected_place_name = isset($_GET['customblock_place']) ? $_GET['customblock_place'] : null;
+
 $selected_place_id = getPlaceIdByName($db, $prefix, $selected_place_name);
 
 $mode = $customBlockId > 0 ? 'edit' : 'create';
