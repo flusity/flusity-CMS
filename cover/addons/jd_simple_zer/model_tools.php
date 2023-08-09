@@ -81,6 +81,11 @@ if ($mode === 'create' || $addon) {
                 <label for="simpleFormControlTextarea" class="form-label"><?php echo t('Description');?></label>
                 <textarea class="form-control" name="description" id="simpleFormControlTextarea" rows="3" required><?php echo $mode === 'edit' ? htmlspecialchars($addon['description']) : ''; ?></textarea>
             </div>
+            <div class="mb-3">
+                <label for="simpleFormControlReadmoreInput" class="form-label"><?php echo t('Read more url');?></label>
+                
+                <input type="text" class="form-control" name="readmore" id="simpleFormControlReadmoreInput" placeholder="read more url" value="<?php echo $mode === 'edit' ? htmlspecialchars($addon['readmore']) : ''; ?>" required>
+            </div>
             <button type="submit" name="submit" class="btn btn-primary"><?php echo t('Submit');?></button>
                 <?php if (isset($_GET['addon_post_edit_id'])): ?>
                 <a href="addons_model.php?name=jd_simple_zer&id=<?php echo htmlspecialchars($_GET['id']) ?>" class="btn btn-secondary"><?php echo t('Cancel');?></a>
@@ -139,7 +144,7 @@ if ($mode === 'create' || $addon) {
                     $stmt = $db->prepare("SELECT COUNT(*) FROM " . $prefix['table_prefix'] . "_jd_simple_zer");
                     $stmt->execute();
                     $total_addons = $stmt->fetchColumn();
-                    $stmt = $db->prepare("SELECT addons.id, addons.title, addons.description, addons.img_url, menu.name as menu_name, places.name as place_name, addons.menu_id
+                    $stmt = $db->prepare("SELECT addons.id, addons.title, addons.description, addons.readmore, addons.img_url, menu.name as menu_name, places.name as place_name, addons.menu_id
                     FROM " . $prefix['table_prefix'] . "_jd_simple_zer as addons LEFT JOIN " .
                      $prefix['table_prefix'] . "_flussi_menu as menu ON addons.menu_id = menu.id LEFT JOIN " .
                       $prefix['table_prefix'] . "_flussi_places as places ON addons.place_id = places.id ORDER BY addons.id DESC LIMIT :limit OFFSET :offset");

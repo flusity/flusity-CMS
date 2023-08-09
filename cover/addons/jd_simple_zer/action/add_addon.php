@@ -22,6 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     try {
         $img_url = null;
         $img_name = null;
+        
+      //  $readmore = null;
         $addonFolder ="jd_simple_zer_img"; // Addon default directory
 
         // Check if directory exists and if not, create it
@@ -34,6 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             $result = uploadFile($uploaded_file, $db, $prefix, $addonFolder);
             $img_url = $result['img_url'];
             $img_name = $result['img_name'];
+            $readmore = $result['readmore'];
             $_SESSION['success_message'] = t("The file has been successfully uploaded to the main directory as well as the addon directory");
         
         } elseif (isset($_POST['brand_icone_id']) && !empty($_POST['brand_icone_id'])) {
@@ -57,23 +60,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
         $title = $_POST['title'];
         $description = $_POST['description'];
+        $readmore = $_POST['readmore'];
         $place_id = $_POST['addon_place_id'];
         $menu_id = $_POST['addon_menu_id'];
         $addon_id = $id;
-        $stmt = $db->prepare("INSERT INTO " . $prefix['table_prefix'] . "_jd_simple_zer (title, description, img_url, img_name, menu_id, place_id, addon_id) VALUES (:title, :description, :img_url, :img_name, :menu_id, :place_id, :addon_id)");
+        $stmt = $db->prepare("INSERT INTO " . $prefix['table_prefix'] . "_jd_simple_zer (title, description, img_url, img_name, readmore, menu_id, place_id, addon_id) VALUES (:title, :description, :img_url, :img_name, :readmore, :menu_id, :place_id, :addon_id)");
         $stmt->bindParam(':title', $title, PDO::PARAM_STR);
         $stmt->bindParam(':description', $description, PDO::PARAM_STR);
         $stmt->bindParam(':img_url', $img_url, PDO::PARAM_STR);
-        $stmt->bindParam(':img_name', $img_name, PDO::PARAM_STR);
+        $stmt->bindParam(':img_name', $img_name, PDO::PARAM_STR); 
+        $stmt->bindParam(':readmore', $readmore, PDO::PARAM_STR); //readmore
         $stmt->bindParam(':menu_id', $menu_id, PDO::PARAM_INT);
         $stmt->bindParam(':place_id', $place_id, PDO::PARAM_INT);
         $stmt->bindParam(':addon_id', $addon_id, PDO::PARAM_INT);
     
         $stmt->execute();
-        
+        $_SESSION['success_message'] = t("Adding the plugin was successful.");
     } catch (Exception $e) {
         $_SESSION['error_message'] = $e->getMessage();
     }
+    
     header('Location: ' . $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/core/tools/addons_model.php?name=jd_simple_zer&id=' . $id);
 
     exit();

@@ -60,26 +60,29 @@ if ($no_image_provided) {
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     $img_url = $result['img_url'];
     $img_name = $result['img_name'];
+    $readmore = $result['readmore'];
 }
 
 
         $title = $_POST['title'];
         $description = $_POST['description'];
+        $readmore = $_POST['readmore'];
         $place_id = $_POST['addon_place_id'];
         $menu_id = $_POST['addon_menu_id'];
 
 
-        $stmt = $db->prepare("UPDATE " . $prefix['table_prefix'] . "_jd_simple_zer SET title = :title, description = :description, img_url = :img_url, img_name = :img_name, menu_id = :menu_id, place_id = :place_id WHERE id = :id");
+        $stmt = $db->prepare("UPDATE " . $prefix['table_prefix'] . "_jd_simple_zer SET title = :title, description = :description, img_url = :img_url, img_name = :img_name, readmore = :readmore, menu_id = :menu_id, place_id = :place_id WHERE id = :id");
         $stmt->bindParam(':title', $title, PDO::PARAM_STR);
         $stmt->bindParam(':description', $description, PDO::PARAM_STR);
         $stmt->bindParam(':img_url', $img_url, PDO::PARAM_STR);
-        $stmt->bindParam(':img_name', $img_name, PDO::PARAM_STR);
+        $stmt->bindParam(':img_name', $img_name, PDO::PARAM_STR);//
+        $stmt->bindParam(':readmore', $readmore, PDO::PARAM_STR);//readmore
         $stmt->bindParam(':menu_id', $menu_id, PDO::PARAM_INT);
         $stmt->bindParam(':place_id', $place_id, PDO::PARAM_INT);
         $stmt->bindParam(':id', $addonPostId, PDO::PARAM_INT);
 
         $stmt->execute();
-       
+        $_SESSION['success_message'] = t("addon edit successfully.");
     } catch (Exception $e) {
         $_SESSION['error_message'] = $e->getMessage();
     }
