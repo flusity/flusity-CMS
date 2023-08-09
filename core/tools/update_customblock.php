@@ -1,7 +1,7 @@
 <?php
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
-  }
+}
 define('IS_ADMIN', true);
 
 define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../') . '/');
@@ -10,16 +10,20 @@ require_once ROOT_PATH . 'security/config.php';
 require_once ROOT_PATH . 'core/functions/functions.php';
 
 // Duomenų gavimas iš duomenų bazės
- $db = getDBConnection($config);
+$db = getDBConnection($config);
 secureSession($db, $prefix);
 $language_code = getLanguageSetting($db, $prefix);
 $translations = getTranslations($db, $prefix, $language_code);
 
 $result = ['success' => false];
 
-if (isset($_POST['customblock_id'], $_POST['customblock_name'], $_POST['customblock_menu_id'], $_POST['customblock_place_id'], $_POST['customblock_html_code'])) {
+// Check if all necessary POST data is available, excluding name for now
+if (isset($_POST['customblock_id'], $_POST['customblock_menu_id'], $_POST['customblock_place_id'], $_POST['customblock_html_code'])) {
     $customBlockId = (int)$_POST['customblock_id'];
-    $name = $_POST['customblock_name'];
+    
+    // Handle potential nullable name
+    $name = isset($_POST['customblock_name']) && !empty($_POST['customblock_name']) ? $_POST['customblock_name'] : null;
+    
     $menuId = (int)$_POST['customblock_menu_id'];
     $placeId = (int)$_POST['customblock_place_id'];
     $htmlCode = $_POST['customblock_html_code'];
