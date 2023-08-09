@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title><?php echo $site_title;?></title>
+    <title><?php echo isset($site_title) ? $site_title : 'Default Title'; ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">  
     <meta name="description" content="<?= isset($meta['description']) ? $meta['description'] : '' ?>">
     <meta name="keywords" content="<?= isset($meta['keywords']) ? $meta['keywords'] : '' ?>">
