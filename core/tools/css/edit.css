@@ -35,7 +35,14 @@
     height:auto;
    
 }
+.myDropdown {
+    position: relative; /* jei jau nėra */
+}
 
+.add-link {
+    position: relative; /* jei jau nėra */
+    z-index: 1000; /* nustatykite reikšmę, kuri yra didesnė nei kitų elementų z-index */
+}
 .myDropdown-menu button {
     color: rgb(41, 41, 41);
     padding: 12px 16px;
