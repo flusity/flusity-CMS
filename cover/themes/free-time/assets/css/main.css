@@ -1,0 +1,75 @@
+.btn {
+  border-radius: 3px;
+}
+
+#sendMessageButton.btn-primary:hover {
+  background-color: rgb(215,163,151)!important;
+  color: rgb(100,111,106)!important;
+}
+
+#readMoreButton.btn-primary:hover {
+  background-color: rgba(248,240,166,0.32)!important;
+  color: rgb(100,111,106)!important;
+}
+
+#readMoreButton {
+  border: none;
+}
+
+.site-heading.subheading {
+  font-size: 28px;
+}
+
+#sendMessageButton {
+  background: rgb(255,245,195);
+  color: rgb(101,102,106);
+  font-family: Anaheim, sans-serif;
+  text-shadow: 0px 0px rgb(108,111,121);
+  height: 52px;
+  margin: 8px;
+  padding: 12px 25px;
+  width: 125.7625px;
+  text-align: center;
+  box-shadow: 2px 3px 12px 1px rgb(207,207,207);
+  border-style: none;
+}
+
+#sendMessageButton.btn-primary:hover {
+  background-color: rgb(215,244,202)!important;
+  color: rgb(100,111,106)!important;
+}
+
+.card {
+  border: none;
+}
+
+div.col {
+  border-left: 1px solid var(--bs-gray);
+}
+
+a.link-secondary {
+  color: rgba(255,255,255,0.32)!important;
+}
+
+.btn:hover {
+  color: #222;
+  background-color: #b6e982 !important;
+}
+
+footer {
+  background-color: var(--bs-gray-800);
+}
+li.nav-item{
+  font-family: Anaheim, sans-serif;font-size: 20px;
+}
+.nav-link a{
+  font-family: Anaheim, sans-serif;font-size: 20px;width: 86.525px;
+}
+
+#mainNav .navbar-nav>li.nav-item>a {
+  font-weight: 300;
+  font-size: 20px !important;
+  font-weight: 100;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}

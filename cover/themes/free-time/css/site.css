@@ -1,0 +1,60 @@
+@import url('profile.css');
+body{
+  font-family: Anaheim, sans-serif;
+}
+
+header.masthead .overlay{
+  height: 660px;
+  background: rgba(105,145,205,0.51);
+}
+header.masthead .site-heading{
+  --bs-primary: #4c607e;
+  --bs-primary-rgb: 76,96,126;
+  height: 660px;
+}
+header.masthead{
+  
+  z-index: 0;
+  background-image: url('/cover/themes/free-time/assets/img/pexels-rachel-claire-4992600.jpg');
+  height: 660px;
+}
+li.nav-item{
+  font-family: Anaheim, sans-serif;font-size: 20px;
+}
+a.nav-link{font-family: Anaheim, sans-serif;font-size: 20px;width: 86.525px;}
+#mainNav .navbar-nav>li.nav-item>a {
+  font-size: 20px !important;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.navbar-collapse {
+  flex-basis: 100%;
+  flex-grow: 1; /* */
+  align-items: center;
+}
+header.masthead.login-header{
+  background-image: url('/cover/themes/free-time/assets/img/pexels-miguel-vv-2882566.jpg');
+  height: 200px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  margin-bottom: -16px;
+}
+header.masthead.contact-head{
+  height: 436px;
+  background-image: url('/cover/themes/free-time/assets/img/pexels-markus-winkler-4160139.jpg');
+}
+header.masthead .overlay.contact-head-ov{
+  height: 436px;
+  background: rgba(95,139,255,0.51);
+}
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 0.575rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 100;
+  line-height: 2;
+  appearance: none;
+  border-radius: 0rem;
+}
