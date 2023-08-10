@@ -29,6 +29,7 @@ $url = isset($_GET['url']) ? intval($_GET['url']) : 1;
 $offset = ($url - 1) * $limit;
 
 $current_page_url = getCurrentPageUrl($db, $prefix);
+
 $posts = getPostsNews($db, $prefix, $limit, $offset, $current_page_url);
 $postSeo = getPostSeo($db, $prefix, $limit, $offset, $current_page_url);
 
@@ -40,6 +41,8 @@ $total_posts = countPosts($db, $prefix);
 $total_urls = ceil($total_posts / $limit);
 
 $menu = getMenuByPageUrl($db, $prefix, $current_page_url);
+$menu_id = $menu['id'];
+
 $templateName = $menu['template'];
 
 require_once "join.php";
