@@ -7,11 +7,9 @@ define('IS_ADMIN', true);
 require_once $_SERVER['DOCUMENT_ROOT'] . '/security/config.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/core/functions/functions.php';
 
-
-// Duomenų gavimas iš duomenų bazės
- $db = getDBConnection($config);
+$db = getDBConnection($config);
 secureSession($db, $prefix);
-// Gaunamas kalbos nustatymas iš duomenų bazės  
+
 $language_code = getLanguageSetting($db, $prefix);
 $translations = getTranslations($db, $prefix, $language_code);
 
@@ -29,9 +27,14 @@ if (!checkUserRole($user_id, 'admin', $db, $prefix) && !checkUserRole($user_id, 
     exit;
 }
 
+$postMenuId = isset($_GET['menu_id']) ? (int)$_GET['menu_id'] : 0;
 $postId = isset($_GET['post_id']) ? (int)$_GET['post_id'] : 0;
+
+
+ //print_r($_GET);
+ 
 $mode = $postId > 0 ? 'edit' : 'create';
-$post = $mode === 'edit' ? getPostById($db, $prefix, $postId) : null;
+$post = $mode === 'edit' ? getPostById($db, $prefix, $postId) : $postMenuId;
 $existingTags = getExistingTags($db, $prefix);
 $menuId = getMenuItems($db, $prefix);
 
@@ -50,12 +53,18 @@ if ($mode === 'create' || $post) {
             <div class="form-group">
             <label for="post_menu"><?php echo t("Menu");?></label>
             <select class="form-control" id="post_menu" name="post_menu" required>
-                <?php foreach ($menuId as $menu) : ?>
-                    <option value="<?php echo $menu['id']; ?>" <?php echo $mode === 'edit' && $post['menu_id'] === $menu['id'] ? 'selected' : ''; ?>>
-                        <?php echo htmlspecialchars($menu['name']); ?>
-                    
-                    </option>
-                <?php endforeach; ?>
+            <?php foreach ($menuId as $menu) : ?>
+                <option value="<?php echo $menu['id']; ?>" 
+                <?php 
+                    if ($mode === 'edit' && $post['menu_id'] === $menu['id']) {
+                        echo 'selected';
+                    } elseif ($mode === 'create' && $postMenuId === $menu['id']) {
+                        echo 'selected';
+                    }
+                ?>>
+                    <?php echo htmlspecialchars($menu['name']); ?>
+                </option>
+            <?php endforeach; ?>
             </select>
         </div>
                 

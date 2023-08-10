@@ -200,6 +200,11 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
   }
  
   
+  function loadPostAddForm(postMenuId) {
+    loadPostForm('create', postMenuId);
+  }
+ 
+  
  document.querySelector('#search_term').addEventListener('input', function() {
         if (this.value !== '') {
             document.querySelector('#clear-search').style.display = 'block';
@@ -265,6 +270,10 @@ $('#confirm-delete-post-btn').on('click', function () {
 if (isset($_GET['edit_post_id'])) {
     $edit_post_id = $_GET['edit_post_id'];
     echo "<script>loadPostEditForm($edit_post_id);</script>";
+}
+if (isset($_GET['menu_id'])) {
+    $menu_id = $_GET['menu_id'];
+    echo "<script>loadPostAddForm($menu_id);</script>";
 }
 ?>
 <script src="js/admin-post-edit.js"></script>
