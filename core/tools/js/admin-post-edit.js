@@ -1,16 +1,23 @@
+function loadPostForm(mode, postDetail) {
+  let url = 'get_post.php';
 
-function loadPostForm(mode, postId = null) {
-  const url = mode === 'edit' ? 'get_post.php?post_id=' + postId : 'get_post.php';
+  if (mode === 'edit') {
+      url += '?post_id=' + postDetail;
+  } else if (mode === 'create') {
+      url += '?menu_id=' + postDetail;
+  }
+
   fetch(url)
-    .then(response => response.text())
-    .then(html => {
-      document.querySelector('#get-post-edit').innerHTML = html;
-      initializePostForm(mode);
-    })
-    .catch(error => {
-      console.error('Error loading post form:', error);
-    });
+      .then(response => response.text())
+      .then(html => {
+          document.querySelector('#get-post-edit').innerHTML = html;
+          initializePostForm(mode);
+      })
+      .catch(error => {
+          console.error('Error loading post form:', error);
+      });
 }
+
 
 function initializePostForm(mode) {
   const postForm = document.querySelector('#post-form');
