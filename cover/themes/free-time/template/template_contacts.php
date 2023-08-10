@@ -45,12 +45,7 @@
             }
             ?>
 
-            <?php foreach ($posts as &$post): ?>
-                <h2><?php echo $post['title']; ?></h2>
-                <?php echo $post['content']; ?>
-                <?php displayEditButton($post['id']); ?>
-            <?php endforeach; ?>
-            <?php echo createPagination($url, $total_urls); ?>
+        
 
                     <div>
                         <form id="contactForm" name="sentMessage">
@@ -71,6 +66,18 @@
                         </form>
                     </div>
                 </div>
+
+
+                
+                <?php foreach ($posts as &$post): ?>
+                    <h2><?php echo $post['title']; ?></h2>
+                    <?php echo $post['content']; ?>
+                    <?php displayEditButton($post['id']); ?> 
+                <?php endforeach; ?> 
+
+                <?php displayAddButton($menu_id); ?>
+                <?php echo createPagination($url, $total_urls); ?>
+
             </div>
         </div>
     </section>
