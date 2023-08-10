@@ -13,7 +13,18 @@ function getPostsNews($db, $prefix, $limit, $offset, $menuUrl) {
 
 function displayEditButton($postId) {
     if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
-        echo '<a href="/core/tools/posts.php?edit_post_id='.$postId.'" class="edit-link"><img src="core/tools/img/pencil.png" width="20px" title="'.t("Edit").'"></a>';
+        
+        echo '<a href="/core/tools/posts.php?edit_post_id='.$postId.'" class="edit-link"><img src="core/tools/img/pencil.png" width="20px" title="'.t("Edit Post").'"></a>';
+       
+    }
+}
+// UPDATE Add new Post button
+function displayAddButton($postMenuId = null) {
+    if (is_null($postMenuId)) {
+        return; 
+    }
+    if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
+        echo '<br><a href="/core/tools/posts.php?menu_id='.$postMenuId.'" class="edit-link"><img src="core/tools/img/plus.png" width="20px" title="'.t("Add Post").'"></a>';
        
     }
 }

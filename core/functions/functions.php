@@ -242,7 +242,7 @@ function getSettings($db, $prefix) {
     }
 
     function includeThemeTemplate($themeName, $templateName, $db, $prefix) {
-        global $db, $prefix, $meta, $site_brand_icone, $posts, $url, $total_urls, $settings, $footer_text;  
+        global $db, $prefix, $meta, $site_title, $site_brand_icone, $posts, $menu_id, $url, $total_urls, $settings, $footer_text;  
        
         $templateDirectory = "cover/themes/{$themeName}/template/";
         $templateFilePath = $templateDirectory . $templateName . '.php';
