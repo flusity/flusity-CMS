@@ -9,9 +9,10 @@
 */
     require_once 'core/functions/functions.php';
 
+   
     list($db, $config, $prefix) = initializeSystem();
     secureSession($db, $prefix);
-
+    $settings = getSettings($db, $prefix);
     require_once "join.php";
     require_once getThemePath($db, $prefix, '/template/header.php'); 
  
