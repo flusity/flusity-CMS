@@ -6,6 +6,9 @@ $language_code = isset($_SESSION['language']) ? $_SESSION['language'] : 'en';
 
 $stage = isset($_SESSION['stage']) ? $_SESSION['stage'] : 1;
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $selected_language = filter_input(INPUT_POST, 'language', FILTER_SANITIZE_STRING);
+    $_SESSION['language'] = $selected_language;
+    
     if (isset($_POST['admin_username']) && isset($_POST['admin_password'])) {
         $stage = 2;
         $prxConfig = require $_SERVER['DOCUMENT_ROOT'] . '/security/config.php';
@@ -134,7 +137,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = preg_replace_callback($foreignKeyPattern, $foreignKeyReplacement, $sql);
 
         $db->exec($sql);
-
+        try {
+            $stmt = $db->prepare("UPDATE ".$table_prefix."_flussi_settings SET language=:language");
+            $stmt->bindParam(':language', $selected_language);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            $_SESSION['error_message'] = "Error updating language in settings: " . $e->getMessage();
+            header("Location: install-flusity.php");
+            exit;
+        }
             $stage = 2;
         } else {
             throw new Exception("No SQL files found in the directory");
@@ -269,8 +280,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="mb-3">
                     <label for="language">Select the language of the page:</label>
                         <select id="language" name="language" class="form-control">
-                            <option value="en" selected="selected">English</option>
-                            <option value="lt">Lietuvių</option>
+                        <option value="en">English</option>
+                        <option value="lt">Lietuvių</option>
+                        <option value="it">Italiano</option>
+                        <option value="fr">Français</option>
                         </select>
                 </div>
                 <div class="mb-3">
