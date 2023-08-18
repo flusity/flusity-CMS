@@ -12,6 +12,22 @@ require_once 'core/functions/functions.php';
 
 list($db, $config, $prefix) = initializeSystem();
 secureSession($db, $prefix);
+$settings = getSettings($db, $prefix);
+$lang_code = $settings['language']; // Kalbos kodas
+$bilingualism = $settings['bilingualism'];
+
+if (isset($_GET['lang']) && in_array($_GET['lang'], [$lang_code, 'en'])) {
+    $_SESSION['lang'] = $_GET['lang'];
+}
+
+$current_lang = $_SESSION['lang'] ?? $lang_code; 
+if (isset($_GET['lang'])) {
+    $selectedLang = $_GET['lang'];
+    
+    $_SESSION['lang'] = $selectedLang;
+    header("Location: " . strtok($_SERVER["REQUEST_URI"], '?'));
+}
+
 $language_code = getLanguageSetting($db, $prefix);
 $translations = getTranslations($db, $prefix, $language_code);
 
@@ -20,7 +36,6 @@ if (isset($_SESSION['user_id'])) {
     $user_name = getUserNameById($db, $prefix, $user_id);
 }
 
-$settings = getSettings($db, $prefix);
 $themeName = $settings['theme'];
 
 $limit = $settings['posts_per_page'];
@@ -30,13 +45,32 @@ $offset = ($url - 1) * $limit;
 
 $current_page_url = getCurrentPageUrl($db, $prefix);
 
-$posts = getPostsNews($db, $prefix, $limit, $offset, $current_page_url);
+$posts = getPostsNews($db, $prefix, $limit, $offset, $current_page_url, $current_lang);
+  
 $postSeo = getPostSeo($db, $prefix, $limit, $offset, $current_page_url);
 
+$titleField = ($current_lang === $lang_code) ? 'title' : 'lang_post_title';
+$contentField = ($current_lang === $lang_code) ? 'content' : 'lang_post_content';
+$nameField = ($current_lang === $lang_code) ? 'name' : 'lang_custom_name';
+$htmlCodeField = ($current_lang === $lang_code) ? 'html_code' : 'lang_custom_content';
+
+
 foreach ($posts as &$post) {
-    $post['title'] = htmlspecialchars_decode($post['title']);
-    $post['content'] = htmlspecialchars_decode($post['content']);
+    if (empty($post[$titleField])) {
+        $post['title'] = htmlspecialchars_decode($post['title']);
+    } else {
+        $post['title'] = htmlspecialchars_decode($post[$titleField]);
+    }
+    
+    if (empty($post[$contentField])) {
+        $post['content'] = htmlspecialchars_decode($post['content']);
+    } else {
+        $post['content'] = htmlspecialchars_decode($post[$contentField]);
+    }
 }
+
+
+
 $total_posts = countPosts($db, $prefix);
 $total_urls = ceil($total_posts / $limit);
 

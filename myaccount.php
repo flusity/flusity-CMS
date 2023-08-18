@@ -13,6 +13,9 @@
     secureSession($db, $prefix);
     $language_code = getLanguageSetting($db, $prefix);
     $translations = getTranslations($db, $prefix, $language_code);
+    $settings = getSettings($db, $prefix);
+
+    $bilingualism = $settings['bilingualism'];
 
     require_once "join.php";
     require_once getThemePath($db, $prefix, '/template/header.php'); 

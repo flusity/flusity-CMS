@@ -11,7 +11,9 @@
     list($db, $config, $prefix) = initializeSystem();
     secureSession($db, $prefix);
     $db = getDBConnection($config);
-    
+    $settings = getSettings($db, $prefix);
+    $bilingualism = $settings['bilingualism'];
+
     require_once "join.php";
     require_once getThemePath($db, $prefix, '/template/header.php'); 
  
@@ -46,6 +48,5 @@
  ?>
 
  <?php
-
  require_once getThemePath($db, $prefix, '/template/login_form.php');  
  ?>
