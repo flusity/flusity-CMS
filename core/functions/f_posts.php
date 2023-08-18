@@ -1,14 +1,43 @@
 <?php
+function getPostsNews($db, $prefix, $limit, $offset, $menuUrl, $lang) {
+    // Sets the column name depending on the language
+    $settings = getSettings($db, $prefix);
+    $lang_code = $settings['language']; // Kalbos kodas
+    if ($lang === $lang_code) {
+        $titleField = $prefix['table_prefix'].'_flussi_posts.title';
+        $contentField = $prefix['table_prefix'].'_flussi_posts.content';
+    } else {
+        $titleField = 'IF('.$prefix['table_prefix'].'_flussi_posts.lang_post_title != "", '.$prefix['table_prefix'].'_flussi_posts.lang_post_title, '.$prefix['table_prefix'].'_flussi_posts.title)';
+        $contentField = 'IF('.$prefix['table_prefix'].'_flussi_posts.lang_post_content != "", '.$prefix['table_prefix'].'_flussi_posts.lang_post_content, '.$prefix['table_prefix'].'_flussi_posts.content)';
+    }
 
-function getPostsNews($db, $prefix, $limit, $offset, $menuUrl) {
+    // Preparing the request based on the passed menu URL
     if ($menuUrl != '') {
-        $stmt = $db->prepare('SELECT '.$prefix['table_prefix'].'_flussi_posts.* FROM '.$prefix['table_prefix'].'_flussi_posts JOIN '.$prefix['table_prefix'].'_flussi_menu ON '.$prefix['table_prefix'].'_flussi_posts.menu_id = '.$prefix['table_prefix'].'_flussi_menu.id WHERE '.$prefix['table_prefix'].'_flussi_menu.page_url = :menu_url AND '.$prefix['table_prefix'].'_flussi_posts.status = "published" LIMIT '.(int)$limit.' OFFSET '.(int)$offset);
+        $stmt = $db->prepare('SELECT 
+            '.$titleField.' AS title, 
+            '.$contentField.' AS content,
+            '.$prefix['table_prefix'].'_flussi_posts.* 
+            FROM '.$prefix['table_prefix'].'_flussi_posts 
+            JOIN '.$prefix['table_prefix'].'_flussi_menu ON '.$prefix['table_prefix'].'_flussi_posts.menu_id = '.$prefix['table_prefix'].'_flussi_menu.id 
+            WHERE '.$prefix['table_prefix'].'_flussi_menu.page_url = :menu_url 
+            AND '.$prefix['table_prefix'].'_flussi_posts.status = "published" 
+            LIMIT '.(int)$limit.' OFFSET '.(int)$offset);
+
         $stmt->bindValue(':menu_url', $menuUrl, PDO::PARAM_STR);
     } else {
-        $stmt = $db->prepare('SELECT '.$prefix['table_prefix'].'_flussi_posts.* FROM '.$prefix['table_prefix'].'_flussi_posts JOIN '.$prefix['table_prefix'].'_flussi_menu ON '.$prefix['table_prefix'].'_flussi_posts.menu_id = '.$prefix['table_prefix'].'_flussi_menu.id WHERE '.$prefix['table_prefix'].'_flussi_menu.page_url = "index" AND '.$prefix['table_prefix'].'_flussi_posts.status = "published" LIMIT '.(int)$limit.' OFFSET '.(int)$offset);
+        $stmt = $db->prepare('SELECT 
+            '.$titleField.' AS title, 
+            '.$contentField.' AS content,
+            '.$prefix['table_prefix'].'_flussi_posts.* 
+            FROM '.$prefix['table_prefix'].'_flussi_posts 
+            JOIN '.$prefix['table_prefix'].'_flussi_menu ON '.$prefix['table_prefix'].'_flussi_posts.menu_id = '.$prefix['table_prefix'].'_flussi_menu.id 
+            WHERE '.$prefix['table_prefix'].'_flussi_menu.page_url = "index" 
+            AND '.$prefix['table_prefix'].'_flussi_posts.status = "published" 
+            LIMIT '.(int)$limit.' OFFSET '.(int)$offset);
     }
+
     $stmt->execute();
-    return $stmt->fetchAll();    
+    return $stmt->fetchAll();
 }
 
 function displayEditButton($postId) {
@@ -18,7 +47,7 @@ function displayEditButton($postId) {
        
     }
 }
-// UPDATE Add new Post button
+
 function displayAddButton($postMenuId = null) {
     if (is_null($postMenuId)) {
         return; 
@@ -53,7 +82,7 @@ function deletePost($db, $prefix, $id) {
     return $stmt->execute();
 }
 
-function createPost($db, $prefix, $title, $content, $menu_id, $status, $author, $tags, $role, $description, $keywords, $priority) {
+function createPost($db, $prefix, $title, $content, $lang_post_title, $lang_post_content, $menu_id, $status, $author, $tags, $role, $description, $keywords, $priority) {
     if($priority == 1) {
         $stmtPriority = $db->prepare('UPDATE '.$prefix['table_prefix'].'_flussi_posts SET priority = 0 WHERE menu_id = :menu_id');
         $stmtPriority->bindValue(':menu_id', $menu_id, PDO::PARAM_INT);
@@ -61,10 +90,12 @@ function createPost($db, $prefix, $title, $content, $menu_id, $status, $author, 
     }
     $current_date = date('Y-m-d H:i:s'); 
 
-    $stmt = $db->prepare('INSERT INTO '.$prefix['table_prefix'].'_flussi_posts (title, content, menu_id, status, author_id, tags, role, created_at, updated_at, description, keywords, priority) VALUES (:title, :content, :menu_id, :status, :author_id, :tags, :role, :created_at, :updated_at, :description, :keywords, :priority)');
+    $stmt = $db->prepare('INSERT INTO '.$prefix['table_prefix'].'_flussi_posts (title, content, lang_post_title, lang_post_content, menu_id, status, author_id, tags, role, created_at, updated_at, description, keywords, priority) VALUES (:title, :content, :lang_post_title, :lang_post_content, :menu_id, :status, :author_id, :tags, :role, :created_at, :updated_at, :description, :keywords, :priority)');
     $stmt->bindParam(':role', $role, PDO::PARAM_STR);
     $stmt->bindParam(':title', $title, PDO::PARAM_STR);
     $stmt->bindParam(':content', $content, PDO::PARAM_STR);
+    $stmt->bindParam(':lang_post_title', $lang_post_title, PDO::PARAM_STR);
+    $stmt->bindParam(':lang_post_content', $lang_post_content, PDO::PARAM_STR);
     $stmt->bindParam(':menu_id', $menu_id, PDO::PARAM_INT);
     $stmt->bindParam(':status', $status, PDO::PARAM_STR);
     $stmt->bindParam(':author_id', $author, PDO::PARAM_STR);
@@ -77,7 +108,7 @@ function createPost($db, $prefix, $title, $content, $menu_id, $status, $author, 
     return $stmt->execute();
 }
 
-function updatePost($db, $prefix, $postId, $title, $content, $menu_id, $status, $tags, $role, $description, $keywords, $priority) {
+function updatePost($db, $prefix, $postId, $title, $content, $lang_post_title, $lang_post_content, $menu_id, $status, $tags, $role, $description, $keywords, $priority) {
     if($priority == 1) {
         $stmtPriority = $db->prepare('UPDATE '.$prefix['table_prefix'].'_flussi_posts SET priority = 0 WHERE menu_id = :menu_id AND id != :post_id');
         $stmtPriority->bindValue(':menu_id', $menu_id, PDO::PARAM_INT);
@@ -86,10 +117,13 @@ function updatePost($db, $prefix, $postId, $title, $content, $menu_id, $status, 
     }
     $current_date = date('Y-m-d H:i:s'); 
 
-    $stmt = $db->prepare('UPDATE '.$prefix['table_prefix'].'_flussi_posts SET title = :title, content = :content, menu_id = :menu_id, status = :status, tags = :tags, role = :role, updated_at = :updated_at, description = :description, keywords = :keywords, priority = :priority WHERE id = :post_id');
+    $stmt = $db->prepare('UPDATE '.$prefix['table_prefix'].'_flussi_posts SET title = :title, content = :content, lang_post_title = :lang_post_title, lang_post_content = :lang_post_content, menu_id = :menu_id, status = :status, tags = :tags, role = :role, updated_at = :updated_at, description = :description, keywords = :keywords, priority = :priority WHERE id = :post_id');
     $stmt->bindParam(':role', $role, PDO::PARAM_STR);
     $stmt->bindParam(':title', $title, PDO::PARAM_STR);
     $stmt->bindParam(':content', $content, PDO::PARAM_STR);
+    
+    $stmt->bindParam(':lang_post_title', $lang_post_title, PDO::PARAM_STR);
+    $stmt->bindParam(':lang_post_content', $lang_post_content, PDO::PARAM_STR);
     $stmt->bindParam(':menu_id', $menu_id, PDO::PARAM_INT);
     $stmt->bindParam(':status', $status, PDO::PARAM_STR);
     $stmt->bindParam(':tags', $tags, PDO::PARAM_STR);

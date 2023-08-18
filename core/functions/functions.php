@@ -91,12 +91,13 @@ function getSettings($db, $prefix) {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     
-    function updateSettings($db, $prefix, $site_title, $meta_description, $footer_text, $pretty_url, $language, $posts_per_page, $registration_enabled, $session_lifetime, $default_keywords, $brand_icone) {
-        $stmt = $db->prepare("UPDATE ".$prefix['table_prefix']."_flussi_settings  SET site_title = :site_title, meta_description = :meta_description, footer_text = :footer_text, pretty_url = :pretty_url, language = :language, posts_per_page = :posts_per_page, registration_enabled = :registration_enabled, session_lifetime = :session_lifetime, default_keywords = :default_keywords" . ($brand_icone != "" ? ", brand_icone = :brand_icone" : ""));
+    function updateSettings($db, $prefix, $site_title, $meta_description, $footer_text, $pretty_url, $bilingualism, $language, $posts_per_page, $registration_enabled, $session_lifetime, $default_keywords, $brand_icone) {
+        $stmt = $db->prepare("UPDATE ".$prefix['table_prefix']."_flussi_settings  SET site_title = :site_title, meta_description = :meta_description, footer_text = :footer_text, pretty_url = :pretty_url, bilingualism = :bilingualism, language = :language, posts_per_page = :posts_per_page, registration_enabled = :registration_enabled, session_lifetime = :session_lifetime, default_keywords = :default_keywords" . ($brand_icone != "" ? ", brand_icone = :brand_icone" : ""));
         $stmt->bindParam(':site_title', $site_title, PDO::PARAM_STR);
         $stmt->bindParam(':meta_description', $meta_description, PDO::PARAM_STR);
         $stmt->bindParam(':footer_text', $footer_text, PDO::PARAM_STR);
         $stmt->bindParam(':pretty_url', $pretty_url, PDO::PARAM_INT);
+        $stmt->bindParam(':bilingualism', $bilingualism, PDO::PARAM_INT);
         $stmt->bindParam(':language', $language, PDO::PARAM_STR);
         $stmt->bindParam(':posts_per_page', $posts_per_page, PDO::PARAM_INT);
         $stmt->bindParam(':registration_enabled', $registration_enabled, PDO::PARAM_INT);
@@ -162,30 +163,43 @@ function getSettings($db, $prefix) {
     }
     
     function displayPlace($db, $prefix, $page_url, $place_name, $admin_label = null) {
+    
+        $settings = getSettings($db, $prefix);
+        $lang_code = $settings['language']; // Kalbos kodas
         $class = (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') ? 'highlight' : '';
     
         echo '<div class="customblock-container ' . $class . '">';
-    
-        $customblocks = getCustomBlocksByUrlNameAndPlace($db, $prefix, $page_url, $place_name);
-    
+        $current_lang = $_SESSION['lang'] ?? $lang_code;
+
+        $customblocks = getCustomBlocksByUrlNameAndPlace($db, $prefix, $page_url, $place_name, $current_lang);
+            /*    echo '<pre>';
+            var_dump($customblocks);
+            echo '</pre>'; */
         if (empty($customblocks) && isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
+            // posible
         }
     
         foreach ($customblocks as $customBlock) {
+            $blockName = isset($customBlock['dynamic_name']) ? htmlspecialchars_decode($customBlock['dynamic_name']) : ''; 
+            $blockHtmlCode = isset($customBlock['dynamic_content']) ? htmlspecialchars_decode($customBlock['dynamic_content']) : '';
+            
             echo '<div class="customblock-widget-'.$customBlock['id'].'">';
+            
             if ($admin_label) {
                 echo '<h3>' . htmlspecialchars($admin_label) . '</h3>';
             } else {
-                echo '<h3>' . htmlspecialchars($customBlock['name']) . '</h3>';
+                echo '<h3>' . htmlspecialchars($blockName) . '</h3>'; 
             }
-            echo '<div>' . $customBlock['html_code'] . '</div>';
+            
+            echo '<div>' . $blockHtmlCode . '</div>';
             echo '</div>';
-    
+            
             if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
                 echo '<a href="/core/tools/customblock.php?edit_customblock_id='.$customBlock['id'].'" class="edit-link"><img src="core/tools/img/pencil.png" width="20px" title="'.t("Edit Block").'"></a>';
             }
         }
-    
+        
+        
         $addonsDirectory = $_SERVER['DOCUMENT_ROOT'] . '/cover/addons/';
     
         foreach(glob($addonsDirectory . "/*", GLOB_ONLYDIR) as $dir) {
@@ -200,7 +214,7 @@ function getSettings($db, $prefix) {
             
         }
     
-        if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
+    if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
     echo '
     <div class="myDropdown">
         <button class="add-link">
@@ -242,7 +256,7 @@ function getSettings($db, $prefix) {
     }
 
     function includeThemeTemplate($themeName, $templateName, $db, $prefix) {
-        global $db, $prefix, $meta, $site_title, $site_brand_icone, $posts, $menu_id, $url, $total_urls, $settings, $footer_text;  
+        global $db, $prefix, $meta, $site_title, $site_brand_icone, $posts, $menu_id, $url, $total_urls, $settings, $footer_text, $bilingualism, $lang_code;  
        
         $templateDirectory = "cover/themes/{$themeName}/template/";
         $templateFilePath = $templateDirectory . $templateName . '.php';

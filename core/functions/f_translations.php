@@ -36,17 +36,18 @@ function getTranslationsWords($db, $prefix, $limit = 15, $offset = 0, $search_te
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-
-
+   
 function addTranslation($db, $prefix, $language_code, $translation_key, $translation_value) {
-    // Patikrina, ar vertimas su tokiu raktu jau egzistuoja
-    $stmt = $db->prepare("SELECT * FROM ".$prefix['table_prefix']."_flussi_translations WHERE translation_key = :translation_key");
-    $stmt->bindParam(':translation_key', $translation_key);
+    // Patikrina, ar yra vertimas su ta pačia reikšme TA PAČIA KALBA
+    $stmt = $db->prepare("SELECT * FROM ".$prefix['table_prefix']."_flussi_translations WHERE translation_value = :translation_value AND language_code = :language_code");
+    
+    $stmt->bindParam(':translation_value', $translation_value);
+    $stmt->bindParam(':language_code', $language_code);
     $stmt->execute();
 
     if ($stmt->fetch(PDO::FETCH_ASSOC)) {
         // Jei vertimas egzistuoja, grąžina klaidą
-        return 'Translation key already exists';
+        return 'Translation value already exists for this language';
     }
 
     // Jei vertimas neegzistuoja, prideda jį
@@ -56,6 +57,32 @@ function addTranslation($db, $prefix, $language_code, $translation_key, $transla
     $stmt->bindParam(':translation_value', $translation_value);
     return $stmt->execute();
 }
+
+function updateTranslation($db, $prefix, $id, $language_code, $translation_key, $translation_value) {
+    // Patikrinama ar toks pat translation_key, translation_value ir language_code jau egzistuoja kitoje eilutėje
+    $stmt = $db->prepare("SELECT * FROM ".$prefix['table_prefix']."_flussi_translations WHERE translation_key = :translation_key AND translation_value = :translation_value AND language_code = :language_code AND id != :id");
+    $stmt->bindParam(':translation_key', $translation_key, PDO::PARAM_STR);
+    $stmt->bindParam(':translation_value', $translation_value, PDO::PARAM_STR);
+    $stmt->bindParam(':language_code', $language_code, PDO::PARAM_STR);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    $existingEntry = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    if ($existingEntry) {
+        return "duplicate_entry";
+    }
+
+    // Atliekamas įrašo atnaujinimas
+    $stmt = $db->prepare("UPDATE ".$prefix['table_prefix']."_flussi_translations SET language_code = :language_code, translation_key = :translation_key, translation_value = :translation_value WHERE id = :id");
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->bindParam(':language_code', $language_code, PDO::PARAM_STR);
+    $stmt->bindParam(':translation_key', $translation_key, PDO::PARAM_STR);
+    $stmt->bindParam(':translation_value', $translation_value, PDO::PARAM_STR);
+    $stmt->execute();
+
+    return "";
+}
+
 
 function deleteTranslation($db, $prefix, $id) {
 $stmt = $db->prepare("DELETE FROM ".$prefix['table_prefix']."_flussi_translations WHERE id = :id");
@@ -79,27 +106,6 @@ function getTranslationById($db, $prefix, $id) {
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetch(PDO::FETCH_ASSOC);
-}
-function updateTranslation($db, $prefix, $id, $language_code, $translation_key, $translation_value) {
-    // Pirmiausia patikrinkite, ar translation_key jau egzistuoja
-    $stmt = $db->prepare("SELECT * FROM ".$prefix['table_prefix']."_flussi_translations WHERE translation_key = :translation_key AND id != :id");
-    $stmt->bindParam(':translation_key', $translation_key, PDO::PARAM_STR);
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-    $stmt->execute();
-    $existingKey = $stmt->fetch(PDO::FETCH_ASSOC);
-    
-    if ($existingKey) {
-        return "duplicate_key";
-    }
-
-    $stmt = $db->prepare("UPDATE ".$prefix['table_prefix']."_flussi_translations SET language_code = :language_code, translation_key = :translation_key, translation_value = :translation_value WHERE id = :id");
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-    $stmt->bindParam(':language_code', $language_code, PDO::PARAM_STR);
-    $stmt->bindParam(':translation_key', $translation_key, PDO::PARAM_STR);
-    $stmt->bindParam(':translation_value', $translation_value, PDO::PARAM_STR);
-    $stmt->execute();
-
-    return "";
 }
 
 function getLanguageSetting($db, $prefix) {

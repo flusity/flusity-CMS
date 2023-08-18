@@ -11,31 +11,35 @@ function getMenuItems($db, $prefix) {
     $stmt->execute();
     return $stmt->fetchAll();
 }
-function getSubMenuItems($db, $prefix, $parentId) {
-    $stmt = $db->prepare('SELECT * FROM ' . $prefix['table_prefix'] . '_flussi_menu WHERE parent_id = ? ORDER BY position');
-    $stmt->execute([$parentId]);
-    return $stmt->fetchAll();
-}
+
 function getParentMenuItems($db, $prefix) {
-    $stmt = $db->prepare('SELECT * FROM '.$prefix['table_prefix'].'_flussi_menu WHERE parent_id IS NULL OR parent_id = 0 ORDER BY position');
+    $stmt = $db->prepare('SELECT id, name, lang_menu_name, page_url, position, template, show_in_menu, parent_id FROM '.$prefix['table_prefix'].'_flussi_menu WHERE parent_id IS NULL OR parent_id = 0 ORDER BY position');
     $stmt->execute();
     return $stmt->fetchAll();
 }
 
-function createMenuItem($db, $prefix, $name, $page_url, $position, $template, $show_in_menu, $parent_id) {
-    $stmt = $db->prepare('INSERT INTO '.$prefix['table_prefix'].'_flussi_menu (name, page_url, position, template, show_in_menu, parent_id) VALUES (:name, :page_url, :position, :template, :show_in_menu, :parent_id)');
-    $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+function getSubMenuItems($db, $prefix, $parentId) {
+    $stmt = $db->prepare('SELECT id, name, lang_menu_name, page_url, position, template, show_in_menu, parent_id FROM ' . $prefix['table_prefix'] . '_flussi_menu WHERE parent_id = ? ORDER BY position');
+    $stmt->execute([$parentId]);
+    return $stmt->fetchAll();
+}
+
+function createMenuItem($db, $prefix, $name, $lang_menu_name, $page_url, $position, $template, $show_in_menu, $parent_id) {
+    $stmt = $db->prepare('INSERT INTO '.$prefix['table_prefix'].'_flussi_menu (name,lang_menu_name, page_url, position, template, show_in_menu, parent_id) VALUES (:name, :lang_menu_name, :page_url, :position, :template, :show_in_menu, :parent_id)');
+    $stmt->bindParam(':name', $name, PDO::PARAM_STR);   
+    $stmt->bindParam(':lang_menu_name', $lang_menu_name, PDO::PARAM_STR);
     $stmt->bindParam(':page_url', $page_url, PDO::PARAM_STR);
     $stmt->bindParam(':position', $position, PDO::PARAM_INT);
     $stmt->bindParam(':template', $template, PDO::PARAM_STR);
     $stmt->bindParam(':show_in_menu', $show_in_menu, PDO::PARAM_BOOL);
     $stmt->bindParam(':parent_id', $parent_id, PDO::PARAM_INT);
-    return $stmt->execute();
+    return $stmt->execute();// 34 eilutė
 }
 
-function updateMenuItem($db, $prefix, $id, $name, $page_url, $position, $template, $show_in_menu, $parent_id) {
-    $stmt = $db->prepare('UPDATE '.$prefix['table_prefix'].'_flussi_menu SET name = :name, page_url = :page_url, position = :position, template = :template, show_in_menu = :show_in_menu, parent_id = :parent_id WHERE id = :id');
+function updateMenuItem($db, $prefix, $id, $name, $lang_menu_name, $page_url, $position, $template, $show_in_menu, $parent_id) {
+    $stmt = $db->prepare('UPDATE '.$prefix['table_prefix'].'_flussi_menu SET name = :name, lang_menu_name = :lang_menu_name, page_url = :page_url, position = :position, template = :template, show_in_menu = :show_in_menu, parent_id = :parent_id WHERE id = :id');
     $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+    $stmt->bindParam(':lang_menu_name', $lang_menu_name, PDO::PARAM_STR);
     $stmt->bindParam(':page_url', $page_url, PDO::PARAM_STR);
     $stmt->bindParam(':position', $position, PDO::PARAM_INT);
     $stmt->bindParam(':template', $template, PDO::PARAM_STR);
@@ -90,4 +94,3 @@ function getMenuItemById($db, $prefix, $id) {
     $stmt->execute();
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
-

@@ -8,15 +8,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/core/functions/functions.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/core/classes/sidebar_class.php';
 
 $configurations = require $_SERVER['DOCUMENT_ROOT'] . '/security/config.php';
-
-// Duomenų gavimas iš duomenų bazės
-
 $prefix = $configurations['prefix'];
 $config = $configurations['config'];
 
-
-
-// Duomenų gavimas iš duomenų bazės
  $db = getDBConnection($config);
 secureSession($db, $prefix);
 
@@ -29,7 +23,7 @@ $footer_text = isset($settings['footer_text']) ? $settings['footer_text'] : '';
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
     $user_name = getUserNameById($db, $prefix, $user_id);
-    // Gaunamas kalbos nustatymas iš duomenų bazės  
+    
     $language_code = getLanguageSetting($db, $prefix);
     $translations = getTranslations($db, $prefix, $language_code);
 
@@ -56,7 +50,6 @@ if (!checkUserRole($user_id, 'admin', $db, $prefix)) {
     <script src="/assets/dist/js/jquery-3.6.0.min.js"></script>  
     <script src="/core/tools/js/admin-post-edit.js"></script> 
     <script src="/core/tools/js/admin-customblock-edit.js"></script>  
-
 <!--     <link type="text/css" href="/assets/ckeditor/sample/css/sample.css" rel="stylesheet" media="screen" /> -->
 </head>
 <body>
