@@ -20,11 +20,10 @@ secureSession($db, $prefix);
 $language_code = getLanguageSetting($db, $prefix);
 $translations = getTranslations($db, $prefix, $language_code);
 
-
 $result = ['error_message' => false];
 $updateResult = ['error_message' => false];
 
-if (isset($_POST['site_title'], $_POST['meta_description'], $_POST['footer_text'], $_POST['pretty_url'], $_POST['language'],
+if (isset($_POST['site_title'], $_POST['meta_description'], $_POST['footer_text'], $_POST['pretty_url'], $_POST['bilingualism'], $_POST['language'],
  $_POST['posts_per_page'], $_POST['registration_enabled'], $_POST['session_lifetime'], $_POST['default_keywords'])) { 
 
     $allowed_file_types = ['image/png', 'image/jpeg', 'image/gif'];
@@ -68,6 +67,7 @@ if (isset($_POST['site_title'], $_POST['meta_description'], $_POST['footer_text'
     $meta_description = $_POST['meta_description'];
     $footer_text_settings = $_POST['footer_text'];
     $pretty_url = $_POST['pretty_url']; 
+    $bilingualism = $_POST['bilingualism'];
     //$pretty_url = isset($_POST['pretty_url']) ? 1 : 0;
     $registration_enabled = $_POST['registration_enabled'];
    // $registration_enabled = isset($_POST['registration_enabled']) ? 1 : 0;
@@ -79,7 +79,7 @@ if (isset($_POST['site_title'], $_POST['meta_description'], $_POST['footer_text'
     $default_keywords = $_POST['default_keywords'];
     $session_life =  $session_lifetime;
 
-    $updateResult = updateSettings($db, $prefix, $site_title, $meta_description, $footer_text_settings, $pretty_url, $language, $posts_per_page, $registration_enabled, $session_life, $default_keywords, $brand_icone); 
+    $updateResult = updateSettings($db, $prefix, $site_title, $meta_description, $footer_text_settings, $pretty_url, $bilingualism, $language, $posts_per_page, $registration_enabled, $session_life, $default_keywords, $brand_icone); 
 
     if ($updateResult) {
         $_SESSION['success_message'] =  t('Settings successfully updated.');

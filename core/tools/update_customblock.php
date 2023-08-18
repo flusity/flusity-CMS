@@ -9,7 +9,6 @@ define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../') . '/');
 require_once ROOT_PATH . 'security/config.php';
 require_once ROOT_PATH . 'core/functions/functions.php';
 
-// Duomenų gavimas iš duomenų bazės
 $db = getDBConnection($config);
 secureSession($db, $prefix);
 $language_code = getLanguageSetting($db, $prefix);
@@ -17,18 +16,18 @@ $translations = getTranslations($db, $prefix, $language_code);
 
 $result = ['success' => false];
 
-// Check if all necessary POST data is available, excluding name for now
-if (isset($_POST['customblock_id'], $_POST['customblock_menu_id'], $_POST['customblock_place_id'], $_POST['customblock_html_code'])) {
+if (isset($_POST['customblock_id'], $_POST['customblock_menu_id'], $_POST['customblock_place_id'], $_POST['customblock_html_code'], $_POST['lang_custom_name'], $_POST['lang_custom_content'])) {
     $customBlockId = (int)$_POST['customblock_id'];
     
-    // Handle potential nullable name
     $name = isset($_POST['customblock_name']) && !empty($_POST['customblock_name']) ? $_POST['customblock_name'] : null;
     
     $menuId = (int)$_POST['customblock_menu_id'];
     $placeId = (int)$_POST['customblock_place_id'];
     $htmlCode = $_POST['customblock_html_code'];
+    $lang_custom_name = $_POST['lang_custom_name'];
+    $lang_custom_content = $_POST['lang_custom_content'];
 
-    $update = updateCustomBlock($db, $prefix, $customBlockId, $name, $menuId, $placeId, $htmlCode);
+    $update = updateCustomBlock($db, $prefix, $customBlockId, $name, $menuId, $placeId, $htmlCode, $lang_custom_name, $lang_custom_content);
 
     if ($update) {
         $_SESSION['success_message'] = t('The Block has been updated successfully.');

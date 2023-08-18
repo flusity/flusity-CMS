@@ -16,22 +16,23 @@ $translations = getTranslations($db, $prefix, $language_code);
 
 $result = ['success' => false];
 
-// Check if all necessary POST data is available
-if (isset($_POST['customblock_menu_id'], $_POST['customblock_place_id'], $_POST['customblock_html_code'])) {
-    // Handle potential nullable name
+if (isset($_POST['customblock_menu_id'], $_POST['customblock_place_id'], $_POST['customblock_html_code'], $_POST['lang_custom_name'], $_POST['lang_custom_content'])) {
+
     $name = isset($_POST['customblock_name']) && !empty($_POST['customblock_name']) ? $_POST['customblock_name'] : null;
     
     $menu_id = (int)$_POST['customblock_menu_id'];
     $place_id = (int)$_POST['customblock_place_id'];
     $html_code = $_POST['customblock_html_code'];
+    $lang_custom_name = $_POST['lang_custom_name'];
+    $lang_custom_content = $_POST['lang_custom_content'];
 
-    $insert = createCustomBlock($db, $prefix, $name, $menu_id, $place_id, $html_code);
+    $insert = createCustomBlock($db, $prefix, $name, $menu_id, $place_id, $html_code, $lang_custom_name, $lang_custom_content);
                         
     if ($insert) {
-        $_SESSION['success_message'] = 'Custom Block sėkmingai pridėtas.';
+        $_SESSION['success_message'] = 'Custom Block successfully added.';
         $result['success'] = true;
     } else {
-        $_SESSION['error_message'] = 'Klaida pridedant Custom Block. Bandykite dar kartą.';
+        $_SESSION['error_message'] = 'Error adding Custom Block. Try again.';
     }
 }
 

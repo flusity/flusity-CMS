@@ -1,7 +1,7 @@
 <?php
     define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../') . '/');
     require_once ROOT_PATH . 'core/template/header-admin.php';
-
+    
     $possible_rows = [15, 35, 75, 150, 250, 350]; // galimos eilučių reikšmės
     $records_per_page = isset($_GET['rows']) ? intval($_GET['rows']) : 15; // pasirinktos eilutės
 
@@ -53,20 +53,32 @@
             <form method="post" action="<?php echo $editTranslation ? 'edit_translation.php' : 'add_translation.php'; ?>">
             <input type="hidden" name="edit_id" value="<?php echo $editTranslation ? $editTranslation['id'] : ''; ?>">
             <div class="form-group">
-                <label for="language_code"><?php echo t("Language Code");?></label>
-                <select class="form-select" id="language_code" name="language_code" required>
-                    <?php
-                        $languages = getAllLanguages($db, $prefix);
-                        $selectedLanguageCode = isset($selectedTranslation) ? $selectedTranslation['language_code'] : '';
-                        foreach ($languages as $language) {
-                            $selected = $language['language_code'] === $selectedLanguageCode ? 'selected' : '';
-                            echo "<option value='{$language['language_code']}' $selected>{$language['language_code']}</option>";
-                        }
-                    ?>
-                <option value="new"><?php echo t("Add new code");?></option>
-            </select>
-            <input type="text" class="form-control mt-2 d-none" id="new_language_code" name="new_language_code" placeholder="<?php echo t('Enter new language code'); ?>">
-            </div>
+    <label for="language_code"><?php echo t("Language Code");?></label>
+    <select class="form-select" id="language_code" name="language_code" required>
+        <?php 
+            $setting_lang = $settings['language'];
+            $languages = getAllLanguages($db, $prefix);
+            $selectedLanguageCode = isset($selectedTranslation) ? $selectedTranslation['language_code'] : '';
+
+            // Įterpkite jau esamų kalbų kodus
+            $existingLanguageCodes = [];
+            foreach ($languages as $language) {
+                $existingLanguageCodes[] = $language['language_code'];
+                $selected = $language['language_code'] === $selectedLanguageCode ? 'selected' : '';
+                echo "<option value='{$language['language_code']}' $selected>{$language['language_code']}</option>";
+            }
+
+            // Jei kalbos kodas iš nustatymų nėra sąraše, pridėkite jį
+            if (!in_array($setting_lang, $existingLanguageCodes)) {
+                $selected = $setting_lang === $selectedLanguageCode ? 'selected' : '';
+                echo "<option value='{$setting_lang}' $selected>{$setting_lang}</option>";
+            }
+        ?>
+        <option value="new"><?php echo t("Add new code");?></option>
+    </select>
+    <input type="text" class="form-control mt-2 d-none" id="new_language_code" name="new_language_code" placeholder="<?php echo t('Enter new language code'); ?>">
+</div>
+
             <div class="form-group">
                 <label for="translation_key"><?php echo t("Translation Key");?></label>
                 <input type="text" class="form-control" id="translation_key" name="translation_key" value="<?php echo $editTranslation ? $editTranslation['translation_key'] : ''; ?>" required>

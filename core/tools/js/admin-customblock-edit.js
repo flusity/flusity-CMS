@@ -61,12 +61,12 @@ function initializeCustomBlockForm(mode) {
                 if (data.success) {
                     window.location.href = 'customblock.php';
                 } else {
-                    alert(mode === 'edit' ? 'Error updating customblock' : 'Klaida pridedant customblock');
+                    alert(mode === 'edit' ? 'Error updating customblock' : 'Error adding customblock');
                 }
             })
             .catch(error => {
                 console.error('Klaida:', error);
-                alert(mode === 'edit' ? 'Error updating customblock2' : 'Klaida pridedant customblock2');
+                alert(mode === 'edit' ? 'Error updating customblock2' : 'Error adding customblock2');
             });
         });
     }

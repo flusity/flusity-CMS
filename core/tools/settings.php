@@ -1,10 +1,7 @@
 <?php
 define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../') . '/');
-
 require_once ROOT_PATH . 'core/template/header-admin.php';
-
 ?>
-
 <?php require_once $_SERVER['DOCUMENT_ROOT'] . '/core/template/admin-menu-horizontal.php';?>
   <button class="btn btn-primary position-fixed start-0 translate-middle-y d-md-none tools-settings" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas">
       <i class="fas fa-bars"></i>
@@ -13,8 +10,6 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
 <div class="container-fluid mt-4 main-content admin-layout">
     <div class="row">
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 content-up">
-
-        
             <div class="col-sm-9">
                 <?php
                 if (isset($_SESSION['success_message'])) {
@@ -88,26 +83,38 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
                                         <input type="number" class="form-control w-25" id="posts_per_page" name="posts_per_page" value="<?php echo htmlspecialchars($settings['posts_per_page']); ?>" required>
                                     </div>
                                     <div class="form-group mt-2 mb-2">
-                                        <label for="language"><?php echo t("Language");?></label>
+                                        <label for="language"><?php echo t("Dashboard language");?></label>
                                         <select class="form-control-slc" id="language" name="language">
                                             <?php 
                                                 $containsEn = array_search('en', array_column($languages, 'language_code')) !== false;
+                                                $containsSettingLang = array_search($settings['language'], array_column($languages, 'language_code')) !== false;
                                                 if (!$containsEn) {
                                                     $languages[] = ['language_code' => 'en'];
                                                 }
+                                                
+                                                if (!$containsSettingLang) {
+                                                    $languages[] = ['language_code' => $settings['language']];
+                                                }
+
                                                 foreach ($languages as $lang) : ?>
-                                                <option value="<?php echo htmlspecialchars($lang['language_code']); ?>" <?php echo ($settings['language'] === $lang['language_code'] ? 'selected' : ''); ?>>
-                                                    <?php echo htmlspecialchars($lang['language_code']); ?>
-                                                </option>
-                                            <?php endforeach; ?>
+                                                    <option value="<?php echo htmlspecialchars($lang['language_code']); ?>" <?php echo ($settings['language'] === $lang['language_code'] ? 'selected' : ''); ?>>
+                                                        <?php echo htmlspecialchars($lang['language_code']); ?>
+                                                    </option>
+                                                <?php endforeach; ?>
                                         </select>
                                     </div>
+                                    <div class="form-group mt-3 w-100">
+                                        <label for="bilingualism"><?php echo t("Additional languages on the web");?></label>
+                                        <input type="checkbox" class="form-control-ch" id="bilingualism" name="bilingualism" value="1" <?php echo ($settings['bilingualism'] == 1 ? 'checked' : '');?>>
+                                    </div>
+
+
+
                                     <div class="form-group mt-2 mb-2">
                                         <label for="session_lifetime"><?php echo t("Session lifetime in minutes");?></label>
                                         <input type="text" class="form-control  w-50" id="session_lifetime" name="session_lifetime" value="<?php echo htmlspecialchars($settings['session_lifetime']); ?>" required>
                                     </div>
                             </div>
-                       
 							<?php $currentImage = getCurrentImage($db, $prefix); ?>
 
 							<div class="col-md-3 border border-dark-subtle mt-2 mb-2" style="position: relative;"> 
@@ -116,7 +123,6 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
 								<div class="row justify-content-end">
 									<label for="brand_icone"><?php echo t("Brand pictures");?></label>
 									<div class="col-auto mb-2">
-										<!-- <input class="form-control" id="brand_icone" type="file" name="brand_icone" onchange="previewImage(event)"> -->
 										<input class="form-control" id="brand_icone" type="file" name="brand_icone" onchange="previewImage(event)" data-upload-method="direct">
 									</div>
 								</div>
@@ -140,8 +146,6 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
 												<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 											</div>
 											<div class="offcanvas-body" id="offcanvasBody" style="background-color: #494f55fa;">
-											
-											
 											</div>
 											<div class="offcanvas-footer">
                                                 <button class="btn file-left prev"><i class="fas fa-angle-left"></i></button>
@@ -214,10 +218,13 @@ $(document).ready(function() {
       $(this).find('.select-overlay').remove();
     }
   );
-  
+     //bilingualism
   $('#update-settings-form').submit(function(e) {
     e.preventDefault();
     var formData = new FormData(this);
+    if (!$('#bilingualism').is(':checked')) {
+        formData.append('bilingualism', 0);
+    }
     if (!$('#pretty_url').is(':checked')) {
         formData.append('pretty_url', 0);
     }

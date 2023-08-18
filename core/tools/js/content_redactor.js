@@ -1,76 +1,74 @@
-
-
-function header1() {
-    wrapText('post_content', '<h1>', '</h1>');
+function header1(elementId) {
+    wrapText(elementId, '<h1>', '</h1>');
 }
 
-function header2() {
-    wrapText('post_content', '<h2>', '</h2>');
+function header2(elementId) {
+    wrapText(elementId, '<h2>', '</h2>');
 }
 
-function header3() {
-    wrapText('post_content', '<h3>', '</h3>');
+function header3(elementId) {
+    wrapText(elementId, '<h3>', '</h3>');
 }
 
-function hypertext() {
-    wrapText('post_content', '<a href="#" target="_blank" title="" alt="">', '</a>');
+function hypertext(elementId) {
+    wrapText(elementId, '<a href="#" target="_blank" title="" alt="">', '</a>');
 }
 
-function underlineText() {
-    wrapText('post_content', '<u>', '</u>');
+function underlineText(elementId) {
+    wrapText(elementId, '<u>', '</u>');
 }
 
-function listTextUl() {
-    wrapText('post_content', '<ul>', '</ul>');
+function listTextUl(elementId) {
+    wrapText(elementId, '<ul>', '</ul>');
 }
 
-function listTextLi() {
-    wrapText('post_content', '<li>', '</li>');
+function listTextLi(elementId) {
+    wrapText(elementId, '<li>', '</li>');
 }
 
-function quotationMark() {
-    wrapText('post_content', '<q>', '</q>');
+function quotationMark(elementId) {
+    wrapText(elementId, '<q>', '</q>');
 }
 
-function markOl() {
-    wrapText('post_content', '<ol>', '</ol>');
+function markOl(elementId) {
+    wrapText(elementId, '<ol>', '</ol>');
 }
 
-function markDel() {
-    wrapText('post_content', '<del>', '</del>');
+function markDel(elementId) {
+    wrapText(elementId, '<del>', '</del>');
 }
-function markSub() {
-    wrapText('post_content', '<sub>', '</sub>');
+function markSub(elementId) {
+    wrapText(elementId, '<sub>', '</sub>');
 }
-function markSup() {
-    wrapText('post_content', '<sup>', '</sup>');
+function markSup(elementId) {
+    wrapText(elementId, '<sup>', '</sup>');
 }
-function markHr() {
-    wrapText('post_content', '<hr>', '');
-}
-
-function boldText() {
-    wrapText('post_content', '<b>', '</b>');
+function markHr(elementId) {
+    wrapText(elementId, '<hr>', '');
 }
 
-function textBreak() {
-    wrapText('post_content', '<br>', '');
+function boldText(elementId) {
+    wrapText(elementId, '<b>', '</b>');
 }
 
-function markText() {
-    wrapText('post_content', '<mark>', '</mark>');
+function textBreak(elementId) {
+    wrapText(elementId, '<br>', '');
 }
 
-function italicText() {
-    wrapText('post_content', '<i>', '</i>');
+function markText(elementId) {
+    wrapText(elementId, '<mark>', '</mark>');
 }
 
-function paragraphText() {
-    wrapText('post_content', '<p>', '</p>');
+function italicText(elementId) {
+    wrapText(elementId, '<i>', '</i>');
 }
 
-function previewPost() {
-  var content = document.getElementById('post_content').value;
+function paragraphText(elementId) {
+    wrapText(elementId, '<p>', '</p>');
+}
+
+function previewPost(elementId) {
+  var content = document.getElementById(elementId).value;
 
   var parser = new DOMParser();
   var doc = parser.parseFromString(content, 'text/html');
@@ -89,8 +87,8 @@ function previewPost() {
   previewModal.show();
 }
 
-function addImage(imageUrl) {
-  var textarea = document.getElementById('post_content');
+function addImage(imageUrl, elementId) {
+  var textarea = document.getElementById(elementId);
   var imgTag;
   
   if (imageUrl.indexOf('http://localhost') === 0) {
@@ -110,7 +108,7 @@ function addImage(imageUrl) {
 }
 
   var page = 0; 
-  function selectImage() {
+  function selectImage(elementId) {
     $.ajax({
         url: 'get_files.php',
         method: 'GET',
@@ -147,8 +145,8 @@ function addImage(imageUrl) {
             .on('click', function() {
               var offcanvas = bootstrap.Offcanvas.getInstance(document.getElementById('imageSelectOffcanvas'));
               offcanvas.hide();
-              addImage(image.url);
-            });
+              addImage(image.url, elementId); 
+          });
           imageWrapper.append(imageElement);
           imageWrapper.append(buttonElement);
           offcanvasBody.append(imageWrapper);

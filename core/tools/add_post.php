@@ -17,10 +17,12 @@ $translations = getTranslations($db, $prefix, $language_code);
 
 $result = ['success' => false];
 
-if (isset($_POST['post_title'], $_POST['post_content'], $_POST['post_menu'], $_POST['post_status'], $_POST['post_tags'], $_POST['role'], $_POST['post_description'], $_POST['post_keywords'])) { 
+if (isset($_POST['post_title'], $_POST['post_content'], $_POST['lang_post_title'], $_POST['lang_post_content'], $_POST['post_menu'], $_POST['post_status'], $_POST['post_tags'], $_POST['role'], $_POST['post_description'], $_POST['post_keywords'])) { 
     
     $title = $_POST['post_title'];
     $content = $_POST['post_content'];
+    $lang_post_title = $_POST['lang_post_title'];
+    $lang_post_content = $_POST['lang_post_content'];
     $menuId = (int)$_POST['post_menu'];
     $status = $_POST['post_status'];
     $tags = $_POST['post_tags'];
@@ -30,7 +32,7 @@ if (isset($_POST['post_title'], $_POST['post_content'], $_POST['post_menu'], $_P
     $keywords = $_POST['post_keywords'];
     $priority = isset($_POST['post_priority']) ? (int)$_POST['post_priority'] : 0; 
 
-    $insert = createPost($db, $prefix, $title, $content, $menuId, $status, $author, $tags, $role, $description, $keywords, $priority);
+    $insert = createPost($db, $prefix, $title, $content, $lang_post_title, $lang_post_content, $menuId, $status, $author, $tags, $role, $description, $keywords, $priority);
  
     if ($insert) {
         $_SESSION['success_message'] = t('Record successfully added.');

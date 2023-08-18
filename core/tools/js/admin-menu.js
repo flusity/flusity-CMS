@@ -1,8 +1,12 @@
 $(document).ready(function() {
+  
+  const bilingualism = parseInt($('#menuTable').data('bilingualism'));
+
   $('#add-menu-form').on('submit', function (e) {
     e.preventDefault();
 
     const menuName = $('#menu_name').val();
+    const langMenuName = $('#lang_menu_name').val();
     const pageUrl = $('#page_url').val();
     const position = $('#position').val();
     const template = $('#template').val();
@@ -29,6 +33,8 @@ $(document).ready(function() {
       action: action,
       menu_id: menuId,
       menu_name: menuName,
+      lang_menu_name: langMenuName,
+
       page_url: pageUrl === '' ? 'index' : pageUrl,
       position: position,
       template: template,
@@ -50,6 +56,7 @@ $(document).ready(function() {
         $('#addMenuModal').modal('hide');
         
         $('#menu_name').val('');
+        $('#lang_menu_name').val('');
         $('#page_url').val('');
         $('#position').val('');
         $('#template').val('');
@@ -75,13 +82,16 @@ $(document).ready(function() {
     modal.data('menu-id', menuId);
   
     if (mode === 'update') {
+      
       const menuName = button.closest('tr').find('td:nth-child(2)').text();
-      const pageUrl = button.closest('tr').find('td:nth-child(3)').text();
-      const position = button.closest('tr').find('td:nth-child(5)').text();
-      const template = button.closest('tr').find('td:nth-child(4)').text();
-      const showInMenu = button.closest('tr').find('td:nth-child(6)').text().trim() == '1' ? true : false;
+      const langMenuName = button.closest('tr').find('td:nth-child(3)').text(); //
+      const pageUrl = button.closest('tr').find('td:nth-child(4)').text();
+      const position = button.closest('tr').find('td:nth-child(6)').text();
+      const template = button.closest('tr').find('td:nth-child(5)').text();
+      const showInMenu = button.closest('tr').find('td:nth-child(7)').text().trim() == '1' ? true : false;
       
       $('#menu_name').val(menuName);
+      $('#lang_menu_name').val(langMenuName);
       $('#page_url').val(pageUrl);
       $('#position').val(position);
       $('#template').val(template);
@@ -92,6 +102,7 @@ $(document).ready(function() {
       modal.find('#submit-button').text('Update Menu');
     } else {
       $('#menu_name').val('');
+      $('#lang_menu_name').val('');
       $('#page_url').val('');
       $('#position').val('');
       $('#template').val('');
@@ -103,7 +114,4 @@ $(document).ready(function() {
     }
   });
   
-  
 });
-
-

@@ -35,23 +35,29 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
                 </div>";
                 unset($_SESSION['info_message']);
             }
+           
+            //  $settings = getSettings($db, $prefix);
+              $bilingualism = $settings['bilingualism'];
                 ?>
             </div>
             <h2><?php echo t("Page Menu");?></h2>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addMenuModal" data-mode="add">
             <i class="fas fa-plus"></i>
             </button>
-            <table class="table">
+            <table class="table" data-bilingualism="<?php echo $bilingualism; ?>">
               <thead>
                   <tr>
                       <th style="width: 3%;"><?php echo t("No.");?></th>
                       <th style="width: 17%;"><?php echo t("Name");?></th>
-                      <th style="width: 20%;"><?php echo t("Page URL");?></th>
+                     
+                      <th style="width: 17%;"><?php echo t("Cust. Lang Name");?></th>
+                      
+                      <th style="width: 18%;"><?php echo t("Page URL");?></th>
                       <th style="width: 12%;"><?php echo t("Template");?></th>
-                      <th style="width: 10%;"><?php echo t("Position");?></th>
+                      <th style="width: 4%;"><?php echo t("Position");?></th>
                       <th style="width: 3%;"><?php echo t("Show");?></th>
-                      <th style="width: 20%;"><?php echo t("Parent");?></th>
-                      <th style="width: 12%;"><?php echo t("Actions");?></th>
+                      <th style="width: 15%;"><?php echo t("Parent");?></th>
+                      <th style="width: 13%;"><?php echo t("Actions");?></th>
                   </tr>
               </thead>
               <tbody>
@@ -60,6 +66,9 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
                       <tr>
                           <td><?php echo $i++; ?>.</td>
                           <td><?php echo htmlspecialchars($menu['name']); ?></td>
+                        
+                          <td><?php echo htmlspecialchars($menu['lang_menu_name']); ?></td>
+                         
                           <td><?php echo htmlspecialchars($menu['page_url']); ?></td>
                           <td><?php echo htmlspecialchars($menu['template']); ?></td>
                           <td><?php echo htmlspecialchars($menu['position']); ?></td>
@@ -103,10 +112,19 @@ require_once ROOT_PATH . 'core/template/header-admin.php';?>
     </div>
     <div class="modal-body">
       <form id="add-menu-form">
-        <div class="form-group">
-          <label for="menu_name"><?php echo t("Menu Name");?></label>
+      <div class="form-group">
+          <label for="menu_name"><?php echo t("Menu  Name");?></label>
           <input type="text" class="form-control" id="menu_name" name="menu_name" required>
         </div>
+        <?php 
+        /* Other language start */
+        if($bilingualism != 0): ?>
+        <div class="form-group">
+          <label for="lang_menu_name"><?php echo t("Menu other language Name");?></label>
+          <input type="text" class="form-control" id="lang_menu_name" name="lang_menu_name">
+        </div>
+        <?php endif; ?>
+        <!-- Other language end-->
         <div class="form-group">
           <label for="page_url"><?php echo t("Page URL");?></label>
           <input type="text" class="form-control" id="page_url" name="page_url">
