@@ -1,0 +1,37 @@
+
+/*  Language select style */
+.custom-dropdown {
+  position: relative;
+  border: 0px solid #ccc;
+  width: 45px;
+  cursor: pointer;
+}
+
+.selected-option, .option {
+  display: flex;
+  align-items: center;
+  padding: 3px;
+}
+
+.flag {
+  width: 34px;
+  height: 34px;
+  margin-left: 2px;
+}
+
+.flag.en {
+  background-image: url('/assets/img/en.png');
+}
+
+.options {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  border: 0px solid #ccc;
+}
+
+.options .option:hover {
+  background-color: #eaeaea;
+}

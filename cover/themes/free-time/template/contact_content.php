@@ -1,18 +1,21 @@
 
 <h2><?php echo t("Contact Us"); ?></h2>
 <form id="contact-form" method="post">
-    <div class="form-group">
-        <label for="name"><?php echo t("Name"); ?></label>
-        <input type="text"  class="form-control" id="name" name="name" required>
+
+
+<div class="control-group">
+        <div class="form-floating controls mb-3"><input class="form-control" type="text" id="name" required="" placeholder="Name"><label class="form-label" for="name">Name</label><small class="form-text text-danger help-block"></small></div>
     </div>
-    <div class="form-group">
-        <label for="email"><?php echo t("Email"); ?></label>
-        <input type="email"  class="form-control" id="email" name="email" required>
+    <div class="control-group">
+        <div class="form-floating controls mb-3"><input class="form-control" type="email" id="email" required="" placeholder="Email Address"><label class="form-label">Email Address</label><small class="form-text text-danger help-block"></small></div>
     </div>
-    <div class="form-group">
-        <label for="message"><?php echo t("Message"); ?></label>
-        <textarea  class="form-control" id="message" name="message" rows="4" required></textarea>
+    <div class="control-group">
+        <div class="form-floating controls mb-3"><small class="form-text text-danger help-block"></small></div>
     </div>
+    <div class="control-group">
+        <div class="form-floating controls mb-3"><textarea class="form-control" id="message" data-validation-required-message="Please enter a message." required="" placeholder="Message" style="height: 150px;"></textarea><label class="form-label">Message</label><small class="form-text text-danger help-block"></small></div>
+    </div>
+
     <div class="form-group">
     <label for="captcha"><?php echo t("Human Check"); ?>: <span id="captchaQuestion"></span></label>
     <div class="d-flex justify-content-between">

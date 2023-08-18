@@ -10,6 +10,9 @@ $id = intval(htmlspecialchars($_GET['id']));
 $placesId = getplaces($db, $prefix);
 $menuId = getMenuItems($db, $prefix);
 
+$settings = getSettings($db, $prefix);
+$bilingualism = $settings['bilingualism'];
+
 $stmt = $db->prepare("SELECT * FROM " . $prefix['table_prefix'] . "_jd_simple_zer WHERE id = :id");
 $stmt->bindParam(':id', $id);
 $stmt->execute();
@@ -74,22 +77,49 @@ if ($mode === 'create' || $addon) {
             </div>
             <div class="mb-3">
                 <label for="simpleFormControlInput" class="form-label"><?php echo t('Title');?></label>
-                
                 <input type="text" class="form-control" name="title" id="simpleFormControlInput" placeholder="Title" value="<?php echo $mode === 'edit' ? htmlspecialchars($addon['title']) : ''; ?>" required>
             </div>
             <div class="mb-3">
                 <label for="simpleFormControlTextarea" class="form-label"><?php echo t('Description');?></label>
                 <textarea class="form-control" name="description" id="simpleFormControlTextarea" rows="3" required><?php echo $mode === 'edit' ? htmlspecialchars($addon['description']) : ''; ?></textarea>
             </div>
-            <div class="mb-3">
-                <label for="simpleFormControlReadmoreInput" class="form-label"><?php echo t('Read more url');?></label>
-                
-                <input type="text" class="form-control" name="readmore" id="simpleFormControlReadmoreInput" placeholder="read more url" value="<?php echo $mode === 'edit' ? htmlspecialchars($addon['readmore']) : ''; ?>" required>
+<!-- Other language start-->
+<?php if($bilingualism != 0): ?>
+    <div class="form-group">
+        <label for="post_status"><?php echo t("Next Language");?></label>
+            <div class="accordion accordion-flush mb-3" id="accordionFlushExample">
+            <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                <?php echo t("Add content in another language");?>
+                </button>
+            </h2>
+        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+                <div class="form-group mb-2">
+                <label for="lang_en_title"><?php echo t('Other language title');?></label>
+                    <input type="text" class="form-control" id="lang_en_title" name="lang_en_title" value="<?php echo $mode === 'edit' ? htmlspecialchars($addon['lang_en_title']) : ''; ?>">
+                </div>
+                <div class="mb-3">
+                    <label for="simpleFormControlTextarea" class="form-label"><?php echo t('Other language description');?></label>
+                    <textarea class="form-control" name="lang_en_description" id="simpleFormControlTextarea" rows="3" ><?php echo $mode === 'edit' ? htmlspecialchars($addon['lang_en_description']) : ''; ?></textarea>
+                </div>
             </div>
-            <button type="submit" name="submit" class="btn btn-primary"><?php echo t('Submit');?></button>
-                <?php if (isset($_GET['addon_post_edit_id'])): ?>
-                <a href="addons_model.php?name=jd_simple_zer&id=<?php echo htmlspecialchars($_GET['id']) ?>" class="btn btn-secondary"><?php echo t('Cancel');?></a>
-                <?php endif; ?>
+        </div>
+        </div>
+        </div>
+    </div>
+    <?php endif; ?>
+<!-- Other language end-->
+        <div class="mb-3">
+            <label for="simpleFormControlReadmoreInput" class="form-label"><?php echo t('Read more url');?></label>
+            
+            <input type="text" class="form-control" name="readmore" id="simpleFormControlReadmoreInput" placeholder="read more url" value="<?php echo $mode === 'edit' ? htmlspecialchars($addon['readmore']) : ''; ?>" required>
+        </div>
+        <button type="submit" name="submit" class="btn btn-primary"><?php echo t('Submit');?></button>
+            <?php if (isset($_GET['addon_post_edit_id'])): ?>
+            <a href="addons_model.php?name=jd_simple_zer&id=<?php echo htmlspecialchars($_GET['id']) ?>" class="btn btn-secondary"><?php echo t('Cancel');?></a>
+            <?php endif; ?>
         </div>
         <div class="col-md-4">
             <div class="mb-3">
@@ -97,35 +127,30 @@ if ($mode === 'create' || $addon) {
                 <input class="form-control form-control-sm" name="file_id" id="file_id" type="file" onchange="previewFile(this)">
                 <input type="hidden" name="file_id"  id="file_id" value="<?php echo isset($addon['img_url']) ? $addon['img_url'] : ''; ?>">
         </div>
-            
             <div id="image_container">
                 <img id="preview_image"  style="max-width: 100%;" src="<?php echo $mode === 'edit' ? $addon['img_url'] : ''; ?>">
             </div>
             <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><?php echo t('files Library');?></button>
-           
-<!-- Demo view start -->
-<button type="button" class="btn btn-info btn-lg" data-bs-toggle="offcanvas" data-bs-target="#demoOffcanvas">DEMO View</button>
+                <!-- Demo view start -->
+                <button type="button" class="btn btn-info btn-lg" data-bs-toggle="offcanvas" data-bs-target="#demoOffcanvas">DEMO View</button>
 
-<div class="offcanvas offcanvas-start" tabindex="-1" id="demoOffcanvas" aria-labelledby="demoOffcanvasLabel">
-    <div class="offcanvas-header">
-        <h5 id="demoOffcanvasLabel">DEMO View</h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-        <div class="card">
-            <img id="demoCardImage" class="card-img-top w-100 d-block" width="294" height="160" src="/cover/addons/jd_simple_zer/img/7646653_f9f1c35fca142b93.jpg">
-            <div class="card-body">
-                <h4 id="demoCardTitle" class="card-title text-dark">DEMO</h4>
-                <p id="demoCardText" class="card-text text-dark">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                <button class="btn btn-primary" id="readMoreButton" type="button">Button</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Demo view end -->
-
-
-            
+                <div class="offcanvas offcanvas-start" tabindex="-1" id="demoOffcanvas" aria-labelledby="demoOffcanvasLabel">
+                    <div class="offcanvas-header">
+                        <h5 id="demoOffcanvasLabel">DEMO View</h5>
+                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <div class="card">
+                            <img id="demoCardImage" class="card-img-top w-100 d-block" width="294" height="160" src="/cover/addons/jd_simple_zer/img/7646653_f9f1c35fca142b93.jpg">
+                            <div class="card-body">
+                                <h4 id="demoCardTitle" class="card-title text-dark">DEMO</h4>
+                                <p id="demoCardText" class="card-text text-dark">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
+                                <button class="btn btn-primary" id="readMoreButton" type="button">Button</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Demo view end -->
             <div class="offcanvas offcanvas-end" style="background-color: #494f55fa;" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
                     <div class="offcanvas-header">
                         <h5 class="offcanvas-title" id="offcanvasRightLabel">Offcanvas right</h5>

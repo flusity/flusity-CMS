@@ -43,28 +43,7 @@
             } else {
                 print "";
             }
-            ?>
-
-        
-
-                    <div>
-                        <form id="contactForm" name="sentMessage">
-                            <div class="control-group">
-                                <div class="form-floating controls mb-3"><input class="form-control" type="text" id="name" required="" placeholder="Name"><label class="form-label" for="name">Name</label><small class="form-text text-danger help-block"></small></div>
-                            </div>
-                            <div class="control-group">
-                                <div class="form-floating controls mb-3"><input class="form-control" type="email" id="email" required="" placeholder="Email Address"><label class="form-label">Email Address</label><small class="form-text text-danger help-block"></small></div>
-                            </div>
-                            <div class="control-group">
-                                <div class="form-floating controls mb-3"><small class="form-text text-danger help-block"></small></div>
-                            </div>
-                            <div class="control-group">
-                                <div class="form-floating controls mb-3"><textarea class="form-control" id="message" data-validation-required-message="Please enter a message." required="" placeholder="Message" style="height: 150px;"></textarea><label class="form-label">Message</label><small class="form-text text-danger help-block"></small></div>
-                            </div>
-                            <div id="success"></div>
-                            <div class="mb-3"><button class="btn btn-primary" id="sendMessageButton" type="submit">Send</button></div>
-                        </form>
-                    </div>
+             require_once 'contact_content.php';?>
                 </div>
 
 

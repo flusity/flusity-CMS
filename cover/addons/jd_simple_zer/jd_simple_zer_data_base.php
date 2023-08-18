@@ -1,13 +1,15 @@
 <?php
 $configurations = require $_SERVER['DOCUMENT_ROOT'] . '/security/config.php';
 
-// Duomenų gavimas iš duomenų bazės
+// Data from database
 $prefix = $configurations['prefix'];
 
 $databaseScript = "CREATE TABLE IF NOT EXISTS {$prefix['table_prefix']}_jd_simple_zer (
     id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     description TEXT,
+    lang_en_title TEXT DEFAULT NULL,
+    lang_en_description TEXT DEFAULT NULL,
     img_url VARCHAR(255) NOT NULL,
     img_name VARCHAR(255) NOT NULL,
     readmore VARCHAR(255) NOT NULL,

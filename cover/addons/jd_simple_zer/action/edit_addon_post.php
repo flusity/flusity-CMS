@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
       
         $img_url = null;
 $img_name = null;
-$addonFolder = "jd_simple_img";
+$addonFolder = "jd_simple_zer_img";
 $no_image_provided = false;
 
 if (isset($_FILES['file_id']) && $_FILES['file_id']['error'] == 0) {
@@ -66,14 +66,18 @@ if ($no_image_provided) {
 
         $title = $_POST['title'];
         $description = $_POST['description'];
+        $lang_en_title = $_POST['lang_en_title'];
+        $lang_en_description = $_POST['lang_en_description'];
         $readmore = $_POST['readmore'];
         $place_id = $_POST['addon_place_id'];
         $menu_id = $_POST['addon_menu_id'];
 
 
-        $stmt = $db->prepare("UPDATE " . $prefix['table_prefix'] . "_jd_simple_zer SET title = :title, description = :description, img_url = :img_url, img_name = :img_name, readmore = :readmore, menu_id = :menu_id, place_id = :place_id WHERE id = :id");
+        $stmt = $db->prepare("UPDATE " . $prefix['table_prefix'] . "_jd_simple_zer SET title = :title, description = :description, lang_en_title = :lang_en_title, lang_en_description = :lang_en_description, img_url = :img_url, img_name = :img_name, readmore = :readmore, menu_id = :menu_id, place_id = :place_id WHERE id = :id");
         $stmt->bindParam(':title', $title, PDO::PARAM_STR);
         $stmt->bindParam(':description', $description, PDO::PARAM_STR);
+        $stmt->bindParam(':lang_en_title', $lang_en_title, PDO::PARAM_STR);
+        $stmt->bindParam(':lang_en_description', $lang_en_description, PDO::PARAM_STR);
         $stmt->bindParam(':img_url', $img_url, PDO::PARAM_STR);
         $stmt->bindParam(':img_name', $img_name, PDO::PARAM_STR);//
         $stmt->bindParam(':readmore', $readmore, PDO::PARAM_STR);//readmore

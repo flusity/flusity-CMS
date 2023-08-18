@@ -40,9 +40,10 @@
         </div>
         <p class="text-muted mb-0" style="padding-left: 10px;text-align: center;padding-bottom: 0px;margin-bottom: 0px;padding-top: 0px;margin-top: 12px;"><?php print $footer_text; ?></p>
     </footer>
-
-<script src="<?php echo getThemePath($db, $prefix, 'assets/bootstrap/js/bootstrap.min.js'); ?>"></script>
-<script src="<?php echo getThemePath($db, $prefix, 'assets/js/bs-init.js'); ?>"></script>
-<script src="<?php echo getThemePath($db, $prefix, 'assets/js/clean-blog.js'); ?>"></script>
+    <script src="<?php echo getThemePath($db, $prefix, 'js/jdscript.js'); ?>"></script>
+    <script src="<?php echo getThemePath($db, $prefix, 'js/lang.js'); ?>"></script>
+    <script src="<?php echo getThemePath($db, $prefix, 'assets/bootstrap/js/bootstrap.min.js'); ?>"></script>
+    <script src="<?php echo getThemePath($db, $prefix, 'assets/js/bs-init.js'); ?>"></script>
+    <script src="<?php echo getThemePath($db, $prefix, 'assets/js/clean-blog.js'); ?>"></script>
 </body>
 </html>

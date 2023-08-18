@@ -60,13 +60,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
         $title = $_POST['title'];
         $description = $_POST['description'];
+        $lang_en_title = $_POST['lang_en_title'];
+        $lang_en_description = $_POST['lang_en_description'];
         $readmore = $_POST['readmore'];
         $place_id = $_POST['addon_place_id'];
         $menu_id = $_POST['addon_menu_id'];
         $addon_id = $id;
-        $stmt = $db->prepare("INSERT INTO " . $prefix['table_prefix'] . "_jd_simple_zer (title, description, img_url, img_name, readmore, menu_id, place_id, addon_id) VALUES (:title, :description, :img_url, :img_name, :readmore, :menu_id, :place_id, :addon_id)");
+        $stmt = $db->prepare("INSERT INTO " . $prefix['table_prefix'] . "_jd_simple_zer (title, description, lang_en_title, lang_en_description, img_url, img_name, readmore, menu_id, place_id, addon_id) VALUES (:title, :description, :lang_en_title, :lang_en_description, :img_url, :img_name, :readmore, :menu_id, :place_id, :addon_id)");
         $stmt->bindParam(':title', $title, PDO::PARAM_STR);
         $stmt->bindParam(':description', $description, PDO::PARAM_STR);
+        $stmt->bindParam(':lang_en_title', $title, PDO::PARAM_STR);
+        $stmt->bindParam(':lang_en_description', $description, PDO::PARAM_STR);
         $stmt->bindParam(':img_url', $img_url, PDO::PARAM_STR);
         $stmt->bindParam(':img_name', $img_name, PDO::PARAM_STR); 
         $stmt->bindParam(':readmore', $readmore, PDO::PARAM_STR); //readmore

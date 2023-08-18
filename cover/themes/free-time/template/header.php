@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?php echo isset( $_SESSION['lang']) ? $_SESSION['lang'] : $lang_code; ?>">
 <head>
     <meta charset="UTF-8">
     <title><?php echo isset($site_title) ? $site_title : 'Default Title'; ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">  
     <meta name="description" content="<?= isset($meta['description']) ? $meta['description'] : '' ?>">
     <meta name="keywords" content="<?= isset($meta['keywords']) ? $meta['keywords'] : '' ?>">
-    <meta http-equiv="Content-Security-Policy: script-src 'self' 'unsafe-inline' https://ssl.gstatic.com 'unsafe-eval'">
+    <meta http-equiv="Content-Security-Policy: script-src 'self' https://ssl.gstatic.com">
     <meta name="GENERATOR" content="flusity" />
     <meta name="AUTHOR" content="jd flusity" /> 
     <link rel="icon" href="/uploads/<?php echo $site_brand_icone;?>" type="image/x-icon" />
@@ -23,5 +23,11 @@
     <link rel="stylesheet" type="text/css"  href="<?php echo getThemePath($db, $prefix, 'css/site.css'); ?>">
     <script src="/assets/dist/js/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="/assets/dist/js/ui/1.12.1/themes/base/jquery-ui.css">
+    <style>
+    .flag.<?php echo isset($settings['language']) ? $settings['language'] : 'en'; ?> {
+        background-image: url('/assets/img/<?php echo isset($settings['language']) ? $settings['language'] : 'en'; ?>.png');
+    }
+    </style>
 </head>
 <body>
+    
