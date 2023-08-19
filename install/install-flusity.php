@@ -282,6 +282,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <select id="language" name="language" class="form-control">
                         <option value="en">English</option>
                         <option value="lt">Lietuvių</option>
+                        <option value="de">Deutsch</option>
                         <option value="it">Italiano</option>
                         <option value="fr">Français</option>
                         </select>
