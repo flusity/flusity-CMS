@@ -1,6 +1,7 @@
 
 <?php if (session_status() !== PHP_SESSION_ACTIVE) {
         session_start(); }
+        
 /*
  @ flusity
  Author Darius Jakaitis, author web site http://www.manowebas.lt
