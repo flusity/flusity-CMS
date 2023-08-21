@@ -12,6 +12,7 @@
     secureSession($db, $prefix);
     $db = getDBConnection($config);
     $settings = getSettings($db, $prefix);
+    $lang_code = $settings['language']; // Kalbos kodas
     $bilingualism = $settings['bilingualism'];
 
     require_once "join.php";
@@ -48,5 +49,5 @@
  ?>
 
  <?php
- require_once getThemePath($db, $prefix, '/template/login_form.php');  
+ require_once getThemePath($db, $prefix, '/template/template_login_form.php');  
  ?>
