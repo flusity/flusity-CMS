@@ -87,6 +87,8 @@ function validateInput($input) {
         $_SESSION['last_activity'] = time();
     }
     */
+
+
    function secureSession($db, $prefix) {
         global $prefix; 
     
