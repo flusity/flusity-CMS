@@ -34,7 +34,7 @@ if($isUserLoggedIn){
 <?php if ($isUserLoggedIn): ?>
         <li><?php include 'user_dropdown.php'; ?></li>
 <?php else: ?>
-            <li><a class="nav-link" href="login.php"><?php echo t("Log In"); ?></a></li>
+            <li><a class="nav-link" href="login"><?php echo t("Log In"); ?></a></li>
 <?php endif; 
       if($settings['bilingualism'] != 0): ?>
             <li><?php include 'language_selector.php'; ?></li>
