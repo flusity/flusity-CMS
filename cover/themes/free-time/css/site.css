@@ -61,3 +61,6 @@ header.masthead .overlay.contact-head-ov{
   appearance: none;
   border-radius: 0rem;
 }
+.answer-option {
+    cursor: move;
+}
