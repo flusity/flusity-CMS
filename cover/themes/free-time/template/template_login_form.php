@@ -37,24 +37,24 @@
                 <div class="col-md-8 col-lg-8 col-xl-6" style="margin-top: -24px;padding-top: 0px;margin-right: 1px;">
                     <div class="card mb-5"></div>
                    
-    <form method="POST" action="" class="text-center">
-    <div class="form-floating">
-    <div class="mb-3"><input type="text" class="form-control" id="login_name" name="login_name" placeholder="<?php echo t("Login Name or Email"); ?>" required></div>
-       
-    </div>
-        <br>
-        <div class="form-floating">
-        <div class="mb-3"><input type="password" class="form-control" id="password" name="password" placeholder="<?php echo t("password"); ?>" required></div>
-            
-        </div>
-        <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token, ENT_QUOTES, 'UTF-8'); ?>">
+                    <form method="POST" action="" class="text-center">
+                    <div class="form-floating">
+                    <div class="mb-3"><input type="text" class="form-control" id="login_name" name="login_name" placeholder="<?php echo t("Login Name or Email"); ?>" required></div>
+                    
+                    </div>
+                        <br>
+                        <div class="form-floating">
+                        <div class="mb-3"><input type="password" class="form-control" id="password" name="password" placeholder="<?php echo t("password"); ?>" required></div>
+                            
+                        </div>
+                        <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token, ENT_QUOTES, 'UTF-8'); ?>">
 
-        <br>
-        <div class="mb-3"><button class="w-100 btn btn-lg btn-primary mb-3" type="submit" style="background: rgb(230,227,160);--bs-primary: #7faef2;--bs-primary-rgb: 127,174,242;border-style: none;color: rgb(136,132,132);"><?php echo t("Login"); ?></button></div>
-    </form>
-        <p><?php echo t("Back to"); ?>&nbsp;<a href="/" class="btn-link"><?php echo strtolower(t("Home page")); ?></a>&nbsp;<?php echo t("or"); ?>&nbsp;
-        <?php echo strtolower(t("Create")); ?>&nbsp;<a href="register.php" class="btn-link"><?php echo strtolower(t("Registration")); ?></a>&nbsp;<p>
-               
+                        <br>
+                        <div class="mb-3"><button class="w-100 btn btn-lg btn-primary mb-3" type="submit" style="background: rgb(230,227,160);--bs-primary: #7faef2;--bs-primary-rgb: 127,174,242;border-style: none;color: rgb(136,132,132);"><?php echo t("Login"); ?></button></div>
+                    </form>
+                    <p><?php echo t("Back to"); ?>&nbsp;<a href="/" class="btn-link"><?php echo strtolower(t("Home page")); ?></a>&nbsp;<?php echo t("or"); ?>&nbsp;
+                    <?php echo strtolower(t("Create")); ?>&nbsp;<a href="register" class="btn-link"><?php echo strtolower(t("Registration")); ?></a>&nbsp;<p>
+                        
                 </div>
             </div>
         </div>
