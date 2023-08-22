@@ -127,12 +127,16 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
                             ?>
                             </td>
                             <td><?php echo htmlspecialchars($post['menu_name']); ?></td>
-                            <td><?php 
-                                      if ($post['status'] == 'published') {
-                                          echo 'On';
-                                      } elseif ($post['status'] == 'draft') {
-                                          echo 'Off';
-                                      }
+                            <td><?php  // View on page post
+                                        $menu_id = $post['menu_id'];
+                                        $menu_item = getMenuByMenuId($db, $prefix, $menu_id);
+                                        $page_url = $menu_item['page_url'];
+                                        $menuUrl = generateMenuUrl($db, $prefix, $page_url);
+                                     if ($post['status'] == 'published') {
+                                        echo '<a href="' . $menuUrl . '">On</a>';
+                                    } elseif ($post['status'] == 'draft') {
+                                        echo '<a href="' . $menuUrl . '">Off</a>';
+                                    }
                                   ?></td>
                             <td><?php echo htmlspecialchars($user_name); ?></td>
                             <td>

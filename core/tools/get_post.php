@@ -121,7 +121,7 @@ if ($mode === 'create' || $post) {
             <div class="accordion-body">
             <div class="form-group mb-2">
             <label for="post_title"><?php echo t("Other languages Title");?></label>
-            <input type="text" class="form-control" id="lang_post_title" name="lang_post_title" value="<?php echo $mode === 'edit' ? htmlspecialchars($post['lang_post_title']) : ''; ?>" required>
+            <input type="text" class="form-control" id="lang_post_title" name="lang_post_title" value="<?php echo $mode === 'edit' ? htmlspecialchars($post['lang_post_title']) : ''; ?>">
             </div>
             <div class="toolbar">
             
