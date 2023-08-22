@@ -135,7 +135,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
                                      if ($post['status'] == 'published') {
                                         echo '<a href="' . $menuUrl . '">On</a>';
                                     } elseif ($post['status'] == 'draft') {
-                                        echo '<a href="' . $menuUrl . '">Off</a>';
+                                        echo 'Off';
                                     }
                                   ?></td>
                             <td><?php echo htmlspecialchars($user_name); ?></td>
