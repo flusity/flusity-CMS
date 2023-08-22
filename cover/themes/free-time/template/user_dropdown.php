@@ -11,7 +11,7 @@
         <?php if ($isAdmin): ?>
             <a class="dropdown-item" href="admin.php"><?php echo t("Dashboard"); ?></a>
         <?php endif; ?>
-        <a class="dropdown-item" href="myaccount.php"><?php echo t("Profile"); ?></a>
+        <a class="dropdown-item" href="myaccount"><?php echo t("Profile"); ?></a>
         <a class="dropdown-item" href="logout.php"><?php echo t("Sign out"); ?></a>
     </div>
 </div>
