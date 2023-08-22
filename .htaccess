@@ -1,13 +1,15 @@
 RewriteEngine On
 
-# Peradresuoti login į login.php
+# Redirect 
 RewriteRule ^login$ login.php [L]
+RewriteRule ^register$ register.php [L]
+RewriteRule ^myaccount$ myaccount.php [L]
 
-# Esamos taisyklės
+# Existing rules
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php?page=$1 [L,QSA]
 
-# Saugos nustatymai
+# Security settings
 Options -Indexes
 ErrorDocument 403 /404.php
