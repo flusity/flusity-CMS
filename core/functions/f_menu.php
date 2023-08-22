@@ -12,6 +12,13 @@ function getMenuItems($db, $prefix) {
     return $stmt->fetchAll();
 }
 
+function getMenuByMenuId($db, $prefix, $menu_id) {
+    $stmt = $db->prepare("SELECT * FROM ".$prefix['table_prefix']."_flussi_menu WHERE id = :id");
+    $stmt->bindParam(':id', $menu_id);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
 function getParentMenuItems($db, $prefix) {
     $stmt = $db->prepare('SELECT id, name, lang_menu_name, page_url, position, template, show_in_menu, parent_id FROM '.$prefix['table_prefix'].'_flussi_menu WHERE parent_id IS NULL OR parent_id = 0 ORDER BY position');
     $stmt->execute();
