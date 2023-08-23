@@ -29,13 +29,11 @@
   <div class="container">
     <div class="row">
         <div class="col-sm-8 p-3"> 
-        <?php foreach ($posts as &$post): ?>
-        <h2><?php echo $post['title']; ?></h2>
-        <p><?php echo $post['content']; ?></p>
-        <?php displayEditButton($post['id']); ?>
-       <?php endforeach; ?>
-
-       <?php echo createPagination($url, $total_urls); ?>
+        <?php 
+        displayPosts($posts);
+        displayAddButton($menu_id);
+        echo createPagination($url, $total_urls);        
+        ?>
         </div>
         <div class="col-sm-4 p-3"> 
         <?php 

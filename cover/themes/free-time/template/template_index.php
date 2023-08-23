@@ -22,13 +22,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-10 col-lg-8 mx-auto">
-            <?php foreach ($posts as &$post): ?>
-                    <h2><?php echo $post['title']; ?></h2>
-                    <?php echo $post['content']; ?>
-                    <?php displayEditButton($post['id']); ?> 
-                <?php endforeach; ?> 
-                <?php displayAddButton($menu_id); ?>
-                <?php echo createPagination($url, $total_urls); ?>
+            <?php 
+        displayPosts($posts);
+        displayAddButton($menu_id);
+        echo createPagination($url, $total_urls);        
+        ?>
             </div>
             <div class="col">
                 <div class="col-md-12">     

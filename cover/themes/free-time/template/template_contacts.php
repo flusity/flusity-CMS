@@ -46,26 +46,15 @@
              require_once 'contact_content.php';?>
                 </div>
 
-
-                
-                <?php foreach ($posts as &$post): ?>
-                    <h2><?php echo $post['title']; ?></h2>
-                    <?php echo $post['content']; ?>
-                    <?php displayEditButton($post['id']); ?> 
-                <?php endforeach; ?> 
-
-                <?php displayAddButton($menu_id); ?>
-                <?php echo createPagination($url, $total_urls); ?>
+    <?php 
+        displayPosts($posts);
+        displayAddButton($menu_id);
+        echo createPagination($url, $total_urls);        
+        ?> 
 
             </div>
         </div>
     </section>
-
-
-
-
-
-
 
 <div class="modal high-z-index" tabindex="-1" id="responseModal">
   <div class="modal-dialog">
