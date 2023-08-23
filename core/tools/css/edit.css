@@ -1,5 +1,8 @@
 .highlight {
-  border: 2px dashed rgb(54, 53, 53);
+    border: 1px dashed rgb(37, 232, 23);
+}
+.highlight-post {
+    border: 1px dashed rgba(52, 76, 237, 0.781);
 }
 #add-btn {
     font-size: 0;
