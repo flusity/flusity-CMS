@@ -11,6 +11,18 @@ function getPostsNews($db, $prefix, $limit, $offset, $menuUrl, $lang) {
         $contentField = 'IF('.$prefix['table_prefix'].'_flussi_posts.lang_post_content != "", '.$prefix['table_prefix'].'_flussi_posts.lang_post_content, '.$prefix['table_prefix'].'_flussi_posts.content)';
     }
 
+    function displayPosts($posts) {
+        foreach ($posts as &$post) {
+            ?>
+            <div class="post-container <?php echo (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') ? 'highlight-post' : ''; ?>">
+                <h2><?php echo $post['title']; ?></h2>
+                <p><?php echo $post['content']; ?></p>
+                <?php displayEditButton($post['id']); ?>
+            </div>
+            <?php
+        }
+    }
+    
     // Preparing the request based on the passed menu URL
     if ($menuUrl != '') {
         $stmt = $db->prepare('SELECT 
