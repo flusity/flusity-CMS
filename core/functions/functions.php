@@ -256,7 +256,7 @@ function getSettings($db, $prefix) {
     }
 
     function includeThemeTemplate($themeName, $templateName, $db, $prefix) {
-        global $db, $prefix, $meta, $site_title, $site_brand_icone, $posts, $menu_id, $url, $total_urls, $settings, $footer_text, $bilingualism, $lang_code;  
+        global $db, $prefix, $meta, $site_title, $site_brand_icone, $posts, $menu_id, $url, $total_urls, $settings, $footer_text, $bilingualism, $lang_code, $translations;  
        
         $templateDirectory = "cover/themes/{$themeName}/template/";
         $templateFilePath = $templateDirectory . $templateName . '.php';
@@ -268,8 +268,6 @@ function getSettings($db, $prefix) {
         }
     }
     
-    
-    
     require_once 'f_users.php';
     require_once 'f_contact_form.php';
     require_once 'f_backup.php';
@@ -280,5 +278,4 @@ function getSettings($db, $prefix) {
     require_once 'f_places.php';
     require_once 'f_translations.php';
     require_once 'f_themes.php';
-    require_once 'f_addons.php';
-    
+    require_once 'f_addons.php';  
