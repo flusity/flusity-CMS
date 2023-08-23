@@ -3,18 +3,18 @@
 $selected_lang = isset($_SESSION['lang']) ? $_SESSION['lang'] : $lang_code;
 
 $translations_it = array(
-    'contact_us' => 'Susisiekite su mumis',
-    'interesting_theme' => 'Dominanti tema',
-    'your_email' => 'Jūsų el. paštas',
-    'message' => 'Žinutė',
-    'human_check' => 'Patikrinama ar esate žmogus',
-    'drag_answer' => 'Tempkite atsakymą čia',
-    'send' => 'Siųsti',
-    'dashboard' => 'Prietaisų skydelis',
-    'profile' => 'Profilis',
-    'signout' => 'Atsijungti',
-    '404_tropic'=> 'Jūs nuklydote į tropinę nežinią! Nieko jūs čia nepamatysite.',
-    '404_return_home'=>'Spustelėkite <a href="/">čia</a>, kad grįžtumėte į pagrindinį puslapį.'
+    'contact_us' => 'Contattaci',
+     'interesting_theme' => 'Tema interessante',
+     'your_email' => 'La tua email posta',
+     'message' => 'Messaggio',
+     'human_check' => 'Verifica se sei umano',
+     'drag_answer' => 'Trascina la risposta qui',
+     'send' => 'Invia',
+     'dashboard' => 'cruscotto',
+     'profile' => 'Profilo',
+     'signout' => 'Esci',
+     '404_tropic'=> 'Hai vagato nell\'ignoto tropicale! Non vedrai nulla qui.',
+     '404_return_home'=>'Fai clic <a href="/">qui</a> per tornare alla home page.'
 );
 
 $translations_en = array(
