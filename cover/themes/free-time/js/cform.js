@@ -1,4 +1,4 @@
-
+// Flusity cform js script
 $(document).ready(function() {
     function generateUniqueAnswers(result) {
         var answers = [result];
@@ -34,7 +34,7 @@ $(document).ready(function() {
             cursor: "move"
         });
 
-        $("#chosenAnswer").html("Įtempti atsakymą čia");
+        $("#chosenAnswer").html("Drag answer here");
     }
 
 
@@ -70,7 +70,7 @@ $(document).ready(function() {
         if($("#possibleAnswers").is(':empty')) {
             // Generate a 'Next Question' button
             var nextButton = $("<button>", {
-                text: "Kartoti ?",
+                text: "Repeat ?",
                 class: "answer-option m-2 p-2 border rounded"
             });
 
@@ -95,7 +95,7 @@ $(document).ready(function() {
                     revert: "invalid"
                 });
 
-                $("#chosenAnswer").html("Įtempti atsakymą čia");
+                $("#chosenAnswer").html("Drag answer here");
 
                 $(this).remove();
             });
@@ -172,7 +172,7 @@ $(document).ready(function() {
             }
         });
 
-        $("#chosenAnswer").html("Įtempti atsakymą čia");
+        $("#chosenAnswer").html("Drag answer here");
     });
 
     $('#responseModal').on('hidden.bs.modal', function (e) {
