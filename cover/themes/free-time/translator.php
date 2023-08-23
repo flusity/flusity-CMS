@@ -2,7 +2,7 @@
 
 $selected_lang = isset($_SESSION['lang']) ? $_SESSION['lang'] : $lang_code;
 
-$translations_lt = array(
+$translations_it = array(
     'contact_us' => 'Susisiekite su mumis',
     'interesting_theme' => 'Dominanti tema',
     'your_email' => 'Jūsų el. paštas',
@@ -32,5 +32,5 @@ $translations_en = array(
     '404_return_home'=>'Click <a href="/">here</a>, to return back home page.'
 );
 
-$translations = ($selected_lang == 'lt') ? $translations_lt : $translations_en;
+$translations = ($selected_lang == 'it') ? $translations_it : $translations_en;
 ?>
