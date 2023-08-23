@@ -1,4 +1,5 @@
 <?php 
+require_once getThemePath($db, $prefix, '/translator.php'); 
 $site_title = isset($settings['site_title']) ? $settings['site_title'] : '';
 $menu_id = isset($menu['id']) ? $menu['id'] : null; 
 $site_brand_icone = isset($settings['brand_icone']) ? $settings['brand_icone'] : '';

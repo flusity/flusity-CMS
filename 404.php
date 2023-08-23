@@ -12,14 +12,17 @@ list($db, $config, $prefix) = initializeSystem();
 secureSession($db, $prefix);
 $language_code = getLanguageSetting($db, $prefix);
 $translations = getTranslations($db, $prefix, $language_code);
+$db = getDBConnection($config);
+ $settings = getSettings($db, $prefix);
+$lang_code = $settings['language']; // Kalbos kodas
+$bilingualism = $settings['bilingualism'];
 
- $db = getDBConnection($config);
-  
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
     $user_name = getUserNameById($db, $prefix, $user_id);
 }
 
+require_once "join.php";
 require_once getThemePath($db, $prefix, '/template/header.php'); ?>
 
 <header id="header">
@@ -30,8 +33,8 @@ require_once getThemePath($db, $prefix, '/template/header.php'); ?>
         <div class="col-sm-8 mx-auto text-center">
         <h2><?php echo t("Oops...");?></h2>
         <img src="/assets/img/green-llama.png" alt="lama">
-        <p><?php echo t("You've wandered off into tropical limbo! Nothing to see here.");?></p>
-        <p><?php echo t("Click");?> <a href="/"><?php echo t("here");?></a>, &nbsp;<?php echo t("to return back home.");?></p>
+        <p><?php echo $translations['404_tropic']; ?></p>
+        <p><?php echo $translations['404_return_home']; ?></p>
 </div>
 </div>
 </main>
