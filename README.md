@@ -7,7 +7,7 @@
 
 <b>The latest update added the ability to edit and add posts from the front of the page, making web administration much easier.</b>
 <p><b>CMS flusity</b> naudoja tradicinį serverio pusės generavimo modelį, bet sukurta naudojant šiuolaikines technologijas ir geriausias praktikas.</p>
-<p>PHP TVS projektas, įdiegimas, prisijungimas, registracija, administratorius, moderatorius, vartotojo vaidmenys, pridėjimas / redagavimas / ištrynimas (įrašas, išdėstymo vietos, kalba, failai, meniu, temos, pasirinktinis blokas, priedo (papildo) sistema, naudotojas, backup.sql), atnaujinkite svetainės nustatymus, integruota papildomos kalbos pridėjimas kaip numatytoji savo pasirinkta iš sąrašo 'lt', 'it', 'fr', 'de' ir papildoma kalba 'en'. turint šiek tiek įgūdžių galima pakeisti ir atvirkščiai</p>
+<p>PHP TVS projektas, įdiegimas, prisijungimas, registracija, administratorius, moderatorius, vartotojo vaidmenys, pridėjimas / redagavimas / ištrynimas (įrašas, išdėstymo vietos, kalba, failai, meniu, temos, pasirinktinis blokas, priedo (papildo) sistema, naudotojas, backup.sql), atnaujinkite svetainės nustatymus, integruota papildomos kalbos pridėjimas kaip numatytoji savo pasirinkta iš sąrašo 'lt', 'it', 'fr', 'de' ir papildoma kalba 'en'. turint šiek tiek įgūdžių galima pakeisti ir atvirkščiai.</p>
 <p>CMS flusity naudoja PHP kaip savo pagrindinę serverio pusės programavimo kalbą.<p>
 <p>Projekte naudojama MySQL duomenų bazė.</p>
 <p>Šiame Projekte naudojamas "Bootstrap" - tai vienas iš populiariausių "front-end" karkasų.</p>
