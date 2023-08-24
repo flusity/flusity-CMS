@@ -14,7 +14,8 @@ $translations_it = array(
      'profile' => 'Profilo',
      'signout' => 'Esci',
      '404_tropic'=> 'Hai vagato nell\'ignoto tropicale! Non vedrai nulla qui.',
-     '404_return_home'=>'Fai clic <a href="/">qui</a> per tornare alla home page.'
+     '404_return_home'=>'Fai clic <a href="/">qui</a> per tornare alla home page.',
+     'repeat' => 'Ripeti?'
 );
 
 $translations_en = array(
@@ -29,7 +30,8 @@ $translations_en = array(
     'profile' => 'Profile',
     'signout' => 'Sign out',
     '404_tropic'=> 'You\'ve wandered off into tropical limbo! You won\'t see anything here.',
-    '404_return_home'=>'Click <a href="/">here</a>, to return back home page.'
+    '404_return_home'=>'Click <a href="/">here</a>, to return back home page.',
+    'repeat' => 'Repeat?'
 );
 
 $translations = ($selected_lang == 'it') ? $translations_it : $translations_en;
