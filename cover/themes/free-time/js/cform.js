@@ -1,5 +1,6 @@
 // Flusity cform js script
 $(document).ready(function() {
+    var repeatText = $("#repeatTranslation").val();
     function generateUniqueAnswers(result) {
         var answers = [result];
 
@@ -70,7 +71,7 @@ $(document).ready(function() {
         if($("#possibleAnswers").is(':empty')) {
             // Generate a 'Next Question' button
             var nextButton = $("<button>", {
-                text: "Repeat ?",
+                text: repeatText,
                 class: "answer-option m-2 p-2 border rounded"
             });
 
