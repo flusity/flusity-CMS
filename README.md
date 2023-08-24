@@ -7,7 +7,7 @@
 
 <b>The latest update added the ability to edit and add posts from the front of the page, making web administration much easier.</b>
 <p><b>CMS flusity</b> naudoja tradicinį serverio pusės generavimo modelį, bet sukurta naudojant šiuolaikines technologijas ir geriausias praktikas.</p>
-<p>PHP TVS projektas, įdiegimas, prisijungimas, registracija, administratorius, moderatorius, vartotojo vaidmenys, pridėjimas / redagavimas / ištrynimas (įrašas, išdėstymo vietos, kalba, failai, meniu, temos, pasirinktinis blokas, priedo (papildo) sistema, naudotojas, backup.sql), atnaujinkite svetainės nustatymus, integruota papildomos kalbos pridėjimas 'en' kaip numatytoji ir savo pasirinkta  'lt', 'it', 'fr', 'de'.</p>
+<p>PHP TVS projektas, įdiegimas, prisijungimas, registracija, administratorius, moderatorius, vartotojo vaidmenys, pridėjimas / redagavimas / ištrynimas (įrašas, išdėstymo vietos, kalba, failai, meniu, temos, pasirinktinis blokas, priedo (papildo) sistema, naudotojas, backup.sql), atnaujinkite svetainės nustatymus, integruota papildomos kalbos pridėjimas kaip numatytoji savo pasirinkta iš sąrašo 'lt', 'it', 'fr', 'de' ir papildoma kalba 'en'. turint šiek tiek įgūdžių galima pakeisti ir atvirkščiai</p>
 <p>CMS flusity naudoja PHP kaip savo pagrindinę serverio pusės programavimo kalbą.<p>
 <p>Projekte naudojama MySQL duomenų bazė.</p>
 <p>Šiame Projekte naudojamas "Bootstrap" - tai vienas iš populiariausių "front-end" karkasų.</p>
@@ -67,7 +67,7 @@ Atsižvelgiant į šiuos elementus ir funkcijas, svetainė yrap patogus ir funkc
   /////// En /////////////////
 
   <h4> Flusity is a unique name that reflects the mission. It originated from the words "flussi" and "city", symbolizing the concepts of data flow and development, connecting everything into a harmonious "city" where everything moves freely and efficiently.</h4>
-<p>PHP CMS project, Install, Log In, Sign Up, admin, moderator, user roles, add/edit/delete (post, layout places, language, files, menu, themes, custom block, addon (plugin) system, user,  backup.sql), update website settings, integrated additional language addition 'en' as default and custom 'lt', 'it', 'fr', 'de'..</p>
+<p>PHP CMS project, Install, Log In, Sign Up, admin, moderator, user roles, add/edit/delete (post, layout places, language, files, menu, themes, custom block, addon (plugin) system, user,  backup.sql), update website settings, Integrated functionality allows for the addition of an extra language to be set as default from the list 'lt', 'it', 'fr', 'de', with 'en' as an additional option. With some skills, it's possible to reverse the settings.</p>
 <p><b>CMS flusity</b>Flusity CMS</b> uses PHP as its main server-side programming language.<p>
  <p>CMS flusity uses a traditional server-side generation model, but is built with modern technology and best practices.</p>
 
