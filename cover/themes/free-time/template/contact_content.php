@@ -23,6 +23,8 @@
     <label for="captcha"><?php echo $translations['human_check']; ?>: <span id="captchaQuestion"></span></label>
     <div class="d-flex justify-content-between">
         <div id="possibleAnswers" class="d-flex flex-wrap"></div>
+        <input type="hidden" id="repeatTranslation" value="<?php echo $translations['repeat']; ?>">
+
         <div id="chosenAnswer" class="mt-2 border rounded p-2 flex-grow-1 ml-3" style="height: 42px"><?php echo $translations['drag_answer']; ?></div>
     </div>
 </div>
