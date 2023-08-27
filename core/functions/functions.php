@@ -161,7 +161,22 @@ function getSettings($db, $prefix) {
     
         return array($db, $config, $prefix);
     }
-    
+
+    function remove_duplicates_by_key($array, $key) {
+        $temp_array = array();
+        $i = 0;
+        $key_array = array();
+        
+        foreach($array as $val) {
+            if (!in_array($val[$key], $key_array)) {
+                $key_array[$i] = $val[$key];
+                $temp_array[$i] = $val;
+            }
+            $i++;
+        }
+        return $temp_array;
+    }
+
     function displayPlace($db, $prefix, $page_url, $place_name, $admin_label = null) {
     
         $settings = getSettings($db, $prefix);
@@ -204,10 +219,13 @@ function getSettings($db, $prefix) {
     
         foreach(glob($addonsDirectory . "/*", GLOB_ONLYDIR) as $dir) {
             $content = basename($dir);
+            
             $addons = getAddonsByUrlNameAndPlace($db, $prefix, $content, $page_url, $place_name);
-            foreach ($addons as $addon) {
+            $addons = remove_duplicates_by_key($addons, 'id');
+            foreach ($addons as $currentAddon) {
                 $viewPath = $dir . "/view.php";
                 if (file_exists($viewPath)) {
+                    $addon = $currentAddon; // Nustatykite šį kintamąjį prieš įkeldami view.php
                     require ($viewPath);
                 }
             }
@@ -268,6 +286,8 @@ function getSettings($db, $prefix) {
         }
     }
     
+    
+    
     require_once 'f_users.php';
     require_once 'f_contact_form.php';
     require_once 'f_backup.php';
@@ -278,4 +298,5 @@ function getSettings($db, $prefix) {
     require_once 'f_places.php';
     require_once 'f_translations.php';
     require_once 'f_themes.php';
-    require_once 'f_addons.php';  
+    require_once 'f_addons.php';
+    

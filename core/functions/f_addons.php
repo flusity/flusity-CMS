@@ -255,3 +255,87 @@ function getAddonsByUrlNameAndPlace($db, $prefix, $addon, $page_url, $place_name
         return [];
     }
 }
+
+
+
+function getAllAddonsCSSFiles() {
+    $baseDirectory = 'cover/addons/';
+    $cssFiles = [];
+
+    $addons = scandir($baseDirectory);
+
+    foreach ($addons as $addon) {
+        if ($addon != '.' && $addon != '..' && is_dir($baseDirectory . $addon)) {
+            $cssDirectory = $baseDirectory . $addon . '/assets/css/';
+
+            if (is_dir($cssDirectory)) {
+                $files = scandir($cssDirectory);
+                
+                foreach ($files as $file) {
+                    if (pathinfo($file, PATHINFO_EXTENSION) === 'css') {
+                        $cssFiles[] = $cssDirectory . $file;
+                    }
+                }
+            }
+        }
+    }
+
+    return $cssFiles;
+}
+
+
+function printAllAddonsCSSFiles() {
+    $cssFiles = getAllAddonsCSSFiles();
+    foreach($cssFiles as $cssFile) {
+        echo '<link rel="stylesheet" type="text/css" href="' . $cssFile . '">
+        ';
+    }
+}
+
+function getAllAddonsJSFiles() {
+    $addonsDir = 'cover/addons/';
+    $allJSFiles = [];
+
+    $addons = scandir($addonsDir);
+
+    foreach ($addons as $addon) {
+        if ($addon !== '.' && $addon !== '..' && is_dir($addonsDir . $addon)) {
+            $jsDir = $addonsDir . $addon . '/assets/js/';
+            if (is_dir($jsDir)) {
+                $jsFiles = scandir($jsDir);
+                foreach ($jsFiles as $jsFile) {
+                    if (pathinfo($jsFile, PATHINFO_EXTENSION) === 'js') {
+                        $filePath = $jsDir . $jsFile;
+                        $fileContents = file_get_contents($filePath);
+                        if (strpos($fileContents, '/*head*/') !== false) {
+                            $allJSFiles['head'][] = $filePath;
+                        } elseif (strpos($fileContents, '/*footer*/') !== false) {
+                            $allJSFiles['footer'][] = $filePath;
+                        } // There are no conditions here, as nothing needs to be added if neither head nor footer is specified.
+                    }
+                }
+            }
+        }
+    }
+    return $allJSFiles;
+}
+
+function printAddonJSFiles($context = 'footer') {
+    $jsFiles = getAllAddonsJSFiles();
+    $scripts = '';
+    
+    if (isset($jsFiles[$context])) {
+        foreach ($jsFiles[$context] as $jsFile) {
+            $scripts .= '<script src="' . $jsFile . '"></script>' . PHP_EOL;
+        }
+    }
+
+    echo $scripts;
+}
+
+function printAllAddonsAssets($context) {
+    if ($context == 'head') {
+        printAllAddonsCSSFiles();
+    }
+    printAddonJSFiles($context);
+}
