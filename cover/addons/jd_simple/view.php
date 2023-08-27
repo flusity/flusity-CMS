@@ -1,5 +1,5 @@
 <?php
-    foreach ($addons as $addon) {
+   
         $class = (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') ? 'highlight' : '';
 
         echo '<div class="customblock-widget-'.$addon['id']. '  '. $class . '">';
@@ -13,5 +13,5 @@
         displayAddonEditButton($db, $prefix, $addon, 'jd_simple');
 
         echo '</div>';
-    }
+    
 ?>
