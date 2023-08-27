@@ -19,7 +19,7 @@ $current_lang = $_SESSION['lang'] ?? $lang_code;
          //  posible functionality
     }
     echo '<div class="social-link-icon"><a href="' . htmlspecialchars($addon['social_link_url']) .'" title="' . htmlspecialchars($display_title) . '" alt="' . htmlspecialchars($display_title) . '">
-    <img class="social-page" src="' . $addon['img_url'] . '" width="80px" title="' . htmlspecialchars($display_title) . '"  alt="' . htmlspecialchars($display_title) . '"/></a></div>';
+    <img class="social-page" src="' . $addon['img_url'] . '" title="' . htmlspecialchars($display_title) . '"  alt="' . htmlspecialchars($display_title) . '"/></a></div>';
 
     displayAddonEditButton($db, $prefix, $addon, 'social_links');
 
