@@ -275,8 +275,19 @@ function getSettings($db, $prefix) {
         }
     }
 
-    function includeThemeTemplate($themeName, $templateName, $db, $prefix) {
-        global $db, $prefix, $meta, $site_title, $site_brand_icone, $posts, $menu_id, $url, $total_urls, $settings, $footer_text, $bilingualism, $lang_code, $translations;  
+   function includeThemeTemplate($themeName, $templateName, $db, $prefix) {
+        global $db,
+        $prefix, 
+        $meta, 
+        $site_title, 
+        $site_brand_icone, 
+        $posts, $menu_id, 
+        $url, $total_urls, 
+        $settings, 
+        $footer_text, 
+        $bilingualism, 
+        $lang_code, 
+        $translations;  
        
         $templateDirectory = "cover/themes/{$themeName}/template/";
         $templateFilePath = $templateDirectory . $templateName . '.php';
@@ -287,8 +298,6 @@ function getSettings($db, $prefix) {
             echo t("Template {$templateName} not found!");
         }
     }
-    
-    
     
     require_once 'f_users.php';
     require_once 'f_contact_form.php';
@@ -301,4 +310,3 @@ function getSettings($db, $prefix) {
     require_once 'f_translations.php';
     require_once 'f_themes.php';
     require_once 'f_addons.php';
-    
