@@ -38,26 +38,28 @@ function validateCSRFToken($token) {
         return null;
     }
 
-    
     function getCurrentPageUrl($db, $prefix) {
         $stmt = $db->prepare("SELECT * FROM ".$prefix['table_prefix']."_flussi_settings");
         $stmt->execute();
         $settings = $stmt->fetch(PDO::FETCH_ASSOC);
     
-        $current_url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        // Čia nustatome protokolą automatiškai pagal tai, ar yra naudojamas SSL
+        $protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? "https://" : "http://";
+        
+        $current_url = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         $menus = getMenuItems($db, $prefix);
         $default_url_name = 'index';
         
         if($settings['pretty_url'] == 1){
             foreach ($menus as $menu) {
-                $menu_url = "http://" . $_SERVER['HTTP_HOST'] . '/' . $menu['page_url'];
+                $menu_url = $protocol . $_SERVER['HTTP_HOST'] . '/' . $menu['page_url'];
                 if ($current_url == $menu_url) {
                     return $menu['page_url'];
                 }
             }
         } else{
             foreach ($menus as $menu) {
-                $menu_url = "http://" . $_SERVER['HTTP_HOST'] . '/?page=' . $menu['page_url'];
+                $menu_url = $protocol . $_SERVER['HTTP_HOST'] . '/?page=' . $menu['page_url'];
                 if ($current_url == $menu_url) {
                     return $menu['page_url'];
                 }
