@@ -1,0 +1,17 @@
+
+.social-link-icon {
+    display: flex;
+    
+}
+
+.social-link-icon-item {
+    margin: 0 3px;
+}
+.social-link-icon-item a {
+    display: inline-block;
+    transition: transform 0.3s ease; 
+}
+
+.social-link-icon-item a:hover {
+    transform: scale(1.1); 
+}
