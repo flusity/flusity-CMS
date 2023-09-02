@@ -14,6 +14,7 @@
     secureSession($db, $prefix);
     $settings = getSettings($db, $prefix);
 
+    $lang_code = $settings['language']; // Kalbos kodas
     $bilingualism = $settings['bilingualism'];
 
     require_once "join.php";
