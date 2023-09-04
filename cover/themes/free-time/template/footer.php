@@ -12,7 +12,7 @@
                         ?>
                 </div>
                 <div class="col-sm-4 col-md-3 col-xl-4 text-center text-lg-start d-flex flex-column">
-                   
+                
                     <?php 
                         $page_url = getCurrentPageUrl($db, $prefix);
                         if ($page_url) {
@@ -32,21 +32,15 @@
                             print "";
                         }
                         ?>
-                        <li class="list-inline-item"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x fa-inverse"></i></span></li>
-                        <li class="list-inline-item"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-github fa-stack-1x fa-inverse"></i></span></li>
                     </ul>
                 </div>
             </div>
         </div>
         <p class="text-muted mb-0" style="padding-left: 10px;text-align: center;padding-bottom: 0px;margin-bottom: 0px;padding-top: 0px;margin-top: 12px;"><?php print $footer_text; ?></p>
     </footer>
-    <?php
-        printAllAddonsAssets('footer');
-    ?>
+    <?php printAllAddonsAssets('footer');?> 
     <script src="<?php echo getThemePath($db, $prefix, 'js/jdscript.js'); ?>"></script>
     <script src="<?php echo getThemePath($db, $prefix, 'js/lang.js'); ?>"></script>
     <script src="<?php echo getThemePath($db, $prefix, 'assets/bootstrap/js/bootstrap.min.js'); ?>"></script>
     <script src="<?php echo getThemePath($db, $prefix, 'assets/js/bs-init.js'); ?>"></script>
     <script src="<?php echo getThemePath($db, $prefix, 'assets/js/clean-blog.js'); ?>"></script>
-</body>
-</html>
