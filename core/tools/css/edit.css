@@ -1,6 +1,8 @@
 .highlight {
     border: 1px dashed rgb(37, 232, 23);
+   cursor:move;
 }
+
 .highlight-post {
     border: 1px dashed rgba(52, 76, 237, 0.781);
 }

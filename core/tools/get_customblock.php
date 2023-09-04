@@ -112,7 +112,7 @@ if ($mode === 'create' || $customBlock) {
         
             </div>
 
-            <textarea class="form-control" id="post_content" name="customblock_html_code" rows="10"><?php echo $mode === 'edit' ? htmlspecialchars($customBlock['html_code']) : ''; ?></textarea>
+            <textarea class="form-control" id="post_content" name="customblock_html_code" rows="10"><?php echo $mode === 'edit' ? htmlspecialchars_decode($customBlock['html_code']) : ''; ?></textarea>
             
         </div>
 <!-- Other language start-->
@@ -158,7 +158,7 @@ if ($mode === 'create' || $customBlock) {
             </button>
         
             </div>
-            <textarea class="form-control"  contenteditable="true" id="lang_custom_content" name="lang_custom_content" rows="16"><?php echo $mode === 'edit' ? htmlspecialchars($customBlock['lang_custom_content']) : ''; ?></textarea>
+            <textarea class="form-control"  contenteditable="true" id="lang_custom_content" name="lang_custom_content" rows="16"><?php echo $mode === 'edit' ? htmlspecialchars_decode($customBlock['lang_custom_content']) : ''; ?></textarea>
             </div>
             </div>
         </div>
@@ -166,7 +166,7 @@ if ($mode === 'create' || $customBlock) {
         </div>
 
         <?php endif; ?>
-<!-- Other language end-->
+        <!-- Other language end-->
         <button type="submit" class="btn btn-primary"><?php echo $mode === 'edit' ? 'Update Block' : 'Add Block'; ?></button>
         <button type="button" class="btn btn-secondary" id="cancel-customblock"><?php echo $mode === 'edit' ? 'Cancel' : 'Back'; ?></button>
     </form>

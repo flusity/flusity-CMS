@@ -74,10 +74,10 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
                     foreach ($customblocks as $customBlock): ?>
                         <tr>
                             <td><?= $i=$i+1; ?>.</td>
-                            <td><?= htmlspecialchars($customBlock['name']); ?></td>
+                            <td><?= htmlspecialchars_decode($customBlock['name']); ?></td>
                             <td>
                               <?php
-                                  $html_code = htmlspecialchars($customBlock['html_code']);
+                                  $html_code = htmlspecialchars_decode($customBlock['html_code']);
                                   $max_length = 100;
                                   if (strlen($html_code) > $max_length) {
                                       echo substr($html_code, 0, $max_length) . '...';
