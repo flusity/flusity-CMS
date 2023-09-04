@@ -38,6 +38,7 @@ function validateCSRFToken($token) {
         return null;
     }
 
+    
     function getCurrentPageUrl($db, $prefix) {
         $stmt = $db->prepare("SELECT * FROM ".$prefix['table_prefix']."_flussi_settings");
         $stmt->execute();
@@ -67,6 +68,7 @@ function validateCSRFToken($token) {
         }
         return $default_url_name;
     }
+    
     
     function getBaseUrl() {
         $protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? "https" : "http";
@@ -184,24 +186,38 @@ function getSettings($db, $prefix) {
         $settings = getSettings($db, $prefix);
         $lang_code = $settings['language']; // Kalbos kodas
         $class = (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') ? 'highlight' : '';
-    
-        echo '<div class="customblock-container ' . $class . '">';
+        $placeIdGet = getPlaceIdByName($db, $prefix, $place_name);
+        echo '<div class="customblock-container ' . $class;
+
+
+        if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
+            echo ' droppable-area';
+            echo '" data-place-id="' . $placeIdGet;
+        }
+        
+        echo '">';
+        
         $current_lang = $_SESSION['lang'] ?? $lang_code;
+       
 
         $customblocks = getCustomBlocksByUrlNameAndPlace($db, $prefix, $page_url, $place_name, $current_lang);
             /*    echo '<pre>';
             var_dump($customblocks);
             echo '</pre>'; */
         if (empty($customblocks) && isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
-            // posible
+            //echo $placeIdGet;
         }
     
         foreach ($customblocks as $customBlock) {
             $blockName = isset($customBlock['dynamic_name']) ? htmlspecialchars_decode($customBlock['dynamic_name']) : ''; 
             $blockHtmlCode = isset($customBlock['dynamic_content']) ? htmlspecialchars_decode($customBlock['dynamic_content']) : '';
             
-            echo '<div class="customblock-widget-'.$customBlock['id'].'">';
-            
+            echo '<div class="customblock-widget-'. $customBlock['id'] .'"';
+            if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
+                echo ' data-block-id="' . $customBlock['id'] . '"  data-block-type="customblock"';
+                 }
+            echo '>';
+            //echo $placeIdGet;
             if ($admin_label) {
                 echo '<h3>' . htmlspecialchars($admin_label) . '</h3>';
             } else {
@@ -215,24 +231,43 @@ function getSettings($db, $prefix) {
                 echo '<a href="/core/tools/customblock.php?edit_customblock_id='.$customBlock['id'].'" class="edit-link"><img src="core/tools/img/pencil.png" width="20px" title="'.t("Edit Block").'"></a>';
             }
         }
-        
-        
+     
         $addonsDirectory = $_SERVER['DOCUMENT_ROOT'] . '/cover/addons/';
-    
-        foreach(glob($addonsDirectory . "/*", GLOB_ONLYDIR) as $dir) {
-            $content = basename($dir);
-            
-            $addons = getAddonsByUrlNameAndPlace($db, $prefix, $content, $page_url, $place_name);
-            $addons = remove_duplicates_by_key($addons, 'id');
+        $latestUpdates = [];
+        $allAddons = [];
+        
+        foreach (glob($addonsDirectory . "/*", GLOB_ONLYDIR) as $dir) {
+            $contentAddonsName = basename($dir);
+            $addons = getAddonsByUrlNameAndPlace($db, $prefix, $contentAddonsName, $page_url, $place_name, $latestUpdates);
+            $tableName = $prefix['table_prefix'] . "_" . $contentAddonsName;
+        
             foreach ($addons as $currentAddon) {
-                $viewPath = $dir . "/view.php";
-                if (file_exists($viewPath)) {
-                    $addon = $currentAddon; // Nustatykite šį kintamąjį prieš įkeldami view.php
-                    require ($viewPath);
-                }
+                $getAllAddonTimes = getLatestUpdateTimeForAddonTable($db, $tableName);
+                $currentAddon['latestUpdateTime'] = $getAllAddonTimes;
+                $currentAddon['contentAddonsName'] = $contentAddonsName;
+                $allAddons[] = $currentAddon;
             }
-            
         }
+        
+        usort($allAddons, function($a, $b) {
+            return strcmp($b['latestUpdateTime'], $a['latestUpdateTime']);
+        });
+        
+        foreach ($allAddons as $currentAddon) {
+            echo '<div class="addon-widget-' . $currentAddon['id'] . '"';
+            if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
+                echo ' data-block-id="' . $currentAddon['id'] . '" data-block-type="addon"';
+                echo ' data-addon-name="' . $currentAddon['contentAddonsName'] . '"';
+            }
+            echo '>';
+            $viewPath = $addonsDirectory . '/' . $currentAddon['contentAddonsName'] . "/view.php";
+            if (file_exists($viewPath)) {
+                $addon = $currentAddon;
+                require ($viewPath);
+            }
+            echo '</div>';
+        }
+        
     
     if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
     echo '
@@ -275,7 +310,7 @@ function getSettings($db, $prefix) {
         }
     }
 
-   function includeThemeTemplate($themeName, $templateName, $db, $prefix) {
+    function includeThemeTemplate($themeName, $templateName, $db, $prefix) {
         global $db,
         $prefix, 
         $meta, 
@@ -287,6 +322,7 @@ function getSettings($db, $prefix) {
         $footer_text, 
         $bilingualism, 
         $lang_code, 
+        $blockId,
         $translations;  
        
         $templateDirectory = "cover/themes/{$themeName}/template/";
@@ -299,6 +335,8 @@ function getSettings($db, $prefix) {
         }
     }
     
+    
+    
     require_once 'f_users.php';
     require_once 'f_contact_form.php';
     require_once 'f_backup.php';
@@ -310,3 +348,4 @@ function getSettings($db, $prefix) {
     require_once 'f_translations.php';
     require_once 'f_themes.php';
     require_once 'f_addons.php';
+    

@@ -79,10 +79,18 @@ function installAddon($db, $prefix, $name_addon) {
 }
 
 
-
+function getLatestUpdateTimeForAddonTable($db, $tableName) {
+    $query = "SELECT MAX(updated) as latestUpdateTime FROM $tableName";
+    $stmt = $db->prepare($query);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result['latestUpdateTime'];
+}
 
 function getAllAddons($db, $prefix) {
-    $stmt = $db->prepare("SELECT * FROM  ".$prefix['table_prefix']."_flussi_tjd_addons");
+   // $stmt = $db->prepare("SELECT * FROM  ".$prefix['table_prefix']."_flussi_tjd_addons");
+      $stmt = $db->prepare("SELECT * FROM ".$prefix['table_prefix']."_flussi_tjd_addons ORDER BY updated_at DESC");
+
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -244,7 +252,7 @@ function getAddonsByUrlNameAndPlace($db, $prefix, $addon, $page_url, $place_name
         LEFT JOIN ".$prefix['table_prefix']."_flussi_places ON ".$prefix['table_prefix']."_".$addon.".place_id = ".$prefix['table_prefix']."_flussi_places.id 
         LEFT JOIN ".$prefix['table_prefix']."_flussi_tjd_addons ON ".$prefix['table_prefix']."_".$addon.".addon_id = ".$prefix['table_prefix']."_flussi_tjd_addons.id 
         WHERE (".$prefix['table_prefix']."_flussi_menu.page_url = :page_url OR ".$prefix['table_prefix']."_".$addon.".menu_id = 0) 
-        AND ".$prefix['table_prefix']."_flussi_places.name = :place_name"); 
+        AND ".$prefix['table_prefix']."_flussi_places.name = :place_name ORDER BY updated DESC, created DESC"); 
 
         $stmt->bindParam(':page_url', $page_url, PDO::PARAM_STR);
         $stmt->bindParam(':place_name', $place_name, PDO::PARAM_STR);
@@ -255,8 +263,6 @@ function getAddonsByUrlNameAndPlace($db, $prefix, $addon, $page_url, $place_name
         return [];
     }
 }
-
-
 
 function getAllAddonsCSSFiles() {
     $baseDirectory = 'cover/addons/';
@@ -324,12 +330,11 @@ function printAddonJSFiles($context = 'footer') {
     $jsFiles = getAllAddonsJSFiles();
     $scripts = '';
     
-    if (isset($jsFiles[$context])) {
+    if (isset($jsFiles[$context])) { 
         foreach ($jsFiles[$context] as $jsFile) {
-            $scripts .= '<script src="' . $jsFile . '"></script>' . PHP_EOL;
+            $scripts .= '    <script src="' . $jsFile . '"></script>' . PHP_EOL;
         }
     }
-
     echo $scripts;
 }
 
