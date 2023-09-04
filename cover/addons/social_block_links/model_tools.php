@@ -71,15 +71,15 @@ if ($mode === 'create' || $addon) { ?>
                     for ($i = 0; $i < count($profile_names); $i++) { ?>
                         <div class="mb-3">
                             <label for="FormControlInput_social_profiles_link_<?php echo $i; ?>" class="form-label"><?php echo t('Profile name');?></label>
-                            <input type="text" class="form-control" name="profiles_name[]" id="FormControlInput_social_profiles_link_<?php echo $i; ?>" placeholder="Profile name" value="<?php echo htmlspecialchars(trim($profile_names[$i])); ?>" required>
+                            <input type="text" class="form-control" name="profiles_name[]" id="FormControlInput_social_profiles_link_<?php echo $i; ?>" placeholder="Profile name" value="<?php echo htmlspecialchars_decode(trim($profile_names[$i])); ?>" required>
                         </div>
                         <div class="mb-3">
                             <label for="FormControl_social_profiles_link_urlInput_<?php echo $i; ?>" class="form-label"><?php echo t('URL link to profile');?></label>
-                            <input type="text" class="form-control" name="social_profiles_link_url[]" id="FormControl_social_profiles_link_urlInput_<?php echo $i; ?>" placeholder="URL link" value="<?php echo htmlspecialchars(trim($profile_links[$i])); ?>" required>
+                            <input type="text" class="form-control" name="social_profiles_link_url[]" id="FormControl_social_profiles_link_urlInput_<?php echo $i; ?>" placeholder="URL link" value="<?php echo htmlspecialchars_decode(trim($profile_links[$i])); ?>" required>
                         </div>
                         <div class="mb-3">
                             <label for="FormControl_fa_icone_code_Input_<?php echo $i; ?>" class="form-label"><?php echo t('profile fa icon code');?></label>
-                            <textarea type="text" class="form-control" name="fa_icone_code[]" id="FormControl_fa_icone_code_Input_<?php echo $i; ?>" placeholder="fa icone code" required><?php echo htmlspecialchars(trim($profile_icons[$i])); ?></textarea>
+                            <textarea type="text" class="form-control" name="fa_icone_code[]" id="FormControl_fa_icone_code_Input_<?php echo $i; ?>" placeholder="fa icone code" required><?php echo htmlspecialchars_decode(trim($profile_icons[$i])); ?></textarea>
                         </div>
                     <?php }
                     } ?>

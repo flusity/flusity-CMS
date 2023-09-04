@@ -25,7 +25,7 @@ for ($i = 0; $i < count($profiles_names); $i++) {
     $fa_icone_code = isset($fa_icone_codes[$i]) ? $fa_icone_codes[$i] : "";
 
     echo '<div class="social-link-icon-item">';
-    echo '<a href="' . htmlspecialchars($social_profiles_link_url) . '"  target="_blank" title="' . htmlspecialchars($profile_name) . '" alt="' . htmlspecialchars($profile_name) . '">' . $fa_icone_code . '</a>';
+    echo '<a href="' . htmlspecialchars($social_profiles_link_url) . '"  target="_blank" title="' . htmlspecialchars($profile_name) . '" alt="' . htmlspecialchars($profile_name) . '">' . htmlspecialchars_decode($fa_icone_code) . '</a>';
     echo '</div>';
 }
 echo '</div>'; 
