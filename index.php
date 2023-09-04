@@ -85,9 +85,14 @@ if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
     echo '<link rel="stylesheet" href="/core/tools/css/edit.css">';
 }
 includeThemeTemplate($themeName, $templateName, $db, $prefix); 
+
 includeThemeTemplate($themeName, 'footer', $db, $prefix);
 
 if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
-    echo '<script src="/core/template/js/edit.js"></script>';
+    echo '<script src="/core/template/js/editable.js"></script>
+    <script src="/core/template/js/edit.js"></script>';
 }
 ?>
+
+</body>
+</html>
