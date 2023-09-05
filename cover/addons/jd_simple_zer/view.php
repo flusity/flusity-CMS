@@ -6,7 +6,7 @@ $lang_code = $settings['language']; // Kalbos kodas
 $current_lang = $_SESSION['lang'] ?? $lang_code;
 
 
-    $class = (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') ? 'highlight' : '';
+    $class = (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') ? 'highlight-drag' : '';
     $display_title = ($current_lang == 'en' && !empty($addon['lang_en_title'])) ? $addon['lang_en_title'] : $addon['title'];
       
     echo '<div class="customblock-widget-' . $addon['id'] . ' ' . $class . '">';
