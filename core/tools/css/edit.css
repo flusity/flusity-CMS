@@ -1,10 +1,15 @@
 .highlight {
     border: 1px dashed rgb(37, 232, 23);
-   cursor:move;
+   
 }
 
 .highlight-post {
     border: 1px dashed rgba(52, 76, 237, 0.781);
+}
+.highlight-drag{
+    border: 1px dashed rgb(232, 121, 23);
+    cursor:move;
+
 }
 #add-btn {
     font-size: 0;
