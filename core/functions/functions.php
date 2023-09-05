@@ -189,7 +189,6 @@ function getSettings($db, $prefix) {
         $placeIdGet = getPlaceIdByName($db, $prefix, $place_name);
         echo '<div class="customblock-container ' . $class;
 
-
         if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
             echo ' droppable-area';
             echo '" data-place-id="' . $placeIdGet;
@@ -199,7 +198,6 @@ function getSettings($db, $prefix) {
         
         $current_lang = $_SESSION['lang'] ?? $lang_code;
        
-
         $customblocks = getCustomBlocksByUrlNameAndPlace($db, $prefix, $page_url, $place_name, $current_lang);
             /*    echo '<pre>';
             var_dump($customblocks);
@@ -207,31 +205,6 @@ function getSettings($db, $prefix) {
         if (empty($customblocks) && isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
             //echo $placeIdGet;
         }
-    
-        foreach ($customblocks as $customBlock) {
-            $blockName = isset($customBlock['dynamic_name']) ? htmlspecialchars_decode($customBlock['dynamic_name']) : ''; 
-            $blockHtmlCode = isset($customBlock['dynamic_content']) ? htmlspecialchars_decode($customBlock['dynamic_content']) : '';
-            
-            echo '<div class="customblock-widget-'. $customBlock['id'] .'"';
-            if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
-                echo ' data-block-id="' . $customBlock['id'] . '"  data-block-type="customblock"';
-                 }
-            echo '>';
-            //echo $placeIdGet;
-            if ($admin_label) {
-                echo '<h3>' . htmlspecialchars($admin_label) . '</h3>';
-            } else {
-                echo '<h3>' . htmlspecialchars($blockName) . '</h3>'; 
-            }
-            
-            echo '<div>' . $blockHtmlCode . '</div>';
-            echo '</div>';
-            
-            if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
-                echo '<a href="/core/tools/customblock.php?edit_customblock_id='.$customBlock['id'].'" class="edit-link"><img src="core/tools/img/pencil.png" width="20px" title="'.t("Edit Block").'"></a>';
-            }
-        }
-     
         $addonsDirectory = $_SERVER['DOCUMENT_ROOT'] . '/cover/addons/';
         $latestUpdates = [];
         $allAddons = [];
@@ -253,43 +226,89 @@ function getSettings($db, $prefix) {
             return strcmp($b['latestUpdateTime'], $a['latestUpdateTime']);
         });
         
+        $combinedArray = [];
+
+        foreach ($customblocks as $customBlock) {
+            $customBlock['type'] = 'customBlock';
+            if (isset($customBlock['updated'])) {
+                $customBlock['latestUpdateTime'] = $customBlock['updated'];
+            } else {
+                $customBlock['latestUpdateTime'] = null; 
+            }
+            $combinedArray[] = $customBlock;
+        }
+
         foreach ($allAddons as $currentAddon) {
-            echo '<div class="addon-widget-' . $currentAddon['id'] . '"';
-            if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
-                echo ' data-block-id="' . $currentAddon['id'] . '" data-block-type="addon"';
-                echo ' data-addon-name="' . $currentAddon['contentAddonsName'] . '"';
+            $currentAddon['type'] = 'addon';
+            $currentAddon['latestUpdateTime'] = $currentAddon['latestUpdateTime'];
+            $combinedArray[] = $currentAddon;
+        }
+
+        usort($combinedArray, function($a, $b) {
+            return strcmp($b['latestUpdateTime'], $a['latestUpdateTime']);
+        });
+        
+        foreach ($combinedArray as $item) {
+            if ($item['type'] === 'customBlock') {
+                $blockName = isset($item['dynamic_name']) ? htmlspecialchars_decode($item['dynamic_name']) : ''; 
+                $blockHtmlCode = isset($item['dynamic_content']) ? htmlspecialchars_decode($item['dynamic_content']) : '';
+        
+                echo '<div class="widget-'. $item['id'] .'"';
+                if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
+                    echo ' data-block-id="' . $item['id'] . '"  data-block-type="customblock"';
+                }
+                echo '>';
+                if ($admin_label) {
+                    echo '<h3>' . htmlspecialchars($admin_label) . '</h3>';
+                } else {
+                    echo '<h3>' . htmlspecialchars($blockName) . '</h3>'; 
+                }
+                echo '<div>' . $blockHtmlCode . '</div>';
+                echo '</div>';
+        
+                if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
+                    echo '<a href="/core/tools/customblock.php?edit_customblock_id='.$item['id'].'" class="edit-link"><img src="core/tools/img/pencil.png" width="20px" title="'.t("Edit Block").'"></a>';
+                }
+            } else if ($item['type'] === 'addon') {
+                echo '<div class="widget-' . $item['id'] . '"';
+                if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
+                    echo ' data-block-id="' . $item['id'] . '" data-block-type="addon"';
+                    echo ' data-addon-name="' . $item['contentAddonsName'] . '"';
+                }
+                echo '>';
+        
+                $viewPath = $addonsDirectory . '/' . $item['contentAddonsName'] . "/view.php";
+        
+                if (file_exists($viewPath)) {
+                    $addon = $item;
+                    require ($viewPath);
+                }
+                echo '</div>';
             }
-            echo '>';
-            $viewPath = $addonsDirectory . '/' . $currentAddon['contentAddonsName'] . "/view.php";
-            if (file_exists($viewPath)) {
-                $addon = $currentAddon;
-                require ($viewPath);
-            }
-            echo '</div>';
         }
         
+        
     
-    if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
-    echo '
-    <div class="myDropdown">
-        <button class="add-link">
-            <img src="core/tools/img/plus.png" width="20px" title="'. t("Add New") .'">
-        </button>
-        <div class="myDropdown-menu">
-            <button class="add-option-btn dropdown-item" onclick="window.location.href=\'/core/tools/customblock.php?customblock_place=' . htmlspecialchars($place_name) . '\'">+ Customblock</button>
-            <button class="add-option-btn dropdown-item addons-button">+ Addons</button>
-            <div id="addons-menu">';
+        if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
+        echo '
+        <div class="myDropdown">
+            <button class="add-link">
+                <img src="core/tools/img/plus.png" width="20px" title="'. t("Add New") .'">
+            </button>
+            <div class="myDropdown-menu">
+                <button class="add-option-btn dropdown-item" onclick="window.location.href=\'/core/tools/customblock.php?customblock_place=' . htmlspecialchars($place_name) . '\'">+ Customblock</button>
+                <button class="add-option-btn dropdown-item addons-button">+ Addons</button>
+                <div id="addons-menu">';
 
-            $allAddons = getAllAddons($db, $prefix);
-            foreach ($allAddons as $addon) {
-                $menuName = getMenuIdByPageUrl($db, $prefix, $page_url);
-                echo '<button class="add-option-btn dropdown-item" onclick="window.location.href=\'/core/tools/addons_model.php?name=' . $addon['name_addon'] . '&id=' . $addon['id'] . '&place_name=' . htmlspecialchars($place_name) . '&menu='.$menuName.'\'">' . htmlspecialchars($addon['name_addon']) . '</button>';
-            }
-
-                echo '</div>
-                    </div>
-                </div>';
-            }
+                $allAddons = getAllAddons($db, $prefix);
+                foreach ($allAddons as $addon) {
+                    $menuName = getMenuIdByPageUrl($db, $prefix, $page_url);
+                    echo '<button class="add-option-btn dropdown-item" onclick="window.location.href=\'/core/tools/addons_model.php?name=' . $addon['name_addon'] . '&id=' . $addon['id'] . '&place_name=' . htmlspecialchars($place_name) . '&menu='.$menuName.'\'">' . htmlspecialchars($addon['name_addon']) . '</button>';
+                }
+                    echo '</div>
+                        </div>
+                    </div>';
+        }
         echo '</div>';
     }
     
