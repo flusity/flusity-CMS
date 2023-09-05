@@ -25,6 +25,7 @@
                         if (parsedResponse.newPlaceId) {
                             $(ui.item).attr('data-place-id', parsedResponse.newPlaceId);
                         }
+                        location.reload();
                     } catch (e) {
                         console.error("Nepavyko apdoroti serverio atsakymo:", e);
                     }
