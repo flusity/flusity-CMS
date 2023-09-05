@@ -181,7 +181,7 @@ function getSettings($db, $prefix) {
         return $temp_array;
     }
 
-     function displayPlace($db, $prefix, $page_url, $place_name, $admin_label = null) {
+    function displayPlace($db, $prefix, $page_url, $place_name, $admin_label = null) {
     
         $settings = getSettings($db, $prefix);
         $lang_code = $settings['language']; // Kalbos kodas
@@ -286,7 +286,7 @@ function getSettings($db, $prefix) {
                 echo '</div>';
             }
         }
-        
+    
         if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
         echo '
         <div class="myDropdown">
@@ -297,11 +297,12 @@ function getSettings($db, $prefix) {
                 <button class="add-option-btn dropdown-item" onclick="window.location.href=\'/core/tools/customblock.php?customblock_place=' . htmlspecialchars($place_name) . '\'">+ Customblock</button>
                 <button class="add-option-btn dropdown-item addons-button">+ Addons</button>
                 <div id="addons-menu">';
-
+               
                 $allAddons = getAllAddons($db, $prefix);
-                foreach ($allAddons as $addon) {
+                foreach ($allAddons as $addon) { 
+                    $displayName = str_replace("_", " ", $addon['name_addon']);
                     $menuName = getMenuIdByPageUrl($db, $prefix, $page_url);
-                    echo '<button class="add-option-btn dropdown-item" onclick="window.location.href=\'/core/tools/addons_model.php?name=' . $addon['name_addon'] . '&id=' . $addon['id'] . '&place_name=' . htmlspecialchars($place_name) . '&menu='.$menuName.'\'">' . htmlspecialchars($addon['name_addon']) . '</button>';
+                    echo '<button class="add-option-btn dropdown-item" onclick="window.location.href=\'/core/tools/addons_model.php?name=' . $addon['name_addon'] . '&id=' . $addon['id'] . '&place_name=' . htmlspecialchars($place_name) . '&menu='.$menuName.'\'">' . htmlspecialchars($displayName) . '</button>';
                 }
                     echo '</div>
                         </div>
@@ -309,7 +310,6 @@ function getSettings($db, $prefix) {
         }
         echo '</div>';
     }
-    
 
     function getDataFromDatabase($db, $prefix, $page_url, $place_id) {
 
