@@ -181,7 +181,7 @@ function getSettings($db, $prefix) {
         return $temp_array;
     }
 
-    function displayPlace($db, $prefix, $page_url, $place_name, $admin_label = null) {
+     function displayPlace($db, $prefix, $page_url, $place_name, $admin_label = null) {
     
         $settings = getSettings($db, $prefix);
         $lang_code = $settings['language']; // Kalbos kodas
@@ -253,7 +253,7 @@ function getSettings($db, $prefix) {
                 $blockName = isset($item['dynamic_name']) ? htmlspecialchars_decode($item['dynamic_name']) : ''; 
                 $blockHtmlCode = isset($item['dynamic_content']) ? htmlspecialchars_decode($item['dynamic_content']) : '';
         
-                echo '<div class="widget-'. $item['id'] .'"';
+                echo '<div class="widget-'. $item['id'] .' highlight-drag"';
                 if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
                     echo ' data-block-id="' . $item['id'] . '"  data-block-type="customblock"';
                 }
@@ -287,8 +287,6 @@ function getSettings($db, $prefix) {
             }
         }
         
-        
-    
         if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
         echo '
         <div class="myDropdown">
