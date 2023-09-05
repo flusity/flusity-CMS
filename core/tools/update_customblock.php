@@ -23,9 +23,9 @@ if (isset($_POST['customblock_id'], $_POST['customblock_menu_id'], $_POST['custo
     
     $menuId = (int)$_POST['customblock_menu_id'];
     $placeId = (int)$_POST['customblock_place_id'];
-    $htmlCode = $_POST['customblock_html_code'];
-    $lang_custom_name = $_POST['lang_custom_name'];
-    $lang_custom_content = $_POST['lang_custom_content'];
+    $htmlCode = htmlspecialchars($_POST['customblock_html_code'], ENT_QUOTES, 'UTF-8');
+    $lang_custom_name = htmlspecialchars($_POST['lang_custom_name'], ENT_QUOTES, 'UTF-8');
+    $lang_custom_content = htmlspecialchars($_POST['lang_custom_content'], ENT_QUOTES, 'UTF-8');
 
     $update = updateCustomBlock($db, $prefix, $customBlockId, $name, $menuId, $placeId, $htmlCode, $lang_custom_name, $lang_custom_content);
 
