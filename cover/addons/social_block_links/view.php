@@ -4,7 +4,7 @@ $settings = getSettings($db, $prefix);
 $lang_code = $settings['language']; // Kalbos kodas
 $current_lang = $_SESSION['lang'] ?? $lang_code;
 
-$class = (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') ? 'highlight' : '';
+$class = (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') ? 'highlight-drag' : '';
 
 // If English is selected and content is available, display English content. Otherwise - the default.
 $profiles_names = explode(',', $addon['profiles_name']);
@@ -13,7 +13,7 @@ $profiles_name = ($current_lang == 'en' && isset($profiles_names[0])) ? $profile
 $social_profiles_link_urls = explode(',', $addon['social_profiles_link_url']);
 $fa_icone_codes = explode(',', $addon['fa_icone_code']);
 
-echo '<div class="custom-widget-' . $addon['id'] . ' ' . $class . '">';
+echo '<div class="widget-' . $addon['id'] . ' ' . $class . '">';
 
 if (isset($admin_label)) {
     echo '<h3>' . htmlspecialchars($admin_label) . '</h3>';
