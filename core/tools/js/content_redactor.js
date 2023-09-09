@@ -107,6 +107,25 @@ function addImage(imageUrl, elementId) {
   textarea.value = (before + imgTag + '\n' + after);
 }
 
+function addImageToDynamicField(imageUrl, imageId, targetElementId) {
+  var targetElement = document.getElementById(targetElementId);
+  if (targetElement === null) {
+      console.error("Target element not found.");
+      return;
+  }
+  var imgTag;
+  if (imageUrl.startsWith('http://localhost')) {
+      var relativeUrl = imageUrl.replace('http://localhost', '');
+      imgTag = `<img src="${relativeUrl}" width="55px" height="auto"/>`;
+  } else {
+      imgTag = `<img src="${imageUrl}" width="55px" height="auto"/>`;
+  }
+
+  var hiddenInput = `<input type="hidden" name="image_id[]" value="${imageId}"/>`;
+  
+  targetElement.innerHTML = imgTag + hiddenInput;
+}
+
 
 
   var page = 0; 
@@ -179,26 +198,6 @@ function addImage(imageUrl, elementId) {
       
     });
   }
-
-  function addImageToDynamicField(imageUrl, imageId, targetElementId) {
-    var targetElement = document.getElementById(targetElementId);
-    if (targetElement === null) {
-        console.error("Target element not found.");
-        return;
-    }
-    var imgTag;
-    if (imageUrl.startsWith('http://localhost')) {
-        var relativeUrl = imageUrl.replace('http://localhost', '');
-        imgTag = `<img src="${relativeUrl}" width="55px" height="auto"/>`;
-    } else {
-        imgTag = `<img src="${imageUrl}" width="55px" height="auto"/>`;
-    }
-    
-    // Čia pridedame paslėptą lauką su paveikslėlio ID
-    var hiddenInput = `<input type="hidden" name="image_id[]" value="${imageId}"/>`;
-    
-    targetElement.innerHTML = imgTag + hiddenInput;
-}
 
 
 
