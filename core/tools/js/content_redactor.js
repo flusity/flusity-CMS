@@ -107,7 +107,10 @@ function addImage(imageUrl, elementId) {
   textarea.value = (before + imgTag + '\n' + after);
 }
 
+
+
   var page = 0; 
+
   function selectImage(elementId) {
     $.ajax({
         url: 'get_files.php',
@@ -173,9 +176,104 @@ function addImage(imageUrl, elementId) {
         var offcanvas = new bootstrap.Offcanvas(document.getElementById('imageSelectOffcanvas'));
         offcanvas.show();
       }
+      
     });
   }
- 
+
+  function addImageToDynamicField(imageUrl, imageId, targetElementId) {
+    var targetElement = document.getElementById(targetElementId);
+    if (targetElement === null) {
+        console.error("Target element not found.");
+        return;
+    }
+    var imgTag;
+    if (imageUrl.startsWith('http://localhost')) {
+        var relativeUrl = imageUrl.replace('http://localhost', '');
+        imgTag = `<img src="${relativeUrl}" width="55px" height="auto"/>`;
+    } else {
+        imgTag = `<img src="${imageUrl}" width="55px" height="auto"/>`;
+    }
+    
+    // Čia pridedame paslėptą lauką su paveikslėlio ID
+    var hiddenInput = `<input type="hidden" name="image_id[]" value="${imageId}"/>`;
+    
+    targetElement.innerHTML = imgTag + hiddenInput;
+}
+
+
+
+function selectImageForDynamicField(targetElementId) {
+  $.ajax({
+    url: 'get_files.php',
+    method: 'GET',
+    data: { page: page },
+    dataType: 'json',
+    success: function(images) {
+      var offcanvasBody = $('#imageSelectOffcanvas .offcanvas-body');
+      offcanvasBody.empty();
+
+      images.forEach(function(image) {
+        var imageWrapper = $('<div>').css({
+          position: 'relative',
+          display: 'inline-block',
+          margin: '10px'
+        });
+        
+        var imageElement = $('<img>').attr({
+          src: image.url,
+          width: '100px',
+          height: '100px',
+          style: 'border-radius: 5px'
+        });
+        
+        var buttonElement = $('<button>Select</button>').css({
+          position: 'absolute',
+          top: '0',
+          bottom: '0',
+          left: '0',
+          right: '0',
+          margin: 'auto',
+          backgroundColor: 'rgba(255, 255, 255, 0.293)',
+          color: '#fff',
+          height: '100px'
+        }).on('click', function() {
+          var offcanvas = bootstrap.Offcanvas.getInstance(document.getElementById('imageSelectOffcanvas'));
+          offcanvas.hide();
+          addImageToDynamicField(image.url, image.id, targetElementId);  // Pridedame image.id čia
+        });
+        
+        imageWrapper.append(imageElement);
+        imageWrapper.append(buttonElement);
+        offcanvasBody.append(imageWrapper);
+      });
+
+      var breakElement  =$('<hr>');
+      var divStart = $('<div class="hstack gap-3">');
+      var divEnd = $('</div>');
+      var loadMoreButton = $('<button class="btn file-right"><i class="fas fa-angle-right"></i></button>')
+      .on('click', function() {
+        page++;  
+        selectImageForDynamicField(targetElementId);
+      });
+      var loadBackButton = $('<button class="btn file-left"><i class="fas fa-angle-left"></i></button>')
+      .on('click', function() {
+        page--;  
+        selectImageForDynamicField(targetElementId);
+      });
+      offcanvasBody.append(divStart);
+      offcanvasBody.append(breakElement);
+      offcanvasBody.append(loadBackButton);
+      offcanvasBody.append(loadMoreButton);
+      offcanvasBody.append(divEnd);
+
+      var offcanvas = new bootstrap.Offcanvas(document.getElementById('imageSelectOffcanvas'));
+      offcanvas.show();
+    }
+    
+  });
+}
+
+  
 function wrapText(elementId, openTag, closeTag) {
     var textarea = document.getElementById(elementId);
     if ('selectionStart' in textarea) {
@@ -190,9 +288,9 @@ function wrapText(elementId, openTag, closeTag) {
     }
 }
 
-$(document).on('click', '.selectable-image', function() {
+/* $(document).on('click', '.selectable-image', function() {
     var imageName = $(this).data('image-name');
     var offcanvas = bootstrap.Offcanvas.getInstance(document.getElementById('imageSelectOffcanvas'));
     offcanvas.hide();
     addImage(imageName);
-  });
+  }); */
