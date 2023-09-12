@@ -110,10 +110,11 @@ function uninstallAddon($db, $prefix, $name_addon) {
     // Check if there is a database script for the addon 
     if(file_exists($addonDatabaseScriptPath)) {
         include $addonDatabaseScriptPath;
-
-        if(isset($databaseDropScript)) {
-            // Execute the database drop script
-            $db->exec($databaseDropScript);
+    
+        if(isset($databaseDropScripts) && is_array($databaseDropScripts)) {  
+            foreach($databaseDropScripts as $dropScript) {  
+                $db->exec($dropScript);
+            }
         }
     }
 
