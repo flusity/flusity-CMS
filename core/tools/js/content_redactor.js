@@ -107,24 +107,6 @@ function addImage(imageUrl, elementId) {
   textarea.value = (before + imgTag + '\n' + after);
 }
 
-function addImageToDynamicField(imageUrl, imageId, targetElementId) {
-  var targetElement = document.getElementById(targetElementId);
-  if (targetElement === null) {
-      console.error("Target element not found.");
-      return;
-  }
-  var imgTag;
-  if (imageUrl.startsWith('http://localhost')) {
-      var relativeUrl = imageUrl.replace('http://localhost', '');
-      imgTag = `<img src="${relativeUrl}" width="55px" height="auto"/>`;
-  } else {
-      imgTag = `<img src="${imageUrl}" width="55px" height="auto"/>`;
-  }
-
-  var hiddenInput = `<input type="hidden" name="image_id[]" value="${imageId}"/>`;
-  
-  targetElement.innerHTML = imgTag + hiddenInput;
-}
 
 
 
@@ -199,9 +181,39 @@ function addImageToDynamicField(imageUrl, imageId, targetElementId) {
     });
   }
 
+  function addImageToDynamicField(imageUrl, imageId, targetElementId, previousImageId, previousItemId) {
+    var targetElement = document.getElementById(targetElementId);
+    if (targetElement === null) {
+      console.error("Target element not found.");
+      return;
+    }
+  
+    var imgTag;
+    if (imageUrl.startsWith('http://localhost')) {
+      var relativeUrl = imageUrl.replace('http://localhost', '');
+      imgTag = `<img src="${relativeUrl}" width="75px" height="auto"/>`;
+    } else {
+      imgTag = `<img src="${imageUrl}" width="75px" height="auto"/>`;
+    }
+  
+    var hiddenImageInput = `<input type="hidden" name="image_id[]" value="${imageId || previousImageId}"/>`;
+    var hiddenItemInput = `<input type="hidden" name="item_id[]" value="${previousItemId}"/>`; 
+  
+    targetElement.innerHTML = imgTag + hiddenImageInput + hiddenItemInput; 
+  }
+  
 
 
 function selectImageForDynamicField(targetElementId) {
+  var targetElement = document.getElementById(targetElementId);
+  if (targetElement === null) {
+    console.error("Target element not found.");
+    return;
+  }
+  
+  var previousImageId = $(targetElement).find('input[name="image_id[]"]').val();
+  var previousItemId = $(targetElement).find('input[name="item_id[]"]').val();
+
   $.ajax({
     url: 'get_files.php',
     method: 'GET',
@@ -238,7 +250,7 @@ function selectImageForDynamicField(targetElementId) {
         }).on('click', function() {
           var offcanvas = bootstrap.Offcanvas.getInstance(document.getElementById('imageSelectOffcanvas'));
           offcanvas.hide();
-          addImageToDynamicField(image.url, image.id, targetElementId);  // Pridedame image.id čia
+          addImageToDynamicField(image.url, image.id, targetElementId, previousImageId, previousItemId);  
         });
         
         imageWrapper.append(imageElement);
@@ -268,9 +280,9 @@ function selectImageForDynamicField(targetElementId) {
       var offcanvas = new bootstrap.Offcanvas(document.getElementById('imageSelectOffcanvas'));
       offcanvas.show();
     }
-    
   });
 }
+
 
   
 function wrapText(elementId, openTag, closeTag) {
