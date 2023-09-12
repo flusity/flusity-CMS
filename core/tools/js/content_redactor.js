@@ -181,7 +181,7 @@ function addImage(imageUrl, elementId) {
     });
   }
 
-  function addImageToDynamicField(imageUrl, imageId, targetElementId, previousImageId, previousItemId) {
+  function addImageToDynamicField(imageUrl, imageId, targetElementId, previousImageId) {
     var targetElement = document.getElementById(targetElementId);
     if (targetElement === null) {
       console.error("Target element not found.");
@@ -197,9 +197,9 @@ function addImage(imageUrl, elementId) {
     }
   
     var hiddenImageInput = `<input type="hidden" name="image_id[]" value="${imageId || previousImageId}"/>`;
-    var hiddenItemInput = `<input type="hidden" name="item_id[]" value="${previousItemId}"/>`; 
+   // var hiddenItemInput = `<input type="hidden" name="item_id[]" value="${previousItemId}"/>`; 
   
-    targetElement.innerHTML = imgTag + hiddenImageInput + hiddenItemInput; 
+    targetElement.innerHTML = imgTag + hiddenImageInput;// + hiddenItemInput; 
   }
   
 
@@ -212,7 +212,7 @@ function selectImageForDynamicField(targetElementId) {
   }
   
   var previousImageId = $(targetElement).find('input[name="image_id[]"]').val();
-  var previousItemId = $(targetElement).find('input[name="item_id[]"]').val();
+ // var previousItemId = $(targetElement).find('input[name="item_id[]"]').val();
 
   $.ajax({
     url: 'get_files.php',
@@ -250,7 +250,7 @@ function selectImageForDynamicField(targetElementId) {
         }).on('click', function() {
           var offcanvas = bootstrap.Offcanvas.getInstance(document.getElementById('imageSelectOffcanvas'));
           offcanvas.hide();
-          addImageToDynamicField(image.url, image.id, targetElementId, previousImageId, previousItemId);  
+          addImageToDynamicField(image.url, image.id, targetElementId, previousImageId);  
         });
         
         imageWrapper.append(imageElement);
