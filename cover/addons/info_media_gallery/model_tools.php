@@ -12,6 +12,8 @@ $id = intval(htmlspecialchars($_GET['id']));
 $placesId = getplaces($db, $prefix);
 $menuId = getMenuItems($db, $prefix);
 $settings = getSettings($db, $prefix);
+$bilingualism = $settings['bilingualism'];
+
 $stmt = $db->prepare("SELECT * FROM " . $prefix['table_prefix'] . "_info_media_gallery WHERE id = :id");
 $stmt->bindParam(':id', $id);
 $stmt->execute();
@@ -95,6 +97,9 @@ if ($mode === 'create' || $addon) { ?>
        
         $item_title[] = $item['title'];
         $item_description[] = $item['media_description'];
+        $lang_en_title[] = isset($item['lang_en_title']) ? $item['lang_en_title'] : '';
+        $lang_en_media_description[] = isset($item['lang_en_media_description']) ? $item['lang_en_media_description'] : '';
+
         $item_link_url[] = $item['hyperlink'];
         $item_media_file_id[] = $item['media_file_id'];
         $item_id[] = $item['id'];
@@ -129,7 +134,39 @@ if ($mode === 'create' || $addon) { ?>
             <input type="text" class="form-control" name="media_url[]" placeholder="<?php echo  t('URL link');?>" value="<?php echo htmlspecialchars(trim($item_link_url[$i])); ?>" required>
             <label><?php echo  t('Description');?></label>
             <textarea class="form-control" name="media_desc[]" placeholder="<?php echo  t('Description');?>" required><?php echo htmlspecialchars(trim($item_description[$i])); ?></textarea>
-</div>
+
+<!-- Other language start-->
+<?php if($bilingualism != 0): ?>
+    <div class="form-group">
+        <label for="post_status"><?php echo t("Next Language");?></label>
+            <div class="accordion accordion-flush mb-3" id="accordionFlushExample_<?php echo $i;?>">
+            <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingOne_<?php echo $i;?>">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne_<?php echo $i;?>" aria-expanded="false" aria-controls="flush-collapseOne_<?php echo $i;?>">
+                <?php echo t("Add content in another language");?>
+                </button>
+            </h2>
+        <div id="flush-collapseOne_<?php echo $i;?>" class="accordion-collapse collapse" aria-labelledby="flush-headingOne_<?php echo $i;?>" data-bs-parent="#accordionFlushExample_<?php echo $i;?>">
+            <div class="accordion-body">
+                <div class="form-group mb-2">
+                <label for="lang_en_title"><?php echo t('Other language title');?></label>
+                <input type="text" class="form-control" id="lang_en_title" name="lang_en_title[]" value="<?php echo isset($lang_en_title[$i]) ? htmlspecialchars($lang_en_title[$i]) : ''; ?>">
+
+                </div>
+                <div class="mb-3">
+                    <label for="simpleFormControlTextarea" class="form-label"><?php echo t('Other language description');?></label>
+                    <textarea class="form-control" name="lang_en_media_description[]" id="simpleFormControlTextarea" rows="3"><?php echo isset($lang_en_media_description[$i]) ? htmlspecialchars($lang_en_media_description[$i]) : ''; ?></textarea>
+
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+    </div>
+    <?php endif; ?>
+<!-- Other language end-->
+
+        </div>
 <?php }
     } 
 }
@@ -314,6 +351,73 @@ function addFields() {
     titleInput.placeholder = "Title";
     titleInput.required = true;
     
+
+  // Sukurti "Other language" dalį
+  const otherLanguageDiv = document.createElement("div");
+    otherLanguageDiv.className = "form-group";
+
+    const otherLanguageLabel = document.createElement("label");
+    otherLanguageLabel.innerHTML = "Next Language";
+
+    const otherLanguageAccordion = document.createElement("div");
+    otherLanguageAccordion.className = "accordion accordion-flush mb-3";
+    otherLanguageAccordion.id = `accordionFlushExample_${counter}`;
+  
+    const accordionItem = document.createElement("div");
+    accordionItem.className = "accordion-item";
+  
+    const accordionHeader = document.createElement("h2");
+    accordionHeader.className = "accordion-header";
+    accordionHeader.id = `flush-headingOne_${counter}`;
+  
+    const accordionButton = document.createElement("button");
+    accordionButton.className = "accordion-button collapsed";
+    accordionButton.type = "button";
+    accordionButton.dataset.bsToggle = "collapse";
+    accordionButton.dataset.bsTarget = `#flush-collapseOne_${counter}`;
+    accordionButton.setAttribute("aria-expanded", "false");
+    accordionButton.setAttribute("aria-controls", `flush-collapseOne_${counter}`);
+    accordionButton.innerHTML = "Add content in another language";
+
+    accordionHeader.appendChild(accordionButton);
+
+    const accordionCollapse = document.createElement("div");
+    accordionCollapse.id = `flush-collapseOne_${counter}`;
+    accordionCollapse.className = "accordion-collapse collapse";
+    accordionCollapse.setAttribute("aria-labelledby", `flush-headingOne_${counter}`);
+    accordionCollapse.dataset.bsParent = `#accordionFlushExample_${counter}`;
+  
+    const accordionBody = document.createElement("div");
+    accordionBody.className = "accordion-body";
+
+    // Čia galite pridėti laukus "Other Language Title" ir "Other Language Description"
+    // Pavyzdžiui:
+    const otherLanguageTitleInput = document.createElement("input");
+    otherLanguageTitleInput.type = "text";
+    otherLanguageTitleInput.className = "form-control";
+    otherLanguageTitleInput.name = `lang_en_title[]`;
+    otherLanguageTitleInput.placeholder = "Other language title";
+
+    const otherLanguageDescInput = document.createElement("textarea");
+    otherLanguageDescInput.className = "form-control";
+    otherLanguageDescInput.name = `lang_en_description[]`;
+    otherLanguageDescInput.placeholder = "Other language description";
+
+    accordionBody.appendChild(otherLanguageTitleInput);
+    accordionBody.appendChild(otherLanguageDescInput);
+  
+    accordionCollapse.appendChild(accordionBody);
+    accordionItem.appendChild(accordionHeader);
+    accordionItem.appendChild(accordionCollapse);
+  
+    otherLanguageAccordion.appendChild(accordionItem);
+  
+    otherLanguageDiv.appendChild(otherLanguageLabel);
+    otherLanguageDiv.appendChild(otherLanguageAccordion);
+
+
+
+
     const imageContainer = document.createElement("div");
     imageContainer.id = `ImageContainer_${counter}`; 
   
@@ -382,7 +486,8 @@ function addFields() {
     containerDiv.appendChild(urlInput);
     containerDiv.appendChild(descLabel);
     containerDiv.appendChild(descInput);
-   
+    containerDiv.appendChild(otherLanguageDiv);
+
     mainContainer.appendChild(containerDiv);
     divs.push(containerDiv);
     counter++;

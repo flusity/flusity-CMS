@@ -11,7 +11,7 @@ $stmt->execute();
 $galleries = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $galleryStyleCss = $addon['gallery_css_style_settings'];
 
-    echo '<div id="styleCss" class="gallery-container ' . $class . '" data-style-css="'. $galleryStyleCss .'">';
+    echo '<div id="styleCss" class="gallery-container d-flex ' . $class . '" data-style-css="'. $galleryStyleCss .'">';
     if (isset($admin_label)) {
         echo '<h3>' . htmlspecialchars($admin_label) . '</h3>';
     }
@@ -24,15 +24,17 @@ $galleryStyleCss = $addon['gallery_css_style_settings'];
 
         foreach ($items as $item) {
         $image_id = $item['media_file_id'];  
-        
+        $galleryTitle = ($current_lang == 'en' && !empty($item['lang_en_title'])) ? $item['lang_en_title'] : $item['title'];
+        $galleryInfoDesc = ($current_lang == 'en' && !empty($item['lang_en_media_description'])) ? $item['lang_en_media_description'] : $item['media_description'];
+
             $file_stmt = $db->prepare("SELECT url FROM " . $prefix['table_prefix'] . "_flussi_files WHERE id = :file_id");
             $file_stmt->bindParam(':file_id', $image_id, PDO::PARAM_INT);
             $file_stmt->execute();
             $file_data = $file_stmt->fetch(PDO::FETCH_ASSOC);
             $file_url = $file_data['url'] ?? ''; 
 
-            echo '<div class="image-card" data-desc="' . htmlspecialchars($item['media_description']) . '">';
-        echo '<img src="' . $file_url . '" alt="' . htmlspecialchars($item['title']). '">';
+            echo '<div class="image-card" data-desc="' . htmlspecialchars($galleryInfoDesc) . '" style="width: calc(50% - 20px);">';
+        echo '<img src="' . $file_url . '" alt="' . htmlspecialchars($galleryTitle). '">';
             echo '</div>';
         }
   } 

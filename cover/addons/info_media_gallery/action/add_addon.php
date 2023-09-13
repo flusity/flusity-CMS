@@ -43,14 +43,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $hyperlink = $_POST['media_url'][$i];
             $media_file_id = $_POST['image_id'][$i];
 
-            $sql = "INSERT INTO " . $prefix['table_prefix'] . "_info_media_gallery_item (title, media_description, hyperlink, media_file_id, id_info_media_gallery) VALUES (:title, :media_description, :hyperlink, :media_file_id, :id_info_media_gallery)";
+            //$sql = "INSERT INTO " . $prefix['table_prefix'] . "_info_media_gallery_item (title, media_description, hyperlink, media_file_id, id_info_media_gallery) VALUES (:title, :media_description, :hyperlink, :media_file_id, :id_info_media_gallery)";
+              $sql = "INSERT INTO " . $prefix['table_prefix'] . "_info_media_gallery_item (title, media_description, lang_en_title, lang_en_media_description, hyperlink, media_file_id, id_info_media_gallery) VALUES (:title, :media_description, :lang_en_title, :lang_en_media_description, :hyperlink, :media_file_id, :id_info_media_gallery)";
+
             $stmt = $db->prepare($sql);
 
             $stmt->bindParam(':title', $title, PDO::PARAM_STR);
             $stmt->bindParam(':media_description', $media_description, PDO::PARAM_STR);
+            $stmt->bindParam(':lang_en_title', $_POST['lang_en_title'][$i], PDO::PARAM_STR); 
+            $stmt->bindParam(':lang_en_media_description', $_POST['lang_en_media_description'][$i], PDO::PARAM_STR); 
             $stmt->bindParam(':hyperlink', $hyperlink, PDO::PARAM_STR);
             $stmt->bindParam(':media_file_id', $media_file_id, PDO::PARAM_INT);
             $stmt->bindParam(':id_info_media_gallery', $id_info_media_gallery, PDO::PARAM_INT);
+
 
             if (!$stmt->execute()) {
                 $_SESSION['error_message'] = t("Error while executing the query.");

@@ -22,7 +22,6 @@ try {
         $input = json_decode(file_get_contents('php://input'), true);
         $id = $input['id'];
         
-        // SQL DELETE užklausa
         $sql = "DELETE FROM " . $prefix['table_prefix'] . "_info_media_gallery_item WHERE id = ?";
         $stmt = $db->prepare($sql);
         $stmt->execute([$id]);

@@ -13,6 +13,8 @@ $createTable2 = "CREATE TABLE IF NOT EXISTS {$prefix['table_prefix']}_info_media
     id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     title TEXT DEFAULT NULL,
     media_description TEXT NOT NULL,
+    lang_en_title TEXT DEFAULT NULL,
+    lang_en_media_description TEXT DEFAULT NULL,
     hyperlink TEXT NOT NULL,
     media_file_id  int(11) DEFAULT NULL,
     id_info_media_gallery int(11) DEFAULT NULL,    

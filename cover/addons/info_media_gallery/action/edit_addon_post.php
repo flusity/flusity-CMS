@@ -39,9 +39,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         
         
         // Update gallery items
-        $sql = "UPDATE " . $prefix['table_prefix'] . "_info_media_gallery_item SET title = ?, media_description = ?, hyperlink = ?, media_file_id = ? WHERE id = ?";
+        //$sql = "UPDATE " . $prefix['table_prefix'] . "_info_media_gallery_item SET title = ?, media_description = ?, hyperlink = ?, media_file_id = ? WHERE id = ?";
+          $sql = "UPDATE " . $prefix['table_prefix'] . "_info_media_gallery_item SET title = ?, media_description = ?, lang_en_title = ?, lang_en_media_description = ?, hyperlink = ?, media_file_id = ? WHERE id = ?";
+
         $stmt = $db->prepare($sql);
-        $sql_insert = "INSERT INTO " . $prefix['table_prefix'] . "_info_media_gallery_item (title, media_description, hyperlink, media_file_id, id_info_media_gallery) VALUES (?, ?, ?, ?, ?)";
+        //$sql_insert = "INSERT INTO " . $prefix['table_prefix'] . "_info_media_gallery_item (title, media_description, hyperlink, media_file_id, id_info_media_gallery) VALUES (?, ?, ?, ?, ?)";
+          $sql_insert = "INSERT INTO " . $prefix['table_prefix'] . "_info_media_gallery_item (title, media_description, lang_en_title, lang_en_media_description, hyperlink, media_file_id, id_info_media_gallery) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+        
         $stmt_insert = $db->prepare($sql_insert);
         foreach ($_POST['media_title'] as $i => $title) {
             $media_description = $_POST['media_desc'][$i];
@@ -50,10 +55,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             
             if (isset($_POST['item_id'][$i])) {
                 $item_id = $_POST['item_id'][$i];
-                $stmt->execute([$title, $media_description, $hyperlink, $image_id, $item_id]);
-                
+                $lang_en_title = $_POST['lang_en_title'][$i]; // Naujas
+                $lang_en_media_description = $_POST['lang_en_media_description'][$i]; // Naujas
+                $stmt->execute([$title, $media_description, $lang_en_title, $lang_en_media_description, $hyperlink, $image_id, $item_id]);
             } else {
-                $stmt_insert->execute([$title, $media_description, $hyperlink, $image_id, $addon_post_edit_id]);
+                $stmt_insert->execute([$title, $media_description, $_POST['lang_en_title'][$i], $_POST['lang_en_media_description'][$i], $hyperlink, $image_id, $addon_post_edit_id]); // Nauji parametrai įterpti
             }
         }
 
