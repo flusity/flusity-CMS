@@ -27,6 +27,15 @@
         displayAddButton($menu_id);
         echo createPagination($url, $total_urls);        
         ?>
+        <?php 
+                        $page_url = getCurrentPageUrl($db, $prefix);
+                        if ($page_url) {
+                            displayPlace($db, $prefix, $page_url, 'home-content-bottom');
+
+                        } else {
+                            print "";
+                        }
+                        ?>
             </div>
             <div class="col">
                 <div class="col-md-12">     
