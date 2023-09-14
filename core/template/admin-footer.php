@@ -31,6 +31,11 @@
 </div>
    <!--  <script src="<?php $_SERVER['DOCUMENT_ROOT']; ?>/assets/ckeditor/ckeditor.js"></script>  -->
  <script>
+  var translations = <?php echo json_encode(getTranslations($db, $prefix, 'lt')); ?>;
+
+function t(key) {
+  return translations[key] || key;
+}
 
 $(document).on('click', '.badge', function() {
     $(".badge").click(function() {
