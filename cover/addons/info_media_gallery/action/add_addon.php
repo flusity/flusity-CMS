@@ -20,10 +20,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $gallery_css_style_settings = $_POST['gallery_css_style_settings'];
     $place_id = $_POST['addon_place_id'];
     $menu_id = $_POST['addon_menu_id'];
+    $img_w = $_POST['img_w'];
     $addon_id = $id;
 
     try {
-        $sql_gallery = "INSERT INTO " . $prefix['table_prefix'] . "_info_media_gallery (gallery_name, gallery_css_style_settings, menu_id, place_id, addon_id) VALUES (:gallery_name, :gallery_css_style_settings, :menu_id, :place_id, :addon_id)";
+        $sql_gallery = "INSERT INTO " . $prefix['table_prefix'] . "_info_media_gallery (gallery_name, gallery_css_style_settings, menu_id, place_id, addon_id, img_w) VALUES (:gallery_name, :gallery_css_style_settings, :menu_id, :place_id, :addon_id, :img_w)";
         $stmt_gallery = $db->prepare($sql_gallery);
 
         $stmt_gallery->bindParam(':gallery_name', $gallery_name, PDO::PARAM_STR);
@@ -31,7 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt_gallery->bindParam(':menu_id', $menu_id, PDO::PARAM_INT);
         $stmt_gallery->bindParam(':place_id', $place_id, PDO::PARAM_INT);
         $stmt_gallery->bindParam(':addon_id', $addon_id, PDO::PARAM_INT);
-
+        $stmt_gallery->bindParam(':img_w', $img_w, PDO::PARAM_INT);  // Naujas bindParam
+       
         if ($stmt_gallery->execute()) {
             $id_info_media_gallery = $db->lastInsertId(); // get the last inserted id
         }

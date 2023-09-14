@@ -82,8 +82,12 @@ if ($mode === 'create' || $addon) { ?>
                     <option value="light" <?php echo $mode === 'edit' && $addon['gallery_css_style_settings'] === 'light' ? 'selected' : ''; ?>><?php echo t('Light');?></option>
                 </select>
             </div>
-            <div class="col-md-4" style="margin-top: 32px;"> 
-            <button type="button"  style="min-height: 38px;" onclick="addFields()"><?php echo t("Add/Edit image & description"); ?></button>
+            <div class="col-md-2 mb-3">    
+                    <label for="FormControlInput_image_width" class="form-label"><?php echo t('Image Width');?></label>
+                    <input type="text" class="form-control" name="img_w" id="FormControlInput_image_width" placeholder="Width px" value="<?php echo $mode === 'edit' ? htmlspecialchars($addon['img_w']) : ''; ?>" >
+            </div>
+            <div class="col-md-2" style="margin-top: 32px;"> 
+            <button type="button"  style="min-height: 38px;" onclick="addFields()"><?php echo t("+ image & description"); ?></button>
             </div>
             </div>
         

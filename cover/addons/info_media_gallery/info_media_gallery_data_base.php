@@ -1,13 +1,16 @@
 <?php
 
-$createTable1 = "CREATE TABLE IF NOT EXISTS {$prefix['table_prefix']}_info_media_gallery (id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-gallery_name TEXT DEFAULT NULL,
-gallery_css_style_settings TEXT NOT NULL,
-menu_id int(11) DEFAULT NULL,
-place_id int(11) DEFAULT NULL,
-addon_id int(11) DEFAULT NULL,
-created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)";
+$createTable1 = "CREATE TABLE IF NOT EXISTS {$prefix['table_prefix']}_info_media_gallery (
+    id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    gallery_name TEXT DEFAULT NULL,
+    gallery_css_style_settings TEXT NOT NULL,
+    menu_id int(11) DEFAULT NULL,
+    place_id int(11) DEFAULT NULL,
+    addon_id int(11) DEFAULT NULL,
+    img_w INT DEFAULT NULL,
+    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+)";
 
 $createTable2 = "CREATE TABLE IF NOT EXISTS {$prefix['table_prefix']}_info_media_gallery_item (
     id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
