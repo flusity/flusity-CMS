@@ -23,19 +23,26 @@
         <div class="row">
             <div class="col-md-10 col-lg-8 mx-auto">
             <?php 
+            $page_url = getCurrentPageUrl($db, $prefix);
+            if ($page_url) {
+                displayPlace($db, $prefix, $page_url, 'home-content-top');
+
+            } else {
+                print "";
+            }
+            
         displayPosts($posts);
         displayAddButton($menu_id);
         echo createPagination($url, $total_urls);        
-        ?>
-        <?php 
-                        $page_url = getCurrentPageUrl($db, $prefix);
-                        if ($page_url) {
-                            displayPlace($db, $prefix, $page_url, 'home-content-bottom');
+         
+            $page_url = getCurrentPageUrl($db, $prefix);
+            if ($page_url) {
+                displayPlace($db, $prefix, $page_url, 'home-content-bottom');
 
-                        } else {
-                            print "";
-                        }
-                        ?>
+            } else {
+                print "";
+            }
+            ?>
             </div>
             <div class="col">
                 <div class="col-md-12">     
