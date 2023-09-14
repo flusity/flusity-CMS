@@ -274,6 +274,7 @@ if ($mode === 'create' || $addon) { ?>
 <?php  } else { echo t("No such record exists"); } ?>
 
 <script>
+
     function deleteAddonGallery(addonId) {
         $.ajax({
             type: 'POST',
@@ -328,8 +329,10 @@ function addFields() {
     const containerDiv = document.createElement("div");
 
     const mediaItemLabel = document.createElement("p");
-    mediaItemLabel.className = "media-item-label";
-    mediaItemLabel.innerHTML = `Media Item ${divs.length + 1}`;
+    mediaItemLabel.className = "media-item-label"; 
+    var mediaItem = t('Media item&nbsp;'); 
+    mediaItemLabel.innerHTML = `${mediaItem}${divs.length + 1}`;
+
 
     const titleRowDiv = document.createElement("div");
     titleRowDiv.className = "form-row d-flex justify-content-between";
@@ -342,7 +345,7 @@ function addFields() {
 
     const titleLabel = document.createElement("label");
     titleLabel.setAttribute("for", `FormControlInput_media_title_${counter}`);
-    titleLabel.innerHTML = "Title";
+    titleLabel.innerHTML = t("Title");
 
     const titleInputGroup = document.createElement("div");
     titleInputGroup.className = "d-flex align-items-center";
@@ -352,7 +355,7 @@ function addFields() {
     titleInput.className = "form-control";
     titleInput.name = `media_title[]`; 
     titleInput.id = `FormControlInput_media_title_${counter}`;
-    titleInput.placeholder = "Title";
+    titleInput.placeholder = t("Title");
     titleInput.required = true;
     
 
@@ -361,7 +364,7 @@ function addFields() {
     otherLanguageDiv.className = "form-group";
 
     const otherLanguageLabel = document.createElement("label");
-    otherLanguageLabel.innerHTML = "Next Language";
+    otherLanguageLabel.innerHTML = t("Next Language");
 
     const otherLanguageAccordion = document.createElement("div");
     otherLanguageAccordion.className = "accordion accordion-flush mb-3";
@@ -381,7 +384,7 @@ function addFields() {
     accordionButton.dataset.bsTarget = `#flush-collapseOne_${counter}`;
     accordionButton.setAttribute("aria-expanded", "false");
     accordionButton.setAttribute("aria-controls", `flush-collapseOne_${counter}`);
-    accordionButton.innerHTML = "Add content in another language";
+    accordionButton.innerHTML = t("Add content in another language");
 
     accordionHeader.appendChild(accordionButton);
 
@@ -394,18 +397,16 @@ function addFields() {
     const accordionBody = document.createElement("div");
     accordionBody.className = "accordion-body";
 
-    // Čia galite pridėti laukus "Other Language Title" ir "Other Language Description"
-    // Pavyzdžiui:
     const otherLanguageTitleInput = document.createElement("input");
     otherLanguageTitleInput.type = "text";
     otherLanguageTitleInput.className = "form-control";
     otherLanguageTitleInput.name = `lang_en_title[]`;
-    otherLanguageTitleInput.placeholder = "Other language title";
+    otherLanguageTitleInput.placeholder = t("Other language title");
 
     const otherLanguageDescInput = document.createElement("textarea");
     otherLanguageDescInput.className = "form-control";
     otherLanguageDescInput.name = `lang_en_description[]`;
-    otherLanguageDescInput.placeholder = "Other language description";
+    otherLanguageDescInput.placeholder = t("Other language description");
 
     accordionBody.appendChild(otherLanguageTitleInput);
     accordionBody.appendChild(otherLanguageDescInput);
@@ -432,7 +433,7 @@ function addFields() {
     imageSelectButton.style.marginLeft = "10px";
 
     const imageText = document.createElement("span");
-    imageText.innerHTML = "+ Image";
+    imageText.innerHTML = t("+ Image");
     imageSelectButton.appendChild(imageText);
 
     imageSelectButton.onclick = (function(localCounter) {
@@ -453,7 +454,7 @@ function addFields() {
     
     const removeButton = document.createElement("button");
     removeButton.type = "button";
-    removeButton.innerHTML = "Remove";
+    removeButton.innerHTML = t("Remove");
     removeButton.className = "btn btn-danger";
     removeButton.onclick = function() {
         removeFields(containerDiv);
@@ -465,20 +466,20 @@ function addFields() {
     titleRowDiv.appendChild(buttonColDiv);
 
     const urlLabel = document.createElement("label");
-    urlLabel.innerHTML = "URL link";
+    urlLabel.innerHTML = t("URL link");
     const urlInput = document.createElement("input");
     urlInput.type = "text";
     urlInput.className = "form-control";
     urlInput.name = `media_url[]`; /// masyvas
-    urlInput.placeholder = "URL link";
+    urlInput.placeholder = t("URL link");
     urlInput.required = true;
 
     const descLabel = document.createElement("label");
-    descLabel.innerHTML = "Description";
+    descLabel.innerHTML = t("Description");
     const descInput = document.createElement("textarea");
     descInput.className = "form-control";
     descInput.name = `media_desc[]`;   /// masyvas
-    descInput.placeholder = "Description";
+    descInput.placeholder = t("Description");
     descInput.required = true;
 
     containerDiv.appendChild(mediaItemLabel);
