@@ -19,7 +19,7 @@ CREATE TABLE `flussi_files` (
   `url` varchar(255) NOT NULL,
   `uploaded_at` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS flussi_menu;
 
@@ -45,7 +45,7 @@ CREATE TABLE `flussi_places` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS flussi_posts;
 
@@ -115,7 +115,7 @@ CREATE TABLE `flussi_tjd_addons` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `show_front` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 DROP TABLE IF EXISTS flussi_translations;
 
@@ -125,7 +125,7 @@ CREATE TABLE `flussi_translations` (
   `translation_key` varchar(255) NOT NULL,
   `translation_value` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=225 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=227 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 DROP TABLE IF EXISTS flussi_users;
 
@@ -153,13 +153,44 @@ CREATE TABLE `flussi_v_custom_blocks` (
   `place_id` int(10) unsigned DEFAULT NULL,
   `html_code` text DEFAULT NULL,
   `lang_custom_name` text DEFAULT NULL,
-  `lang_custom_content` text DEFAULT NULL,
-  `updated` datetime DEFAULT current_timestamp(),
-  `created` datetime DEFAULT current_timestamp(),
+  `lang_custom_content` text NOT NULL,
+  `updated` datetime DEFAULT NULL,
+  `created` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `menu_id` (`menu_id`),
   KEY `place_id` (`place_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+DROP TABLE IF EXISTS info_media_gallery;
+
+CREATE TABLE `info_media_gallery` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `gallery_name` text DEFAULT NULL,
+  `gallery_css_style_settings` text NOT NULL,
+  `menu_id` int(11) DEFAULT NULL,
+  `place_id` int(11) DEFAULT NULL,
+  `addon_id` int(11) DEFAULT NULL,
+  `img_w` int(11) DEFAULT NULL,
+  `created` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+DROP TABLE IF EXISTS info_media_gallery_item;
+
+CREATE TABLE `info_media_gallery_item` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` text DEFAULT NULL,
+  `media_description` text NOT NULL,
+  `lang_en_title` text DEFAULT NULL,
+  `lang_en_media_description` text DEFAULT NULL,
+  `hyperlink` text NOT NULL,
+  `media_file_id` int(11) DEFAULT NULL,
+  `id_info_media_gallery` int(11) DEFAULT NULL,
+  `created` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 DROP TABLE IF EXISTS jd_simple_zer;
 
@@ -204,13 +235,14 @@ INSERT INTO flussi_files VALUES("23","7646653_f9f1c35fca142b93.jpg","http://loca
 INSERT INTO flussi_files VALUES("24","flusity-b_a252d067e7fe12f7_019b936138264d1f.png","http://localhost/uploads/flusity-b_a252d067e7fe12f7_019b936138264d1f.png","2023-08-09 23:05:49");
 INSERT INTO flussi_files VALUES("25","facebook-1_d00a2bd3f98d49c6.png","http://localhost/uploads/facebook-1_d00a2bd3f98d49c6.png","2023-08-27 16:39:00");
 INSERT INTO flussi_files VALUES("26","github_c1b0e9c17264fee5.png","http://localhost/uploads/github_c1b0e9c17264fee5.png","2023-08-27 20:28:37");
+INSERT INTO flussi_files VALUES("27","image1_05f051a9605edf83.jpg","http://localhost/uploads/image1_05f051a9605edf83.jpg","2023-09-13 07:10:57");
+INSERT INTO flussi_files VALUES("28","image2_17dc230bc4563906.jpg","http://localhost/uploads/image2_17dc230bc4563906.jpg","2023-09-13 07:11:10");
 
 
 
 INSERT INTO flussi_menu VALUES("6","HOMES",NULL,"index","1","template_index","2023-04-16 15:35:26","2023-06-20 22:59:31","1","0");
 INSERT INTO flussi_menu VALUES("12","Contact","Kontaktai","contacts","2","template_contacts","2023-04-21 17:28:01","2023-08-17 15:00:59","1","0");
 INSERT INTO flussi_menu VALUES("20","LOGIN",NULL,"login","3","template_login_form","2023-08-08 19:03:28","2023-08-17 12:39:10","0","0");
-INSERT INTO flussi_menu VALUES("30","fdd","dfd","ffffd","4","template_right_content","2023-08-23 20:37:46","2023-08-23 20:37:59","1","12");
 
 
 
@@ -221,11 +253,16 @@ INSERT INTO flussi_places VALUES("13","footer-col4-2","2023-07-13 15:10:09","202
 INSERT INTO flussi_places VALUES("14","footer-col4-3","2023-07-13 15:10:13","2023-07-13 15:10:13");
 INSERT INTO flussi_places VALUES("15","head-pulse-animated","2023-08-07 22:45:30","2023-08-07 22:45:30");
 INSERT INTO flussi_places VALUES("16","right-my-history","2023-08-07 22:48:00","2023-08-07 22:48:00");
+INSERT INTO flussi_places VALUES("17","home-content-bottom","2023-09-13 17:09:16","2023-09-13 17:09:16");
 
 
 
-INSERT INTO flussi_posts VALUES("2","New attempt","&lt;p&gt;&lt;b&gt;Lorem&lt;/b&gt; ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;\n\n\n\n&lt;img src=&quot;uploads/pexels-dominika-roseclay_2b7dd92bc8d188b4_b6617d36205e378a.jpg&quot; title=&quot; &quot; alt=&quot; &quot; width=&quot;250px&quot; height=&quot;auto&quot; align=&quot;left&quot; hspace=&quot;15&quot; vspace=&quot;15&quot;/&gt;\n\n\n\n&lt;p&gt;Aliquam ultricies justo ut purus efficitur, eleifend pellentesque risus cursus. Maecenas ex massa, sagittis id metus non, convallis scelerisque ligula. Vivamus aliquam risus accumsan lacinia eleifend. Nunc vestibulum massa a mauris egestas, quis sollicitudin est posuere. Duis lobortis tincidunt leo, vitae condimentum odio mollis at. Nullam mollis lobortis erat, lobortis mollis mi commodo ac. Nunc in lectus vitae mauris imperdiet varius in id neque. Vestibulum orci risus, posuere in velit eget, ullamcorper convallis augue. Mauris nulla dui, iaculis ac ultrices quis, scelerisque a libero.&lt;/p&gt;",NULL,NULL,"2","admin","2023-01-01 11:03:58","published","6",NULL,"2023-08-22 19:52:14","Flusity is a contemporary PHP CMS project utilizing MVC architecture, MySQL database, and Bootstrap front-end framework. It includes the management of users, posts, menu, blocks and other elements, as well as security and SEO features.","free cms flusity, php cms, cms, website","1");
-INSERT INTO flussi_posts VALUES("16","Lorem ipsum dolor sit","&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut consequuntur magnam, excepturi aliquid ex itaque esse est vero natus quae optio aperiam soluta voluptatibus corporis atque iste neque sit tempora!&lt;/p&gt;","Lorem ipsum dolor sit LT","&lt;p&gt;LT Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut consequuntur magnam, excepturi aliquid ex itaque esse est vero natus quae optio aperiam soluta voluptatibus corporis atque iste neque sit tempora!&lt;/p&gt;","1","admin","2023-08-08 19:51:48","published","6","word","2023-08-14 17:38:44",NULL,NULL,"0");
+INSERT INTO flussi_posts VALUES("2","New attempt","&lt;p&gt;&lt;b&gt;Lorem&lt;/b&gt; ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;
+\n
+\n&lt;img src=&quot;uploads/pexels-dominika-roseclay_2b7dd92bc8d188b4_b6617d36205e378a.jpg&quot; title=&quot; &quot; alt=&quot; &quot; width=&quot;250px&quot; height=&quot;auto&quot; align=&quot;left&quot; hspace=&quot;15&quot; vspace=&quot;15&quot;/&gt;
+\n
+\n&lt;p&gt;Aliquam ultricies justo ut purus efficitur, eleifend pellentesque risus cursus. Maecenas ex massa, sagittis id metus non, convallis scelerisque ligula. Vivamus aliquam risus accumsan lacinia eleifend. Nunc vestibulum massa a mauris egestas, quis sollicitudin est posuere. Duis lobortis tincidunt leo, vitae condimentum odio mollis at. Nullam mollis lobortis erat, lobortis mollis mi commodo ac. Nunc in lectus vitae mauris imperdiet varius in id neque. Vestibulum orci risus, posuere in velit eget, ullamcorper convallis augue. Mauris nulla dui, iaculis ac ultrices quis, scelerisque a libero.&lt;/p&gt;",NULL,NULL,"2","admin","2023-01-01 11:03:58","published","6",NULL,"2023-08-22 19:52:14","Flusity is a contemporary PHP CMS project utilizing MVC architecture, MySQL database, and Bootstrap front-end framework. It includes the management of users, posts, menu, blocks and other elements, as well as security and SEO features.","free cms flusity, php cms, cms, website","1");
+INSERT INTO flussi_posts VALUES("16","Lorem ipsum dolor sit","&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut consequuntur magnam, excepturi aliquid ex itaque esse est vero natus quae optio aperiam soluta voluptatibus corporis atque iste neque sit tempora!&lt;/p&gt;","Lorem ipsum dolor sit LT","&lt;p&gt;LT Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut consequuntur magnam, excepturi aliquid ex itaque esse est vero natus quae optio aperiam soluta voluptatibus corporis atque iste neque sit tempora!&lt;/p&gt;","1","admin","2023-08-08 19:51:48","published","6","word","2023-09-09 06:13:44",NULL,NULL,"0");
 
 
 
@@ -251,6 +288,7 @@ INSERT INTO flussi_sidebar VALUES("13","Language","fas fa-language","/core/tools
 
 INSERT INTO flussi_tjd_addons VALUES("14","jd_simple_zer","This test addon","1","1v","JD Flusite Zer","2023-08-08 19:52:26","2023-08-08 19:52:37","1");
 INSERT INTO flussi_tjd_addons VALUES("16","social_block_links","Social block links addon","1","1v","JD Flusite","2023-09-01 13:53:39","2023-09-01 13:53:45","1");
+INSERT INTO flussi_tjd_addons VALUES("19","info_media_gallery","Gallery info with description","1","1v","JD Flusity","2023-09-13 21:40:54","2023-09-13 21:40:59","1");
 
 
 
@@ -473,6 +511,8 @@ INSERT INTO flussi_translations VALUES("218","lt","Contact","Kontaktai");
 INSERT INTO flussi_translations VALUES("219","lt","HOMES","Pagrindinis");
 INSERT INTO flussi_translations VALUES("223","it","HOMES","CASA");
 INSERT INTO flussi_translations VALUES("224","it","Dashboard","Pannello");
+INSERT INTO flussi_translations VALUES("225","lt","Media item&nbsp;","Žiniasklaidos elementas&nbsp;");
+INSERT INTO flussi_translations VALUES("226","lt","Gallery name","Galerijos pavadinimas");
 
 
 
@@ -480,16 +520,27 @@ INSERT INTO flussi_users VALUES("1","Tester","Admin","tester","8615523111","test
 
 
 
-INSERT INTO flussi_v_custom_blocks VALUES("36","testing area","0","12","test area content",NULL,NULL,"2023-09-05 14:29:15","2023-09-13 19:33:08");
-INSERT INTO flussi_v_custom_blocks VALUES("38",NULL,"6","15"," &lt;h1 class=&quot;pulse animated&quot;&gt;Your Website&lt;/h1&gt;&lt;span class=&quot;pulse animated subheading&quot;&gt;This is your web&lt;/span&gt;",NULL," &lt;h1 class=&quot;pulse animated&quot;&gt;Your Website&lt;/h1&gt;&lt;span class=&quot;pulse animated subheading&quot;&gt;This is your web En&lt;/span&gt;","2023-09-04 11:18:25","2023-09-03 04:18:35");
+INSERT INTO flussi_v_custom_blocks VALUES("36","testing area","0","12","test area content",NULL,NULL,"2023-09-05 18:55:20","2023-09-13 19:33:08");
+INSERT INTO flussi_v_custom_blocks VALUES("38",NULL,"6","15"," &lt;h1 class=&quot;pulse animated&quot;&gt;Your Website&lt;/h1&gt;&lt;span class=&quot;pulse animated subheading&quot;&gt;This is your web&lt;/span&gt;",NULL," &lt;h1 class=&quot;pulse animated&quot;&gt;Your Website&lt;/h1&gt;&lt;span class=&quot;pulse animated subheading&quot;&gt;This is your web En&lt;/span&gt;",NULL,NULL);
 
 
 
-INSERT INTO jd_simple_zer VALUES("1","My History","Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.","My History tes","Testas test test test","http://localhost/uploads/jd_simple_zer_img/7646653_f9f1c35fca142b93.jpg","7646653_f9f1c35fca142b93.jpg","contacts","6","16","14","2023-08-08 20:00:50","2023-09-05 14:31:00");
+INSERT INTO info_media_gallery VALUES("1","testas 2","light","6","17","19","400","2023-09-13 21:42:37","2023-09-14 18:11:50");
 
 
 
-INSERT INTO social_block_links VALUES("14","Facebook,Github","https://facebook.com,https://github.com/","&lt;span class=&quot;fa-stack fa-lg&quot;&gt;&lt;i class=&quot;fa fa-circle fa-stack-2x&quot;&gt;&lt;/i&gt;&lt;i class=&quot;fa fa-facebook fa-stack-1x fa-inverse&quot;&gt;&lt;/i&gt;&lt;/span&gt;,&lt;span class=&quot;fa-stack fa-lg&quot;&gt;&lt;i class=&quot;fa fa-circle fa-stack-2x&quot;&gt;&lt;/i&gt;&lt;i class=&quot;fa fa-github fa-stack-1x fa-inverse&quot;&gt;&lt;/i&gt;&lt;/span&gt;","0","14","16","2023-09-01 19:44:28","2023-09-05 14:31:04");
+INSERT INTO info_media_gallery_item VALUES("1","tess","Kas yra Lorem Ipsum?
+\nLorem ipsum - tai fiktyvus tekstas naudojamas spaudos ir grafinio dizaino pasaulyje jau nuo XVI a. pradžios. Lorem Ipsum tapo standartiniu fiktyviu tekstu, kai nežinomas spaustuvininkas atsitiktine tvarka išdėliojo raides atspaudų prese ir tokiu būdu sukūrė raidžių egzempliorių. Šis tekstas išliko beveik nepasikeitęs ne tik penkis amžius, bet ir įžengė i kopiuterinio grafinio dizaino laikus. Jis išpopuliarėjo XX a. šeštajame dešimtmetyje, kai buvo išleisti Letraset lapai su Lorem Ipsum ištraukomis, o vėliau -leidybinė sistema AldusPageMaker, kurioje buvo ir Lorem Ipsum versija.","ccccc 3","bbbbbbbbb 4","dfgsd4444","27","1","2023-09-13 21:42:37","2023-09-13 22:13:19");
+INSERT INTO info_media_gallery_item VALUES("2","tesssrrr","Kas yra Lorem Ipsum?
+\nLorem ipsum - tai fiktyvus tekstas naudojamas spaudos ir grafinio dizaino pasaulyje jau nuo XVI a. pradžios. Lorem Ipsum tapo standartiniu fiktyviu tekstu, kai nežinomas spaustuvininkas atsitiktine tvarka išdėliojo raides atspaudų prese ir tokiu būdu sukūrė raidžių egzempliorių. Šis tekstas išliko beveik nepasikeitęs ne tik penkis amžius, bet ir įžengė i kopiuterinio grafinio dizaino laikus. Jis išpopuliarėjo XX a. šeštajame dešimtmetyje, kai buvo išleisti Letraset lapai su Lorem Ipsum ištraukomis, o vėliau -leidybinė sistema AldusPageMaker, kurioje buvo ir Lorem Ipsum versija.","aaaaaaaaa 1","uuuuuuuuuuuu 8","dfgsd777","28","1","2023-09-13 21:42:37","2023-09-13 22:12:43");
+
+
+
+INSERT INTO jd_simple_zer VALUES("1","My History","Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.","My History tes","Testas test test test","http://localhost/uploads/jd_simple_zer_img/7646653_f9f1c35fca142b93.jpg","7646653_f9f1c35fca142b93.jpg","contacts","6","16","14","2023-08-08 20:00:50","2023-09-14 16:46:12");
+
+
+
+INSERT INTO social_block_links VALUES("14","Facebook,Github","https://facebook.com,https://github.com/","&lt;span class=&quot;fa-stack fa-lg&quot;&gt;&lt;i class=&quot;fa fa-circle fa-stack-2x&quot;&gt;&lt;/i&gt;&lt;i class=&quot;fa fa-facebook fa-stack-1x fa-inverse&quot;&gt;&lt;/i&gt;&lt;/span&gt;,&lt;span class=&quot;fa-stack fa-lg&quot;&gt;&lt;i class=&quot;fa fa-circle fa-stack-2x&quot;&gt;&lt;/i&gt;&lt;i class=&quot;fa fa-github fa-stack-1x fa-inverse&quot;&gt;&lt;/i&gt;&lt;/span&gt;","0","14","16","2023-09-01 19:44:28","2023-09-09 05:37:18");
 INSERT INTO social_block_links VALUES("15","dfg","https://fbbbb.com","&lt;a&gt;dfgdfgfdgfdg&lt;/a&gt;","0","7","16","2023-09-04 20:25:39","2023-09-04 20:25:39");
 
 
