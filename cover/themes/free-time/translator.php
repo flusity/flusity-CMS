@@ -1,4 +1,12 @@
 <?php
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
+/* error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ */
+
+//require_once $_SERVER['DOCUMENT_ROOT'] . '/core/functions/core/media_function.php';
 
 $selected_lang = isset($_SESSION['lang']) ? $_SESSION['lang'] : $lang_code;
 
@@ -18,6 +26,22 @@ $translations_it = array(
      'repeat' => 'Ripeti?'
 );
 
+$translations_lt = array(
+    'contact_us' => 'Susisiekime',
+     'interesting_theme' => 'Dominanti tema',
+     'your_email' => 'Jūsį el. paštas',
+     'message' => 'Žinutė',
+     'human_check' => 'Patikrinama ar esate žmogus',
+     'drag_answer' => 'Vilkite atsakymą čia',
+     'send' => 'Siųsti',
+     'dashboard' => 'Prietaisų skydelis',
+     'profile' => 'Profilis',
+     'signout' => 'Atsijungti',
+     '404_tropic'=> 'Jūs nuklydote į atogrąžų nežinią! Nieko čia nepamatysi.',
+     '404_return_home'=>'Spustelėkite <a href="/">čia</a>, kad grįžtumėte į pagrindinį puslapį.',
+     'repeat' => 'Kartoti?'
+);
+
 $translations_en = array(
     'contact_us' => 'Contact Us',
     'interesting_theme' => 'Interesting Theme',
@@ -34,5 +58,9 @@ $translations_en = array(
     'repeat' => 'Repeat?'
 );
 
-$translations = ($selected_lang == 'it') ? $translations_it : $translations_en;
+
+$translations_ = isset($translations_) ? $translations_ : []; 
+
+$translations = ($selected_lang == $lang_code) ? array_merge($translations_, ${"translations_" . $lang_code}) : $translations_en;
+
 ?>
