@@ -45,7 +45,7 @@ CREATE TABLE `flussi_places` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS flussi_posts;
 
@@ -142,7 +142,7 @@ CREATE TABLE `flussi_users` (
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `login_name` (`login_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 DROP TABLE IF EXISTS flussi_v_custom_blocks;
 
@@ -254,14 +254,11 @@ INSERT INTO flussi_places VALUES("14","footer-col4-3","2023-07-13 15:10:13","202
 INSERT INTO flussi_places VALUES("15","head-pulse-animated","2023-08-07 22:45:30","2023-08-07 22:45:30");
 INSERT INTO flussi_places VALUES("16","right-my-history","2023-08-07 22:48:00","2023-08-07 22:48:00");
 INSERT INTO flussi_places VALUES("17","home-content-bottom","2023-09-13 17:09:16","2023-09-13 17:09:16");
+INSERT INTO flussi_places VALUES("18","home-content-top","2023-09-14 21:30:50","2023-09-14 21:30:50");
 
 
 
-INSERT INTO flussi_posts VALUES("2","New attempt","&lt;p&gt;&lt;b&gt;Lorem&lt;/b&gt; ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;
-\n
-\n&lt;img src=&quot;uploads/pexels-dominika-roseclay_2b7dd92bc8d188b4_b6617d36205e378a.jpg&quot; title=&quot; &quot; alt=&quot; &quot; width=&quot;250px&quot; height=&quot;auto&quot; align=&quot;left&quot; hspace=&quot;15&quot; vspace=&quot;15&quot;/&gt;
-\n
-\n&lt;p&gt;Aliquam ultricies justo ut purus efficitur, eleifend pellentesque risus cursus. Maecenas ex massa, sagittis id metus non, convallis scelerisque ligula. Vivamus aliquam risus accumsan lacinia eleifend. Nunc vestibulum massa a mauris egestas, quis sollicitudin est posuere. Duis lobortis tincidunt leo, vitae condimentum odio mollis at. Nullam mollis lobortis erat, lobortis mollis mi commodo ac. Nunc in lectus vitae mauris imperdiet varius in id neque. Vestibulum orci risus, posuere in velit eget, ullamcorper convallis augue. Mauris nulla dui, iaculis ac ultrices quis, scelerisque a libero.&lt;/p&gt;",NULL,NULL,"2","admin","2023-01-01 11:03:58","published","6",NULL,"2023-08-22 19:52:14","Flusity is a contemporary PHP CMS project utilizing MVC architecture, MySQL database, and Bootstrap front-end framework. It includes the management of users, posts, menu, blocks and other elements, as well as security and SEO features.","free cms flusity, php cms, cms, website","1");
+INSERT INTO flussi_posts VALUES("2","New attempt","&lt;p&gt;&lt;b&gt;Lorem&lt;/b&gt; ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;\n\n\n\n&lt;img src=&quot;uploads/pexels-dominika-roseclay_2b7dd92bc8d188b4_b6617d36205e378a.jpg&quot; title=&quot; &quot; alt=&quot; &quot; width=&quot;250px&quot; height=&quot;auto&quot; align=&quot;left&quot; hspace=&quot;15&quot; vspace=&quot;15&quot;/&gt;\n\n\n\n&lt;p&gt;Aliquam ultricies justo ut purus efficitur, eleifend pellentesque risus cursus. Maecenas ex massa, sagittis id metus non, convallis scelerisque ligula. Vivamus aliquam risus accumsan lacinia eleifend. Nunc vestibulum massa a mauris egestas, quis sollicitudin est posuere. Duis lobortis tincidunt leo, vitae condimentum odio mollis at. Nullam mollis lobortis erat, lobortis mollis mi commodo ac. Nunc in lectus vitae mauris imperdiet varius in id neque. Vestibulum orci risus, posuere in velit eget, ullamcorper convallis augue. Mauris nulla dui, iaculis ac ultrices quis, scelerisque a libero.&lt;/p&gt;",NULL,NULL,"2","admin","2023-01-01 11:03:58","published","6",NULL,"2023-08-22 19:52:14","Flusity is a contemporary PHP CMS project utilizing MVC architecture, MySQL database, and Bootstrap front-end framework. It includes the management of users, posts, menu, blocks and other elements, as well as security and SEO features.","free cms flusity, php cms, cms, website","1");
 INSERT INTO flussi_posts VALUES("16","Lorem ipsum dolor sit","&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut consequuntur magnam, excepturi aliquid ex itaque esse est vero natus quae optio aperiam soluta voluptatibus corporis atque iste neque sit tempora!&lt;/p&gt;","Lorem ipsum dolor sit LT","&lt;p&gt;LT Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut consequuntur magnam, excepturi aliquid ex itaque esse est vero natus quae optio aperiam soluta voluptatibus corporis atque iste neque sit tempora!&lt;/p&gt;","1","admin","2023-08-08 19:51:48","published","6","word","2023-09-09 06:13:44",NULL,NULL,"0");
 
 
@@ -525,18 +522,16 @@ INSERT INTO flussi_v_custom_blocks VALUES("38",NULL,"6","15"," &lt;h1 class=&quo
 
 
 
-INSERT INTO info_media_gallery VALUES("1","testas 2","light","6","17","19","400","2023-09-13 21:42:37","2023-09-14 18:11:50");
+INSERT INTO info_media_gallery VALUES("1","testas 2","light","6","16","19","400","2023-09-13 21:42:37","2023-09-14 18:17:26");
 
 
 
-INSERT INTO info_media_gallery_item VALUES("1","tess","Kas yra Lorem Ipsum?
-\nLorem ipsum - tai fiktyvus tekstas naudojamas spaudos ir grafinio dizaino pasaulyje jau nuo XVI a. pradžios. Lorem Ipsum tapo standartiniu fiktyviu tekstu, kai nežinomas spaustuvininkas atsitiktine tvarka išdėliojo raides atspaudų prese ir tokiu būdu sukūrė raidžių egzempliorių. Šis tekstas išliko beveik nepasikeitęs ne tik penkis amžius, bet ir įžengė i kopiuterinio grafinio dizaino laikus. Jis išpopuliarėjo XX a. šeštajame dešimtmetyje, kai buvo išleisti Letraset lapai su Lorem Ipsum ištraukomis, o vėliau -leidybinė sistema AldusPageMaker, kurioje buvo ir Lorem Ipsum versija.","ccccc 3","bbbbbbbbb 4","dfgsd4444","27","1","2023-09-13 21:42:37","2023-09-13 22:13:19");
-INSERT INTO info_media_gallery_item VALUES("2","tesssrrr","Kas yra Lorem Ipsum?
-\nLorem ipsum - tai fiktyvus tekstas naudojamas spaudos ir grafinio dizaino pasaulyje jau nuo XVI a. pradžios. Lorem Ipsum tapo standartiniu fiktyviu tekstu, kai nežinomas spaustuvininkas atsitiktine tvarka išdėliojo raides atspaudų prese ir tokiu būdu sukūrė raidžių egzempliorių. Šis tekstas išliko beveik nepasikeitęs ne tik penkis amžius, bet ir įžengė i kopiuterinio grafinio dizaino laikus. Jis išpopuliarėjo XX a. šeštajame dešimtmetyje, kai buvo išleisti Letraset lapai su Lorem Ipsum ištraukomis, o vėliau -leidybinė sistema AldusPageMaker, kurioje buvo ir Lorem Ipsum versija.","aaaaaaaaa 1","uuuuuuuuuuuu 8","dfgsd777","28","1","2023-09-13 21:42:37","2023-09-13 22:12:43");
+INSERT INTO info_media_gallery_item VALUES("1","tess","Kas yra Lorem Ipsum?\n\nLorem ipsum - tai fiktyvus tekstas naudojamas spaudos ir grafinio dizaino pasaulyje jau nuo XVI a. pradžios. Lorem Ipsum tapo standartiniu fiktyviu tekstu, kai nežinomas spaustuvininkas atsitiktine tvarka išdėliojo raides atspaudų prese ir tokiu būdu sukūrė raidžių egzempliorių. Šis tekstas išliko beveik nepasikeitęs ne tik penkis amžius, bet ir įžengė i kopiuterinio grafinio dizaino laikus. Jis išpopuliarėjo XX a. šeštajame dešimtmetyje, kai buvo išleisti Letraset lapai su Lorem Ipsum ištraukomis, o vėliau -leidybinė sistema AldusPageMaker, kurioje buvo ir Lorem Ipsum versija.","ccccc 3","bbbbbbbbb 4","dfgsd4444","27","1","2023-09-13 21:42:37","2023-09-13 22:13:19");
+INSERT INTO info_media_gallery_item VALUES("2","tesssrrr","Kas yra Lorem Ipsum?\n\nLorem ipsum - tai fiktyvus tekstas naudojamas spaudos ir grafinio dizaino pasaulyje jau nuo XVI a. pradžios. Lorem Ipsum tapo standartiniu fiktyviu tekstu, kai nežinomas spaustuvininkas atsitiktine tvarka išdėliojo raides atspaudų prese ir tokiu būdu sukūrė raidžių egzempliorių. Šis tekstas išliko beveik nepasikeitęs ne tik penkis amžius, bet ir įžengė i kopiuterinio grafinio dizaino laikus. Jis išpopuliarėjo XX a. šeštajame dešimtmetyje, kai buvo išleisti Letraset lapai su Lorem Ipsum ištraukomis, o vėliau -leidybinė sistema AldusPageMaker, kurioje buvo ir Lorem Ipsum versija.","aaaaaaaaa 1","uuuuuuuuuuuu 8","dfgsd777","28","1","2023-09-13 21:42:37","2023-09-13 22:12:43");
 
 
 
-INSERT INTO jd_simple_zer VALUES("1","My History","Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.","My History tes","Testas test test test","http://localhost/uploads/jd_simple_zer_img/7646653_f9f1c35fca142b93.jpg","7646653_f9f1c35fca142b93.jpg","contacts","6","16","14","2023-08-08 20:00:50","2023-09-14 16:46:12");
+INSERT INTO jd_simple_zer VALUES("1","My History","Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.","My History tes","Testas test test test","http://localhost/uploads/jd_simple_zer_img/7646653_f9f1c35fca142b93.jpg","7646653_f9f1c35fca142b93.jpg","contacts","6","16","14","2023-08-08 20:00:50","2023-09-14 20:26:00");
 
 
 
