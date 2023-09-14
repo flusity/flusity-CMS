@@ -153,7 +153,7 @@ CREATE TABLE `flussi_v_custom_blocks` (
   `place_id` int(10) unsigned DEFAULT NULL,
   `html_code` text DEFAULT NULL,
   `lang_custom_name` text DEFAULT NULL,
-  `lang_custom_content` text NOT NULL,
+  `lang_custom_content` text DEFAULT NULL,
   `updated` datetime DEFAULT NULL,
   `created` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
