@@ -5,9 +5,6 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 /* error_reporting(E_ALL);
 ini_set('display_errors', 1);
  */
-
-//require_once $_SERVER['DOCUMENT_ROOT'] . '/core/functions/core/media_function.php';
-
 $selected_lang = isset($_SESSION['lang']) ? $_SESSION['lang'] : $lang_code;
 
 $translations_it = array(
