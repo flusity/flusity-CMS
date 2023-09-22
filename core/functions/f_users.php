@@ -117,23 +117,25 @@
             session_start();
         }
     
-        if (!isset($_SESSION['user_id'])) {
-            return;
-        }
-    
         if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > $inactive)) {
-    
+            
+            // Įsimename norimą puslapį prieš sesiją užbaigiant
             $requested_url = $_SERVER['REQUEST_URI'];
-    
+            
             session_unset();
             session_destroy();
-            session_start();  
+            session_start();  // Pradėkite naują sesiją, kad galėtumėte įrašyti norimą URL
     
             $_SESSION['requested_url'] = $requested_url;
     
-            $redirect_login = $base_url . "/login"; 
-            header("Location: " . $redirect_login);
-            exit;
+            if (isset($requested_url)) {
+                header("Location: " . $base_url . $requested_url);
+                exit;
+            } else {
+                $redirect_home = $base_url . "/index.php"; 
+                header("Location: " . $redirect_home);
+                exit;
+            }
         }
     
         $_SESSION['last_activity'] = time();
