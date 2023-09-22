@@ -281,11 +281,13 @@ function getSettings($db, $prefix) {
         
                 if (file_exists($viewPath)) {
                     $addon = $item;
-                    require ($viewPath);
+                    require_once ($viewPath);
                 }
                 echo '</div>';
             }
         }
+        
+        
     
         if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
         echo '
@@ -310,6 +312,8 @@ function getSettings($db, $prefix) {
         }
         echo '</div>';
     }
+    
+    
 
     function getDataFromDatabase($db, $prefix, $page_url, $place_id) {
 
