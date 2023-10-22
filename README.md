@@ -1,7 +1,7 @@
 # flusity CMS
  <p>100% completion</p>
  
- ![banner](http://manowebas.lt/wp-content/uploads/2023/06/flusity-b.png) v 2.392
+ ![banner](https://www.flusity.com) v 2.392
  
  <h4> Flusity - tai unikalus pavadinimas, kuris atspindi misiją. Jis kilo iš "flussi" ir "city" žodžių, simbolizuojančių duomenų srauto ir plėtros koncepcijas, viską sujungiant į harmoningą "miestą", kuriame viskas juda laisvai ir efektyviai.</h4>
 
@@ -126,18 +126,9 @@ Considering these elements and functions, the website is a convenient and functi
    <p>Login to system user:  Demo User Name: Tester and password: 1234 ,The project is still ongoing, it is planned to add more functionalities</p>
    <br>
    
-Author's address http://www.manowebas.lt
+Author's address https://www.flusity.com
  
-Autoriaus adresas http://www.manowebas.lt
-![banner](http://manowebas.lt/wp-content/uploads/2023/06/dashboard.jpg)
-![banner](http://manowebas.lt/wp-content/uploads/2023/06/log-ser.jpg)
-![banner](http://manowebas.lt/wp-content/uploads/2023/06/rg-user.jpg)
-![banner](http://manowebas.lt/wp-content/uploads/2023/06/users-system.jpg)
-![banner](http://manowebas.lt/wp-content/uploads/2023/06/settings.jpg)
-![banner](http://manowebas.lt/wp-content/uploads/2023/06/posts-system.jpg)
-![banner](http://manowebas.lt/wp-content/uploads/2023/06/files-system.jpg)
-![banner](http://manowebas.lt/wp-content/uploads/2023/06/front.jpg)
-
+Autoriaus adresas https://www.flusity.com
 
 
 
