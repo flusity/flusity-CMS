@@ -5,6 +5,8 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 /* error_reporting(E_ALL);
 ini_set('display_errors', 1);
  */
+
+
 $selected_lang = isset($_SESSION['lang']) ? $_SESSION['lang'] : $lang_code;
 
 $translations_it = array(

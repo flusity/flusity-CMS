@@ -1,0 +1,149 @@
+/*Calendar*/
+.calendar {
+    display: flex;
+    flex-flow: column;
+}
+.calendar .header .month-year {
+    font-size: 20px;
+    font-weight: bold;
+    color: #636e73;
+    padding: 20px 0;
+}
+.calendar .days {
+    display: flex;
+    flex-flow: wrap;
+}
+.calendar .days .day_name {
+    width: calc(100% / 7);
+    border-right: 1px solid #1b2632;
+    padding: 20px;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: bold;
+    color: #818589;
+    color: #fff;
+    background-color: #43505d;
+}
+.calendar .days .day_name:nth-child(7) {
+    border: none;
+}
+.calendar .days .day_num {
+    display: flex;
+    flex-flow: column;
+    width: calc(100% / 7);
+    border-right: 1px solid #e6e9ea;
+    border-bottom: 1px solid #e6e9ea;
+    padding: 3px;
+    font-weight: bold;
+    color: #7c878d;
+    cursor: pointer;
+     aspect-ratio: 1 / 1; /*  min-height: 100px; */
+    
+}
+.calendar .days .day_num span {
+    display: inline-flex;
+    width: 30px;
+    font-size: 14px;
+}
+.calendar .days .day_num .event {
+    margin-top: 2px;
+    font-weight: 300;
+    font-size: 14px;
+    padding: 2px 4px;
+    border-radius: 2px;
+    background-color: #f7c30d;
+    color: #fff;
+    word-wrap: break-word;
+}
+.calendar .days .day_num .event.green {
+    background-color: #51ce57;
+}
+.calendar .days .day_num .event.blue {
+    background-color: #518fce;
+}
+.calendar .days .day_num .event.red {
+    background-color: #ce5151;
+}
+.calendar .days .day_num:nth-child(7n+1) {
+    border-left: 1px solid #e6e9ea;
+}
+.calendar .days .day_num:hover {
+    background-color: #fdfdfd;
+}
+.calendar .days .day_num.ignore {
+    background-color: #fdfdfd;
+    color: #ced2d4;
+    cursor: inherit;
+}
+.calendar .days .day_num.selected {
+    background-color: #f1f2f3;
+    cursor: inherit;
+}
+.calendar .day_num.weekend {
+  background-color: lightyellow;
+}
+
+.modal-view {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    opacity: 0;
+    pointer-events: none; 
+    transition: opacity 0.5s ease;
+    overflow-y: auto; 
+}
+
+
+.modal-content {
+    margin: 5% auto;
+    padding: 20px;
+    width: 60%;
+    background-color: #fff;
+     /*max-height: 80vh; Maksimalus aukštis 80% ekrano aukščio */
+    overflow-y: auto; /* Slankjuostė, jei reikia */
+    height: auto;
+}
+
+.close-event {
+    color: #939393;
+    float: right;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.modal-view.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Stilius akordeonui */
+.accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+}
+
+.active, .accordion:hover {
+    background-color: #ccc; 
+}
+
+.panel {
+    padding: 0 18px;
+    display: none;
+    background-color: white;
+    overflow: hidden;
+}
+#eventDate{
+    line-height: 1.5;
+    margin: 10px 0;
+}

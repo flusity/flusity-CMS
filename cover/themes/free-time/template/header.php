@@ -21,6 +21,7 @@
     <link rel="stylesheet" type="text/css"  href="<?php echo getThemePath($db, $prefix, 'assets/css/Footer-Multi-Column-icons.css'); ?>">
     <link rel="stylesheet" type="text/css"  href="<?php echo getThemePath($db, $prefix, 'assets/css/main.css'); ?>"> 
     <link rel="stylesheet" type="text/css"  href="<?php echo getThemePath($db, $prefix, 'css/site.css'); ?>">
+    <link rel="stylesheet" type="text/css"  href="<?php echo getThemePath($db, $prefix, 'css/callendar.css'); ?>">
     <?php printAllAddonsAssets('head'); ?>
     <script src="/assets/dist/js/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="/assets/dist/js/ui/1.12.1/themes/base/jquery-ui.css">
