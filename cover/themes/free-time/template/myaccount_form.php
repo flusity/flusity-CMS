@@ -4,7 +4,7 @@
     }
 /*
  @MiniFrame css karkasas Lic GNU
- Author Darius Jakaitis, author web site http://www.manowebas.lt
+ Author Darius Jakaitis, author web site https://www.flusity.com
  fix-content
 */
 ?>

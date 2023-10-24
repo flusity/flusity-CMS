@@ -4,7 +4,7 @@
         
 /*
  @ flusity
- Author Darius Jakaitis, author web site http://www.manowebas.lt
+ Author Darius Jakaitis, author web site https://www.flusity.com
 */  
  ?>
 <?php require_once 'menu-horizontal.php';?>
