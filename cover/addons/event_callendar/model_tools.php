@@ -260,7 +260,6 @@ if ($mode === 'create' || $addon) { ?>
                                     <option value="purple">Purple</option>
                                     <option value="pink">Pink</option>
                                     <option value="brown">Brown</option>
-                                    <option value="grey">Grey</option>
                                     <option value="teal">Teal</option>
                                     <option value="cyan">Cyan</option>
                                     <option value="magenta">Magenta</option>
