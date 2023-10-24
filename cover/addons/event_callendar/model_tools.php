@@ -190,22 +190,23 @@ if ($mode === 'create' || $addon) { ?>
             </tbody>
             </table> 
             <div class="form-group row p-2">  
-                <h3>Create Holiday</h3>
+                <h3><?php echo t('Create Holiday'); ?></h3>
             <form action="add_holiday.php" method="post">             
                 <select name="month">
                     <option value="" disabled selected><?php echo t('Month'); ?></option>
-                    <option value="1">Sausis</option>
-                    <option value="2">Vasaris</option>
-                    <option value="3">Kovas</option>
-                    <option value="4">Balandis</option>
-                    <option value="5">Gegužė</option>
-                    <option value="6">Birželis</option>
-                    <option value="7">Liepa</option>
-                    <option value="8">Rugpjūtis</option>
-                    <option value="9">Rugsėjis</option>
-                    <option value="10">Spalis</option>
-                    <option value="11">Lapkritis</option>
-                    <option value="12">Gruodis</option>
+                    <option value="1"><?php echo t('January'); ?></option>
+                    <option value="2"><?php echo t('February'); ?></option>
+                    <option value="3"><?php echo t('March'); ?></option>
+                    <option value="4"><?php echo t('April'); ?></option>
+                    <option value="5"><?php echo t('May'); ?></option>
+                    <option value="6"><?php echo t('June'); ?></option>
+                    <option value="7"><?php echo t('July'); ?></option>
+                    <option value="8"><?php echo t('August'); ?></option>
+                    <option value="9"><?php echo t('September'); ?></option>
+                    <option value="10"><?php echo t('October'); ?></option>
+                    <option value="11"><?php echo t('November'); ?></option>
+                    <option value="12"><?php echo t('December'); ?></option>
+
                 </select>
                                   
                 <select name="holiday">
@@ -221,7 +222,7 @@ if ($mode === 'create' || $addon) { ?>
 
 
             <div class="form-group row p-2">
-            <h3>All Holidays</h3>
+            <h3><?php echo t('All Holidays'); ?></h3>
 
             </div>
         </div>
