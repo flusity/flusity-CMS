@@ -3,8 +3,8 @@
     session_start();
     }
     /*
-    @MiniFrame css karkasas Lic GNU
-    Author Darius Jakaitis, author web site http://www.manowebas.lt
+    @flusity 
+    Author Darius Jakaitis, author web site https://flusity.com
     fix-content
     */
     require_once 'core/functions/functions.php';
@@ -34,12 +34,12 @@
     if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
         echo '<link rel="stylesheet" href="/core/tools/css/edit.css">';
     }
-?>
 
-<?php require_once getThemePath($db, $prefix, 'template/myaccount_form.php'); ?>
-      
-<?php require_once getThemePath($db, $prefix, '/template/footer.php'); 
-if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
-    echo '<script src="/core/template/js/edit.js"></script>';
+require_once getThemePath($db, $prefix, 'template/myaccount_form.php');
+require_once getThemePath($db, $prefix, '/template/footer.php'); 
+if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {echo '<script src="/core/template/js/editable.js"></script>
+    <script src="/core/template/js/edit.js"></script>';
 }
 ?>
+</body>
+</html>

@@ -1,7 +1,7 @@
 <?php
 /*
  @CMS flusity
- Author Darius Jakaitis, author web site http://www.flusity.com
+ Author Darius Jakaitis, author web site https://www.flusity.com
 */
 
 if (session_status() !== PHP_SESSION_ACTIVE) {
