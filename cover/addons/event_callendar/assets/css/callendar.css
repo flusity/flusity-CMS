@@ -1,0 +1,224 @@
+/*Calendar*/
+.calendar {
+    display: flex;
+    flex-flow: column;
+}
+.calendar .header .month-year {
+    font-size: 20px;
+    font-weight: bold;
+    color: #636e73;
+    padding: 20px 0;
+}
+.calendar .days {
+    display: flex;
+    flex-flow: wrap;
+}
+.calendar .days .day_name {
+    width: calc(100% / 7);
+    border-right: 1px solid #1b2632;
+    padding: 20px;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: bold;
+    color: #818589;
+    color: #fff;
+    background-color: #43505d;
+}
+.calendar .days .day_name:nth-child(7) {
+    border: none;
+}
+.calendar .days .day_num {
+    display: flex;
+    flex-flow: column;
+    width: calc(100% / 7);
+    border-right: 1px solid #e6e9ea;
+    border-bottom: 1px solid #e6e9ea;
+    padding: 3px;
+    font-weight: bold;
+    color: #7c878d;
+    cursor: pointer;
+     aspect-ratio: 1 / 1; /*  min-height: 100px; */
+    
+}
+.calendar .days .day_num span {
+    display: inline-flex;
+    width: 30px;
+    font-size: 18px;
+}
+.calendar .days .day_num .event {
+    margin-top: 2px;
+    font-weight: 300;
+    font-size: 18px;
+    padding: 1px 4px;
+    border-radius: 1px;
+    background-color: #7a7a7a97;
+    min-height: 40px;
+    color: #fff;
+    word-wrap: break-word;
+}
+.calendar .days .day_num .event .gray {
+    margin-top: 2px;
+    font-weight: 300;
+    font-size: 16px;
+    padding: 2px 4px;
+    border-radius: 1px;
+    background-color: #7a7a7a97;
+    color: #fff;
+    word-wrap: break-word;
+}
+
+.calendar .days .day_num .event.green {
+    background-color: #51ce57;
+    min-height: 40px;
+}
+.calendar .days .day_num .event.blue {
+    background-color: #518fce;
+    min-height: 40px;
+}
+.calendar .days .day_num .event.red {
+    background-color: #ce5151;
+    min-height: 40px;
+}
+.calendar .days .day_num .event.yellow {
+    background-color: #c8c511;
+    min-height: 40px;
+}
+.calendar .days .day_num:nth-child(7n+1) {
+    border-left: 1px solid #e6e9ea;
+}
+.calendar .days .day_num:hover {
+    background-color: #fdfdfd;
+}
+.calendar .days .day_num.ignore {
+    background-color: #fdfdfd;
+    color: #ced2d4;
+    cursor: inherit;
+}
+.calendar .days .day_num.selected {
+    background-color: #f1f2f3;
+    cursor: pointer;
+}
+.calendar .day_num.weekend {
+  background-color: lightyellow;
+}
+.calendar .days .day_num.past {
+    cursor: not-allowed; 
+}
+.modal-view {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    opacity: 0;
+    pointer-events: none; 
+    transition: opacity 0.5s ease;
+    overflow-y: auto; 
+}
+
+button.callendar-accordion.accordion{
+    font-size:18px;
+}
+
+.modal-content {
+    margin: 5% auto;
+    padding: 20px;
+    width: 60%;
+    background-color: #fff;
+     /*max-height: 80vh; 
+    overflow-y: auto; */
+    height: auto;
+}
+
+.close-event:hover {
+    color: #942121;
+    font-size: 48px;
+    margin-top:-8px; 
+    margin-bottom: -32px;
+}
+
+.close-event {
+    color: #d95353;
+    float: right;
+    font-size: 38px;
+    cursor: pointer;
+    margin-bottom: -25px;
+}
+
+.modal-view.show-mdl {
+    opacity: 1;
+    pointer-events: auto;
+}
+.modal-view:not(.show-mdl) {
+    opacity: 0;
+    pointer-events: none;
+}
+/* Stilius akordeonui */
+.accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+}
+.accordion-event-image {
+    width: 100%;  
+    max-height: 250px;  
+    object-fit: cover;  
+}
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.flex-item-left {
+    width: 39%;
+}
+
+.flex-item-right {
+    width: 59%;
+}
+
+.active, .accordion:hover {
+    background-color: #c5c0c0; 
+}
+.active, .accordion.button-accordion-color-open:hover{
+    background-color:#81ee86b0;
+}
+
+a.callendar-prev, a.callendar-next {
+    color: #51ce57;
+    font-size: 36px;
+  }
+  
+  a.callendar-prev:hover, a.callendar-next:hover {
+    color: #3c58e4;
+  }
+   
+.span-title{
+    font-size:18px;
+}
+.float-right {
+    float: right;
+}
+.accordion .fa {
+    font-size: 28px;  
+    color:#518fce;
+}
+
+.panel {
+    padding: 0 18px;
+    display: none;
+    background-color: white;
+    overflow: hidden;
+}
+#eventDate{
+    line-height: 1.5;
+    margin: 10px 0;
+}
