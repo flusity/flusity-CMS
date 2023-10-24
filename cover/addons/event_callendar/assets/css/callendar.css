@@ -83,6 +83,69 @@
     background-color: #c8c511;
     min-height: 40px;
 }
+
+.calendar .days .day_num .event.orange {
+    background-color: #FFA500;
+    min-height: 40px;
+}
+.calendar .days .day_num .event.purple {
+    background-color: #800080;
+    min-height: 40px;
+}
+.calendar .days .day_num .event.pink {
+    background-color: #FFC0CB;
+    min-height: 40px;
+}
+.calendar .days .day_num .event.brown {
+    background-color: #A52A2A;
+    min-height: 40px;
+}
+
+.calendar .days .day_num .event.teal {
+    background-color: #008080;
+    min-height: 40px;
+}
+.calendar .days .day_num .event.cyan {
+    background-color: #00FFFF;
+    min-height: 40px;
+}
+.calendar .days .day_num .event.magenta {
+    background-color: #FF00FF;
+    min-height: 40px;
+}
+.calendar .days .day_num .event.gold {
+    background-color: #FFD700;
+    min-height: 40px;
+}
+.calendar .days .day_num .event.silver {
+    background-color: #C0C0C0;
+    min-height: 40px;
+}
+.calendar .days .day_num .event.navy {
+    background-color: #000080;
+    min-height: 40px;
+}
+.calendar .days .day_num .event.lime {
+    background-color: #00FF00;
+    min-height: 40px;
+}
+.calendar .days .day_num .event.indigo {
+    background-color: #4B0082;
+    min-height: 40px;
+}
+.calendar .days .day_num .event.beige {
+    background-color: #F5F5DC;
+    min-height: 40px;
+}
+.calendar .days .day_num .event.maroon {
+    background-color: #800000;
+    min-height: 40px;
+}
+.calendar .days .day_num .event.olive {
+    background-color: #808000;
+    min-height: 40px;
+}
+
 .calendar .days .day_num:nth-child(7n+1) {
     border-left: 1px solid #e6e9ea;
 }
