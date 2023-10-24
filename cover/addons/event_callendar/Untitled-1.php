@@ -21,11 +21,11 @@ $addon = $mode === 'edit' ? getAddonById($db, $prefix, $name_addon, $addonId) : 
 $selectedMenuId = ($mode === 'edit' && $addon) ? $addon['menu_id'] : $addonMenuId;
 
 if ($mode === 'create' || $addon) { ?>
-<div class="col-md-12">
+
     <h4>
         <?php echo t('Addon JD Flusity \'Event Callendar\' ');?>
     </h4>
-    
+
         <ul class="nav nav-tabs  mt-2">
             <li class="nav-item tabs-nav-item">
                 <a class="nav-link active" data-bs-toggle="tab" href="#calendar">
@@ -37,11 +37,13 @@ if ($mode === 'create' || $addon) { ?>
                     <?php echo t("Coordinators of activities");?>
                 </a>
             </li>
+          
 
         </ul>
-<div class="tab-content">  
+        
+        <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="calendar">
-         <div class="form-group row p-2">
+        <div class="form-group row p-2">
             <form id="update-addon-form" method="POST"
                 action="../../cover/addons/event_callendar/action/<?php echo $mode === 'edit' ? 'edit_addon_post.php' : 'add_addon.php'; ?>"
                 enctype="multipart/form-data" class="col-md-10">
@@ -50,7 +52,7 @@ if ($mode === 'create' || $addon) { ?>
                 <input type="hidden" class="form-control" name="id" value="<?php echo $id; ?>">
 
                 <?php if($addonId >0): ?>
-                    <div class="form-group row p-2">
+                <div class="form-group row p-2">
                     <div class="col-md-4 mb-3">
                         <label for="addon_place_id"><?php echo t('Place');?></label>
                         <select class="form-control" id="addon_place_id" name="addon_place_id" required>
@@ -125,12 +127,8 @@ if ($mode === 'create' || $addon) { ?>
                             class="btn btn-secondary">
                             <?php echo t('Cancel');?>
                         </a>
-                        <?php endif; ?>
+                        <?php endif; endif; ?>
                     </div>
-                    </div>
-
-                    <?php  endif; ?>
-
 
                     <table class="table table-sm">
                         <thead>
@@ -189,24 +187,39 @@ if ($mode === 'create' || $addon) { ?>
             </form>
             </tbody>
             </table> 
-            <div class="form-group row p-2">  
-                <h3><?php echo t('Create Holiday'); ?></h3>
+     
+<?php
+    $stmt = $db->prepare("SELECT * FROM " . $prefix['table_prefix'] . "_event_callendar WHERE addon_id = :id");
+    $stmt->bindParam(':id', $_GET['id'], PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    $calendaries = $result['id'];
+
+    $stmt = $db->prepare("SELECT * FROM " . $prefix['table_prefix'] . "_event_callendar_laboratories WHERE callendar_id = :addon_id");
+    $stmt->bindParam(':addon_id', $calendaries, PDO::PARAM_INT);
+    $stmt->execute();
+    $laboratoryResults = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
+
+<div class="form-group row p-2">  
+                <h3>Create Holiday</h3>
             <form action="add_holiday.php" method="post">             
                 <select name="month">
                     <option value="" disabled selected><?php echo t('Month'); ?></option>
-                    <option value="1"><?php echo t('January'); ?></option>
-                    <option value="2"><?php echo t('February'); ?></option>
-                    <option value="3"><?php echo t('March'); ?></option>
-                    <option value="4"><?php echo t('April'); ?></option>
-                    <option value="5"><?php echo t('May'); ?></option>
-                    <option value="6"><?php echo t('June'); ?></option>
-                    <option value="7"><?php echo t('July'); ?></option>
-                    <option value="8"><?php echo t('August'); ?></option>
-                    <option value="9"><?php echo t('September'); ?></option>
-                    <option value="10"><?php echo t('October'); ?></option>
-                    <option value="11"><?php echo t('November'); ?></option>
-                    <option value="12"><?php echo t('December'); ?></option>
-
+                    <option value="1">Sausis</option>
+                    <option value="2">Vasaris</option>
+                    <option value="3">Kovas</option>
+                    <option value="4">Balandis</option>
+                    <option value="5">Gegužė</option>
+                    <option value="6">Birželis</option>
+                    <option value="7">Liepa</option>
+                    <option value="8">Rugpjūtis</option>
+                    <option value="9">Rugsėjis</option>
+                    <option value="10">Spalis</option>
+                    <option value="11">Lapkritis</option>
+                    <option value="12">Gruodis</option>
                 </select>
                                   
                 <select name="holiday">
@@ -222,20 +235,20 @@ if ($mode === 'create' || $addon) { ?>
 
 
             <div class="form-group row p-2">
-            <h3><?php echo t('All Holidays'); ?></h3>
+            <h3>All Holidays</h3>
 
             </div>
         </div>
-
     </div>
 </div>
-  
-          
-            <div class="tab-pane fade" id="coordinators">
-              <div class="form-group row p-2">
+         
+              
+<div class="tab-pane fade" id="coordinators">
+    <div class="form-group row p-2">
                 <h3>
                     <?php echo t('Cabinet heads'); ?>
                 </h3>
+
                 <div class="accordion accordion-flush" id="accordionFlushExample">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="flush-headingOne">
@@ -260,6 +273,7 @@ if ($mode === 'create' || $addon) { ?>
                                     <option value="purple">Purple</option>
                                     <option value="pink">Pink</option>
                                     <option value="brown">Brown</option>
+                                    <option value="grey">Grey</option>
                                     <option value="teal">Teal</option>
                                     <option value="cyan">Cyan</option>
                                     <option value="magenta">Magenta</option>
@@ -276,7 +290,7 @@ if ($mode === 'create' || $addon) { ?>
                                 <select name="new_manager_id[]" multiple="multiple" id="managerSelect" data-placeholder="<?php echo t('Select Managers...'); ?>">
                                     
                                     <?php
-                                    $stmt = $db->prepare("SELECT id, username FROM " . $prefix['table_prefix'] . "_flussi_users WHERE role IN ('admin', 'moderator')");
+                                    $stmt = $db->prepare("SELECT id, username FROM tren_flussi_users WHERE role IN ('admin', 'moderator')");
                                     $stmt->execute();
                                     $managers = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     foreach ($managers as $manager) {
@@ -296,16 +310,6 @@ if ($mode === 'create' || $addon) { ?>
                     </div>
                 </div>
 
-                <?php
-                    $stmt = $db->prepare("SELECT * FROM " . $prefix['table_prefix'] . "_event_callendar WHERE addon_id = :id");
-                    $stmt->bindParam(':id', $_GET['id'], PDO::PARAM_INT);
-                    $stmt->execute();
-                    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-                    
-                        $calendaries = $result['id'];
-                ?>
-
-                
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -332,14 +336,8 @@ if ($mode === 'create' || $addon) { ?>
                             </th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <?php
-
-    $stmt = $db->prepare("SELECT * FROM " . $prefix['table_prefix'] . "_event_callendar_laboratories WHERE callendar_id = :addon_id");
-    $stmt->bindParam(':addon_id', $calendaries, PDO::PARAM_INT);
-    $stmt->execute();
-    $laboratoryResults = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+                <tbody>
+<?php
     $counter = 1; 
 
     foreach ($laboratoryResults as $laboratory) {
@@ -375,19 +373,17 @@ if ($mode === 'create' || $addon) { ?>
                     </tbody>
                 </table>
             </div>
-  
         </div>
-        </div>
-        </div>
-
+    </div>
+      
 <?php  } else { 
     echo t("No such record exists");
  } ?>
-
-<script>
+<script type="text/javascript">
     $(document).ready(function() {
         $('#managerSelect').select2();
     });
+
     function deleteAddon(addonId) {
         $.ajax({
             type: 'POST',
