@@ -189,42 +189,74 @@ if ($mode === 'create' || $addon) { ?>
             </form>
             </tbody>
             </table> 
-            <div class="form-group row p-2">  
+            <div class="form-group row p-2"> 
+ <?php
+    $monthNames = array(
+        1 => 'January',
+        2 => 'February',
+        3 => 'March',
+        4 => 'April',
+        5 => 'May',
+        6 => 'June',
+        7 => 'July',
+        8 => 'August',
+        9 => 'September',
+        10 => 'October',
+        11 => 'November',
+        12 => 'December',
+    );
+
+    $stmt = $db->prepare("SELECT * FROM " . $prefix['table_prefix'] . "_event_callendar_holidays");
+    $stmt->execute();
+    $holidays = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>        
+            
                 <h3><?php echo t('Create Holiday'); ?></h3>
-            <form action="add_holiday.php" method="post">             
-                <select name="month">
-                    <option value="" disabled selected><?php echo t('Month'); ?></option>
-                    <option value="1"><?php echo t('January'); ?></option>
-                    <option value="2"><?php echo t('February'); ?></option>
-                    <option value="3"><?php echo t('March'); ?></option>
-                    <option value="4"><?php echo t('April'); ?></option>
-                    <option value="5"><?php echo t('May'); ?></option>
-                    <option value="6"><?php echo t('June'); ?></option>
-                    <option value="7"><?php echo t('July'); ?></option>
-                    <option value="8"><?php echo t('August'); ?></option>
-                    <option value="9"><?php echo t('September'); ?></option>
-                    <option value="10"><?php echo t('October'); ?></option>
-                    <option value="11"><?php echo t('November'); ?></option>
-                    <option value="12"><?php echo t('December'); ?></option>
-
-                </select>
-                                  
-                <select name="holiday">
-                    <option value="" disabled selected><?php echo t('Day'); ?></option>
-                <?php for($i=1; $i<=31; $i++){?>
-                    <option value="<?php echo $i;?>"><?php echo $i;?></option>
-                    
-                    <?php }?>
-                </select>
-                <input type="text" name="holiday_name" placeholder="Holiday name">                         
-                <input type="submit" value="<?php echo t('Add Holiday'); ?>">
-            </form>
+                <form action="add_holiday.php" method="post">             
+                    <select name="month">
+                        <option value="" disabled selected><?php echo t('Month'); ?></option>
+                        <?php foreach ($monthNames as $key => $value): ?>
+                            <option value="<?php echo $key; ?>"><?php echo t($value); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                                            
+                    <select name="holiday">
+                        <option value="" disabled selected><?php echo t('Day'); ?></option>
+                        <?php for($i=1; $i<=31; $i++){ ?>
+                            <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                        <?php } ?>
+                    </select>
+                    <input type="text" name="holiday_name" placeholder="Holiday name">                         
+                    <input type="submit" value="<?php echo t('Add Holiday'); ?>">
+                </form>
 
 
-            <div class="form-group row p-2">
-            <h3><?php echo t('All Holidays'); ?></h3>
+    <div class="form-group row p-2">
+    <h3><?php echo t('All Holidays'); ?></h3>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th><?php echo t('Month'); ?></th>
+                <th><?php echo t('Day'); ?></th>
+                <th><?php echo t('Holiday Name'); ?></th>
+                <th><?php echo t('Actions'); ?></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($holidays as $holiday): ?>
+            <tr>
+                <td><?php echo htmlspecialchars($holiday['id']); ?></td>
+                <td><?php echo htmlspecialchars($monthNames[$holiday['month']]); ?></td>
+                <td><?php echo htmlspecialchars($holiday['holiday']); ?></td>
+                <td><?php echo htmlspecialchars($holiday['holiday_name']); ?></td>
+                <td><?php echo htmlspecialchars(" "); ?></td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
 
-            </div>
         </div>
 
     </div>
