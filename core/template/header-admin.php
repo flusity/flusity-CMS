@@ -28,12 +28,14 @@ if (isset($_SESSION['user_id'])) {
     $translations = getTranslations($db, $prefix, $language_code);
 
 } else {
-    header("Location: 404.php");
+    $baseUrl = getBaseUrl();
+    header("Location: " . $baseUrl . "/login.php");
     exit;
 }
 
 if (!checkUserRole($user_id, 'admin', $db, $prefix)) {
-    header("Location: 404.php");
+    $baseUrl = getBaseUrl();
+    header("Location: " . $baseUrl . "/404.php");
     exit;
 }
 ?>
@@ -50,6 +52,9 @@ if (!checkUserRole($user_id, 'admin', $db, $prefix)) {
     <script src="/assets/dist/js/jquery-3.6.0.min.js"></script>  
     <script src="/core/tools/js/admin-post-edit.js"></script> 
     <script src="/core/tools/js/admin-customblock-edit.js"></script>  
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
 <!--     <link type="text/css" href="/assets/ckeditor/sample/css/sample.css" rel="stylesheet" media="screen" /> -->
 </head>
 <body>
