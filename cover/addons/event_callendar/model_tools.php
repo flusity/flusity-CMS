@@ -236,7 +236,7 @@ if ($mode === 'create' || $addon) { ?>
     <table>
         <thead>
             <tr>
-                <th>No.</th>
+                <th><?php echo t('No.'); ?></th>
                 <th><?php echo t('Holiday month'); ?></th>
                 <th><?php echo t('Day'); ?></th>
                 <th><?php echo t('Holiday Name'); ?></th>
