@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 05, 2023 at 02:34 PM
+-- Generation Time: Oct 24, 2023 at 01:25 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -18,8 +18,165 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `weberis`
+-- Database: `ress`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `callendar_users_member`
+--
+
+CREATE TABLE `callendar_users_member` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `member_login_name` text NOT NULL,
+  `member_first_name` text NOT NULL,
+  `member_last_name` text NOT NULL,
+  `member_telephone` text NOT NULL,
+  `member_email` text NOT NULL,
+  `member_email_ok` int(11) DEFAULT NULL,
+  `member_institution` text DEFAULT NULL,
+  `member_address_institution` text DEFAULT NULL,
+  `member_invoice` text DEFAULT NULL,
+  `member_employee_position` text DEFAULT NULL,
+  `member_description` text DEFAULT NULL,
+  `created` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `event_callendar`
+--
+
+CREATE TABLE `event_callendar` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `callendar_name` text DEFAULT NULL,
+  `work_dayStart` time DEFAULT NULL,
+  `work_dayEnd` time DEFAULT NULL,
+  `lunch_breakStart` time DEFAULT NULL,
+  `lunch_breakEnd` time DEFAULT NULL,
+  `prepare_time` int(11) DEFAULT NULL,
+  `registration_end_date` varchar(255) DEFAULT NULL,
+  `menu_id` int(11) DEFAULT NULL,
+  `place_id` int(11) DEFAULT NULL,
+  `addon_id` int(11) DEFAULT NULL,
+  `created` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `event_callendar`
+--
+
+INSERT INTO `event_callendar` (`id`, `callendar_name`, `work_dayStart`, `work_dayEnd`, `lunch_breakStart`, `lunch_breakEnd`, `prepare_time`, `registration_end_date`, `menu_id`, `place_id`, `addon_id`, `created`, `updated`) VALUES
+(1, 'Registracija', '08:15:00', '16:45:00', '12:00:00', '13:00:00', 10, '1', 31, 19, 24, '2023-09-21 03:01:01', '2023-10-23 08:12:36');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `event_callendar_holidays`
+--
+
+CREATE TABLE `event_callendar_holidays` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `month` int(11) DEFAULT NULL,
+  `holiday` int(11) DEFAULT NULL,
+  `holiday_name` varchar(255) DEFAULT NULL,
+  `created` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `event_callendar_holidays`
+--
+
+INSERT INTO `event_callendar_holidays` (`id`, `month`, `holiday`, `holiday_name`, `created`, `updated`) VALUES
+(1, 10, 26, 'test', '2023-09-21 18:45:16', '2023-10-23 07:59:14'),
+(2, 10, 30, 'bandomas', '2023-09-21 18:45:16', '2023-10-23 07:59:18');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `event_callendar_item`
+--
+
+CREATE TABLE `event_callendar_item` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `laboratories_id` int(11) DEFAULT NULL,
+  `title` text NOT NULL,
+  `short_description` text DEFAULT NULL,
+  `methodical_material` text DEFAULT NULL,
+  `time_limit` int(11) DEFAULT NULL,
+  `target_audience` text DEFAULT NULL,
+  `metodic_file_id` int(11) DEFAULT NULL,
+  `image_id` int(11) DEFAULT NULL,
+  `created` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `event_callendar_item`
+--
+
+INSERT INTO `event_callendar_item` (`id`, `laboratories_id`, `title`, `short_description`, `methodical_material`, `time_limit`, `target_audience`, `metodic_file_id`, `image_id`, `created`, `updated`) VALUES
+(1, 1, 'Testuoju Pavadinima', 'Trumpas aprašymas', 'dgffg455', 180, '6-9', NULL, 27, '2023-09-21 15:27:16', '2023-09-23 08:00:10'),
+(2, 1, 'Trumpas ar koks pavadinimas', 'Trumpas aprašymas 2', '45nkjkjkbvbvbv', 90, '7-8', NULL, 28, '2023-09-21 15:27:16', '2023-09-22 20:27:45'),
+(3, 1, 'Bandomasis įrašas antraštei', 'testukas su kitu', 'bvbvbbvbv555', 45, '10-12', NULL, 27, '2023-09-21 17:50:05', '2023-10-04 06:36:35'),
+(4, 2, 'laboratorijos temos antraštė', 'Bandome trumpą aprašymą apie veiklos pobūdį', 'erertrte ertertrete  erterte e err', 45, '11-12', NULL, 28, '2023-09-21 18:36:58', '2023-09-22 20:27:55');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `event_callendar_laboratories`
+--
+
+CREATE TABLE `event_callendar_laboratories` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `callendar_id` int(11) DEFAULT NULL,
+  `event_name` text DEFAULT NULL,
+  `managers` varchar(255) DEFAULT NULL,
+  `when_event_will_start` date DEFAULT NULL,
+  `event_days` text NOT NULL,
+  `event_color` text DEFAULT NULL,
+  `created` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `event_callendar_laboratories`
+--
+
+INSERT INTO `event_callendar_laboratories` (`id`, `callendar_id`, `event_name`, `managers`, `when_event_will_start`, `event_days`, `event_color`, `created`, `updated`) VALUES
+(1, 1, 'Mechatronika', '1,22', '2023-10-15', '32', 'blue', '2023-09-21 03:12:48', '2023-10-23 07:56:32'),
+(2, 1, 'Gamtamokslinė', '1', '2023-10-15', '31', 'yellow', '2023-09-21 03:12:48', '2023-10-23 07:55:35'),
+(3, 1, 'Žalioji energetika', '1', '2023-10-15', '25', 'green', '2023-09-21 03:12:48', '2023-10-23 07:55:37');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `event_reservation_time`
+--
+
+CREATE TABLE `event_reservation_time` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `event_laboratory_id` int(11) DEFAULT NULL,
+  `event_item_id` int(11) DEFAULT NULL,
+  `reserve_event_time` time DEFAULT NULL,
+  `reserve_date` date DEFAULT NULL,
+  `reservation_description` text DEFAULT NULL,
+  `created` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `event_reservation_time`
+--
+
+INSERT INTO `event_reservation_time` (`id`, `event_laboratory_id`, `event_item_id`, `reserve_event_time`, `reserve_date`, `reservation_description`, `created`, `updated`) VALUES
+(6, 1, 2, '13:00:00', '2023-10-31', 'dfgsfdg', '2023-09-23 08:02:39', '2023-10-18 11:58:57'),
+(10, 1, 3, '09:10:00', '2023-10-31', 'dfgsfdg', '2023-09-23 08:02:39', '2023-10-18 11:59:00');
 
 -- --------------------------------------------------------
 
@@ -64,7 +221,9 @@ INSERT INTO `flussi_files` (`id`, `name`, `url`, `uploaded_at`) VALUES
 (23, '7646653_f9f1c35fca142b93.jpg', 'http://localhost/uploads/7646653_f9f1c35fca142b93.jpg', '2023-08-09 17:33:11'),
 (24, 'flusity-b_a252d067e7fe12f7_019b936138264d1f.png', 'http://localhost/uploads/flusity-b_a252d067e7fe12f7_019b936138264d1f.png', '2023-08-09 23:05:49'),
 (25, 'facebook-1_d00a2bd3f98d49c6.png', 'http://localhost/uploads/facebook-1_d00a2bd3f98d49c6.png', '2023-08-27 16:39:00'),
-(26, 'github_c1b0e9c17264fee5.png', 'http://localhost/uploads/github_c1b0e9c17264fee5.png', '2023-08-27 20:28:37');
+(26, 'github_c1b0e9c17264fee5.png', 'http://localhost/uploads/github_c1b0e9c17264fee5.png', '2023-08-27 20:28:37'),
+(27, 'image1_05f051a9605edf83.jpg', 'http://localhost/uploads/image1_05f051a9605edf83.jpg', '2023-09-13 07:10:57'),
+(28, 'image2_17dc230bc4563906.jpg', 'http://localhost/uploads/image2_17dc230bc4563906.jpg', '2023-09-13 07:11:10');
 
 -- --------------------------------------------------------
 
@@ -93,7 +252,7 @@ INSERT INTO `flussi_menu` (`id`, `name`, `lang_menu_name`, `page_url`, `position
 (6, 'HOMES', NULL, 'index', 1, 'template_index', '2023-04-16 12:35:26', '2023-06-20 19:59:31', 1, 0),
 (12, 'Contact', 'Kontaktai', 'contacts', 2, 'template_contacts', '2023-04-21 14:28:01', '2023-08-17 12:00:59', 1, 0),
 (20, 'LOGIN', NULL, 'login', 3, 'template_login_form', '2023-08-08 16:03:28', '2023-08-17 09:39:10', 0, 0),
-(30, 'fdd', 'dfd', 'ffffd', 4, 'template_right_content', '2023-08-23 17:37:46', '2023-08-23 17:37:59', 1, 12);
+(31, 'Callendar', 'Kalendorius', 'event-callendar', 4, 'template_callendar', '2023-09-16 11:18:26', '2023-09-16 11:18:26', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -119,7 +278,10 @@ INSERT INTO `flussi_places` (`id`, `name`, `created_at`, `updated_at`) VALUES
 (13, 'footer-col4-2', '2023-07-13 12:10:09', '2023-07-13 12:10:09'),
 (14, 'footer-col4-3', '2023-07-13 12:10:13', '2023-07-13 12:10:13'),
 (15, 'head-pulse-animated', '2023-08-07 19:45:30', '2023-08-07 19:45:30'),
-(16, 'right-my-history', '2023-08-07 19:48:00', '2023-08-07 19:48:00');
+(16, 'right-my-history', '2023-08-07 19:48:00', '2023-08-07 19:48:00'),
+(17, 'home-content-bottom', '2023-09-13 14:09:16', '2023-09-13 14:09:16'),
+(18, 'home-content-top', '2023-09-14 18:30:50', '2023-09-14 18:30:50'),
+(19, 'callendar-full-12', '2023-09-16 11:22:43', '2023-09-16 11:23:21');
 
 -- --------------------------------------------------------
 
@@ -151,7 +313,7 @@ CREATE TABLE `flussi_posts` (
 
 INSERT INTO `flussi_posts` (`id`, `title`, `content`, `lang_post_title`, `lang_post_content`, `author_id`, `role`, `created_at`, `status`, `menu_id`, `tags`, `updated_at`, `description`, `keywords`, `priority`) VALUES
 (2, 'New attempt', '&lt;p&gt;&lt;b&gt;Lorem&lt;/b&gt; ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;\n\n\n\n&lt;img src=&quot;uploads/pexels-dominika-roseclay_2b7dd92bc8d188b4_b6617d36205e378a.jpg&quot; title=&quot; &quot; alt=&quot; &quot; width=&quot;250px&quot; height=&quot;auto&quot; align=&quot;left&quot; hspace=&quot;15&quot; vspace=&quot;15&quot;/&gt;\n\n\n\n&lt;p&gt;Aliquam ultricies justo ut purus efficitur, eleifend pellentesque risus cursus. Maecenas ex massa, sagittis id metus non, convallis scelerisque ligula. Vivamus aliquam risus accumsan lacinia eleifend. Nunc vestibulum massa a mauris egestas, quis sollicitudin est posuere. Duis lobortis tincidunt leo, vitae condimentum odio mollis at. Nullam mollis lobortis erat, lobortis mollis mi commodo ac. Nunc in lectus vitae mauris imperdiet varius in id neque. Vestibulum orci risus, posuere in velit eget, ullamcorper convallis augue. Mauris nulla dui, iaculis ac ultrices quis, scelerisque a libero.&lt;/p&gt;', NULL, NULL, 2, 'admin', '2023-01-01 11:03:58', 'published', 6, NULL, '2023-08-22 16:52:14', 'Flusity is a contemporary PHP CMS project utilizing MVC architecture, MySQL database, and Bootstrap front-end framework. It includes the management of users, posts, menu, blocks and other elements, as well as security and SEO features.', 'free cms flusity, php cms, cms, website', 1),
-(16, 'Lorem ipsum dolor sit', '&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut consequuntur magnam, excepturi aliquid ex itaque esse est vero natus quae optio aperiam soluta voluptatibus corporis atque iste neque sit tempora!&lt;/p&gt;', 'Lorem ipsum dolor sit LT', '&lt;p&gt;LT Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut consequuntur magnam, excepturi aliquid ex itaque esse est vero natus quae optio aperiam soluta voluptatibus corporis atque iste neque sit tempora!&lt;/p&gt;', 1, 'admin', '2023-08-08 19:51:48', 'published', 6, 'word', '2023-08-14 14:38:44', NULL, NULL, 0);
+(16, 'Lorem ipsum dolor sit', '&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut consequuntur magnam, excepturi aliquid ex itaque esse est vero natus quae optio aperiam soluta voluptatibus corporis atque iste neque sit tempora!&lt;/p&gt;', 'Lorem ipsum dolor sit LT', '&lt;p&gt;LT Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut consequuntur magnam, excepturi aliquid ex itaque esse est vero natus quae optio aperiam soluta voluptatibus corporis atque iste neque sit tempora!&lt;/p&gt;', 1, 'admin', '2023-08-08 19:51:48', 'published', 6, 'word', '2023-10-24 09:54:17', NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -180,7 +342,7 @@ CREATE TABLE `flussi_settings` (
 --
 
 INSERT INTO `flussi_settings` (`site_title`, `meta_description`, `footer_text`, `pretty_url`, `language`, `posts_per_page`, `registration_enabled`, `session_lifetime`, `default_keywords`, `theme`, `brand_icone`, `table_prefix`, `bilingualism`) VALUES
-('Free CMS flusity', 'Flusity is a contemporary PHP CMS project utilizing MVC architecture, MySQL database, and Bootstrap front-end framework. It includes the management of users, posts, menu, blocks and other elements, as well as security and SEO features.', 'Copyright &copy; flusity JD Theme 2023', 1, 'lt', 10, 1, 30, 'free cms, php, free website, cms, content management system, free cms flusity, php cms, website ', 'free-time', 'flusity-b_a252d067e7fe12f7_019b936138264d1f.png', 'jdfsite', 1);
+('Free CMS flusity', 'Flusity is a contemporary PHP CMS project utilizing MVC architecture, MySQL database, and Bootstrap front-end framework. It includes the management of users, posts, menu, blocks and other elements, as well as security and SEO features.', 'Copyright &copy; flusity JD Theme 2023', 1, 'en', 10, 1, 30, 'free cms, php, free website, cms, content management system, free cms flusity, php cms, website ', 'free-time', 'flusity-b_a252d067e7fe12f7_019b936138264d1f.png', 'jdfsite', 1);
 
 -- --------------------------------------------------------
 
@@ -240,7 +402,9 @@ CREATE TABLE `flussi_tjd_addons` (
 
 INSERT INTO `flussi_tjd_addons` (`id`, `name_addon`, `description_addon`, `active`, `version`, `author`, `created_at`, `updated_at`, `show_front`) VALUES
 (14, 'jd_simple_zer', 'This test addon', 1, '1v', 'JD Flusite Zer', '2023-08-08 16:52:26', '2023-08-08 16:52:37', 1),
-(16, 'social_block_links', 'Social block links addon', 1, '1v', 'JD Flusite', '2023-09-01 10:53:39', '2023-09-01 10:53:45', 1);
+(16, 'social_block_links', 'Social block links addon', 1, '1v', 'JD Flusite', '2023-09-01 10:53:39', '2023-09-01 10:53:45', 1),
+(19, 'info_media_gallery', 'Gallery info with description', 1, '1v', 'JD Flusity', '2023-09-13 18:40:54', '2023-09-13 18:40:59', 1),
+(24, 'event_callendar', 'Events callendar addon', 1, '1v', 'JD Flusity', '2023-09-21 13:31:15', '2023-09-21 13:31:21', 1);
 
 -- --------------------------------------------------------
 
@@ -478,7 +642,19 @@ INSERT INTO `flussi_translations` (`id`, `language_code`, `translation_key`, `tr
 (218, 'lt', 'Contact', 'Kontaktai'),
 (219, 'lt', 'HOMES', 'Pagrindinis'),
 (223, 'it', 'HOMES', 'CASA'),
-(224, 'it', 'Dashboard', 'Pannello');
+(224, 'it', 'Dashboard', 'Pannello'),
+(225, 'lt', 'Media item&nbsp;', 'Žiniasklaidos elementas&nbsp;'),
+(226, 'lt', 'Gallery name', 'Galerijos pavadinimas'),
+(227, 'lt', 'Add content in another language', 'Pridėti turinį kita kalba'),
+(228, 'lt', 'Other languages Title', 'Antraštė kita kalba'),
+(229, 'lt', 'Search for posts or pages', 'Įrašų arba puslapių paieška'),
+(230, 'lt', 'Per page:', 'Puslapyje:'),
+(231, 'lt', 'Search post...', 'Ieškoti įrašą...'),
+(232, 'lt', 'Next Language', 'Kita kalba'),
+(233, 'lt', 'Add new', 'Pridėti naują'),
+(234, 'lt', 'Edit post', 'Redaguoti įrašą'),
+(235, 'lt', 'Edit Addon', 'Redaguoti papildinį'),
+(236, 'lt', 'Add Addon', 'Pridėti papildinį');
 
 -- --------------------------------------------------------
 
@@ -502,7 +678,8 @@ CREATE TABLE `flussi_users` (
 --
 
 INSERT INTO `flussi_users` (`id`, `login_name`, `username`, `surname`, `phone`, `email`, `password`, `role`) VALUES
-(1, 'Tester', 'Admin', 'tester', '8615523111', 'tests@gl.com', '$2y$10$4xw8Ssej8MPQBGHRnqXlieHU6qlKQUKpDgTIj8ZqJg0sCWU6WXIOa', 'admin');
+(1, 'Tester', 'Admin', 'tester', '8615523111', 'tests@gl.com', '$2y$10$4xw8Ssej8MPQBGHRnqXlieHU6qlKQUKpDgTIj8ZqJg0sCWU6WXIOa', 'admin'),
+(22, 'Redag', 'Redaguojantysis', 'tester 2', '8615523111', 'tests2@gl.com', '$2y$10$4xw8Ssej8MPQBGHRnqXlieHU6qlKQUKpDgTIj8ZqJg0sCWU6WXIOa', 'moderator');
 
 -- --------------------------------------------------------
 
@@ -518,8 +695,8 @@ CREATE TABLE `flussi_v_custom_blocks` (
   `html_code` text DEFAULT NULL,
   `lang_custom_name` text DEFAULT NULL,
   `lang_custom_content` text DEFAULT NULL,
-  `updated` datetime DEFAULT current_timestamp(),
-  `created` datetime DEFAULT current_timestamp()
+  `updated` datetime DEFAULT NULL,
+  `created` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
@@ -527,8 +704,60 @@ CREATE TABLE `flussi_v_custom_blocks` (
 --
 
 INSERT INTO `flussi_v_custom_blocks` (`id`, `name`, `menu_id`, `place_id`, `html_code`, `lang_custom_name`, `lang_custom_content`, `updated`, `created`) VALUES
-(36, 'testing area', 0, 12, 'test area content', NULL, NULL, '2023-09-05 14:29:15', '2023-09-13 19:33:08'),
-(38, NULL, 6, 15, ' &lt;h1 class=&quot;pulse animated&quot;&gt;Your Website&lt;/h1&gt;&lt;span class=&quot;pulse animated subheading&quot;&gt;This is your web&lt;/span&gt;', NULL, ' &lt;h1 class=&quot;pulse animated&quot;&gt;Your Website&lt;/h1&gt;&lt;span class=&quot;pulse animated subheading&quot;&gt;This is your web En&lt;/span&gt;', '2023-09-04 11:18:25', '2023-09-03 04:18:35');
+(36, 'testing area', 0, 12, 'test area content', NULL, NULL, '2023-09-05 18:55:20', '2023-09-13 19:33:08'),
+(38, NULL, 6, 15, ' &lt;h1 class=&quot;pulse animated&quot;&gt;Your Website&lt;/h1&gt;&lt;span class=&quot;pulse animated subheading&quot;&gt;This is your web&lt;/span&gt;', NULL, ' &lt;h1 class=&quot;pulse animated&quot;&gt;Your Website&lt;/h1&gt;&lt;span class=&quot;pulse animated subheading&quot;&gt;This is your web En&lt;/span&gt;', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `info_media_gallery`
+--
+
+CREATE TABLE `info_media_gallery` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `gallery_name` text DEFAULT NULL,
+  `gallery_css_style_settings` text NOT NULL,
+  `menu_id` int(11) DEFAULT NULL,
+  `place_id` int(11) DEFAULT NULL,
+  `addon_id` int(11) DEFAULT NULL,
+  `img_w` int(11) DEFAULT NULL,
+  `created` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `info_media_gallery`
+--
+
+INSERT INTO `info_media_gallery` (`id`, `gallery_name`, `gallery_css_style_settings`, `menu_id`, `place_id`, `addon_id`, `img_w`, `created`, `updated`) VALUES
+(1, 'testas 2', 'light', 6, 18, 19, 400, '2023-09-13 18:42:37', '2023-09-14 17:38:33');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `info_media_gallery_item`
+--
+
+CREATE TABLE `info_media_gallery_item` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `title` text DEFAULT NULL,
+  `media_description` text NOT NULL,
+  `lang_en_title` text DEFAULT NULL,
+  `lang_en_media_description` text DEFAULT NULL,
+  `hyperlink` text NOT NULL,
+  `media_file_id` int(11) DEFAULT NULL,
+  `id_info_media_gallery` int(11) DEFAULT NULL,
+  `created` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `info_media_gallery_item`
+--
+
+INSERT INTO `info_media_gallery_item` (`id`, `title`, `media_description`, `lang_en_title`, `lang_en_media_description`, `hyperlink`, `media_file_id`, `id_info_media_gallery`, `created`, `updated`) VALUES
+(1, 'tess', 'Kas yra Lorem Ipsum?\n\nLorem ipsum - tai fiktyvus tekstas naudojamas spaudos ir grafinio dizaino pasaulyje jau nuo XVI a. pradžios. Lorem Ipsum tapo standartiniu fiktyviu tekstu, kai nežinomas spaustuvininkas atsitiktine tvarka išdėliojo raides atspaudų prese ir tokiu būdu sukūrė raidžių egzempliorių. Šis tekstas išliko beveik nepasikeitęs ne tik penkis amžius, bet ir įžengė i kopiuterinio grafinio dizaino laikus. Jis išpopuliarėjo XX a. šeštajame dešimtmetyje, kai buvo išleisti Letraset lapai su Lorem Ipsum ištraukomis, o vėliau -leidybinė sistema AldusPageMaker, kurioje buvo ir Lorem Ipsum versija.', 'ccccc 3', 'bbbbbbbbb 4', 'dfgsd4444', 27, 1, '2023-09-13 18:42:37', '2023-09-13 19:13:19'),
+(2, 'tesssrrr', 'Kas yra Lorem Ipsum?\n\nLorem ipsum - tai fiktyvus tekstas naudojamas spaudos ir grafinio dizaino pasaulyje jau nuo XVI a. pradžios. Lorem Ipsum tapo standartiniu fiktyviu tekstu, kai nežinomas spaustuvininkas atsitiktine tvarka išdėliojo raides atspaudų prese ir tokiu būdu sukūrė raidžių egzempliorių. Šis tekstas išliko beveik nepasikeitęs ne tik penkis amžius, bet ir įžengė i kopiuterinio grafinio dizaino laikus. Jis išpopuliarėjo XX a. šeštajame dešimtmetyje, kai buvo išleisti Letraset lapai su Lorem Ipsum ištraukomis, o vėliau -leidybinė sistema AldusPageMaker, kurioje buvo ir Lorem Ipsum versija.', 'aaaaaaaaa 1', 'uuuuuuuuuuuu 8', 'dfgsd777', 28, 1, '2023-09-13 18:42:37', '2023-09-13 19:12:43');
 
 -- --------------------------------------------------------
 
@@ -557,7 +786,7 @@ CREATE TABLE `jd_simple_zer` (
 --
 
 INSERT INTO `jd_simple_zer` (`id`, `title`, `description`, `lang_en_title`, `lang_en_description`, `img_url`, `img_name`, `readmore`, `menu_id`, `place_id`, `addon_id`, `created`, `updated`) VALUES
-(1, 'My History', 'Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.', 'My History tes', 'Testas test test test', 'http://localhost/uploads/jd_simple_zer_img/7646653_f9f1c35fca142b93.jpg', '7646653_f9f1c35fca142b93.jpg', 'contacts', 6, 16, 14, '2023-08-08 17:00:50', '2023-09-05 11:31:00');
+(1, 'My History', 'Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.', 'My History tes', 'Testas test test test', 'http://localhost/uploads/jd_simple_zer_img/7646653_f9f1c35fca142b93.jpg', '7646653_f9f1c35fca142b93.jpg', 'contacts', 6, 16, 14, '2023-08-08 17:00:50', '2023-09-14 17:26:00');
 
 -- --------------------------------------------------------
 
@@ -582,12 +811,47 @@ CREATE TABLE `social_block_links` (
 --
 
 INSERT INTO `social_block_links` (`id`, `profiles_name`, `social_profiles_link_url`, `fa_icone_code`, `menu_id`, `place_id`, `addon_id`, `created`, `updated`) VALUES
-(14, 'Facebook,Github', 'https://facebook.com,https://github.com/', '&lt;span class=&quot;fa-stack fa-lg&quot;&gt;&lt;i class=&quot;fa fa-circle fa-stack-2x&quot;&gt;&lt;/i&gt;&lt;i class=&quot;fa fa-facebook fa-stack-1x fa-inverse&quot;&gt;&lt;/i&gt;&lt;/span&gt;,&lt;span class=&quot;fa-stack fa-lg&quot;&gt;&lt;i class=&quot;fa fa-circle fa-stack-2x&quot;&gt;&lt;/i&gt;&lt;i class=&quot;fa fa-github fa-stack-1x fa-inverse&quot;&gt;&lt;/i&gt;&lt;/span&gt;', 0, 14, 16, '2023-09-01 16:44:28', '2023-09-05 11:31:04'),
-(15, 'dfg', 'https://fbbbb.com', '&lt;a&gt;dfgdfgfdgfdg&lt;/a&gt;', 0, 7, 16, '2023-09-04 17:25:39', '2023-09-04 17:25:39');
+(14, 'Facebook,Github', 'https://facebook.com,https://github.com/', '&lt;span class=&quot;fa-stack fa-lg&quot;&gt;&lt;i class=&quot;fa fa-circle fa-stack-2x&quot;&gt;&lt;/i&gt;&lt;i class=&quot;fa fa-facebook fa-stack-1x fa-inverse&quot;&gt;&lt;/i&gt;&lt;/span&gt;,&lt;span class=&quot;fa-stack fa-lg&quot;&gt;&lt;i class=&quot;fa fa-circle fa-stack-2x&quot;&gt;&lt;/i&gt;&lt;i class=&quot;fa fa-github fa-stack-1x fa-inverse&quot;&gt;&lt;/i&gt;&lt;/span&gt;', 0, 14, 16, '2023-09-01 16:44:28', '2023-09-09 02:37:18');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `callendar_users_member`
+--
+ALTER TABLE `callendar_users_member`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `event_callendar`
+--
+ALTER TABLE `event_callendar`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `event_callendar_holidays`
+--
+ALTER TABLE `event_callendar_holidays`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `event_callendar_item`
+--
+ALTER TABLE `event_callendar_item`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `event_callendar_laboratories`
+--
+ALTER TABLE `event_callendar_laboratories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `event_reservation_time`
+--
+ALTER TABLE `event_reservation_time`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `flussi_contact_form_settings`
@@ -658,6 +922,18 @@ ALTER TABLE `flussi_v_custom_blocks`
   ADD KEY `place_id` (`place_id`);
 
 --
+-- Indexes for table `info_media_gallery`
+--
+ALTER TABLE `info_media_gallery`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `info_media_gallery_item`
+--
+ALTER TABLE `info_media_gallery_item`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `jd_simple_zer`
 --
 ALTER TABLE `jd_simple_zer`
@@ -674,6 +950,42 @@ ALTER TABLE `social_block_links`
 --
 
 --
+-- AUTO_INCREMENT for table `callendar_users_member`
+--
+ALTER TABLE `callendar_users_member`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `event_callendar`
+--
+ALTER TABLE `event_callendar`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `event_callendar_holidays`
+--
+ALTER TABLE `event_callendar_holidays`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `event_callendar_item`
+--
+ALTER TABLE `event_callendar_item`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `event_callendar_laboratories`
+--
+ALTER TABLE `event_callendar_laboratories`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `event_reservation_time`
+--
+ALTER TABLE `event_reservation_time`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
 -- AUTO_INCREMENT for table `flussi_contact_form_settings`
 --
 ALTER TABLE `flussi_contact_form_settings`
@@ -683,19 +995,19 @@ ALTER TABLE `flussi_contact_form_settings`
 -- AUTO_INCREMENT for table `flussi_files`
 --
 ALTER TABLE `flussi_files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `flussi_menu`
 --
 ALTER TABLE `flussi_menu`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `flussi_places`
 --
 ALTER TABLE `flussi_places`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `flussi_posts`
@@ -713,25 +1025,37 @@ ALTER TABLE `flussi_sidebar`
 -- AUTO_INCREMENT for table `flussi_tjd_addons`
 --
 ALTER TABLE `flussi_tjd_addons`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `flussi_translations`
 --
 ALTER TABLE `flussi_translations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=225;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=237;
 
 --
 -- AUTO_INCREMENT for table `flussi_users`
 --
 ALTER TABLE `flussi_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `flussi_v_custom_blocks`
 --
 ALTER TABLE `flussi_v_custom_blocks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+
+--
+-- AUTO_INCREMENT for table `info_media_gallery`
+--
+ALTER TABLE `info_media_gallery`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `info_media_gallery_item`
+--
+ALTER TABLE `info_media_gallery_item`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `jd_simple_zer`
