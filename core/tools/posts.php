@@ -272,13 +272,17 @@ $('#confirm-delete-post-btn').on('click', function () {
 </script>
 <?php
 if (isset($_GET['edit_post_id'])) {
-    $edit_post_id = $_GET['edit_post_id'];
-    echo "<script>loadPostEditForm($edit_post_id);</script>";
+    $edit_post_id = filter_input(INPUT_GET, 'edit_post_id', FILTER_SANITIZE_NUMBER_INT);
+    $safe_edit_post_id = htmlspecialchars($edit_post_id, ENT_QUOTES, 'UTF-8');
+    echo "<script>loadPostEditForm($safe_edit_post_id);</script>";
 }
+
 if (isset($_GET['menu_id'])) {
-    $menu_id = $_GET['menu_id'];
-    echo "<script>loadPostAddForm($menu_id);</script>";
+    $menu_id = filter_input(INPUT_GET, 'menu_id', FILTER_SANITIZE_NUMBER_INT);
+    $safe_menu_id = htmlspecialchars($menu_id, ENT_QUOTES, 'UTF-8');
+    echo "<script>loadPostAddForm($safe_menu_id);</script>";
 }
+
 ?>
 <script src="js/admin-post-edit.js"></script>
 
