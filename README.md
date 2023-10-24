@@ -62,6 +62,7 @@ Atsižvelgiant į šiuos elementus ir funkcijas, svetainė yrap patogus ir funkc
 
 <li>Duomenų bazės saugumas: Duomenų bazės užklausos yra paruoštos naudojant PDO paruoštas pareiškimus, kurie apsaugo nuo SQL injekcijos atakų.</li>
   </ul>
+  Kuriamas papildinys <b></b>"Įvykių kalendorius"</b> tačiau jis dar 45% baigtumo
   <p>Prisijungimas prie sistemos: Demo User Name: Tester and password: 1234 , Projektas dar tęsiamas, numatoma pridėti daugiau funkcionalumų</p>
   
   /////// En /////////////////
@@ -125,7 +126,7 @@ Considering these elements and functions, the website is a convenient and functi
    </ul>
    <p>Login to system user:  Demo User Name: Tester and password: 1234 ,The project is still ongoing, it is planned to add more functionalities</p>
    <br>
-   
+   The <b>"event calendar"</b> plugin is being developed, but it is still 45% complete
 Author's address https://www.flusity.com
  
 Autoriaus adresas https://www.flusity.com
