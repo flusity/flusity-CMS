@@ -244,15 +244,21 @@ if ($mode === 'create' || $addon) { ?>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($holidays as $holiday): ?>
-            <tr>
-                <td><?php echo htmlspecialchars($holiday['id']); ?></td>
-                <td><?php echo htmlspecialchars($monthNames[$holiday['month']]); ?></td>
-                <td><?php echo htmlspecialchars($holiday['holiday']); ?></td>
-                <td><?php echo htmlspecialchars($holiday['holiday_name']); ?></td>
-                <td><?php echo htmlspecialchars(" "); ?></td>
-            </tr>
-            <?php endforeach; ?>
+        <?php $i=1;
+                foreach ($holidays as $holiday):  ?>
+                <tr><?php //echo htmlspecialchars($holiday['id']); ?>
+                    <td><?php echo $i; ?></td>
+                    <td><?php echo htmlspecialchars($monthNames[$holiday['month']]); ?></td>
+                    <td><?php echo htmlspecialchars($holiday['holiday']); ?></td>
+                    <td><?php echo htmlspecialchars($holiday['holiday_name']); ?></td>
+                    <td><?php 
+                    echo '<a href="addons_model.php?name=event_callendar&id=' . htmlspecialchars($_GET['id']) . '&addon_post_edit_id=' . htmlspecialchars($addonRes['id']) . '"><i class="fa fa-edit"></i></a> ';
+                    echo '<a href="../../cover/addons/event_callendar/action/delete_addon_post.php?name=event_callendar&id=' . htmlspecialchars($_GET['id']) . '&addon_post_id=' . htmlspecialchars($addonRes['id']) . '"><i class="fa fa-trash"></i></a>';
+                    
+                    ?></td>
+                </tr>
+        <?php $i++; 
+            endforeach; ?>
         </tbody>
     </table>
 </div>
