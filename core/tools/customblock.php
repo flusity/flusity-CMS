@@ -190,13 +190,17 @@ function loadCustomBlockEditForm(customBlockId) {
 </script>
 <?php
 if (isset($_GET['edit_customblock_id'])) {
-    $edit_customblock_id = $_GET['edit_customblock_id'];
-    echo "<script>loadCustomBlockEditForm($edit_customblock_id);</script>";
+    $edit_customblock_id = filter_input(INPUT_GET, 'edit_customblock_id', FILTER_SANITIZE_NUMBER_INT);
+    $safe_edit_customblock_id = htmlspecialchars($edit_customblock_id, ENT_QUOTES, 'UTF-8');
+    echo "<script>loadCustomBlockEditForm($safe_edit_customblock_id);</script>";
 }
+
 if (isset($_GET['customblock_place'])) {
-    $customblock_place = $_GET['customblock_place'];
-    echo "<script>loadCustomBlocCreateForm('$customblock_place');</script>";
+    $customblock_place = filter_input(INPUT_GET, 'customblock_place', FILTER_SANITIZE_STRING);
+    $safe_customblock_place = htmlspecialchars($customblock_place, ENT_QUOTES, 'UTF-8');
+    echo "<script>loadCustomBlocCreateForm('$safe_customblock_place');</script>";
 }
+
 ?>
 <script src="js/admin-customblock-edit.js"></script>
 
