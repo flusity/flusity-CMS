@@ -24,6 +24,7 @@
     <link rel="stylesheet" type="text/css"  href="<?php echo getThemePath($db, $prefix, 'css/callendar.css'); ?>">
     <?php printAllAddonsAssets('head'); ?>
     <script src="/assets/dist/js/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
     <link rel="stylesheet" href="/assets/dist/js/ui/1.12.1/themes/base/jquery-ui.css">
     <style>
     .flag.<?php echo isset($settings['language']) ? $settings['language'] : 'en'; ?> {
