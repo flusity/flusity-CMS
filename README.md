@@ -130,6 +130,8 @@ Considering these elements and functions, the website is a convenient and functi
 Author's address https://www.flusity.com
  
 Autoriaus adresas https://www.flusity.com
+<p>Admin dashboard</p>
+![banner](https://flusity.com/uploads/admin_904cf16d5a6da047.jpg)
 
 
 
