@@ -12,7 +12,7 @@ $stmt = $db->prepare("SELECT * FROM " . $prefix['table_prefix'] . "_event_callen
 $stmt->bindParam(':id', $id);
 $stmt->execute();
 $result = $stmt->fetch(PDO::FETCH_ASSOC);
-$addonId = isset($_GET['addon_post_edit_id']) ? (int)htmlspecialchars($_GET['addon_post_edit_id']) : 0;
+$addonId = isset($_GET['addon_event_edit_id']) ? (int)htmlspecialchars($_GET['addon_event_edit_id']) : 0;
 $addonPlace = isset($_GET['place_name']) ? $_GET['place_name'] : null; 
 $addonMenuId = isset($_GET['menu']) ? $_GET['menu'] : null; 
 $mode = $addonId > 0 ? 'edit' : 'create';
@@ -42,11 +42,10 @@ if ($mode === 'create' || $addon) { ?>
 <div class="tab-content">  
         <div class="tab-pane fade show active" id="calendar">
          <div class="form-group row p-2">
-            <form id="update-addon-form" method="POST"
-                action="../../cover/addons/event_callendar/action/<?php echo $mode === 'edit' ? 'edit_addon_post.php' : 'add_addon.php'; ?>"
+            <form id="update-addon-form" method="POST" action="../../cover/addons/event_callendar/action/<?php echo $mode === 'edit' ? 'edit_addon.php' : 'add_addon.php'; ?>"
                 enctype="multipart/form-data" class="col-md-10">
                 <input type="hidden" name="mode" value="<?php echo $mode; ?>">
-                <input type="hidden" name="addon_post_edit_id" value="<?php echo isset($addon['id']) ? $addon['id'] : ''; ?>">
+                <input type="hidden" name="addon_event_edit_id" value="<?php echo isset($addon['id']) ? $addon['id'] : ''; ?>">
                 <input type="hidden" class="form-control" name="id" value="<?php echo $id; ?>">
 
                 <?php if($addonId >0): ?>
@@ -120,7 +119,7 @@ if ($mode === 'create' || $addon) { ?>
 
                     <div class="col-md-5 mb-3">
                         <button type="submit" name="submit" class="btn btn-primary"><?php echo t('Submit');?></button>
-                        <?php if (isset($_GET['addon_post_edit_id'])): ?>
+                        <?php if (isset($_GET['addon_event_edit_id'])): ?>
                         <a href="addons_model.php?name=event_callendar&id=<?php echo htmlspecialchars($_GET['id']) ?>"
                             class="btn btn-secondary">
                             <?php echo t('Cancel');?>
@@ -181,11 +180,13 @@ if ($mode === 'create' || $addon) { ?>
                         echo '</td>';
                         echo '<td>' . $short_place . '</td>';
                         echo '<td>';
-                        echo '<a href="addons_model.php?name=event_callendar&id=' . htmlspecialchars($_GET['id']) . '&addon_post_edit_id=' . htmlspecialchars($addonRes['id']) . '"><i class="fa fa-edit"></i></a> ';
-                        echo '<a href="../../cover/addons/event_callendar/action/delete_addon_post.php?name=event_callendar&id=' . htmlspecialchars($_GET['id']) . '&addon_post_id=' . htmlspecialchars($addonRes['id']) . '"><i class="fa fa-trash"></i></a>';
-                        echo '</td>';
-                        echo '</tr>';
-                    } ?>
+                        echo '<a href="addons_model.php?name=event_callendar&id=' . htmlspecialchars($_GET['id']) . '&addon_event_edit_id=' . htmlspecialchars($addonRes['id']) . '"><i class="fa fa-edit"></i></a> ';
+                      ?>
+                        <a href="javascript:void(0);" onclick="deleteEventAddon(<?php echo htmlspecialchars($addonRes['id']); ?>)"><i class="fa fa-trash"></i></a>
+                    
+                        </td>
+                        </tr>
+                   <?php  } ?>
             </form>
             </tbody>
             </table> 
@@ -252,8 +253,8 @@ if ($mode === 'create' || $addon) { ?>
                     <td><?php echo htmlspecialchars($holiday['holiday']); ?></td>
                     <td><?php echo htmlspecialchars($holiday['holiday_name']); ?></td>
                     <td><?php 
-                    echo '<a href="addons_model.php?name=event_callendar&id=' . htmlspecialchars($_GET['id']) . '&addon_post_edit_id=' . htmlspecialchars($addonRes['id']) . '"><i class="fa fa-edit"></i></a> ';
-                    echo '<a href="../../cover/addons/event_callendar/action/delete_addon_post.php?name=event_callendar&id=' . htmlspecialchars($_GET['id']) . '&addon_post_id=' . htmlspecialchars($addonRes['id']) . '"><i class="fa fa-trash"></i></a>';
+                    echo '<a href="addons_model.php?name=event_callendar&id=' . htmlspecialchars($_GET['id']) . '&addon_event_edit_id=' . htmlspecialchars($addonRes['id']) . '"><i class="fa fa-edit"></i></a> ';
+                    echo '<a href="../../cover/addons/event_callendar/action/delete_addon_post.php?name=event_callendar&id=' . htmlspecialchars($_GET['id']) . '&addon_event_id=' . htmlspecialchars($addonRes['id']) . '"><i class="fa fa-trash"></i></a>';
                     
                     ?></td>
                 </tr>
@@ -267,7 +268,6 @@ if ($mode === 'create' || $addon) { ?>
 
     </div>
 </div>
-  
           
             <div class="tab-pane fade" id="coordinators">
               <div class="form-group row p-2">
@@ -283,7 +283,7 @@ if ($mode === 'create' || $addon) { ?>
                         <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
                       
-                            <form action="your_script_to_add_manager.php" method="post">
+                            <form action="add_event_manager.php" method="post">
                                 <input type="text" name="event_name" placeholder="Event Name">
                                 <input type="date" name="when_event_will_start" placeholder="When Event Will Start" value="<?php echo date('Y-m-d'); ?>">
                                 <input type="text" name="event_days" placeholder="Event Days">
@@ -322,13 +322,9 @@ if ($mode === 'create' || $addon) { ?>
                                     }
                                     ?>
                                 </select>
-
                                 
-                                <input type="submit" value="<?php echo t('Add Event'); ?>">
+                                <input type="submit" value="<?php echo t('Add Event & Managers'); ?>">
                             </form>
-     
-
-
                         </div>
                         </div>
                     </div>
@@ -342,8 +338,6 @@ if ($mode === 'create' || $addon) { ?>
                     
                         $calendaries = $result['id'];
                 ?>
-
-                
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -372,43 +366,42 @@ if ($mode === 'create' || $addon) { ?>
                     </thead>
                     <tbody>
                         <?php
+                            $stmt = $db->prepare("SELECT * FROM " . $prefix['table_prefix'] . "_event_callendar_laboratories WHERE callendar_id = :addon_id");
+                            $stmt->bindParam(':addon_id', $calendaries, PDO::PARAM_INT);
+                            $stmt->execute();
+                            $laboratoryResults = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    $stmt = $db->prepare("SELECT * FROM " . $prefix['table_prefix'] . "_event_callendar_laboratories WHERE callendar_id = :addon_id");
-    $stmt->bindParam(':addon_id', $calendaries, PDO::PARAM_INT);
-    $stmt->execute();
-    $laboratoryResults = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                            $counter = 1; 
 
-    $counter = 1; 
+                            foreach ($laboratoryResults as $laboratory) {
+                                $managers = explode(',', $laboratory['managers']);
+                                $managers = array_map('intval', $managers);
+                                $placeholders = implode(',', array_fill(0, count($managers), '?'));
 
-    foreach ($laboratoryResults as $laboratory) {
-        $managers = explode(',', $laboratory['managers']);
-        $managers = array_map('intval', $managers);
-        $placeholders = implode(',', array_fill(0, count($managers), '?'));
+                                $stmt = $db->prepare("SELECT * FROM " . $prefix['table_prefix'] . "_flussi_users WHERE id IN ($placeholders)");
+                                $stmt->execute($managers);
+                                $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                                
+                                $managerNames = array_map(function($user) {
+                                    return $user['username'] . " ";
+                                }, $users);
 
-        $stmt = $db->prepare("SELECT * FROM " . $prefix['table_prefix'] . "_flussi_users WHERE id IN ($placeholders)");
-        $stmt->execute($managers);
-        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
-        $managerNames = array_map(function($user) {
-            return $user['username'] . " ";
-        }, $users);
+                                echo '<tr>';
+                                echo '<th scope="row">' . $counter . '</th>';
+                                echo '<td>' . htmlspecialchars($laboratory['event_name']) . '</td>';
+                                echo '<td>' . htmlspecialchars($laboratory['when_event_will_start']) . '</td>';
+                                echo '<td>' . htmlspecialchars($laboratory['event_days']) . '</td>';
+                                echo '<td>' . htmlspecialchars($laboratory['event_color']) . '</td>';
+                                echo '<td>' . implode(", ", $managerNames) . '</td>';
+                                echo '<td>'; 
+                                echo '<a href="addons_model.php?name=event_callendar&id=' . htmlspecialchars($_GET['id']) . '&addon_event_edit_id=' . htmlspecialchars($addonRes['id']) . '"><i class="fa fa-edit"></i></a> ';
+                                echo '<a href="../../cover/addons/event_callendar/action/delete_event_addon.php?name=event_callendar&id=' . htmlspecialchars($_GET['id']) . '&addon_event_id=' . htmlspecialchars($addonRes['id']) . '"><i class="fa fa-trash"></i></a>';
+                                echo '</td>';
+                                echo '</tr>';
 
-        echo '<tr>';
-        echo '<th scope="row">' . $counter . '</th>';
-        echo '<td>' . htmlspecialchars($laboratory['event_name']) . '</td>';
-        echo '<td>' . htmlspecialchars($laboratory['when_event_will_start']) . '</td>';
-        echo '<td>' . htmlspecialchars($laboratory['event_days']) . '</td>';
-        echo '<td>' . htmlspecialchars($laboratory['event_color']) . '</td>';
-        echo '<td>' . implode(", ", $managerNames) . '</td>';
-        echo '<td>'; 
-        echo '<a href="addons_model.php?name=event_callendar&id=' . htmlspecialchars($_GET['id']) . '&addon_post_edit_id=' . htmlspecialchars($addonRes['id']) . '"><i class="fa fa-edit"></i></a> ';
-        echo '<a href="../../cover/addons/event_callendar/action/delete_addon_post.php?name=event_callendar&id=' . htmlspecialchars($_GET['id']) . '&addon_post_id=' . htmlspecialchars($addonRes['id']) . '"><i class="fa fa-trash"></i></a>';
-        echo '</td>';
-        echo '</tr>';
-
-        $counter++; 
-    }
-?>
+                                $counter++; 
+                            }
+                        ?>
 
                     </tbody>
                 </table>
@@ -426,14 +419,14 @@ if ($mode === 'create' || $addon) { ?>
     $(document).ready(function() {
         $('#managerSelect').select2();
     });
-    function deleteAddon(addonId) {
+    function deleteEventAddon(addonId) {
         $.ajax({
             type: 'POST',
-            url: '../../cover/addons/event_callendar/action/delete_addon_post.php',
+            url: '../../cover/addons/event_callendar/action/delete_calendar_addon.php',
             data: {
                 name: 'event_callendar',
                 id: '<?php echo htmlspecialchars($_GET['id']); ?>',
-                addon_post_id: addonId
+                addon_event_id: addonId
             },
             success: function(response) {
                 window.location.href = 'addons_model.php?name=event_callendar&id=<?php echo htmlspecialchars($_GET['id']); ?>';
