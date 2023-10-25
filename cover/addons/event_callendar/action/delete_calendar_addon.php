@@ -21,33 +21,41 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
 
     try {
-        $stmt = $db->prepare("DELETE FROM " . $prefix['table_prefix'] . "_event_callendar WHERE id = :id");
-        $stmt->bindParam(':id', $addon_event_id, PDO::PARAM_INT);
-        $stmt->execute();
-
-        if ($stmt->rowCount() > 0) {
-            $_SESSION['success_message'] = t("The addon has been successfully deleted.");
-            $response = [
-                'status' => 'success',
-                'message' => $_SESSION['success_message']
-            ];
-        } else {
-            $_SESSION['error_message'] = t("Addon not found.");
-            $response = [
-                'status' => 'error',
-                'message' => $_SESSION['error_message']
-            ];
-        }
-        
+        $db->beginTransaction();
+    
+        // Trinamas pagrindinis įrašas
+        $stmt1 = $db->prepare("DELETE FROM " . $prefix['table_prefix'] . "_event_callendar WHERE id = :id");
+        $stmt1->bindParam(':id', $addon_event_id, PDO::PARAM_INT);
+        $stmt1->execute();
+    
+        // Trinami visi susiję įrašai iš kitų lentelių
+        $stmt2 = $db->prepare("DELETE FROM " . $prefix['table_prefix'] . "_event_callendar_holidays");
+        $stmt3 = $db->prepare("DELETE FROM " . $prefix['table_prefix'] . "_event_callendar_item");
+        $stmt4 = $db->prepare("DELETE FROM " . $prefix['table_prefix'] . "_event_callendar_laboratories");
+        $stmt5 = $db->prepare("DELETE FROM " . $prefix['table_prefix'] . "_event_reservation_time");
+    
+        $stmt2->execute();
+        $stmt3->execute();
+        $stmt4->execute();
+        $stmt5->execute();
+    
+        $db->commit();
+    
+        $_SESSION['success_message'] = t("The addon and related records have been successfully deleted.");
+        $response = [
+            'status' => 'success',
+            'message' => $_SESSION['success_message']
+        ];
         
         echo json_encode($response);
         exit();
-
-    } catch (Exception $e) {
-        $_SESSION['error_message'] = $e->getMessage();
-    }
     
-    header('Location: ' . $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/core/tools/addons_model.php?name=event_callendar&id=' . $_POST['id']);
-    exit();
+    } catch (Exception $e) {
+        $db->rollback();
+        $_SESSION['error_message'] = $e->getMessage();
+        
+        header('Location: ' . $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/core/tools/addons_model.php?name=event_callendar&id=' . $_POST['id']);
+        exit();
+    }
 }
 ?>
