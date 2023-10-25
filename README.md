@@ -126,7 +126,7 @@ Considering these elements and functions, the website is a convenient and functi
    </ul>
    <p>Login to system user:  Demo User Name: Tester and password: 1234 ,The project is still ongoing, it is planned to add more functionalities</p>
    <br>
-   The <b>"event calendar"</b> plugin is being developed, but it is still 45% complete
+   <p>The <b>"event calendar"</b> plugin is being developed, but it is still 45% complete</p>
 Author's address https://www.flusity.com
  
 Autoriaus adresas https://www.flusity.com
