@@ -1,7 +1,7 @@
 # flusity CMS
  <p>100% completion</p>
  
- ![banner](https://www.flusity.com) v 2.304
+ ![banner]https://flusity.com/uploads/banneris_49d80b2a642e06c6.jpg v 2.304
  
  <h4> Flusity - tai unikalus pavadinimas, kuris atspindi misiją. Jis kilo iš "flussi" ir "city" žodžių, simbolizuojančių duomenų srauto ir plėtros koncepcijas, viską sujungiant į harmoningą "miestą", kuriame viskas juda laisvai ir efektyviai.</h4>
 
