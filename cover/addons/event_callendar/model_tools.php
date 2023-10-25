@@ -48,7 +48,14 @@ if ($mode === 'create' || $addon) { ?>
                 <input type="hidden" name="addon_event_edit_id" value="<?php echo isset($addon['id']) ? $addon['id'] : ''; ?>">
                 <input type="hidden" class="form-control" name="id" value="<?php echo $id; ?>">
 
-                <?php if($addonId >0): ?>
+                <?php
+                $stmt = $db->prepare("SELECT COUNT(*) FROM " . $prefix['table_prefix'] . "_event_callendar WHERE addon_id = :id");
+                $stmt->bindParam(':id', $_GET['id'], PDO::PARAM_INT);
+                $stmt->execute();
+                $count = $stmt->fetchColumn();
+                $showFields = ($count == 0) || ($mode === 'edit');
+                
+                if($showFields): ?>
                     <div class="form-group row p-2">
                     <div class="col-md-4 mb-3">
                         <label for="addon_place_id"><?php echo t('Place');?></label>
@@ -329,15 +336,20 @@ if ($mode === 'create' || $addon) { ?>
                         </div>
                     </div>
                 </div>
-
                 <?php
                     $stmt = $db->prepare("SELECT * FROM " . $prefix['table_prefix'] . "_event_callendar WHERE addon_id = :id");
                     $stmt->bindParam(':id', $_GET['id'], PDO::PARAM_INT);
                     $stmt->execute();
                     $result = $stmt->fetch(PDO::FETCH_ASSOC);
-                    
+
+                    if ($result !== false) {
                         $calendaries = $result['id'];
-                ?>
+                    } else {
+
+                        $calendaries = null;
+                    }
+                    ?>
+
                 <table class="table table-bordered">
                     <thead>
                         <tr>
