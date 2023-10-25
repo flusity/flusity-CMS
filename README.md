@@ -131,7 +131,7 @@ Author's address https://www.flusity.com
  
 Autoriaus adresas https://www.flusity.com
 <p>Admin dashboard</p>
-![A test image](https://flusity.com/uploads/admin_904cf16d5a6da047.jpg)
+![In a single picture](https://flusity.com/uploads/admin_904cf16d5a6da047.jpg)
 
 
 
