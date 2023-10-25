@@ -11,7 +11,6 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
     <div class="row">
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 content-up">
 
-
             <div class="col-sm-9">
                 <?php
                 if (isset($_SESSION['success_message'])) {
@@ -53,10 +52,10 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
             $fileUrl = $file['url'];
             
             if (strpos($fileUrl, 'http://localhost') === 0) {
-                // Jei URL prasideda nuo "http://localhost", naudoti nuorodą be "http://localhost"
+               // If URL starts with "http://localhost", use link without "http://localhost"
                 $url = str_replace('http://localhost', '', $fileUrl);
             } else {
-                // Kitu atveju naudoti visą URL
+                // Otherwise use full URL
                 $url = $fileUrl;
             }
             $is_image = preg_match('/\.(gif|jpe?g|png)$/i', $file['name']);
@@ -69,8 +68,8 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
             echo '<div class="col mt-3" style="margin: 7px; width: 150px; position: relative;">';
             echo '<div class="card h-100" style="padding: 3px; width: 160px;">'; 
     
-            // Alternatyvūs paveiksliukai ne vaizdo failams
-            $default_image = '/img/default.png'; // pridėkite numatytąją nuotrauką
+            // Alternate images for non-image files
+            $default_image = '/img/default.png'; // will add default photo
             $file_extension = pathinfo($file['name'], PATHINFO_EXTENSION);
     
             switch (strtolower($file_extension)) {
@@ -85,7 +84,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
                     $default_image = 'img/xlsx.png';
                     break;
                            
-                // pridėkite atitinkamas nuorodas prie kitų failų tipų
+                // add appropriate references to other file types
             }
     
             if ($is_image) {
@@ -112,7 +111,6 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
     echo '</div>'; 
 ?>
             </div>
-        
     </main>
     </div>
 </div>
@@ -158,7 +156,6 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
         }
     });
 });
-
 
 document.querySelectorAll('.card-body').forEach((cardBody) => {
     cardBody.addEventListener('mouseover', () => {
