@@ -4,9 +4,6 @@
 */
 /*footer*/
 
-
-
-
 function convertMinutesToHoursMinutes(minutes) {
     const hours = Math.floor(minutes / 60);
     const remainingMinutes = minutes % 60;
@@ -23,6 +20,7 @@ function convertMinutesToHoursMinutes(minutes) {
         return `${minutes} min.`;
     }
 }
+
 function renderTimeOptions(timeOptions, eventDate, reserveDayOption, reserveDayTimeOption) {
     let optionsHTML = '';
     if (Array.isArray(reserveDayOption) && reserveDayOption.includes(eventDate)) {
@@ -44,8 +42,6 @@ function renderTimeOptions(timeOptions, eventDate, reserveDayOption, reserveDayT
     return optionsHTML;
 }
 
-    
-
     function createEventModal(themeId, registrationAllowed, eventDate) {
         let accordionHTML = '';
         eventTopics.forEach(topic => {
@@ -55,11 +51,8 @@ function renderTimeOptions(timeOptions, eventDate, reserveDayOption, reserveDayT
                 let reserveDayTimeOption = topic.reserveEventDay;
                 let reserveDayOption = topic.reserveDay;
                 let timeOptions = topic.provideTime;
-              
-               
                 let timeOptionsHTML = renderTimeOptions(timeOptions, eventDate, reserveDayOption, reserveDayTimeOption); // 60 eilutė
            
-
             accordionHTML += `
                 <button class="callendar-accordion accordion">${topic.title} <i class="fa fa-angle-down float-right"></i></button>
                 <div class="panel">
@@ -80,7 +73,6 @@ function renderTimeOptions(timeOptions, eventDate, reserveDayOption, reserveDayT
                     }
                 });
                 
-
     const modalHTML = `
     <div id="eventModal" class="modal-view">
         <div class="modal-content">
@@ -149,7 +141,6 @@ function showEventModal(eventData,topic) {
     const eventDate = new Date(eventData.date);
     let registrationAllowed = true;
 
-    // Sukuriamas naujas Date objektas, kuris yra 2 dienos anksčiau už renginio datą
     const registrationEndDate = new Date(eventDate);
     let endRegister = topic ? topic.setRegistrationEndDate : 0;
 
@@ -200,10 +191,7 @@ function attachEventListeners() {
             date: $(this).data('date'),
             color: $(this).data('color')
         };
-        
-        // Randa tinkamą topic pagal theme-id
-        const matchingTopic = eventTopics.find(topic => topic.theme_id === eventData.id);
-        
+        const matchingTopic = eventTopics.find(topic => topic.theme_id === eventData.id);// Randa tinkamą topic pagal theme-id
         showEventModal(eventData, matchingTopic);
     });
 }

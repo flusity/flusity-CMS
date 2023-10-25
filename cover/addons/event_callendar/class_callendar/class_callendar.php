@@ -54,7 +54,7 @@ class Calendar {
         $this->_createNavi();
         
         $html = '<div class="calendar">';
-        $html .= '<div class="header">';
+        $html .= '<div class="heade">';
         $html .= '<a href="' . $this->naviHref['previousMonth'] . '" class="callendar-prev prev">&#9664;</a>'; // Pakeisti << į &#9664; (Left-pointing double angle quotation mark)
         $html .= '<a href="' . $this->naviHref['nextMonth'] . '" class="callendar-next next">&#9654;</a>'; // Pakeisti >> į &#9654; (Right-pointing double angle quotation mark)
 
