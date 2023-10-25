@@ -55,9 +55,11 @@ function getCurrentImage($db, $prefix) {
     }
     return false;
 }
-
+// 23-10-25 Updated function checks the filename for invalid characters and returns an error message if there are. 
 function handleFileUpload($db, $table_prefix, $target_dir, $allowed_file_types, $max_file_size) {
     $uploaded_file = $_FILES["uploaded_file"];
+    $filename = $uploaded_file['name'];
+    $filename_clean = preg_replace("/[^a-zA-Z0-9\._]+/", "", $filename); // Pašaliname specialiuosius simbolius
 
     if (!in_array($uploaded_file['type'], $allowed_file_types)) {
         $_SESSION['error_message'] = t("Invalid file type.");
@@ -69,15 +71,20 @@ function handleFileUpload($db, $table_prefix, $target_dir, $allowed_file_types, 
         return false;
     }
 
+    if ($filename !== $filename_clean) {
+        $_SESSION['error_message'] = t("Invalid characters in file name.");
+        return false;
+    }
+
     $unique_code = bin2hex(random_bytes(8));
-    $filename_parts = pathinfo($uploaded_file["name"]);
+    $filename_parts = pathinfo($filename_clean);
     $new_filename = $filename_parts['filename'] . '_' . $unique_code . '.' . $filename_parts['extension'];
 
     $target_file = $target_dir . basename($new_filename);
 
     if (move_uploaded_file($uploaded_file["tmp_name"], $target_file)) {
         $file_url = $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['HTTP_HOST'] . "/uploads/" . $new_filename;
-        $_SESSION['success_message'] = "File" ." ". basename($uploaded_file["name"]) . " " .t("file uploaded successfully.");
+        $_SESSION['success_message'] = "File" ." ". basename($filename_clean) . " " .t("file uploaded successfully.");
 
         $stmt = $db->prepare("INSERT INTO " . $table_prefix . "_flussi_files (name, url) VALUES (:name, :url)");
         $stmt->bindParam(':name', $new_filename, PDO::PARAM_STR);
@@ -90,4 +97,5 @@ function handleFileUpload($db, $table_prefix, $target_dir, $allowed_file_types, 
         return false;
     }
 }
+
 
