@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $profileIconsStr = implode(',', $profileIcons);
 
     try {
-        $stmt = $db->prepare("INSERT INTO " . $prefix['table_prefix'] . "_social_block_links (profiles_name, fa_icone_code, social_profiles_link_url, menu_id, place_id, addon_id) VALUES (:profiles_name, :fa_icon_code, :social_profiles_link_url, :menu_id, :place_id, :addon_id)");
+        $stmt = $db->prepare("INSERT INTO " . $prefix['table_prefix'] . "_event_callendar (profiles_name, fa_icone_code, social_profiles_link_url, menu_id, place_id, addon_id) VALUES (:profiles_name, :fa_icon_code, :social_profiles_link_url, :menu_id, :place_id, :addon_id)");
 
         // Parametrų priskyrimas ir saugumo patikra
         $menu_id = intval($_POST['addon_menu_id']);
