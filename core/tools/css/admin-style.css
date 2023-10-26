@@ -80,7 +80,7 @@ main {
   height: calc(100% - 56px); 
   overflow-y: auto;
   padding: 1rem;
-  z-index: 9;
+  /*z-index: 9;*/
 }
 main.col-md-9.ml-sm-auto.col-lg-10.px-4{
   margin-top: 80px;
