@@ -20,30 +20,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     $addon_event_edit_id = intval($_POST['addon_event_edit_id']);
     $mode = $_POST['mode'];
 
-  // Extract array data from POST request
-$profileNames = $_POST["profiles_name"];
-$profileUrls = array_map(function($input) { return htmlspecialchars($input, ENT_QUOTES, 'UTF-8'); }, $_POST["social_profiles_link_url"]);
-$profileIcons = array_map(function($input) { return htmlspecialchars($input, ENT_QUOTES, 'UTF-8'); }, $_POST["fa_icone_code"]);
+    $callendar_name = $_POST['callendar_name'];
+    $work_dayStart = $_POST['work_dayStart'];
+    $work_dayEnd = $_POST['work_dayEnd'];
+    $lunch_breakStart = $_POST['lunch_breakStart'];
+    $lunch_breakEnd = $_POST['lunch_breakEnd'];
+    $prepare_time = $_POST['prepare_time'];
+    $registration_end_date = $_POST['registration_end_date'];
 
-
-    // Convert arrays to comma-separated strings
-    $profileNamesStr = implode(',', $profileNames);
-    $profileUrlsStr = implode(',', $profileUrls);
-    $profileIconsStr = implode(',', $profileIcons);
-
-    try {
+    try {  
         $sql = ($mode === 'edit') ? 
-            "UPDATE " . $prefix['table_prefix'] . "_event_callendar SET profiles_name = :profiles_name, fa_icone_code = :fa_icon_code, social_profiles_link_url = :social_profiles_link_url, menu_id = :menu_id, place_id = :place_id WHERE id = :addon_id" : 
-            "INSERT INTO " . $prefix['table_prefix'] . "_event_callendar (profiles_name, fa_icone_code, social_profiles_link_url, menu_id, place_id) VALUES (:profiles_name, :fa_icon_code, :social_profiles_link_url, :menu_id, :place_id)";
+            "UPDATE " . $prefix['table_prefix'] . "_event_callendar SET callendar_name = :callendar_name, work_dayStart = :work_dayStart, work_dayEnd = :work_dayEnd, lunch_breakStart = :lunch_breakStart, lunch_breakEnd = :lunch_breakEnd, prepare_time = :prepare_time, registration_end_date = :registration_end_date WHERE id = :addon_id" : 
+            "INSERT INTO " . $prefix['table_prefix'] . "_event_callendar (callendar_name, work_dayStart, work_dayEnd, lunch_breakStart, lunch_breakEnd, prepare_time, registration_end_date) VALUES (:callendar_name, :work_dayStart, :work_dayEnd, :lunch_breakStart, :lunch_breakEnd, :prepare_time, :registration_end_date)";
         
         $stmt = $db->prepare($sql);
 
-        $stmt->bindParam(':profiles_name', $profileNamesStr, PDO::PARAM_STR);
-        $stmt->bindParam(':fa_icon_code', $profileIconsStr, PDO::PARAM_STR);
-        $stmt->bindParam(':social_profiles_link_url', $profileUrlsStr, PDO::PARAM_STR);
-        $stmt->bindParam(':menu_id', $_POST['addon_menu_id'], PDO::PARAM_INT);
-        $stmt->bindParam(':place_id', $_POST['addon_place_id'], PDO::PARAM_INT);
-        
+        $stmt->bindParam(':callendar_name', $callendar_name, PDO::PARAM_STR);
+        $stmt->bindParam(':work_dayStart', $work_dayStart, PDO::PARAM_STR);
+        $stmt->bindParam(':work_dayEnd', $work_dayEnd, PDO::PARAM_STR);
+        $stmt->bindParam(':lunch_breakStart', $lunch_breakStart, PDO::PARAM_STR);
+        $stmt->bindParam(':lunch_breakEnd', $lunch_breakEnd, PDO::PARAM_STR);
+        $stmt->bindParam(':prepare_time', $prepare_time, PDO::PARAM_STR);
+        $stmt->bindParam(':registration_end_date', $registration_end_date, PDO::PARAM_STR);
+
         if ($mode === 'edit') {
             $stmt->bindParam(':addon_id', $addon_event_edit_id, PDO::PARAM_INT);
         }
