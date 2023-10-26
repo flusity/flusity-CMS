@@ -27,11 +27,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     $lunch_breakEnd = $_POST['lunch_breakEnd'];
     $prepare_time = $_POST['prepare_time'];
     $registration_end_date = $_POST['registration_end_date'];
+    $menu_id = intval($_POST['addon_menu_id']);
+    $place_id = intval($_POST['addon_place_id']);
 
     try {  
         $sql = ($mode === 'edit') ? 
-            "UPDATE " . $prefix['table_prefix'] . "_event_callendar SET callendar_name = :callendar_name, work_dayStart = :work_dayStart, work_dayEnd = :work_dayEnd, lunch_breakStart = :lunch_breakStart, lunch_breakEnd = :lunch_breakEnd, prepare_time = :prepare_time, registration_end_date = :registration_end_date WHERE id = :addon_id" : 
-            "INSERT INTO " . $prefix['table_prefix'] . "_event_callendar (callendar_name, work_dayStart, work_dayEnd, lunch_breakStart, lunch_breakEnd, prepare_time, registration_end_date) VALUES (:callendar_name, :work_dayStart, :work_dayEnd, :lunch_breakStart, :lunch_breakEnd, :prepare_time, :registration_end_date)";
+            "UPDATE " . $prefix['table_prefix'] . "_event_callendar SET callendar_name = :callendar_name, work_dayStart = :work_dayStart, work_dayEnd = :work_dayEnd, lunch_breakStart = :lunch_breakStart, lunch_breakEnd = :lunch_breakEnd, prepare_time = :prepare_time, registration_end_date = :registration_end_date, menu_id = :menu_id, place_id = :place_id WHERE id = :addon_event_edit_id" : 
+            "INSERT INTO " .  $prefix['table_prefix'] . "_event_callendar (callendar_name, work_dayStart, work_dayEnd, lunch_breakStart, lunch_breakEnd, prepare_time, registration_end_date, menu_id, place_id) VALUES (:callendar_name, :work_dayStart, :work_dayEnd, :lunch_breakStart, :lunch_breakEnd, :prepare_time, :registration_end_date, :menu_id, :place_id)";
         
         $stmt = $db->prepare($sql);
 
@@ -42,9 +44,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         $stmt->bindParam(':lunch_breakEnd', $lunch_breakEnd, PDO::PARAM_STR);
         $stmt->bindParam(':prepare_time', $prepare_time, PDO::PARAM_STR);
         $stmt->bindParam(':registration_end_date', $registration_end_date, PDO::PARAM_STR);
-
+        $stmt->bindParam(':menu_id', $menu_id, PDO::PARAM_INT);
+        $stmt->bindParam(':place_id', $place_id, PDO::PARAM_INT);
+        
         if ($mode === 'edit') {
-            $stmt->bindParam(':addon_id', $addon_event_edit_id, PDO::PARAM_INT);
+            $stmt->bindParam(':addon_event_edit_id', $addon_event_edit_id, PDO::PARAM_INT);
         }
 
         $stmt->execute();

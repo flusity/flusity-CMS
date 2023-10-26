@@ -14,36 +14,32 @@ secureSession($db, $prefix);
 $language_code = getLanguageSetting($db, $prefix);
 $translations = getTranslations($db, $prefix, $language_code);
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') 
 { 
     $id = intval($_POST['id']); 
 
-    // Extract array data from POST request
-    $profileNames = [];
-    $profileUrls = [];
-    $profileIcons = [];
-
-    for ($i = 1; isset($_POST["profiles_name_$i"]); $i++) {
-        $profileNames[] = htmlspecialchars($_POST["profiles_name_$i"], ENT_QUOTES, 'UTF-8');
-        $profileUrls[] =  htmlspecialchars($_POST["social_profiles_link_url_$i"], ENT_QUOTES, 'UTF-8');
-        $profileIcons[] =  htmlspecialchars($_POST["fa_icone_code_$i"], ENT_QUOTES, 'UTF-8');
-    }
-
-    // Convert arrays to comma-separated strings
-    $profileNamesStr = implode(',', $profileNames);
-    $profileUrlsStr = implode(',', $profileUrls);
-    $profileIconsStr = implode(',', $profileIcons);
+    // Čia yra papildomi laukai
+    $callendar_name = $_POST['callendar_name'];
+    $work_dayStart = $_POST['work_dayStart'];
+    $work_dayEnd = $_POST['work_dayEnd'];
+    $lunch_breakStart = $_POST['lunch_breakStart'];
+    $lunch_breakEnd = $_POST['lunch_breakEnd'];
+    $prepare_time = $_POST['prepare_time'];
+    $registration_end_date = $_POST['registration_end_date'];
+    $menu_id = intval($_POST['addon_menu_id']);
+    $place_id = intval($_POST['addon_place_id']);
 
     try {
-        $stmt = $db->prepare("INSERT INTO " . $prefix['table_prefix'] . "_event_callendar (profiles_name, fa_icone_code, social_profiles_link_url, menu_id, place_id, addon_id) VALUES (:profiles_name, :fa_icon_code, :social_profiles_link_url, :menu_id, :place_id, :addon_id)");
+        $sql = "INSERT INTO " .  $prefix['table_prefix'] . "_event_callendar (callendar_name, work_dayStart, work_dayEnd, lunch_breakStart, lunch_breakEnd, prepare_time, registration_end_date, menu_id, place_id, addon_id) VALUES (:callendar_name, :work_dayStart, :work_dayEnd, :lunch_breakStart, :lunch_breakEnd, :prepare_time, :registration_end_date, :menu_id, :place_id, :addon_id)";
+        $stmt = $db->prepare($sql);
 
-        // Parametrų priskyrimas ir saugumo patikra
-        $menu_id = intval($_POST['addon_menu_id']);
-        $place_id = intval($_POST['addon_place_id']);
-
-        $stmt->bindParam(':profiles_name', $profileNamesStr, PDO::PARAM_STR);
-        $stmt->bindParam(':fa_icon_code', $profileIconsStr, PDO::PARAM_STR);
-        $stmt->bindParam(':social_profiles_link_url', $profileUrlsStr, PDO::PARAM_STR);
+        $stmt->bindParam(':callendar_name', $callendar_name, PDO::PARAM_STR);
+        $stmt->bindParam(':work_dayStart', $work_dayStart, PDO::PARAM_STR);
+        $stmt->bindParam(':work_dayEnd', $work_dayEnd, PDO::PARAM_STR);
+        $stmt->bindParam(':lunch_breakStart', $lunch_breakStart, PDO::PARAM_STR);
+        $stmt->bindParam(':lunch_breakEnd', $lunch_breakEnd, PDO::PARAM_STR);
+        $stmt->bindParam(':prepare_time', $prepare_time, PDO::PARAM_STR);
+        $stmt->bindParam(':registration_end_date', $registration_end_date, PDO::PARAM_STR);
         $stmt->bindParam(':menu_id', $menu_id, PDO::PARAM_INT);
         $stmt->bindParam(':place_id', $place_id, PDO::PARAM_INT);
         $stmt->bindParam(':addon_id', $id, PDO::PARAM_INT);
@@ -53,11 +49,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         } else {
             $_SESSION['error_message'] = t("Error while executing the query.");
         }
-    } catch (PDOException $e) {
+
+    } catch (Exception $e) {
         $_SESSION['error_message'] = $e->getMessage();
     }
 
-    header('Location: ' . $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/core/tools/addons_model.php?name=social_block_links&id=' . $id);
+    header('Location: ' . $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/core/tools/addons_model.php?name=event_callendar&id=' . $id);
     exit();
 }
 ?>
