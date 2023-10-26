@@ -427,11 +427,33 @@ if ($mode === 'create' || $addon) { ?>
     echo t("No such record exists");
  } ?>
 
+<div class="modal tools fade" id="deleteModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><?php echo t("Delete confirm");?></h5>
+                <button type="button" class="close" data-bs-dismiss="modal"><span>&times;</span></button>
+            </div>
+            <div class="modal-body">
+           <p style="font-size: 24px; color: red;"><?php echo t("Are you sure you want to delete this calendar block?");?> </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?php echo t("Cancel");?></button>
+                <button type="button" class="btn btn-danger" id="confirmDelete"><?php echo t("Delete");?></button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     $(document).ready(function() {
         $('#managerSelect').select2();
     });
-    function deleteEventAddon(addonId) {
+
+
+function deleteEventAddon(addonId) {
+    $("#deleteModal").modal("show");
+    $("#confirmDelete").off('click').on('click', function() {
         $.ajax({
             type: 'POST',
             url: '../../cover/addons/event_callendar/action/delete_calendar_addon.php',
@@ -447,6 +469,8 @@ if ($mode === 'create' || $addon) { ?>
                 console.error(textStatus, errorThrown);
             }
         });
-    }
+        $("#deleteModal").modal("hide");
+    });
+}
 
 </script>
