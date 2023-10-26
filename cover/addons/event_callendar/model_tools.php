@@ -463,8 +463,13 @@ if (isset($_GET['edit_holiday_id'])) {
     $(document).ready(function() {
         $('#managerSelect').select2();
     });
-
-
+    
+  function confirmDelete(url) {
+        if (confirm("Ar tikrai norite trinti?")) {
+            window.location.href = url;
+        }
+    }
+    
 function deleteEventAddon(addonId) {
     $("#deleteModal").modal("show");
     $("#confirmDelete").off('click').on('click', function() {
