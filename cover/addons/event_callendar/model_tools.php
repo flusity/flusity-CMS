@@ -274,8 +274,8 @@ if (isset($_GET['edit_holiday_id'])) {
                     <td><?php echo htmlspecialchars($holiday['holiday_name']); ?></td>
                     <td><?php 
                     echo '<a href="addons_model.php?name=event_callendar&id='. htmlspecialchars($_GET['id']).'&edit_holiday_id='. htmlspecialchars($holiday['id']).'"><i class="fa fa-edit"></i></a>';        
-                    echo '<a href="../../cover/addons/event_callendar/action/delete_holiday.php?event_calendar='.$id.'&holiday_id='. htmlspecialchars($holiday['id']) .'"><i class="fa fa-trash"></i></a>';
-                    
+                    echo '<a href="#" onclick="confirmDelete(\'../../cover/addons/event_callendar/action/delete_holiday.php?event_calendar='.$id.'&holiday_id='.htmlspecialchars($holiday['id']).'\')"><i class="fa fa-trash"></i></a>';
+
                     ?></td>
                     
                 </tr>
@@ -305,6 +305,18 @@ if (isset($_GET['edit_holiday_id'])) {
                         <div class="accordion-body">
                       
                             <form action="../../cover/addons/event_callendar/action/add_event_manager.php" method="post">
+                            <input type="hidden" name="id" value="<?php echo $id; ?>">
+                            <select name="callendar_id" id="callendarSelect" data-placeholder="<?php echo t('Select Calendar...'); ?>">
+                                <?php
+                                $stmt = $db->prepare("SELECT id, callendar_name FROM " . $prefix['table_prefix'] . "_event_callendar");
+                                $stmt->execute();
+                                $calendars = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                                foreach ($calendars as $calendar) {
+                                    echo '<option value="' . $calendar['id'] . '">' . $calendar['callendar_name'] . '</option>';
+                                }
+                                ?>
+                            </select>
+ 
                                 <input type="text" name="event_name" placeholder="Event Name">
                                 <input type="date" name="when_event_will_start" placeholder="When Event Will Start" value="<?php echo date('Y-m-d'); ?>">
                                 <input type="text" name="event_days" placeholder="Event Days">
@@ -420,8 +432,8 @@ if (isset($_GET['edit_holiday_id'])) {
                                 echo '<td>' . htmlspecialchars($laboratory['event_color']) . '</td>';
                                 echo '<td>' . implode(", ", $managerNames) . '</td>';
                                 echo '<td>'; 
-                                echo '<a href="addons_model.php?name=event_callendar&id=' . htmlspecialchars($_GET['id']) . '&addon_event_edit_id=' . htmlspecialchars($addonRes['id']) . '"><i class="fa fa-edit"></i></a> ';
-                                echo '<a href="../../cover/addons/event_callendar/action/delete_event_addon.php?name=event_callendar&id=' . htmlspecialchars($_GET['id']) . '&addon_event_id=' . htmlspecialchars($addonRes['id']) . '"><i class="fa fa-trash"></i></a>';
+                                echo '<a href="addons_model.php?name=event_callendar&id=' . htmlspecialchars($_GET['id']) . '&addon_event_edit_id=' . htmlspecialchars($laboratory['id']) . '"><i class="fa fa-edit"></i></a> ';
+                                echo '<a href="../../cover/addons/event_callendar/action/delete_event.php?name=event_callendar&id=' . htmlspecialchars($_GET['id']) . '&event_id=' . htmlspecialchars($laboratory['id']) . '"><i class="fa fa-trash"></i></a>';
                                 echo '</td>';
                                 echo '</tr>';
 
@@ -463,13 +475,12 @@ if (isset($_GET['edit_holiday_id'])) {
     $(document).ready(function() {
         $('#managerSelect').select2();
     });
-    
-  function confirmDelete(url) {
+    function confirmDelete(url) {
         if (confirm("Ar tikrai norite trinti?")) {
             window.location.href = url;
         }
     }
-    
+
 function deleteEventAddon(addonId) {
     $("#deleteModal").modal("show");
     $("#confirmDelete").off('click').on('click', function() {
