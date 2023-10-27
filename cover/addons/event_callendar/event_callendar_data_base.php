@@ -63,15 +63,32 @@ $createTable5 = "CREATE TABLE IF NOT EXISTS {$prefix['table_prefix']}_event_rese
     updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 )";
 
+$createTable6 = "CREATE TABLE IF NOT EXISTS {$prefix['table_prefix']}_callendar_users_member (
+    id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    member_login_name TEXT NOT NULL,
+    member_first_name TEXT NOT NULL,
+    member_last_name TEXT NOT NULL,
+    member_telephone TEXT NOT NULL,
+    member_email TEXT NOT NULL,
+    member_email_ok INT(11) DEFAULT NULL,
+    member_institution TEXT DEFAULT NULL,
+    member_address_institution TEXT DEFAULT NULL,
+    member_invoice TEXT DEFAULT NULL,
+    member_employee_position TEXT DEFAULT NULL,
+    member_description TEXT DEFAULT NULL,
+    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  )";
 
 $dropTable1 = "DROP TABLE IF EXISTS {$prefix['table_prefix']}_event_callendar"; 
 $dropTable2 = "DROP TABLE IF EXISTS {$prefix['table_prefix']}_event_callendar_item";
 $dropTable3 = "DROP TABLE IF EXISTS {$prefix['table_prefix']}_event_callendar_laboratories";
 $dropTable4 = "DROP TABLE IF EXISTS {$prefix['table_prefix']}_event_callendar_holidays";
 $dropTable5 = "DROP TABLE IF EXISTS {$prefix['table_prefix']}_event_reservation_time";
+$dropTable6 = "DROP TABLE IF EXISTS {$prefix['table_prefix']}_callendar_users_member";
 
 
-$databaseDropScripts = [$dropTable1, $dropTable2, $dropTable3, $dropTable4, $dropTable5];
+$databaseDropScripts = [$dropTable1, $dropTable2, $dropTable3, $dropTable4, $dropTable5, $dropTable6];
 
 foreach ($databaseDropScripts as $databaseDropScript) {
     $stmt = $db->prepare($databaseDropScript);
@@ -82,7 +99,7 @@ foreach ($databaseDropScripts as $databaseDropScript) {
 }
 
 
-$databaseScripts = [$createTable1, $createTable2, $createTable3, $createTable4, $createTable5];
+$databaseScripts = [$createTable1, $createTable2, $createTable3, $createTable4, $createTable5, $createTable6];
 
 foreach ($databaseScripts as $databaseScript) {
     $stmt = $db->prepare($databaseScript);
