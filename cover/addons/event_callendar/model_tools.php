@@ -447,7 +447,7 @@ if (isset($_GET['edit_holiday_id'])) {
                                 echo '<td>' . implode(", ", $managerNames) . '</td>';
                                 echo '<td>'; 
                                 echo '<a href="addons_model.php?name=event_callendar&id=' . htmlspecialchars($_GET['id']) . '&event_edit_id=' . htmlspecialchars($laboratory['id']) . '"  value="'.isset($eventToEdit).'"><i class="fa fa-edit"></i></a>';
-                                echo '<a href="../../cover/addons/event_callendar/action/delete_event.php?name=event_callendar&id=' . htmlspecialchars($_GET['id']) . '&event_id=' . htmlspecialchars($laboratory['id']) . '"><i class="fa fa-trash"></i></a>';
+                                echo '<a href="#" onclick="return confirmDelete(\'../../cover/addons/event_callendar/action/delete_event.php?name=event_callendar&id=' . htmlspecialchars($_GET['id']) . '&event_id=' . htmlspecialchars($laboratory['id']) . '\')"><i class="fa fa-trash"></i></a>';
                                 echo '</td>';
                                 echo '</tr>';
 
@@ -496,7 +496,12 @@ if (isset($_GET['edit_holiday_id'])) {
         }
     }
 
-
+    function confirmDelete(url) {
+    if (confirm("Are you sure you want to delete this item?")) {
+        window.location.href = url;
+    }
+    return false;
+    }
 
 function deleteEventAddon(addonId) {
     $("#deleteModal").modal("show");
