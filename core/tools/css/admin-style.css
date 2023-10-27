@@ -388,13 +388,25 @@ button.btn-close:hover {
   font-size: 24px;
 }
 .select2-container {
-  width: 17% !important;
+  min-width: 0% !important;
+  box-shadow: none;
+  border: 0px solid;
 }
 .select2-container--default .select2-search--inline .select2-search__field {
   background: transparent;
-  border: none;
+  border: 0px solid;
   outline: 0;
   box-shadow: none;
   -webkit-appearance: textfield;
-  width: auto !important;
+  width: 0% !important;
+ box-shadow: none;
+}
+
+.select2-container .select2-search--inline .select2-search__field {
+  box-sizing: border-box;
+  border: 0px solid;
+  font-size: 80% !important;
+  margin-top: 3px;
+  margin-left: 3px;
+  padding: 0
 }
