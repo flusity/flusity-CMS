@@ -39,7 +39,6 @@ if ($mode === 'create' || $addon) { ?>
     <h4>
         <?php echo t('Addon JD Flusity \'Event Callendar\' ');?>
     </h4>
-    
         <ul class="nav nav-tabs  mt-2">
             <li class="nav-item tabs-nav-item">
                 <a class="nav-link active" data-bs-toggle="tab" href="#calendar">
@@ -120,36 +119,29 @@ if ($mode === 'create' || $addon) { ?>
                         <input type="text" class="form-control" name="callendar_name" id="calendarFormControlInput" placeholder="Name" value="<?php echo $mode === 'edit' ? htmlspecialchars($addon['callendar_name']) : ''; ?>" required>
                     </div>
 
-
                     <div class="col-md-2 mb-3">
                         <label for="calendarFormControlworkDayStartInput" class="form-label"><?php echo t('Work day start');?></label>
                         <input type="time" class="form-control" name="work_dayStart" id="calendarFormControlworkDayStartInput" placeholder="work day Start" value="<?php echo $mode === 'edit' ? htmlspecialchars($addon['work_dayStart']) : ''; ?>" required>
-
                     </div>
                     <div class="col-md-2 mb-3">
                         <label for="calendarFormControlWorkDayEndInput" class="form-label"><?php echo t('Work day End');?></label>
-
                         <input type="time" class="form-control" name="work_dayEnd" id="calendarFormControlWorkDayEndInput" placeholder="work day End" value="<?php echo $mode === 'edit' ? htmlspecialchars($addon['work_dayEnd']) : ''; ?>" required>
                     </div>
                     <div class="col-md-2 mb-3">
                         <label for="calendarFormControlLunchBreakStartInput" class="form-label"><?php echo t('Lunch time Start');?></label>
-
                         <input type="time" class="form-control" name="lunch_breakStart" id="calendarFormControlLunchBreakStartInput" placeholder="Lunch Start" value="<?php echo $mode === 'edit' ? htmlspecialchars($addon['lunch_breakStart']) : ''; ?>" required>
                     </div>
                     <div class="col-md-2 mb-3">
                         <label for="calendarFormControlLunchBreakEndInput" class="form-label"><?php echo t('Lunch time end');?></label>
-
                         <input type="time" class="form-control" name="lunch_breakEnd" id="calendarFormControlLunchBreakEndInput" placeholder="Lunch End" value="<?php echo $mode === 'edit' ? htmlspecialchars($addon['lunch_breakEnd']) : ''; ?>" required>
                     </div>
 
                     <div class="col-md-2 mb-3">
                         <label for="calendarFormControlPrepareInput" class="form-label"><?php echo t('Prepare time');?></label>
-
                         <input type="text" class="form-control" name="prepare_time" id="calendarFormControlPrepareInput" placeholder="Prepare time" value="<?php echo $mode === 'edit' ? htmlspecialchars($addon['prepare_time']) : ''; ?>" required>
                     </div>
                     <div class="col-md-2 mb-3">
                         <label for="calendarFormControlRegisEndDateInput" class="form-label"><?php echo t('Regist. end date');?></label>
-
                         <input type="text" class="form-control" name="registration_end_date" id="calendarFormControlRegisEndDateInput" placeholder="registr. end date" value="<?php echo $mode === 'edit' ? htmlspecialchars($addon['registration_end_date']) : ''; ?>" required>
                     </div>
 
@@ -165,7 +157,6 @@ if ($mode === 'create' || $addon) { ?>
                     </div>
 
                     <?php  endif; ?>
-
 
                     <table class="table table-sm">
                         <thead>
@@ -185,7 +176,7 @@ if ($mode === 'create' || $addon) { ?>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
+            <?php
                 $get_params = $_GET;
                 unset($get_params['page']);
                 
@@ -217,7 +208,7 @@ if ($mode === 'create' || $addon) { ?>
                         echo '<td>' . $short_place . '</td>';
                         echo '<td>';
                         echo '<a href="addons_model.php?name=event_callendar&id=' . htmlspecialchars($_GET['id']) . '&addon_event_edit_id=' . htmlspecialchars($addonRes['id']) . '"><i class="fa fa-edit"></i></a> ';
-                      ?>
+                    ?>
                         <a href="javascript:void(0);" onclick="deleteEventAddon(<?php echo htmlspecialchars($addonRes['id']); ?>)"><i class="fa fa-trash"></i></a>
                     
                         </td>
@@ -232,10 +223,9 @@ if ($mode === 'create' || $addon) { ?>
             
             </div>
         </div>
-</div>
-          
-            <div class="tab-pane fade" id="coordinators" data-tab="coordinators">
-              <div class="form-group row p-2">
+    </div>
+        <div class="tab-pane fade" id="coordinators" data-tab="coordinators">
+            <div class="form-group row p-2">
                 <h3>
                     <?php echo t('Cabinet heads'); ?>
                 </h3>
@@ -245,22 +235,22 @@ if ($mode === 'create' || $addon) { ?>
         </div>
         
         <div class="tab-pane fade" id="calendarItem" data-tab="calendarItem">
-              <div class="form-group row p-2">
+            <div class="form-group row p-2">
                 <h3>
                     <?php echo t('Event activities'); ?>
                 </h3>
                 <?php require ("event_activities.php");?>
         
-                </div>
+            </div>
         </div>
         <div class="tab-pane fade" id="eventRegistration" data-tab="eventRegistration">
-              <div class="form-group row p-2">
+            <div class="form-group row p-2">
                 <h3>
                     <?php echo t('Event registration'); ?>
                 </h3>
                 <?php require ("event_registration.php");?>
         
-                </div>
+            </div>
         </div>
         <div class="tab-pane fade" id="members" data-tab="members">
             <div class="form-group row p-2">
@@ -314,40 +304,40 @@ if ($mode === 'create' || $addon) { ?>
     return false;
     }
 
-function deleteEventAddon(addonId) {
-    $("#deleteModal").modal("show");
-    $("#confirmDelete").off('click').on('click', function() {
-        $.ajax({
-            type: 'POST',
-            url: '../../cover/addons/event_callendar/action/delete_calendar_addon.php',
-            data: {
-                name: 'event_callendar',
-                id: '<?php echo htmlspecialchars($_GET['id']); ?>',
-                addon_event_id: addonId
-            },
-            success: function(response) {
-                window.location.href = 'addons_model.php?name=event_callendar&id=<?php echo htmlspecialchars($_GET['id']); ?>';
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.error(textStatus, errorThrown);
-            }
-        });
-        $("#deleteModal").modal("hide");
-    });
-}
-document.addEventListener("DOMContentLoaded", function() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const eventEditId = urlParams.get('event_edit_id');
-
-    if(eventEditId) {
-        var tab = new bootstrap.Tab(document.querySelector('a[href="#coordinators"]'));
-        tab.show();
-
-        var myAccordion = document.getElementById('accordionFlushExample');
-        var bsCollapse = new bootstrap.Collapse(myAccordion.querySelector('.collapse'), {
-            toggle: true
+    function deleteEventAddon(addonId) {
+        $("#deleteModal").modal("show");
+        $("#confirmDelete").off('click').on('click', function() {
+            $.ajax({
+                type: 'POST',
+                url: '../../cover/addons/event_callendar/action/delete_calendar_addon.php',
+                data: {
+                    name: 'event_callendar',
+                    id: '<?php echo htmlspecialchars($_GET['id']); ?>',
+                    addon_event_id: addonId
+                },
+                success: function(response) {
+                    window.location.href = 'addons_model.php?name=event_callendar&id=<?php echo htmlspecialchars($_GET['id']); ?>';
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error(textStatus, errorThrown);
+                }
+            });
+            $("#deleteModal").modal("hide");
         });
     }
-});
+    document.addEventListener("DOMContentLoaded", function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const eventEditId = urlParams.get('event_edit_id');
+
+        if(eventEditId) {
+            var tab = new bootstrap.Tab(document.querySelector('a[href="#coordinators"]'));
+            tab.show();
+
+            var myAccordion = document.getElementById('accordionFlushExample');
+            var bsCollapse = new bootstrap.Collapse(myAccordion.querySelector('.collapse'), {
+                toggle: true
+            });
+        }
+    });
 
 </script>
