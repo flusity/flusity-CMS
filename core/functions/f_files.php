@@ -55,11 +55,16 @@ function getCurrentImage($db, $prefix) {
     }
     return false;
 }
-// 23-10-25 Updated function checks the filename for invalid characters and returns an error message if there are. 
+
 function handleFileUpload($db, $table_prefix, $target_dir, $allowed_file_types, $max_file_size) {
     $uploaded_file = $_FILES["uploaded_file"];
     $filename = $uploaded_file['name'];
-    $filename_clean = preg_replace("/[^a-zA-Z0-9\._]+/", "", $filename); // Pašaliname specialiuosius simbolius
+   $filename_clean = strtolower(preg_replace("/[^a-zA-Z0-9\._]+/", "_", $filename));
+
+    // if ($filename !== $filename_clean) {
+    //     $_SESSION['error_message'] = t("Invalid characters in file name.");
+    //     return false;
+    // }
 
     if (!in_array($uploaded_file['type'], $allowed_file_types)) {
         $_SESSION['error_message'] = t("Invalid file type.");
@@ -68,11 +73,6 @@ function handleFileUpload($db, $table_prefix, $target_dir, $allowed_file_types, 
 
     if ($uploaded_file['size'] > $max_file_size) {
         $_SESSION['error_message'] = t("File size exceeded limit.");
-        return false;
-    }
-
-    if ($filename !== $filename_clean) {
-        $_SESSION['error_message'] = t("Invalid characters in file name.");
         return false;
     }
 
@@ -97,5 +97,3 @@ function handleFileUpload($db, $table_prefix, $target_dir, $allowed_file_types, 
         return false;
     }
 }
-
-
