@@ -235,12 +235,12 @@ if ($mode === 'create' || $addon) { ?>
         </div>
         
         <div class="tab-pane fade" id="calendarItem" data-tab="calendarItem">
-            <div class="form-group row p-2">
+            <div class="form-group p-2">
                 <h3>
                     <?php echo t('Event activities'); ?>
                 </h3>
                 <?php require ("event_activities.php");?>
-        
+
             </div>
         </div>
         <div class="tab-pane fade" id="eventRegistration" data-tab="eventRegistration">
@@ -292,16 +292,23 @@ if ($mode === 'create' || $addon) { ?>
         $('#managerSelect').select2();
     });
     function confirmDelete(url) {
-        if (confirm("Are you sure you want to delete??")) {
+        if (confirm("Are you sure you want to delete?")) {
             window.location.href = url;
         }
     }
 
-    function confirmDelete(url) {
-    if (confirm("Are you sure you want to delete this item?")) {
-        window.location.href = url;
+    function confirmDelete2(url) {
+        if (confirm("Are you sure you want to delete this item?")) {
+            window.location.href = url;
+        }
+        return false;
     }
-    return false;
+
+    function confirmDelete3(url) {
+        if (confirm("Are you sure you want to delete this activity?")) {
+            window.location.href = url;
+        }
+        return false;
     }
 
     function deleteEventAddon(addonId) {

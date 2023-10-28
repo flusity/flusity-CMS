@@ -61,7 +61,7 @@
                    <td><?php echo htmlspecialchars($holiday['holiday_name']); ?></td>
                    <td><?php 
                    echo '<a href="addons_model.php?name=event_callendar&id='. htmlspecialchars($_GET['id']).'&edit_holiday_id='. htmlspecialchars($holiday['id']).'"><i class="fa fa-edit"></i></a>';        
-                   echo '<a href="#" onclick="confirmDelete(\'../../cover/addons/event_callendar/action/delete_holiday.php?event_calendar='.$id.'&holiday_id='.htmlspecialchars($holiday['id']).'\')"><i class="fa fa-trash"></i></a>';
+                   echo '<a href="#" onclick="confirmDelete2(\'../../cover/addons/event_callendar/action/delete_holiday.php?event_calendar='.$id.'&holiday_id='.htmlspecialchars($holiday['id']).'\')"><i class="fa fa-trash"></i></a>';
 
                    ?></td>
                    
