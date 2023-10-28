@@ -1,5 +1,5 @@
 <?php 
-/*  23-10-25 Update report:
+/*  Report:
  *   Session Management: The code initially checks to see if a PHP session is active, and if not, initializes it. This allows error and success messages to be safely stored.
  *   Configuration Load: Loads the necessary configuration and feature files.
  *   Database Connection: A connection to the database is opened and a security mechanism is applied.
