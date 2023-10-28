@@ -13,6 +13,10 @@
     $stmtLabs->execute();
     $laboratories = $stmtLabs->fetchAll(PDO::FETCH_ASSOC);
 
+    $sql = "SELECT * FROM rewxcas_flussi_files";
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+    $files = $stmt->fetchAll(PDO::FETCH_ASSOC);
     ?>
 
 <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -26,8 +30,10 @@
                     <div class="row">
                         <div class="col-md-8">
                             <form method="POST" action="../../cover/addons/event_callendar/action/add_activities.php">
+                            <input type="hidden" class="form-control" name="id" value="<?php echo $id; ?>">
+
                                 <div class="form-group d-flex">
-                                <select name="laboratories_id" class="p-2" id="laboratories_id" placeholder="<?php t('Cabinet heads'); ?>">
+                                <select name="laboratories_id" class="p-2" id="laboratories_id" placeholder="<?php t('Cabinet heads'); ?>" required>
                                         <option value="" disabled selected><?php echo t('Select cabinet heads'); ?></option>
                                         <?php foreach ($laboratories as $lab): ?>
                                             <option value="<?php echo $lab['id']; ?>">
@@ -35,17 +41,42 @@
                                             </option>
                                         <?php endforeach; ?>
                                     </select>
-                                    <input type="text" class="p-1 w-50" name="title" id="title" placeholder="<?php echo t('Event Title'); ?>">
-                                    <input type="number" class="p-1" name="time_limit" id="time_limit" placeholder="<?php echo t('Time Limit'); ?>">
+                                    <input type="text" class="p-1 w-50" name="title" id="title" placeholder="<?php echo t('Event Title'); ?>" required>
+                                    <input type="number" class="p-1" name="time_limit" id="time_limit" placeholder="<?php echo t('Time Limit'); ?>" required>
                                     
-                                    <input type="text" class="p-1" width="20%" name="target_audience" id="target_audience" placeholder="<?php echo t('Target Audience'); ?>">
+                                    <input type="text" class="p-1" width="20%" name="target_audience" id="target_audience" placeholder="<?php echo t('Target Audience'); ?>" required>
                                 </div>
-                            </form>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group p-2" style="margin-bottom:-250px">
-                                <input type="file" class="p-2 m-2" name="metodic_file_id" id="metodic_file_id" placeholder="<?php echo t('Metodic File'); ?>">
-                                <input type="file" class="p-2 m-2" name="image_id" id="image_id" placeholder="<?php echo t('Image'); ?>">
+                          
+                            <select name="metodic_file_id" id="metodic_file_id" class="p-2 m-2">
+                                <option value=""><?php echo t('Select pdf, office File'); ?></option>
+                                <?php foreach ($files as $file): ?>
+                                    <?php
+                                    $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+                                    $allowedExtensions = ['doc', 'docx', 'xls', 'xlsx', 'pdf'];
+                                    if (in_array($extension, $allowedExtensions)): ?>
+                                        <option value="<?php echo $file['id']; ?>"><?php echo $file['name']; ?></option>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            </select>
+                            <!-- Paveiksliuko pasirinkimas -->
+                         
+                            <select name="image_id" id="image_id" class="p-2 m-2">
+                                <option value=""><?php echo t('Select Image'); ?></option>
+                                <?php foreach ($files as $file): ?>
+                                    <option value="<?php echo $file['id']; ?>" data-img-src="<?php echo $file['url']; ?>">
+                                        <?php echo substr($file['name'], 0, 15); ?>
+                                    </option>
+                                        <?php endforeach; ?>
+                            </select>
+
+                            <!-- Miniatiūros konteineris -->
+                            <div id="thumbnailEvent-container">
+                                <img id="thumbnailEvent" src="" alt="Selected thumbnail" width="150px">
+                            </div>
+
                                 <button type="submit" class="p-3 m-3" name="submit"><?php echo t("Add/Edit activity");?></button>
                             </div>
                         </div>
@@ -53,7 +84,7 @@
                 </div>
                 <div class="col-md-12">
                     <div class="form-group p-2"> 
-                        <textarea name="short_description" id="short_description" rows="10" cols="100" placeholder="<?php echo t('Description'); ?>"></textarea>
+                        <textarea name="short_description" id="short_description" rows="10" cols="100" placeholder="<?php echo t('Description'); ?>" required></textarea>
                     </div>  
                 </div>
                 <div class="col-md-8 mb-3">

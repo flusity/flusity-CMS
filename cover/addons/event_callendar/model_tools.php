@@ -347,4 +347,19 @@ if ($mode === 'create' || $addon) { ?>
         }
     });
 
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const selectElement = document.getElementById('image_id');
+        const thumbnailElement = document.getElementById('thumbnailEvent');
+
+        // Keičiame miniatiūrą, kai pasirenkamas naujas elementas
+        selectElement.addEventListener('change', function() {
+            const selectedOption = selectElement.options[selectElement.selectedIndex];
+            const imgSrc = selectedOption.getAttribute('data-img-src');
+
+            thumbnailElement.src = imgSrc;
+        });
+    });
+
+
 </script>
