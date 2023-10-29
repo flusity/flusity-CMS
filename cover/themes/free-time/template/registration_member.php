@@ -69,19 +69,19 @@
                 </div>
              
                <br>
-                <div class="mb-3"><input type="text" class="form-control" id="member_login_name" name="member_login_name" placeholder="<?php echo t("Login Name");?>" required></div>
+                <div class="mb-3"><input type="text" class="form-control" id="member_login_name" name="member_login_name" placeholder="<?php echo htmlspecialchars(t("Login Name"));?>" required></div>
                 <br>
-                <div class="mb-3"><input type="text" class="form-control" id="member_first_name" name="member_first_name" placeholder="<?php echo t("First Name");?>" required></div>
+                <div class="mb-3"><input type="text" class="form-control" id="member_first_name" name="member_first_name" placeholder="<?php echo htmlspecialchars(t("First Name"));?>" required></div>
                 <br>
-                <div class="mb-3"><input type="text" class="form-control" id="member_last_name" name="member_last_name" placeholder="<?php echo t("Last Name");?>" required></div>
+                <div class="mb-3"><input type="text" class="form-control" id="member_last_name" name="member_last_name" placeholder="<?php echo htmlspecialchars(t("Last Name"));?>" required></div>
                 <br>
-                <div class="mb-3"><input type="text" class="form-control" id="member_telephone" name="member_telephone" placeholder="<?php echo t("Telephone");?>" required></div>
+                <div class="mb-3"><input type="text" class="form-control" id="member_telephone" name="member_telephone" placeholder="<?php echo htmlspecialchars(t("Telephone"));?>" required></div>
                 <br>
-                <div class="mb-3"><input type="email" class="form-control" id="member_email" name="member_email" placeholder="<?php echo t("Email");?>" required></div>
+                <div class="mb-3"><input type="email" class="form-control" id="member_email" name="member_email" placeholder="<?php echo htmlspecialchars(t("Email"));?>" required></div>
                 <br>
-                <div class="mb-3"><input type="text" class="form-control" id="member_institution" name="member_institution" placeholder="<?php echo t("Institution");?>"></div>
+                <div class="mb-3"><input type="text" class="form-control" id="member_institution" name="member_institution" placeholder="<?php echo htmlspecialchars(t("Institution"));?>"></div>
                 <br>
-                <div class="mb-3"><input type="text" class="form-control" id="member_address_institution" name="member_address_institution" placeholder="<?php echo t("Institution Address");?>" required></div>
+                <div class="mb-3"><input type="text" class="form-control" id="member_address_institution" name="member_address_institution" placeholder="<?php echo htmlspecialchars(t("Institution Address"));?>" required></div>
                 <br>
                 <div class="mb-3 row">
                     <label for="member_invoice" class="col-sm-2 col-form-label"><?php echo t("Invoice"); ?></label>
@@ -89,14 +89,13 @@
                         <select class="form-control" id="member_invoice" name="member_invoice">
                             <option value="0"><?php echo t("No"); ?></option>
                             <option value="1"><?php echo t("Yes"); ?></option>
-                            
                         </select>
                     </div>
                 </div>
                 <br>
-                <div class="mb-3"><input type="text" class="form-control" id="member_employee_position" name="member_employee_position" placeholder="<?php echo t("Employee Position");?>" required></div>
+                <div class="mb-3"><input type="text" class="form-control" id="member_employee_position" name="member_employee_position" placeholder="<?php echo htmlspecialchars(t("Employee Position"));?>" required></div>
                 <br>
-                <div class="mb-3"><textarea class="form-control" id="member_description" name="member_description" placeholder="<?php echo t("Additional information");?>"></textarea></div>
+                <div class="mb-3"><textarea class="form-control" id="member_description" name="member_description" placeholder="<?php echo htmlspecialchars(t("Additional information"));?>"></textarea></div>
                 <br>
                 <input type="hidden" name="csrf_token" value="<?php echo generateCSRFToken(); ?>">
                 <br>
