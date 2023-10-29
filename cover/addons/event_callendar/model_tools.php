@@ -347,19 +347,66 @@ if ($mode === 'create' || $addon) { ?>
         }
     });
 
+    $(document).ready(function() {
+    const thumbnailElement = document.getElementById('thumbnailEvent');
+    const metodicTextElement = document.getElementById('metodicThumbnail'); // Naujas tekstas
 
-    document.addEventListener('DOMContentLoaded', function() {
-        const selectElement = document.getElementById('image_id');
-        const thumbnailElement = document.getElementById('thumbnailEvent');
-
-        // Keičiame miniatiūrą, kai pasirenkamas naujas elementas
-        selectElement.addEventListener('change', function() {
-            const selectedOption = selectElement.options[selectElement.selectedIndex];
-            const imgSrc = selectedOption.getAttribute('data-img-src');
-
-            thumbnailElement.src = imgSrc;
-        });
+    // Inicializuojame Select2 image_id
+    $('#image_id').select2().on('select2:select', function (e) {
+        const data = e.params.data;
+        const imgSrc = $(data.element).attr('data-img-src');
+        
+        thumbnailElement.src = imgSrc;
     });
+
+    // Inicializuojame Select2 metodic_file_id
+    $('#metodic_file_id').select2().on('select2:select', function (e) {
+        const data = e.params.data;
+        const fileName = data.text; // Gausime pasirinkto elemento tekstą
+        
+        metodicTextElement.innerText = fileName; // Naujas tekstas
+    });
+
+    // Inicialinis paveikslėlio rodymas image_id
+    const initialImgSrc = $('#image_id').find(':selected').data('img-src');
+    if (initialImgSrc) {
+        thumbnailElement.src = initialImgSrc;
+    }
+
+    // Inicialinis failo pavadinimo rodymas metodic_file_id
+    const initialMetodicFileName = $('#metodic_file_id').find(':selected').text();
+    if (initialMetodicFileName) {
+        metodicTextElement.innerText = initialMetodicFileName; // Naujas tekstas
+    }
+});
+
+
+$(document).ready(function() {
+  $('.accordion-button').click(function() {
+    let collapseId = $(this).attr('data-bs-target');
+    if ($(collapseId).hasClass('show')) {
+      sessionStorage.setItem('activeAccordion', '');
+    } else {
+      sessionStorage.setItem('activeAccordion', collapseId);
+    }
+  });
+
+  $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function(e) {
+    let tabId = $(e.target).attr('href');
+    sessionStorage.setItem('activeTab', tabId);
+  });
+
+  let activeAccordion = sessionStorage.getItem('activeAccordion');
+  if (activeAccordion) {
+    $(activeAccordion).addClass('show');
+    $(`button[data-bs-target="${activeAccordion}"]`).removeClass('collapsed');
+  }
+
+  let activeTab = sessionStorage.getItem('activeTab');
+  if (activeTab) {
+    $('a[href="' + activeTab + '"]').tab('show');
+  }
+});
 
 
 </script>
