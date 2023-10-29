@@ -50,7 +50,7 @@ $(document).on('change', '.time-checkbox', function() {
 ////////////////////////////////////////////////////////
 
 
-function createEventModal(themeId, registrationAllowed, eventDate) {
+function createEventModal(themeId, registrationAllowed, eventDate, eventTitle) {
     let accordionHTML = '';
     eventTopics.forEach(topic => {
         if (topic.theme_id === themeId) {
@@ -76,6 +76,11 @@ function createEventModal(themeId, registrationAllowed, eventDate) {
                     <p>${topic.shortDescription} <br>
                     <b>Metodinė medžiaga:</b> <br>${topic.methodicalMaterial}</p>
                     <form action="registration-member.php" method="post">
+                    <input type="hidden" name="event_laboratory_id" value="${topic.theme_id}">
+                    <input type="hidden" name="event_item_id" value="${topic.id}">
+                    <input type="hidden" name="event_item_title" value="${topic.title}">
+                    <input type="hidden" name="event_laboratory_title" value="${eventTitle}">
+                    <input type="hidden" name="event_reserve_day" value="${eventDate}">
                         <input type="hidden" name="selectedTime" class="selected-time-input" value="">
                         <button type="submit" class="btn btn-primary registration-button"  style="display: none; margin-bottom: 10px">Registration</button>
                     </form>
@@ -161,7 +166,7 @@ function showEventModal(eventData,topic) {
         registrationAllowed = false;
     }
 
-    createEventModal(eventData.id, registrationAllowed, eventData.date);
+    createEventModal(eventData.id, registrationAllowed, eventData.date, eventData.title);
 
     const modal = document.getElementById("eventModal");
     const closeBtn = document.getElementsByClassName("close-event")[0];
