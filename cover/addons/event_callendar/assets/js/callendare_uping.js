@@ -4,6 +4,7 @@
 */
 /*footer*/
 
+
 function convertMinutesToHoursMinutes(minutes) {
     const hours = Math.floor(minutes / 60);
     const remainingMinutes = minutes % 60;
@@ -41,18 +42,24 @@ function renderTimeOptions(timeOptions, eventDate, reserveDayOption, reserveDayT
     }
     return optionsHTML;
 }
+///////////////////////////
+$(document).on('change', '.time-checkbox', function() {
+    $('.time-checkbox').not(this).prop('checked', false);
+    $('.selected-time-input').val($(this).val());
+});///
+////////////////////////////////////////////////////////
 
-    function createEventModal(themeId, registrationAllowed, eventDate) {
-        let accordionHTML = '';
-        eventTopics.forEach(topic => {
-            if (topic.theme_id === themeId) {
-              
-                const timeString = convertMinutesToHoursMinutes(topic.timeLimit);
-                let reserveDayTimeOption = topic.reserveEventDay;
-                let reserveDayOption = topic.reserveDay;
-                let timeOptions = topic.provideTime;
-                let timeOptionsHTML = renderTimeOptions(timeOptions, eventDate, reserveDayOption, reserveDayTimeOption); // 60 eilutė
-           
+
+function createEventModal(themeId, registrationAllowed, eventDate) {
+    let accordionHTML = '';
+    eventTopics.forEach(topic => {
+        if (topic.theme_id === themeId) {
+            const timeString = convertMinutesToHoursMinutes(topic.timeLimit);
+            let reserveDayTimeOption = topic.reserveEventDay;
+            let reserveDayOption = topic.reserveDay;
+            let timeOptions = topic.provideTime;
+            let timeOptionsHTML = renderTimeOptions(timeOptions, eventDate, reserveDayOption, reserveDayTimeOption);
+            
             accordionHTML += `
                 <button class="callendar-accordion accordion">${topic.title} <i class="fa fa-angle-down float-right"></i></button>
                 <div class="panel">
@@ -68,10 +75,13 @@ function renderTimeOptions(timeOptions, eventDate, reserveDayOption, reserveDayT
                     <img src="${topic.imageUrl}" class="accordion-event-image" alt="image">
                     <p>${topic.shortDescription} <br>
                     <b>Metodinė medžiaga:</b> <br>${topic.methodicalMaterial}</p>
+                    <form action="registration-member.php" method="post">
+                        <input type="hidden" name="selectedTime" class="selected-time-input" value="">
+                        <button type="submit" class="btn btn-primary registration-button"  style="display: none; margin-bottom: 10px">Registration</button>
+                    </form>
                 </div>`;
-
-                    }
-                });
+        }
+    });
                 
     const modalHTML = `
     <div id="eventModal" class="modal-view">
@@ -207,4 +217,17 @@ $(document).ready(function() {
         $('#eventModal').hide();
         closeEventModal();
     });
+});
+
+
+$(document).on('change', '.time-checkbox', function() {
+    $('.time-checkbox').not(this).prop('checked', false);
+    
+    $('.selected-time-input').val($(this).val());
+
+    if ($('.time-checkbox:checked').length > 0) {
+        $('.registration-button').show();
+    } else {
+        $('.registration-button').hide();
+    }
 });
