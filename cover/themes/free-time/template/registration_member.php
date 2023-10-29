@@ -81,9 +81,8 @@
                 <br>
                 <div class="mb-3"><input type="text" class="form-control" id="member_institution" name="member_institution" placeholder="<?php echo t("Institution");?>"></div>
                 <br>
-                <div class="mb-3"><input type="text" class="form-control" id="member_address_institution" name="member_address_institution" placeholder="<?php echo t("Institution Address");?>"></div>
+                <div class="mb-3"><input type="text" class="form-control" id="member_address_institution" name="member_address_institution" placeholder="<?php echo t("Institution Address");?>" required></div>
                 <br>
-
                 <div class="mb-3 row">
                     <label for="member_invoice" class="col-sm-2 col-form-label"><?php echo t("Invoice"); ?></label>
                     <div class="col-sm-2">
@@ -93,11 +92,9 @@
                             
                         </select>
                     </div>
-                    
                 </div>
-
                 <br>
-                <div class="mb-3"><input type="text" class="form-control" id="member_employee_position" name="member_employee_position" placeholder="<?php echo t("Employee Position");?>"></div>
+                <div class="mb-3"><input type="text" class="form-control" id="member_employee_position" name="member_employee_position" placeholder="<?php echo t("Employee Position");?>" required></div>
                 <br>
                 <div class="mb-3"><textarea class="form-control" id="member_description" name="member_description" placeholder="<?php echo t("Additional information");?>"></textarea></div>
                 <br>
