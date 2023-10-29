@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 24, 2023 at 01:25 PM
+-- Generation Time: Oct 29, 2023 at 07:11 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ress`
+-- Database: `werr`
 --
 
 -- --------------------------------------------------------
@@ -71,7 +71,7 @@ CREATE TABLE `event_callendar` (
 --
 
 INSERT INTO `event_callendar` (`id`, `callendar_name`, `work_dayStart`, `work_dayEnd`, `lunch_breakStart`, `lunch_breakEnd`, `prepare_time`, `registration_end_date`, `menu_id`, `place_id`, `addon_id`, `created`, `updated`) VALUES
-(1, 'Registracija', '08:15:00', '16:45:00', '12:00:00', '13:00:00', 10, '1', 31, 19, 24, '2023-09-21 03:01:01', '2023-10-23 08:12:36');
+(1, 'Registracija', '08:15:00', '16:45:00', '12:00:00', '13:00:00', 10, '1', 31, 19, 24, '2023-09-21 00:01:01', '2023-10-29 16:15:57');
 
 -- --------------------------------------------------------
 
@@ -93,8 +93,9 @@ CREATE TABLE `event_callendar_holidays` (
 --
 
 INSERT INTO `event_callendar_holidays` (`id`, `month`, `holiday`, `holiday_name`, `created`, `updated`) VALUES
-(1, 10, 26, 'test', '2023-09-21 18:45:16', '2023-10-23 07:59:14'),
-(2, 10, 30, 'bandomas', '2023-09-21 18:45:16', '2023-10-23 07:59:18');
+(1, 10, 26, 'test2', '2023-09-21 15:45:16', '2023-10-28 05:51:20'),
+(15, 10, 31, 'test', '2023-10-26 19:35:22', '2023-10-28 05:51:09'),
+(24, 4, 18, 'dfgfg', '2023-10-29 08:55:26', '2023-10-29 08:55:26');
 
 -- --------------------------------------------------------
 
@@ -121,10 +122,13 @@ CREATE TABLE `event_callendar_item` (
 --
 
 INSERT INTO `event_callendar_item` (`id`, `laboratories_id`, `title`, `short_description`, `methodical_material`, `time_limit`, `target_audience`, `metodic_file_id`, `image_id`, `created`, `updated`) VALUES
-(1, 1, 'Testuoju Pavadinima', 'Trumpas aprašymas', 'dgffg455', 180, '6-9', NULL, 27, '2023-09-21 15:27:16', '2023-09-23 08:00:10'),
-(2, 1, 'Trumpas ar koks pavadinimas', 'Trumpas aprašymas 2', '45nkjkjkbvbvbv', 90, '7-8', NULL, 28, '2023-09-21 15:27:16', '2023-09-22 20:27:45'),
-(3, 1, 'Bandomasis įrašas antraštei', 'testukas su kitu', 'bvbvbbvbv555', 45, '10-12', NULL, 27, '2023-09-21 17:50:05', '2023-10-04 06:36:35'),
-(4, 2, 'laboratorijos temos antraštė', 'Bandome trumpą aprašymą apie veiklos pobūdį', 'erertrte ertertrete  erterte e err', 45, '11-12', NULL, 28, '2023-09-21 18:36:58', '2023-09-22 20:27:55');
+(1, 1, 'Testuoju Pavadinima', 'Trumpas aprašymas', 'dgffg455', 180, '6-9', 39, 27, '2023-09-21 12:27:16', '2023-10-28 18:51:35'),
+(2, 1, 'Trumpas ar koks pavadinimas', 'Trumpas aprašymas 2', '45nkjkjkbvbvbv', 90, '7-8', 0, 28, '2023-09-21 12:27:16', '2023-10-29 08:55:53'),
+(3, 1, 'Bandomasis įrašas antraštei', 'testukas su kitu', 'bvbvbbvbv555', 45, '10-12', 39, 27, '2023-09-21 14:50:05', '2023-10-28 18:51:43'),
+(4, 2, 'laboratorijos temos antraštė', 'Bandome trumpą aprašymą apie veiklos pobūdį', 'erertrte ertertrete  erterte e err', 45, '11-12', 39, 28, '2023-09-21 15:36:58', '2023-10-28 18:51:47'),
+(18, 3, 'test 1000', '77777 sdfdsf s fsdf ddd 444444444444', 'sd sfd fdgf hfghghgfhfg', 45, '3-6', 40, 27, '2023-10-29 08:16:30', '2023-10-29 08:39:23'),
+(19, 3, 'test22222', '77777 sdfdsf s fsdf ddd 444444444444', 'sd sfd fdgf hfghghgfhfg', 45, '3-6', 40, 27, '2023-10-29 08:17:15', '2023-10-29 08:26:17'),
+(20, 3, '444', ',hgfkhjgljhgljh', '', 50, '3', 41, 20, '2023-10-29 08:27:00', '2023-10-29 08:27:00');
 
 -- --------------------------------------------------------
 
@@ -149,9 +153,9 @@ CREATE TABLE `event_callendar_laboratories` (
 --
 
 INSERT INTO `event_callendar_laboratories` (`id`, `callendar_id`, `event_name`, `managers`, `when_event_will_start`, `event_days`, `event_color`, `created`, `updated`) VALUES
-(1, 1, 'Mechatronika', '1,22', '2023-10-15', '32', 'blue', '2023-09-21 03:12:48', '2023-10-23 07:56:32'),
-(2, 1, 'Gamtamokslinė', '1', '2023-10-15', '31', 'yellow', '2023-09-21 03:12:48', '2023-10-23 07:55:35'),
-(3, 1, 'Žalioji energetika', '1', '2023-10-15', '25', 'green', '2023-09-21 03:12:48', '2023-10-23 07:55:37');
+(1, 1, 'Mechatronika', '1,22', '2023-10-26', '32', 'blue', '2023-09-21 00:12:48', '2023-10-28 08:57:53'),
+(2, 1, 'Gamtamokslinė', '1', '2023-10-26', '31', 'yellow', '2023-09-21 00:12:48', '2023-10-28 08:58:12'),
+(3, 1, 'Žalioji energetika', '1,22', '2023-10-26', '60', 'indigo', '2023-09-21 00:12:48', '2023-10-28 08:58:24');
 
 -- --------------------------------------------------------
 
@@ -175,8 +179,8 @@ CREATE TABLE `event_reservation_time` (
 --
 
 INSERT INTO `event_reservation_time` (`id`, `event_laboratory_id`, `event_item_id`, `reserve_event_time`, `reserve_date`, `reservation_description`, `created`, `updated`) VALUES
-(6, 1, 2, '13:00:00', '2023-10-31', 'dfgsfdg', '2023-09-23 08:02:39', '2023-10-18 11:58:57'),
-(10, 1, 3, '09:10:00', '2023-10-31', 'dfgsfdg', '2023-09-23 08:02:39', '2023-10-18 11:59:00');
+(6, 1, 2, '13:00:00', '2023-10-31', 'dfgsfdg', '2023-09-23 05:02:39', '2023-10-18 08:58:57'),
+(10, 1, 3, '09:10:00', '2023-10-31', 'dfgsfdg', '2023-09-23 05:02:39', '2023-10-18 08:59:00');
 
 -- --------------------------------------------------------
 
@@ -223,7 +227,9 @@ INSERT INTO `flussi_files` (`id`, `name`, `url`, `uploaded_at`) VALUES
 (25, 'facebook-1_d00a2bd3f98d49c6.png', 'http://localhost/uploads/facebook-1_d00a2bd3f98d49c6.png', '2023-08-27 16:39:00'),
 (26, 'github_c1b0e9c17264fee5.png', 'http://localhost/uploads/github_c1b0e9c17264fee5.png', '2023-08-27 20:28:37'),
 (27, 'image1_05f051a9605edf83.jpg', 'http://localhost/uploads/image1_05f051a9605edf83.jpg', '2023-09-13 07:10:57'),
-(28, 'image2_17dc230bc4563906.jpg', 'http://localhost/uploads/image2_17dc230bc4563906.jpg', '2023-09-13 07:11:10');
+(28, 'image2_17dc230bc4563906.jpg', 'http://localhost/uploads/image2_17dc230bc4563906.jpg', '2023-09-13 07:11:10'),
+(40, 'readmy_8889e71aa55264b1.pdf', 'http://localhost/uploads/readmy_8889e71aa55264b1.pdf', '2023-10-28 22:41:56'),
+(41, 'readmy_ed4e7803685a945a.docx', 'http://localhost/uploads/readmy_ed4e7803685a945a.docx', '2023-10-28 22:42:06');
 
 -- --------------------------------------------------------
 
@@ -250,9 +256,9 @@ CREATE TABLE `flussi_menu` (
 
 INSERT INTO `flussi_menu` (`id`, `name`, `lang_menu_name`, `page_url`, `position`, `template`, `created_at`, `updated_at`, `show_in_menu`, `parent_id`) VALUES
 (6, 'HOMES', NULL, 'index', 1, 'template_index', '2023-04-16 12:35:26', '2023-06-20 19:59:31', 1, 0),
-(12, 'Contact', 'Kontaktai', 'contacts', 2, 'template_contacts', '2023-04-21 14:28:01', '2023-08-17 12:00:59', 1, 0),
+(12, 'Kontaktai', 'Contact', 'contacts', 2, 'template_contacts', '2023-04-21 14:28:01', '2023-10-25 16:05:03', 1, 0),
 (20, 'LOGIN', NULL, 'login', 3, 'template_login_form', '2023-08-08 16:03:28', '2023-08-17 09:39:10', 0, 0),
-(31, 'Callendar', 'Kalendorius', 'event-callendar', 4, 'template_callendar', '2023-09-16 11:18:26', '2023-09-16 11:18:26', 1, 0);
+(31, 'Kalendorius', 'Calendar', 'event-calendar', 4, 'template_callendar', '2023-09-16 11:18:26', '2023-10-25 16:05:17', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -704,7 +710,7 @@ CREATE TABLE `flussi_v_custom_blocks` (
 --
 
 INSERT INTO `flussi_v_custom_blocks` (`id`, `name`, `menu_id`, `place_id`, `html_code`, `lang_custom_name`, `lang_custom_content`, `updated`, `created`) VALUES
-(36, 'testing area', 0, 12, 'test area content', NULL, NULL, '2023-09-05 18:55:20', '2023-09-13 19:33:08'),
+(36, 'testing area', 0, 12, 'test area content', NULL, NULL, '2023-10-24 18:54:15', '2023-09-13 19:33:08'),
 (38, NULL, 6, 15, ' &lt;h1 class=&quot;pulse animated&quot;&gt;Your Website&lt;/h1&gt;&lt;span class=&quot;pulse animated subheading&quot;&gt;This is your web&lt;/span&gt;', NULL, ' &lt;h1 class=&quot;pulse animated&quot;&gt;Your Website&lt;/h1&gt;&lt;span class=&quot;pulse animated subheading&quot;&gt;This is your web En&lt;/span&gt;', NULL, NULL);
 
 -- --------------------------------------------------------
@@ -730,7 +736,7 @@ CREATE TABLE `info_media_gallery` (
 --
 
 INSERT INTO `info_media_gallery` (`id`, `gallery_name`, `gallery_css_style_settings`, `menu_id`, `place_id`, `addon_id`, `img_w`, `created`, `updated`) VALUES
-(1, 'testas 2', 'light', 6, 18, 19, 400, '2023-09-13 18:42:37', '2023-09-14 17:38:33');
+(1, 'testas 2', 'light', 6, 18, 19, 400, '2023-09-13 18:42:37', '2023-10-27 10:24:34');
 
 -- --------------------------------------------------------
 
@@ -786,7 +792,7 @@ CREATE TABLE `jd_simple_zer` (
 --
 
 INSERT INTO `jd_simple_zer` (`id`, `title`, `description`, `lang_en_title`, `lang_en_description`, `img_url`, `img_name`, `readmore`, `menu_id`, `place_id`, `addon_id`, `created`, `updated`) VALUES
-(1, 'My History', 'Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.', 'My History tes', 'Testas test test test', 'http://localhost/uploads/jd_simple_zer_img/7646653_f9f1c35fca142b93.jpg', '7646653_f9f1c35fca142b93.jpg', 'contacts', 6, 16, 14, '2023-08-08 17:00:50', '2023-09-14 17:26:00');
+(1, 'My History', 'Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.', 'My History tes', 'Testas test test test', 'http://localhost/uploads/jd_simple_zer_img/7646653_f9f1c35fca142b93.jpg', '7646653_f9f1c35fca142b93.jpg', 'contacts', 6, 16, 14, '2023-08-08 17:00:50', '2023-10-27 10:24:37');
 
 -- --------------------------------------------------------
 
@@ -811,7 +817,7 @@ CREATE TABLE `social_block_links` (
 --
 
 INSERT INTO `social_block_links` (`id`, `profiles_name`, `social_profiles_link_url`, `fa_icone_code`, `menu_id`, `place_id`, `addon_id`, `created`, `updated`) VALUES
-(14, 'Facebook,Github', 'https://facebook.com,https://github.com/', '&lt;span class=&quot;fa-stack fa-lg&quot;&gt;&lt;i class=&quot;fa fa-circle fa-stack-2x&quot;&gt;&lt;/i&gt;&lt;i class=&quot;fa fa-facebook fa-stack-1x fa-inverse&quot;&gt;&lt;/i&gt;&lt;/span&gt;,&lt;span class=&quot;fa-stack fa-lg&quot;&gt;&lt;i class=&quot;fa fa-circle fa-stack-2x&quot;&gt;&lt;/i&gt;&lt;i class=&quot;fa fa-github fa-stack-1x fa-inverse&quot;&gt;&lt;/i&gt;&lt;/span&gt;', 0, 14, 16, '2023-09-01 16:44:28', '2023-09-09 02:37:18');
+(14, 'Facebook,Github', 'https://facebook.com,https://github.com/', '&lt;span class=&quot;fa-stack fa-lg&quot;&gt;&lt;i class=&quot;fa fa-circle fa-stack-2x&quot;&gt;&lt;/i&gt;&lt;i class=&quot;fa fa-facebook fa-stack-1x fa-inverse&quot;&gt;&lt;/i&gt;&lt;/span&gt;,&lt;span class=&quot;fa-stack fa-lg&quot;&gt;&lt;i class=&quot;fa fa-circle fa-stack-2x&quot;&gt;&lt;/i&gt;&lt;i class=&quot;fa fa-github fa-stack-1x fa-inverse&quot;&gt;&lt;/i&gt;&lt;/span&gt;', 0, 14, 16, '2023-09-01 16:44:28', '2023-10-24 15:50:26');
 
 --
 -- Indexes for dumped tables
@@ -959,25 +965,25 @@ ALTER TABLE `callendar_users_member`
 -- AUTO_INCREMENT for table `event_callendar`
 --
 ALTER TABLE `event_callendar`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `event_callendar_holidays`
 --
 ALTER TABLE `event_callendar_holidays`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `event_callendar_item`
 --
 ALTER TABLE `event_callendar_item`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `event_callendar_laboratories`
 --
 ALTER TABLE `event_callendar_laboratories`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `event_reservation_time`
@@ -995,19 +1001,19 @@ ALTER TABLE `flussi_contact_form_settings`
 -- AUTO_INCREMENT for table `flussi_files`
 --
 ALTER TABLE `flussi_files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `flussi_menu`
 --
 ALTER TABLE `flussi_menu`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `flussi_places`
 --
 ALTER TABLE `flussi_places`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `flussi_posts`
