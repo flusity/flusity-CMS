@@ -42,13 +42,11 @@ function renderTimeOptions(timeOptions, eventDate, reserveDayOption, reserveDayT
     }
     return optionsHTML;
 }
-///////////////////////////
+
 $(document).on('change', '.time-checkbox', function() {
     $('.time-checkbox').not(this).prop('checked', false);
     $('.selected-time-input').val($(this).val());
-});///
-////////////////////////////////////////////////////////
-
+});
 
 function createEventModal(themeId, registrationAllowed, eventDate, eventTitle) {
     let accordionHTML = '';
@@ -65,10 +63,10 @@ function createEventModal(themeId, registrationAllowed, eventDate, eventTitle) {
                 <div class="panel">
                     <div class="flex-container">
                         <div class="flex-item-left">
-                            <p><b>Trukmė:</b> ${timeString} <br><b>Amžiaus grupė:</b> ${topic.targetAudience} kl.</p>
+                            <p><b>Duration time:</b> ${timeString} <br><b>Audience:</b> ${topic.targetAudience} kl.</p>
                         </div>
                         <div class="flex-item-right">
-                        <p><b>Prieinamas laikas: </b><br>
+                        <p><b>Available times: </b><br>
                         ${timeOptionsHTML}</p>
                     </div>
                     </div>
@@ -81,9 +79,10 @@ function createEventModal(themeId, registrationAllowed, eventDate, eventTitle) {
                     <input type="hidden" name="event_item_title" value="${topic.title}">
                     <input type="hidden" name="event_laboratory_title" value="${eventTitle}">
                     <input type="hidden" name="event_reserve_day" value="${eventDate}">
-                        <input type="hidden" name="selectedTime" class="selected-time-input" value="">
-                        <button type="submit" class="btn btn-primary registration-button"  style="display: none; margin-bottom: 10px">Registration</button>
-                    </form>
+                    <input type="hidden" name="event_target_audience" value="${topic.targetAudience}">
+                    <input type="hidden" name="selectedTime" class="selected-time-input" value="">
+                    <button type="submit" class="btn btn-primary registration-button"  style="display: none; margin-bottom: 10px">Registration</button>
+                  </form>
                 </div>`;
         }
     });
@@ -162,7 +161,7 @@ function showEventModal(eventData,topic) {
     registrationEndDate.setDate(registrationEndDate.getDate() - endRegister);
 
     if (registrationEndDate <= currentDate) {
-        eventData.title += ' <span class="span-title" style="color: #d55258;">(Registracija pasibaigusi)</span>';
+        eventData.title += ' <span class="span-title" style="color: #d55258;">(Registration has ended)</span>';
         registrationAllowed = false;
     }
 
@@ -174,8 +173,8 @@ function showEventModal(eventData,topic) {
     const eventDateElement = document.getElementById("eventDate");
     const eventIdElement = document.getElementById("themeId");
 
-    eventTitleElement.innerHTML = "Laboratorija: " + eventData.title;
-    eventDateElement.innerText = "Pasirinkta data: " + eventData.date;
+    eventTitleElement.innerHTML = "Location: " + eventData.title;
+    eventDateElement.innerText = "Date chosen: " + eventData.date;
     eventIdElement.innerText = "" + eventData.id;
 
     modal.style.opacity = 0;
@@ -235,4 +234,21 @@ $(document).on('change', '.time-checkbox', function() {
     } else {
         $('.registration-button').hide();
     }
+});
+
+/// Registration member script
+$(document).ready(function(){
+    $("#registrationForm").on("submit", function(event){
+        event.preventDefault();
+        
+        $.ajax({
+            url: "../../cover/addons/event_callendar/action/re_member.php",
+            type: "POST",
+            data: $(this).serialize(),
+            success: function(response){
+                console.log(response);
+                window.location.href = "registration-member.php?message=success"; 
+            }
+        });
+    });
 });
