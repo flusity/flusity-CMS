@@ -56,6 +56,7 @@ $createTable5 = "CREATE TABLE IF NOT EXISTS {$prefix['table_prefix']}_event_rese
     id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     event_laboratory_id INT(11) DEFAULT NULL,
     event_item_id INT(11) DEFAULT NULL,
+    event_users_member_id INT(11) DEFAULT NULL,
     event_target_audience TEXT DEFAULT NULL,
     reserve_event_time TIME DEFAULT NULL,
     reserve_date date DEFAULT NULL,
