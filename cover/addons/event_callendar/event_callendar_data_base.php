@@ -76,7 +76,6 @@ $createTable6 = "CREATE TABLE IF NOT EXISTS {$prefix['table_prefix']}_callendar_
     member_address_institution TEXT DEFAULT NULL,
     member_invoice TEXT DEFAULT NULL,
     member_employee_position TEXT DEFAULT NULL,
-    member_description TEXT DEFAULT NULL,
     created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
   )";
