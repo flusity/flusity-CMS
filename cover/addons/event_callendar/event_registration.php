@@ -21,7 +21,7 @@
                 <th><?php echo t("No.");?></th>
                 <th><?php echo t("Cabinet heads");?></th>
                 <th><?php echo t("Event Title");?></th>
-                <th><?php echo t("Target audience");?></th>
+                <th><?php echo t("Audience");?></th>
                 <th><?php echo t("Member User");?></th>
                 <th><?php echo t("Reservation time");?></th>
                 <th><?php echo t("Date");?></th>
