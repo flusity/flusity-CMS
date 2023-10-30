@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 29, 2023 at 07:11 PM
+-- Generation Time: Oct 30, 2023 at 06:39 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -71,7 +71,7 @@ CREATE TABLE `event_callendar` (
 --
 
 INSERT INTO `event_callendar` (`id`, `callendar_name`, `work_dayStart`, `work_dayEnd`, `lunch_breakStart`, `lunch_breakEnd`, `prepare_time`, `registration_end_date`, `menu_id`, `place_id`, `addon_id`, `created`, `updated`) VALUES
-(1, 'Registracija', '08:15:00', '16:45:00', '12:00:00', '13:00:00', 10, '1', 31, 19, 24, '2023-09-21 00:01:01', '2023-10-29 16:15:57');
+(1, 'Registracija', '08:15:00', '16:45:00', '12:00:00', '13:00:00', 10, '1', 31, 19, 24, '2023-09-21 00:01:01', '2023-10-30 16:21:35');
 
 -- --------------------------------------------------------
 
@@ -167,6 +167,7 @@ CREATE TABLE `event_reservation_time` (
   `id` int(11) UNSIGNED NOT NULL,
   `event_laboratory_id` int(11) DEFAULT NULL,
   `event_item_id` int(11) DEFAULT NULL,
+  `event_target_audience` text DEFAULT NULL,
   `reserve_event_time` time DEFAULT NULL,
   `reserve_date` date DEFAULT NULL,
   `reservation_description` text DEFAULT NULL,
@@ -178,9 +179,9 @@ CREATE TABLE `event_reservation_time` (
 -- Dumping data for table `event_reservation_time`
 --
 
-INSERT INTO `event_reservation_time` (`id`, `event_laboratory_id`, `event_item_id`, `reserve_event_time`, `reserve_date`, `reservation_description`, `created`, `updated`) VALUES
-(6, 1, 2, '13:00:00', '2023-10-31', 'dfgsfdg', '2023-09-23 05:02:39', '2023-10-18 08:58:57'),
-(10, 1, 3, '09:10:00', '2023-10-31', 'dfgsfdg', '2023-09-23 05:02:39', '2023-10-18 08:59:00');
+INSERT INTO `event_reservation_time` (`id`, `event_laboratory_id`, `event_item_id`, `event_target_audience`, `reserve_event_time`, `reserve_date`, `reservation_description`, `created`, `updated`) VALUES
+(6, 1, 2, NULL, '13:00:00', '2023-10-31', 'dfgsfdg', '2023-09-23 05:02:39', '2023-10-18 08:58:57'),
+(10, 1, 3, NULL, '09:10:00', '2023-10-31', 'dfgsfdg', '2023-09-23 05:02:39', '2023-10-18 08:59:00');
 
 -- --------------------------------------------------------
 
