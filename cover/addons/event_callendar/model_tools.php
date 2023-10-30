@@ -311,6 +311,13 @@ if ($mode === 'create' || $addon) { ?>
         return false;
     }
 
+    function confirmDelete4(url) {
+        if (confirm("Are you sure you want to delete this registration?")) {
+            window.location.href = url;
+        }
+        return false;
+    }
+
     function deleteEventAddon(addonId) {
         $("#deleteModal").modal("show");
         $("#confirmDelete").off('click').on('click', function() {
