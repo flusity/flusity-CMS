@@ -14,7 +14,7 @@ try {
     secureSession($db, $prefix);
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        // Gaukite POST duomenis
+        
         $selectedTime = $_POST['reserve_event_time'];
         $reserve_date = $_POST['reserve_date'];
         $event_laboratory_id = $_POST['reserve_event_laboratory_id'];
@@ -32,23 +32,19 @@ try {
         $member_invoice = $_POST['member_invoice'];
         $member_employee_position = $_POST['member_employee_position'];
         
-
-        // SQL užklausos
-        $sql1 = "INSERT INTO " .  $prefix['table_prefix'] . "_callendar_users_member (member_login_name, member_first_name, member_last_name, member_telephone, member_email, member_institution, member_address_institution, member_invoice, member_employee_position) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        $sql2 = "INSERT INTO " .  $prefix['table_prefix'] . "_event_reservation_time (event_laboratory_id, event_item_id, event_target_audience, reserve_event_time, reserve_date, reservation_description) VALUES (?, ?, ?, ?, ?, ?)";
-        
-        $stmt1 = $db->prepare($sql1);
+        $sql2 = "INSERT INTO " .  $prefix['table_prefix'] . "_callendar_users_member (member_login_name, member_first_name, member_last_name, member_telephone, member_email, member_institution, member_address_institution, member_invoice, member_employee_position) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt2 = $db->prepare($sql2);
         
-        // Įrašyti į pirmąją lentelę
-        $stmt1->execute([$member_login_name, $member_first_name, $member_last_name, $member_telephone, $member_email, $member_institution, $member_address_institution, $member_invoice, $member_employee_position]);
+        $stmt2->execute([$member_login_name, $member_first_name, $member_last_name, $member_telephone, $member_email, $member_institution, $member_address_institution, $member_invoice, $member_employee_position]);
+        $lastInsertMemberId = $db->lastInsertId();
         
-        // Įrašyti į antrąją lentelę
-        $stmt2->execute([$event_laboratory_id, $event_item_id, $event_target_audience, $selectedTime, $reserve_date, $reservation_description]);
+        $sql1 = "INSERT INTO " .  $prefix['table_prefix'] . "_event_reservation_time (event_laboratory_id, event_item_id, event_users_member_id, event_target_audience, reserve_event_time, reserve_date, reservation_description) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $stmt1 = $db->prepare($sql1);
+        
+        $stmt1->execute([$event_laboratory_id, $event_item_id, $lastInsertMemberId, $event_target_audience, $selectedTime, $reserve_date, $reservation_description]);
         
         $_SESSION['success_message'] = t("The activity has been successfully submitted for registration, please wait for confirmation via the email you provided.");
-  
-             header("Location: registration-member.php?message=success");
+        header("Location: registration-member.php?message=success");
         exit();
     }
 
