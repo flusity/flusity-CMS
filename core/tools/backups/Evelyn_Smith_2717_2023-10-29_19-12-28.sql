@@ -89,6 +89,7 @@ CREATE TABLE `event_reservation_time` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `event_laboratory_id` int(11) DEFAULT NULL,
   `event_item_id` int(11) DEFAULT NULL,
+  `event_target_audience` text DEFAULT NULL,
   `reserve_event_time` time DEFAULT NULL,
   `reserve_date` date DEFAULT NULL,
   `reservation_description` text DEFAULT NULL,
@@ -352,9 +353,8 @@ INSERT INTO event_callendar_laboratories VALUES("3","1","Žalioji energetika","1
 
 
 
-INSERT INTO event_reservation_time VALUES("6","1","2","13:00:00","2023-10-31","dfgsfdg","2023-09-23 08:02:39","2023-10-18 11:58:57");
-INSERT INTO event_reservation_time VALUES("10","1","3","09:10:00","2023-10-31","dfgsfdg","2023-09-23 08:02:39","2023-10-18 11:59:00");
-
+INSERT INTO event_reservation_time VALUES("6","1","2","NULL","13:00:00","2023-10-31","dfgsfdg","2023-09-23 08:02:39","2023-10-18 11:58:57");
+INSERT INTO event_reservation_time VALUES("10","1","3","NULL","09:10:00","2023-10-31","dfgsfdg","2023-09-23 08:02:39","2023-10-18 11:59:00");
 
 
 INSERT INTO flussi_contact_form_settings VALUES("1","New message from Contact Form","We received a message from:","Email has been sent successfully","Failed to send the email");
