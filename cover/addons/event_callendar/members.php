@@ -29,7 +29,7 @@
                     <td><?php echo htmlspecialchars($row['member_institution']); ?></td>
                     <td><?php echo htmlspecialchars($row['member_employee_position']); ?></td>
                     <td>
-                        <a href="members_model.php?id=<?php echo htmlspecialchars($row['id']); ?>&edit_member_id=<?php echo htmlspecialchars($row['id']); ?>"><i class="fa fa-edit"></i></a> |
+                        <a href="addons_model.php?name=event_callendar&id=<?php echo htmlspecialchars($id); ?>&edit_member_id=<?php echo htmlspecialchars($row['id']); ?>"><i class="fa fa-edit"></i></a> |
                         <a href="#" onclick="confirmDelete5('../../cover/addons/members/action/delete_member.php?id=<?php echo htmlspecialchars($row['id']); ?>')"><i class="fa fa-trash"></i></a>
                     </td>
                 </tr>
