@@ -20,12 +20,26 @@
             </div>
             <div class="row d-flex justify-content-center" style="padding-top: 0px;">
                 <div class="col-md-8 col-lg-8 col-xl-6" style="margin-top: -24px;padding-top: 0px;margin-right: 1px;">
-                    <div class="card mb-1"></div>
-                    <?php if (isset($error_message)): ?>
-                    <div id="error_message" class="alert alert-danger" role="alert">
-                        <?php echo htmlspecialchars($error_message); ?>
-                    </div>
-                    <?php endif; ?>
+                    
+                <div class="col-md-12 text-center" style="padding-bottom: 0px;"> 
+                   
+                        <?php if (isset($error_message)): ?>
+                            <div class="alert alert-danger" role="alert">
+                                <?php echo htmlspecialchars($error_message, ENT_QUOTES, 'UTF-8'); ?>
+                            </div>
+                        <?php endif; 
+                        if (isset($_SESSION['success_message'])): ?>
+                            <div class="alert alert-success alert-dismissible fade show slow-fade">
+                                <?php echo htmlspecialchars($_SESSION['success_message']); ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            <?php unset($_SESSION['success_message']); ?>
+                        <?php endif; 
+
+                        $csrf_token = generateCSRFToken();
+                        ?>
+                </div>
+
                     <?php
                         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $selectedTime = isset($_POST["selectedTime"]) ? $_POST["selectedTime"] : null;
@@ -91,7 +105,7 @@
                        
                         <div class="mb-3"><textarea class="form-control" id="member_description" name="member_description" placeholder="<?php echo htmlspecialchars(t("Additional information"));?>"></textarea></div>
                        
-                        <input type="hidden" name="csrf_token" value="<?php echo generateCSRFToken(); ?>">
+                        <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token, ENT_QUOTES, 'UTF-8'); ?>">
                         
                         <div class="mb-3">
                             <button class="btn btn-primary d-block w-100" type="submit" style="background: rgb(230,227,160);--bs-primary: #7faef2;--bs-primary-rgb: 127,174,242;border-style: none;color: rgb(136,132,132);"><?php echo t("Register event");?></button>
