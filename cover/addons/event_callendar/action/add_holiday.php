@@ -23,7 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     $edit_holiday_id = isset($_POST['edit_holiday_id']) ? intval($_POST['edit_holiday_id']) : null;
 
     try {
-        if ($edit_holiday_id > 0) {           $sql = "UPDATE " . $prefix['table_prefix'] . "_event_callendar_holidays SET month = :month, holiday = :holiday, holiday_name = :holiday_name WHERE id = :edit_holiday_id";
+        if ($edit_holiday_id > 0) {          
+            $sql = "UPDATE " . $prefix['table_prefix'] . "_event_callendar_holidays SET month = :month, holiday = :holiday, holiday_name = :holiday_name WHERE id = :edit_holiday_id";
             $stmt = $db->prepare($sql);
             $stmt->bindParam(':month', $month, PDO::PARAM_INT);
             $stmt->bindParam(':holiday', $holiday, PDO::PARAM_INT);
