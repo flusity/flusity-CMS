@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-md-10 col-lg-9 offset-lg-0 mx-auto position-relative">
                     <div class="site-heading">
-                        <?php 
+                        <?php
                             $page_url = getCurrentPageUrl($db, $prefix);
                             if ($page_url) {
                                 displayPlace($db, $prefix, $page_url, 'head-pulse-animated');
