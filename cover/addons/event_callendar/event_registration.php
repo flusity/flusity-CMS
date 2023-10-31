@@ -1,9 +1,9 @@
 <?php
-    $sql = "SELECT rewxcas_event_reservation_time.*, lab.event_name AS laboratory_name, item.title AS event_title, mem.member_first_name, mem.member_last_name
-    FROM rewxcas_event_reservation_time
-    LEFT JOIN " . $prefix['table_prefix'] . "_event_callendar_laboratories AS lab ON rewxcas_event_reservation_time.event_laboratory_id = lab.id
-    LEFT JOIN " . $prefix['table_prefix'] . "_event_callendar_item AS item ON rewxcas_event_reservation_time.event_item_id = item.id
-    LEFT JOIN " . $prefix['table_prefix'] . "_callendar_users_member AS mem ON rewxcas_event_reservation_time.event_users_member_id = mem.id";
+    $sql = "SELECT " . $prefix['table_prefix'] . "_event_reservation_time.*, lab.event_name AS laboratory_name, item.title AS event_title, mem.member_first_name, mem.member_last_name
+    FROM " . $prefix['table_prefix'] . "_event_reservation_time
+    LEFT JOIN " . $prefix['table_prefix'] . "_event_callendar_laboratories AS lab ON " . $prefix['table_prefix'] . "_event_reservation_time.event_laboratory_id = lab.id
+    LEFT JOIN " . $prefix['table_prefix'] . "_event_callendar_item AS item ON " . $prefix['table_prefix'] . "_event_reservation_time.event_item_id = item.id
+    LEFT JOIN " . $prefix['table_prefix'] . "_callendar_users_member AS mem ON " . $prefix['table_prefix'] . "_event_reservation_time.event_users_member_id = mem.id";
     $stmt = $db->prepare($sql);
     $stmt->execute();
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
