@@ -14,7 +14,6 @@ CREATE TABLE `callendar_users_member` (
   `member_address_institution` text DEFAULT NULL,
   `member_invoice` text DEFAULT NULL,
   `member_employee_position` text DEFAULT NULL,
-  `member_description` text DEFAULT NULL,
   `created` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
