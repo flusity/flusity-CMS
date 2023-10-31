@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 30, 2023 at 06:39 PM
+-- Generation Time: Oct 31, 2023 at 07:42 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -18,170 +18,8 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `werr`
+-- Database: `werba`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `callendar_users_member`
---
-
-CREATE TABLE `callendar_users_member` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `member_login_name` text NOT NULL,
-  `member_first_name` text NOT NULL,
-  `member_last_name` text NOT NULL,
-  `member_telephone` text NOT NULL,
-  `member_email` text NOT NULL,
-  `member_email_ok` int(11) DEFAULT NULL,
-  `member_institution` text DEFAULT NULL,
-  `member_address_institution` text DEFAULT NULL,
-  `member_invoice` text DEFAULT NULL,
-  `member_employee_position` text DEFAULT NULL,
-  `member_description` text DEFAULT NULL,
-  `created` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `event_callendar`
---
-
-CREATE TABLE `event_callendar` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `callendar_name` text DEFAULT NULL,
-  `work_dayStart` time DEFAULT NULL,
-  `work_dayEnd` time DEFAULT NULL,
-  `lunch_breakStart` time DEFAULT NULL,
-  `lunch_breakEnd` time DEFAULT NULL,
-  `prepare_time` int(11) DEFAULT NULL,
-  `registration_end_date` varchar(255) DEFAULT NULL,
-  `menu_id` int(11) DEFAULT NULL,
-  `place_id` int(11) DEFAULT NULL,
-  `addon_id` int(11) DEFAULT NULL,
-  `created` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `event_callendar`
---
-
-INSERT INTO `event_callendar` (`id`, `callendar_name`, `work_dayStart`, `work_dayEnd`, `lunch_breakStart`, `lunch_breakEnd`, `prepare_time`, `registration_end_date`, `menu_id`, `place_id`, `addon_id`, `created`, `updated`) VALUES
-(1, 'Registracija', '08:15:00', '16:45:00', '12:00:00', '13:00:00', 10, '1', 31, 19, 24, '2023-09-21 00:01:01', '2023-10-30 16:21:35');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `event_callendar_holidays`
---
-
-CREATE TABLE `event_callendar_holidays` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `month` int(11) DEFAULT NULL,
-  `holiday` int(11) DEFAULT NULL,
-  `holiday_name` varchar(255) DEFAULT NULL,
-  `created` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `event_callendar_holidays`
---
-
-INSERT INTO `event_callendar_holidays` (`id`, `month`, `holiday`, `holiday_name`, `created`, `updated`) VALUES
-(1, 10, 26, 'test2', '2023-09-21 15:45:16', '2023-10-28 05:51:20'),
-(15, 10, 31, 'test', '2023-10-26 19:35:22', '2023-10-28 05:51:09'),
-(24, 4, 18, 'dfgfg', '2023-10-29 08:55:26', '2023-10-29 08:55:26');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `event_callendar_item`
---
-
-CREATE TABLE `event_callendar_item` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `laboratories_id` int(11) DEFAULT NULL,
-  `title` text NOT NULL,
-  `short_description` text DEFAULT NULL,
-  `methodical_material` text DEFAULT NULL,
-  `time_limit` int(11) DEFAULT NULL,
-  `target_audience` text DEFAULT NULL,
-  `metodic_file_id` int(11) DEFAULT NULL,
-  `image_id` int(11) DEFAULT NULL,
-  `created` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `event_callendar_item`
---
-
-INSERT INTO `event_callendar_item` (`id`, `laboratories_id`, `title`, `short_description`, `methodical_material`, `time_limit`, `target_audience`, `metodic_file_id`, `image_id`, `created`, `updated`) VALUES
-(1, 1, 'Testuoju Pavadinima', 'Trumpas aprašymas', 'dgffg455', 180, '6-9', 39, 27, '2023-09-21 12:27:16', '2023-10-28 18:51:35'),
-(2, 1, 'Trumpas ar koks pavadinimas', 'Trumpas aprašymas 2', '45nkjkjkbvbvbv', 90, '7-8', 0, 28, '2023-09-21 12:27:16', '2023-10-29 08:55:53'),
-(3, 1, 'Bandomasis įrašas antraštei', 'testukas su kitu', 'bvbvbbvbv555', 45, '10-12', 39, 27, '2023-09-21 14:50:05', '2023-10-28 18:51:43'),
-(4, 2, 'laboratorijos temos antraštė', 'Bandome trumpą aprašymą apie veiklos pobūdį', 'erertrte ertertrete  erterte e err', 45, '11-12', 39, 28, '2023-09-21 15:36:58', '2023-10-28 18:51:47'),
-(18, 3, 'test 1000', '77777 sdfdsf s fsdf ddd 444444444444', 'sd sfd fdgf hfghghgfhfg', 45, '3-6', 40, 27, '2023-10-29 08:16:30', '2023-10-29 08:39:23'),
-(19, 3, 'test22222', '77777 sdfdsf s fsdf ddd 444444444444', 'sd sfd fdgf hfghghgfhfg', 45, '3-6', 40, 27, '2023-10-29 08:17:15', '2023-10-29 08:26:17'),
-(20, 3, '444', ',hgfkhjgljhgljh', '', 50, '3', 41, 20, '2023-10-29 08:27:00', '2023-10-29 08:27:00');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `event_callendar_laboratories`
---
-
-CREATE TABLE `event_callendar_laboratories` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `callendar_id` int(11) DEFAULT NULL,
-  `event_name` text DEFAULT NULL,
-  `managers` varchar(255) DEFAULT NULL,
-  `when_event_will_start` date DEFAULT NULL,
-  `event_days` text NOT NULL,
-  `event_color` text DEFAULT NULL,
-  `created` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `event_callendar_laboratories`
---
-
-INSERT INTO `event_callendar_laboratories` (`id`, `callendar_id`, `event_name`, `managers`, `when_event_will_start`, `event_days`, `event_color`, `created`, `updated`) VALUES
-(1, 1, 'Mechatronika', '1,22', '2023-10-26', '32', 'blue', '2023-09-21 00:12:48', '2023-10-28 08:57:53'),
-(2, 1, 'Gamtamokslinė', '1', '2023-10-26', '31', 'yellow', '2023-09-21 00:12:48', '2023-10-28 08:58:12'),
-(3, 1, 'Žalioji energetika', '1,22', '2023-10-26', '60', 'indigo', '2023-09-21 00:12:48', '2023-10-28 08:58:24');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `event_reservation_time`
---
-
-CREATE TABLE `event_reservation_time` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `event_laboratory_id` int(11) DEFAULT NULL,
-  `event_item_id` int(11) DEFAULT NULL,
-  `event_target_audience` text DEFAULT NULL,
-  `reserve_event_time` time DEFAULT NULL,
-  `reserve_date` date DEFAULT NULL,
-  `reservation_description` text DEFAULT NULL,
-  `created` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `event_reservation_time`
---
-
-INSERT INTO `event_reservation_time` (`id`, `event_laboratory_id`, `event_item_id`, `event_target_audience`, `reserve_event_time`, `reserve_date`, `reservation_description`, `created`, `updated`) VALUES
-(6, 1, 2, NULL, '13:00:00', '2023-10-31', 'dfgsfdg', '2023-09-23 05:02:39', '2023-10-18 08:58:57'),
-(10, 1, 3, NULL, '09:10:00', '2023-10-31', 'dfgsfdg', '2023-09-23 05:02:39', '2023-10-18 08:59:00');
 
 -- --------------------------------------------------------
 
@@ -258,8 +96,7 @@ CREATE TABLE `flussi_menu` (
 INSERT INTO `flussi_menu` (`id`, `name`, `lang_menu_name`, `page_url`, `position`, `template`, `created_at`, `updated_at`, `show_in_menu`, `parent_id`) VALUES
 (6, 'HOMES', NULL, 'index', 1, 'template_index', '2023-04-16 12:35:26', '2023-06-20 19:59:31', 1, 0),
 (12, 'Kontaktai', 'Contact', 'contacts', 2, 'template_contacts', '2023-04-21 14:28:01', '2023-10-25 16:05:03', 1, 0),
-(20, 'LOGIN', NULL, 'login', 3, 'template_login_form', '2023-08-08 16:03:28', '2023-08-17 09:39:10', 0, 0),
-(31, 'Kalendorius', 'Calendar', 'event-calendar', 4, 'template_callendar', '2023-09-16 11:18:26', '2023-10-25 16:05:17', 1, 0);
+(20, 'LOGIN', NULL, 'login', 3, 'template_login_form', '2023-08-08 16:03:28', '2023-08-17 09:39:10', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -287,8 +124,7 @@ INSERT INTO `flussi_places` (`id`, `name`, `created_at`, `updated_at`) VALUES
 (15, 'head-pulse-animated', '2023-08-07 19:45:30', '2023-08-07 19:45:30'),
 (16, 'right-my-history', '2023-08-07 19:48:00', '2023-08-07 19:48:00'),
 (17, 'home-content-bottom', '2023-09-13 14:09:16', '2023-09-13 14:09:16'),
-(18, 'home-content-top', '2023-09-14 18:30:50', '2023-09-14 18:30:50'),
-(19, 'callendar-full-12', '2023-09-16 11:22:43', '2023-09-16 11:23:21');
+(18, 'home-content-top', '2023-09-14 18:30:50', '2023-09-14 18:30:50');
 
 -- --------------------------------------------------------
 
@@ -410,8 +246,7 @@ CREATE TABLE `flussi_tjd_addons` (
 INSERT INTO `flussi_tjd_addons` (`id`, `name_addon`, `description_addon`, `active`, `version`, `author`, `created_at`, `updated_at`, `show_front`) VALUES
 (14, 'jd_simple_zer', 'This test addon', 1, '1v', 'JD Flusite Zer', '2023-08-08 16:52:26', '2023-08-08 16:52:37', 1),
 (16, 'social_block_links', 'Social block links addon', 1, '1v', 'JD Flusite', '2023-09-01 10:53:39', '2023-09-01 10:53:45', 1),
-(19, 'info_media_gallery', 'Gallery info with description', 1, '1v', 'JD Flusity', '2023-09-13 18:40:54', '2023-09-13 18:40:59', 1),
-(24, 'event_callendar', 'Events callendar addon', 1, '1v', 'JD Flusity', '2023-09-21 13:31:15', '2023-09-21 13:31:21', 1);
+(19, 'info_media_gallery', 'Gallery info with description', 1, '1v', 'JD Flusity', '2023-09-13 18:40:54', '2023-09-13 18:40:59', 1);
 
 -- --------------------------------------------------------
 
@@ -685,8 +520,7 @@ CREATE TABLE `flussi_users` (
 --
 
 INSERT INTO `flussi_users` (`id`, `login_name`, `username`, `surname`, `phone`, `email`, `password`, `role`) VALUES
-(1, 'Tester', 'Admin', 'tester', '8615523111', 'tests@gl.com', '$2y$10$4xw8Ssej8MPQBGHRnqXlieHU6qlKQUKpDgTIj8ZqJg0sCWU6WXIOa', 'admin'),
-(22, 'Redag', 'Redaguojantysis', 'tester 2', '8615523111', 'tests2@gl.com', '$2y$10$4xw8Ssej8MPQBGHRnqXlieHU6qlKQUKpDgTIj8ZqJg0sCWU6WXIOa', 'moderator');
+(1, 'Tester', 'Admin', 'tester', '8615523111', 'tests@gl.com', '$2y$10$4xw8Ssej8MPQBGHRnqXlieHU6qlKQUKpDgTIj8ZqJg0sCWU6WXIOa', 'admin');
 
 -- --------------------------------------------------------
 
@@ -825,42 +659,6 @@ INSERT INTO `social_block_links` (`id`, `profiles_name`, `social_profiles_link_u
 --
 
 --
--- Indexes for table `callendar_users_member`
---
-ALTER TABLE `callendar_users_member`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `event_callendar`
---
-ALTER TABLE `event_callendar`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `event_callendar_holidays`
---
-ALTER TABLE `event_callendar_holidays`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `event_callendar_item`
---
-ALTER TABLE `event_callendar_item`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `event_callendar_laboratories`
---
-ALTER TABLE `event_callendar_laboratories`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `event_reservation_time`
---
-ALTER TABLE `event_reservation_time`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `flussi_contact_form_settings`
 --
 ALTER TABLE `flussi_contact_form_settings`
@@ -957,42 +755,6 @@ ALTER TABLE `social_block_links`
 --
 
 --
--- AUTO_INCREMENT for table `callendar_users_member`
---
-ALTER TABLE `callendar_users_member`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `event_callendar`
---
-ALTER TABLE `event_callendar`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `event_callendar_holidays`
---
-ALTER TABLE `event_callendar_holidays`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
-
---
--- AUTO_INCREMENT for table `event_callendar_item`
---
-ALTER TABLE `event_callendar_item`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
---
--- AUTO_INCREMENT for table `event_callendar_laboratories`
---
-ALTER TABLE `event_callendar_laboratories`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
--- AUTO_INCREMENT for table `event_reservation_time`
---
-ALTER TABLE `event_reservation_time`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
 -- AUTO_INCREMENT for table `flussi_contact_form_settings`
 --
 ALTER TABLE `flussi_contact_form_settings`
@@ -1044,7 +806,7 @@ ALTER TABLE `flussi_translations`
 -- AUTO_INCREMENT for table `flussi_users`
 --
 ALTER TABLE `flussi_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `flussi_v_custom_blocks`
