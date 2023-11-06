@@ -36,59 +36,6 @@
     function validateInput($input) {
         return trim(strip_tags(htmlspecialchars(stripslashes($input))));
     }
-
-    /* 
-    function secureSession($db, $prefix) {
-        global $prefix; 
-    
-        $base_url = getBaseUrl();
-        // Setting secure session parameters
-        $session_name = 'secure_session';
-        $secure = true;
-        $httponly = true;
-    
-        $settings = getSettings($db, $prefix);
-        $session = $settings['session_lifetime'] * 60;
-        $inactive = isset($session) ? $session : 1000;
-    
-        if (session_status() === PHP_SESSION_NONE) {
-            ini_set('session.use_only_cookies', 1);
-            ini_set('session.cookie_httponly', 1);
-            ini_set('session.cookie_secure', 1);
-            ini_set('session.use_strict_mode', 1);
-            $cookieParams = session_get_cookie_params();
-            session_set_cookie_params($cookieParams['lifetime'], $cookieParams['path'], $cookieParams['domain'], $secure, $httponly);
-            session_name($session_name);
-        }
-    
-        if (session_status() !== PHP_SESSION_ACTIVE) {
-            session_start();
-        }
-    
-        if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > $inactive)) {
-            
-            // Įsimename norimą puslapį prieš sesiją užbaigiant
-            $requested_url = $_SERVER['REQUEST_URI'];
-            
-            session_unset();
-            session_destroy();
-            session_start();  // Pradėkite naują sesiją, kad galėtumėte įrašyti norimą URL
-    
-            $_SESSION['requested_url'] = $requested_url;
-    
-            if (isset($requested_url)) {
-                header("Location: " . $base_url . $requested_url);
-                exit;
-            } else {
-                $redirect_home = $base_url . "/index.php"; 
-                header("Location: " . $redirect_home);
-                exit;
-            }
-        }
-    
-        $_SESSION['last_activity'] = time();
-    }
-     */
     
      function secureSession($db, $prefix) {
         global $prefix; 
