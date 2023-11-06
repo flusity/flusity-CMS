@@ -66,12 +66,11 @@
     
         if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > $inactive)) {
             
-            // Įsimename norimą puslapį prieš sesiją užbaigiant
             $requested_url = $_SERVER['REQUEST_URI'];
             
             session_unset();
             session_destroy();
-            session_start();  // Pradėkite naują sesiją, kad galėtumėte įrašyti norimą URL
+            session_start();  
     
             $_SESSION['requested_url'] = $requested_url;
     
