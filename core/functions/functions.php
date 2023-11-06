@@ -1,4 +1,5 @@
 <?php
+
 function getDBConnection($config) {
     try {
         $dsn = 'mysql:host=' . $config['db_host'] . ';dbname=' . $config['db_name'] . ';charset=utf8mb4';
@@ -13,7 +14,6 @@ function getDBConnection($config) {
     }
 }
 
-
 function getFullUrl($relativePath) {
     $base_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'];
     return $base_url . $relativePath;
@@ -25,6 +25,7 @@ function generateCSRFToken() {
     }
     return $_SESSION['csrf_token'];
 }
+
 function validateCSRFToken($token) {
     return isset($_SESSION['csrf_token']) && hash_equals($_SESSION['csrf_token'], $token);
 }
@@ -38,7 +39,6 @@ function validateCSRFToken($token) {
         return null;
     }
 
-    
     function getCurrentPageUrl($db, $prefix) {
         $stmt = $db->prepare("SELECT * FROM ".$prefix['table_prefix']."_flussi_settings");
         $stmt->execute();
@@ -68,7 +68,6 @@ function validateCSRFToken($token) {
         }
         return $default_url_name;
     }
-    
     
     function getBaseUrl() {
         $protocol = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') ? "https" : "http";
@@ -193,7 +192,6 @@ function getSettings($db, $prefix) {
             echo ' droppable-area';
             echo '" data-place-id="' . $placeIdGet;
         }
-        
         echo '">';
         
         $current_lang = $_SESSION['lang'] ?? $lang_code;
@@ -287,8 +285,6 @@ function getSettings($db, $prefix) {
             }
         }
         
-        
-    
         if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') {
         echo '
         <div class="myDropdown">
@@ -312,7 +308,6 @@ function getSettings($db, $prefix) {
         }
         echo '</div>';
     }
-    
     
 
     function getDataFromDatabase($db, $prefix, $page_url, $place_id) {
@@ -356,8 +351,6 @@ function getSettings($db, $prefix) {
         }
     }
     
-    
-    
     require_once 'f_users.php';
     require_once 'f_contact_form.php';
     require_once 'f_backup.php';
@@ -369,4 +362,3 @@ function getSettings($db, $prefix) {
     require_once 'f_translations.php';
     require_once 'f_themes.php';
     require_once 'f_addons.php';
-    

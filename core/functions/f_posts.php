@@ -1,8 +1,9 @@
 <?php
+
 function getPostsNews($db, $prefix, $limit, $offset, $menuUrl, $lang) {
-    // Sets the column name depending on the language
+    
     $settings = getSettings($db, $prefix);
-    $lang_code = $settings['language']; // Kalbos kodas
+    $lang_code = $settings['language']; 
     if ($lang === $lang_code) {
         $titleField = $prefix['table_prefix'].'_flussi_posts.title';
         $contentField = $prefix['table_prefix'].'_flussi_posts.content';

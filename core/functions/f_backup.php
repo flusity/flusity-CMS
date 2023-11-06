@@ -1,7 +1,5 @@
 <?php 
 
-
-    
 function createBackupFilename($db, $prefix) {
     $names = [
         ['Emily', 'Sophia', 'Amelia', 'Harper', 'Evelyn', 'Abigail', 'Ella', 'Ava', 'Sophie', 'Isabella'],
@@ -69,7 +67,6 @@ return $filename;
         return false;
     }
 }
- 
 
  function createDatabaseBackup($db, $prefix, $backupFilename) {
     $tables = [];
@@ -131,11 +128,6 @@ return $filename;
         return false;
     }
 }
-
-
-
-
-
 
 function getBackupFilesList($backupDir) {
     $files = array_diff(scandir($backupDir), array('..', '.'));
