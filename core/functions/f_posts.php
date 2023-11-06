@@ -14,9 +14,9 @@ function getPostsNews($db, $prefix, $limit, $offset, $menuUrl, $lang) {
     function displayPosts($posts) {
         foreach ($posts as &$post) {
             ?>
-            <div class="post-container <?php echo (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') ? 'highlight-post' : ''; ?>">
+            <div class="post-container <?php echo (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin') ? 'highlight-post' : ''; ?> p-1">
                 <h2><?php echo $post['title']; ?></h2>
-                <p><?php echo $post['content']; ?></p>
+                <?php echo $post['content']; ?>
                 <?php displayEditButton($post['id']); ?>
             </div>
             <?php
