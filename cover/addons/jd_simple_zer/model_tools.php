@@ -129,6 +129,7 @@ if ($mode === 'create' || $addon) {
         </div>
             <div id="image_container">
                 <img id="preview_image"  style="max-width: 100%;" src="<?php echo $mode === 'edit' ? $addon['img_url'] : ''; ?>">
+                <input type="hidden" name="db_img_name" value="<?php echo $mode === 'edit' ? $addon['img_name'] : ''; ?>">
             </div>
             <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><?php echo t('files Library');?></button>
                 <!-- Demo view start -->
