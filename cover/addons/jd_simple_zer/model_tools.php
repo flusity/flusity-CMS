@@ -83,50 +83,50 @@ if ($mode === 'create' || $addon) {
                 <label for="simpleFormControlTextarea" class="form-label"><?php echo t('Description');?></label>
                 <textarea class="form-control" name="description" id="simpleFormControlTextarea" rows="3" required><?php echo $mode === 'edit' ? htmlspecialchars($addon['description']) : ''; ?></textarea>
             </div>
-<!-- Other language start-->
-<?php if($bilingualism != 0): ?>
-    <div class="form-group">
-        <label for="post_status"><?php echo t("Next Language");?></label>
-            <div class="accordion accordion-flush mb-3" id="accordionFlushExample">
-            <div class="accordion-item">
-            <h2 class="accordion-header" id="flush-headingOne">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                <?php echo t("Add content in another language");?>
-                </button>
-            </h2>
-        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-            <div class="accordion-body">
-                <div class="form-group mb-2">
-                <label for="lang_en_title"><?php echo t('Other language title');?></label>
-                    <input type="text" class="form-control" id="lang_en_title" name="lang_en_title" value="<?php echo $mode === 'edit' ? htmlspecialchars($addon['lang_en_title']) : ''; ?>">
-                </div>
-                <div class="mb-3">
-                    <label for="simpleFormControlTextarea" class="form-label"><?php echo t('Other language description');?></label>
-                    <textarea class="form-control" name="lang_en_description" id="simpleFormControlTextarea" rows="3" ><?php echo $mode === 'edit' ? htmlspecialchars($addon['lang_en_description']) : ''; ?></textarea>
-                </div>
-            </div>
-        </div>
-        </div>
-        </div>
-    </div>
-    <?php endif; ?>
-<!-- Other language end-->
-        <div class="mb-3">
-            <label for="simpleFormControlReadmoreInput" class="form-label"><?php echo t('Read more url');?></label>
-            
-            <input type="text" class="form-control" name="readmore" id="simpleFormControlReadmoreInput" placeholder="read more url" value="<?php echo $mode === 'edit' ? htmlspecialchars($addon['readmore']) : ''; ?>" required>
-        </div>
-        <button type="submit" name="submit" class="btn btn-primary"><?php echo t('Submit');?></button>
-            <?php if (isset($_GET['addon_post_edit_id'])): ?>
-            <a href="addons_model.php?name=jd_simple_zer&id=<?php echo htmlspecialchars($_GET['id']) ?>" class="btn btn-secondary"><?php echo t('Cancel');?></a>
-            <?php endif; ?>
-        </div>
-        <div class="col-md-4">
+                <!-- Other language start-->
+                <?php if($bilingualism != 0): ?>
+                    <div class="form-group">
+                        <label for="post_status"><?php echo t("Next Language");?></label>
+                            <div class="accordion accordion-flush mb-3" id="accordionFlushExample">
+                            <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                <?php echo t("Add content in another language");?>
+                                </button>
+                            </h2>
+                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <div class="form-group mb-2">
+                                <label for="lang_en_title"><?php echo t('Other language title');?></label>
+                                    <input type="text" class="form-control" id="lang_en_title" name="lang_en_title" value="<?php echo $mode === 'edit' ? htmlspecialchars($addon['lang_en_title']) : ''; ?>">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="simpleFormControlTextarea" class="form-label"><?php echo t('Other language description');?></label>
+                                    <textarea class="form-control" name="lang_en_description" id="simpleFormControlTextarea" rows="3" ><?php echo $mode === 'edit' ? htmlspecialchars($addon['lang_en_description']) : ''; ?></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+                <!-- Other language end-->
             <div class="mb-3">
-                <label for="file_id" class="form-label"><?php echo t('Image');?></label>
-                <input class="form-control form-control-sm" name="file_id" id="file_id" type="file" onchange="previewFile(this)">
-                <input type="hidden" name="file_id"  id="file_id" value="<?php echo isset($addon['img_url']) ? $addon['img_url'] : ''; ?>">
-        </div>
+                <label for="simpleFormControlReadmoreInput" class="form-label"><?php echo t('Read more url');?></label>
+                
+                <input type="text" class="form-control" name="readmore" id="simpleFormControlReadmoreInput" placeholder="read more url" value="<?php echo $mode === 'edit' ? htmlspecialchars($addon['readmore']) : ''; ?>" required>
+            </div>
+            <button type="submit" name="submit" class="btn btn-primary"><?php echo t('Submit');?></button>
+                <?php if (isset($_GET['addon_post_edit_id'])): ?>
+                <a href="addons_model.php?name=jd_simple_zer&id=<?php echo htmlspecialchars($_GET['id']) ?>" class="btn btn-secondary"><?php echo t('Cancel');?></a>
+                <?php endif; ?>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="file_id" class="form-label"><?php echo t('Image');?></label>
+                    <input class="form-control form-control-sm" name="file_id" id="file_id" type="file" onchange="previewFile(this)">
+                    <input type="hidden" name="file_id"  id="file_id" value="<?php echo isset($addon['img_url']) ? $addon['img_url'] : ''; ?>">
+            </div>
             <div id="image_container">
                 <img id="preview_image"  style="max-width: 100%;" src="<?php echo $mode === 'edit' ? $addon['img_url'] : ''; ?>">
                 <input type="hidden" name="db_img_name" value="<?php echo $mode === 'edit' ? $addon['img_name'] : ''; ?>">
@@ -231,8 +231,6 @@ if ($mode === 'create' || $addon) {
                     } ?></form>
                 </tbody>
             </table>
-
-
                 <?php 
                 $total_pages = ceil($total_addons / $addons_per_page);
 
