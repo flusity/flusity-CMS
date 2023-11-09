@@ -1,10 +1,6 @@
 <?php
-$configurations = require $_SERVER['DOCUMENT_ROOT'] . '/security/config.php';
 
-// Data from database
-$prefix = $configurations['prefix'];
-
-$databaseScript = "CREATE TABLE IF NOT EXISTS {$prefix['table_prefix']}_jd_simple_zer (
+$createTable1 = "CREATE TABLE IF NOT EXISTS {$prefix['table_prefix']}_jd_simple_zer (
     id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     description TEXT,
@@ -20,4 +16,26 @@ $databaseScript = "CREATE TABLE IF NOT EXISTS {$prefix['table_prefix']}_jd_simpl
     updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 )";
 
-$databaseDropScript = "DROP TABLE IF EXISTS {$prefix['table_prefix']}_jd_simple_zer";
+$dropTable1 = "DROP TABLE IF EXISTS {$prefix['table_prefix']}_jd_simple_zer";
+
+
+$databaseDropScripts = [$dropTable1];
+
+foreach ($databaseDropScripts as $databaseDropScript) {
+    $stmt = $db->prepare($databaseDropScript);
+    $stmt->execute();
+    if ($stmt->execute() === false) {
+        error_log("Klaida vykdant SQL užklausą: " . $stmt->errorInfo()[2]);
+    }
+}
+
+
+$databaseScripts = [$createTable1];
+
+foreach ($databaseScripts as $databaseScript) {
+    $stmt = $db->prepare($databaseScript);
+    $stmt->execute();
+    if ($stmt->execute() === false) {
+        error_log("Klaida vykdant SQL užklausą: " . $stmt->errorInfo()[2]);
+    }
+}
