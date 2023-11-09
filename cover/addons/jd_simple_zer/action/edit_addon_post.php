@@ -71,10 +71,15 @@ if ($no_image_provided) {
         $readmore = $_POST['readmore'];
         $place_id = $_POST['addon_place_id'];
         $menu_id = $_POST['addon_menu_id'];
-        $db_img_name = $_POST['db_img_name'];
-
-        $old_selected_file = $_SERVER['DOCUMENT_ROOT'] . "/uploads/".$addonFolder."/" . $db_img_name; //
-        unlink($old_selected_file);
+        
+              if (isset($_POST['db_img_name']) && $_POST['db_img_name'] != '') {
+            $db_img_name = $_POST['db_img_name'];
+        
+            $old_selected_file = $_SERVER['DOCUMENT_ROOT'] . "/uploads/" . $addonFolder . "/" . $db_img_name;
+            if (file_exists($old_selected_file)) {
+                unlink($old_selected_file);
+            }
+        }
 
         $stmt = $db->prepare("UPDATE " . $prefix['table_prefix'] . "_jd_simple_zer SET title = :title, description = :description, lang_en_title = :lang_en_title, lang_en_description = :lang_en_description, img_url = :img_url, img_name = :img_name, readmore = :readmore, menu_id = :menu_id, place_id = :place_id WHERE id = :id");
         $stmt->bindParam(':title', $title, PDO::PARAM_STR);
