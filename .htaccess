@@ -13,3 +13,6 @@ RewriteRule ^(.*)$ index.php?page=$1 [L,QSA]
 # Security settings
 Options -Indexes
 ErrorDocument 403 /404.php
+
+Header always set X-Content-Type-Options "nosniff"
+Header always set X-XSS-Protection "1; mode=block"
