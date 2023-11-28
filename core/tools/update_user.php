@@ -2,13 +2,17 @@
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
   }
+
 define('IS_ADMIN', true);
 
 define('ROOT_PATH', realpath(dirname(__FILE__) . '/../../') . '/');
 
 require_once ROOT_PATH . 'security/config.php';
 require_once ROOT_PATH . 'core/functions/functions.php';
-
+  if (!validateCSRFToken($_POST['csrf_token'])) {
+    // Čia galite nukreipti į klaidos puslapį arba rodyti klaidos pranešimą
+    exit('CSRF token validation failed.');
+}
 
 // Duomenų gavimas iš duomenų bazės
  $db = getDBConnection($config);
@@ -16,6 +20,13 @@ secureSession($db, $prefix);
 // Gaunamas kalbos nustatymas iš duomenų bazės  
 $language_code = getLanguageSetting($db, $prefix);
 $translations = getTranslations($db, $prefix, $language_code);
+$user_id = $_SESSION['user_id'];
+if (!checkUserRole($user_id, 'admin', $db, $prefix)) {
+    // Jei vartotojas nėra administratorius, grąžinkite klaidą
+    $_SESSION['error_message'] = t('You do not have permission to perform this action.');
+    echo json_encode($result);
+    exit;
+}
 
 $result = ['success' => false];
 

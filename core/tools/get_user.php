@@ -13,31 +13,40 @@ secureSession($db, $prefix);
 $language_code = getLanguageSetting($db, $prefix);
 $translations = getTranslations($db, $prefix, $language_code);
 
-if (isset($_SESSION['user_id'])) {
-    $user_id = $_SESSION['user_id'];
-    $user_name = getUserNameById($db, $prefix, $user_id);
-
-} else {
+$csrfToken = generateCSRFToken();
+if (!isset($_SESSION['user_id'])) {
     header("Location: 404.php");
     exit;
 }
 
+$user_id = $_SESSION['user_id'];
 if (!checkUserRole($user_id, 'admin', $db, $prefix) && !checkUserRole($user_id, 'moderator', $db, $prefix)) {
     header("Location: 404.php");
     exit;
 }
 
 $userId = isset($_GET['user_id']) ? (int)$_GET['user_id'] : 0;
+if ($userId <= 0) {
+    // Handle invalid user ID (e.g., redirect or show error)
+    exit('Invalid User ID');
+}
 
 $user = getUserById($db, $prefix, $userId);
+if (!$user) {
+    // Handle user not found (e.g., redirect or show error)
+    exit('User not found.');
+}
+
 
 if ($user) { ?>
+
 <div id="edit-user-content mb-3">
     <form id="edit-user-form">
         <div class="row">
         <div class="col-12 mb-1">
             <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">
-               
+            <input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>">
+ 
                 </div>
                 <div class="col-6 mb-3">
                 <div class="form-group mb-3 mt-3">
@@ -89,9 +98,9 @@ if ($user) { ?>
                 <div class="form-group">
                     <label for="user_role"><?php echo t("Role");?></label>
                     <select class="form-control" id="user_role" name="user_role" required>
-                        <option value="admin" <?php echo $user['role'] === 'admin' ? 'selected' : ''; ?>><?php echo t("Admin") ?></option>
-                        <option value="moderator" <?php echo $user['role'] === 'moderator' ? 'selected' : ''; ?>><?php echo t("Moderator") ?></option>
-                        <option value="user" <?php echo $user['role'] === 'user' ? 'selected' : ''; ?>><?php echo t("User") ?></option>
+                        <option value="admin" <?php echo  htmlspecialchars($user['role']) === 'admin' ? 'selected' : ''; ?>><?php echo t("Admin") ?></option>
+                        <option value="moderator" <?php echo htmlspecialchars($user['role']) === 'moderator' ? 'selected' : ''; ?>><?php echo t("Moderator") ?></option>
+                        <option value="user" <?php echo htmlspecialchars($user['role']) === 'user' ? 'selected' : ''; ?>><?php echo t("User") ?></option>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary mt-2 mb-2"><?php echo t("Update User");?></button>
