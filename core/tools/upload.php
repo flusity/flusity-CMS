@@ -22,8 +22,18 @@ $db = getDBConnection($config);
 secureSession($db, $prefix);
 $target_dir = ROOT_PATH . "uploads/";
 
-$allowed_file_types = ['image/png', 'image/jpeg', 'image/gif', 'application/pdf', 'application/msword', 'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
-$max_file_size = 5 * 1024 * 1024;
+$allowed_file_types = [
+    'image/png', 
+    'image/jpeg', 
+    'image/jpg', 
+    'image/gif', 
+    'application/pdf', 
+    'application/msword', 
+    'application/vnd.ms-excel', 
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+];
+$max_file_size = 3.5 * 1024 * 1024; /// 3.5 MB
 
 if (isset($_FILES['uploaded_file'])) {
     $filename = $_FILES['uploaded_file']['name'];

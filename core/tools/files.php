@@ -83,8 +83,6 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
                 case 'xlsx':
                     $default_image = 'img/xlsx.png';
                     break;
-                           
-                // add appropriate references to other file types
             }
     
             if ($is_image) {
@@ -97,7 +95,9 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
             echo '<p class="card-text m-0" style="position: absolute; bottom: 0; width: 100%; text-align: center;">';
             echo '<a href="' . $url . '" target="_blank" title="'.t("Preview").'" style="color: white;"><i class="fas fa-eye"></i></a> ';
             echo '<a href="#" onclick="copyToClipboard(\'' . $url . '\')" title="'.t("Copy url").'" style="color: white;"><i class="fas fa-copy"></i></a> ';
-            echo '<a href="file_delete.php?id=' . urlencode($file['id']) . '" title="'.t("Delete").'" style="color: white;"><i class="fas fa-trash"></i></a>';
+          //  echo '<a href="file_delete.php?id=' . urlencode($file['id']) . '" title="'.t("Delete").'" style="color: white;"><i class="fas fa-trash"></i></a>';
+            echo '<a href="#" class="delete-link" data-id="' . urlencode($file['id']) . '" title="'.t("Delete").'" style="color: white;"><i class="fas fa-trash"></i></a>';
+
             echo '</p>';
             echo '</div>';
     
@@ -114,6 +114,27 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
     </main>
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteConfirmationModalLabel"><?php echo t("Confirm Deletion"); ?></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <?php echo t("Are you sure you want to delete this file?"); ?>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?php echo t("Cancel");?></button>
+                <button type="button" class="btn btn-danger" id="confirmDelete"><?php echo t("Delete");?></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script>
     function copyToClipboard(text) {
         var textarea = document.createElement("textarea");
@@ -165,6 +186,22 @@ document.querySelectorAll('.card-body').forEach((cardBody) => {
     cardBody.addEventListener('mouseout', () => {
         hideCardTools(cardBody);
     });
+});
+
+document.querySelectorAll('.delete-link').forEach(function(link) {
+    link.addEventListener('click', function(event) {
+        event.preventDefault();
+        var fileId = link.getAttribute('data-id');
+        var deleteButton = document.getElementById('confirmDelete');
+        deleteButton.setAttribute('data-id', fileId);
+        var deleteModal = new bootstrap.Modal(document.getElementById('deleteConfirmationModal'));
+        deleteModal.show();
+    });
+});
+
+document.getElementById('confirmDelete').addEventListener('click', function() {
+    var fileId = this.getAttribute('data-id');
+    window.location.href = 'file_delete.php?id=' + fileId;
 });
 
 </script>
