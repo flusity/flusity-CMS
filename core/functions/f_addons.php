@@ -203,14 +203,34 @@ function getAddonIdByName($db, $prefix, $AddonName) {
 
     return $result ? $result['id'] : null;
 }
+
 function uploadFile($uploaded_file, $db, $prefix, $subfolder = null) {
-    
+    // Nustatomos leidžiamos failų rūšys ir maksimalus dydis
+    $allowed_file_types = ['image/png', 'image/jpeg', 'image/gif'];
+    $allowed_extensions = ['png', 'jpeg', 'jpg', 'gif'];
+    $max_file_size = 5 * 1024 * 1024; // 5 MB
+
     if(!$subfolder) {
         $subfolder = "addon_default";
     }
 
+    // Patikrinama, ar failo tipas yra leidžiamų sąraše
+    if (!in_array($uploaded_file['type'], $allowed_file_types)) {
+        throw new Exception("Invalid file type.");
+    }
+
+    // Patikrinama, ar failo dydis neviršija maksimalaus leidžiamo dydžio
+    if ($uploaded_file['size'] > $max_file_size) {
+        throw new Exception("File size exceeded limit.");
+    }
+
     $unique_code = bin2hex(random_bytes(8));
     $filename_parts = pathinfo($uploaded_file["name"]);
+
+    // Patikrinama, ar failo plėtinys yra leidžiamų sąraše
+    if (!in_array(strtolower($filename_parts['extension']), $allowed_extensions)) {
+        throw new Exception("Invalid file extension.");
+    }
 
     // Replacing space with underscore in the filename
     $filename = str_replace(' ', '_', $filename_parts['filename']);
@@ -245,6 +265,7 @@ function uploadFile($uploaded_file, $db, $prefix, $subfolder = null) {
         throw new Exception("Error moving uploaded file.");
     }
 }
+
 
 function getAddonsByUrlNameAndPlace($db, $prefix, $addon, $page_url, $place_name) {
     try {
