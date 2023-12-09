@@ -45,7 +45,12 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
 
                 </form>
                 <?php
-           $files = getFilesListFromDatabase($db, $prefix);
+                $items_per_page = 10; // Pavyzdžiui, rodyti 10 failų viename puslapyje
+                $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+                $current_page = max($current_page, 1); // Užtikrinkite, kad puslapis būtų teigiamas skaičius
+                $offset = ($current_page - 1) * $items_per_page;
+                $files = getFilesListFromDatabase($db, $prefix, $offset, $items_per_page);
+                
         echo "<h3>";?><?php echo t("File list");?><?php echo "</h3>";
         echo '<div class="row row-cols-1 row-cols-md-3 g-4">';
         foreach ($files as $file) {
@@ -109,7 +114,38 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
             echo '</div>';
         }
     echo '</div>'; 
+
+    $total_files = getTotalFilesCount($db, $prefix);
+    $total_pages = ceil($total_files / $items_per_page);
 ?>
+
+                <div class="d-flex justify-content-center mt-3">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li class="page-item <?php echo ($current_page <= 1) ? 'disabled' : ''; ?>">
+                                <a class="page-link" href="?page=<?php echo $current_page - 1; ?>" aria-label="Previous">
+                                    <span aria-hidden="true">«</span>
+                                </a>
+                            </li>
+                            <?php
+                            $num_pages_to_display = 5;
+                            $start = max(1, $current_page - $num_pages_to_display);
+                            $end = min($current_page + $num_pages_to_display, $total_pages);
+
+                            for ($i = $start; $i <= $end; $i++): ?>
+                                <li class="page-item <?php echo ($i == $current_page) ? 'active' : ''; ?>">
+                                    <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                                </li>
+                            <?php endfor; ?>
+                            <li class="page-item <?php echo ($current_page >= $total_pages) ? 'disabled' : ''; ?>">
+                                <a class="page-link" href="?page=<?php echo $current_page + 1; ?>" aria-label="Next">
+                                    <span aria-hidden="true">»</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
             </div>
     </main>
     </div>
