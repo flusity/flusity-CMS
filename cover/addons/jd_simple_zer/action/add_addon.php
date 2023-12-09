@@ -16,9 +16,11 @@ $language_code = getLanguageSetting($db, $prefix);
 $translations = getTranslations($db, $prefix, $language_code);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') 
-{ 
+{  if (!validateCSRFToken($_POST['csrf_token'])) {
+        die('CSRF token validation failed');
+    }
     $id = intval($_POST['id']); 
-    
+   
     try {
         $img_url = null;
         $img_name = null;

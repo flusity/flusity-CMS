@@ -71,8 +71,7 @@ if ($no_image_provided) {
         $readmore = $_POST['readmore'];
         $place_id = $_POST['addon_place_id'];
         $menu_id = $_POST['addon_menu_id'];
-        
-              if (isset($_POST['db_img_name']) && $_POST['db_img_name'] != '') {
+        if (isset($_POST['db_img_name']) && $_POST['db_img_name'] != '') {
             $db_img_name = $_POST['db_img_name'];
         
             $old_selected_file = $_SERVER['DOCUMENT_ROOT'] . "/uploads/" . $addonFolder . "/" . $db_img_name;

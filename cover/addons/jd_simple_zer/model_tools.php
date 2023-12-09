@@ -37,7 +37,7 @@ if ($mode === 'create' || $addon) {
     <div class="row d-flex">
 
     <form id="update-addon-form" method="POST" action="../../cover/addons/jd_simple_zer/action/<?php echo $mode === 'edit' ? 'edit_addon_post.php' : 'add_addon.php'; ?>" enctype="multipart/form-data" class="col-md-10">
-
+    <input type="hidden" name="csrf_token" value="<?php echo generateCSRFToken(); ?>">
     <input type="hidden" name="mode" value="<?php echo $mode; ?>">
      <input type="hidden" name="addon_post_edit_id" value="<?php echo isset($addon['id']) ? $addon['id'] : ''; ?>">
     <input type="hidden" class="form-control" name="id" value="<?php echo $id; ?>">
