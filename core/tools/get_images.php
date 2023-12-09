@@ -14,10 +14,12 @@ $language_code = getLanguageSetting($db, $prefix);
 $translations = getTranslations($db, $prefix, $language_code);
  $db = getDBConnection($config);
 $index = isset($_GET['index']) ? $_GET['index'] : 0;
-$files = getFilesListFromDatabase($db, $prefix);
+$files = getFilesListForSettingsFromDatabase($db, $prefix);
 $slicedFiles = array_slice($files, $index, 9);
 
 $counter = 0;
+
+
 foreach ($slicedFiles as $file) {
     if ($counter % 3 == 0) {
         echo '<div class="row">';
