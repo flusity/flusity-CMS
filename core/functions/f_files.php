@@ -19,6 +19,11 @@ function saveFileToDatabase($db, $prefix, $name, $url) {
     return $query->execute();
 }
 
+function getFilesListForSettingsFromDatabase($db, $prefix){
+	  $query = $db->query("SELECT * FROM  ".$prefix['table_prefix']."_flussi_files");
+    return $query->fetchAll(PDO::FETCH_ASSOC);
+}
+
 function getFilesListFromDatabase($db, $prefix, $offset, $items_per_page) {
     $stmt = $db->prepare("SELECT * FROM " . $prefix['table_prefix'] . "_flussi_files LIMIT :limit OFFSET :offset");
     $stmt->bindParam(':limit', $items_per_page, PDO::PARAM_INT);
