@@ -45,7 +45,7 @@ require_once ROOT_PATH . 'core/template/header-admin.php';
 
                 </form>
                 <?php
-                $items_per_page = 10; // Pavyzdžiui, rodyti 10 failų viename puslapyje
+                $items_per_page = 20; // Rodyti 20 failų viename puslapyje
                 $current_page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
                 $current_page = max($current_page, 1); // Užtikrinkite, kad puslapis būtų teigiamas skaičius
                 $offset = ($current_page - 1) * $items_per_page;
