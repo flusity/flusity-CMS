@@ -350,7 +350,15 @@ function getSettings($db, $prefix) {
             echo t("Template {$templateName} not found!");
         }
     }
-    
+
+    function encryptEmail($email, $key) {
+        return openssl_encrypt($email, 'AES-128-ECB', $key);
+    }
+
+    function decryptEmail($encryptedEmail, $key) {
+        return openssl_decrypt($encryptedEmail, 'AES-128-ECB', $key);
+    }
+
     require_once 'f_users.php';
     require_once 'f_contact_form.php';
     require_once 'f_backup.php';
