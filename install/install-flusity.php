@@ -169,6 +169,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $config_text .= "  'db_name' => '{$db_name}',\n";
         $config_text .= "  'db_user' => '{$db_user}',\n";
         $config_text .= "  'db_password' => '{$db_password}',\n";
+        $config_text .= "  'encryption_key' => 'My_ENC_PaSSw_18534',\n";
         $config_text .= "];\n\n";
         
         $config_text .= "\$prefix = [\n";
