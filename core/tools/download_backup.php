@@ -13,18 +13,18 @@ secureSession($db, $prefix);
 $language_code = getLanguageSetting($db, $prefix);
 $translations = getTranslations($db, $prefix, $language_code);
 
-if (!checkIfAdmin()) { // Naudojama funkcija, kad patikrintų ar vartotojas yra administratorius
+if (!checkIfAdmin()) { // A function is used to check if the user is an administrator
     http_response_code(403);
-    echo "Klaida: Neturite teisių.";
+    echo t("Error: You do not have rights.");
     exit;
 }
 
 if (isset($_GET['file'])) {
     $backupDir = realpath(dirname(__FILE__) . '/backups/') . '/';
-    $filename = basename($_GET['file']); // Naudojama basename() funkciją, kad pašalinti kelio manipuliavimą
+    $filename = basename($_GET['file']); //Uses the basename() function to eliminate path manipulation
     $filePath = $backupDir . $filename;
 
-    // Patikrinama, ar failas egzistuoja ir yra saugomų failų aplanke
+    // Checks if the file exists and is in the stored files folder
     if (file_exists($filePath) && is_file($filePath)) {
         header('Content-Description: File Transfer');
         header('Content-Type: application/octet-stream');
@@ -37,10 +37,10 @@ if (isset($_GET['file'])) {
         exit;
     } else {
         http_response_code(404);
-        echo "Failas nerastas.";
+        echo t("File not found.");
     }
 } else {
     http_response_code(400);
-    echo "Klaida: Prašome nurodyti failo pavadinimą.";
+    echo t("Error: Specify a file name.");
 }
 ?>
